@@ -1,0 +1,99 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.jakewharton.hugo'
+apply plugin: 'com.github.triplet.play'
+apply plugin: 'io.fabric'
+
+Properties local_properties = new Properties()
+File localPropertiesFile = project.rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    local_properties.load(localPropertiesFile.newDataInputStream())
+}
+
+def gitSha = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
+def buildTime = new Date().format("yyyy-MM-dd'T'HH:mm'Z'", TimeZone.getTimeZone("UTC"))
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.tasomaniac.openwith"
+        minSdkVersion 15
+        targetSdkVersion rootProject.ext.compileSdkVersion
+        versionCode rootProject.ext.versionMajor * 10000 + rootProject.ext.versionMinor * 1000 + rootProject.ext.versionPatch * 100 + rootProject.ext.versionBuild
+        versionName "${rootProject.ext.versionMajor}.${rootProject.ext.versionMinor}" + ((rootProject.ext.versionPatch != 0) ? ".${rootProject.ext.versionPatch}" : "")
+        buildConfigField "String", "GIT_SHA", "\"${gitSha}\""
+        buildConfigField "String", "BUILD_TIME", "\"${buildTime}\""
+
+        resConfigs "en"
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("../distribution/debug.keystore")
+        }
+
+        release {
+            storeFile file("../distribution/" + (local_properties.release_keystore_name ?: "debug.keystore"))
+            keyAlias(local_properties.release_keystore_alias ?: "androiddebugkey")
+            storePassword(local_properties.release_keystore_pwd ?: "android")
+            keyPassword(local_properties.release_keystore_pwd2 ?: "android")
+        }
+    }
+
+    buildTypes {
+        debug {
+            ext.enableCrashlytics = false
+            applicationIdSuffix ".debug"
+            signingConfig signingConfigs.debug
+            versionNameSuffix "-debug"
+        }
+
+        release {
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.release
+        }
+    }
+
+    lintOptions {
+        abortOnError true
+        textReport true
+        textOutput 'stdout'
+
+        fatal 'UnusedResources'
+        warning 'InvalidPackage'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    dexOptions {
+        // Skip pre-dexing when running on Travis CI or when disabled via -Dpre-dex=false.
+        preDexLibraries = rootProject.ext.preDexEnabled && !rootProject.ext.isTravis
+    }
+}
+
+play {
+    serviceAccountEmail = local_properties.play_service_account ?: ''
+    pk12File = file("../distribution/" + (local_properties.play_key_file ?: 'no-file.p12'))
+    track = 'alpha'
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:23.0.1'
+    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.android.support:recyclerview-v7:23.0.1'
+
+    compile 'ch.tutti.android.bottomsheet:library:1.0'
+
+
+    // Crashlytics Kit
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.2@aar') {
+        transitive = true
+    }
+
+    testCompile 'junit:junit:4.12'
+}
