@@ -6,10 +6,14 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ShareCompat;
 import android.webkit.URLUtil;
 import android.widget.Toast;
 
+import com.tasomaniac.openwith.resolver.ResolverActivity;
+
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,29 +23,63 @@ public class ShareToOpenWith extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        boolean urlHandled = false;
         final ShareCompat.IntentReader reader = ShareCompat.IntentReader.from(this);
 
-        boolean urlHandled = false;
         String foundUrl = findFirstUrl(reader.getText());
-        if (foundUrl == null) {
-            foundUrl = findFirstUrl(reader.getHtmlText());
-        }
 
         if (foundUrl != null) {
             Intent intentToHandle = new Intent(Intent.ACTION_VIEW, Uri.parse(foundUrl));
 
-            final ResolveInfo resolveInfo = getPackageManager()
-                    .resolveActivity(intentToHandle, PackageManager.MATCH_DEFAULT_ONLY);
+            final List<ResolveInfo> resolveInfos = getPackageManager()
+                    .queryIntentActivities(intentToHandle, PackageManager.MATCH_DEFAULT_ONLY);
+
+            if (resolveInfos != null && resolveInfos.size() > 0) {
+                urlHandled = true;
+                startActivity(intentToHandle
+                        .putExtra(ShareCompat.EXTRA_CALLING_ACTIVITY, reader.getCallingActivity())
+                        .putExtra(ShareCompat.EXTRA_CALLING_PACKAGE, reader.getCallingPackage())
+                        .setClass(this, ResolverActivity.class));
+//                startActivity(BottomSheetChooserActivity.create(this)
+//                        .forIntent(intentToHandle)
+//                        .title(getString(R.string.open_with))
+//                        .history(true)
+//                        .priority("com.whatsapp",
+//                                "com.twitter.android",
+//                                "com.facebook.katana",
+//                                "com.facebook.orca",
+//                                "com.google.android.youtube",
+//                                "com.google.android.gm", "com.google.android.talk",
+//                                "com.google.android.apps.plus",
+//                                "com.google.android.apps.photos",
+//                                "com.pandora.android",
+//                                "com.instagram.android",
+//                                "com.linkedin.android",
+//                                "com.spotify.music",
+//                                "com.pinterest",
+//                                "com.medium.reader",
+//                                "com.ubercab",
+//                                "com.meetup",
+//                                "com.tumblr",
+//                                "com.badoo.mobile",
+//                                "tv.periscope.android",
+//                                "com.skype.raider")
+//                        .getIntent());
+            }
         }
 
         if (!urlHandled) {
             Toast.makeText(this, "The shared content did not have any valid URLs.", Toast.LENGTH_SHORT).show();
         }
+        finish();
     }
 
-    private String findFirstUrl(CharSequence text) {
+    private String findFirstUrl(@Nullable CharSequence text) {
+        if (text == null) {
+            return null;
+        }
 
-        final Matcher matcher = Pattern.compile("\\b((?:[a-z][\\w-]+:(?:/{1,3}|[a-z0-9%])|www\\d{0,3}[.]|[a-z0-9.\\-]+[.][a-z]{2,4}/)(?:[^\\s()<>]+|\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\))+(?:\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\)|[^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]))\n", Pattern.CASE_INSENSITIVE)
+        final Matcher matcher = Pattern.compile("\\b((?:[a-z][\\w-]+:(?:/{1,3}|[a-z0-9%])|www\\d{0,3}[.]|[a-z0-9.\\-]+[.][a-z]{2,4}/)(?:[^\\s()<>]+|\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\))+(?:\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\)|[^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]))", Pattern.CASE_INSENSITIVE)
                 .matcher(text);
         while (matcher.find()) {
             final String url = matcher.group();

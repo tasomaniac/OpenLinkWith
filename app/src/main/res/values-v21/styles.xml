@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <style name="BottomSheet.Light" parent="Base.BottomSheet.Light">
+    <item name="android:windowTranslucentStatus">false</item>
+    <item name="android:windowTranslucentNavigation">false</item>
+    <item name="android:windowDrawsSystemBarBackgrounds">false</item>
+    <item name="android:colorControlActivated">?attr/colorControlHighlight</item>
+  </style>
+</resources>

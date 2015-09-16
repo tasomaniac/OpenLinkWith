@@ -86,9 +86,7 @@ dependencies {
     compile 'com.android.support:support-v4:23.0.1'
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.android.support:recyclerview-v7:23.0.1'
-
-    compile 'ch.tutti.android.bottomsheet:library:1.0'
-
+    compile 'com.karumi:headerrecyclerview:1.0.3'
 
     // Crashlytics Kit
     compile('com.crashlytics.sdk.android:crashlytics:2.5.2@aar') {

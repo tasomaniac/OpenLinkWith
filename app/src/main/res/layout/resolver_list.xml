@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+* Copyright 2012, The Android Open Source Project
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+-->
+<com.tasomaniac.openwith.resolver.ResolverDrawerLayout
+  android:id="@id/contentPanel"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  app:maxCollapsedHeight="192dp"
+  app:maxCollapsedHeightSmall="56dp"
+  app:maxWidth="@dimen/resolver_max_width">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:elevation="8dp"
+    app:layout_alwaysShow="true">
+
+    <TextView
+      android:id="@+id/title"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:gravity="start|center_vertical"
+      android:minHeight="56dp"
+      android:paddingBottom="8dp"
+      android:paddingLeft="?attr/listPreferredItemPaddingLeft"
+      android:paddingRight="?attr/listPreferredItemPaddingRight"
+      android:paddingTop="8dp"
+      android:textAppearance="?android:attr/textAppearanceMedium"/>
+  </LinearLayout>
+
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/resolver_list"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:clipToPadding="false"
+    android:divider="@null"
+    android:elevation="8dp"
+    android:scrollbarStyle="outsideOverlay"/>
+
+  <TextView
+    android:id="@+id/empty"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:padding="32dp"
+    android:visibility="gone"
+    app:layout_alwaysShow="true"/>
+
+  <LinearLayout
+    android:id="@+id/button_bar"
+    style="?attr/buttonBarStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:elevation="8dp"
+    android:gravity="end|center_vertical"
+    android:measureWithLargestChild="true"
+    android:orientation="horizontal"
+    android:paddingBottom="8dp"
+    android:paddingEnd="12dp"
+    android:paddingStart="12dp"
+    android:paddingTop="8dp"
+    android:visibility="gone"
+    app:layout_alwaysShow="true"
+    app:layout_ignoreOffset="true">
+
+    <Button
+      android:id="@+id/button_once"
+      style="?attr/buttonBarNegativeButtonStyle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="start"
+      android:enabled="false"
+      android:maxLines="2"
+      android:minHeight="@dimen/alert_dialog_button_bar_height"
+      android:onClick="onButtonClick"
+      android:text="@string/activity_resolver_use_once"/>
+
+    <Button
+      android:id="@+id/button_always"
+      style="?attr/buttonBarPositiveButtonStyle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="end"
+      android:enabled="false"
+      android:maxLines="2"
+      android:minHeight="@dimen/alert_dialog_button_bar_height"
+      android:onClick="onButtonClick"
+      android:text="@string/activity_resolver_use_always"/>
+  </LinearLayout>
+
+</com.tasomaniac.openwith.resolver.ResolverDrawerLayout>

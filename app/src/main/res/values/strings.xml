@@ -1,4 +1,11 @@
 <resources>
   <string name="app_name">Open Link With</string>
-  <string name="open_with">Open With…</string>
+  <string name="open_with">\u0020Open With…</string>
+
+
+  <string name="use_a_different_app">Use a different app</string>
+  <string name="activity_resolver_use_once">Just Once</string>
+  <string name="activity_resolver_use_always">Always</string>
+  <string name="whichViewApplication">Open with</string>
+  <string name="whichViewApplicationNamed">Open with %1$s</string>
 </resources>

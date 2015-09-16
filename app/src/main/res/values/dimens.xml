@@ -1,0 +1,9 @@
+<resources>
+  <dimen name="bs_max_width">600dp</dimen>
+  <dimen name="bs_share_icon">46dp</dimen>
+  <dimen name="bs_padding">16dp</dimen>
+
+  <dimen name="alert_dialog_button_bar_height">48dip</dimen>
+
+  <dimen name="resolver_max_width">480dp</dimen>
+</resources>
