@@ -15,6 +15,7 @@
  */
 package com.tasomaniac.openwith.resolver;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
@@ -611,6 +612,8 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
         event.setClassName(ResolverDrawerLayout.class.getName());
     }
 
+    @SuppressWarnings("deprecation")
+    @SuppressLint("InlinedApi")
     @Override
     public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
         super.onInitializeAccessibilityNodeInfo(info);
