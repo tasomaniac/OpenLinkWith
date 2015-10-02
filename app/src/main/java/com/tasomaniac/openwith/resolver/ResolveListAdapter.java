@@ -226,7 +226,7 @@ public final class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveL
             if (!usePkg) {
                 // Use HashSet to track duplicates
                 HashSet<CharSequence> duplicates =
-                        new HashSet<CharSequence>();
+                        new HashSet<>();
                 duplicates.add(startApp);
                 for (int j = start + 1; j <= end; j++) {
                     ResolveInfo jRi = rList.get(j);
@@ -291,7 +291,12 @@ public final class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveL
     public DisplayResolveInfo getItem(int position) {
         position -= getHeaderViewsCount();
         if (position < 0) {
-            return null;
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Position: %d It cannot be negative or header cannot be selected.",
+                            position
+                    )
+            );
         }
         if (mFilterLastUsed && mLastChosenPosition >= 0 && position >= mLastChosenPosition) {
             position++;
@@ -364,10 +369,8 @@ public final class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveL
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                if (mOnItemLongClickedListener != null) {
-                    return mOnItemLongClickedListener.onItemLongClicked(position);
-                }
-                return false;
+                return mOnItemLongClickedListener != null
+                        && mOnItemLongClickedListener.onItemLongClicked(position);
             }
         });
 
@@ -438,6 +441,7 @@ public final class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveL
     public static Drawable getIcon(Resources res, int resId, int mIconDpi) {
         Drawable result;
         try {
+            //noinspection deprecation
             result = res.getDrawableForDensity(resId, mIconDpi);
         } catch (Resources.NotFoundException e) {
             result = null;

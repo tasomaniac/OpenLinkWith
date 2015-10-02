@@ -272,8 +272,6 @@ public class ResolverActivity extends Activity
 
     @Override
     public void onItemClicked(int position) {
-        ResolveInfo resolveInfo = mAdapter.resolveInfoForPosition(position, true);
-
         final int checkedPos = mAdapter.getCheckedItemPosition();
         final boolean hasValidSelection = checkedPos != ListView.INVALID_POSITION;
         if (mAlwaysUseOption && (!hasValidSelection || mLastSelected != checkedPos)) {
