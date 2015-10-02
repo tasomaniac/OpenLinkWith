@@ -15,6 +15,7 @@
  */
 package com.tasomaniac.openwith.resolver;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ComponentName;
@@ -24,6 +25,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PatternMatcher;
 import android.provider.Settings;
@@ -98,6 +100,7 @@ public class ResolverActivity extends Activity
     }
 
     @Override
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     protected void onCreate(Bundle savedInstanceState) {
         final Intent intent = makeMyIntent();
 
