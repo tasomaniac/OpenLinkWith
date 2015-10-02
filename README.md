@@ -1,7 +1,7 @@
 Open Link With
 ==============
 
-#[![Get it on Google Play](art/banner.png)][1]
+<!--- [![Get it on Google Play](art/banner.png)][1] --->
 
 
 [![Build Status](https://travis-ci.org/tasomaniac/OpenLinkWith.png?branch=develop)](https://travis-ci.org/tasomaniac/OpenLinkWith)
@@ -9,10 +9,10 @@ Open Link With
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 ![API](https://img.shields.io/badge/API-15%2B-brightgreen.svg?style=flat)
 
+<!---
 Installation
 ------------
-
-#[![Get it on Google Play](art/en_generic_rgb_wo_60.png)][1]
+ [![Get it on Google Play](art/en_generic_rgb_wo_60.png)][1] --->
 
 What
 ----
