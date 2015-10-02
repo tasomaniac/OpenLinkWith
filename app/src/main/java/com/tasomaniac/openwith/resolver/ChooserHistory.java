@@ -6,9 +6,6 @@ import android.content.SharedPreferences;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by pboos on 28/01/15.
- */
 class ChooserHistory {
 
     private static final String KEY_HISTORY = "history";
@@ -64,10 +61,6 @@ class ChooserHistory {
         } else {
             mHistoryMap.put(packageName, currentCount + 1);
         }
-    }
-
-    public void addPrefered(String packageName) {
-        mHistoryMap.put(packageName, Integer.MAX_VALUE);
     }
 
     public void save(Context context) {

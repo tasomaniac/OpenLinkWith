@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -52,7 +53,9 @@ import static android.view.WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.COMPONENT;
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.HOST;
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.LAST_CHOSEN;
+import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.PREFERRED;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.CONTENT_URI;
+import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withHost;
 
 /**
  * This activity is displayed when the system attempts to start an Intent for
@@ -114,9 +117,38 @@ public class ResolverActivity extends Activity
         setTheme(R.style.BottomSheet_Light);
         super.onCreate(savedInstanceState);
 
+        mPm = getPackageManager();
+
         mRequestedUri = intent.getData();
 
-        mPm = getPackageManager();
+        ResolveInfo lastChosen = null;
+        final Cursor query =
+                getContentResolver().query(withHost(intent.getData().getHost()), null, null, null, null);
+
+        if (query != null && query.moveToFirst()) {
+
+            final boolean isPreferred = query.getInt(query.getColumnIndex(PREFERRED)) == 1;
+            final boolean isLastChosen = query.getInt(query.getColumnIndex(LAST_CHOSEN)) == 1;
+
+            if (isPreferred || isLastChosen) {
+                final String componentString = query.getString(query.getColumnIndex(COMPONENT));
+
+                final Intent lastChosenIntent = new Intent();
+                final ComponentName lastChosenComponent = ComponentName.unflattenFromString(componentString);
+                lastChosenIntent.setComponent(lastChosenComponent);
+                ResolveInfo ri = mPm.resolveActivity(lastChosenIntent, PackageManager.MATCH_DEFAULT_ONLY);
+
+                if (isPreferred && ri != null) {
+                    intent.setComponent(lastChosenComponent);
+                    startActivity(intent);
+                    finish();
+                    return;
+                }
+
+                lastChosen = ri;
+            }
+            query.close();
+        }
 
         mPackageMonitor.register(this, getMainLooper(), false);
         mRegistered = true;
@@ -125,7 +157,7 @@ public class ResolverActivity extends Activity
         mIconDpi = am.getLauncherLargeIconDensity();
 
         ComponentName callerActivity = intent.getParcelableExtra(ShareCompat.EXTRA_CALLING_ACTIVITY);
-        mAdapter = new ResolveListAdapter(this, getHistory(), intent, callerActivity, true);
+        mAdapter = new ResolveListAdapter(this, getHistory(), intent, callerActivity, lastChosen, true);
         mAdapter.setPriorityItems(intent.getStringArrayExtra(EXTRA_PRIORITY_PACKAGES));
 
         mAlwaysUseOption = true;
@@ -404,20 +436,17 @@ public class ResolverActivity extends Activity
             }
 
             if (filter != null) {
-                if (alwaysCheck) {
-                    //TODO handle preferred
-//                    getPackageManager().addPreferredActivity(filter, bestMatch, set,
-//                            intent.getComponent());
-                    history.addPrefered(intent.getComponent().getPackageName());
-                } else {
-                    history.add(intent.getComponent().getPackageName());
+                ContentValues values = new ContentValues(3);
+                values.put(HOST, mRequestedUri.getHost());
+                values.put(COMPONENT, intent.getComponent().flattenToString());
 
-                    ContentValues values = new ContentValues(3);
-                    values.put(HOST, mRequestedUri.getHost());
-                    values.put(COMPONENT, intent.getComponent().flattenToString());
-                    values.put(LAST_CHOSEN, true);
-                    getContentResolver().insert(CONTENT_URI, values);
+                if (alwaysCheck) {
+                    values.put(PREFERRED, true);
                 }
+                values.put(LAST_CHOSEN, true);
+                getContentResolver().insert(CONTENT_URI, values);
+
+                history.add(intent.getComponent().getPackageName());
             }
         }
 

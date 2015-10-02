@@ -12,7 +12,6 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
-import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -36,10 +35,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-
-import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.COMPONENT;
-import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.LAST_CHOSEN;
-import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withHost;
 
 public final class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAdapter.ViewHolder, ResolveListAdapter.Header, DisplayResolveInfo, Void> {
     private static final String TAG = "ResolveListAdapter";
@@ -85,7 +80,9 @@ public final class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveL
     public ResolveListAdapter(Context context,
                               ChooserHistory history,
                               Intent intent,
-                              ComponentName callerActivity, boolean filterLastUsed) {
+                              ComponentName callerActivity,
+                              ResolveInfo lastChosen,
+                              boolean filterLastUsed) {
 
         final ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         mIconDpi = am.getLauncherLargeIconDensity();
@@ -97,30 +94,16 @@ public final class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveL
             mStats = mUsm.queryAndAggregateUsageStats(sinceTime, System.currentTimeMillis());
         }
 
-        mCallerActivity = callerActivity;
-        mContext = context;
-        mHistory = history;
         mPm = context.getPackageManager();
-        mIntent = intent;
         mInflater = LayoutInflater.from(context);
         mList = new ArrayList<>();
+
+        mContext = context;
+        mHistory = history;
+        mIntent = intent;
+        mCallerActivity = callerActivity;
+        mLastChosen = lastChosen;
         mFilterLastUsed = filterLastUsed;
-
-        final Cursor query =
-                mContext.getContentResolver().query(withHost(intent.getData().getHost()), null, null, null, null);
-
-        if (query != null && query.moveToFirst()) {
-
-            final boolean isLastChosen = query.getInt(query.getColumnIndex(LAST_CHOSEN)) == 1;
-            if (isLastChosen) {
-                final String componentString = query.getString(query.getColumnIndex(COMPONENT));
-
-                final Intent lastChosenIntent = new Intent();
-                lastChosenIntent.setComponent(ComponentName.unflattenFromString(componentString));
-                mLastChosen = mPm.resolveActivity(lastChosenIntent, PackageManager.MATCH_DEFAULT_ONLY);
-            }
-            query.close();
-        }
 
         rebuildList();
     }
