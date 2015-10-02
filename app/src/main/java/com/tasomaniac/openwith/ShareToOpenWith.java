@@ -19,6 +19,30 @@ import java.util.regex.Pattern;
 
 public class ShareToOpenWith extends Activity {
 
+    private static final String[] PRIORITY_PACKAGES = new String[] {
+            "com.whatsapp",
+            "com.twitter.android",
+            "com.facebook.katana",
+            "com.facebook.orca",
+            "com.google.android.youtube",
+            "com.google.android.gm",
+            "com.google.android.talk",
+            "com.google.android.apps.plus",
+            "com.google.android.apps.photos",
+            "com.pandora.android",
+            "com.instagram.android",
+            "com.linkedin.android",
+            "com.spotify.music",
+            "com.pinterest",
+            "com.medium.reader",
+            "com.ubercab",
+            "com.meetup",
+            "com.tumblr",
+            "com.badoo.mobile",
+            "tv.periscope.android",
+            "com.skype.raider"
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,35 +60,12 @@ public class ShareToOpenWith extends Activity {
 
             if (resolveInfos != null && resolveInfos.size() > 0) {
                 urlHandled = true;
+
                 startActivity(intentToHandle
                         .putExtra(ShareCompat.EXTRA_CALLING_ACTIVITY, reader.getCallingActivity())
                         .putExtra(ShareCompat.EXTRA_CALLING_PACKAGE, reader.getCallingPackage())
+                        .putExtra(ResolverActivity.EXTRA_PRIORITY_PACKAGES, PRIORITY_PACKAGES)
                         .setClass(this, ResolverActivity.class));
-//                startActivity(BottomSheetChooserActivity.create(this)
-//                        .forIntent(intentToHandle)
-//                        .title(getString(R.string.open_with))
-//                        .history(true)
-//                        .priority("com.whatsapp",
-//                                "com.twitter.android",
-//                                "com.facebook.katana",
-//                                "com.facebook.orca",
-//                                "com.google.android.youtube",
-//                                "com.google.android.gm", "com.google.android.talk",
-//                                "com.google.android.apps.plus",
-//                                "com.google.android.apps.photos",
-//                                "com.pandora.android",
-//                                "com.instagram.android",
-//                                "com.linkedin.android",
-//                                "com.spotify.music",
-//                                "com.pinterest",
-//                                "com.medium.reader",
-//                                "com.ubercab",
-//                                "com.meetup",
-//                                "com.tumblr",
-//                                "com.badoo.mobile",
-//                                "tv.periscope.android",
-//                                "com.skype.raider")
-//                        .getIntent());
             }
         }
 

@@ -56,6 +56,8 @@ public class ResolverActivity extends Activity
         implements ResolveListAdapter.OnItemClickedListener,
         ResolveListAdapter.OnItemLongClickedListener {
 
+    public static final String EXTRA_PRIORITY_PACKAGES = "EXTRA_PRIORITY_PACKAGES";
+
     private ResolveListAdapter mAdapter;
     private PackageManager mPm;
     private boolean mAlwaysUseOption;
@@ -112,6 +114,7 @@ public class ResolverActivity extends Activity
 
         ComponentName callerActivity = getIntent().getParcelableExtra(ShareCompat.EXTRA_CALLING_ACTIVITY);
         mAdapter = new ResolveListAdapter(this, getHistory(), intent, callerActivity, true);
+        mAdapter.setPriorityItems(getIntent().getStringArrayExtra(EXTRA_PRIORITY_PACKAGES));
 
         mAlwaysUseOption = true;
         final int layoutId;

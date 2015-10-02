@@ -31,6 +31,7 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -62,6 +63,8 @@ public final class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveL
     private ChooserHistory mHistory;
     private final Context mContext;
     private final ComponentName mCallerActivity;
+
+    private HashMap<String, Integer> mPriorities;
 
     private int checkedItemPosition = AbsListView.INVALID_POSITION;
     private boolean mIsSelectable = false;
@@ -97,6 +100,24 @@ public final class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveL
         mInflater = LayoutInflater.from(context);
         mList = new ArrayList<>();
         mFilterLastUsed = filterLastUsed;
+        rebuildList();
+    }
+
+
+    public void setPriorityItems(String... packageNames) {
+        if (packageNames == null || packageNames.length == 0) {
+            mPriorities = null;
+            rebuildList();
+            return;
+        }
+
+        int size = packageNames.length;
+        mPriorities = new HashMap<>(size);
+        for (int i = 0; i < size; i++) {
+            // position 0 should have highest priority,
+            // starting with 1 for lowest priority.
+            mPriorities.put(packageNames[0], size - i + 1);
+        }
         rebuildList();
     }
 
@@ -482,6 +503,14 @@ public final class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveL
                 }
             }
 
+            if (mPriorities != null) {
+                int leftPriority = getPriority(lhs);
+                int rightPriority = getPriority(rhs);
+                if (leftPriority != rightPriority) {
+                    return rightPriority - leftPriority;
+                }
+            }
+
             if (mStats != null) {
                 final long timeDiff =
                         getPackageTimeSpent(rhs.activityInfo.packageName) -
@@ -510,6 +539,11 @@ public final class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveL
 
             }
             return 0;
+        }
+
+        private int getPriority(ResolveInfo lhs) {
+            final Integer integer = mPriorities.get(lhs.activityInfo.packageName);
+            return integer != null ? integer : 0;
         }
     }
 
