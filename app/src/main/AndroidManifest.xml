@@ -37,6 +37,11 @@
       android:relinquishTaskIdentity="true"
       android:theme="@style/BottomSheet.Light" />
 
+    <provider
+      android:authorities="${applicationId}"
+      android:name=".provider.OpenWithProvider"
+      android:exported="false" />
+
     <meta-data
       android:name="io.fabric.ApiKey"
       android:value="12d100ee6072b6f8a57cd79b03942ad742ba6916" />
