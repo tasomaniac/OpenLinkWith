@@ -39,5 +39,17 @@ public final class OpenWithProvider {
         public static Uri withId(long id) {
             return Uri.withAppendedPath(CONTENT_URI, String.valueOf(id));
         }
+
+        @InexactContentUri(
+                name = "OPENWITH_HOST",
+                path = OpenWithDatabase.OPENWITH + "/host/" + "*",
+                type = "vnd.android.cursor.item/openwith",
+                whereColumn = OpenWithDatabase.OpenWithColumns.HOST,
+                pathSegment = 2)
+        public static Uri withHost(String host) {
+            return CONTENT_URI.buildUpon()
+                    .appendEncodedPath("host")
+                    .appendPath(host).build();
+        }
     }
 }

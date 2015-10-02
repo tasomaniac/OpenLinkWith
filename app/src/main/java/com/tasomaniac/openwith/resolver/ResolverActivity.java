@@ -19,6 +19,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ComponentName;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -48,6 +49,10 @@ import java.util.Set;
 
 import static android.view.WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR;
 import static android.view.WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
+import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.COMPONENT;
+import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.HOST;
+import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.LAST_CHOSEN;
+import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.CONTENT_URI;
 
 /**
  * This activity is displayed when the system attempts to start an Intent for
@@ -69,6 +74,8 @@ public class ResolverActivity extends Activity
     private Button mOnceButton;
     private int mIconDpi;
     private int mLastSelected = ListView.INVALID_POSITION;
+
+    private Uri mRequestedUri;
 
     private ChooserHistory mHistory;
 
@@ -107,6 +114,8 @@ public class ResolverActivity extends Activity
         setTheme(R.style.BottomSheet_Light);
         super.onCreate(savedInstanceState);
 
+        mRequestedUri = intent.getData();
+
         mPm = getPackageManager();
 
         mPackageMonitor.register(this, getMainLooper(), false);
@@ -115,9 +124,9 @@ public class ResolverActivity extends Activity
         final ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
         mIconDpi = am.getLauncherLargeIconDensity();
 
-        ComponentName callerActivity = getIntent().getParcelableExtra(ShareCompat.EXTRA_CALLING_ACTIVITY);
+        ComponentName callerActivity = intent.getParcelableExtra(ShareCompat.EXTRA_CALLING_ACTIVITY);
         mAdapter = new ResolveListAdapter(this, getHistory(), intent, callerActivity, true);
-        mAdapter.setPriorityItems(getIntent().getStringArrayExtra(EXTRA_PRIORITY_PACKAGES));
+        mAdapter.setPriorityItems(intent.getStringArrayExtra(EXTRA_PRIORITY_PACKAGES));
 
         mAlwaysUseOption = true;
         final int layoutId;
@@ -395,30 +404,19 @@ public class ResolverActivity extends Activity
             }
 
             if (filter != null) {
-//                final int N = mAdapter.mOrigResolveList.size();
-//                ComponentName[] set = new ComponentName[N];
-//                int bestMatch = 0;
-//                for (int i = 0; i < N; i++) {
-//                    ResolveInfo r = mAdapter.mOrigResolveList.get(i);
-//                    set[i] = new ComponentName(r.activityInfo.packageName,
-//                            r.activityInfo.name);
-//                    if (r.match > bestMatch) bestMatch = r.match;
-//                }
                 if (alwaysCheck) {
+                    //TODO handle preferred
 //                    getPackageManager().addPreferredActivity(filter, bestMatch, set,
 //                            intent.getComponent());
                     history.addPrefered(intent.getComponent().getPackageName());
                 } else {
                     history.add(intent.getComponent().getPackageName());
-                    //TODO
-//                    try {
-//                        AppGlobals.getPackageManager().setLastChosenActivity(intent,
-//                                intent.resolveTypeIfNeeded(getContentResolver()),
-//                                PackageManager.MATCH_DEFAULT_ONLY,
-//                                filter, bestMatch, intent.getComponent());
-//                    } catch (RemoteException re) {
-//                        Log.d(TAG, "Error calling setLastChosenActivity\n" + re);
-//                    }
+
+                    ContentValues values = new ContentValues(3);
+                    values.put(HOST, mRequestedUri.getHost());
+                    values.put(COMPONENT, intent.getComponent().flattenToString());
+                    values.put(LAST_CHOSEN, true);
+                    getContentResolver().insert(CONTENT_URI, values);
                 }
             }
         }

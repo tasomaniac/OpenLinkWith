@@ -1,6 +1,7 @@
 package com.tasomaniac.openwith.data;
 
 import net.simonvt.schematic.annotation.AutoIncrement;
+import net.simonvt.schematic.annotation.ConflictResolutionType;
 import net.simonvt.schematic.annotation.DataType;
 import net.simonvt.schematic.annotation.Database;
 import net.simonvt.schematic.annotation.NotNull;
@@ -28,7 +29,7 @@ public final class OpenWithDatabase {
 
         @DataType(INTEGER) @PrimaryKey @AutoIncrement String ID = "_id";
 
-        @DataType(TEXT) @NotNull @Unique String HOST = "host";
+        @DataType(TEXT) @NotNull @Unique(onConflict = ConflictResolutionType.REPLACE) String HOST = "host";
 
         @DataType(TEXT) @NotNull String COMPONENT = "component";
 
