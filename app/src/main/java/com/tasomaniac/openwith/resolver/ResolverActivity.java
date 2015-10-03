@@ -15,7 +15,6 @@
  */
 package com.tasomaniac.openwith.resolver;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ComponentName;
@@ -27,7 +26,6 @@ import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.PatternMatcher;
 import android.provider.Settings;
@@ -110,7 +108,6 @@ public class ResolverActivity extends Activity
     }
 
     @Override
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     protected void onCreate(Bundle savedInstanceState) {
         final Intent intent = makeMyIntent();
 
@@ -202,7 +199,6 @@ public class ResolverActivity extends Activity
             mListView.setVisibility(View.GONE);
         }
 
-        mListView.setNestedScrollingEnabled(true);
         mListView.setLayoutManager(new LinearLayoutManager(this));
 
         // Prevent the Resolver window from becoming the top fullscreen window and thus from taking
