@@ -16,7 +16,6 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,8 +35,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import timber.log.Timber;
+
 public final class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAdapter.ViewHolder, ResolveListAdapter.Header, DisplayResolveInfo, Void> {
-    private static final String TAG = "ResolveListAdapter";
 
     private boolean mShowExtended;
     private final int mIconDpi;
@@ -446,7 +446,7 @@ public final class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveL
                 }
             }
         } catch (PackageManager.NameNotFoundException e) {
-            Log.e(TAG, "Couldn't find resources for package", e);
+            Timber.e(e, "Couldn't find resources for package");
         }
         return ri.loadIcon(mPm);
     }

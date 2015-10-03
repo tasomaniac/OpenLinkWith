@@ -30,7 +30,6 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ScrollerCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -45,8 +44,9 @@ import android.widget.AbsListView;
 
 import com.tasomaniac.openwith.R;
 
+import timber.log.Timber;
+
 public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingParent {
-    private static final String TAG = "ResolverDrawerLayout";
 
     /**
      * Max width of the whole drawer layout
@@ -240,7 +240,7 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
             case MotionEvent.ACTION_MOVE: {
                 int index = MotionEventCompat.findPointerIndex(ev, mActivePointerId);
                 if (index < 0) {
-                    Log.e(TAG, "Bad pointer id " + mActivePointerId + ", resetting");
+                    Timber.e("Bad pointer id " + mActivePointerId + ", resetting");
                     index = 0;
                     mActivePointerId = MotionEventCompat.getPointerId(ev, 0);
                     mInitialTouchX = MotionEventCompat.getX(ev, 0);
