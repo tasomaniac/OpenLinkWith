@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+  <style name="Theme.OpenWith" parent="Theme.AppCompat.Light.DarkActionBar">
+    <item name="colorPrimary">@color/theme_primary</item>
+    <item name="colorPrimaryDark">@color/theme_primary_dark</item>
+    <item name="colorAccent">@color/theme_accent</item>
+
+  </style>
+
   <style name="Theme.Transparent" parent="@android:style/Theme">
     <item name="android:windowBackground">@android:color/transparent</item>
     <item name="android:windowNoTitle">true</item>

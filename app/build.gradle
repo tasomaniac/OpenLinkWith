@@ -92,6 +92,8 @@ dependencies {
     apt 'net.simonvt.schematic:schematic-compiler:0.6.3'
     compile 'net.simonvt.schematic:schematic:0.6.3'
 
+    compile 'com.jakewharton.timber:timber:3.1.0'
+
     // Crashlytics Kit
     compile('com.crashlytics.sdk.android:crashlytics:2.5.2@aar') {
         transitive = true
