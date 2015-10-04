@@ -2,11 +2,13 @@ package com.tasomaniac.openwith.preferred;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,13 +29,16 @@ import butterknife.ButterKnife;
 
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.COMPONENT;
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.HOST;
+import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.ID;
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.PREFERRED;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.CONTENT_URI;
+import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withId;
 
-public class PreferredAppsActivity extends AppCompatActivity {
+public class PreferredAppsActivity extends AppCompatActivity implements ResolveListAdapter.OnItemClickedListener {
 
     @Bind(R.id.recycler_view)
     RecyclerView recyclerView;
+    private PreferredAppsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,18 +57,20 @@ public class PreferredAppsActivity extends AppCompatActivity {
             return;
         }
 
-        final List<DisplayResolveInfo> apps = new ArrayList<>(cursor.getCount());
+        List<DisplayResolveInfo> apps = new ArrayList<>(cursor.getCount());
         while (cursor.moveToNext()) {
 
+            final int id = cursor.getInt(cursor.getColumnIndex(ID));
             final String host = cursor.getString(cursor.getColumnIndex(HOST));
             final String componentString = cursor.getString(cursor.getColumnIndex(COMPONENT));
+
             Intent intent = new Intent();
             intent.setComponent(ComponentName.unflattenFromString(componentString));
 
             final ResolveInfo ro = mPm.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
 
             CharSequence roLabel = ro.loadLabel(mPm);
-            final DisplayResolveInfo info = new DisplayResolveInfo(ro, roLabel, host, null);
+            final DisplayResolveInfo info = new DisplayResolveInfo(id, ro, roLabel, host, null);
             apps.add(info);
         }
 
@@ -72,10 +79,34 @@ public class PreferredAppsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL_LIST));
-        final PreferredAppsAdapter adapter = new PreferredAppsAdapter(this, apps);
+        adapter = new PreferredAppsAdapter(this, apps);
         recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickedListener(this);
 
         adapter.setHeader(new ResolveListAdapter.Header());
+    }
+
+    @Override
+    public void onItemClicked(int position) {
+        final DisplayResolveInfo info = adapter.getItem(position);
+
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.title_remove_preferred)
+                .setMessage(getString(R.string.message_remove_preferred,
+                        info.getDisplayLabel(),
+                        info.getExtendedInfo(),
+                        info.getExtendedInfo()))
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        getContentResolver().delete(withId(info.getId()), null, null);
+
+                        adapter.notifyDataSetChanged();
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
     }
 
     private static class PreferredAppsAdapter extends ResolveListAdapter {
