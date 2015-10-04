@@ -62,7 +62,7 @@ android {
         textReport true
         textOutput 'stdout'
 
-        fatal 'UnusedResources'
+        // fatal 'UnusedResources'
         warning 'InvalidPackage'
     }
 
