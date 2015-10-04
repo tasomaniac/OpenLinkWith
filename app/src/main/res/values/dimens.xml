@@ -10,4 +10,6 @@
   <dimen name="keyline_1_minus_12dp">4dp</dimen>
   <dimen name="keyline_2">72dp</dimen>
   <dimen name="keyline_2_minus_16dp">56dp</dimen>
+
+  <dimen name="appbar_height">196dp</dimen>
 </resources>
