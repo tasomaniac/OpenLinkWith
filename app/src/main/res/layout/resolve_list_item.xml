@@ -20,16 +20,17 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
    android:layout_width="match_parent"
    android:layout_height="wrap_content"
+   android:minHeight="?attr/listPreferredItemHeightSmall"
    android:foreground="?selectableItemBackground"
-   android:background="?android:attr/activatedBackgroundIndicator">
+   android:background="?android:attr/activatedBackgroundIndicator"
+   android:paddingBottom="4dp"
+   android:paddingTop="4dp">
 
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="?attr/listPreferredItemHeightSmall"
-    android:orientation="horizontal"
-    android:paddingBottom="4dp"
-    android:paddingTop="4dp">
+    android:layout_gravity="center_vertical"
+    android:orientation="horizontal">
 
     <!-- Activity icon when presenting dialog
          Size will be filled in by ResolverActivity -->

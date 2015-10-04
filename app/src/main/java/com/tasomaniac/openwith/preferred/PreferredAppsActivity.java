@@ -10,10 +10,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.resolver.DisplayResolveInfo;
 import com.tasomaniac.openwith.resolver.ResolveListAdapter;
+import com.tasomaniac.openwith.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,15 +34,13 @@ public class PreferredAppsActivity extends AppCompatActivity {
     @Bind(R.id.recycler_view)
     RecyclerView recyclerView;
 
-    private PackageManager mPm;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferred_apps);
         ButterKnife.bind(this);
 
-        mPm = getPackageManager();
+        PackageManager mPm = getPackageManager();
 
         final Cursor cursor = getContentResolver().query(CONTENT_URI, null, PREFERRED + "=1", null, null);
 
@@ -65,6 +66,8 @@ public class PreferredAppsActivity extends AppCompatActivity {
         cursor.close();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this,
+                DividerItemDecoration.VERTICAL_LIST));
         final PreferredAppsAdapter adapter = new PreferredAppsAdapter(this, apps);
         recyclerView.setAdapter(adapter);
 
@@ -73,11 +76,17 @@ public class PreferredAppsActivity extends AppCompatActivity {
 
     private static class PreferredAppsAdapter extends ResolveListAdapter {
 
+        private Context mContext;
+        private LayoutInflater mInflater;
+
         public PreferredAppsAdapter(Context context, List<DisplayResolveInfo> apps) {
             super(context, null, null, null, null, false);
 
-            this.mList = apps;
-            this.mShowExtended = true;
+            mContext = context;
+            mInflater = LayoutInflater.from(context);
+
+            mList = apps;
+            mShowExtended = true;
         }
 
         @Override
@@ -86,10 +95,16 @@ public class PreferredAppsActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onBindHeaderViewHolder(ViewHolder holder, int position) {
-            super.onBindHeaderViewHolder(holder, position);
+        protected ViewHolder onCreateHeaderViewHolder(ViewGroup parent, int viewType) {
+            return new ViewHolder(mInflater
+                    .inflate(R.layout.preferred_header, parent, false));
+        }
 
-            holder.text.setText(R.string.desc_preferred);
+        @Override
+        public ViewHolder onCreateItemViewHolder(ViewGroup viewGroup, int i) {
+            final ViewHolder viewHolder = super.onCreateItemViewHolder(viewGroup, i);
+            viewHolder.itemView.setMinimumHeight(Utils.dpToPx(mContext.getResources(), 72));
+            return viewHolder;
         }
     }
 }
