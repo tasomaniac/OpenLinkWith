@@ -359,16 +359,20 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         final DisplayResolveInfo info = getItem(position);
 
         holder.text.setText(info.displayLabel);
-        if (mShowExtended) {
-            holder.text2.setVisibility(View.VISIBLE);
-            holder.text2.setText(info.extendedInfo);
-        } else {
-            holder.text2.setVisibility(View.GONE);
+        if (holder.text2 != null) {
+            if (mShowExtended) {
+                holder.text2.setVisibility(View.VISIBLE);
+                holder.text2.setText(info.extendedInfo);
+            } else {
+                holder.text2.setVisibility(View.GONE);
+            }
         }
-        if (info.displayIcon == null) {
-            new LoadIconTask().execute(info);
+        if (holder.icon != null) {
+            if (info.displayIcon == null) {
+                new LoadIconTask().execute(info);
+            }
+            holder.icon.setImageDrawable(info.displayIcon);
         }
-        holder.icon.setImageDrawable(info.displayIcon);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
