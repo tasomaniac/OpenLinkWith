@@ -15,6 +15,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,11 +36,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import timber.log.Timber;
 
-public final class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAdapter.ViewHolder, ResolveListAdapter.Header, DisplayResolveInfo, Void> {
+public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAdapter.ViewHolder, ResolveListAdapter.Header, DisplayResolveInfo, Void> {
 
-    private boolean mShowExtended;
+    protected boolean mShowExtended;
     private final int mIconDpi;
 
     private Intent mIntent;
@@ -47,7 +50,7 @@ public final class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveL
     private ResolveInfo mLastChosen;
     private final LayoutInflater mInflater;
 
-    List<DisplayResolveInfo> mList;
+    protected List<DisplayResolveInfo> mList;
     List<ResolveInfo> mOrigResolveList;
 
     private int mLastChosenPosition = -1;
@@ -150,7 +153,7 @@ public final class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveL
         return mFilterLastUsed && mLastChosenPosition >= 0;
     }
 
-    private void rebuildList() {
+    protected void rebuildList() {
 
         mList.clear();
         List<ResolveInfo> currentResolveList = mOrigResolveList = mPm.queryIntentActivities(
@@ -278,7 +281,7 @@ public final class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveL
         }
     }
 
-    private void addResolveInfo(DisplayResolveInfo dri) {
+    protected void addResolveInfo(DisplayResolveInfo dri) {
         mList.add(dri);
     }
 
@@ -393,15 +396,16 @@ public final class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveL
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        @Bind(R.id.text1)
         public TextView text;
+        @Nullable @Bind(R.id.text2)
         public TextView text2;
+        @Nullable @Bind(R.id.icon)
         public ImageView icon;
 
         public ViewHolder(View view) {
             super(view);
-            text = (TextView) view.findViewById(R.id.text1);
-            text2 = (TextView) view.findViewById(R.id.text2);
-            icon = (ImageView) view.findViewById(R.id.icon);
+            ButterKnife.bind(this, view);
         }
     }
 

@@ -2,4 +2,12 @@
   <dimen name="alert_dialog_button_bar_height">48dip</dimen>
 
   <dimen name="resolver_max_width">480dp</dimen>
+
+  <dimen name="content_padding">16dp</dimen>
+
+  <dimen name="keyline_1">16dp</dimen>
+  <dimen name="keyline_1_minus_8dp">8dp</dimen>
+  <dimen name="keyline_1_minus_12dp">4dp</dimen>
+  <dimen name="keyline_2">72dp</dimen>
+  <dimen name="keyline_2_minus_16dp">56dp</dimen>
 </resources>

@@ -8,4 +8,6 @@
   <string name="activity_resolver_use_always">Always</string>
   <string name="whichViewApplication">Open with</string>
   <string name="whichViewApplicationNamed">Open with %1$s</string>
+  <string name="title_preferred_apps">Preferred Apps</string>
+  <string name="desc_preferred">Preferred applications to be used directly when the links below shared with this app.\n\nTap to remove a preferred app.</string>
 </resources>

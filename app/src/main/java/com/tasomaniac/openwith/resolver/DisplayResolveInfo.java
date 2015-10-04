@@ -11,7 +11,7 @@ public final class DisplayResolveInfo {
     CharSequence extendedInfo;
     Intent origIntent;
 
-    DisplayResolveInfo(ResolveInfo pri, CharSequence pLabel,
+    public DisplayResolveInfo(ResolveInfo pri, CharSequence pLabel,
                        CharSequence pInfo, Intent pOrigIntent) {
         ri = pri;
         displayLabel = pLabel;

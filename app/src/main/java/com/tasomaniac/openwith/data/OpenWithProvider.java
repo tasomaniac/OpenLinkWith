@@ -9,6 +9,9 @@ import net.simonvt.schematic.annotation.ContentUri;
 import net.simonvt.schematic.annotation.InexactContentUri;
 import net.simonvt.schematic.annotation.TableEndpoint;
 
+import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.HOST;
+import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.ID;
+
 @ContentProvider(authority = OpenWithProvider.AUTHORITY,
         database = OpenWithDatabase.class,
         packageName = "com.tasomaniac.openwith.provider")
@@ -34,7 +37,7 @@ public final class OpenWithProvider {
                 name = "OPENWITH_ID",
                 path = OpenWithDatabase.OPENWITH + "/#",
                 type = "vnd.android.cursor.item/openwith",
-                whereColumn = OpenWithDatabase.OpenWithColumns.ID,
+                whereColumn = ID,
                 pathSegment = 1)
         public static Uri withId(long id) {
             return Uri.withAppendedPath(CONTENT_URI, String.valueOf(id));
@@ -44,7 +47,7 @@ public final class OpenWithProvider {
                 name = "OPENWITH_HOST",
                 path = OpenWithDatabase.OPENWITH + "/host/" + "*",
                 type = "vnd.android.cursor.item/openwith",
-                whereColumn = OpenWithDatabase.OpenWithColumns.HOST,
+                whereColumn = HOST,
                 pathSegment = 2)
         public static Uri withHost(String host) {
             return CONTENT_URI.buildUpon()
