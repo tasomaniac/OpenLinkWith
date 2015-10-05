@@ -12,6 +12,8 @@
     <application
         android:name=".App"
         android:allowBackup="true"
+        android:fullBackupContent="true"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.OpenWith" >
         <activity
@@ -41,6 +43,7 @@
             android:excludeFromRecents="true"
             android:finishOnCloseSystemDialogs="true"
             android:relinquishTaskIdentity="true"
+            android:process=":resolver"
             android:theme="@style/BottomSheet.Light" />
 
         <activity android:name=".preferred.PreferredAppsActivity"
