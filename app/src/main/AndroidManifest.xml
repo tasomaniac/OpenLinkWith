@@ -46,8 +46,7 @@
             android:process=":resolver"
             android:theme="@style/BottomSheet.Light" />
 
-        <activity android:name=".preferred.PreferredAppsActivity"
-          android:label="@string/title_preferred_apps">
+        <activity android:name=".preferred.PreferredAppsActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

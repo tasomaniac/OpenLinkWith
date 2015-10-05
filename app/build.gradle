@@ -10,6 +10,10 @@ if (localPropertiesFile.exists()) {
     local_properties.load(localPropertiesFile.newDataInputStream())
 }
 
+def STRING = 'String'
+def GIT_SHA = 'GIT_SHA'
+def BUILD_TIME = 'BUILD_TIME'
+
 def gitSha = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
 def buildTime = new Date().format("yyyy-MM-dd'T'HH:mm'Z'", TimeZone.getTimeZone("UTC"))
 
@@ -21,10 +25,10 @@ android {
         applicationId "com.tasomaniac.openwith"
         minSdkVersion 15
         targetSdkVersion rootProject.ext.compileSdkVersion
-        versionCode rootProject.ext.versionMajor * 10000 + rootProject.ext.versionMinor * 1000 + rootProject.ext.versionPatch * 100 + rootProject.ext.versionBuild
-        versionName "${rootProject.ext.versionMajor}.${rootProject.ext.versionMinor}" + ((rootProject.ext.versionPatch != 0) ? ".${rootProject.ext.versionPatch}" : "")
-        buildConfigField "String", "GIT_SHA", "\"${gitSha}\""
-        buildConfigField "String", "BUILD_TIME", "\"${buildTime}\""
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        buildConfigField STRING, GIT_SHA , "\"${gitSha}\""
+        buildConfigField STRING, BUILD_TIME , "\"${buildTime}\""
 
         resConfigs "en"
     }
