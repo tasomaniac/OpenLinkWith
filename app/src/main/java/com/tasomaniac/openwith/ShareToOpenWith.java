@@ -62,7 +62,6 @@ public class ShareToOpenWith extends Activity {
                 urlHandled = true;
 
                 startActivity(intentToHandle
-                        .putExtra(ShareCompat.EXTRA_CALLING_ACTIVITY, reader.getCallingActivity())
                         .putExtra(ShareCompat.EXTRA_CALLING_PACKAGE, reader.getCallingPackage())
                         .putExtra(ResolverActivity.EXTRA_PRIORITY_PACKAGES, PRIORITY_PACKAGES)
                         .setClass(this, ResolverActivity.class));

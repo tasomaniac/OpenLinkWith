@@ -118,6 +118,9 @@ public class ResolverActivity extends Activity
 
         mRequestedUri = intent.getData();
 
+        boolean isCallerPackagePreferred = false;
+        final String callerPackage = intent.getStringExtra(ShareCompat.EXTRA_CALLING_PACKAGE);
+
         ResolveInfo lastChosen = null;
         final Cursor query =
                 getContentResolver().query(withHost(intent.getData().getHost()), null, null, null, null);
@@ -136,10 +139,13 @@ public class ResolverActivity extends Activity
                 ResolveInfo ri = mPm.resolveActivity(lastChosenIntent, PackageManager.MATCH_DEFAULT_ONLY);
 
                 if (isPreferred && ri != null) {
-                    intent.setComponent(lastChosenComponent);
-                    startActivity(intent);
-                    finish();
-                    return;
+                    isCallerPackagePreferred = ri.activityInfo.packageName.equals(callerPackage);
+                    if (!isCallerPackagePreferred) {
+                        intent.setComponent(lastChosenComponent);
+                        startActivity(intent);
+                        finish();
+                        return;
+                    }
                 }
 
                 lastChosen = ri;
@@ -153,8 +159,7 @@ public class ResolverActivity extends Activity
         final ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
         mIconDpi = am.getLauncherLargeIconDensity();
 
-        ComponentName callerActivity = intent.getParcelableExtra(ShareCompat.EXTRA_CALLING_ACTIVITY);
-        mAdapter = new ResolveListAdapter(this, getHistory(), intent, callerActivity, lastChosen, true);
+        mAdapter = new ResolveListAdapter(this, getHistory(), intent, callerPackage, lastChosen, true);
         mAdapter.setPriorityItems(intent.getStringArrayExtra(EXTRA_PRIORITY_PACKAGES));
 
         mAlwaysUseOption = true;
@@ -167,6 +172,11 @@ public class ResolverActivity extends Activity
         } else {
             useHeader = false;
             layoutId = R.layout.resolver_list;
+        }
+
+        //If the caller is already the preferred, don't change it.
+        if (isCallerPackagePreferred) {
+            mAlwaysUseOption = false;
         }
 
         int count = mAdapter.mList.size();

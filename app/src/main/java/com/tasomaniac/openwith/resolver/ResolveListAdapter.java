@@ -17,6 +17,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +66,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     private OnItemLongClickedListener mOnItemLongClickedListener;
     private ChooserHistory mHistory;
     private final Context mContext;
-    private final ComponentName mCallerActivity;
+    private final String mCallerPackage;
 
     private HashMap<String, Integer> mPriorities;
 
@@ -83,7 +84,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     public ResolveListAdapter(Context context,
                               ChooserHistory history,
                               Intent intent,
-                              ComponentName callerActivity,
+                              String callerPackage,
                               ResolveInfo lastChosen,
                               boolean filterLastUsed) {
 
@@ -104,7 +105,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         mContext = context;
         mHistory = history;
         mIntent = intent;
-        mCallerActivity = callerActivity;
+        mCallerPackage = callerPackage;
         mLastChosen = lastChosen;
         mFilterLastUsed = filterLastUsed;
 
@@ -179,15 +180,15 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
                 }
             }
 
-            if (mCallerActivity != null) {
+            if (!TextUtils.isEmpty(mCallerPackage)) {
+                List<ResolveInfo> infosToRemoved = new ArrayList<>();
                 for (ResolveInfo info : currentResolveList) {
-
-                    if (info.activityInfo.packageName.equals(mCallerActivity.getPackageName())
-                            && info.activityInfo.name.equals(mCallerActivity.getClassName())) {
-                        currentResolveList.remove(info);
-                        break;
+                    if (info.activityInfo.packageName.equals(mCallerPackage)) {
+                        infosToRemoved.add(info);
                     }
                 }
+                currentResolveList.removeAll(infosToRemoved);
+                N -= infosToRemoved.size();
             }
 
             if (N > 1) {
