@@ -15,8 +15,11 @@
  */
 package com.tasomaniac.openwith.resolver;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.usage.UsageStats;
+import android.app.usage.UsageStatsManager;
 import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -34,6 +37,7 @@ import android.support.v4.app.ShareCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +46,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.tasomaniac.openwith.BuildConfig;
 import com.tasomaniac.openwith.R;
 
 import java.util.Iterator;
@@ -262,16 +267,56 @@ public class ResolverActivity extends Activity
     private String getCallerPackage() {
         String callerPackage = getIntent().getStringExtra(ShareCompat.EXTRA_CALLING_PACKAGE);
 
-        if (callerPackage == null) {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                ActivityManager am = (ActivityManager) getSystemService(Activity.ACTIVITY_SERVICE);
-                final List<ActivityManager.RunningTaskInfo> runningTasks = am.getRunningTasks(1);
-                final ComponentName topActivity = runningTasks.get(0).baseActivity;
-                callerPackage = topActivity.getPackageName();
-            }
+        if (callerPackage != null) {
+            return callerPackage;
         }
 
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return getCallerPackagerLegacy();
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            return getCallerPackageLollipop();
+        }
+
+        return null;
+    }
+
+    @SuppressWarnings("deprecation")
+    private String getCallerPackagerLegacy() {
+        String callerPackage;ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        final List<ActivityManager.RunningTaskInfo> runningTasks = am.getRunningTasks(1);
+        final ComponentName topActivity = runningTasks.get(0).baseActivity;
+        callerPackage = topActivity.getPackageName();
         return callerPackage;
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP_MR1)
+    private String getCallerPackageLollipop() {
+        UsageStatsManager mUsm = (UsageStatsManager) getSystemService(USAGE_STATS_SERVICE);
+        long time = System.currentTimeMillis();
+        // We get usage stats for the last 10 seconds
+        List<UsageStats> stats = mUsm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY,
+                time - 10 * DateUtils.SECOND_IN_MILLIS, time);
+        if (stats == null) {
+            return null;
+        }
+
+        UsageStats lastUsage = null;
+        for (UsageStats currentUsage : stats) {
+            String currentPackage = currentUsage.getPackageName();
+            if (BuildConfig.APPLICATION_ID.equals(currentPackage)
+                    || "android".equals(currentPackage)) {
+                continue;
+            }
+            if (lastUsage == null ||
+                    lastUsage.getLastTimeUsed() < currentUsage.getLastTimeUsed()) {
+                lastUsage = currentUsage;
+            }
+        }
+        if (lastUsage != null) {
+            return lastUsage.getPackageName();
+        }
+
+        return null;
     }
 
     protected CharSequence getTitleForAction() {
