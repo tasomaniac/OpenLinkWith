@@ -26,6 +26,7 @@ import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PatternMatcher;
 import android.provider.Settings;
@@ -44,6 +45,7 @@ import android.widget.TextView;
 import com.tasomaniac.openwith.R;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import static android.view.WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR;
@@ -119,7 +121,7 @@ public class ResolverActivity extends Activity
         mRequestedUri = intent.getData();
 
         boolean isCallerPackagePreferred = false;
-        final String callerPackage = intent.getStringExtra(ShareCompat.EXTRA_CALLING_PACKAGE);
+        final String callerPackage = getCallerPackage();
 
         ResolveInfo lastChosen = null;
         final Cursor query =
@@ -255,6 +257,21 @@ public class ResolverActivity extends Activity
             mAlwaysButton.setEnabled(true);
             mOnceButton.setEnabled(true);
         }
+    }
+
+    private String getCallerPackage() {
+        String callerPackage = getIntent().getStringExtra(ShareCompat.EXTRA_CALLING_PACKAGE);
+
+        if (callerPackage == null) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                ActivityManager am = (ActivityManager) getSystemService(Activity.ACTIVITY_SERVICE);
+                final List<ActivityManager.RunningTaskInfo> runningTasks = am.getRunningTasks(1);
+                final ComponentName topActivity = runningTasks.get(0).baseActivity;
+                callerPackage = topActivity.getPackageName();
+            }
+        }
+
+        return callerPackage;
     }
 
     protected CharSequence getTitleForAction() {
