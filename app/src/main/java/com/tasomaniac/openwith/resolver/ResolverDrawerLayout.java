@@ -130,6 +130,7 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
 
         mParentHelper = new NestedScrollingParentHelper(this);
 
+        //noinspection ResourceType
         mScroller = ScrollerCompat.create(context, AnimationUtils.loadInterpolator(context,
                 android.R.interpolator.decelerate_quint));
         mVelocityTracker = VelocityTracker.obtain();
