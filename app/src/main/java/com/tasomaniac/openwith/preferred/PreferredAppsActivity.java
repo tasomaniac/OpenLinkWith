@@ -31,8 +31,7 @@ import butterknife.ButterKnife;
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.COMPONENT;
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.HOST;
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.ID;
-import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.PREFERRED;
-import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.CONTENT_URI;
+import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.CONTENT_URI_PREFERRED;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withId;
 
 public class PreferredAppsActivity extends AppCompatActivity implements ResolveListAdapter.OnItemClickedListener {
@@ -52,7 +51,7 @@ public class PreferredAppsActivity extends AppCompatActivity implements ResolveL
 
         PackageManager mPm = getPackageManager();
 
-        final Cursor cursor = getContentResolver().query(CONTENT_URI, null, PREFERRED + "=1", null, null);
+        final Cursor cursor = getContentResolver().query(CONTENT_URI_PREFERRED, null, null, null, null);
 
         if (cursor == null) {
             return;

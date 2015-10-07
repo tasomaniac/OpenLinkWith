@@ -11,6 +11,7 @@ import net.simonvt.schematic.annotation.TableEndpoint;
 
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.HOST;
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.ID;
+import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.PREFERRED;
 
 @ContentProvider(authority = OpenWithProvider.AUTHORITY,
         database = OpenWithDatabase.class,
@@ -54,5 +55,12 @@ public final class OpenWithProvider {
                     .appendEncodedPath("host")
                     .appendPath(host).build();
         }
+
+
+        @ContentUri(
+                path = OpenWithDatabase.OPENWITH + "/preferred",
+                type = "vnd.android.cursor.dir/openwith",
+                where = PREFERRED + "=1")
+        public static final Uri CONTENT_URI_PREFERRED = Uri.withAppendedPath(CONTENT_URI, "preferred");
     }
 }
