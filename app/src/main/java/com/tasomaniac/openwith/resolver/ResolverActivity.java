@@ -326,7 +326,7 @@ public class ResolverActivity extends Activity
 
     protected CharSequence getTitleForAction() {
         final DisplayResolveInfo item = mAdapter.getFilteredItem();
-        return item != null ? getString(R.string.whichV_view_application_named, item.displayLabel) :
+        return item != null ? getString(R.string.which_view_application_named, item.displayLabel) :
                 getString(R.string.which_view_application);
     }
 

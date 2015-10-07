@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Open Link With</string>
+  <string name="activity_resolver_use_always">Her zaman</string>
+  <string name="activity_resolver_use_once">Yalnızca bir defa</string>
+  <string name="which_view_application">Şununla aç:</string>
+  <string name="which_view_application_named">%1$s ile aç</string>
+  <string name="warning_open_link_with_name">%1$s ile açılıyor.</string>
+  <string name="use_a_different_app">Farklı bir uygulama kullan</string>
+  <string name="title_remove_preferred">Tercihi kaldır?</string>
+  <string name="title_preferred_apps">Tercih Edilenler</string>
+  <string name="open_with">Başka yerde aç…</string>
+  <string name="message_remove_preferred">%2$s bağlantılarını açmak için kullanılan %1$s uygulamasını tercih edilenlerden kaldır?\n\nNot: %3$s bağlantısını daha sonra paylaşarak tercih edilen uygulamayı seçebilirsiniz.</string>
+  <string name="error_invalid_url">Paylaşılan içerikte geçerli bir URL bulunamadı.</string>
+  <string name="desc_preferred">Aşağıda bulunan bağlantılar bu uygulama ile paylaşıldığı zaman öncelikli olarak tercih edilecek uygulamalar.\n\nTercihi silmek için uygulamayı seçin.</string>
+</resources>
