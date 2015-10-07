@@ -1,5 +1,6 @@
 package com.tasomaniac.openwith;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -43,14 +44,18 @@ public class ShareToOpenWith extends Activity {
             "com.skype.raider"
     };
 
+    @SuppressLint("InlinedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         boolean urlHandled = false;
         final ShareCompat.IntentReader reader = ShareCompat.IntentReader.from(this);
-
-        String foundUrl = findFirstUrl(reader.getText());
+        CharSequence text = reader.getText();
+        if (text == null) {
+            text = getIntent().getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT);
+        }
+        String foundUrl = findFirstUrl(text);
 
         if (foundUrl != null) {
             Intent intentToHandle = new Intent(Intent.ACTION_VIEW, Uri.parse(foundUrl));

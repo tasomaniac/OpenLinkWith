@@ -31,8 +31,7 @@
       android:label="@string/open_with"
       android:relinquishTaskIdentity="true"
       android:theme="@style/Theme.Transparent.NoAnimation"
-      android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
-      tools:ignore="ExportedService">
+      android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
 
       <intent-filter android:label="@string/open_with">
         <action android:name="android.intent.action.SEND"/>
@@ -42,6 +41,13 @@
         <data android:mimeType="text/plain"/>
       </intent-filter>
 
+      <intent-filter>
+        <action android:name="android.intent.action.PROCESS_TEXT"/>
+
+        <category android:name="android.intent.category.DEFAULT"/>
+
+        <data android:mimeType="text/plain"/>
+      </intent-filter>
     </activity>
 
     <activity
