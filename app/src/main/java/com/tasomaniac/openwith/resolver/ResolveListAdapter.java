@@ -157,9 +157,15 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     protected void rebuildList() {
 
         mList.clear();
-        List<ResolveInfo> currentResolveList = mOrigResolveList = mPm.queryIntentActivities(
-                mIntent, PackageManager.MATCH_DEFAULT_ONLY
-                        | (mFilterLastUsed ? PackageManager.GET_RESOLVED_FILTER : 0));
+        int flag;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            flag = PackageManager.MATCH_ALL;
+        } else {
+            flag = PackageManager.MATCH_DEFAULT_ONLY;
+        }
+        flag = flag | (mFilterLastUsed ? PackageManager.GET_RESOLVED_FILTER : 0);
+        List<ResolveInfo> currentResolveList = mOrigResolveList =
+                mPm.queryIntentActivities(mIntent, flag);
         int N;
         if ((currentResolveList != null) && ((N = currentResolveList.size()) > 0)) {
             // Only display the first matches that are either of equal
@@ -291,7 +297,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     }
 
     public ResolveInfo resolveInfoForPosition(int position, boolean filtered) {
-        return (displayResolveInfoForPosition(position, filtered)).ri;
+        return displayResolveInfoForPosition(position, filtered).ri;
     }
 
     public Intent intentForPosition(int position, boolean filtered) {

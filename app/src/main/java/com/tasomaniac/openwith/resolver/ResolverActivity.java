@@ -23,7 +23,6 @@ import android.app.usage.UsageStatsManager;
 import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
@@ -31,14 +30,12 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PatternMatcher;
 import android.provider.Settings;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -50,9 +47,7 @@ import android.widget.Toast;
 import com.tasomaniac.openwith.BuildConfig;
 import com.tasomaniac.openwith.R;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import static android.view.WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR;
 import static android.view.WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
@@ -422,108 +417,27 @@ public class ResolverActivity extends Activity
         if (isFinishing()) {
             return;
         }
-        ResolveInfo ri = mAdapter.resolveInfoForPosition(which, filtered);
         Intent intent = mAdapter.intentForPosition(which, filtered);
-        onIntentSelected(ri, intent, always);
+        onIntentSelected(intent, always);
         finish();
     }
 
-    protected void onIntentSelected(ResolveInfo ri, Intent intent, boolean alwaysCheck) {
+    protected void onIntentSelected(Intent intent, boolean alwaysCheck) {
 
         final ChooserHistory history = getHistory();
 
         if ((mAlwaysUseOption || mAdapter.hasFilteredItem()) && mAdapter.mOrigResolveList != null) {
-            // Build a reasonable intent filter, based on what matched.
-            IntentFilter filter = new IntentFilter();
+            ContentValues values = new ContentValues(3);
+            values.put(HOST, mRequestedUri.getHost());
+            values.put(COMPONENT, intent.getComponent().flattenToString());
 
-            if (intent.getAction() != null) {
-                filter.addAction(intent.getAction());
+            if (alwaysCheck) {
+                values.put(PREFERRED, true);
             }
-            Set<String> categories = intent.getCategories();
-            if (categories != null) {
-                for (String cat : categories) {
-                    filter.addCategory(cat);
-                }
-            }
-            filter.addCategory(Intent.CATEGORY_DEFAULT);
+            values.put(LAST_CHOSEN, true);
+            getContentResolver().insert(CONTENT_URI, values);
 
-            int cat = ri.match & IntentFilter.MATCH_CATEGORY_MASK;
-            Uri data = intent.getData();
-            if (cat == IntentFilter.MATCH_CATEGORY_TYPE) {
-                String mimeType = intent.resolveType(this);
-                if (mimeType != null) {
-                    try {
-                        filter.addDataType(mimeType);
-                    } catch (IntentFilter.MalformedMimeTypeException e) {
-                        Log.w("ResolverActivity", e);
-                        filter = null;
-                    }
-                }
-            }
-            if (filter != null && data != null && data.getScheme() != null) {
-                // We need the data specification if there was no type,
-                // OR if the scheme is not one of our magical "file:"
-                // or "content:" schemes (see IntentFilter for the reason).
-                if (cat != IntentFilter.MATCH_CATEGORY_TYPE
-                        || (!"file".equals(data.getScheme())
-                        && !"content".equals(data.getScheme()))) {
-                    filter.addDataScheme(data.getScheme());
-
-                    // Look through the resolved filter to determine which part
-                    // of it matched the original Intent.
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-                        Iterator<PatternMatcher> pIt = ri.filter.schemeSpecificPartsIterator();
-
-                        if (pIt != null) {
-                            String ssp = data.getSchemeSpecificPart();
-                            while (ssp != null && pIt.hasNext()) {
-                                PatternMatcher p = pIt.next();
-                                if (p.match(ssp)) {
-                                    filter.addDataSchemeSpecificPart(p.getPath(), p.getType());
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    Iterator<IntentFilter.AuthorityEntry> aIt = ri.filter.authoritiesIterator();
-                    if (aIt != null) {
-                        while (aIt.hasNext()) {
-                            IntentFilter.AuthorityEntry a = aIt.next();
-                            if (a.match(data) >= 0) {
-                                int port = a.getPort();
-                                filter.addDataAuthority(a.getHost(),
-                                        port >= 0 ? Integer.toString(port) : null);
-                                break;
-                            }
-                        }
-                    }
-                    Iterator<PatternMatcher> pIt = ri.filter.pathsIterator();
-                    if (pIt != null) {
-                        String path = data.getPath();
-                        while (path != null && pIt.hasNext()) {
-                            PatternMatcher p = pIt.next();
-                            if (p.match(path)) {
-                                filter.addDataPath(p.getPath(), p.getType());
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (filter != null) {
-                ContentValues values = new ContentValues(3);
-                values.put(HOST, mRequestedUri.getHost());
-                values.put(COMPONENT, intent.getComponent().flattenToString());
-
-                if (alwaysCheck) {
-                    values.put(PREFERRED, true);
-                }
-                values.put(LAST_CHOSEN, true);
-                getContentResolver().insert(CONTENT_URI, values);
-
-                history.add(intent.getComponent().getPackageName());
-            }
+            history.add(intent.getComponent().getPackageName());
         }
 
         if (intent != null) {
