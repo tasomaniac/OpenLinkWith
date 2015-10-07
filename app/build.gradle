@@ -97,7 +97,7 @@ dependencies {
     apt 'net.simonvt.schematic:schematic-compiler:0.6.3'
     compile 'net.simonvt.schematic:schematic:0.6.3'
 
-    compile 'com.jakewharton.timber:timber:3.1.0'
+    compile 'com.jakewharton.timber:timber:4.0.0'
     compile 'com.jakewharton:butterknife:7.0.1'
 
     // Crashlytics Kit
