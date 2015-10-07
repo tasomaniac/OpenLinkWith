@@ -74,7 +74,7 @@ public class ShareToOpenWith extends Activity {
         }
 
         if (!urlHandled) {
-            Toast.makeText(this, "The shared content did not have any valid URLs.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.error_invalid_url, Toast.LENGTH_SHORT).show();
         }
         finish();
     }
