@@ -12,5 +12,6 @@
   <string name="open_with">Başka yerde aç…</string>
   <string name="message_remove_preferred"><![CDATA[<strong>%2$s</strong> bağlantılarını açmak için kullanılan <strong>%1$s</strong> uygulamasını tercih edilenlerden kaldır?<br><br><strong>Not:</strong> <strong>%3$s</strong> bağlantısını daha sonra paylaşarak tercih edilen uygulamayı seçebilirsiniz.]]></string>
   <string name="error_invalid_url">Paylaşılan içerikte geçerli bir URL bulunamadı.</string>
-  <string name="desc_preferred">Aşağıda bulunan bağlantılar bu uygulama ile paylaşıldığı zaman öncelikli olarak tercih edilecek uygulamalar.\n\nTercihi silmek için uygulamayı seçin.</string>
+  <string name="desc_preferred">Aşağıda bulunan bağlantılar bu uygulama ile paylaşıldığı zaman öncelikli olarak tercih edilecek uygulamalar aşağıdadır.\n\nTercihi silmek için uygulamayı seçin.</string>
+  <string name="desc_preferred_empty">Aşağıda bulunan bağlantılar bu uygulama ile paylaşıldığı zaman öncelikli olarak tercih edilecek uygulamalar aşağıdadır.\n\nTercih edilen bir uygulama eklemek için bir linki bu uygulama ile paylaşın ve \"Her zaman\" tuşunu tıklayın.</string>
 </resources>

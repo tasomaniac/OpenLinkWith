@@ -137,6 +137,15 @@ public class PreferredAppsActivity extends AppCompatActivity implements ResolveL
         }
 
         @Override
+        protected void onBindHeaderViewHolder(ViewHolder holder, int position) {
+            if (getItemCount() - getHeaderViewsCount() == 0) {
+                holder.text.setText(R.string.desc_preferred_empty);
+            } else {
+                holder.text.setText(R.string.desc_preferred);
+            }
+        }
+
+        @Override
         public ViewHolder onCreateItemViewHolder(ViewGroup viewGroup, int i) {
             final ViewHolder viewHolder = super.onCreateItemViewHolder(viewGroup, i);
             viewHolder.itemView.setMinimumHeight(Utils.dpToPx(mContext.getResources(), 72));
