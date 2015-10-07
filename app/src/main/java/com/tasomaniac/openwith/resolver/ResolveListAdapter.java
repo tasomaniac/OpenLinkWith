@@ -287,12 +287,16 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     }
 
     public ResolveInfo resolveInfoForPosition(int position, boolean filtered) {
-        return (filtered ? getItem(position) : mList.get(position)).ri;
+        return (displayResolveInfoForPosition(position, filtered)).ri;
     }
 
     public Intent intentForPosition(int position, boolean filtered) {
-        DisplayResolveInfo dri = filtered ? getItem(position) : mList.get(position);
+        DisplayResolveInfo dri = displayResolveInfoForPosition(position, filtered);
         return intentForDisplayResolveInfo(dri);
+    }
+
+    DisplayResolveInfo displayResolveInfoForPosition(int position, boolean filtered) {
+        return filtered ? getItem(position) : mList.get(position);
     }
 
     @Override

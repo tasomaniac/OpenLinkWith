@@ -45,6 +45,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tasomaniac.openwith.BuildConfig;
 import com.tasomaniac.openwith.R;
@@ -149,6 +150,8 @@ public class ResolverActivity extends Activity
                     isCallerPackagePreferred = ri.activityInfo.packageName.equals(callerPackage);
                     if (!isCallerPackagePreferred) {
                         intent.setComponent(lastChosenComponent);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
+                                | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
                         startActivity(intent);
                         finish();
                         return;
@@ -201,6 +204,8 @@ public class ResolverActivity extends Activity
                 mAdapter.setHeader(new ResolveListAdapter.Header());
             }
         } else if (count == 1) {
+            final DisplayResolveInfo dri = mAdapter.displayResolveInfoForPosition(0, false);
+            Toast.makeText(this, getString(R.string.warning_open_link_with_name, dri.getDisplayLabel()), Toast.LENGTH_SHORT).show();
             startActivity(mAdapter.intentForPosition(0, false));
             mPackageMonitor.unregister();
             mRegistered = false;

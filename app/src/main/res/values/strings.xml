@@ -12,4 +12,5 @@
   <string name="title_remove_preferred">Remove preferred?</string>
   <string name="message_remove_preferred">Remove %1$s as the preferred app to load %2$s links with?\n\nNote: You can set a new preferred app to use next time you share %3$s link.</string>
   <string name="error_invalid_url">The shared content did not have any valid URLs.</string>
+  <string name="warning_open_link_with_name">Opening link with %s</string>
 </resources>
