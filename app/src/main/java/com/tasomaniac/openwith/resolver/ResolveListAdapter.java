@@ -61,25 +61,11 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     private Map<String, UsageStats> mStats;
     private static final long USAGE_STATS_PERIOD = 1000 * 60 * 60 * 24 * 14;
 
-    private OnItemClickedListener mOnItemClickedListener;
-
-    private OnItemLongClickedListener mOnItemLongClickedListener;
     private ChooserHistory mHistory;
     private final Context mContext;
     private final String mCallerPackage;
 
     private HashMap<String, Integer> mPriorities;
-
-    private int checkedItemPosition = AbsListView.INVALID_POSITION;
-    private boolean mIsSelectable = false;
-
-    public void setOnItemClickedListener(OnItemClickedListener mOnItemClickedListener) {
-        this.mOnItemClickedListener = mOnItemClickedListener;
-    }
-
-    public void setOnItemLongClickedListener(OnItemLongClickedListener mOnItemLongClickedListener) {
-        this.mOnItemLongClickedListener = mOnItemLongClickedListener;
-    }
 
     public ResolveListAdapter(Context context,
                               ChooserHistory history,
@@ -336,7 +322,8 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     }
 
     public long getItemId(int position) {
-        return position;
+        final int id = getItem(position).getId();
+        return id != 0 ? id : 0;
     }
 
 
@@ -388,30 +375,6 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
             }
             holder.icon.setImageDrawable(info.displayIcon);
         }
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isSelectable()) {
-                    v.setActivated(!v.isActivated());
-                    setSelection(position);
-                }
-                if (mOnItemClickedListener != null) {
-                    mOnItemClickedListener.onItemClicked(position);
-                }
-            }
-        });
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                return mOnItemLongClickedListener != null
-                        && mOnItemLongClickedListener.onItemLongClicked(position);
-            }
-        });
-
-        if (isSelectable()) {
-            holder.itemView.setActivated(getCheckedItemPosition() == position);
-        }
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -426,14 +389,6 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
             super(view);
             ButterKnife.bind(this, view);
         }
-    }
-
-    public interface OnItemClickedListener {
-        void onItemClicked(int position);
-    }
-
-    public interface OnItemLongClickedListener {
-        boolean onItemLongClicked(int position);
     }
 
     class LoadIconTask extends AsyncTask<DisplayResolveInfo, Void, DisplayResolveInfo> {
@@ -579,22 +534,4 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     }
 
     public static class Header {}
-
-    public int getCheckedItemPosition() {
-        return checkedItemPosition;
-    }
-
-    public void setSelection(int position) {
-        checkedItemPosition = position;
-        notifyDataSetChanged();
-    }
-
-    public void setSelectable(boolean selectable) {
-        mIsSelectable = selectable;
-        notifyDataSetChanged();
-    }
-
-    public boolean isSelectable() {
-        return mIsSelectable;
-    }
 }

@@ -10,11 +10,11 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.tasomaniac.openwith.R;
@@ -22,22 +22,28 @@ import com.tasomaniac.openwith.resolver.DisplayResolveInfo;
 import com.tasomaniac.openwith.resolver.ResolveListAdapter;
 import com.tasomaniac.openwith.util.Utils;
 
+import org.lucasr.twowayview.ItemClickSupport;
+import org.lucasr.twowayview.widget.ListLayoutManager;
+import org.lucasr.twowayview.widget.TwoWayView;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.COMPONENT;
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.HOST;
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.ID;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.CONTENT_URI_PREFERRED;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withId;
+import static org.lucasr.twowayview.TwoWayLayoutManager.Orientation.VERTICAL;
 
-public class PreferredAppsActivity extends AppCompatActivity implements ResolveListAdapter.OnItemClickedListener {
+public class PreferredAppsActivity extends AppCompatActivity implements ItemClickSupport.OnItemClickListener {
 
     @Bind(R.id.recycler_view)
-    RecyclerView recyclerView;
+    TwoWayView recyclerView;
     private PreferredAppsAdapter adapter;
 
     @Override
@@ -76,18 +82,20 @@ public class PreferredAppsActivity extends AppCompatActivity implements ResolveL
 
         cursor.close();
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new ListLayoutManager(this, VERTICAL));
         recyclerView.addItemDecoration(new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL_LIST));
+        recyclerView.setItemAnimator(new SlideInRightAnimator());
         adapter = new PreferredAppsAdapter(this, apps);
         recyclerView.setAdapter(adapter);
-        adapter.setOnItemClickedListener(this);
+        ItemClickSupport.addTo(recyclerView).setOnItemClickListener(this);
 
         adapter.setHeader(new ResolveListAdapter.Header());
     }
 
     @Override
-    public void onItemClicked(int position) {
+    public void onItemClick(RecyclerView parent, View view, final int position, long id) {
+
         final DisplayResolveInfo info = adapter.getItem(position);
 
         final String message = getString(R.string.message_remove_preferred,
@@ -102,12 +110,29 @@ public class PreferredAppsActivity extends AppCompatActivity implements ResolveL
                     public void onClick(DialogInterface dialog, int which) {
 
                         getContentResolver().delete(withId(info.getId()), null, null);
-
-                        adapter.notifyDataSetChanged();
+                        notifyItemRemoval(position);
                     }
                 })
                 .setNegativeButton(android.R.string.cancel, null)
                 .show();
+    }
+
+    private void notifyItemRemoval(final int position) {
+        recyclerView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                adapter.remove(adapter.getItem(position));
+                adapter.notifyItemRemoved(position);
+
+                recyclerView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.notifyItemChanged(0);
+                    }
+                }, 200);
+            }
+        }, 300);
     }
 
     private static class PreferredAppsAdapter extends ResolveListAdapter {
@@ -125,9 +150,12 @@ public class PreferredAppsActivity extends AppCompatActivity implements ResolveL
             mShowExtended = true;
         }
 
+        public void remove(DisplayResolveInfo item) {
+            mList.remove(item);
+        }
+
         @Override
         protected void rebuildList() {
-
         }
 
         @Override

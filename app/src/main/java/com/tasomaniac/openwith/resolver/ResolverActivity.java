@@ -32,7 +32,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.ShareCompat;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -47,6 +46,10 @@ import android.widget.Toast;
 import com.tasomaniac.openwith.BuildConfig;
 import com.tasomaniac.openwith.R;
 
+import org.lucasr.twowayview.ItemClickSupport;
+import org.lucasr.twowayview.ItemSelectionSupport;
+import org.lucasr.twowayview.widget.ListLayoutManager;
+
 import java.util.List;
 
 import static android.view.WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR;
@@ -57,6 +60,7 @@ import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.LAST
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.PREFERRED;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.CONTENT_URI;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withHost;
+import static org.lucasr.twowayview.TwoWayLayoutManager.Orientation.VERTICAL;
 
 /**
  * This activity is displayed when the system attempts to start an Intent for
@@ -64,8 +68,8 @@ import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withHo
  * which to go to.  It is not normally used directly by application developers.
  */
 public class ResolverActivity extends Activity
-        implements ResolveListAdapter.OnItemClickedListener,
-        ResolveListAdapter.OnItemLongClickedListener {
+        implements ItemClickSupport.OnItemClickListener,
+        ItemClickSupport.OnItemLongClickListener {
 
     public static final String EXTRA_PRIORITY_PACKAGES = "EXTRA_PRIORITY_PACKAGES";
 
@@ -74,13 +78,15 @@ public class ResolverActivity extends Activity
     private boolean mAlwaysUseOption;
 
     private RecyclerView mListView;
+    private ItemSelectionSupport selectionSupport;
+
     private Button mAlwaysButton;
     private Button mOnceButton;
     private int mIconDpi;
-    private int mLastSelected = ListView.INVALID_POSITION;
+
+    private int mLastSelected = ItemSelectionSupport.INVALID_POSITION;
 
     private Uri mRequestedUri;
-
     private ChooserHistory mHistory;
 
     private ChooserHistory getHistory() {
@@ -192,11 +198,15 @@ public class ResolverActivity extends Activity
             setContentView(layoutId);
             mListView = (RecyclerView) findViewById(R.id.resolver_list);
             mListView.setAdapter(mAdapter);
-            mAdapter.setOnItemClickedListener(this);
-            mAdapter.setOnItemLongClickedListener(this);
+
+            selectionSupport = ItemSelectionSupport.addTo(mListView);
+
+            final ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mListView);
+            itemClickSupport.setOnItemClickListener(this);
+            itemClickSupport.setOnItemLongClickListener(this);
 
             if (mAlwaysUseOption) {
-                mAdapter.setSelectable(true);
+                selectionSupport.setChoiceMode(ItemSelectionSupport.ChoiceMode.SINGLE);
             }
             if (useHeader) {
                 mAdapter.setHeader(new ResolveListAdapter.Header());
@@ -219,7 +229,7 @@ public class ResolverActivity extends Activity
             return;
         }
 
-        mListView.setLayoutManager(new LinearLayoutManager(this));
+        mListView.setLayoutManager(new ListLayoutManager(this, VERTICAL));
 
         // Prevent the Resolver window from becoming the top fullscreen window and thus from taking
         // control of the system bars.
@@ -377,37 +387,42 @@ public class ResolverActivity extends Activity
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         if (mAlwaysUseOption) {
-            final int checkedPos = mAdapter.getCheckedItemPosition();
+            final int checkedPos = selectionSupport.getCheckedItemPosition();
             final boolean hasValidSelection = checkedPos != ListView.INVALID_POSITION;
             mLastSelected = checkedPos;
             mAlwaysButton.setEnabled(hasValidSelection);
             mOnceButton.setEnabled(hasValidSelection);
             if (hasValidSelection) {
-                mAdapter.setSelection(checkedPos);
+                selectionSupport.setItemChecked(checkedPos, true);
             }
         }
     }
 
     @Override
-    public void onItemClicked(int position) {
-        final int checkedPos = mAdapter.getCheckedItemPosition();
-        final boolean hasValidSelection = checkedPos != ListView.INVALID_POSITION;
-        if (mAlwaysUseOption && (!hasValidSelection || mLastSelected != checkedPos)) {
-            mAlwaysButton.setEnabled(hasValidSelection);
-            mOnceButton.setEnabled(hasValidSelection);
-            if (hasValidSelection) {
-                mListView.smoothScrollToPosition(checkedPos);
+    public void onItemClick(RecyclerView parent, View view, final int position, long id) {
+        mListView.post(new Runnable() {
+            @Override
+            public void run() {
+                final int checkedPos = selectionSupport.getCheckedItemPosition();
+                final boolean hasValidSelection = checkedPos != ItemSelectionSupport.INVALID_POSITION;
+                if (mAlwaysUseOption && (!hasValidSelection || mLastSelected != checkedPos)) {
+                    mAlwaysButton.setEnabled(hasValidSelection);
+                    mOnceButton.setEnabled(hasValidSelection);
+                    if (hasValidSelection) {
+                        mListView.smoothScrollToPosition(checkedPos);
+                    }
+                    mLastSelected = checkedPos;
+                } else {
+                    startSelected(position, false, true);
+                }
             }
-            mLastSelected = checkedPos;
-        } else {
-            startSelected(position, false, true);
-        }
+        });
     }
 
     public void onButtonClick(View v) {
         final int id = v.getId();
         startSelected(mAlwaysUseOption ?
-                        mAdapter.getCheckedItemPosition() : mAdapter.getFilteredPosition(),
+                        selectionSupport.getCheckedItemPosition()  : mAdapter.getFilteredPosition(),
                 id == R.id.button_always,
                 mAlwaysUseOption);
         dismiss();
@@ -455,7 +470,7 @@ public class ResolverActivity extends Activity
     }
 
     @Override
-    public boolean onItemLongClicked(int position) {
+    public boolean onItemLongClick(RecyclerView parent, View view, int position, long id) {
         ResolveInfo ri = mAdapter.resolveInfoForPosition(position, true);
         showAppDetails(ri);
         return true;
