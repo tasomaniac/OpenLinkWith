@@ -191,6 +191,10 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
                 N -= infosToRemoved.size();
             }
 
+            if (N <= 0) {
+                return;
+            }
+
             if (N > 1) {
                 Comparator<ResolveInfo> rComparator =
                         new ResolverComparator(mContext, mIntent);

@@ -57,15 +57,6 @@
     android:elevation="8dp"
     android:scrollbarStyle="outsideOverlay"/>
 
-  <TextView
-    android:id="@+id/empty"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:padding="32dp"
-    android:visibility="gone"
-    app:layout_alwaysShow="true"/>
-
   <LinearLayout
     android:id="@+id/button_bar"
     style="?attr/buttonBarStyle"

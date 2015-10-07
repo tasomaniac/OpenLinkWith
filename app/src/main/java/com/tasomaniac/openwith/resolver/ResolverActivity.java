@@ -212,13 +212,11 @@ public class ResolverActivity extends Activity
             finish();
             return;
         } else {
-            setContentView(R.layout.resolver_list);
-
-            final TextView empty = (TextView) findViewById(R.id.empty);
-            empty.setVisibility(View.VISIBLE);
-
-            mListView = (RecyclerView) findViewById(R.id.resolver_list);
-            mListView.setVisibility(View.GONE);
+            Toast.makeText(this, getString(R.string.empty_resolver_activity,
+                            mRequestedUri.toString()),
+                    Toast.LENGTH_LONG).show();
+            finish();
+            return;
         }
 
         mListView.setLayoutManager(new LinearLayoutManager(this));
