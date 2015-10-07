@@ -10,7 +10,9 @@
   <string name="title_preferred_apps">Preferred Apps</string>
   <string name="desc_preferred">Preferred applications to be used directly when the links below shared with this app.\n\nTap to remove a preferred app.</string>
   <string name="title_remove_preferred">Remove preferred?</string>
-  <string name="message_remove_preferred">Remove %1$s as the preferred app to load %2$s links with?\n\nNote: You can set a new preferred app to use next time you share %3$s link.</string>
+  <string name="message_remove_preferred"><![CDATA[
+    Remove <strong>%1$s</strong> as the preferred app to load <strong>%2$s</strong> links with?<br><br><strong>Note:</strong> You can set a new preferred app to use next time you share <strong>%3$s</strong> link.
+    ]]></string>
   <string name="error_invalid_url">The shared content did not have any valid URLs.</string>
   <string name="empty_resolver_activity">No other application found to handle the URL.</string>
   <string name="warning_open_link_with_name">Opening link with %s.</string>

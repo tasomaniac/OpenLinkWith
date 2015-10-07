@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -90,12 +91,13 @@ public class PreferredAppsActivity extends AppCompatActivity implements ResolveL
     public void onItemClicked(int position) {
         final DisplayResolveInfo info = adapter.getItem(position);
 
+        final String message = getString(R.string.message_remove_preferred,
+                info.getDisplayLabel(),
+                info.getExtendedInfo(),
+                info.getExtendedInfo());
         new AlertDialog.Builder(this)
                 .setTitle(R.string.title_remove_preferred)
-                .setMessage(getString(R.string.message_remove_preferred,
-                        info.getDisplayLabel(),
-                        info.getExtendedInfo(),
-                        info.getExtendedInfo()))
+                .setMessage(Html.fromHtml(message))
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
