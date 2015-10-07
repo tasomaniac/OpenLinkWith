@@ -149,6 +149,9 @@ public class ResolverActivity extends Activity
                 if (isPreferred && ri != null) {
                     isCallerPackagePreferred = ri.activityInfo.packageName.equals(callerPackage);
                     if (!isCallerPackagePreferred) {
+                        Toast.makeText(this, getString(R.string.warning_open_link_with_name,
+                                        ri.loadLabel(mPm)),
+                                Toast.LENGTH_SHORT).show();
                         intent.setComponent(lastChosenComponent);
                         intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
                                 | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
@@ -205,7 +208,9 @@ public class ResolverActivity extends Activity
             }
         } else if (count == 1) {
             final DisplayResolveInfo dri = mAdapter.displayResolveInfoForPosition(0, false);
-            Toast.makeText(this, getString(R.string.warning_open_link_with_name, dri.getDisplayLabel()), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.warning_open_link_with_name,
+                        dri.getDisplayLabel()),
+                    Toast.LENGTH_SHORT).show();
             startActivity(mAdapter.intentForPosition(0, false));
             mPackageMonitor.unregister();
             mRegistered = false;
