@@ -305,15 +305,11 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         return result;
     }
 
+    @Override
     public DisplayResolveInfo getItem(int position) {
         position -= getHeaderViewsCount();
         if (position < 0) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Position: %d It cannot be negative or header cannot be selected.",
-                            position
-                    )
-            );
+            return null;
         }
         if (mFilterLastUsed && mLastChosenPosition >= 0 && position >= mLastChosenPosition) {
             position++;
@@ -321,11 +317,10 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         return mList.get(position);
     }
 
+    @Override
     public long getItemId(int position) {
-        final int id = getItem(position).getId();
-        return id != 0 ? id : 0;
+        return position;
     }
-
 
     public int getHeaderViewsCount() {
         return hasHeader() ? 1 : 0;

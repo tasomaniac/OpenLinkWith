@@ -53,3 +53,5 @@
     public static final ** CREATOR;
 }
 
+-dontwarn org.jetbrains.annotations.**
+

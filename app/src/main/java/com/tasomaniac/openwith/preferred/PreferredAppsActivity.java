@@ -97,6 +97,9 @@ public class PreferredAppsActivity extends AppCompatActivity implements ItemClic
     public void onItemClick(RecyclerView parent, View view, final int position, long id) {
 
         final DisplayResolveInfo info = adapter.getItem(position);
+        if (info == null) {
+            return;
+        }
 
         final String message = getString(R.string.message_remove_preferred,
                 info.getDisplayLabel(),
