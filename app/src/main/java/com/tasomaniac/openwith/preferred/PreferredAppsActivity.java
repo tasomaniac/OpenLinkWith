@@ -76,7 +76,7 @@ public class PreferredAppsActivity extends AppCompatActivity implements ItemClic
             final ResolveInfo ro = mPm.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
 
             CharSequence roLabel = ro.loadLabel(mPm);
-            final DisplayResolveInfo info = new DisplayResolveInfo(id, ro, roLabel, host, null);
+            final DisplayResolveInfo info = new DisplayResolveInfo(id, ro, roLabel, host);
             apps.add(info);
         }
 

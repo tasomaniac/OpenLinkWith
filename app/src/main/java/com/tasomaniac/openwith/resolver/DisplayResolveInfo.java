@@ -1,6 +1,5 @@
 package com.tasomaniac.openwith.resolver;
 
-import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 
@@ -10,20 +9,18 @@ public final class DisplayResolveInfo {
     CharSequence displayLabel;
     Drawable displayIcon;
     CharSequence extendedInfo;
-    Intent origIntent;
 
     public DisplayResolveInfo(ResolveInfo pri, CharSequence pLabel,
-                              CharSequence pInfo, Intent pOrigIntent) {
-        this(0, pri, pLabel, pInfo, pOrigIntent);
+                              CharSequence pInfo) {
+        this(0, pri, pLabel, pInfo);
     }
 
     public DisplayResolveInfo(int id, ResolveInfo pri, CharSequence pLabel,
-                              CharSequence pInfo, Intent pOrigIntent) {
+                              CharSequence pInfo) {
         this.id = id;
         ri = pri;
         displayLabel = pLabel;
         extendedInfo = pInfo;
-        origIntent = pOrigIntent;
     }
 
     public int getId() {

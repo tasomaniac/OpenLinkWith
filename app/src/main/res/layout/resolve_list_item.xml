@@ -18,7 +18,8 @@
 */
 -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-   android:layout_width="match_parent"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
    android:layout_height="wrap_content"
    android:minHeight="?attr/listPreferredItemHeightSmall"
    android:foreground="?selectableItemBackground"
@@ -30,7 +31,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    tools:ignore="UselessParent">
 
     <!-- Activity icon when presenting dialog
          Size will be filled in by ResolverActivity -->
@@ -42,7 +44,8 @@
       android:layout_marginBottom="12dp"
       android:layout_marginLeft="?attr/listPreferredItemPaddingLeft"
       android:layout_marginTop="12dp"
-      android:scaleType="fitCenter"/>
+      android:scaleType="fitCenter"
+      android:contentDescription="@null"/>
 
     <LinearLayout android:layout_width="wrap_content"
                   android:layout_height="wrap_content"

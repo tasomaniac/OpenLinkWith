@@ -14,7 +14,7 @@ class ChooserHistory {
 
     private static final char SEPARATOR_ITEMS = '#';
 
-    HashMap<String, Integer> mHistoryMap;
+    private final HashMap<String, Integer> mHistoryMap;
 
     public static ChooserHistory fromSettings(Context context) {
         return fromSettings(getPreferences(context).getString(KEY_HISTORY, ""));
@@ -50,7 +50,7 @@ class ChooserHistory {
         return history;
     }
 
-    public ChooserHistory() {
+    private ChooserHistory() {
         mHistoryMap = new HashMap<>();
     }
 

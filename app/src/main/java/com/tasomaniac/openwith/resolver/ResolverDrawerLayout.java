@@ -241,7 +241,7 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
             case MotionEvent.ACTION_MOVE: {
                 int index = MotionEventCompat.findPointerIndex(ev, mActivePointerId);
                 if (index < 0) {
-                    Timber.e("Bad pointer id " + mActivePointerId + ", resetting");
+                    Timber.e("Bad pointer id %d, resetting", mActivePointerId);
                     index = 0;
                     mActivePointerId = MotionEventCompat.getPointerId(ev, 0);
                     mInitialTouchX = MotionEventCompat.getX(ev, 0);

@@ -227,7 +227,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         int num = end - start + 1;
         if (num == 1) {
             // No duplicate labels. Use label for entry at start
-            addResolveInfo(new DisplayResolveInfo(ro, roLabel, null, null));
+            addResolveInfo(new DisplayResolveInfo(ro, roLabel, null));
             updateLastChosenPosition(ro);
         } else {
             mShowExtended = true;
@@ -259,11 +259,11 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
                 if (usePkg) {
                     // Use application name for all entries from start to end-1
                     addResolveInfo(new DisplayResolveInfo(add, roLabel,
-                            add.activityInfo.packageName, null));
+                            add.activityInfo.packageName));
                 } else {
                     // Use package name for all entries from start to end-1
                     addResolveInfo(new DisplayResolveInfo(add, roLabel,
-                            add.activityInfo.applicationInfo.loadLabel(mPm), null));
+                            add.activityInfo.applicationInfo.loadLabel(mPm)));
                 }
                 updateLastChosenPosition(add);
             }
@@ -278,7 +278,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         }
     }
 
-    protected void addResolveInfo(DisplayResolveInfo dri) {
+    private void addResolveInfo(DisplayResolveInfo dri) {
         mList.add(dri);
     }
 
@@ -386,7 +386,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         }
     }
 
-    class LoadIconTask extends AsyncTask<DisplayResolveInfo, Void, DisplayResolveInfo> {
+    private class LoadIconTask extends AsyncTask<DisplayResolveInfo, Void, DisplayResolveInfo> {
         @Override
         protected DisplayResolveInfo doInBackground(DisplayResolveInfo... params) {
             final DisplayResolveInfo info = params[0];
@@ -424,7 +424,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         return ri.loadIcon(mPm);
     }
 
-    public static Drawable getIcon(Resources res, int resId, int mIconDpi) {
+    private static Drawable getIcon(Resources res, int resId, int mIconDpi) {
         Drawable result;
         try {
             //noinspection deprecation
@@ -513,7 +513,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     }
 
     Intent intentForDisplayResolveInfo(DisplayResolveInfo dri) {
-        Intent intent = new Intent(dri.origIntent != null ? dri.origIntent : mIntent);
+        Intent intent = new Intent(mIntent);
         intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
                 | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
         ActivityInfo ai = dri.ri.activityInfo;

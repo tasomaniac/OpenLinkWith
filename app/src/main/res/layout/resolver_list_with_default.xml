@@ -46,16 +46,17 @@
         android:layout_gravity="start|top"
         android:layout_marginLeft="?attr/listPreferredItemPaddingLeft"
         android:layout_marginTop="20dp"
-        android:scaleType="fitCenter"/>
+        android:scaleType="fitCenter"
+        android:contentDescription="@null"/>
 
       <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="?attr/listPreferredItemHeight"
         android:layout_marginLeft="?attr/listPreferredItemPaddingLeft"
+        android:layout_marginRight="16dp"
         android:layout_weight="1"
         android:gravity="start|center_vertical"
-        android:paddingRight="16dp"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
     </LinearLayout>
 
