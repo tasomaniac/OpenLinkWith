@@ -13,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.Nullable;
@@ -36,12 +37,21 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
 public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAdapter.ViewHolder, ResolveListAdapter.Header, DisplayResolveInfo, Void> {
+
+    private static final Intent BROWSER_INTENT;
+    static {
+        BROWSER_INTENT = new Intent();
+        BROWSER_INTENT.setAction(Intent.ACTION_VIEW);
+        BROWSER_INTENT.addCategory(Intent.CATEGORY_BROWSABLE);
+        BROWSER_INTENT.setData(Uri.parse("http:"));
+    }
 
     protected boolean mShowExtended;
     private final int mIconDpi;
@@ -52,7 +62,6 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     private final LayoutInflater mInflater;
 
     protected List<DisplayResolveInfo> mList;
-    List<ResolveInfo> mOrigResolveList;
 
     private int mLastChosenPosition = -1;
     private boolean mFilterLastUsed;
@@ -150,10 +159,15 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
             flag = PackageManager.MATCH_DEFAULT_ONLY;
         }
         flag = flag | (mFilterLastUsed ? PackageManager.GET_RESOLVED_FILTER : 0);
-        List<ResolveInfo> currentResolveList = mOrigResolveList =
-                mPm.queryIntentActivities(mIntent, flag);
+
+        Set<ResolveInfo> origResolveList = new HashSet<>();
+        origResolveList.addAll(mPm.queryIntentActivities(mIntent, flag));
+        origResolveList.addAll(queryBrowserIntentActivities(flag));
+
+        List<ResolveInfo> currentResolveList = new ArrayList<>(origResolveList);
+
         int N;
-        if ((currentResolveList != null) && ((N = currentResolveList.size()) > 0)) {
+        if ((N = currentResolveList.size()) > 0) {
             // Only display the first matches that are either of equal
             // priority or have asked to be default options.
             ResolveInfo r0 = currentResolveList.get(0);
@@ -163,15 +177,13 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
                 if (r0.priority != ri.priority ||
                         r0.isDefault != ri.isDefault) {
                     while (i < N) {
-                        if (mOrigResolveList == currentResolveList) {
-                            mOrigResolveList = new ArrayList<>(mOrigResolveList);
-                        }
                         currentResolveList.remove(i);
                         N--;
                     }
                 }
             }
 
+            //Remove the components from the caller
             if (!TextUtils.isEmpty(mCallerPackage)) {
                 List<ResolveInfo> infosToRemoved = new ArrayList<>();
                 for (ResolveInfo info : currentResolveList) {
@@ -183,6 +195,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
                 N -= infosToRemoved.size();
             }
 
+            //If there is no left, return
             if (N <= 0) {
                 return;
             }
@@ -219,6 +232,10 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
             // Process last group
             processGroup(currentResolveList, start, (N - 1), r0, r0Label);
         }
+    }
+
+    private List<ResolveInfo> queryBrowserIntentActivities(int flags) {
+        return mPm.queryIntentActivities(BROWSER_INTENT, flags);
     }
 
     private void processGroup(List<ResolveInfo> rList, int start, int end, ResolveInfo ro,

@@ -3,8 +3,6 @@ package com.tasomaniac.openwith;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,7 +12,6 @@ import android.widget.Toast;
 
 import com.tasomaniac.openwith.resolver.ResolverActivity;
 
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,7 +46,6 @@ public class ShareToOpenWith extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        boolean urlHandled = false;
         final ShareCompat.IntentReader reader = ShareCompat.IntentReader.from(this);
         CharSequence text = reader.getText();
         if (text == null) {
@@ -59,23 +55,14 @@ public class ShareToOpenWith extends Activity {
 
         if (foundUrl != null) {
             Intent intentToHandle = new Intent(Intent.ACTION_VIEW, Uri.parse(foundUrl));
-
-            final List<ResolveInfo> resolveInfos = getPackageManager()
-                    .queryIntentActivities(intentToHandle, PackageManager.MATCH_DEFAULT_ONLY);
-
-            if (resolveInfos != null && resolveInfos.size() > 0) {
-                urlHandled = true;
-
-                startActivity(intentToHandle
-                        .putExtra(ShareCompat.EXTRA_CALLING_PACKAGE, reader.getCallingPackage())
-                        .putExtra(ResolverActivity.EXTRA_PRIORITY_PACKAGES, PRIORITY_PACKAGES)
-                        .setClass(this, ResolverActivity.class));
-            }
-        }
-
-        if (!urlHandled) {
+            startActivity(intentToHandle
+                    .putExtra(ShareCompat.EXTRA_CALLING_PACKAGE, reader.getCallingPackage())
+                    .putExtra(ResolverActivity.EXTRA_PRIORITY_PACKAGES, PRIORITY_PACKAGES)
+                    .setClass(this, ResolverActivity.class));
+        } else {
             Toast.makeText(this, R.string.error_invalid_url, Toast.LENGTH_SHORT).show();
         }
+
         finish();
     }
 
