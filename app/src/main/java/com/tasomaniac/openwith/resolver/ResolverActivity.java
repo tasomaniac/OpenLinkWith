@@ -225,6 +225,8 @@ public class ResolverActivity extends Activity
             Toast.makeText(this, getString(R.string.empty_resolver_activity,
                             mRequestedUri.toString()),
                     Toast.LENGTH_LONG).show();
+            mPackageMonitor.unregister();
+            mRegistered = false;
             finish();
             return;
         }
