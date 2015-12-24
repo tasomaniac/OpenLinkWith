@@ -120,7 +120,7 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
 
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ResolverDrawerLayout,
                 defStyleAttr, 0);
-        mMaxWidth = a.getDimensionPixelSize(R.styleable.ResolverDrawerLayout_maxWidth, -1);
+        mMaxWidth = a.getDimensionPixelSize(R.styleable.ResolverDrawerLayout_resolverMaxWidth, -1);
         mMaxCollapsedHeight = a.getDimensionPixelSize(
                 R.styleable.ResolverDrawerLayout_maxCollapsedHeight, 0);
         mMaxCollapsedHeightSmall = a.getDimensionPixelSize(

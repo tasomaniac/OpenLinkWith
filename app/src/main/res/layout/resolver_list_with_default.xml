@@ -23,7 +23,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   app:maxCollapsedHeight="144dp"
-  app:maxWidth="@dimen/resolver_max_width"
+  app:resolverMaxWidth="@dimen/resolver_max_width"
   >
 
   <LinearLayout

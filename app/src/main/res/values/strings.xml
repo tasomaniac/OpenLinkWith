@@ -17,4 +17,12 @@
   <string name="error_invalid_url">The shared content did not have any valid URLs.</string>
   <string name="empty_resolver_activity">No other application found to handle the URL.</string>
   <string name="warning_open_link_with_name">Opening link with %s.</string>
+
+  <string name="done">Done</string>
+
+  <string name="settings_label">Settings</string>
+
+  <string name="pref_key_category_general">pref_category_general</string>
+  <string name="pref_title_general">General</string>
+
 </resources>

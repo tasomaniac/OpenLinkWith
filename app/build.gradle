@@ -92,6 +92,7 @@ dependencies {
     compile "com.android.support:appcompat-v7:$supportLibVersion"
     compile "com.android.support:recyclerview-v7:$supportLibVersion"
     compile "com.android.support:design:$supportLibVersion"
+    compile "com.android.support:preference-v14:$supportLibVersion"
 
     compile 'com.karumi:headerrecyclerview:1.0.3'
     compile 'jp.wasabeef:recyclerview-animators:2.1.0'
