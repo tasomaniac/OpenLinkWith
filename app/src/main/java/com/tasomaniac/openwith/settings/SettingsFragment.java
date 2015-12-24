@@ -1,9 +1,11 @@
 package com.tasomaniac.openwith.settings;
 
+import android.annotation.TargetApi;
 import android.app.backup.BackupManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.app.ActivityCompat;
@@ -14,6 +16,9 @@ import android.view.View;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.intro.IntroActivity;
 import com.tasomaniac.openwith.preferred.PreferredAppsActivity;
+
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.LOLLIPOP;
 
 public class SettingsFragment extends PreferenceFragmentCompat
         implements SharedPreferences.OnSharedPreferenceChangeListener,
@@ -36,9 +41,14 @@ public class SettingsFragment extends PreferenceFragmentCompat
 
         findPreference(R.string.pref_key_about).setOnPreferenceClickListener(this);
         findPreference(R.string.pref_key_preferred).setOnPreferenceClickListener(this);
-        findPreference(R.string.pref_key_usage_stats).setOnPreferenceClickListener(this);
+
+        if (SDK_INT >= LOLLIPOP) {
+            addPreferencesFromResource(R.xml.pref_usage);
+            findPreference(R.string.pref_key_usage_stats).setOnPreferenceClickListener(this);
+        }
     }
 
+    @TargetApi(LOLLIPOP)
     @Override
     public boolean onPreferenceClick(Preference preference) {
 
@@ -47,6 +57,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
         } else if (getString(R.string.pref_key_preferred).equals(preference.getKey())) {
             startActivity(new Intent(getActivity(), PreferredAppsActivity.class));
         } else if (getString(R.string.pref_key_usage_stats).equals(preference.getKey())) {
+            startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
         }
         return true;
     }
