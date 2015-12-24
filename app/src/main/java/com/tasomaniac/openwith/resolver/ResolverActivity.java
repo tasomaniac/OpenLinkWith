@@ -443,7 +443,7 @@ public class ResolverActivity extends Activity
 
         final ChooserHistory history = getHistory();
 
-        if ((mAlwaysUseOption || mAdapter.hasFilteredItem()) && mAdapter.mOrigResolveList != null) {
+        if (mAlwaysUseOption || mAdapter.hasFilteredItem()) {
             ContentValues values = new ContentValues(3);
             values.put(HOST, mRequestedUri.getHost());
             values.put(COMPONENT, intent.getComponent().flattenToString());

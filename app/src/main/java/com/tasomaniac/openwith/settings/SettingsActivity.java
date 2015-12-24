@@ -22,12 +22,11 @@ public class SettingsActivity extends AppCompatActivity
 
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle(getString(R.string.settings_label));
+        collapsingToolbar.setTitle(getTitle());
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container,
-                            SettingsFragment.newInstance())
+                    .add(R.id.fragment_container, SettingsFragment.newInstance())
                     .commit();
         }
     }

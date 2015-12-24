@@ -43,6 +43,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.M;
+
 public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAdapter.ViewHolder, ResolveListAdapter.Header, DisplayResolveInfo, Void> {
 
     private static final Intent BROWSER_INTENT;
@@ -86,7 +89,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         final ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         mIconDpi = am.getLauncherLargeIconDensity();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+        if (SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
             UsageStatsManager mUsm = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
 
             final long sinceTime = System.currentTimeMillis() - USAGE_STATS_PERIOD;
@@ -149,20 +152,18 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         return mFilterLastUsed && mLastChosenPosition >= 0;
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
     protected void rebuildList() {
-
         mList.clear();
         int flag;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            flag = PackageManager.MATCH_ALL;
-        } else {
-            flag = PackageManager.MATCH_DEFAULT_ONLY;
-        }
+        flag = SDK_INT >= M ? PackageManager.MATCH_ALL : PackageManager.MATCH_DEFAULT_ONLY;
         flag = flag | (mFilterLastUsed ? PackageManager.GET_RESOLVED_FILTER : 0);
 
         Set<ResolveInfo> origResolveList = new HashSet<>();
         origResolveList.addAll(mPm.queryIntentActivities(mIntent, flag));
-        origResolveList.addAll(queryBrowserIntentActivities(flag));
+        if (SDK_INT >= M) {
+            origResolveList.addAll(queryBrowserIntentActivities(flag));
+        }
 
         List<ResolveInfo> currentResolveList = new ArrayList<>(origResolveList);
 
