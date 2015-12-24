@@ -1,6 +1,7 @@
 package com.tasomaniac.openwith.settings;
 
 import android.app.backup.BackupManager;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,9 +12,12 @@ import android.support.v7.preference.PreferenceFragmentCompat;
 import android.view.View;
 
 import com.tasomaniac.openwith.R;
+import com.tasomaniac.openwith.intro.IntroActivity;
+import com.tasomaniac.openwith.preferred.PreferredAppsActivity;
 
 public class SettingsFragment extends PreferenceFragmentCompat
         implements SharedPreferences.OnSharedPreferenceChangeListener,
+        Preference.OnPreferenceClickListener,
         ActivityCompat.OnRequestPermissionsResultCallback {
 
     public SettingsFragment() {
@@ -29,6 +33,22 @@ public class SettingsFragment extends PreferenceFragmentCompat
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
         addPreferencesFromResource(R.xml.pref_general);
+
+        findPreference(R.string.pref_key_about).setOnPreferenceClickListener(this);
+        findPreference(R.string.pref_key_preferred).setOnPreferenceClickListener(this);
+        findPreference(R.string.pref_key_usage_stats).setOnPreferenceClickListener(this);
+    }
+
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+
+        if (getString(R.string.pref_key_about).equals(preference.getKey())) {
+            startActivity(new Intent(getActivity(), IntroActivity.class));
+        } else if (getString(R.string.pref_key_preferred).equals(preference.getKey())) {
+            startActivity(new Intent(getActivity(), PreferredAppsActivity.class));
+        } else if (getString(R.string.pref_key_usage_stats).equals(preference.getKey())) {
+        }
+        return true;
     }
 
     public Preference findPreference(@StringRes int keyResource) {

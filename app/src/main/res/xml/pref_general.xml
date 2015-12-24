@@ -4,6 +4,21 @@
     android:key="@string/pref_key_category_general"
     android:title="@string/pref_title_general">
 
+    <Preference
+      android:key="@string/pref_key_about"
+      android:title="@string/pref_title_about"
+      android:summary="@string/pref_summary_about"/>
+
+    <Preference
+      android:key="@string/pref_key_preferred"
+      android:title="@string/pref_title_preferred"
+      android:summary="@string/pref_summary_preferred"/>
+
+    <Preference
+      android:key="@string/pref_key_usage_stats"
+      android:title="@string/pref_title_usage_stats"
+      android:summary="@string/pref_summary_usage_stats"/>
+
   </PreferenceCategory>
 
 </PreferenceScreen>
