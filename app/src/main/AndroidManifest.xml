@@ -19,8 +19,25 @@
     android:fullBackupContent="true"
     android:icon="@mipmap/ic_launcher"
     android:label="@string/app_name"
-    android:theme="@style/Theme.OpenWith"
-    android:supportsRtl="true">
+    android:supportsRtl="true"
+    android:theme="@style/Theme.OpenWith">
+
+    <activity
+      android:name=".settings.SettingsActivity"
+      android:clearTaskOnLaunch="true"
+      android:label="@string/app_name">
+
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+    </activity>
+
+    <activity
+      android:name=".preferred.PreferredAppsActivity"
+      android:label="@string/title_preferred_apps"/>
+
+    <activity android:name=".intro.IntroActivity"/>
 
     <activity
       android:name=".ShareToOpenWith"
@@ -48,6 +65,7 @@
         <category android:name="android.intent.category.DEFAULT"/>
 
         <data android:mimeType="text/plain"/>
+
       </intent-filter>
     </activity>
 
@@ -59,21 +77,6 @@
       android:process=":resolver"
       android:relinquishTaskIdentity="true"
       android:theme="@style/BottomSheet.Light"/>
-
-    <activity
-      android:name=".preferred.PreferredAppsActivity"
-      android:label="@string/title_preferred_apps"/>
-
-    <activity android:name=".settings.SettingsActivity"
-      android:label="@string/app_name">
-
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
-        <category android:name="android.intent.category.LAUNCHER"/>
-      </intent-filter>
-    </activity>
-
-    <activity android:name=".intro.IntroActivity" />
 
     <provider
       android:name=".provider.OpenWithProvider"
