@@ -74,7 +74,7 @@ android {
 
     dexOptions {
         // Skip pre-dexing when running on Travis CI or when disabled via -Dpre-dex=false.
-        preDexLibraries = rootProject.ext.preDexEnabled && !rootProject.ext.isTravis
+        preDexLibraries = rootProject.ext.preDexEnabled && !rootProject.ext.ci
     }
 }
 
@@ -86,6 +86,7 @@ play {
 
 dependencies {
     def supportLibVersion = "23.1.1"
+    def schematicVersion = '0.6.4'
 
     compile "com.android.support:support-v4:$supportLibVersion"
     compile "com.android.support:appcompat-v7:$supportLibVersion"
@@ -93,18 +94,18 @@ dependencies {
     compile "com.android.support:design:$supportLibVersion"
 
     compile 'com.karumi:headerrecyclerview:1.0.3'
-    compile 'jp.wasabeef:recyclerview-animators:1.3.0'
+    compile 'jp.wasabeef:recyclerview-animators:2.1.0'
     compile 'org.lucasr.twowayview:core:1.0.0-SNAPSHOT@aar'
     compile 'org.lucasr.twowayview:layouts:1.0.0-SNAPSHOT@aar'
 
-    apt 'net.simonvt.schematic:schematic-compiler:0.6.3'
-    compile 'net.simonvt.schematic:schematic:0.6.3'
+    apt "net.simonvt.schematic:schematic-compiler:$schematicVersion"
+    compile "net.simonvt.schematic:schematic:$schematicVersion"
 
-    compile 'com.jakewharton.timber:timber:4.0.1'
+    compile 'com.jakewharton.timber:timber:4.1.0'
     compile 'com.jakewharton:butterknife:7.0.1'
 
     // Crashlytics Kit
-    compile('com.crashlytics.sdk.android:crashlytics:2.5.2@aar') {
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
         transitive = true
     }
 
