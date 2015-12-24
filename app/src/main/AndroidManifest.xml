@@ -73,6 +73,8 @@
       </intent-filter>
     </activity>
 
+    <activity android:name=".intro.IntroActivity" />
+
     <provider
       android:name=".provider.OpenWithProvider"
       android:authorities="${applicationId}"
