@@ -51,6 +51,7 @@ public class SettingsFragment extends PreferenceFragment
 
         findPreference(R.string.pref_key_about).setOnPreferenceClickListener(this);
         findPreference(R.string.pref_key_preferred).setOnPreferenceClickListener(this);
+        findPreference(R.string.pref_key_open_source).setOnPreferenceClickListener(this);
 
         setupVersionPreference();
     }
@@ -117,8 +118,15 @@ public class SettingsFragment extends PreferenceFragment
             startActivity(new Intent(getActivity(), PreferredAppsActivity.class));
         } else if (getString(R.string.pref_key_usage_stats).equals(preference.getKey())) {
             startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
+        } else if (getString(R.string.pref_key_open_source).equals(preference.getKey())) {
+            displayLicensesDialogFragment();
         }
         return true;
+    }
+
+    private void displayLicensesDialogFragment() {
+        LicensesDialogFragment dialog = LicensesDialogFragment.newInstance();
+        dialog.show(getActivity().getFragmentManager(), "LicensesDialog");
     }
 
     public Preference findPreference(@StringRes int keyResource) {
