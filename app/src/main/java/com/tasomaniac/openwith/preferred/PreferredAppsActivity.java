@@ -54,6 +54,7 @@ public class PreferredAppsActivity extends AppCompatActivity implements ItemClic
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         PackageManager mPm = getPackageManager();
 

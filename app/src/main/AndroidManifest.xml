@@ -35,7 +35,12 @@
 
     <activity
       android:name=".preferred.PreferredAppsActivity"
-      android:label="@string/title_preferred_apps"/>
+      android:label="@string/title_preferred_apps"
+      android:parentActivityName=".settings.SettingsActivity">
+      <meta-data
+        android:name="android.support.PARENT_ACTIVITY"
+        android:value=".settings.SettingsActivity" />
+    </activity>
 
     <activity android:name=".intro.IntroActivity"/>
 
