@@ -5,4 +5,6 @@
     <color name="theme_accent">#00BCD4</color>
 
     <color name="white">#fff</color>
+
+    <color name="error_color">#FFDD2C00</color>
 </resources>
