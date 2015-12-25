@@ -38,4 +38,17 @@
   <string name="pref_title_usage_stats">Usage Stats</string>
   <string name="pref_summary_usage_stats">Improve the application sorting by giving access to Usage Stats.</string>
 
+  <string name="pref_key_category_others">pref_category_others</string>
+  <string name="pref_title_category_others">Others</string>
+
+  <string name="pref_key_open_source">pref_open_source</string>
+  <string name="pref_title_open_source">Open Source Licenses</string>
+  <string name="pref_summary_open_source">Improve the application sorting by giving access to Usage Stats.</string>
+
+  <string name="pref_key_market">pref_market</string>
+  <string name="pref_title_market">More apps by Said Tahsin Dane</string>
+  <string name="pref_summary_market">Like it? Why not check out my other apps?</string>
+
+  <string name="pref_key_version">pref_version</string>
+  <string name="pref_title_version">Version %s</string>
 </resources>

@@ -1,0 +1,26 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <PreferenceCategory
+    android:order="100"
+    android:title="@string/pref_title_category_others">
+
+    <Preference
+      android:key="@string/pref_key_open_source"
+      android:title="@string/pref_title_open_source"
+      android:summary="@string/pref_summary_open_source"/>
+
+    <Preference
+      android:key="@string/pref_key_market"
+      android:title="@string/pref_title_market"
+      android:summary="@string/pref_summary_market">
+      <intent android:action="android.intent.action.VIEW"
+              android:data="https://play.google.com/store/apps/developer?id=Said+Tahsin+Dane"/>
+    </Preference>
+
+    <Preference
+      android:key="@string/pref_key_version"
+      android:selectable="false"/>
+
+  </PreferenceCategory>
+
+</PreferenceScreen>

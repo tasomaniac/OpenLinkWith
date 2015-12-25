@@ -18,6 +18,7 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 
+import com.tasomaniac.openwith.BuildConfig;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.intro.IntroActivity;
 import com.tasomaniac.openwith.preferred.PreferredAppsActivity;
@@ -46,27 +47,22 @@ public class SettingsFragment extends PreferenceFragment
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
         addPreferencesFromResource(R.xml.pref_general);
+        addPreferencesFromResource(R.xml.pref_others);
 
         findPreference(R.string.pref_key_about).setOnPreferenceClickListener(this);
         findPreference(R.string.pref_key_preferred).setOnPreferenceClickListener(this);
+
+        setupVersionPreference();
     }
 
-    @TargetApi(LOLLIPOP)
-    @Override
-    public boolean onPreferenceClick(Preference preference) {
-
-        if (getString(R.string.pref_key_about).equals(preference.getKey())) {
-            startActivity(new Intent(getActivity(), IntroActivity.class));
-        } else if (getString(R.string.pref_key_preferred).equals(preference.getKey())) {
-            startActivity(new Intent(getActivity(), PreferredAppsActivity.class));
-        } else if (getString(R.string.pref_key_usage_stats).equals(preference.getKey())) {
-            startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
+    private void setupVersionPreference() {
+        StringBuilder version = new StringBuilder(BuildConfig.VERSION_NAME);
+        if (BuildConfig.DEBUG) {
+            version.append(" (")
+                    .append(BuildConfig.VERSION_CODE)
+                    .append(")");
         }
-        return true;
-    }
-
-    public Preference findPreference(@StringRes int keyResource) {
-        return findPreference(getString(keyResource));
+        findPreference(R.string.pref_key_version).setTitle(getString(R.string.pref_title_version, version));
     }
 
     @Override
@@ -74,7 +70,6 @@ public class SettingsFragment extends PreferenceFragment
         super.onResume();
         getPreferenceManager().getSharedPreferences()
                 .registerOnSharedPreferenceChangeListener(this);
-
 
         if (SDK_INT >= LOLLIPOP) {
             setupUsagePreference();
@@ -110,6 +105,24 @@ public class SettingsFragment extends PreferenceFragment
         super.onPause();
         getPreferenceManager().getSharedPreferences()
                 .unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    @TargetApi(LOLLIPOP)
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+
+        if (getString(R.string.pref_key_about).equals(preference.getKey())) {
+            startActivity(new Intent(getActivity(), IntroActivity.class));
+        } else if (getString(R.string.pref_key_preferred).equals(preference.getKey())) {
+            startActivity(new Intent(getActivity(), PreferredAppsActivity.class));
+        } else if (getString(R.string.pref_key_usage_stats).equals(preference.getKey())) {
+            startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
+        }
+        return true;
+    }
+
+    public Preference findPreference(@StringRes int keyResource) {
+        return findPreference(getString(keyResource));
     }
 
     @SuppressWarnings("ConstantConditions")
