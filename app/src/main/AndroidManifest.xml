@@ -36,13 +36,15 @@
     <activity
       android:name=".preferred.PreferredAppsActivity"
       android:label="@string/title_preferred_apps"
-      android:parentActivityName=".settings.SettingsActivity">
+      android:parentActivityName=".settings.SettingsActivity"
+      tools:ignore="UnusedAttribute">
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"
         android:value=".settings.SettingsActivity" />
     </activity>
 
-    <activity android:name=".intro.IntroActivity"/>
+    <activity android:name=".intro.IntroActivity"
+      android:theme="@style/Theme.OpenWith.Intro"/>
 
     <activity
       android:name=".ShareToOpenWith"
