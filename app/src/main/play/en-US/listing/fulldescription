@@ -1,0 +1,19 @@
+Open the current web page in a browser in another app!
+
+Did it ever happen to you? You click a link (let's say Youtube link) and the system does not ask you anything and opens the link in the browser. And you are stuck in Youtube web page instead of watching the video in the native app.
+
+There are 2 options for you. You either watch the video in the web or you remember the name of the video and search it in the app. Well, not anymore.
+
+With OpenLinkWith, you can share any webpage with it and it will ask you which applications to open the link with.
+
+Although the original intent of the application is to direct web pages to apps, it can even be used to switch between apps. Imagine you have 2 Twitter clients in your phone. You can open a tweet in the official Twitter application and then switch to an another app with the same tweet opened. Cool, hah?
+
+Although the problem discovered above is not huge, it is missing in the Android ecosystem. And I couldn't find anything doing this. So I wrote one. :)
+
+I hope you find this useful. The idea is still immature. Please help me by trying it ans sending feedback to me.
+
+The application is open source and the source can be found here:
+https://github.com/tasomaniac/OpenLinkWith/
+
+Icon is from here:
+https://www.iconfinder.com/icons/216215/flow_switch_icon#size=512
