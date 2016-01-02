@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ShareCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
@@ -52,6 +53,7 @@ public class SettingsFragment extends PreferenceFragment
         findPreference(R.string.pref_key_about).setOnPreferenceClickListener(this);
         findPreference(R.string.pref_key_preferred).setOnPreferenceClickListener(this);
         findPreference(R.string.pref_key_open_source).setOnPreferenceClickListener(this);
+        findPreference(R.string.pref_key_contact).setOnPreferenceClickListener(this);
 
         setupVersionPreference();
     }
@@ -120,6 +122,12 @@ public class SettingsFragment extends PreferenceFragment
             startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
         } else if (getString(R.string.pref_key_open_source).equals(preference.getKey())) {
             displayLicensesDialogFragment();
+        } else if (getString(R.string.pref_key_contact).equals(preference.getKey())) {
+            ShareCompat.IntentBuilder.from(getActivity())
+                    .addEmailTo("Said Tahsin Dane <tasomaniac+openlinkwith@gmail.com>")
+                    .setSubject(getString(R.string.app_name))
+                    .setType("message/rfc822")
+                    .startChooser();
         }
         return true;
     }

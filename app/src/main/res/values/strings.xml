@@ -44,6 +44,10 @@
   <string name="pref_title_open_source">Open Source Licenses</string>
   <string name="pref_summary_open_source">See licenses of open source libraries.</string>
 
+  <string name="pref_key_contact" translatable="false">pref_contact</string>
+  <string name="pref_title_contact">Contact Me</string>
+  <string name="pref_summary_contact">Send me an email before giving a 1 star.</string>
+
   <string name="pref_key_market" translatable="false">pref_market</string>
   <string name="pref_title_market">More apps by Said Tahsin Dane</string>
   <string name="pref_summary_market">Like it? Why not check out my other apps?</string>

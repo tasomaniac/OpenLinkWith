@@ -25,7 +25,7 @@
   <strong>KULLANIM İZNİ</strong>\'ne erişim verirsen daha iyi çalışırım. Paylaştığın uygulamayı anlarım ve ona göre davranırım.
   ]]></string>
   <string name="done">Bitti</string>
-  <string name="empty_resolver_activity">Bu URL\\'i açmak için uygulama bulunamadı.</string>
+  <string name="empty_resolver_activity">Bu URL\'i açmak için uygulama bulunamadı.</string>
   <string name="pref_summary_about">Başlangıç ekranını tekrar gör.</string>
   <string name="pref_summary_market">Beğendin mi? Diğer uygulamalarıma göz at?</string>
   <string name="pref_summary_open_source">Açık kaynak kütüphane lisanslarını gör.</string>
@@ -35,13 +35,14 @@
   <string name="pref_title_category_others">Diğer</string>
   <string name="pref_title_category_usage">Kullanım Erişimi</string>
   <string name="pref_title_general">Genel</string>
-  <string name="pref_title_market">Said Tahsin Dane\\'nin diğer uygulamaları</string>
+  <string name="pref_title_market">Said Tahsin Dane\'nin diğer uygulamaları</string>
   <string name="pref_title_open_source">Open Source Lisanslar</string>
   <string name="pref_title_usage_stats">Kullanım İstatistikleri</string>
   <string name="skip">Atla</string>
-  <string name="title_tutorial_0">Open Link With\\'e Hoşgeldin</string>
+  <string name="title_tutorial_0">Open Link With\'e Hoşgeldin</string>
   <string name="title_tutorial_1">Hiç başınıza geldi mi?</string>
   <string name="title_tutorial_2">Paylaş!</string>
   <string name="title_tutorial_3">Tercih Edilen Uyg.lar</string>
   <string name="title_tutorial_4">Kullanım Erişimi</string>
+  <string name="pref_summary_contact">1 yıldız vermeden önce bana email göderin.</string>
 </resources>

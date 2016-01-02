@@ -18,6 +18,11 @@
     </Preference>
 
     <Preference
+      android:key="@string/pref_key_contact"
+      android:title="@string/pref_title_contact"
+      android:summary="@string/pref_summary_contact"/>
+
+    <Preference
       android:key="@string/pref_key_version"
       android:selectable="false"/>
 
