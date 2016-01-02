@@ -99,8 +99,6 @@ dependencies {
     compile 'org.lucasr.twowayview:core:1.0.0-SNAPSHOT@aar'
     compile 'org.lucasr.twowayview:layouts:1.0.0-SNAPSHOT@aar'
 
-    compile 'com.github.paolorotolo:appintro:3.3.0'
-
     apt "net.simonvt.schematic:schematic-compiler:$schematicVersion"
     compile "net.simonvt.schematic:schematic:$schematicVersion"
 

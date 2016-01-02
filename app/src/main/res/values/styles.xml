@@ -12,7 +12,7 @@
   <style name="Theme.OpenWith" parent="Base.Theme.OpenWith"/>
 
   <style name="Theme.OpenWith.Intro" parent="Theme.OpenWith">
-    <item name="android:windowBackground">@android:color/transparent</item>
+    <item name="android:windowBackground">@color/theme_primary</item>
   </style>
 
   <style name="Theme.Transparent" parent="@android:style/Theme">

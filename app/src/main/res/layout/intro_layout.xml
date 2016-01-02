@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <com.tasomaniac.openwith.intro.AppIntroViewPager
+    android:id="@+id/view_pager"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_above="@id/bottom"/>
+
+  <LinearLayout
+    android:id="@+id/bottom"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:layout_alignParentBottom="true"
+    android:gravity="bottom"
+    android:orientation="vertical">
+
+    <View
+      android:id="@+id/bottom_separator"
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="#2000"/>
+
+    <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+      <com.tasomaniac.openwith.intro.CircularIndicatorView
+        android:id="@+id/indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"/>
+
+      <Button
+        android:id="@+id/skip"
+        style="?attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:paddingRight="@dimen/keyline_1"
+        android:paddingLeft="@dimen/keyline_1"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:minWidth="100dp"
+        android:text="@string/skip"
+        android:textColor="#ffffff"/>
+
+      <ImageButton
+        android:id="@+id/next"
+        style="?attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:paddingRight="@dimen/keyline_1"
+        android:paddingLeft="@dimen/keyline_1"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:minWidth="100dp"
+        android:src="@drawable/ic_navigate_next_white_24dp"/>
+
+      <Button
+        android:id="@+id/done"
+        style="?attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:minWidth="100dp"
+        android:paddingRight="@dimen/keyline_1"
+        android:paddingLeft="@dimen/keyline_1"
+        android:text="@string/done"
+        android:textColor="#ffffff"
+        android:visibility="gone"/>
+    </FrameLayout>
+  </LinearLayout>
+</RelativeLayout>

@@ -6,10 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 
-import com.github.paolorotolo.appintro.AppIntro;
-import com.github.paolorotolo.appintro.AppIntroFragment;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.util.Utils;
 
@@ -24,34 +21,32 @@ public class IntroActivity extends AppIntro {
     @Override
     public void init(@Nullable Bundle savedInstanceState) {
 
-        int bgColor = ContextCompat.getColor(this, R.color.theme_primary);
+        addSlide(new AppIntroFragment.Builder()
+                .title(R.string.title_tutorial_0)
+                .description(R.string.description_tutorial_0)
+                .drawable(R.drawable.tutorial_0).build());
 
-        addSlide(AppIntroFragment.newInstance("Welcome",
-                "I rescue you when you stuck in browsers. I help you to open them in native apps.",
-                R.mipmap.ic_launcher,
-                bgColor));
+        addSlide(new AppIntroFragment.Builder()
+                .title(R.string.title_tutorial_1)
+                .description(R.string.description_tutorial_1)
+                .drawable(R.drawable.tutorial_1).build());
 
-        addSlide(AppIntroFragment.newInstance("Did it ever happen to you?",
-                "You click a short-link and somehow you end up being stuck in web page instead of watching the video directly.",
-                R.drawable.tutorial_1,
-                bgColor));
+        addSlide(new AppIntroFragment.Builder()
+                .title(R.string.title_tutorial_2)
+                .description(R.string.description_tutorial_2)
+                .drawable(R.drawable.tutorial_2).build());
 
-        addSlide(AppIntroFragment.newInstance("Share it!",
-                "Just share it with me and I will switch apps for you.",
-                R.drawable.tutorial_2,
-                bgColor));
-
-        addSlide(AppIntroFragment.newInstance("Preferred Apps",
-                "You can also select \"Always\" to tell me to open that link always with a specific app.",
-                R.drawable.tutorial_3,
-                bgColor));
+        addSlide(new AppIntroFragment.Builder()
+                .title(R.string.title_tutorial_3)
+                .description(R.string.description_tutorial_3)
+                .drawable(R.drawable.tutorial_3).build());
 
         if (SDK_INT >= LOLLIPOP && !Utils.isUsageStatsEnabled(this)) {
             showUsageStatsSlide = true;
-            addSlide(AppIntroFragment.newInstance("Usage Stats",
-                    "Give me access to \"Usage Stats\" and I will work better.\nI will detect the browser you are sharing from to act accordingly.",
-                    R.drawable.tutorial_4,
-                    bgColor));
+            addSlide(new AppIntroFragment.Builder()
+                    .title(R.string.title_tutorial_4)
+                    .description(R.string.description_tutorial_4)
+                    .drawable(R.drawable.tutorial_4).build());
 
             setDoneText("Give Access");
         }
@@ -74,11 +69,6 @@ public class IntroActivity extends AppIntro {
         } else {
             finish();
         }
-    }
-
-    @Override
-    public void onSlideChanged() {
-
     }
 
     @Override
