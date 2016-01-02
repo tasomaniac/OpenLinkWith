@@ -20,32 +20,31 @@
 
   <string name="done">Done</string>
 
-  <string name="pref_key_category_general">pref_category_general</string>
+  <string name="pref_key_category_general" translatable="false">pref_category_general</string>
   <string name="pref_title_general">General</string>
 
-  <string name="pref_key_about">pref_about</string>
+  <string name="pref_key_about" translatable="false">pref_about</string>
   <string name="pref_title_about">About</string>
   <string name="pref_summary_about">See the tutorial again.</string>
 
-  <string name="pref_key_preferred">pref_preferred</string>
-  <string name="pref_title_preferred">@string/title_preferred_apps</string>
+  <string name="pref_key_preferred" translatable="false">pref_preferred</string>
+  <string name="pref_title_preferred" translatable="false">@string/title_preferred_apps</string>
   <string name="pref_summary_preferred">Change preferred app settings.</string>
 
-  <string name="pref_key_category_usage">pref_category_usage</string>
+  <string name="pref_key_category_usage" translatable="false">pref_category_usage</string>
   <string name="pref_title_category_usage">Usage Access</string>
 
-  <string name="pref_key_usage_stats">pref_usage_stats</string>
+  <string name="pref_key_usage_stats" translatable="false">pref_usage_stats</string>
   <string name="pref_title_usage_stats">Usage Stats</string>
   <string name="pref_summary_usage_stats">Improve the application sorting by giving access to Usage Stats.</string>
 
-  <string name="pref_key_category_others">pref_category_others</string>
   <string name="pref_title_category_others">Others</string>
 
-  <string name="pref_key_open_source">pref_open_source</string>
+  <string name="pref_key_open_source" translatable="false">pref_open_source</string>
   <string name="pref_title_open_source">Open Source Licenses</string>
-  <string name="pref_summary_open_source">Improve the application sorting by giving access to Usage Stats.</string>
+  <string name="pref_summary_open_source">See licenses of open source libraries.</string>
 
-  <string name="pref_key_market">pref_market</string>
+  <string name="pref_key_market" translatable="false">pref_market</string>
   <string name="pref_title_market">More apps by Said Tahsin Dane</string>
   <string name="pref_summary_market">Like it? Why not check out my other apps?</string>
 
@@ -63,9 +62,9 @@
   <string name="description_tutorial_1">You click a short-link and somehow you end up being stuck in web page instead of watching the video directly.</string>
   <string name="description_tutorial_2">Just share it with me and I will switch apps for you.</string>
   <string name="description_tutorial_3"><![CDATA[
-    You can also select <strong>ALWAYS</strong> to tell me to open that link always with a specific app.
+    Select <strong>ALWAYS</strong> to tell me to open that link always with a specific app.
   ]]></string>
   <string name="description_tutorial_4"><![CDATA[
-    Give me access to <strong>USAGE ACCESS</strong> and I will work better. I will detect the browser you are sharing from to act accordingly.
+    Give access to <strong>USAGE ACCESS</strong> and I will work better. I will detect the browser you are sharing from to act accordingly.
   ]]></string>
 </resources>

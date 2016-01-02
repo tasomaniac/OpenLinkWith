@@ -14,4 +14,34 @@
   <string name="error_invalid_url">Paylaşılan içerikte geçerli bir URL bulunamadı.</string>
   <string name="desc_preferred">Aşağıda bulunan bağlantılar bu uygulama ile paylaşıldığı zaman öncelikli olarak tercih edilecek uygulamalar aşağıdadır.\n\nTercihi silmek için uygulamayı seçin.</string>
   <string name="desc_preferred_empty">Aşağıda bulunan bağlantılar bu uygulama ile paylaşıldığı zaman öncelikli olarak tercih edilecek uygulamalar aşağıdadır.\n\nTercih edilen bir uygulama eklemek için bir linki bu uygulama ile paylaşın ve \"Her zaman\" tuşunu tıklayın.</string>
+  <string name="cd_image_tutorial">Başlangıç Resmi</string>
+  <string name="description_tutorial_0">Tarayıcıda sıkıştığın zaman seni kurtarmaya geldim.</string>
+  <string name="description_tutorial_1">Kısa linklerden birine tıkladın ve vidyoyu direl izlemek yerine bir şekilde web sayfasında takıldın.</string>
+  <string name="description_tutorial_2">Sadece benimle paylaş ve senin için uygulamada açayım.</string>
+  <string name="description_tutorial_3"><![CDATA[
+  <strong>HER ZAMAN</strong> to tell me to open that link always with a specific app.
+  ]]></string>
+  <string name="description_tutorial_4"><![CDATA[
+  <strong>KULLANIM İZNİ</strong>\'ne erişim verirsen daha iyi çalışırım. Paylaştığın uygulamayı anlarım ve ona göre davranırım.
+  ]]></string>
+  <string name="done">Bitti</string>
+  <string name="empty_resolver_activity">Bu URL\\'i açmak için uygulama bulunamadı.</string>
+  <string name="pref_summary_about">Başlangıç ekranını tekrar gör.</string>
+  <string name="pref_summary_market">Beğendin mi? Diğer uygulamalarıma göz at?</string>
+  <string name="pref_summary_open_source">Açık kaynak kütüphane lisanslarını gör.</string>
+  <string name="pref_summary_preferred">Tercih edilen uygulama ayarları.</string>
+  <string name="pref_summary_usage_stats">Uygulama dizilimini iyileştirmek için izin ver.</string>
+  <string name="pref_title_about">Hakkında</string>
+  <string name="pref_title_category_others">Diğer</string>
+  <string name="pref_title_category_usage">Kullanım Erişimi</string>
+  <string name="pref_title_general">Genel</string>
+  <string name="pref_title_market">Said Tahsin Dane\\'nin diğer uygulamaları</string>
+  <string name="pref_title_open_source">Open Source Lisanslar</string>
+  <string name="pref_title_usage_stats">Kullanım İstatistikleri</string>
+  <string name="skip">Atla</string>
+  <string name="title_tutorial_0">Open Link With\\'e Hoşgeldin</string>
+  <string name="title_tutorial_1">Hiç başınıza geldi mi?</string>
+  <string name="title_tutorial_2">Paylaş!</string>
+  <string name="title_tutorial_3">Tercih Edilen Uyg.lar</string>
+  <string name="title_tutorial_4">Kullanım Erişimi</string>
 </resources>
