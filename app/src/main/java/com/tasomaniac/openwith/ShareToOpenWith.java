@@ -54,7 +54,7 @@ public class ShareToOpenWith extends Activity {
         String foundUrl = findFirstUrl(text);
 
         if (foundUrl != null) {
-            Intent intentToHandle = new Intent(Intent.ACTION_VIEW, Uri.parse(foundUrl));
+            Intent intentToHandle = new Intent(Intent.ACTION_VIEW, Uri.parse(fixTwitterUrl(foundUrl)));
             startActivity(intentToHandle
                     .putExtra(ShareCompat.EXTRA_CALLING_PACKAGE, reader.getCallingPackage())
                     .putExtra(ResolverActivity.EXTRA_PRIORITY_PACKAGES, PRIORITY_PACKAGES)
@@ -80,6 +80,10 @@ public class ShareToOpenWith extends Activity {
             }
         }
         return null;
+    }
+
+    private String fixTwitterUrl(String foundUrl) {
+        return foundUrl.replace("//mobile.twitter.com", "//twitter.com");
     }
 
 }
