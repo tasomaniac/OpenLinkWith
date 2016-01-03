@@ -32,7 +32,7 @@ ext {
 
     versionMajor = 1
     versionMinor = 0
-    versionPatch = 3
+    versionPatch = 4
     versionBuild = 0
 
     compileSdkVersion = 23
