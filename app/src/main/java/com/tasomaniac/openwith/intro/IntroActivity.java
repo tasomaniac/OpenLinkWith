@@ -75,7 +75,7 @@ public class IntroActivity extends AppIntro {
     protected void onResume() {
         super.onResume();
 
-        if (Utils.isUsageStatsEnabled(this)) {
+        if (showUsageStatsSlide && Utils.isUsageStatsEnabled(this)) {
             setDoneText(getString(R.string.done));
         }
     }
