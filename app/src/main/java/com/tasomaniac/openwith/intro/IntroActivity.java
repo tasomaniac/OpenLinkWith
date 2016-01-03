@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 
+import com.tasomaniac.openwith.App;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.util.Utils;
 
@@ -15,11 +16,15 @@ import static android.os.Build.VERSION_CODES.LOLLIPOP;
 
 public class IntroActivity extends AppIntro {
 
+    public static final String EXTRA_FIRST_START = "first_start";
+
     private static final int REQUEST_CODE_USAGE_STATS = 909;
     private boolean showUsageStatsSlide;
 
     @Override
     public void init(@Nullable Bundle savedInstanceState) {
+
+        App.getApp(this).getAnalytics().sendScreenView("App Intro");
 
         addSlide(new AppIntroFragment.Builder()
                 .title(R.string.title_tutorial_0)
@@ -77,6 +82,18 @@ public class IntroActivity extends AppIntro {
 
         if (showUsageStatsSlide && Utils.isUsageStatsEnabled(this)) {
             setDoneText(getString(R.string.done));
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (SDK_INT >= LOLLIPOP && getIntent().getBooleanExtra(EXTRA_FIRST_START, false)) {
+            App.getApp(this).getAnalytics()
+                    .sendEvent("Usage Access",
+                            "Given in first intro",
+                            Boolean.toString(Utils.isUsageStatsEnabled(this)));
         }
     }
 }

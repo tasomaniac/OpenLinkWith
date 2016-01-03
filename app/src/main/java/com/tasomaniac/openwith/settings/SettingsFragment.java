@@ -15,12 +15,16 @@ import android.support.v4.app.ShareCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceManager;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 
+import com.tasomaniac.openwith.Analytics;
+import com.tasomaniac.openwith.App;
 import com.tasomaniac.openwith.BuildConfig;
 import com.tasomaniac.openwith.R;
+import com.tasomaniac.openwith.data.prefs.BooleanPreference;
 import com.tasomaniac.openwith.intro.IntroActivity;
 import com.tasomaniac.openwith.preferred.PreferredAppsActivity;
 import com.tasomaniac.openwith.util.Utils;
@@ -34,6 +38,8 @@ public class SettingsFragment extends PreferenceFragment
         ActivityCompat.OnRequestPermissionsResultCallback {
 
     private PreferenceCategory usageStatsPreferenceCategory;
+    private Analytics analytics;
+    private BooleanPreference usageAccessPref;
 
     public SettingsFragment() {
     }
@@ -43,6 +49,15 @@ public class SettingsFragment extends PreferenceFragment
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        analytics = App.getApp(getActivity()).getAnalytics();
+        usageAccessPref = new BooleanPreference(
+                PreferenceManager.getDefaultSharedPreferences(getActivity()),
+                "usage_access");
     }
 
     @Override
@@ -80,7 +95,9 @@ public class SettingsFragment extends PreferenceFragment
     }
 
     private void setupUsagePreference() {
-        if (Utils.isUsageStatsEnabled(getActivity())) {
+        boolean usageAccessGiven = Utils.isUsageStatsEnabled(getActivity());
+
+        if (usageAccessGiven) {
             if (usageStatsPreferenceCategory != null) {
                 getPreferenceScreen().removePreference(usageStatsPreferenceCategory);
                 usageStatsPreferenceCategory = null;
@@ -100,6 +117,15 @@ public class SettingsFragment extends PreferenceFragment
                         getErrorString(getActivity(), getString(R.string.pref_summary_usage_stats)));
                 usageStatsPreference.setWidgetLayoutResource(R.layout.preference_widget_error);
             }
+        }
+
+        if (usageAccessPref.get() != usageAccessGiven) {
+            usageAccessPref.set(usageAccessGiven);
+
+            analytics.sendEvent(
+                    "Usage Access",
+                    "Access Given",
+                    Boolean.toString(usageAccessGiven));
         }
     }
 
@@ -129,6 +155,11 @@ public class SettingsFragment extends PreferenceFragment
                     .setType("message/rfc822")
                     .startChooser();
         }
+
+        analytics.sendEvent(
+                "Preference",
+                "Item Click",
+                preference.getTitle().toString());
         return true;
     }
 

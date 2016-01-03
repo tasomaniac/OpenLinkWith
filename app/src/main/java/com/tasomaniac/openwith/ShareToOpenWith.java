@@ -46,6 +46,8 @@ public class ShareToOpenWith extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        App.getApp(this).getAnalytics().sendScreenView("ShareToOpenWith");
+
         final ShareCompat.IntentReader reader = ShareCompat.IntentReader.from(this);
         CharSequence text = reader.getText();
         if (text == null) {

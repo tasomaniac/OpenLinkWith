@@ -17,6 +17,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.tasomaniac.openwith.Analytics;
+import com.tasomaniac.openwith.App;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.resolver.DisplayResolveInfo;
 import com.tasomaniac.openwith.resolver.ResolveListAdapter;
@@ -46,11 +48,16 @@ public class PreferredAppsActivity extends AppCompatActivity implements ItemClic
     TwoWayView recyclerView;
     private PreferredAppsAdapter adapter;
 
+    private Analytics analytics;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferred_apps);
         ButterKnife.bind(this);
+
+        analytics = App.getApp(this).getAnalytics();
+        analytics.sendScreenView("Preferred Apps");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -115,6 +122,10 @@ public class PreferredAppsActivity extends AppCompatActivity implements ItemClic
 
                         getContentResolver().delete(withId(info.getId()), null, null);
                         notifyItemRemoval(position);
+
+                        analytics.sendEvent("Preferred",
+                                "Removed",
+                                info.getDisplayLabel().toString());
                     }
                 })
                 .setNegativeButton(android.R.string.cancel, null)

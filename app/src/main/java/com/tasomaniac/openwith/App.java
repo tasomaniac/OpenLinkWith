@@ -5,11 +5,15 @@ import android.content.Context;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
 
 import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
 
 public class App extends Application {
+
+    Analytics analytics;
 
     @Override
     public void onCreate() {
@@ -21,6 +25,26 @@ public class App extends Application {
             Fabric.with(this, new Crashlytics());
             Timber.plant(new CrashReportingTree());
         }
+        analytics = provideAnalytics();
+    }
+
+    private Analytics provideAnalytics() {
+        if (BuildConfig.DEBUG) {
+            return new Analytics.DebugAnalytics();
+        }
+
+        GoogleAnalytics googleAnalytics = GoogleAnalytics.getInstance(this);
+        Tracker tracker = googleAnalytics.newTracker(BuildConfig.ANALYTICS_KEY);
+        tracker.setSessionTimeout(300); // ms? s? better be s.
+        return new Analytics.GoogleAnalytics(tracker);
+    }
+
+    public static App getApp(Context context) {
+        return (App) context.getApplicationContext();
+    }
+
+    public Analytics getAnalytics() {
+        return analytics;
     }
 
     /** A tree which logs important information for crash reporting. */
