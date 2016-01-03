@@ -37,7 +37,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -159,13 +158,17 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         flag = SDK_INT >= M ? PackageManager.MATCH_ALL : PackageManager.MATCH_DEFAULT_ONLY;
         flag = flag | (mFilterLastUsed ? PackageManager.GET_RESOLVED_FILTER : 0);
 
-        Set<ResolveInfo> origResolveList = new HashSet<>();
-        origResolveList.addAll(mPm.queryIntentActivities(mIntent, flag));
-        if (SDK_INT >= M) {
-            origResolveList.addAll(queryBrowserIntentActivities(flag));
+        List<ResolveInfo> currentResolveList = new ArrayList<>();
+        currentResolveList.addAll(mPm.queryIntentActivities(mIntent, flag));
+
+        //Remove the components from the caller
+        if (!TextUtils.isEmpty(mCallerPackage)) {
+            removePackageFromList(mCallerPackage, currentResolveList);
         }
 
-        List<ResolveInfo> currentResolveList = new ArrayList<>(origResolveList);
+        if (SDK_INT >= M) {
+            addBrowsersToList(currentResolveList, flag);
+        }
 
         int N;
         if ((N = currentResolveList.size()) > 0) {
@@ -182,18 +185,6 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
                         N--;
                     }
                 }
-            }
-
-            //Remove the components from the caller
-            if (!TextUtils.isEmpty(mCallerPackage)) {
-                List<ResolveInfo> infosToRemoved = new ArrayList<>();
-                for (ResolveInfo info : currentResolveList) {
-                    if (info.activityInfo.packageName.equals(mCallerPackage)) {
-                        infosToRemoved.add(info);
-                    }
-                }
-                currentResolveList.removeAll(infosToRemoved);
-                N -= infosToRemoved.size();
             }
 
             //If there is no left, return
@@ -232,6 +223,38 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
             }
             // Process last group
             processGroup(currentResolveList, start, (N - 1), r0, r0Label);
+        }
+    }
+
+    private void removePackageFromList(final String packageName, List<ResolveInfo> currentResolveList) {
+        List<ResolveInfo> infosToRemoved = new ArrayList<>();
+        for (ResolveInfo info : currentResolveList) {
+            if (info.activityInfo.packageName.equals(packageName)) {
+                infosToRemoved.add(info);
+            }
+        }
+        currentResolveList.removeAll(infosToRemoved);
+    }
+
+    private void addBrowsersToList(List<ResolveInfo> currentResolveList, int flag) {
+        final int initialSize = currentResolveList.size();
+
+        List<ResolveInfo> browsers = queryBrowserIntentActivities(flag);
+        for (ResolveInfo browser : browsers) {
+            boolean browserFound = false;
+
+            for (int i = 0; i < initialSize; i++) {
+                ResolveInfo info = currentResolveList.get(i);
+
+                if (info.activityInfo.packageName.equals(browser.activityInfo.packageName)) {
+                    browserFound = true;
+                    break;
+                }
+            }
+
+            if (!browserFound) {
+                currentResolveList.add(browser);
+            }
         }
     }
 
