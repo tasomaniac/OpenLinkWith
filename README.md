@@ -13,11 +13,6 @@ Open Link With
 Installation
 ------------
 
-The application is not released yet.
-
-You need to first join the BETA group and then you can install the app.
-Beta group: https://play.google.com/apps/testing/com.tasomaniac.openwith
-
  [![Get it on Google Play](art/en_generic_rgb_wo_60.png)][1]
 
 What
