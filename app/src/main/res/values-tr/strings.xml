@@ -45,4 +45,5 @@
   <string name="title_tutorial_3">Tercih Edilen Uyg.lar</string>
   <string name="title_tutorial_4">Kullanım Erişimi</string>
   <string name="pref_summary_contact">1 yıldız vermeden önce bana email göderin.</string>
+  <string name="pref_title_contact">Yardım</string>
 </resources>
