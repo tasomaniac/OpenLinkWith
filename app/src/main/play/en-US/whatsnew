@@ -1,3 +1,5 @@
-v 1.0.4
+v 1.0.5
 
 - Bug and crash fixes.
+- Fix: Duplicate browsers in the list
+- Fix: Some devices don't have Usage Access Settings.
