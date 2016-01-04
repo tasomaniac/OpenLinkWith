@@ -1,12 +1,9 @@
 package com.tasomaniac.openwith.intro;
 
-import android.annotation.TargetApi;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.Nullable;
 
+import com.tasomaniac.openwith.Analytics;
 import com.tasomaniac.openwith.App;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.util.Utils;
@@ -18,13 +15,15 @@ public class IntroActivity extends AppIntro {
 
     public static final String EXTRA_FIRST_START = "first_start";
 
-    private static final int REQUEST_CODE_USAGE_STATS = 909;
     private boolean showUsageStatsSlide;
+
+    private Analytics analytics;
 
     @Override
     public void init(@Nullable Bundle savedInstanceState) {
 
-        App.getApp(this).getAnalytics().sendScreenView("App Intro");
+        analytics = App.getApp(this).getAnalytics();
+        analytics.sendScreenView("App Intro");
 
         addSlide(new AppIntroFragment.Builder()
                 .title(R.string.title_tutorial_0)
@@ -66,11 +65,13 @@ public class IntroActivity extends AppIntro {
     public void onNextPressed() {
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onDonePressed() {
         if (showUsageStatsSlide && !Utils.isUsageStatsEnabled(this)) {
-            startActivityForResult(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS), REQUEST_CODE_USAGE_STATS);
+            boolean success = Utils.maybeStartUsageAccessSettings(this);
+            if (!success) {
+                finish();
+            }
         } else {
             finish();
         }
@@ -90,10 +91,9 @@ public class IntroActivity extends AppIntro {
         super.onDestroy();
 
         if (SDK_INT >= LOLLIPOP && getIntent().getBooleanExtra(EXTRA_FIRST_START, false)) {
-            App.getApp(this).getAnalytics()
-                    .sendEvent("Usage Access",
-                            "Given in first intro",
-                            Boolean.toString(Utils.isUsageStatsEnabled(this)));
+            analytics.sendEvent("Usage Access",
+                    "Given in first intro",
+                    Boolean.toString(Utils.isUsageStatsEnabled(this)));
         }
     }
 }

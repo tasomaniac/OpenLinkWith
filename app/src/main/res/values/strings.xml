@@ -71,4 +71,5 @@
   <string name="description_tutorial_4"><![CDATA[
     Give access to <strong>USAGE ACCESS</strong> and I will work better. I will detect the browser you are sharing from to act accordingly.
   ]]></string>
+  <string name="error_usage_access_not_found">Usage Access Settings cannot be found.</string>
 </resources>

@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v14.preference.PreferenceFragment;
@@ -145,7 +144,7 @@ public class SettingsFragment extends PreferenceFragment
         } else if (getString(R.string.pref_key_preferred).equals(preference.getKey())) {
             startActivity(new Intent(getActivity(), PreferredAppsActivity.class));
         } else if (getString(R.string.pref_key_usage_stats).equals(preference.getKey())) {
-            startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
+            Utils.maybeStartUsageAccessSettings(getActivity());
         } else if (getString(R.string.pref_key_open_source).equals(preference.getKey())) {
             displayLicensesDialogFragment();
         } else if (getString(R.string.pref_key_contact).equals(preference.getKey())) {
