@@ -229,8 +229,7 @@ public class ResolverActivity extends Activity
             finish();
             return;
         } else {
-            Toast.makeText(this, getString(R.string.empty_resolver_activity,
-                            mRequestedUri.toString()),
+            Toast.makeText(this, getString(R.string.empty_resolver_activity),
                     Toast.LENGTH_LONG).show();
             mPackageMonitor.unregister();
             mRegistered = false;
