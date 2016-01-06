@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ShareCompat;
-import android.webkit.URLUtil;
 import android.widget.Toast;
 
 import com.tasomaniac.openwith.resolver.ResolverActivity;
@@ -75,11 +74,8 @@ public class ShareToOpenWith extends Activity {
         }
         final Matcher matcher = Pattern.compile("\\b((?:[a-z][\\w-]+:(?:/{1,3}|[a-z0-9%])|www\\d{0,3}[.]|[a-z0-9.\\-]+[.][a-z]{2,4}/)(?:[^\\s()<>]+|\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\))+(?:\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\)|[^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]))", Pattern.CASE_INSENSITIVE)
                 .matcher(text);
-        while (matcher.find()) {
-            final String url = matcher.group();
-            if (URLUtil.isValidUrl(url)) {
-                return url;
-            }
+        if (matcher.find()) {
+            return matcher.group();
         }
         return null;
     }
