@@ -19,7 +19,7 @@
   <string name="description_tutorial_1">Kısa linklerden birine tıkladın ve vidyoyu direl izlemek yerine bir şekilde web sayfasında takıldın.</string>
   <string name="description_tutorial_2">Sadece benimle paylaş ve senin için uygulamada açayım.</string>
   <string name="description_tutorial_3"><![CDATA[
-  <strong>HER ZAMAN</strong> to tell me to open that link always with a specific app.
+  Linki her zaman bir uygulama ile açmak için <strong>HER ZAMAN</strong> seçeneğini seçin.
   ]]></string>
   <string name="description_tutorial_4"><![CDATA[
   <strong>KULLANIM İZNİ</strong>\'ne erişim verirsen daha iyi çalışırım. Paylaştığın uygulamayı anlarım ve ona göre davranırım.
