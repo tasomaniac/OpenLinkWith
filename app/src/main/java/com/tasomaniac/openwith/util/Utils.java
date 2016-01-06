@@ -10,12 +10,16 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.widget.Toast;
 
 import com.tasomaniac.openwith.App;
 import com.tasomaniac.openwith.R;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import timber.log.Timber;
 
@@ -52,20 +56,13 @@ public class Utils {
         return mode == AppOpsManager.MODE_ALLOWED;
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public static boolean maybeStartUsageAccessSettings(final Activity activity) {
-        try {
-            activity.startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
-            return true;
-        } catch (ActivityNotFoundException e) {
-            String error = activity.getString(R.string.error_usage_access_not_found);
-
-            Toast.makeText(activity, error, Toast.LENGTH_SHORT).show();
-            Timber.e(e, error);
-
-            App.getApp(activity).getAnalytics().sendEvent("Usage Access", "Not Found", null);
+    @Nullable
+    public static String extractAmazonASIN(String foundUrl) {
+        final Matcher matcher = Pattern.compile("//www.amazon.com/gp/aw/d/(\\w{10})/", Pattern.CASE_INSENSITIVE)
+                    .matcher(foundUrl);
+        if (matcher.find()) {
+            return matcher.group(1);
         }
-
-        return false;
+        return null;
     }
 }

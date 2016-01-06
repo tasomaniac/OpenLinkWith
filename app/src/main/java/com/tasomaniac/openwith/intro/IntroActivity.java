@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import com.tasomaniac.openwith.Analytics;
 import com.tasomaniac.openwith.App;
 import com.tasomaniac.openwith.R;
+import com.tasomaniac.openwith.util.Intents;
 import com.tasomaniac.openwith.util.Utils;
 
 import static android.os.Build.VERSION.SDK_INT;
@@ -68,7 +69,7 @@ public class IntroActivity extends AppIntro {
     @Override
     public void onDonePressed() {
         if (showUsageStatsSlide && !Utils.isUsageStatsEnabled(this)) {
-            boolean success = Utils.maybeStartUsageAccessSettings(this);
+            boolean success = Intents.maybeStartUsageAccessSettings(this);
             if (!success) {
                 finish();
             }

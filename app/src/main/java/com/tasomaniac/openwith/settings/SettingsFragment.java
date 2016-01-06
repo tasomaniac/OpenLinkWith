@@ -26,6 +26,7 @@ import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.prefs.BooleanPreference;
 import com.tasomaniac.openwith.intro.IntroActivity;
 import com.tasomaniac.openwith.preferred.PreferredAppsActivity;
+import com.tasomaniac.openwith.util.Intents;
 import com.tasomaniac.openwith.util.Utils;
 
 import static android.os.Build.VERSION.SDK_INT;
@@ -144,7 +145,7 @@ public class SettingsFragment extends PreferenceFragment
         } else if (getString(R.string.pref_key_preferred).equals(preference.getKey())) {
             startActivity(new Intent(getActivity(), PreferredAppsActivity.class));
         } else if (getString(R.string.pref_key_usage_stats).equals(preference.getKey())) {
-            Utils.maybeStartUsageAccessSettings(getActivity());
+            Intents.maybeStartUsageAccessSettings(getActivity());
         } else if (getString(R.string.pref_key_open_source).equals(preference.getKey())) {
             displayLicensesDialogFragment();
         } else if (getString(R.string.pref_key_contact).equals(preference.getKey())) {
