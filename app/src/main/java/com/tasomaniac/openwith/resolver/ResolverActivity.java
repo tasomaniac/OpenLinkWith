@@ -126,13 +126,17 @@ public class ResolverActivity extends Activity
         mPm = getPackageManager();
 
         mRequestedUri = intent.getData();
+        if (mRequestedUri == null) {
+            finish();
+            return;
+        }
 
         boolean isCallerPackagePreferred = false;
         final String callerPackage = getCallerPackage();
 
         ResolveInfo lastChosen = null;
         final Cursor query =
-                getContentResolver().query(withHost(intent.getData().getHost()), null, null, null, null);
+                getContentResolver().query(withHost(mRequestedUri.getHost()), null, null, null, null);
 
         if (query != null && query.moveToFirst()) {
 
