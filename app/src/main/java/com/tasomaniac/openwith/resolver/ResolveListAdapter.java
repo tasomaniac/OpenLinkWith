@@ -161,13 +161,13 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         List<ResolveInfo> currentResolveList = new ArrayList<>();
         currentResolveList.addAll(mPm.queryIntentActivities(mIntent, flag));
 
+        if (SDK_INT >= M) {
+            addBrowsersToList(currentResolveList, flag);
+        }
+
         //Remove the components from the caller
         if (!TextUtils.isEmpty(mCallerPackage)) {
             removePackageFromList(mCallerPackage, currentResolveList);
-        }
-
-        if (SDK_INT >= M) {
-            addBrowsersToList(currentResolveList, flag);
         }
 
         int N;
