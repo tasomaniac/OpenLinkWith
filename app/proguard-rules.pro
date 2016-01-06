@@ -16,6 +16,8 @@
 #   public *;
 #}
 
+-dontobfuscate
+
 # ButterKnife 7
 -keep class butterknife.** { *; }
 -dontwarn butterknife.internal.**
@@ -54,4 +56,3 @@
 }
 
 -dontwarn org.jetbrains.annotations.**
-
