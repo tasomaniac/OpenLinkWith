@@ -31,6 +31,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -45,6 +46,8 @@ import android.widget.Toast;
 
 import com.tasomaniac.openwith.BuildConfig;
 import com.tasomaniac.openwith.R;
+import com.tasomaniac.openwith.util.Intents;
+import com.tasomaniac.openwith.util.Utils;
 
 import org.lucasr.twowayview.ItemClickSupport;
 import org.lucasr.twowayview.ItemSelectionSupport;
@@ -462,9 +465,39 @@ public class ResolverActivity extends Activity
         }
 
         if (intent != null) {
-            startActivity(intent);
+            startActivity(fixIntent(intent));
         }
         history.save(this);
+    }
+
+    private Intent fixIntent(final Intent originalIntent) {
+        Intent fixedIntent = fixAmazonIntent(originalIntent);
+
+        if (Intents.hasHandler(this, fixedIntent)) {
+            return fixedIntent;
+        }
+        return originalIntent;
+    }
+
+    /**
+     * If link contains amazon and it has ASIN in it, create a specific intent to open Amazon App.
+     *
+     * @param originalIntent Original Intent with amazon link in it.
+     * @return Specific Intent for Amazon app.
+     */
+    @NonNull
+    private Intent fixAmazonIntent(final Intent originalIntent) {
+        if (originalIntent.getDataString() != null && originalIntent.getDataString().contains("amazon")) {
+            String asin = Utils.extractAmazonASIN(originalIntent.getDataString());
+            if (asin != null) {
+                return new Intent("android.intent.action.VIEW")
+                        .setDataAndType(
+                                Uri.parse("mshop://featured?ASIN=" + asin),
+                                "vnd.android.cursor.item/vnd.amazon.mShop.featured"
+                        );
+            }
+        }
+        return originalIntent;
     }
 
     @SuppressWarnings("deprecation")

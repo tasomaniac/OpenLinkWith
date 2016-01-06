@@ -11,6 +11,7 @@ import android.webkit.URLUtil;
 import android.widget.Toast;
 
 import com.tasomaniac.openwith.resolver.ResolverActivity;
+import com.tasomaniac.openwith.util.Utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -56,7 +57,7 @@ public class ShareToOpenWith extends Activity {
         String foundUrl = findFirstUrl(text);
 
         if (foundUrl != null) {
-            Intent intentToHandle = new Intent(Intent.ACTION_VIEW, Uri.parse(fixTwitterUrl(foundUrl)));
+            Intent intentToHandle = new Intent(Intent.ACTION_VIEW, Uri.parse(fixUrls(foundUrl)));
             startActivity(intentToHandle
                     .putExtra(ShareCompat.EXTRA_CALLING_PACKAGE, reader.getCallingPackage())
                     .putExtra(ResolverActivity.EXTRA_PRIORITY_PACKAGES, PRIORITY_PACKAGES)
@@ -72,7 +73,6 @@ public class ShareToOpenWith extends Activity {
         if (text == null) {
             return null;
         }
-
         final Matcher matcher = Pattern.compile("\\b((?:[a-z][\\w-]+:(?:/{1,3}|[a-z0-9%])|www\\d{0,3}[.]|[a-z0-9.\\-]+[.][a-z]{2,4}/)(?:[^\\s()<>]+|\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\))+(?:\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\)|[^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]))", Pattern.CASE_INSENSITIVE)
                 .matcher(text);
         while (matcher.find()) {
@@ -84,8 +84,20 @@ public class ShareToOpenWith extends Activity {
         return null;
     }
 
-    private String fixTwitterUrl(String foundUrl) {
+    private String fixUrls(String foundUrl) {
+        foundUrl = fixTwitterUrl(foundUrl);
+        return fixAmazonUrl(foundUrl);
+    }
+
+    private static String fixTwitterUrl(String foundUrl) {
         return foundUrl.replace("//mobile.twitter.com", "//twitter.com");
     }
 
+    private static String fixAmazonUrl(String foundUrl) {
+        String asin = Utils.extractAmazonASIN(foundUrl);
+        if (asin != null) {
+            foundUrl = "http://www.amazon.com/gp/aw/d/" + asin + "/aiv/detailpage/";
+        }
+        return foundUrl;
+    }
 }
