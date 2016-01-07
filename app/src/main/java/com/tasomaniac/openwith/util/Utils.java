@@ -14,7 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Utils {
-    
+
     private Utils() {
 
     }
@@ -23,14 +23,14 @@ public class Utils {
      * Converts dp value to px value.
      *
      * @param res Resources objects to get displayMetrics.
-     * @param dp original dp value.
+     * @param dp  original dp value.
      * @return px value.
      */
     public static int dpToPx(@NonNull Resources res, int dp) {
         return (int) TypedValue
                 .applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, res.getDisplayMetrics());
     }
-    
+
     public static float convertPixelsToDp(float px, Context context) {
         Resources resources = context.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
@@ -49,7 +49,20 @@ public class Utils {
     @Nullable
     public static String extractAmazonASIN(String foundUrl) {
         try {
-            final Matcher matcher = Pattern.compile(".*//www.amazon.(?:com|co.uk|co.jp|de)/gp/aw/d/(\\w{10})/.*", Pattern.CASE_INSENSITIVE)
+            final Matcher matcher = Pattern.compile(".*//www.amazon.(?:com|co\\.uk|co.jp|de)/gp/aw/d/(\\w{10})/.*", Pattern.CASE_INSENSITIVE)
+                    .matcher(foundUrl);
+            if (matcher.find()) {
+                return matcher.group(1);
+            }
+        } catch (Exception ignored) {
+        }
+        return null;
+    }
+
+    @Nullable
+    public static String extractEbayItemId(String foundUrl) {
+        try {
+            final Matcher matcher = Pattern.compile("(?:(?:http|https)://)?(?:www|m).ebay.(?:com|co\\.uk|com.hk|com.au|at|ca|fr|de|ie|it|com\\.my|nl|ph|pl|com\\.sg|es|ch)/itm/(?:.*/)?(\\d+)(?:\\?.*)?")
                     .matcher(foundUrl);
             if (matcher.find()) {
                 return matcher.group(1);

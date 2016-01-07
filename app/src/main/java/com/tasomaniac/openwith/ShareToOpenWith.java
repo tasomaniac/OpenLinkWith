@@ -82,6 +82,7 @@ public class ShareToOpenWith extends Activity {
 
     private String fixUrls(String foundUrl) {
         foundUrl = fixTwitterUrl(foundUrl);
+        foundUrl = fixEbayUrl(foundUrl);
         return fixAmazonUrl(foundUrl);
     }
 
@@ -89,11 +90,19 @@ public class ShareToOpenWith extends Activity {
         return foundUrl.replace("//mobile.twitter.com", "//twitter.com");
     }
 
+    private static String fixEbayUrl(String foundUrl) {
+        final String ebayItemId = Utils.extractEbayItemId(foundUrl);
+        if (ebayItemId != null) {
+            return "http://pages.ebay.com/link/?nav=item.view&id=" + ebayItemId;
+        }
+        return foundUrl;
+    }
+
     private static String fixAmazonUrl(String foundUrl) {
         String asin = Utils.extractAmazonASIN(foundUrl);
 
         //Use fake ASIN to make Amazon App popup for the Intent.
-        final Matcher matcher = Pattern.compile("((?:http|https)://)?www.amazon.(?:com|co.uk|co.jp|de)/?")
+        final Matcher matcher = Pattern.compile("((?:http|https)://)?www\\.amazon\\.(?:com|co\\.uk|co\\.jp|de)/?")
                 .matcher(foundUrl);
         if (matcher.matches()) {
             asin = "0000000000";
