@@ -158,12 +158,12 @@ public class ResolverActivity extends Activity
                     isCallerPackagePreferred = ri.activityInfo.packageName.equals(callerPackage);
                     if (!isCallerPackagePreferred) {
                         Toast.makeText(this, getString(R.string.warning_open_link_with_name,
-                                        ri.loadLabel(mPm)),
+                                ri.loadLabel(mPm)),
                                 Toast.LENGTH_SHORT).show();
                         intent.setComponent(lastChosenComponent);
                         intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
                                 | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
-                        startActivity(intent);
+                        startActivityFixingIntent(intent);
                         finish();
                         return;
                     }
@@ -221,9 +221,9 @@ public class ResolverActivity extends Activity
         } else if (count == 1) {
             final DisplayResolveInfo dri = mAdapter.displayResolveInfoForPosition(0, false);
             Toast.makeText(this, getString(R.string.warning_open_link_with_name,
-                        dri.getDisplayLabel()),
+                    dri.getDisplayLabel()),
                     Toast.LENGTH_SHORT).show();
-            startActivity(mAdapter.intentForPosition(0, false));
+            startActivityFixingIntent(mAdapter.intentForPosition(0, false));
             mPackageMonitor.unregister();
             mRegistered = false;
             finish();
@@ -303,11 +303,10 @@ public class ResolverActivity extends Activity
 
     @SuppressWarnings("deprecation")
     private String getCallerPackagerLegacy() {
-        String callerPackage;ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
         final List<ActivityManager.RunningTaskInfo> runningTasks = am.getRunningTasks(1);
         final ComponentName topActivity = runningTasks.get(0).baseActivity;
-        callerPackage = topActivity.getPackageName();
-        return callerPackage;
+        return topActivity.getPackageName();
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP_MR1)
@@ -430,7 +429,7 @@ public class ResolverActivity extends Activity
     public void onButtonClick(View v) {
         final int id = v.getId();
         startSelected(mAlwaysUseOption ?
-                        selectionSupport.getCheckedItemPosition()  : mAdapter.getFilteredPosition(),
+                        selectionSupport.getCheckedItemPosition() : mAdapter.getFilteredPosition(),
                 id == R.id.button_always,
                 mAlwaysUseOption);
         dismiss();
@@ -464,9 +463,13 @@ public class ResolverActivity extends Activity
         }
 
         if (intent != null) {
-            startActivity(fixIntent(intent));
+            startActivityFixingIntent(intent);
         }
         history.save(this);
+    }
+
+    private void startActivityFixingIntent(Intent intent) {
+        startActivity(fixIntent(intent));
     }
 
     private Intent fixIntent(final Intent originalIntent) {
@@ -489,6 +492,10 @@ public class ResolverActivity extends Activity
         if (originalIntent.getDataString() != null && originalIntent.getDataString().contains("amazon")) {
             String asin = Utils.extractAmazonASIN(originalIntent.getDataString());
             if (asin != null) {
+                if ("0000000000".equals(asin)) {
+                    return getPackageManager()
+                            .getLaunchIntentForPackage(originalIntent.getComponent().getPackageName());
+                }
                 return new Intent("android.intent.action.VIEW")
                         .setDataAndType(
                                 Uri.parse("mshop://featured?ASIN=" + asin),

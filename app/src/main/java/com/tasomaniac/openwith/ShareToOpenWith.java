@@ -91,6 +91,14 @@ public class ShareToOpenWith extends Activity {
 
     private static String fixAmazonUrl(String foundUrl) {
         String asin = Utils.extractAmazonASIN(foundUrl);
+
+        //Use fake ASIN to make Amazon App popup for the Intent.
+        final Matcher matcher = Pattern.compile("((?:http|https)://)?www.amazon.(?:com|co.uk|co.jp|de)/?")
+                .matcher(foundUrl);
+        if (matcher.matches()) {
+            asin = "0000000000";
+        }
+
         if (asin != null) {
             foundUrl = "http://www.amazon.com/gp/aw/d/" + asin + "/aiv/detailpage/";
         }
