@@ -557,10 +557,12 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         Intent intent = new Intent(mIntent);
         intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
                 | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
-        if (dri.ri != null) {
+        if (dri != null && dri.ri != null) {
             ActivityInfo ai = dri.ri.activityInfo;
-            intent.setComponent(new ComponentName(
-                    ai.applicationInfo.packageName, ai.name));
+            if (ai != null) {
+                intent.setComponent(new ComponentName(
+                        ai.applicationInfo.packageName, ai.name));
+            }
         }
         return intent;
     }
