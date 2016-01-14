@@ -1,0 +1,11 @@
+---
+project_identifier: open-link-with
+
+files:
+  -
+    source: '/app/src/main/res/values/strings.xml'
+    translation: '/app/src/main/res/values-%android_code%/strings.xml'
+    languages_mapping:
+      android_code:
+        pt-BR: pt-rBR
+        tr: tr

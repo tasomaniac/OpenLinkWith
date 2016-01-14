@@ -35,6 +35,12 @@ Although the problem discovered above is not huge, it is missing in the Android 
 I hope you find this useful. The idea is still immature. Please help me by trying it ans sending feedback to me. 
 
 
+Translation
+-----------
+
+You can help me translate the app. Head over to Crowdin and start translating Open Link With to your language.
+https://crowdin.com/project/open-link-with/
+
 License
 -------
 
