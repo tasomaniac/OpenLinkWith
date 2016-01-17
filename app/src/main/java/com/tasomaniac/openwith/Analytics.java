@@ -16,11 +16,11 @@ public interface Analytics {
 
     void sendEvent(String category, String action, String label);
 
-    class GoogleAnalytics implements Analytics {
+    class AnalyticsImpl implements Analytics {
         private final Tracker tracker;
         private final Answers answers;
 
-        public GoogleAnalytics(Tracker tracker) {
+        public AnalyticsImpl(Tracker tracker) {
             this.tracker = tracker;
             answers = Answers.getInstance();
         }

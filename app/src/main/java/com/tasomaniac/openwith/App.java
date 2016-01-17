@@ -36,7 +36,7 @@ public class App extends Application {
         GoogleAnalytics googleAnalytics = GoogleAnalytics.getInstance(this);
         Tracker tracker = googleAnalytics.newTracker(BuildConfig.ANALYTICS_KEY);
         tracker.setSessionTimeout(300); // ms? s? better be s.
-        return new Analytics.GoogleAnalytics(tracker);
+        return new Analytics.AnalyticsImpl(tracker);
     }
 
     public static App getApp(Context context) {
