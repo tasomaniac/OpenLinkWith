@@ -21,8 +21,8 @@ android {
         applicationId "com.tasomaniac.openwith"
         minSdkVersion 15
         targetSdkVersion rootProject.ext.compileSdkVersion
-        versionCode rootProject.ext.versionMajor * 10000 + rootProject.ext.versionMinor * 1000 + rootProject.ext.versionPatch * 100 + rootProject.ext.versionBuild
-        versionName "${rootProject.ext.versionMajor}.${rootProject.ext.versionMinor}" + ((rootProject.ext.versionPatch != 0) ? ".${rootProject.ext.versionPatch}" : "")
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
         buildConfigField "String", "GIT_SHA", "\"${gitSha}\""
         buildConfigField "String", "BUILD_TIME", "\"${buildTime}\""
 
@@ -59,6 +59,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
+    }
+
+    productFlavors {
+        floss {
+            applicationIdSuffix ".floss"
+            versionName rootProject.ext.versionName + "-floss"
+        }
+        prod
     }
 
     lintOptions {
@@ -108,10 +116,8 @@ dependencies {
     compile 'com.jakewharton.timber:timber:4.1.0'
     compile 'com.jakewharton:butterknife:7.0.1'
 
-    compile "com.google.android.gms:play-services-analytics:8.4.0"
-
-    // Crashlytics Kit
-    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+    prodCompile "com.google.android.gms:play-services-analytics:8.4.0"
+    prodCompile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
         transitive = true
     }
 

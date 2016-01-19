@@ -1,7 +1,5 @@
 package com.tasomaniac.openwith;
 
-import android.app.Application;
-import android.content.Context;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
@@ -11,24 +9,20 @@ import com.google.android.gms.analytics.Tracker;
 import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
 
-public class App extends Application {
-
-    Analytics analytics;
+public class App extends BaseApp {
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        if (BuildConfig.DEBUG) {
-            Timber.plant(new Timber.DebugTree());
-        } else {
+        if (!BuildConfig.DEBUG) {
             Fabric.with(this, new Crashlytics());
             Timber.plant(new CrashReportingTree());
         }
-        analytics = provideAnalytics();
     }
 
-    private Analytics provideAnalytics() {
+    @Override
+    protected Analytics provideAnalytics() {
         if (BuildConfig.DEBUG) {
             return new Analytics.DebugAnalytics();
         }
@@ -37,14 +31,6 @@ public class App extends Application {
         Tracker tracker = googleAnalytics.newTracker(BuildConfig.ANALYTICS_KEY);
         tracker.setSessionTimeout(300); // ms? s? better be s.
         return new Analytics.AnalyticsImpl(tracker);
-    }
-
-    public static App getApp(Context context) {
-        return (App) context.getApplicationContext();
-    }
-
-    public Analytics getAnalytics() {
-        return analytics;
     }
 
     /** A tree which logs important information for crash reporting. */

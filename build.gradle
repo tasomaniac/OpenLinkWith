@@ -35,6 +35,9 @@ ext {
     versionPatch = 7
     versionBuild = 0
 
+    versionCode = versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
+    versionName = "${versionMajor}.${versionMinor}" + ((versionPatch != 0) ? ".${versionPatch}" : "")
+
     compileSdkVersion = 23
     buildToolsVersion = '23.0.2'
 }
