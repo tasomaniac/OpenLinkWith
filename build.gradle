@@ -32,7 +32,7 @@ ext {
 
     versionMajor = 1
     versionMinor = 0
-    versionPatch = 7
+    versionPatch = 8
     versionBuild = 0
 
     versionCode = versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
