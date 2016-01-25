@@ -71,4 +71,17 @@ public class Utils {
         }
         return null;
     }
+
+    @Nullable
+    public static String extractDailyMailArticleId(String foundUrl) {
+        try {
+            final Matcher matcher = Pattern.compile("(?:(?:http|https)://)?(?:www|m).dailymail.co.uk/.*/article-(\\d*)?/.*")
+                    .matcher(foundUrl);
+            if (matcher.find()) {
+                return matcher.group(1);
+            }
+        } catch (Exception ignored) {
+        }
+        return null;
+    }
 }

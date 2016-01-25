@@ -83,7 +83,9 @@ public class ShareToOpenWith extends Activity {
     private String fixUrls(String foundUrl) {
         foundUrl = fixTwitterUrl(foundUrl);
         foundUrl = fixEbayUrl(foundUrl);
-        return fixAmazonUrl(foundUrl);
+        foundUrl = fixDailyMailUrl(foundUrl);
+        foundUrl = fixAmazonUrl(foundUrl);
+        return foundUrl;
     }
 
     private static String fixTwitterUrl(String foundUrl) {
@@ -110,6 +112,14 @@ public class ShareToOpenWith extends Activity {
 
         if (asin != null) {
             foundUrl = "http://www.amazon.com/gp/aw/d/" + asin + "/aiv/detailpage/";
+        }
+        return foundUrl;
+    }
+
+    private static String fixDailyMailUrl(String foundUrl) {
+        String articleId = Utils.extractDailyMailArticleId(foundUrl);
+        if (articleId != null) {
+            foundUrl = "dailymail://article/" + articleId;
         }
         return foundUrl;
     }
