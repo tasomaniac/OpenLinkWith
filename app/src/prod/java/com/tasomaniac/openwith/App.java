@@ -19,9 +19,10 @@ public class App extends BaseApp {
             Fabric.with(this, new Crashlytics());
             Timber.plant(new CrashReportingTree());
         }
+
+        analytics = provideAnalytics();
     }
 
-    @Override
     protected Analytics provideAnalytics() {
         if (BuildConfig.DEBUG) {
             return new Analytics.DebugAnalytics();
@@ -30,7 +31,7 @@ public class App extends BaseApp {
         GoogleAnalytics googleAnalytics = GoogleAnalytics.getInstance(this);
         Tracker tracker = googleAnalytics.newTracker(BuildConfig.ANALYTICS_KEY);
         tracker.setSessionTimeout(300); // ms? s? better be s.
-        return new Analytics.AnalyticsImpl(tracker);
+        return new AnalyticsImpl(tracker);
     }
 
     /** A tree which logs important information for crash reporting. */

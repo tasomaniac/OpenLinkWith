@@ -16,10 +16,7 @@ public abstract class BaseApp extends Application {
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
-        analytics = provideAnalytics();
     }
-
-    protected abstract Analytics provideAnalytics();
 
     public static App getApp(Context context) {
         return (App) context.getApplicationContext();
