@@ -8,6 +8,9 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -42,7 +45,9 @@ import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.CONTEN
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withId;
 import static org.lucasr.twowayview.TwoWayLayoutManager.Orientation.VERTICAL;
 
-public class PreferredAppsActivity extends AppCompatActivity implements ItemClickSupport.OnItemClickListener {
+public class PreferredAppsActivity extends AppCompatActivity implements
+        LoaderManager.LoaderCallbacks<Cursor>,
+        ItemClickSupport.OnItemClickListener {
 
     @Bind(R.id.recycler_view)
     TwoWayView recyclerView;
@@ -63,42 +68,17 @@ public class PreferredAppsActivity extends AppCompatActivity implements ItemClic
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        PackageManager mPm = getPackageManager();
-
-        final Cursor cursor = getContentResolver().query(CONTENT_URI_PREFERRED, null, null, null, null);
-
-        if (cursor == null) {
-            return;
-        }
-
-        List<DisplayResolveInfo> apps = new ArrayList<>(cursor.getCount());
-        while (cursor.moveToNext()) {
-
-            final int id = cursor.getInt(cursor.getColumnIndex(ID));
-            final String host = cursor.getString(cursor.getColumnIndex(HOST));
-            final String componentString = cursor.getString(cursor.getColumnIndex(COMPONENT));
-
-            Intent intent = new Intent();
-            intent.setComponent(ComponentName.unflattenFromString(componentString));
-
-            final ResolveInfo ro = mPm.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
-
-            CharSequence roLabel = ro.loadLabel(mPm);
-            final DisplayResolveInfo info = new DisplayResolveInfo(id, ro, roLabel, host);
-            apps.add(info);
-        }
-
-        cursor.close();
-
         recyclerView.setLayoutManager(new ListLayoutManager(this, VERTICAL));
         recyclerView.addItemDecoration(new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL_LIST));
         recyclerView.setItemAnimator(new SlideInRightAnimator());
-        adapter = new PreferredAppsAdapter(this, apps);
+        adapter = new PreferredAppsAdapter(this, new ArrayList<DisplayResolveInfo>());
         recyclerView.setAdapter(adapter);
         ItemClickSupport.addTo(recyclerView).setOnItemClickListener(this);
 
         adapter.setHeader(new ResolveListAdapter.Header());
+
+        getSupportLoaderManager().initLoader(0, null, this);
     }
 
     @Override
@@ -150,6 +130,40 @@ public class PreferredAppsActivity extends AppCompatActivity implements ItemClic
         }, 300);
     }
 
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new CursorLoader(this, CONTENT_URI_PREFERRED, null, null, null, null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        PackageManager mPm = getPackageManager();
+
+        List<DisplayResolveInfo> apps = new ArrayList<>(data.getCount());
+        while (data.moveToNext()) {
+
+            final int id = data.getInt(data.getColumnIndex(ID));
+            final String host = data.getString(data.getColumnIndex(HOST));
+            final String componentString = data.getString(data.getColumnIndex(COMPONENT));
+
+            Intent intent = new Intent();
+            intent.setComponent(ComponentName.unflattenFromString(componentString));
+
+            final ResolveInfo ro = mPm.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
+
+            CharSequence roLabel = ro.loadLabel(mPm);
+            final DisplayResolveInfo info = new DisplayResolveInfo(id, ro, roLabel, host);
+            apps.add(info);
+        }
+
+        adapter.setApplications(apps);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        adapter.setApplications(new ArrayList<DisplayResolveInfo>());
+    }
+
     private static class PreferredAppsAdapter extends ResolveListAdapter {
 
         private Context mContext;
@@ -167,6 +181,11 @@ public class PreferredAppsActivity extends AppCompatActivity implements ItemClic
 
         public void remove(DisplayResolveInfo item) {
             mList.remove(item);
+        }
+
+        void setApplications(List<DisplayResolveInfo> apps) {
+            mList = apps;
+            notifyDataSetChanged();
         }
 
         @Override
