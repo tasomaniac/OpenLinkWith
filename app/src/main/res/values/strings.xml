@@ -1,5 +1,5 @@
 <resources>
-  <string name="app_name">Open Link With</string>
+  <string name="app_name" translatable="false">Open Link With</string>
   <string name="open_with">\u0020Open With…</string>
 
   <string name="use_a_different_app">Use a different app</string>
