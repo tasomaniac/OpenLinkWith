@@ -49,7 +49,10 @@ import static android.os.Build.VERSION_CODES.M;
 
 public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAdapter.ViewHolder, ResolveListAdapter.Header, DisplayResolveInfo, Void> {
 
+    public static final int INVALID_POSITION = -1;
+
     private static final Intent BROWSER_INTENT;
+
     static {
         BROWSER_INTENT = new Intent();
         BROWSER_INTENT.setAction(Intent.ACTION_VIEW);
@@ -69,6 +72,9 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
 
     private int mLastChosenPosition = -1;
     private boolean mFilterLastUsed;
+
+    private boolean selectionEnabled;
+    private int checkedItemPosition = INVALID_POSITION;
 
     private PackageManager mPm;
     private Map<String, UsageStats> mStats;
@@ -398,6 +404,14 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     }
 
     @Override
+    public void onBindViewHolder(ViewHolder holder, int position, List<Object> payloads) {
+        super.onBindViewHolder(holder, position, payloads);
+
+        boolean checked = position == checkedItemPosition;
+        holder.itemView.setActivated(checked);
+    }
+
+    @Override
     public void onBindItemViewHolder(final ViewHolder holder, final int position) {
         final DisplayResolveInfo info = getItem(position);
 
@@ -423,6 +437,8 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
                 if (itemClickListener != null) {
                     itemClickListener.onItemClick(v, holder.getAdapterPosition(), holder.getItemId());
                 }
+
+                setItemChecked(holder.getAdapterPosition());
             }
         });
 
@@ -443,6 +459,25 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
 
     public void setItemLongClickListener(ItemLongClickListener itemLongClickListener) {
         this.itemLongClickListener = itemLongClickListener;
+    }
+
+    public int getCheckedItemPosition() {
+        return checkedItemPosition;
+    }
+
+    public void setSelectionEnabled(boolean selectionEnabled) {
+        this.selectionEnabled = selectionEnabled;
+    }
+
+    public void setItemChecked(int position) {
+        if (!selectionEnabled) {
+            return;
+        }
+
+        notifyItemChanged(position, true);
+        notifyItemChanged(checkedItemPosition, false);
+
+        checkedItemPosition = position;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

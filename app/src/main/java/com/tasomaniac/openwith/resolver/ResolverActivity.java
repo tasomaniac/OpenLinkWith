@@ -33,6 +33,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ShareCompat;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -46,24 +47,18 @@ import android.widget.Toast;
 
 import com.tasomaniac.openwith.BuildConfig;
 import com.tasomaniac.openwith.R;
+import com.tasomaniac.openwith.misc.ItemClickListener;
+import com.tasomaniac.openwith.misc.ItemLongClickListener;
+import com.tasomaniac.openwith.util.Extensions;
 import com.tasomaniac.openwith.util.Intents;
-import com.tasomaniac.openwith.util.Utils;
-
-import org.lucasr.twowayview.ItemClickSupport;
-import org.lucasr.twowayview.ItemSelectionSupport;
-import org.lucasr.twowayview.widget.ListLayoutManager;
 
 import java.util.List;
 
 import static android.view.WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR;
 import static android.view.WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
-import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.COMPONENT;
-import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.HOST;
-import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.LAST_CHOSEN;
-import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.PREFERRED;
+import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.*;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.CONTENT_URI;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withHost;
-import static org.lucasr.twowayview.TwoWayLayoutManager.Orientation.VERTICAL;
 
 /**
  * This activity is displayed when the system attempts to start an Intent for
@@ -71,23 +66,24 @@ import static org.lucasr.twowayview.TwoWayLayoutManager.Orientation.VERTICAL;
  * which to go to.  It is not normally used directly by application developers.
  */
 public class ResolverActivity extends Activity
-        implements ItemClickSupport.OnItemClickListener,
-        ItemClickSupport.OnItemLongClickListener {
+        implements
+        ItemClickListener,
+        ItemLongClickListener {
 
     public static final String EXTRA_PRIORITY_PACKAGES = "EXTRA_PRIORITY_PACKAGES";
+    private static final String KEY_CHECKED_POS = "KEY_CHECKED_POS";
 
     private ResolveListAdapter mAdapter;
     private PackageManager mPm;
     private boolean mAlwaysUseOption;
 
     private RecyclerView mListView;
-    private ItemSelectionSupport selectionSupport;
 
     private Button mAlwaysButton;
     private Button mOnceButton;
     private int mIconDpi;
 
-    private int mLastSelected = ItemSelectionSupport.INVALID_POSITION;
+    private int mLastSelected = ResolveListAdapter.INVALID_POSITION;
 
     private Uri mRequestedUri;
     private ChooserHistory mHistory;
@@ -157,12 +153,17 @@ public class ResolverActivity extends Activity
                 if (isPreferred && ri != null) {
                     isCallerPackagePreferred = ri.activityInfo.packageName.equals(callerPackage);
                     if (!isCallerPackagePreferred) {
-                        Toast.makeText(this, getString(R.string.warning_open_link_with_name,
-                                ri.loadLabel(mPm)),
-                                Toast.LENGTH_SHORT).show();
+                        Toast.makeText(
+                                this,
+                                getString(
+                                        R.string.warning_open_link_with_name,
+                                        ri.loadLabel(mPm)
+                                ),
+                                Toast.LENGTH_SHORT
+                        ).show();
                         intent.setComponent(lastChosenComponent);
                         intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
-                                | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+                                                | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
                         startActivityFixingIntent(intent);
                         finish();
                         return;
@@ -206,38 +207,39 @@ public class ResolverActivity extends Activity
             mListView = (RecyclerView) findViewById(R.id.resolver_list);
             mListView.setAdapter(mAdapter);
 
-            selectionSupport = ItemSelectionSupport.addTo(mListView);
-
-            final ItemClickSupport itemClickSupport = ItemClickSupport.addTo(mListView);
-            itemClickSupport.setOnItemClickListener(this);
-            itemClickSupport.setOnItemLongClickListener(this);
+            mAdapter.setItemClickListener(this);
+            mAdapter.setItemLongClickListener(this);
 
             if (mAlwaysUseOption) {
-                selectionSupport.setChoiceMode(ItemSelectionSupport.ChoiceMode.SINGLE);
+                mAdapter.setSelectionEnabled(true);
             }
             if (useHeader) {
                 mAdapter.setHeader(new ResolveListAdapter.Header());
             }
         } else if (count == 1) {
             final DisplayResolveInfo dri = mAdapter.displayResolveInfoForPosition(0, false);
-            Toast.makeText(this, getString(R.string.warning_open_link_with_name,
-                    dri.getDisplayLabel()),
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(
+                    this,
+                    getString(
+                            R.string.warning_open_link_with_name,
+                            dri.getDisplayLabel()
+                    ),
+                    Toast.LENGTH_SHORT
+            ).show();
             startActivityFixingIntent(mAdapter.intentForPosition(0, false));
             mPackageMonitor.unregister();
             mRegistered = false;
             finish();
             return;
         } else {
-            Toast.makeText(this, getString(R.string.empty_resolver_activity),
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.empty_resolver_activity), Toast.LENGTH_LONG).show();
             mPackageMonitor.unregister();
             mRegistered = false;
             finish();
             return;
         }
 
-        mListView.setLayoutManager(new ListLayoutManager(this, VERTICAL));
+        mListView.setLayoutManager(new LinearLayoutManager(this));
 
         // Prevent the Resolver window from becoming the top fullscreen window and thus from taking
         // control of the system bars.
@@ -315,7 +317,8 @@ public class ResolverActivity extends Activity
         long time = System.currentTimeMillis();
         // We get usage stats for the last 10 seconds
         List<UsageStats> stats = mUsm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY,
-                time - 10 * DateUtils.SECOND_IN_MILLIS, time);
+                                                      time - 10 * DateUtils.SECOND_IN_MILLIS, time
+        );
         if (stats == null) {
             return null;
         }
@@ -391,47 +394,50 @@ public class ResolverActivity extends Activity
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt(KEY_CHECKED_POS, mAdapter.getCheckedItemPosition());
+    }
+
+    @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         if (mAlwaysUseOption) {
-            final int checkedPos = selectionSupport.getCheckedItemPosition();
+            final int checkedPos = savedInstanceState.getInt(KEY_CHECKED_POS);
             final boolean hasValidSelection = checkedPos != ListView.INVALID_POSITION;
             mLastSelected = checkedPos;
             mAlwaysButton.setEnabled(hasValidSelection);
             mOnceButton.setEnabled(hasValidSelection);
             if (hasValidSelection) {
-                selectionSupport.setItemChecked(checkedPos, true);
+                mAdapter.setItemChecked(checkedPos);
             }
         }
     }
 
     @Override
-    public void onItemClick(RecyclerView parent, View view, final int position, long id) {
-        mListView.post(new Runnable() {
-            @Override
-            public void run() {
-                final int checkedPos = selectionSupport.getCheckedItemPosition();
-                final boolean hasValidSelection = checkedPos != ItemSelectionSupport.INVALID_POSITION;
-                if (mAlwaysUseOption && (!hasValidSelection || mLastSelected != checkedPos)) {
-                    mAlwaysButton.setEnabled(hasValidSelection);
-                    mOnceButton.setEnabled(hasValidSelection);
-                    if (hasValidSelection) {
-                        mListView.smoothScrollToPosition(checkedPos);
-                    }
-                    mLastSelected = checkedPos;
-                } else {
-                    startSelected(position, false, true);
-                }
+    public void onItemClick(View view, final int position, long id) {
+        final boolean hasValidSelection = position != ResolveListAdapter.INVALID_POSITION;
+        if (mAlwaysUseOption && (!hasValidSelection || mLastSelected != position)) {
+            mAlwaysButton.setEnabled(hasValidSelection);
+            mOnceButton.setEnabled(hasValidSelection);
+            if (hasValidSelection) {
+                mListView.smoothScrollToPosition(position);
             }
-        });
+            mLastSelected = position;
+        } else {
+            startSelected(position, false, true);
+        }
     }
 
     public void onButtonClick(View v) {
         final int id = v.getId();
-        startSelected(mAlwaysUseOption ?
-                        selectionSupport.getCheckedItemPosition() : mAdapter.getFilteredPosition(),
+        startSelected(
+                mAlwaysUseOption ?
+                        mAdapter.getCheckedItemPosition() : mAdapter.getFilteredPosition(),
                 id == R.id.button_always,
-                mAlwaysUseOption);
+                mAlwaysUseOption
+        );
         dismiss();
     }
 
@@ -515,7 +521,7 @@ public class ResolverActivity extends Activity
     }
 
     @Override
-    public boolean onItemLongClick(RecyclerView parent, View view, int position, long id) {
+    public boolean onItemLongClick(View view, int position, long id) {
         ResolveInfo ri = mAdapter.resolveInfoForPosition(position, true);
         showAppDetails(ri);
         return true;

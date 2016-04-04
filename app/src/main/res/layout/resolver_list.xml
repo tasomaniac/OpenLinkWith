@@ -47,7 +47,7 @@
       android:textAppearance="?android:attr/textAppearanceMedium"/>
   </LinearLayout>
 
-  <org.lucasr.twowayview.widget.TwoWayView
+  <android.support.v7.widget.RecyclerView
     android:id="@+id/resolver_list"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
