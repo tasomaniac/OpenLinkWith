@@ -103,13 +103,13 @@ dependencies {
     compile "com.android.support:design:$supportLibVersion"
     compile "com.android.support:preference-v14:$supportLibVersion"
 
-    compile 'com.karumi:headerrecyclerview:1.0.3'
+    compile 'com.karumi:headerrecyclerview:1.1.0'
     compile 'jp.wasabeef:recyclerview-animators:2.1.0'
 
     apt "net.simonvt.schematic:schematic-compiler:$schematicVersion"
     compile "net.simonvt.schematic:schematic:$schematicVersion"
 
-    compile 'com.jakewharton.timber:timber:4.1.0'
+    compile 'com.jakewharton.timber:timber:4.1.2'
     compile 'com.jakewharton:butterknife:7.0.1'
 
     prodCompile "com.google.android.gms:play-services-analytics:8.4.0"
