@@ -490,7 +490,7 @@ public class ResolverActivity extends Activity
     @NonNull
     private Intent fixAmazonIntent(final Intent originalIntent) {
         if (originalIntent.getDataString() != null && originalIntent.getDataString().contains("amazon")) {
-            String asin = Utils.extractAmazonASIN(originalIntent.getDataString());
+            String asin = Extensions.extractAmazonASIN(originalIntent.getDataString());
             if (asin != null) {
                 if ("0000000000".equals(asin)) {
                     return getPackageManager()

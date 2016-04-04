@@ -2,7 +2,6 @@ package com.tasomaniac.openwith.preferred;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -11,11 +10,9 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,9 +43,12 @@ import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.CONTEN
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withId;
 import static org.lucasr.twowayview.TwoWayLayoutManager.Orientation.VERTICAL;
 
-public class PreferredAppsActivity extends AppCompatActivity implements
+public class PreferredAppsActivity
+        extends AppCompatActivity
+        implements
         LoaderManager.LoaderCallbacks<Cursor>,
-        ItemClickSupport.OnItemClickListener {
+        ItemClickListener,
+        AppRemoveDialogFragment.Callbacks {
 
     @Bind(R.id.recycler_view)
     TwoWayView recyclerView;
@@ -90,27 +90,8 @@ public class PreferredAppsActivity extends AppCompatActivity implements
             return;
         }
 
-        final String message = getString(R.string.message_remove_preferred,
-                info.getDisplayLabel(),
-                info.getExtendedInfo(),
-                info.getExtendedInfo());
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.title_remove_preferred)
-                .setMessage(Html.fromHtml(message))
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        getContentResolver().delete(withId(info.getId()), null, null);
-                        notifyItemRemoval(position);
-
-                        analytics.sendEvent("Preferred",
-                                "Removed",
-                                info.getDisplayLabel().toString());
-                    }
-                })
-                .setNegativeButton(android.R.string.cancel, null)
-                .show();
+        AppRemoveDialogFragment.newInstance(info, position)
+                .show(getSupportFragmentManager(), AppRemoveDialogFragment.class.getSimpleName());
     }
 
     private void notifyItemRemoval(final int position) {
@@ -150,11 +131,13 @@ public class PreferredAppsActivity extends AppCompatActivity implements
             Intent intent = new Intent();
             intent.setComponent(ComponentName.unflattenFromString(componentString));
 
-            final ResolveInfo ro = mPm.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
+            final ResolveInfo resolveInfo = mPm.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
 
-            CharSequence roLabel = ro.loadLabel(mPm);
-            final DisplayResolveInfo info = new DisplayResolveInfo(id, ro, roLabel, host);
-            apps.add(info);
+            if (resolveInfo != null) {
+                CharSequence roLabel = resolveInfo.loadLabel(mPm);
+                final DisplayResolveInfo info = new DisplayResolveInfo(id, resolveInfo, roLabel, host);
+                apps.add(info);
+            }
         }
 
         adapter.setApplications(apps);
@@ -165,54 +148,16 @@ public class PreferredAppsActivity extends AppCompatActivity implements
         adapter.setApplications(new ArrayList<DisplayResolveInfo>());
     }
 
-    private static class PreferredAppsAdapter extends ResolveListAdapter {
+    @Override
+    public void onAppRemoved(DisplayResolveInfo info, int position) {
+        getContentResolver().delete(withId(info.getId()), null, null);
 
-        private Context mContext;
-        private LayoutInflater mInflater;
+        notifyItemRemoval(position);
 
-        public PreferredAppsAdapter(Context context, List<DisplayResolveInfo> apps) {
-            super(context, null, null, null, null, false);
-
-            mContext = context;
-            mInflater = LayoutInflater.from(context);
-
-            mList = apps;
-            mShowExtended = true;
-        }
-
-        public void remove(DisplayResolveInfo item) {
-            mList.remove(item);
-        }
-
-        void setApplications(List<DisplayResolveInfo> apps) {
-            mList = apps;
-            notifyDataSetChanged();
-        }
-
-        @Override
-        protected void rebuildList() {
-        }
-
-        @Override
-        protected ViewHolder onCreateHeaderViewHolder(ViewGroup parent, int viewType) {
-            return new ViewHolder(mInflater
-                    .inflate(R.layout.preferred_header, parent, false));
-        }
-
-        @Override
-        protected void onBindHeaderViewHolder(ViewHolder holder, int position) {
-            if (getItemCount() - getHeaderViewsCount() == 0) {
-                holder.text.setText(R.string.desc_preferred_empty);
-            } else {
-                holder.text.setText(R.string.desc_preferred);
-            }
-        }
-
-        @Override
-        public ViewHolder onCreateItemViewHolder(ViewGroup viewGroup, int i) {
-            final ViewHolder viewHolder = super.onCreateItemViewHolder(viewGroup, i);
-            viewHolder.itemView.setMinimumHeight(Utils.dpToPx(mContext.getResources(), 72));
-            return viewHolder;
-        }
+        analytics.sendEvent(
+                "Preferred",
+                "Removed",
+                info.getDisplayLabel().toString()
+        );
     }
 }
