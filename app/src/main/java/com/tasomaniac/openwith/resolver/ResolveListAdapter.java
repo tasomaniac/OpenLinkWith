@@ -28,6 +28,8 @@ import android.widget.TextView;
 
 import com.karumi.headerrecyclerview.HeaderRecyclerViewAdapter;
 import com.tasomaniac.openwith.R;
+import com.tasomaniac.openwith.misc.ItemClickListener;
+import com.tasomaniac.openwith.misc.ItemLongClickListener;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -77,6 +79,9 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     private final String mCallerPackage;
 
     private HashMap<String, Integer> mPriorities;
+
+    private ItemClickListener itemClickListener;
+    private ItemLongClickListener itemLongClickListener;
 
     public ResolveListAdapter(Context context,
                               ChooserHistory history,
@@ -393,7 +398,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     }
 
     @Override
-    public void onBindItemViewHolder(ViewHolder holder, final int position) {
+    public void onBindItemViewHolder(final ViewHolder holder, final int position) {
         final DisplayResolveInfo info = getItem(position);
 
         holder.text.setText(info.displayLabel);
@@ -411,6 +416,33 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
             }
             holder.icon.setImageDrawable(info.displayIcon);
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (itemClickListener != null) {
+                    itemClickListener.onItemClick(v, holder.getAdapterPosition(), holder.getItemId());
+                }
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (itemLongClickListener != null) {
+                    return itemLongClickListener.onItemLongClick(v, holder.getAdapterPosition(), holder.getItemId());
+                }
+                return false;
+            }
+        });
+    }
+
+    public void setItemClickListener(ItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
+    }
+
+    public void setItemLongClickListener(ItemLongClickListener itemLongClickListener) {
+        this.itemLongClickListener = itemLongClickListener;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

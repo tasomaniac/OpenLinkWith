@@ -1,33 +1,28 @@
 package com.tasomaniac.openwith.preferred;
 
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.tasomaniac.openwith.Analytics;
 import com.tasomaniac.openwith.App;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.misc.DividerItemDecoration;
+import com.tasomaniac.openwith.misc.ItemClickListener;
 import com.tasomaniac.openwith.resolver.DisplayResolveInfo;
 import com.tasomaniac.openwith.resolver.ResolveListAdapter;
-import com.tasomaniac.openwith.util.Utils;
-
-import org.lucasr.twowayview.ItemClickSupport;
-import org.lucasr.twowayview.widget.ListLayoutManager;
-import org.lucasr.twowayview.widget.TwoWayView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +36,6 @@ import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.HOST
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.ID;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.CONTENT_URI_PREFERRED;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withId;
-import static org.lucasr.twowayview.TwoWayLayoutManager.Orientation.VERTICAL;
 
 public class PreferredAppsActivity
         extends AppCompatActivity
@@ -51,7 +45,7 @@ public class PreferredAppsActivity
         AppRemoveDialogFragment.Callbacks {
 
     @Bind(R.id.recycler_view)
-    TwoWayView recyclerView;
+    RecyclerView recyclerView;
     private PreferredAppsAdapter adapter;
 
     private Analytics analytics;
@@ -69,13 +63,15 @@ public class PreferredAppsActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        recyclerView.setLayoutManager(new ListLayoutManager(this, VERTICAL));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this,
-                DividerItemDecoration.VERTICAL_LIST));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(
+                this,
+                DividerItemDecoration.VERTICAL_LIST
+        ));
         recyclerView.setItemAnimator(new SlideInRightAnimator());
         adapter = new PreferredAppsAdapter(this, new ArrayList<DisplayResolveInfo>());
+        adapter.setItemClickListener(this);
         recyclerView.setAdapter(adapter);
-        ItemClickSupport.addTo(recyclerView).setOnItemClickListener(this);
 
         adapter.setHeader(new ResolveListAdapter.Header());
 
@@ -83,7 +79,7 @@ public class PreferredAppsActivity
     }
 
     @Override
-    public void onItemClick(RecyclerView parent, View view, final int position, long id) {
+    public void onItemClick(View view, int position, long id) {
 
         final DisplayResolveInfo info = adapter.getItem(position);
         if (info == null) {
@@ -122,6 +118,11 @@ public class PreferredAppsActivity
         PackageManager mPm = getPackageManager();
 
         List<DisplayResolveInfo> apps = new ArrayList<>(data.getCount());
+
+        Intent mIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://gdgroups.org"));
+        List<ResolveInfo> infos = mPm.queryIntentActivities(mIntent, 0);
+        apps.add(new DisplayResolveInfo(infos.get(0), "Deneme", "Deneme"));
+
         while (data.moveToNext()) {
 
             final int id = data.getInt(data.getColumnIndex(ID));

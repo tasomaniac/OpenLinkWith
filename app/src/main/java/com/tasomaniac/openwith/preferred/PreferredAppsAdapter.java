@@ -41,8 +41,7 @@ class PreferredAppsAdapter extends ResolveListAdapter {
 
     @Override
     protected ViewHolder onCreateHeaderViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(mInflater
-                                      .inflate(R.layout.preferred_header, parent, false));
+        return new ViewHolder(mInflater.inflate(R.layout.preferred_header, parent, false));
     }
 
     @Override
