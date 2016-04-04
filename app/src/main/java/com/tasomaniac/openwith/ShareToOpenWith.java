@@ -10,7 +10,7 @@ import android.support.v4.app.ShareCompat;
 import android.widget.Toast;
 
 import com.tasomaniac.openwith.resolver.ResolverActivity;
-import com.tasomaniac.openwith.util.Utils;
+import com.tasomaniac.openwith.util.Extensions;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -93,7 +93,7 @@ public class ShareToOpenWith extends Activity {
     }
 
     private static String fixEbayUrl(String foundUrl) {
-        final String ebayItemId = Utils.extractEbayItemId(foundUrl);
+        final String ebayItemId = Extensions.extractEbayItemId(foundUrl);
         if (ebayItemId != null) {
             return "http://pages.ebay.com/link/?nav=item.view&id=" + ebayItemId;
         }
@@ -101,7 +101,7 @@ public class ShareToOpenWith extends Activity {
     }
 
     private static String fixAmazonUrl(String foundUrl) {
-        String asin = Utils.extractAmazonASIN(foundUrl);
+        String asin = Extensions.extractAmazonASIN(foundUrl);
 
         //Use fake ASIN to make Amazon App popup for the Intent.
         final Matcher matcher = Pattern.compile("((?:http|https)://)?www\\.amazon\\.(?:com|co\\.uk|co\\.jp|de)/?")
@@ -117,7 +117,7 @@ public class ShareToOpenWith extends Activity {
     }
 
     private static String fixDailyMailUrl(String foundUrl) {
-        String articleId = Utils.extractDailyMailArticleId(foundUrl);
+        String articleId = Extensions.extractDailyMailArticleId(foundUrl);
         if (articleId != null) {
             foundUrl = "dailymail://article/" + articleId;
         }

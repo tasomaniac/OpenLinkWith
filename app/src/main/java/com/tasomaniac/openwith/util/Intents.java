@@ -17,9 +17,6 @@ import java.util.List;
 
 import timber.log.Timber;
 
-/**
- * Created by tasomaniac on 6/1/16.
- */
 public class Intents {
 
     /**

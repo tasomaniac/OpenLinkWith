@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import com.tasomaniac.openwith.Analytics;
 import com.tasomaniac.openwith.App;
 import com.tasomaniac.openwith.R;
+import com.tasomaniac.openwith.misc.DividerItemDecoration;
 import com.tasomaniac.openwith.resolver.DisplayResolveInfo;
 import com.tasomaniac.openwith.resolver.ResolveListAdapter;
 import com.tasomaniac.openwith.util.Utils;
