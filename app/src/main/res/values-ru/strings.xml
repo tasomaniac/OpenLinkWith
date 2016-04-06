@@ -47,5 +47,6 @@
   ]]></string>
   <string name="description_tutorial_4"><![CDATA[
 Дайте доступ к <strong>СТАТИСТИКЕ ИСПОЛЬЗОВАНИЯ</strong> и я смогу работать лучше. Я буду обнаруживать браузер из которого вы делитесь для соответствия.  ]]></string>
-  <string name="error_usage_access_not_found">Настройка статистики использования не может быть найдена.</string>
+  <string name="error">Ошибка</string>
+  <string name="error_usage_access_not_found">Настройка статистики использования не может быть найдена.\n\nYou may access it by going into Settings -&gt; Security</string>
 </resources>

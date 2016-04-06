@@ -47,5 +47,6 @@ Descredenciar <strong>%1$s</strong> como aplicativo preferencial para abrir link
   ]]></string>
   <string name="description_tutorial_4"><![CDATA[
 Conceda <strong>ACESSO AO USO</strong> e eu vou funcionar melhor. Vou saber de qual navegador você está compartilhando para executar a ação certa.  ]]></string>
-  <string name="error_usage_access_not_found">Configurações de Acesso ao Uso não encontradas.</string>
+  <string name="error">Erro</string>
+  <string name="error_usage_access_not_found">Configurações de Acesso ao Uso não encontradas.\n\nYou may access it by going into Settings -&gt; Security</string>
 </resources>

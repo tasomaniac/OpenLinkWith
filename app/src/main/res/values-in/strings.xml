@@ -48,5 +48,6 @@
   <string name="description_tutorial_4"><![CDATA[
     Berikan izin ke <strong>AKSES PENGGUNAAN</strong> dan saya akan bekerja lebih baik. Saya akan mendeteksi peramban yang anda bagikan dari tindakkan yang sesuai.
   ]]></string>
-  <string name="error_usage_access_not_found">Pengaturan Akses Penggunaan tidak dapat ditemukan.</string>
+  <string name="error">Kesalahan</string>
+  <string name="error_usage_access_not_found">Pengaturan Akses Penggunaan tidak dapat ditemukan.\n\nYou may access it by going into Settings -&gt; Security</string>
 </resources>

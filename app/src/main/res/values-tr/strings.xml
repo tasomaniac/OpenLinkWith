@@ -46,5 +46,6 @@
   <string name="description_tutorial_4"><![CDATA[
   <strong>KULLANIM İZNİ</strong>\'ne erişim verirsen daha iyi çalışırım. Paylaştığın uygulamayı anlarım ve ona göre davranırım.
   ]]></string>
-  <string name="error_usage_access_not_found">Kullanım Erişimi Ayarları bulunamadı.</string>
+  <string name="error">Hata</string>
+  <string name="error_usage_access_not_found">Kullanım Erişimi ayarları açılamıyor.\n\nAyarlar -&gt; Güvenlik kısmına giderek kendiniz ulaşabilirsiniz.</string>
 </resources>

@@ -47,5 +47,6 @@ Seleziona <strong>SEMPRE</strong> per dirmi di aprire sempre quel link con un\'a
   <string name="description_tutorial_4"><![CDATA[
 Dammi l\'accesso ad <strong>ACCESSO A DATI DI UTILIZZO</strong> e lavorerò meglio. Rileverò il browser dal quale stai condividendo per agire di conseguenza.
   ]]></string>
-  <string name="error_usage_access_not_found">Impostazioni di Accesso a dati di utilizzo non trovate.</string>
+  <string name="error">Errore</string>
+  <string name="error_usage_access_not_found">Impostazioni di Accesso a dati di utilizzo non trovate.\n\nYou may access it by going into Settings -&gt; Security</string>
 </resources>
