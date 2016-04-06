@@ -32,6 +32,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -136,45 +137,40 @@ public class ResolverActivity extends Activity
         final String callerPackage = getCallerPackage();
 
         ResolveInfo lastChosen = null;
-        final Cursor query =
-                getContentResolver().query(withHost(mRequestedUri.getHost()), null, null, null, null);
-
+        final Cursor query = queryIntentWith(mRequestedUri.getHost());
         if (query != null && query.moveToFirst()) {
+            try {
+                final boolean isPreferred = query.getInt(query.getColumnIndex(PREFERRED)) == 1;
+                final boolean isLastChosen = query.getInt(query.getColumnIndex(LAST_CHOSEN)) == 1;
 
-            final boolean isPreferred = query.getInt(query.getColumnIndex(PREFERRED)) == 1;
-            final boolean isLastChosen = query.getInt(query.getColumnIndex(LAST_CHOSEN)) == 1;
+                if (isPreferred || isLastChosen) {
+                    final String componentString = query.getString(query.getColumnIndex(COMPONENT));
 
-            if (isPreferred || isLastChosen) {
-                final String componentString = query.getString(query.getColumnIndex(COMPONENT));
+                    final Intent lastChosenIntent = new Intent();
+                    final ComponentName lastChosenComponent = ComponentName.unflattenFromString(componentString);
+                    lastChosenIntent.setComponent(lastChosenComponent);
+                    ResolveInfo ri = mPm.resolveActivity(lastChosenIntent, PackageManager.MATCH_DEFAULT_ONLY);
 
-                final Intent lastChosenIntent = new Intent();
-                final ComponentName lastChosenComponent = ComponentName.unflattenFromString(componentString);
-                lastChosenIntent.setComponent(lastChosenComponent);
-                ResolveInfo ri = mPm.resolveActivity(lastChosenIntent, PackageManager.MATCH_DEFAULT_ONLY);
+                    if (isPreferred && ri != null) {
+                        isCallerPackagePreferred = ri.activityInfo.packageName.equals(callerPackage);
+                        if (!isCallerPackagePreferred) {
+                            String warning = getString(R.string.warning_open_link_with_name, ri.loadLabel(mPm));
+                            Toast.makeText(this, warning, Toast.LENGTH_SHORT).show();
 
-                if (isPreferred && ri != null) {
-                    isCallerPackagePreferred = ri.activityInfo.packageName.equals(callerPackage);
-                    if (!isCallerPackagePreferred) {
-                        Toast.makeText(
-                                this,
-                                getString(
-                                        R.string.warning_open_link_with_name,
-                                        ri.loadLabel(mPm)
-                                ),
-                                Toast.LENGTH_SHORT
-                        ).show();
-                        intent.setComponent(lastChosenComponent);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
-                                                | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
-                        startActivityFixingIntent(intent);
-                        finish();
-                        return;
+                            intent.setComponent(lastChosenComponent);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
+                                                    | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+                            startActivityFixingIntent(intent);
+                            finish();
+                            return;
+                        }
                     }
-                }
 
-                lastChosen = ri;
+                    lastChosen = ri;
+                }
+            } finally {
+                query.close();
             }
-            query.close();
         }
 
         mPackageMonitor.register(this, getMainLooper(), false);
@@ -287,6 +283,14 @@ public class ResolverActivity extends Activity
             mAlwaysButton.setEnabled(true);
             mOnceButton.setEnabled(true);
         }
+    }
+
+    @Nullable
+    private Cursor queryIntentWith(String host) {
+        if (TextUtils.isEmpty(host)) {
+            return null;
+        }
+        return getContentResolver().query(withHost(host), null, null, null, null);
     }
 
     private String getCallerPackage() {
