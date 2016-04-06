@@ -44,13 +44,16 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.tasomaniac.openwith.BuildConfig;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.misc.ItemClickListener;
 import com.tasomaniac.openwith.misc.ItemLongClickListener;
 import com.tasomaniac.openwith.util.Extensions;
 import com.tasomaniac.openwith.util.Intents;
+
 import java.util.List;
+
 import timber.log.Timber;
 
 import static android.view.WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR;
@@ -451,29 +454,35 @@ public class ResolverActivity extends Activity
 
     protected void onIntentSelected(Intent intent, boolean alwaysCheck) {
 
-        final ChooserHistory history = getHistory();
-
         if (mAlwaysUseOption || mAdapter.hasFilteredItem()) {
-            ContentValues values = new ContentValues(3);
-            values.put(HOST, mRequestedUri.getHost());
-            values.put(COMPONENT, intent.getComponent().flattenToString());
-
-            if (alwaysCheck) {
-                values.put(PREFERRED, true);
-            }
-            values.put(LAST_CHOSEN, true);
-            try {
-                getContentResolver().insert(CONTENT_URI, values);
-            } catch (Exception e) {
-                Timber.e(e, "Error while saving selected Intent");
-            }
-
-            history.add(intent.getComponent().getPackageName());
+            persistSelectedIntent(intent, alwaysCheck);
         }
 
         if (intent != null) {
             startActivityFixingIntent(intent);
         }
+    }
+
+    private void persistSelectedIntent(Intent intent, boolean alwaysCheck) {
+        if (intent.getComponent() == null) {
+            return;
+        }
+        final ChooserHistory history = getHistory();
+        ContentValues values = new ContentValues(4);
+        values.put(HOST, mRequestedUri.getHost());
+        values.put(COMPONENT, intent.getComponent().flattenToString());
+
+        if (alwaysCheck) {
+            values.put(PREFERRED, true);
+        }
+        values.put(LAST_CHOSEN, true);
+        try {
+            getContentResolver().insert(CONTENT_URI, values);
+        } catch (Exception e) {
+            Timber.e(e, "Error while saving selected Intent");
+        }
+
+        history.add(intent.getComponent().getPackageName());
         history.save(this);
     }
 
