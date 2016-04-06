@@ -298,6 +298,7 @@ public class ResolverActivity extends Activity
         return getContentResolver().query(withHost(host), null, null, null, null);
     }
 
+    @Nullable
     private String getCallerPackage() {
         String callerPackage = getIntent().getStringExtra(ShareCompat.EXTRA_CALLING_PACKAGE);
 
@@ -327,9 +328,14 @@ public class ResolverActivity extends Activity
         UsageStatsManager mUsm = (UsageStatsManager) getSystemService(USAGE_STATS_SERVICE);
         long time = System.currentTimeMillis();
         // We get usage stats for the last 10 seconds
-        List<UsageStats> stats = mUsm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY,
-                                                      time - 10 * DateUtils.SECOND_IN_MILLIS, time
-        );
+        List<UsageStats> stats = null;
+        try {
+            stats = mUsm.queryUsageStats(
+                    UsageStatsManager.INTERVAL_DAILY,
+                    time - 10 * DateUtils.SECOND_IN_MILLIS,
+                    time
+            );
+        } catch (Exception ignored) { }
         if (stats == null) {
             return null;
         }
