@@ -160,9 +160,14 @@ public class ResolverActivity extends Activity
                             intent.setComponent(lastChosenComponent);
                             intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
                                                     | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
-                            startActivityFixingIntent(intent);
-                            finish();
-                            return;
+                            try {
+                                startActivityFixingIntent(intent);
+                                finish();
+                                return;
+                            } catch (SecurityException e) {
+                                Timber.e(e, "Security Exception for %s", lastChosenComponent.flattenToString());
+                                getContentResolver().delete(withHost(mRequestedUri.getHost()), null, null);
+                            }
                         }
                     }
 
