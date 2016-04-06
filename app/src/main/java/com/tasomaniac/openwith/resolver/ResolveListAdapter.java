@@ -361,7 +361,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     public DisplayResolveInfo getItem(int position) {
         position -= getHeaderViewsCount();
         if (position < 0) {
-            return null;
+            position = 0;
         }
         if (mFilterLastUsed && mLastChosenPosition >= 0 && position >= mLastChosenPosition) {
             position++;
