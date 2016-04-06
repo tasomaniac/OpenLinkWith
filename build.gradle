@@ -30,8 +30,8 @@ ext {
     preDexEnabled = "true".equals(System.getProperty("pre-dex", "true"))
 
     versionMajor = 1
-    versionMinor = 0
-    versionPatch = 9
+    versionMinor = 1
+    versionPatch = 1
     versionBuild = 0
 
     versionCode = versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
