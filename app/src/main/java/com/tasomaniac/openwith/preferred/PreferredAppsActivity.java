@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -118,11 +117,6 @@ public class PreferredAppsActivity
         PackageManager mPm = getPackageManager();
 
         List<DisplayResolveInfo> apps = new ArrayList<>(data.getCount());
-
-        Intent mIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://gdgroups.org"));
-        List<ResolveInfo> infos = mPm.queryIntentActivities(mIntent, 0);
-        apps.add(new DisplayResolveInfo(infos.get(0), "Deneme", "Deneme"));
-
         while (data.moveToNext()) {
 
             final int id = data.getInt(data.getColumnIndex(ID));

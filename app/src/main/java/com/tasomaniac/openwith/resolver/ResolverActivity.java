@@ -44,15 +44,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.tasomaniac.openwith.BuildConfig;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.misc.ItemClickListener;
 import com.tasomaniac.openwith.misc.ItemLongClickListener;
 import com.tasomaniac.openwith.util.Extensions;
 import com.tasomaniac.openwith.util.Intents;
-
 import java.util.List;
+import timber.log.Timber;
 
 import static android.view.WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR;
 import static android.view.WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
@@ -463,7 +462,11 @@ public class ResolverActivity extends Activity
                 values.put(PREFERRED, true);
             }
             values.put(LAST_CHOSEN, true);
-            getContentResolver().insert(CONTENT_URI, values);
+            try {
+                getContentResolver().insert(CONTENT_URI, values);
+            } catch (Exception e) {
+                Timber.e(e, "Error while saving selected Intent");
+            }
 
             history.add(intent.getComponent().getPackageName());
         }
