@@ -2,16 +2,13 @@ package com.tasomaniac.openwith.util;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.os.Build;
 import android.provider.Settings;
-import android.widget.Toast;
 
 import com.tasomaniac.openwith.App;
-import com.tasomaniac.openwith.R;
 
 import java.util.List;
 
@@ -32,11 +29,8 @@ public class Intents {
         try {
             activity.startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
             return true;
-        } catch (ActivityNotFoundException e) {
-            String error = activity.getString(R.string.error_usage_access_not_found);
-
-            Toast.makeText(activity, error, Toast.LENGTH_SHORT).show();
-            Timber.e(e, error);
+        } catch (Exception e) {
+            Timber.e(e, "Usage Access Open");
 
             App.getApp(activity).getAnalytics().sendEvent("Usage Access", "Not Found", null);
         }

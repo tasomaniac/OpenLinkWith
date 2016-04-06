@@ -12,6 +12,7 @@ import android.support.v14.preference.PreferenceFragment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ShareCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceManager;
@@ -145,7 +146,7 @@ public class SettingsFragment extends PreferenceFragment
         } else if (getString(R.string.pref_key_preferred).equals(preference.getKey())) {
             startActivity(new Intent(getActivity(), PreferredAppsActivity.class));
         } else if (getString(R.string.pref_key_usage_stats).equals(preference.getKey())) {
-            Intents.maybeStartUsageAccessSettings(getActivity());
+            onUsageAccessClick(preference);
         } else if (getString(R.string.pref_key_open_source).equals(preference.getKey())) {
             displayLicensesDialogFragment();
         } else if (getString(R.string.pref_key_contact).equals(preference.getKey())) {
@@ -161,6 +162,20 @@ public class SettingsFragment extends PreferenceFragment
                 "Item Click",
                 preference.getTitle().toString());
         return true;
+    }
+
+    private void onUsageAccessClick(Preference preference) {
+        boolean settingsOpened = Intents.maybeStartUsageAccessSettings(getActivity());
+
+        if (!settingsOpened) {
+            new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.error)
+                    .setMessage(R.string.error_usage_access_not_found)
+                    .setPositiveButton(android.R.string.ok, null)
+                    .show();
+
+            preference.setSummary(R.string.error_usage_access_not_found);
+        }
     }
 
     private void displayLicensesDialogFragment() {
