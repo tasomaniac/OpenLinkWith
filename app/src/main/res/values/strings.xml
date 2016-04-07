@@ -53,7 +53,7 @@
   <string name="pref_summary_market">Like it? Why not check out my other apps?</string>
 
   <string name="pref_key_version" translatable="false">pref_version</string>
-  <string name="pref_title_version" translatable="false">Version %s</string>
+  <string name="pref_title_version">Version</string>
   <string name="skip">Skip</string>
   <string name="cd_image_tutorial">Tutorial Image</string>
 

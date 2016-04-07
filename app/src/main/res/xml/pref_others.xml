@@ -6,25 +6,30 @@
 
     <Preference
       android:key="@string/pref_key_open_source"
-      android:title="@string/pref_title_open_source"
-      android:summary="@string/pref_summary_open_source"/>
+      android:summary="@string/pref_summary_open_source"
+      android:title="@string/pref_title_open_source" />
 
     <Preference
       android:key="@string/pref_key_market"
-      android:title="@string/pref_title_market"
-      android:summary="@string/pref_summary_market">
-      <intent android:action="android.intent.action.VIEW"
-              android:data="https://play.google.com/store/apps/developer?id=Said+Tahsin+Dane"/>
+      android:summary="@string/pref_summary_market"
+      android:title="@string/pref_title_market">
+      <intent
+        android:action="android.intent.action.VIEW"
+        android:data="https://play.google.com/store/apps/dev?id=6306600074970713582" />
     </Preference>
 
     <Preference
       android:key="@string/pref_key_contact"
-      android:title="@string/pref_title_contact"
-      android:summary="@string/pref_summary_contact"/>
+      android:summary="@string/pref_summary_contact"
+      android:title="@string/pref_title_contact" />
 
     <Preference
       android:key="@string/pref_key_version"
-      android:selectable="false"/>
+      android:title="@string/pref_title_version">
+      <intent
+        android:action="android.intent.action.VIEW"
+        android:data="https://play.google.com/store/apps/details?id=com.tasomaniac.openwith" />
+    </Preference>
 
   </PreferenceCategory>
 

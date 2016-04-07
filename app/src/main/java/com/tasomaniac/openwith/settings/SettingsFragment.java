@@ -70,18 +70,6 @@ public class SettingsFragment extends PreferenceFragment
         findPreference(R.string.pref_key_preferred).setOnPreferenceClickListener(this);
         findPreference(R.string.pref_key_open_source).setOnPreferenceClickListener(this);
         findPreference(R.string.pref_key_contact).setOnPreferenceClickListener(this);
-
-        setupVersionPreference();
-    }
-
-    private void setupVersionPreference() {
-        StringBuilder version = new StringBuilder(BuildConfig.VERSION_NAME);
-        if (BuildConfig.DEBUG) {
-            version.append(" (")
-                    .append(BuildConfig.VERSION_CODE)
-                    .append(")");
-        }
-        findPreference(R.string.pref_key_version).setTitle(getString(R.string.pref_title_version, version));
     }
 
     @Override
@@ -93,6 +81,14 @@ public class SettingsFragment extends PreferenceFragment
         if (SDK_INT >= LOLLIPOP) {
             setupUsagePreference();
         }
+        setupVersionPreference();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        getPreferenceManager().getSharedPreferences()
+                .unregisterOnSharedPreferenceChangeListener(this);
     }
 
     private void setupUsagePreference() {
@@ -130,11 +126,15 @@ public class SettingsFragment extends PreferenceFragment
         }
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        getPreferenceManager().getSharedPreferences()
-                .unregisterOnSharedPreferenceChangeListener(this);
+    private void setupVersionPreference() {
+        StringBuilder version = new StringBuilder(BuildConfig.VERSION_NAME);
+        if (BuildConfig.DEBUG) {
+            version.append(" (")
+                    .append(BuildConfig.VERSION_CODE)
+                    .append(")");
+        }
+        Preference preference = findPreference(R.string.pref_key_version);
+        preference.setSummary(version);
     }
 
     @TargetApi(LOLLIPOP)
@@ -150,11 +150,7 @@ public class SettingsFragment extends PreferenceFragment
         } else if (getString(R.string.pref_key_open_source).equals(preference.getKey())) {
             displayLicensesDialogFragment();
         } else if (getString(R.string.pref_key_contact).equals(preference.getKey())) {
-            ShareCompat.IntentBuilder.from(getActivity())
-                    .addEmailTo("Said Tahsin Dane <tasomaniac+openlinkwith@gmail.com>")
-                    .setSubject(getString(R.string.app_name))
-                    .setType("message/rfc822")
-                    .startChooser();
+            startContactEmailChooser();
         }
 
         analytics.sendEvent(
@@ -183,8 +179,12 @@ public class SettingsFragment extends PreferenceFragment
         dialog.show(getActivity().getFragmentManager(), "LicensesDialog");
     }
 
-    public Preference findPreference(@StringRes int keyResource) {
-        return findPreference(getString(keyResource));
+    private void startContactEmailChooser() {
+        ShareCompat.IntentBuilder.from(getActivity())
+                .addEmailTo("Said Tahsin Dane <tasomaniac+openlinkwith@gmail.com>")
+                .setSubject(getString(R.string.app_name))
+                .setType("message/rfc822")
+                .startChooser();
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -197,6 +197,10 @@ public class SettingsFragment extends PreferenceFragment
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
         new BackupManager(getActivity()).dataChanged();
+    }
+
+    private Preference findPreference(@StringRes int keyResource) {
+        return findPreference(getString(keyResource));
     }
 
     private static SpannableString getErrorString(final Context context, CharSequence originalString) {
