@@ -94,7 +94,7 @@ play {
 }
 
 dependencies {
-    def supportLibVersion = "23.2.1"
+    def supportLibVersion = "23.3.0"
     def schematicVersion = '0.6.4'
 
     compile "com.android.support:support-v4:$supportLibVersion"
