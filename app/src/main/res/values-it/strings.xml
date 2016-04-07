@@ -31,6 +31,7 @@ Rimuovi <strong>%1$s</strong> come app preferita per caricare i link di <strong>
   <string name="pref_summary_contact">Inviami una mail prima di dare 1 stella.</string>
   <string name="pref_title_market">Più app da Said Tahsin Dane</string>
   <string name="pref_summary_market">Ti piace? Perché non dai un\'occhiata alle mie altre app?</string>
+  <string name="pref_title_version">Version</string>
   <string name="skip">Ignora</string>
   <string name="cd_image_tutorial">Immagine tutorial</string>
   <string name="title_tutorial_0">Benvenuto in Apri Link Con</string>

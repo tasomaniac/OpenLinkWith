@@ -32,6 +32,7 @@ Descredenciar <strong>%1$s</strong> como aplicativo preferencial para abrir link
   <string name="pref_summary_contact">Me envie um e-mail antes de dar uma 1 estrela.</string>
   <string name="pref_title_market">Mais apps de Said Tahsin Dane</string>
   <string name="pref_summary_market">Curte este? Por quê não experimenta meus outros apps?</string>
+  <string name="pref_title_version">Version</string>
   <string name="skip">Pular</string>
   <string name="cd_image_tutorial">Imagem de Tutorial</string>
   <string name="title_tutorial_0">Bem-vindo ao Abrir Link Com</string>

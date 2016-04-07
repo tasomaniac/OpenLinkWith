@@ -31,6 +31,7 @@ Eliminar <strong>%1$s</strong> como app preferida para cargar los enlaces de <st
   <string name="pref_summary_contact">Envíeme un correo electrónico antes de dar una 1 estrella.</string>
   <string name="pref_title_market">Más aplicaciones de Tahsin Dane</string>
   <string name="pref_summary_market">Te gusta? Por qué no mirar mis otras apps?</string>
+  <string name="pref_title_version">Version</string>
   <string name="skip">Saltar</string>
   <string name="cd_image_tutorial">Tutorial Imagen</string>
   <string name="title_tutorial_0">Bienvenido a Abrir Enlace Con</string>

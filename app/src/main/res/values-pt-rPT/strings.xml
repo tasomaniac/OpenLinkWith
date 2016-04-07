@@ -31,6 +31,7 @@ Remover <strong>%1$s</strong> como a aplicação predefinida para abrir ligaçõ
   <string name="pref_summary_contact">Envie-me um e-mail antes de classificar com 1 estrela.</string>
   <string name="pref_title_market">Mais aplicações de Said Tahsin Dane</string>
   <string name="pref_summary_market">Gostou? Por que não verificar as minhas outras aplicações?</string>
+  <string name="pref_title_version">Version</string>
   <string name="skip">Ignorar</string>
   <string name="cd_image_tutorial">Imagem do Tutorial</string>
   <string name="title_tutorial_0">Bem-vindo ao Abrir a Ligação Com</string>

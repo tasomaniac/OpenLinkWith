@@ -32,6 +32,7 @@
   <string name="pref_summary_contact">Отправьте мне сообщение, прежде чем ставить одну звезду.</string>
   <string name="pref_title_market">Больше приложений от Said Tahsin Dane</string>
   <string name="pref_summary_market">Понравилось приложение? Почему бы не посмотреть другие?</string>
+  <string name="pref_title_version">Version</string>
   <string name="skip">Пропустить</string>
   <string name="cd_image_tutorial">Изображение в обучении</string>
   <string name="title_tutorial_0">Добро пожаловать в Open Link With</string>
