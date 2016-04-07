@@ -46,12 +46,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tasomaniac.openwith.App;
 import com.tasomaniac.openwith.BuildConfig;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.misc.ItemClickListener;
 import com.tasomaniac.openwith.misc.ItemLongClickListener;
 import com.tasomaniac.openwith.util.Extensions;
 import com.tasomaniac.openwith.util.Intents;
+import com.tasomaniac.openwith.util.Utils;
 
 import java.util.List;
 
@@ -124,6 +126,14 @@ public class ResolverActivity extends Activity
 
         setTheme(R.style.BottomSheet_Light);
         super.onCreate(savedInstanceState);
+
+        if (ChooserTargetService.isFromDirectShare(intent)) {
+            App.getApp(this).getAnalytics().sendEvent(
+                    "Direct Share",
+                    "Clicked",
+                    "true"
+            );
+        }
 
         mPm = getPackageManager();
 
