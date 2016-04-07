@@ -13,13 +13,20 @@ import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.prefs.BooleanPreference;
 import com.tasomaniac.openwith.intro.IntroActivity;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class SettingsActivity extends AppCompatActivity
         implements ActivityCompat.OnRequestPermissionsResultCallback {
 
-    BooleanPreference tutorialShown;
+    @Bind(R.id.toolbar)
+    private Toolbar toolbar;
+    @Bind(R.id.collapsing_toolbar)
+    private CollapsingToolbarLayout collapsingToolbar;
 
+    @Override
     public void onCreate(Bundle savedInstanceState) {
-        tutorialShown = new BooleanPreference(
+        BooleanPreference tutorialShown = new BooleanPreference(
                 PreferenceManager.getDefaultSharedPreferences(this),
                 "pref_tutorial_shown");
         if (!tutorialShown.get()) {
@@ -30,16 +37,14 @@ public class SettingsActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        ButterKnife.bind(this);
 
         App.getApp(this).getAnalytics().sendScreenView("Settings");
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_action_done);
         toolbar.setNavigationContentDescription(R.string.done);
         setSupportActionBar(toolbar);
 
-        CollapsingToolbarLayout collapsingToolbar =
-                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle(getTitle());
 
         if (savedInstanceState == null) {

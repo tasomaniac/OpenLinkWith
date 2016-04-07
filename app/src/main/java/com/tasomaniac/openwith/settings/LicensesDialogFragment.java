@@ -2,16 +2,16 @@ package com.tasomaniac.openwith.settings;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.webkit.WebView;
 
 import com.tasomaniac.openwith.R;
 
-public class LicensesDialogFragment extends DialogFragment {
+public class LicensesDialogFragment extends AppCompatDialogFragment {
 
     public static LicensesDialogFragment newInstance() {
         return new LicensesDialogFragment();
