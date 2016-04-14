@@ -20,9 +20,9 @@ public class SettingsActivity extends AppCompatActivity
         implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     @Bind(R.id.toolbar)
-    private Toolbar toolbar;
+    Toolbar toolbar;
     @Bind(R.id.collapsing_toolbar)
-    private CollapsingToolbarLayout collapsingToolbar;
+    CollapsingToolbarLayout collapsingToolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class SettingsActivity extends AppCompatActivity
         collapsingToolbar.setTitle(getTitle());
 
         if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
+            getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment_container, SettingsFragment.newInstance())
                     .commit();
         }

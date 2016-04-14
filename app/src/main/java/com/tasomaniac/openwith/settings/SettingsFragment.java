@@ -8,13 +8,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
-import android.support.v14.preference.PreferenceFragment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ShareCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceManager;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -33,7 +33,7 @@ import com.tasomaniac.openwith.util.Utils;
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.LOLLIPOP;
 
-public class SettingsFragment extends PreferenceFragment
+public class SettingsFragment extends PreferenceFragmentCompat
         implements SharedPreferences.OnSharedPreferenceChangeListener,
         Preference.OnPreferenceClickListener,
         ActivityCompat.OnRequestPermissionsResultCallback {
@@ -176,7 +176,7 @@ public class SettingsFragment extends PreferenceFragment
 
     private void displayLicensesDialogFragment() {
         LicensesDialogFragment dialog = LicensesDialogFragment.newInstance();
-        dialog.show(getActivity().getFragmentManager(), "LicensesDialog");
+        dialog.show(getFragmentManager(), "LicensesDialog");
     }
 
     private void startContactEmailChooser() {
