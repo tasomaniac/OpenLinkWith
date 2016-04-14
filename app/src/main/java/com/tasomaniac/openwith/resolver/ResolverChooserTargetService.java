@@ -8,15 +8,17 @@ import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.Bundle;
 import android.service.chooser.ChooserTarget;
+import android.service.chooser.ChooserTargetService;
 
 import com.tasomaniac.openwith.App;
 import com.tasomaniac.openwith.R;
+import com.tasomaniac.openwith.ShareToOpenWith;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @TargetApi(Build.VERSION_CODES.M)
-public class ChooserTargetService extends android.service.chooser.ChooserTargetService {
+public class ResolverChooserTargetService extends ChooserTargetService {
 
     private static final String EXTRA_FROM_DIRECT_SHARE = "EXTRA_FROM_DIRECT_SHARE";
 
@@ -26,7 +28,7 @@ public class ChooserTargetService extends android.service.chooser.ChooserTargetS
         sendAnalyticsEvent();
 
         ComponentName componentName = new ComponentName(getPackageName(),
-                ResolverActivity.class.getCanonicalName());
+                ShareToOpenWith.class.getCanonicalName());
 
         ArrayList<ChooserTarget> targets = new ArrayList<>();
         targets.add(new ChooserTarget(
@@ -34,12 +36,12 @@ public class ChooserTargetService extends android.service.chooser.ChooserTargetS
                 Icon.createWithResource(this, R.mipmap.ic_launcher),
                 0.2f,
                 componentName,
-                getBundleExtra()
+                createBundleExtra()
         ));
         return targets;
     }
 
-    private Bundle getBundleExtra() {
+    private Bundle createBundleExtra() {
         Bundle extras = new Bundle(1);
         extras.putBoolean(EXTRA_FROM_DIRECT_SHARE, true);
         return extras;

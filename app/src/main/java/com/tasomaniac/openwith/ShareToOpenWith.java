@@ -10,6 +10,7 @@ import android.support.v4.app.ShareCompat;
 import android.widget.Toast;
 
 import com.tasomaniac.openwith.resolver.ResolverActivity;
+import com.tasomaniac.openwith.resolver.ResolverChooserTargetService;
 import com.tasomaniac.openwith.util.Extensions;
 
 import java.util.regex.Matcher;
@@ -47,6 +48,13 @@ public class ShareToOpenWith extends Activity {
         super.onCreate(savedInstanceState);
 
         App.getApp(this).getAnalytics().sendScreenView("ShareToOpenWith");
+        if (ResolverChooserTargetService.isFromDirectShare(getIntent())) {
+            App.getApp(this).getAnalytics().sendEvent(
+                    "Direct Share",
+                    "Clicked",
+                    "true"
+            );
+        }
 
         final ShareCompat.IntentReader reader = ShareCompat.IntentReader.from(this);
         CharSequence text = reader.getText();

@@ -77,7 +77,7 @@
 
       <meta-data
         android:name="android.service.chooser.chooser_target_service"
-        android:value=".SampleChooserTargetService" />
+        android:value=".resolver.ResolverChooserTargetService" />
     </activity>
 
     <activity
@@ -95,7 +95,7 @@
       android:exported="false"/>
 
     <service
-      android:name=".resolver.ChooserTargetService"
+      android:name=".resolver.ResolverChooserTargetService"
       android:label="@string/app_name"
       android:permission="android.permission.BIND_CHOOSER_TARGET_SERVICE">
       <intent-filter>
