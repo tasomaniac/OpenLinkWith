@@ -2,7 +2,6 @@ package com.tasomaniac.openwith.resolver;
 
 import android.annotation.TargetApi;
 import android.content.ComponentName;
-import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.Icon;
 import android.os.Build;
@@ -19,8 +18,6 @@ import java.util.List;
 
 @TargetApi(Build.VERSION_CODES.M)
 public class ResolverChooserTargetService extends ChooserTargetService {
-
-    private static final String EXTRA_FROM_DIRECT_SHARE = "EXTRA_FROM_DIRECT_SHARE";
 
     @Override
     public List<ChooserTarget> onGetChooserTargets(ComponentName targetActivityName,
@@ -43,7 +40,7 @@ public class ResolverChooserTargetService extends ChooserTargetService {
 
     private Bundle createBundleExtra() {
         Bundle extras = new Bundle(1);
-        extras.putBoolean(EXTRA_FROM_DIRECT_SHARE, true);
+        extras.putBoolean(ShareToOpenWith.EXTRA_FROM_DIRECT_SHARE, true);
         return extras;
     }
 
@@ -53,9 +50,5 @@ public class ResolverChooserTargetService extends ChooserTargetService {
                 "Shown",
                 "true"
         );
-    }
-
-    public static boolean isFromDirectShare(Intent intent) {
-        return intent.getBooleanExtra(EXTRA_FROM_DIRECT_SHARE, false);
     }
 }

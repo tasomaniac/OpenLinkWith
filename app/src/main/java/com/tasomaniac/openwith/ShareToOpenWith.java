@@ -10,7 +10,6 @@ import android.support.v4.app.ShareCompat;
 import android.widget.Toast;
 
 import com.tasomaniac.openwith.resolver.ResolverActivity;
-import com.tasomaniac.openwith.resolver.ResolverChooserTargetService;
 import com.tasomaniac.openwith.util.Extensions;
 
 import java.util.regex.Matcher;
@@ -42,13 +41,19 @@ public class ShareToOpenWith extends Activity {
             "com.skype.raider"
     };
 
+    public static final String EXTRA_FROM_DIRECT_SHARE = "EXTRA_FROM_DIRECT_SHARE";
+
+    private static boolean isFromDirectShare(Intent intent) {
+        return intent.getBooleanExtra(EXTRA_FROM_DIRECT_SHARE, false);
+    }
+
     @SuppressLint("InlinedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         App.getApp(this).getAnalytics().sendScreenView("ShareToOpenWith");
-        if (ResolverChooserTargetService.isFromDirectShare(getIntent())) {
+        if (isFromDirectShare(getIntent())) {
             App.getApp(this).getAnalytics().sendEvent(
                     "Direct Share",
                     "Clicked",

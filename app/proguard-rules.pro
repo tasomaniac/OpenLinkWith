@@ -16,7 +16,7 @@
 #   public *;
 #}
 
--dontobfuscate
+#-dontobfuscate
 
 # ButterKnife 7
 -keep class butterknife.** { *; }
