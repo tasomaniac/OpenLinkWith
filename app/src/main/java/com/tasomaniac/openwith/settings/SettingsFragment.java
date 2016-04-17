@@ -70,6 +70,24 @@ public class SettingsFragment extends PreferenceFragmentCompat
         findPreference(R.string.pref_key_preferred).setOnPreferenceClickListener(this);
         findPreference(R.string.pref_key_open_source).setOnPreferenceClickListener(this);
         findPreference(R.string.pref_key_contact).setOnPreferenceClickListener(this);
+
+        if (BuildConfig.DEBUG) {
+            addPreferencesFromResource(R.xml.pref_debug);
+
+            setupDebugPreference(R.string.pref_key_debug_amazon,
+                                 "http://www.amazon.com/Garmin-Speed-Cadence-Bike-Sensor/dp/B000BFNOT8");
+        }
+    }
+
+    private void setupDebugPreference(int debugPrefKey, String debugPrefUrl) {
+        Intent intent = ShareCompat.IntentBuilder.from(getActivity())
+                .setText(debugPrefUrl)
+                .setType("text/plain")
+                .createChooserIntent();
+
+        Preference debugPreference = findPreference(debugPrefKey);
+        debugPreference.setIntent(intent);
+        debugPreference.setSummary(debugPrefUrl);
     }
 
     @Override

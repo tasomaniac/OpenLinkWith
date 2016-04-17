@@ -73,4 +73,8 @@
   ]]></string>
   <string name="error">Error</string>
   <string name="error_usage_access_not_found">Usage Access Settings cannot be open.\n\nYou may access it by going into Settings -> Security</string>
+
+  <string name="pref_title_category_debug" translatable="false">Debug</string>
+  <string name="pref_key_debug_amazon" translatable="false">pref_debug</string>
+  <string name="pref_title_debug_amazon" translatable="false">Test Amazon Intent</string>
 </resources>
