@@ -31,8 +31,8 @@ ext {
 
     versionMajor = 1
     versionMinor = 1
-    versionPatch = 1
-    versionBuild = 5
+    versionPatch = 2
+    versionBuild = 0
 
     versionCode = versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
     versionName = "${versionMajor}.${versionMinor}" + ((versionPatch != 0) ? ".${versionPatch}" : "")
