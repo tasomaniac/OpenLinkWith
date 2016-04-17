@@ -17,6 +17,15 @@ public class Extensions {
             }
         } catch (Exception ignored) {
         }
+        try {
+            //http://www.amazon.com/Garmin-Speed-Cadence-Bike-Sensor/dp/B000BFNOT8
+            final Matcher matcher = Pattern.compile(".*//www.amazon.(?:com|co\\.uk|co.jp|de)/(?:.+/)?dp/(\\w{10}).*", Pattern.CASE_INSENSITIVE)
+                    .matcher(foundUrl);
+            if (matcher.find()) {
+                return matcher.group(1);
+            }
+        } catch (Exception ignored) {
+        }
         return null;
     }
 
