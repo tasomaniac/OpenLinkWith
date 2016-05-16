@@ -74,6 +74,7 @@
   <string name="usage_access_give_access">Give Access</string>
   <string name="error">Error</string>
   <string name="error_usage_access_not_found">Usage Access Settings cannot be open.\n\nYou may access it by going into Settings -> Security</string>
+  <string name="menu_item_add_shortcut">Add Shortcut</string>
 
   <string name="pref_title_category_debug" translatable="false">Debug</string>
   <string name="pref_key_debug_amazon" translatable="false">pref_debug</string>
