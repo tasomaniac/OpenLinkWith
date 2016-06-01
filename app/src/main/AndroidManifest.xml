@@ -53,7 +53,6 @@
       android:configChanges="keyboardHidden|orientation|screenLayout"
       android:documentLaunchMode="never"
       android:excludeFromRecents="true"
-      android:exported="true"
       android:finishOnCloseSystemDialogs="true"
       android:label="@string/open_with"
       android:relinquishTaskIdentity="true"
@@ -80,6 +79,28 @@
       <meta-data
         android:name="android.service.chooser.chooser_target_service"
         android:value=".resolver.ResolverChooserTargetService" />
+    </activity>
+
+    <activity
+      android:name=".AddToHomeScreen"
+      android:configChanges="keyboardHidden|orientation|screenLayout"
+      android:documentLaunchMode="never"
+      android:excludeFromRecents="true"
+      android:finishOnCloseSystemDialogs="true"
+      android:label="@string/add_to_homescreen"
+      android:relinquishTaskIdentity="true"
+      android:theme="@style/Theme.Transparent.NoAnimation"
+      android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+      android:enabled="@bool/add_to_home_screen_enabled">
+
+      <intent-filter android:label="@string/add_to_homescreen">
+        <action android:name="android.intent.action.SEND" />
+
+        <category android:name="android.intent.category.DEFAULT" />
+
+        <data android:mimeType="text/plain" />
+      </intent-filter>
+
     </activity>
 
     <activity
