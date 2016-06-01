@@ -94,8 +94,9 @@ play {
 }
 
 dependencies {
-    def supportLibVersion = "23.3.0"
-    def schematicVersion = '0.6.4'
+    def supportLibVersion = "23.4.0"
+    def schematicVersion = '0.6.7'
+    def butterKnifeVersion = '8.0.1'
 
     compile "com.android.support:support-v4:$supportLibVersion"
     compile "com.android.support:appcompat-v7:$supportLibVersion"
@@ -104,15 +105,16 @@ dependencies {
     compile "com.android.support:preference-v14:$supportLibVersion"
 
     compile 'com.karumi:headerrecyclerview:1.1.0'
-    compile 'jp.wasabeef:recyclerview-animators:2.1.0'
+    compile 'jp.wasabeef:recyclerview-animators:2.2.3'
 
     apt "net.simonvt.schematic:schematic-compiler:$schematicVersion"
     compile "net.simonvt.schematic:schematic:$schematicVersion"
 
+    compile "com.jakewharton:butterknife:$butterKnifeVersion"
+    apt "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
     compile 'com.jakewharton.timber:timber:4.1.2'
-    compile 'com.jakewharton:butterknife:7.0.1'
 
-    prodCompile "com.google.android.gms:play-services-analytics:8.4.0"
+    prodCompile "com.google.android.gms:play-services-analytics:9.0.1"
     prodCompile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
         transitive = true
     }

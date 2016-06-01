@@ -26,13 +26,11 @@ import com.tasomaniac.openwith.resolver.ResolveListAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 
-import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.COMPONENT;
-import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.HOST;
-import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.ID;
+import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.*;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.CONTENT_URI_PREFERRED;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withId;
 
@@ -43,7 +41,7 @@ public class PreferredAppsActivity
         ItemClickListener,
         AppRemoveDialogFragment.Callbacks {
 
-    @Bind(R.id.recycler_view)
+    @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     private PreferredAppsAdapter adapter;
 

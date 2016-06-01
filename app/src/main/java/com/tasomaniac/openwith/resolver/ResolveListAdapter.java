@@ -40,7 +40,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
@@ -481,11 +481,11 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.text1)
+        @BindView(R.id.text1)
         public TextView text;
-        @Nullable @Bind(R.id.text2)
+        @Nullable @BindView(R.id.text2)
         public TextView text2;
-        @Nullable @Bind(R.id.icon)
+        @Nullable @BindView(R.id.icon)
         public ImageView icon;
 
         public ViewHolder(View view) {
