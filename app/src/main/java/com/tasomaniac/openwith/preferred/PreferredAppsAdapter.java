@@ -13,20 +13,14 @@ import java.util.List;
 
 class PreferredAppsAdapter extends ResolveListAdapter {
 
-    private Context mContext;
-    private LayoutInflater mInflater;
-
-    public PreferredAppsAdapter(Context context, List<DisplayResolveInfo> apps) {
+    PreferredAppsAdapter(Context context, List<DisplayResolveInfo> apps) {
         super(context, null, null, null, null, false);
-
-        mContext = context;
-        mInflater = LayoutInflater.from(context);
 
         mList = apps;
         mShowExtended = true;
     }
 
-    public void remove(DisplayResolveInfo item) {
+    void remove(DisplayResolveInfo item) {
         mList.remove(item);
     }
 
@@ -41,7 +35,8 @@ class PreferredAppsAdapter extends ResolveListAdapter {
 
     @Override
     protected ViewHolder onCreateHeaderViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(mInflater.inflate(R.layout.preferred_header, parent, false));
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        return new ViewHolder(inflater.inflate(R.layout.preferred_header, parent, false));
     }
 
     @Override
@@ -56,7 +51,7 @@ class PreferredAppsAdapter extends ResolveListAdapter {
     @Override
     public ViewHolder onCreateItemViewHolder(ViewGroup viewGroup, int i) {
         final ViewHolder viewHolder = super.onCreateItemViewHolder(viewGroup, i);
-        viewHolder.itemView.setMinimumHeight(Utils.dpToPx(mContext.getResources(), 72));
+        viewHolder.itemView.setMinimumHeight(Utils.dpToPx(viewGroup.getResources(), 72));
         return viewHolder;
     }
 }

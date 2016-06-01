@@ -17,7 +17,7 @@ public class AppRemoveDialogFragment extends AppCompatDialogFragment {
     private static final String EXTRA_INFO = "EXTRA_INFO";
     private static final String EXTRA_POSITION = "EXTRA_POSITION";
 
-    public static AppRemoveDialogFragment newInstance(DisplayResolveInfo info, int position) {
+    static AppRemoveDialogFragment newInstance(DisplayResolveInfo info, int position) {
         Bundle args = new Bundle();
         args.putParcelable(EXTRA_INFO, info);
         args.putInt(EXTRA_POSITION, position);
@@ -26,7 +26,7 @@ public class AppRemoveDialogFragment extends AppCompatDialogFragment {
         return fragment;
     }
 
-    Callbacks callbacks = Callbacks.EMPTY;
+    private Callbacks callbacks = Callbacks.EMPTY;
 
     @Override
     public void onAttach(Context context) {
@@ -69,7 +69,7 @@ public class AppRemoveDialogFragment extends AppCompatDialogFragment {
                 .show();
     }
 
-    public interface Callbacks {
+    interface Callbacks {
         void onAppRemoved(DisplayResolveInfo info, int position);
 
         Callbacks EMPTY = new Callbacks() {
