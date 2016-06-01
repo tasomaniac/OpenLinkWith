@@ -5,15 +5,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ShareCompat;
 import android.widget.Toast;
 
 import com.tasomaniac.openwith.resolver.ResolverActivity;
-import com.tasomaniac.openwith.util.Extensions;
+import com.tasomaniac.openwith.util.Urls;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import static com.tasomaniac.openwith.util.Urls.fixUrls;
 
 public class ShareToOpenWith extends Activity {
 
@@ -66,7 +64,7 @@ public class ShareToOpenWith extends Activity {
         if (text == null) {
             text = getIntent().getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT);
         }
-        String foundUrl = findFirstUrl(text);
+        String foundUrl = Urls.findFirstUrl(text);
 
         if (foundUrl != null) {
             Intent intentToHandle = new Intent(Intent.ACTION_VIEW, Uri.parse(fixUrls(foundUrl)));
@@ -79,61 +77,5 @@ public class ShareToOpenWith extends Activity {
         }
 
         finish();
-    }
-
-    private String findFirstUrl(@Nullable CharSequence text) {
-        if (text == null) {
-            return null;
-        }
-        final Matcher matcher = Pattern.compile("\\b((?:[a-z][\\w-]+:(?:/{1,3}|[a-z0-9%])|www\\d{0,3}[.]|[a-z0-9.\\-]+[.][a-z]{2,4}/)(?:[^\\s()<>]+|\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\))+(?:\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\)|[^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]))", Pattern.CASE_INSENSITIVE)
-                .matcher(text);
-        if (matcher.find()) {
-            return matcher.group();
-        }
-        return null;
-    }
-
-    private String fixUrls(String foundUrl) {
-        foundUrl = fixTwitterUrl(foundUrl);
-        foundUrl = fixEbayUrl(foundUrl);
-        foundUrl = fixDailyMailUrl(foundUrl);
-        foundUrl = fixAmazonUrl(foundUrl);
-        return foundUrl;
-    }
-
-    private static String fixTwitterUrl(String foundUrl) {
-        return foundUrl.replace("//mobile.twitter.com", "//twitter.com");
-    }
-
-    private static String fixEbayUrl(String foundUrl) {
-        final String ebayItemId = Extensions.extractEbayItemId(foundUrl);
-        if (ebayItemId != null) {
-            return "http://pages.ebay.com/link/?nav=item.view&id=" + ebayItemId;
-        }
-        return foundUrl;
-    }
-
-    private static String fixAmazonUrl(String foundUrl) {
-        String asin = Extensions.extractAmazonASIN(foundUrl);
-
-        //Use fake ASIN to make Amazon App popup for the Intent.
-        final Matcher matcher = Pattern.compile("((?:http|https)://)?www\\.amazon\\.(?:com|co\\.uk|co\\.jp|de)/?")
-                .matcher(foundUrl);
-        if (matcher.matches()) {
-            asin = "0000000000";
-        }
-
-        if (asin != null) {
-            foundUrl = "http://www.amazon.com/gp/aw/d/" + asin + "/aiv/detailpage/";
-        }
-        return foundUrl;
-    }
-
-    private static String fixDailyMailUrl(String foundUrl) {
-        String articleId = Extensions.extractDailyMailArticleId(foundUrl);
-        if (articleId != null) {
-            foundUrl = "dailymail://article/" + articleId;
-        }
-        return foundUrl;
     }
 }
