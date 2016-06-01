@@ -31,7 +31,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -50,7 +49,6 @@ import com.tasomaniac.openwith.BuildConfig;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.misc.ItemClickListener;
 import com.tasomaniac.openwith.misc.ItemLongClickListener;
-import com.tasomaniac.openwith.util.Extensions;
 import com.tasomaniac.openwith.util.Intents;
 
 import java.util.List;
@@ -359,13 +357,13 @@ public class ResolverActivity extends Activity
         return null;
     }
 
-    protected CharSequence getTitleForAction() {
+    private CharSequence getTitleForAction() {
         final DisplayResolveInfo item = mAdapter.getFilteredItem();
         return item != null ? getString(R.string.which_view_application_named, item.displayLabel) :
                 getString(R.string.which_view_application);
     }
 
-    void dismiss() {
+    private void dismiss() {
         if (!isFinishing()) {
             finish();
         }
@@ -458,7 +456,7 @@ public class ResolverActivity extends Activity
         dismiss();
     }
 
-    void startSelected(int which, boolean always, boolean filtered) {
+    private void startSelected(int which, boolean always, boolean filtered) {
         if (isFinishing()) {
             return;
         }
@@ -467,7 +465,7 @@ public class ResolverActivity extends Activity
         finish();
     }
 
-    protected void onIntentSelected(Intent intent, boolean alwaysCheck) {
+    private void onIntentSelected(Intent intent, boolean alwaysCheck) {
 
         if (mAlwaysUseOption || mAdapter.hasFilteredItem()) {
             persistSelectedIntent(intent, alwaysCheck);
@@ -502,49 +500,7 @@ public class ResolverActivity extends Activity
     }
 
     private void startActivityFixingIntent(Intent intent) {
-        startActivity(fixIntent(intent));
-    }
-
-    private Intent fixIntent(final Intent originalIntent) {
-        Intent fixedIntent = fixAmazonIntent(originalIntent);
-
-        if (Intents.hasHandler(this, fixedIntent)) {
-            return fixedIntent;
-        }
-        return originalIntent;
-    }
-
-    /**
-     * If link contains amazon and it has ASIN in it, create a specific intent to open Amazon App.
-     *
-     * @param originalIntent Original Intent with amazon link in it.
-     * @return Specific Intent for Amazon app.
-     */
-    @NonNull
-    private Intent fixAmazonIntent(final Intent originalIntent) {
-        if (originalIntent.getDataString() != null && originalIntent.getDataString().contains("amazon")) {
-            String asin = Extensions.extractAmazonASIN(originalIntent.getDataString());
-            if (asin != null) {
-                if ("0000000000".equals(asin)) {
-                    return getPackageManager()
-                            .getLaunchIntentForPackage(originalIntent.getComponent().getPackageName());
-                }
-                return new Intent("android.intent.action.VIEW")
-                        .setDataAndType(
-                                Uri.parse("mshop://featured?ASIN=" + asin),
-                                "vnd.android.cursor.item/vnd.amazon.mShop.featured"
-                        );
-            }
-        }
-        return originalIntent;
-    }
-
-    @SuppressWarnings("deprecation")
-    void showAppDetails(ResolveInfo ri) {
-        Intent in = new Intent().setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                .setData(Uri.fromParts("package", ri.activityInfo.packageName, null))
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-        startActivity(in);
+        startActivity(Intents.fixIntents(this, intent));
     }
 
     @Override
@@ -554,10 +510,18 @@ public class ResolverActivity extends Activity
         return true;
     }
 
-    class LoadIconIntoViewTask extends AsyncTask<DisplayResolveInfo, Void, DisplayResolveInfo> {
+    @SuppressWarnings("deprecation")
+    private void showAppDetails(ResolveInfo ri) {
+        Intent in = new Intent().setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                .setData(Uri.fromParts("package", ri.activityInfo.packageName, null))
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        startActivity(in);
+    }
+
+    private class LoadIconIntoViewTask extends AsyncTask<DisplayResolveInfo, Void, DisplayResolveInfo> {
         final ImageView mTargetView;
 
-        public LoadIconIntoViewTask(ImageView target) {
+        LoadIconIntoViewTask(ImageView target) {
             mTargetView = target;
         }
 

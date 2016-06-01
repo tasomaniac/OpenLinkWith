@@ -44,18 +44,31 @@ public final class Urls {
     private static class EbayFixer implements Fixer {
         @Override
         public String fix(String url) {
-            final String ebayItemId = Extensions.extractEbayItemId(url);
+            final String ebayItemId = extractEbayItemId(url);
             if (ebayItemId != null) {
                 return "http://pages.ebay.com/link/?nav=item.view&id=" + ebayItemId;
             }
             return url;
         }
+
+        @Nullable
+        private static String extractEbayItemId(String foundUrl) {
+            try {
+                final Matcher matcher = Pattern.compile("(?:(?:http|https)://)?(?:www|m).ebay.(?:com|co\\.uk|com.hk|com.au|at|ca|fr|de|ie|it|com\\.my|nl|ph|pl|com\\.sg|es|ch)/itm/(?:.*/)?(\\d+)(?:\\?.*)?")
+                        .matcher(foundUrl);
+                if (matcher.find()) {
+                    return matcher.group(1);
+                }
+            } catch (Exception ignored) {
+            }
+            return null;
+        }
     }
 
-    private static class AmazonFixer implements Fixer {
+    static class AmazonFixer implements Fixer {
         @Override
         public String fix(String url) {
-            String asin = Extensions.extractAmazonASIN(url);
+            String asin = extractAmazonASIN(url);
 
             //Use fake ASIN to make Amazon App popup for the Intent.
             final Matcher matcher = Pattern.compile("((?:http|https)://)?www\\.amazon\\.(?:com|co\\.uk|co\\.jp|de)/?")
@@ -69,20 +82,58 @@ public final class Urls {
             }
             return url;
         }
+
+        @Nullable
+        static String extractAmazonASIN(String foundUrl) {
+            try {
+                final Matcher matcher = Pattern.compile(".*//www.amazon.(?:com|co\\.uk|co.jp|de)/gp/aw/d/(\\w{10})/.*", Pattern.CASE_INSENSITIVE)
+                        .matcher(foundUrl);
+                if (matcher.find()) {
+                    return matcher.group(1);
+                }
+            } catch (Exception ignored) {
+            }
+            try {
+                //http://www.amazon.com/Garmin-Speed-Cadence-Bike-Sensor/dp/B000BFNOT8
+                final Matcher matcher = Pattern.compile(".*//www.amazon.(?:com|co\\.uk|co.jp|de)/(?:.+/)?dp/(\\w{10}).*", Pattern.CASE_INSENSITIVE)
+                        .matcher(foundUrl);
+                if (matcher.find()) {
+                    return matcher.group(1);
+                }
+            } catch (Exception ignored) {
+            }
+            return null;
+        }
     }
 
     private static class DailyMailFixer implements Fixer {
         @Override
         public String fix(String url) {
-            String articleId = Extensions.extractDailyMailArticleId(url);
+            String articleId = extractDailyMailArticleId(url);
             if (articleId != null) {
                 url = "dailymail://article/" + articleId;
             }
             return url;
         }
+
+        @Nullable
+        private static String extractDailyMailArticleId(String foundUrl) {
+            try {
+                final Matcher matcher = Pattern.compile("(?:(?:http|https)://)?(?:www|m).dailymail.co.uk/.*/article-(\\d*)?/.*")
+                        .matcher(foundUrl);
+                if (matcher.find()) {
+                    return matcher.group(1);
+                }
+            } catch (Exception ignored) {
+            }
+            return null;
+        }
     }
 
     interface Fixer {
         String fix(String url);
+    }
+
+    private Urls() {
     }
 }
