@@ -23,7 +23,7 @@ public final class OpenWithProvider {
 
     public static final String AUTHORITY = BuildConfig.APPLICATION_ID;
 
-    static final Uri BASE_CONTENT_URI = Uri.parse("content://" + AUTHORITY);
+    private static final Uri BASE_CONTENT_URI = Uri.parse("content://" + AUTHORITY);
 
     @TableEndpoint(table = OpenWithDatabase.OPENWITH)
     public static class OpenWithHosts {

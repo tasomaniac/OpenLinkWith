@@ -16,14 +16,14 @@ import java.util.List;
 
 public class CircularIndicatorView extends LinearLayout {
     private static final int FIRST_PAGE_NUM = 0;
-    public static final int DEFAULT_COLOR = 1;
+    private static final int DEFAULT_COLOR = 1;
 
     private List<ImageView> mDots;
     private int mSlideCount;
-    int selectedDotColor = DEFAULT_COLOR;
-    int unselectedDotColor = DEFAULT_COLOR;
+    private int selectedDotColor = DEFAULT_COLOR;
+    private int unselectedDotColor = DEFAULT_COLOR;
 
-    int mCurrentPosition;
+    private int mCurrentPosition;
 
     public CircularIndicatorView(Context context) {
         this(context, null);
@@ -44,7 +44,7 @@ public class CircularIndicatorView extends LinearLayout {
         setOrientation(HORIZONTAL);
     }
 
-    public void initialize(int slideCount) {
+    void initialize(int slideCount) {
         mDots = new ArrayList<>();
         mSlideCount = slideCount;
         selectedDotColor = -1;
@@ -66,7 +66,7 @@ public class CircularIndicatorView extends LinearLayout {
         selectPosition(FIRST_PAGE_NUM);
     }
 
-    public void selectPosition(int index) {
+    void selectPosition(int index) {
         mCurrentPosition = index;
         for (int i = 0; i < mSlideCount; i++) {
             int drawableId = (i == index) ? (R.drawable.indicator_dot_white) : (R.drawable.indicator_dot_grey);
@@ -77,15 +77,5 @@ public class CircularIndicatorView extends LinearLayout {
                 drawable.mutate().setColorFilter(unselectedDotColor, PorterDuff.Mode.SRC_IN);
             mDots.get(i).setImageDrawable(drawable);
         }
-    }
-
-    public void setSelectedIndicatorColor(int color) {
-        selectedDotColor = color;
-        selectPosition(mCurrentPosition);
-    }
-
-    public void setUnselectedIndicatorColor(int color) {
-        unselectedDotColor = color;
-        selectPosition(mCurrentPosition);
     }
 }

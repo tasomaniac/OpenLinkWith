@@ -1,14 +1,12 @@
 package com.tasomaniac.openwith.util;
 
-import android.annotation.TargetApi;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
 
 import com.tasomaniac.openwith.App;
 
@@ -22,7 +20,7 @@ public class Intents {
             new AmazonFixer(),
     };
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @SuppressLint("InlinedApi")
     public static boolean maybeStartUsageAccessSettings(final Activity activity) {
         try {
             activity.startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
@@ -64,7 +62,6 @@ public class Intents {
          * @param intent Original Intent with amazon link in it.
          * @return Specific Intent for Amazon app.
          */
-        @NonNull
         @Override
         public Intent fix(Context context, Intent intent) {
             if (intent.getDataString() != null && intent.getDataString().contains("amazon")) {

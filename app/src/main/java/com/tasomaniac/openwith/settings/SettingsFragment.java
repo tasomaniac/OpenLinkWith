@@ -5,6 +5,7 @@ import android.app.backup.BackupManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
@@ -109,6 +110,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
                 .unregisterOnSharedPreferenceChangeListener(this);
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void setupUsagePreference() {
         boolean usageAccessGiven = Utils.isUsageStatsEnabled(getActivity());
 

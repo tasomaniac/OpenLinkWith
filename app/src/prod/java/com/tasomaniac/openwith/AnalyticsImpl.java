@@ -6,14 +6,11 @@ import com.crashlytics.android.answers.CustomEvent;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
-/**
- * Created by tasomaniac on 26/1/16.
- */
-public class AnalyticsImpl implements Analytics {
+class AnalyticsImpl implements Analytics {
     private final Tracker tracker;
     private final Answers answers;
 
-    public AnalyticsImpl(Tracker tracker) {
+    AnalyticsImpl(Tracker tracker) {
         this.tracker = tracker;
         answers = Answers.getInstance();
     }

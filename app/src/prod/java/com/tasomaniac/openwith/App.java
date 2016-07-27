@@ -1,5 +1,6 @@
 package com.tasomaniac.openwith;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
@@ -20,15 +21,15 @@ public class App extends BaseApp {
             Timber.plant(new CrashReportingTree());
         }
 
-        analytics = provideAnalytics();
+        analytics = provideAnalytics(this);
     }
 
-    protected Analytics provideAnalytics() {
+    private static Analytics provideAnalytics(Context context) {
         if (BuildConfig.DEBUG) {
             return new Analytics.DebugAnalytics();
         }
 
-        GoogleAnalytics googleAnalytics = GoogleAnalytics.getInstance(this);
+        GoogleAnalytics googleAnalytics = GoogleAnalytics.getInstance(context);
         Tracker tracker = googleAnalytics.newTracker(BuildConfig.ANALYTICS_KEY);
         tracker.setSessionTimeout(300); // ms? s? better be s.
         return new AnalyticsImpl(tracker);

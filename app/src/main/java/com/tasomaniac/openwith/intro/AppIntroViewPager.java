@@ -11,7 +11,7 @@ public class AppIntroViewPager extends ViewPager {
     private boolean nextPagingEnabled;
     private float initialXValue;
     private int lockPage;
-    protected OnPageChangeListener listener;
+    private OnPageChangeListener listener;
 
     public AppIntroViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -76,30 +76,30 @@ public class AppIntroViewPager extends ViewPager {
     }
 
     // To enable/disable swipe
-    public void setNextPagingEnabled(boolean nextPagingEnabled) {
+    void setNextPagingEnabled(boolean nextPagingEnabled) {
         this.nextPagingEnabled = nextPagingEnabled;
         if (!nextPagingEnabled) {
             lockPage = getCurrentItem();
         }
     }
 
-    public boolean isNextPagingEnabled() {
+    boolean isNextPagingEnabled() {
         return nextPagingEnabled;
     }
 
-    public boolean isPagingEnabled() {
+    boolean isPagingEnabled() {
         return pagingEnabled;
     }
 
-    public void setPagingEnabled(boolean pagingEnabled) {
+    void setPagingEnabled(boolean pagingEnabled) {
         this.pagingEnabled = pagingEnabled;
     }
 
-    public int getLockPage() {
+    int getLockPage() {
         return lockPage;
     }
 
-    public void setLockPage(int lockPage) {
+    void setLockPage(int lockPage) {
         this.lockPage = lockPage;
     }
 
