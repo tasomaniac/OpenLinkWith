@@ -103,8 +103,9 @@ public abstract class AppIntro extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if (slidesNumber > 1)
+                if (slidesNumber > 1) {
                     mController.selectPosition(position);
+                }
 
                 // Allow the swipe to be re-enabled if a user swipes to a previous slide. Restore
                 // state of progress button depending on global progress button setting
@@ -118,7 +119,7 @@ public abstract class AppIntro extends AppCompatActivity {
                 } else {
                     setProgressButtonEnabled(progressButtonEnabled);
                 }
-                setButtonState(skipButton, skipButtonEnabled);
+                skipButton.setVisibility(skipButtonEnabled ? View.VISIBLE : View.GONE);
             }
 
             @Override
@@ -150,7 +151,6 @@ public abstract class AppIntro extends AppCompatActivity {
         outState.putInt("currentItem", pager.getCurrentItem());
     }
 
-
     private void restoreLockingState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         this.baseProgressButtonEnabled = savedInstanceState.getBoolean("baseProgressButtonEnabled");
@@ -170,14 +170,6 @@ public abstract class AppIntro extends AppCompatActivity {
     public void addSlide(Fragment fragment) {
         fragments.add(fragment);
         mPagerAdapter.notifyDataSetChanged();
-    }
-
-    private void setButtonState(View button, boolean show) {
-        if (show) {
-            button.setVisibility(View.VISIBLE);
-        } else {
-            button.setVisibility(View.INVISIBLE);
-        }
     }
 
     public abstract void init(@Nullable Bundle savedInstanceState);
@@ -212,15 +204,15 @@ public abstract class AppIntro extends AppCompatActivity {
         this.progressButtonEnabled = progressButtonEnabled;
         if (progressButtonEnabled) {
             if (pager.getCurrentItem() == slidesNumber - 1) {
-                setButtonState(nextButton, false);
-                setButtonState(doneButton, true);
+                nextButton.setVisibility(View.GONE);
+                doneButton.setVisibility(View.VISIBLE);
             } else {
-                setButtonState(nextButton, true);
-                setButtonState(doneButton, false);
+                nextButton.setVisibility(View.VISIBLE);
+                doneButton.setVisibility(View.GONE);
             }
         } else {
-            setButtonState(nextButton, false);
-            setButtonState(doneButton, false);
+            nextButton.setVisibility(View.GONE);
+            doneButton.setVisibility(View.GONE);
         }
     }
 
