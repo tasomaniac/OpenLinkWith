@@ -96,7 +96,7 @@ play {
 dependencies {
     def supportLibVersion = "23.4.0"
     def schematicVersion = '0.6.7'
-    def butterKnifeVersion = '8.0.1'
+    def butterKnifeVersion = '8.2.1'
 
     compile "com.android.support:support-v4:$supportLibVersion"
     compile "com.android.support:appcompat-v7:$supportLibVersion"
@@ -114,10 +114,8 @@ dependencies {
     apt "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
     compile 'com.jakewharton.timber:timber:4.1.2'
 
-    prodCompile "com.google.android.gms:play-services-analytics:9.0.1"
-    prodCompile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
-        transitive = true
-    }
+    prodCompile "com.google.android.gms:play-services-analytics:9.2.1"
+    prodCompile 'com.crashlytics.sdk.android:crashlytics:2.6.1'
 
     testCompile 'junit:junit:4.12'
 }
