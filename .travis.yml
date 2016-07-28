@@ -3,9 +3,9 @@ language: android
 android:
   components:
     - tools
-    - platform-tools-24.0.1
+    - platform-tools
     - build-tools-24.0.1
-    - android-24
+    - android-23
     - extra-google-m2repository
     - extra-android-m2repository
 
