@@ -1,14 +1,7 @@
 Open Link With
 ==============
 
-<!--- [![Get it on Google Play](art/banner.png)][1] --->
-
-
 [![Build Status](https://travis-ci.org/tasomaniac/OpenLinkWith.png?branch=master)](https://travis-ci.org/tasomaniac/OpenLinkWith)
-[![Join the chat at https://gitter.im/tasomaniac/OpenLinkWith](https://img.shields.io/badge/GITTER-join%20chat-green.svg)](https://gitter.im/tasomaniac/OpenLinkWith?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
-![API](https://img.shields.io/badge/API-15%2B-brightgreen.svg?style=flat)
-
 
 Installation
 ------------
