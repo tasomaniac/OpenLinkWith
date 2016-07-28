@@ -1,7 +1,5 @@
-Open Link With
+Open Link With [![Build Status](https://travis-ci.org/tasomaniac/OpenLinkWith.png?branch=master)][2]
 ==============
-
-[![Build Status](https://travis-ci.org/tasomaniac/OpenLinkWith.png?branch=master)](https://travis-ci.org/tasomaniac/OpenLinkWith)
 
 Installation
 ------------
@@ -53,3 +51,4 @@ License
 
 
 [1]: https://play.google.com/store/apps/details?id=com.tasomaniac.openwith
+[2]: https://travis-ci.org/tasomaniac/OpenLinkWith
