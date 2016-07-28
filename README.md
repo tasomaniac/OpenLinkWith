@@ -1,9 +1,6 @@
 Open Link With [![Build Status](https://travis-ci.org/tasomaniac/OpenLinkWith.png?branch=master)][2]
 ==============
 
-Installation
-------------
-
  [![Get it on Google Play](art/en_generic_rgb_wo_60.png)][1]
 
 What
