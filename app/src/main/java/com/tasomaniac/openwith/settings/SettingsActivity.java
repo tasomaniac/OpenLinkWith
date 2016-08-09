@@ -1,6 +1,5 @@
 package com.tasomaniac.openwith.settings;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -30,8 +29,7 @@ public class SettingsActivity extends AppCompatActivity
                 PreferenceManager.getDefaultSharedPreferences(this),
                 "pref_tutorial_shown");
         if (!tutorialShown.get()) {
-            startActivity(new Intent(this, IntroActivity.class)
-                    .putExtra(IntroActivity.EXTRA_FIRST_START, true));
+            startActivity(IntroActivity.newIntent(this, true));
             tutorialShown.set(true);
         }
 
