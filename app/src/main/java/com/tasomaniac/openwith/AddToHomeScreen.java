@@ -24,7 +24,8 @@ public class AddToHomeScreen extends Activity {
         String foundUrl = Utils.extractUrlFrom(getIntent(), reader);
 
         if (foundUrl != null) {
-            Intent intentToHandle = new Intent(Intent.ACTION_VIEW, Uri.parse(fixUrls(foundUrl)));
+            Intent intentToHandle = new Intent(Intent.ACTION_VIEW, Uri.parse(fixUrls(foundUrl)))
+                    .putExtra(ResolverActivity.EXTRA_ADD_TO_HOME_SCREEN, true);
             startActivity(intentToHandle.setClass(this, ResolverActivity.class));
         } else {
             Toast.makeText(this, R.string.error_invalid_url, Toast.LENGTH_SHORT).show();

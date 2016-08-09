@@ -25,6 +25,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -72,11 +73,13 @@ public class ResolverActivity extends Activity
         ItemLongClickListener {
 
     public static final String EXTRA_PRIORITY_PACKAGES = "EXTRA_PRIORITY_PACKAGES";
+    public static final String EXTRA_ADD_TO_HOME_SCREEN = "EXTRA_ADD_TO_HOME_SCREEN";
     private static final String KEY_CHECKED_POS = "KEY_CHECKED_POS";
 
     private ResolveListAdapter mAdapter;
     private PackageManager mPm;
     private boolean mAlwaysUseOption;
+    private boolean isAddToHomeScreen;
 
     private RecyclerView mListView;
 
@@ -123,6 +126,7 @@ public class ResolverActivity extends Activity
         setTheme(R.style.BottomSheet_Light);
         super.onCreate(savedInstanceState);
 
+        isAddToHomeScreen = intent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
         mPm = getPackageManager();
 
         mRequestedUri = intent.getData();
@@ -136,7 +140,7 @@ public class ResolverActivity extends Activity
 
         ResolveInfo lastChosen = null;
         final Cursor query = queryIntentWith(mRequestedUri.getHost());
-        if (query != null && query.moveToFirst()) {
+        if (!isAddToHomeScreen && query != null && query.moveToFirst()) {
             try {
                 final boolean isPreferred = query.getInt(query.getColumnIndex(PREFERRED)) == 1;
                 final boolean isLastChosen = query.getInt(query.getColumnIndex(LAST_CHOSEN)) == 1;
@@ -185,53 +189,30 @@ public class ResolverActivity extends Activity
         mAdapter = new ResolveListAdapter(this, getHistory(), intent, callerPackage, lastChosen, true);
         mAdapter.setPriorityItems(intent.getStringArrayExtra(EXTRA_PRIORITY_PACKAGES));
 
-        mAlwaysUseOption = true;
-        final int layoutId;
-        final boolean useHeader;
-        if (mAdapter.hasFilteredItem()) {
-            layoutId = R.layout.resolver_list_with_default;
-            mAlwaysUseOption = false;
-            useHeader = true;
-        } else {
-            useHeader = false;
-            layoutId = R.layout.resolver_list;
-        }
-
-        //If the caller is already the preferred, don't change it.
-        if (isCallerPackagePreferred) {
-            mAlwaysUseOption = false;
-        }
+        mAlwaysUseOption = !isAddToHomeScreen && !isCallerPackagePreferred && !mAdapter.hasFilteredItem();
 
         int count = mAdapter.mList.size();
         if (count > 1) {
-            setContentView(layoutId);
-            mListView = (RecyclerView) findViewById(R.id.resolver_list);
-            mListView.setAdapter(mAdapter);
-
-            mAdapter.setItemClickListener(this);
-            mAdapter.setItemLongClickListener(this);
-
-            if (mAlwaysUseOption) {
-                mAdapter.setSelectionEnabled(true);
-            }
-            if (useHeader) {
-                mAdapter.setHeader(new ResolveListAdapter.Header());
-            }
+            setupListAdapter();
         } else if (count == 1) {
-            final DisplayResolveInfo dri = mAdapter.displayResolveInfoForPosition(0, false);
-            Toast.makeText(
-                    this,
-                    getString(
-                            R.string.warning_open_link_with_name,
-                            dri.getDisplayLabel()
-                    ),
-                    Toast.LENGTH_SHORT
-            ).show();
-            startActivityFixingIntent(mAdapter.intentForPosition(0, false));
-            mPackageMonitor.unregister();
-            mRegistered = false;
-            finish();
-            return;
+            if (isAddToHomeScreen) {
+                setupListAdapter();
+            } else {
+                final DisplayResolveInfo dri = mAdapter.displayResolveInfoForPosition(0, false);
+                Toast.makeText(
+                        this,
+                        getString(
+                                R.string.warning_open_link_with_name,
+                                dri.getDisplayLabel()
+                        ),
+                        Toast.LENGTH_SHORT
+                ).show();
+                startActivityFixingIntent(mAdapter.intentForPosition(0, false));
+                mPackageMonitor.unregister();
+                mRegistered = false;
+                finish();
+                return;
+            }
         } else {
             Toast.makeText(this, getString(R.string.empty_resolver_activity), Toast.LENGTH_LONG).show();
             mPackageMonitor.unregister();
@@ -256,14 +237,7 @@ public class ResolverActivity extends Activity
             });
         }
 
-        CharSequence title = getTitleForAction();
-        if (!TextUtils.isEmpty(title)) {
-            final TextView titleView = (TextView) findViewById(R.id.title);
-            if (titleView != null) {
-                titleView.setText(title);
-            }
-            setTitle(title);
-        }
+        setupTitle();
 
         final ImageView iconView = (ImageView) findViewById(R.id.icon);
         final DisplayResolveInfo iconInfo = mAdapter.getFilteredItem();
@@ -286,14 +260,6 @@ public class ResolverActivity extends Activity
             mAlwaysButton.setEnabled(true);
             mOnceButton.setEnabled(true);
         }
-    }
-
-    @Nullable
-    private Cursor queryIntentWith(String host) {
-        if (TextUtils.isEmpty(host)) {
-            return null;
-        }
-        return getContentResolver().query(withHost(host), null, null, null, null);
     }
 
     @Nullable
@@ -356,6 +322,42 @@ public class ResolverActivity extends Activity
         }
 
         return null;
+    }
+
+    @Nullable
+    private Cursor queryIntentWith(String host) {
+        if (TextUtils.isEmpty(host)) {
+            return null;
+        }
+        return getContentResolver().query(withHost(host), null, null, null, null);
+    }
+
+    private void setupListAdapter() {
+        boolean useHeader = !isAddToHomeScreen && mAdapter.hasFilteredItem();
+        int layoutId = useHeader ? R.layout.resolver_list_with_default : R.layout.resolver_list;
+
+        setContentView(layoutId);
+        mListView = (RecyclerView) findViewById(R.id.resolver_list);
+        mListView.setAdapter(mAdapter);
+
+        mAdapter.setItemClickListener(this);
+        mAdapter.setItemLongClickListener(this);
+
+        if (mAlwaysUseOption) {
+            mAdapter.setSelectionEnabled(true);
+        }
+        if (useHeader) {
+            mAdapter.setHeader(new ResolveListAdapter.Header());
+        }
+    }
+
+    private void setupTitle() {
+        final TextView titleView = (TextView) findViewById(R.id.title);
+        if (isAddToHomeScreen) {
+            titleView.setText(R.string.add_to_homescreen);
+        } else {
+            titleView.setText(getTitleForAction());
+        }
     }
 
     private CharSequence getTitleForAction() {
@@ -456,29 +458,59 @@ public class ResolverActivity extends Activity
         dismiss();
     }
 
-    private void startSelected(int which, boolean always, boolean filtered) {
-        if (isFinishing()) {
-            return;
-        }
-        Intent intent = mAdapter.intentForPosition(which, filtered);
-        onIntentSelected(intent, always);
-        finish();
-    }
-
     int getSelectedIntentPosition() {
         return mAlwaysUseOption ?
                 mAdapter.getCheckedItemPosition() : mAdapter.getFilteredPosition();
     }
 
-    private void onIntentSelected(Intent intent, boolean alwaysCheck) {
+    private void startSelected(int which, boolean always, boolean filtered) {
+        if (isFinishing()) {
+            return;
+        }
+        if (isAddToHomeScreen) {
+            createShortcut(which, filtered);
+        } else {
+            Intent intent = mAdapter.intentForPosition(which, filtered);
+            onIntentSelected(intent, always);
+        }
+        finish();
+    }
 
+    private void createShortcut(int position, boolean filtered) {
+        DisplayResolveInfo dri = mAdapter.displayResolveInfoForPosition(position, filtered);
+
+        Intent shortcutIntent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
+        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "Open With: " + dri.displayLabel);
+        shortcutIntent.putExtra(
+                Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
+                getShortcutIconResource(dri)
+
+        );
+        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, mAdapter.intentForDisplayResolveInfo(dri));
+        shortcutIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
+
+        sendBroadcast(shortcutIntent);
+    }
+
+    private Intent.ShortcutIconResource getShortcutIconResource(DisplayResolveInfo displayResolveInfo) {
+        Intent.ShortcutIconResource icon;
+        try {
+            icon = new Intent.ShortcutIconResource();
+            icon.packageName = displayResolveInfo.ri.activityInfo.packageName;
+            icon.resourceName = mPm.getResourcesForApplication(icon.packageName)
+                    .getResourceName(displayResolveInfo.ri.getIconResource());
+        } catch (PackageManager.NameNotFoundException | Resources.NotFoundException e) {
+            icon = Intent.ShortcutIconResource.fromContext(ResolverActivity.this, R.mipmap.ic_launcher);
+        }
+        return icon;
+    }
+
+    private void onIntentSelected(Intent intent, boolean alwaysCheck) {
         if (mAlwaysUseOption || mAdapter.hasFilteredItem()) {
             persistSelectedIntent(intent, alwaysCheck);
         }
 
-        if (intent != null) {
-            startActivityFixingIntent(intent);
-        }
+        startActivityFixingIntent(intent);
     }
 
     private void persistSelectedIntent(Intent intent, boolean alwaysCheck) {
