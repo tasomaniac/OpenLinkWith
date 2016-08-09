@@ -174,7 +174,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
         analytics.sendEvent(
                 "Preference",
                 "Item Click",
-                preference.getTitle().toString());
+                preference.getKey());
         return true;
     }
 
