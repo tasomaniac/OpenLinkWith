@@ -1,6 +1,5 @@
 package com.tasomaniac.openwith;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import static com.tasomaniac.openwith.util.Urls.fixUrls;
 
 public class AddToHomeScreen extends BaseShareActivity {
 
-    @SuppressLint("InlinedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

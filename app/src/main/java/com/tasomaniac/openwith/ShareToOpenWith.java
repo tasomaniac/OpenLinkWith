@@ -1,6 +1,5 @@
 package com.tasomaniac.openwith;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -42,7 +41,6 @@ public class ShareToOpenWith extends BaseShareActivity {
         return intent.getBooleanExtra(EXTRA_FROM_DIRECT_SHARE, false);
     }
 
-    @SuppressLint("InlinedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

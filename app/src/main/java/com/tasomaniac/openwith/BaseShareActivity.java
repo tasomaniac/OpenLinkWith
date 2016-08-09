@@ -1,5 +1,6 @@
 package com.tasomaniac.openwith;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.ShareCompat;
@@ -12,9 +13,14 @@ public abstract class BaseShareActivity extends Activity {
     String extractUrlFrom(ShareCompat.IntentReader reader) {
         CharSequence text = reader.getText();
         if (text == null) {
-            text = getIntent().getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT);
+            text = getExtraSelectedText();
         }
         return Urls.findFirstUrl(text);
+    }
+
+    @SuppressLint("InlinedApi")
+    private CharSequence getExtraSelectedText() {
+        return getIntent().getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT);
     }
 
     void showErrorInvalidUrl() {
