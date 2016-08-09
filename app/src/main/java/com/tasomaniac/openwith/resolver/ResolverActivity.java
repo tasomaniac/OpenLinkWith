@@ -207,7 +207,7 @@ public class ResolverActivity extends Activity
                         ),
                         Toast.LENGTH_SHORT
                 ).show();
-                startActivityFixingIntent(mAdapter.intentForPosition(0, false));
+                startActivityFixingIntent(mAdapter.intentForDisplayResolveInfo(dri));
                 mPackageMonitor.unregister();
                 mRegistered = false;
                 finish();
@@ -467,18 +467,17 @@ public class ResolverActivity extends Activity
         if (isFinishing()) {
             return;
         }
+        DisplayResolveInfo dri = mAdapter.displayResolveInfoForPosition(which, filtered);
         if (isAddToHomeScreen) {
-            createShortcut(which, filtered);
+            createShortcutFor(dri);
         } else {
-            Intent intent = mAdapter.intentForPosition(which, filtered);
+            Intent intent = mAdapter.intentForDisplayResolveInfo(dri);
             onIntentSelected(intent, always);
         }
         finish();
     }
 
-    private void createShortcut(int position, boolean filtered) {
-        DisplayResolveInfo dri = mAdapter.displayResolveInfoForPosition(position, filtered);
-
+    private void createShortcutFor(DisplayResolveInfo dri) {
         Intent shortcutIntent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
         shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "Open With: " + dri.displayLabel);
         shortcutIntent.putExtra(
@@ -542,7 +541,7 @@ public class ResolverActivity extends Activity
 
     @Override
     public boolean onItemLongClick(View view, int position, long id) {
-        ResolveInfo ri = mAdapter.resolveInfoForPosition(position, true);
+        ResolveInfo ri = mAdapter.displayResolveInfoForPosition(position, true).ri;
         showAppDetails(ri);
         return true;
     }

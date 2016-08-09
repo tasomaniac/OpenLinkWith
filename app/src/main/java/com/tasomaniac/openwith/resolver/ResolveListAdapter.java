@@ -334,15 +334,6 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         mList.add(dri);
     }
 
-    public ResolveInfo resolveInfoForPosition(int position, boolean filtered) {
-        return displayResolveInfoForPosition(position, filtered).ri;
-    }
-
-    public Intent intentForPosition(int position, boolean filtered) {
-        DisplayResolveInfo dri = displayResolveInfoForPosition(position, filtered);
-        return intentForDisplayResolveInfo(dri);
-    }
-
     DisplayResolveInfo displayResolveInfoForPosition(int position, boolean filtered) {
         return filtered ? getItem(position) : mList.get(position);
     }
@@ -544,11 +535,11 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         return result;
     }
 
-    class ResolverComparator implements Comparator<ResolveInfo> {
+    private class ResolverComparator implements Comparator<ResolveInfo> {
         private final Collator mCollator;
         private final boolean mHttp;
 
-        public ResolverComparator(Context context, Intent intent) {
+        ResolverComparator(Context context, Intent intent) {
             mCollator = Collator.getInstance(context.getResources().getConfiguration().locale);
             String scheme = intent.getScheme();
             mHttp = "http".equals(scheme) || "https".equals(scheme);

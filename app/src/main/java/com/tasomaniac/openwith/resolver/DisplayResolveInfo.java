@@ -7,14 +7,14 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 
 public final class DisplayResolveInfo implements Parcelable {
-    int id;
-    ResolveInfo ri;
-    CharSequence displayLabel;
+    private final int id;
+    final ResolveInfo ri;
+    final CharSequence displayLabel;
+    final CharSequence extendedInfo;
     Drawable displayIcon;
-    CharSequence extendedInfo;
 
-    public DisplayResolveInfo(ResolveInfo pri, CharSequence pLabel,
-                              CharSequence pInfo) {
+    DisplayResolveInfo(ResolveInfo pri, CharSequence pLabel,
+                       CharSequence pInfo) {
         this(0, pri, pLabel, pInfo);
     }
 
@@ -26,7 +26,7 @@ public final class DisplayResolveInfo implements Parcelable {
         extendedInfo = pInfo;
     }
 
-    protected DisplayResolveInfo(Parcel in) {
+    private DisplayResolveInfo(Parcel in) {
         id = in.readInt();
         ri = in.readParcelable(ResolveInfo.class.getClassLoader());
         displayLabel = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in);
