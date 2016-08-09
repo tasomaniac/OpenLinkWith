@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="pref_title_category_debug" translatable="false">Debug</string>
+
+  <string name="pref_key_debug_amazon" translatable="false">pref_debug_amazon</string>
+  <string name="pref_title_debug_amazon" translatable="false">Amazon Intent</string>
+
+  <string name="pref_key_debug_maps" translatable="false">pref_debug_maps</string>
+  <string name="pref_title_debug_maps" translatable="false">Maps Intent</string>
+</resources>

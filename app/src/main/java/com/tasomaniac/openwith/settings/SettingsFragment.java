@@ -75,6 +75,8 @@ public class SettingsFragment extends PreferenceFragmentCompat
 
             setupDebugPreference(R.string.pref_key_debug_amazon,
                                  "http://www.amazon.com/Garmin-Speed-Cadence-Bike-Sensor/dp/B000BFNOT8");
+            setupDebugPreference(R.string.pref_key_debug_maps,
+                                 "http://maps.google.com/maps");
         }
     }
 

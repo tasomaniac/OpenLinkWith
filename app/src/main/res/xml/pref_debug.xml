@@ -8,6 +8,10 @@
       android:key="@string/pref_key_debug_amazon"
       android:title="@string/pref_title_debug_amazon" />
 
+    <Preference
+      android:key="@string/pref_key_debug_maps"
+      android:title="@string/pref_title_debug_maps" />
+
   </PreferenceCategory>
 
 </PreferenceScreen>
