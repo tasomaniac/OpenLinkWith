@@ -1,9 +1,9 @@
 package com.tasomaniac.openwith.settings;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -15,8 +15,7 @@ import com.tasomaniac.openwith.intro.IntroActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SettingsActivity extends AppCompatActivity
-        implements ActivityCompat.OnRequestPermissionsResultCallback {
+public class SettingsActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -25,9 +24,7 @@ public class SettingsActivity extends AppCompatActivity
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        BooleanPreference tutorialShown = new BooleanPreference(
-                PreferenceManager.getDefaultSharedPreferences(this),
-                "pref_tutorial_shown");
+        BooleanPreference tutorialShown = provideTutorialShownPref(this);
         if (!tutorialShown.get()) {
             startActivity(IntroActivity.newIntent(this, true));
             tutorialShown.set(true);
@@ -56,5 +53,10 @@ public class SettingsActivity extends AppCompatActivity
     public boolean onSupportNavigateUp() {
         finish();
         return true;
+    }
+
+    private static BooleanPreference provideTutorialShownPref(Context context) {
+        return new BooleanPreference(PreferenceManager.getDefaultSharedPreferences(context),
+                                     "pref_tutorial_shown");
     }
 }

@@ -9,7 +9,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ShareCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -36,8 +35,7 @@ import static android.os.Build.VERSION_CODES.LOLLIPOP;
 
 public class SettingsFragment extends PreferenceFragmentCompat
         implements SharedPreferences.OnSharedPreferenceChangeListener,
-        Preference.OnPreferenceClickListener,
-        ActivityCompat.OnRequestPermissionsResultCallback {
+        Preference.OnPreferenceClickListener {
 
     private PreferenceCategory usageStatsPreferenceCategory;
     private Analytics analytics;
