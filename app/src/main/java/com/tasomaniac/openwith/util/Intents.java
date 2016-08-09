@@ -20,6 +20,13 @@ public class Intents {
             new AmazonFixer(),
     };
 
+    public static void launchHomeScreen(Activity activity) {
+        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+        homeIntent.addCategory(Intent.CATEGORY_HOME);
+        homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+        activity.startActivity(homeIntent);
+    }
+
     @SuppressLint("InlinedApi")
     public static boolean maybeStartUsageAccessSettings(final Activity activity) {
         try {

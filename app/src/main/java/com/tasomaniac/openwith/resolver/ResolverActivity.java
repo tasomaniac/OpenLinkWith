@@ -470,6 +470,7 @@ public class ResolverActivity extends Activity
         DisplayResolveInfo dri = mAdapter.displayResolveInfoForPosition(which, filtered);
         if (isAddToHomeScreen) {
             createShortcutFor(dri);
+            Intents.launchHomeScreen(this);
         } else {
             Intent intent = mAdapter.intentForDisplayResolveInfo(dri);
             onIntentSelected(intent, always);
