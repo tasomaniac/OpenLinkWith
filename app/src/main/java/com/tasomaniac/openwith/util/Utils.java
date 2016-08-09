@@ -1,11 +1,14 @@
 package com.tasomaniac.openwith.util;
 
+import android.annotation.SuppressLint;
 import android.app.AppOpsManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ShareCompat;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 
@@ -39,5 +42,18 @@ public class Utils {
     }
 
     private Utils() {
+    }
+
+    public static String extractUrlFrom(Intent intent, ShareCompat.IntentReader reader) {
+        CharSequence text = reader.getText();
+        if (text == null) {
+            text = getExtraSelectedText(intent);
+        }
+        return Urls.findFirstUrl(text);
+    }
+
+    @SuppressLint("InlinedApi")
+    private static CharSequence getExtraSelectedText(Intent intent) {
+        return intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT);
     }
 }
