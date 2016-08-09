@@ -25,7 +25,6 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -36,10 +35,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -91,7 +88,6 @@ public class ResolverActivity extends Activity
 
     private Uri mRequestedUri;
     private ChooserHistory mHistory;
-    private MenuItem shortcutMenuItem;
 
     private ChooserHistory getHistory() {
         if (mHistory == null) {
@@ -209,7 +205,6 @@ public class ResolverActivity extends Activity
         int count = mAdapter.mList.size();
         if (count > 1) {
             setContentView(layoutId);
-            setupToolbarMenu();
             mListView = (RecyclerView) findViewById(R.id.resolver_list);
             mListView.setAdapter(mAdapter);
 
@@ -221,7 +216,6 @@ public class ResolverActivity extends Activity
             }
             if (useHeader) {
                 mAdapter.setHeader(new ResolveListAdapter.Header());
-                shortcutMenuItem.setVisible(true);
             }
         } else if (count == 1) {
             final DisplayResolveInfo dri = mAdapter.displayResolveInfoForPosition(0, false);
@@ -294,49 +288,6 @@ public class ResolverActivity extends Activity
         }
     }
 
-    private void setupToolbarMenu() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.inflateMenu(R.menu.shortcut);
-        shortcutMenuItem = toolbar.getMenu().findItem(R.id.menu_shortcut);
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if (R.id.menu_shortcut == item.getItemId()) {
-
-                    int position = getSelectedIntentPosition();
-                    DisplayResolveInfo dri = mAdapter.displayResolveInfoForPosition(position, mAlwaysUseOption);
-
-                    Intent shortcutIntent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
-                    shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "Open With: " + dri.displayLabel);
-                    shortcutIntent.putExtra(
-                            Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
-                            getShortcutIconResource(dri)
-                    );
-                    shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, mAdapter.intentForDisplayResolveInfo(dri));
-                    shortcutIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
-
-                    sendBroadcast(shortcutIntent);
-
-                    return true;
-                }
-                return false;
-            }
-        });
-    }
-
-    private Intent.ShortcutIconResource getShortcutIconResource(DisplayResolveInfo displayResolveInfo) {
-        Intent.ShortcutIconResource icon;
-        try {
-            icon = new Intent.ShortcutIconResource();
-            icon.packageName = displayResolveInfo.ri.activityInfo.packageName;
-            icon.resourceName = mPm.getResourcesForApplication(icon.packageName)
-                    .getResourceName(displayResolveInfo.ri.getIconResource());
-        } catch (PackageManager.NameNotFoundException | Resources.NotFoundException e) {
-            icon = Intent.ShortcutIconResource.fromContext(ResolverActivity.this, R.mipmap.ic_launcher);
-        }
-        return icon;
-    }
-
     @Nullable
     private Cursor queryIntentWith(String host) {
         if (TextUtils.isEmpty(host)) {
@@ -382,7 +333,8 @@ public class ResolverActivity extends Activity
                     time - 10 * DateUtils.SECOND_IN_MILLIS,
                     time
             );
-        } catch (Exception ignored) { }
+        } catch (Exception ignored) {
+        }
         if (stats == null) {
             return null;
         }
@@ -489,7 +441,6 @@ public class ResolverActivity extends Activity
                 mListView.smoothScrollToPosition(position);
             }
             mLastSelected = position;
-            shortcutMenuItem.setVisible(true);
         } else {
             startSelected(position, false, true);
         }
@@ -505,18 +456,18 @@ public class ResolverActivity extends Activity
         dismiss();
     }
 
-    int getSelectedIntentPosition() {
-        return mAlwaysUseOption ?
-                mAdapter.getCheckedItemPosition() : mAdapter.getFilteredPosition();
-    }
-
-    void startSelected(int which, boolean always, boolean filtered) {
+    private void startSelected(int which, boolean always, boolean filtered) {
         if (isFinishing()) {
             return;
         }
         Intent intent = mAdapter.intentForPosition(which, filtered);
         onIntentSelected(intent, always);
         finish();
+    }
+
+    int getSelectedIntentPosition() {
+        return mAlwaysUseOption ?
+                mAdapter.getCheckedItemPosition() : mAdapter.getFilteredPosition();
     }
 
     private void onIntentSelected(Intent intent, boolean alwaysCheck) {

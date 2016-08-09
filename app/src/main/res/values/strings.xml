@@ -1,7 +1,6 @@
 <resources>
   <string name="app_name" translatable="false">Open Link With</string>
   <string name="open_with">\u0020Open With…</string>
-  <string name="add_to_homescreen">Add To Home screen</string>
 
   <string name="use_a_different_app">Use a different app</string>
   <string name="activity_resolver_use_once">Just Once</string>
@@ -75,5 +74,6 @@
   <string name="usage_access_give_access">Give Access</string>
   <string name="error">Error</string>
   <string name="error_usage_access_not_found">Usage Access Settings cannot be open.\n\nYou may access it by going into Settings -> Security</string>
-  <string name="menu_item_add_shortcut">Add Shortcut</string>
+
+  <string name="add_to_homescreen">Add To Home screen</string>
 </resources>
