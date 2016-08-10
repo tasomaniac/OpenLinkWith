@@ -16,7 +16,6 @@
 package com.tasomaniac.openwith.resolver;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
@@ -26,8 +25,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -35,7 +32,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ShareCompat;
-import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -50,10 +47,10 @@ import android.widget.Toast;
 
 import com.tasomaniac.openwith.BuildConfig;
 import com.tasomaniac.openwith.R;
+import com.tasomaniac.openwith.homescreen.AddToHomeScreenDialogFragment;
 import com.tasomaniac.openwith.misc.ItemClickListener;
 import com.tasomaniac.openwith.misc.ItemLongClickListener;
 import com.tasomaniac.openwith.util.Intents;
-import com.tasomaniac.openwith.util.Utils;
 
 import java.util.List;
 
@@ -70,7 +67,7 @@ import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withHo
  * which there is more than one matching activity, allowing the user to decide
  * which to go to.  It is not normally used directly by application developers.
  */
-public class ResolverActivity extends Activity
+public class ResolverActivity extends AppCompatActivity
         implements
         ItemClickListener,
         ItemLongClickListener {
@@ -471,33 +468,15 @@ public class ResolverActivity extends Activity
             return;
         }
         DisplayResolveInfo dri = mAdapter.displayResolveInfoForPosition(which, filtered);
+        Intent intent = mAdapter.intentForDisplayResolveInfo(dri);
         if (isAddToHomeScreen) {
-            createShortcutFor(dri);
-            Intents.launchHomeScreen(this);
+            AddToHomeScreenDialogFragment
+                    .newInstance(dri, intent)
+                    .show(getSupportFragmentManager());
         } else {
-            Intent intent = mAdapter.intentForDisplayResolveInfo(dri);
             onIntentSelected(intent, always);
+            finish();
         }
-        finish();
-    }
-
-    private void createShortcutFor(DisplayResolveInfo dri) {
-        Intent shortcutIntent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
-        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "Open With: " + dri.displayLabel);
-        shortcutIntent.putExtra(
-                Intent.EXTRA_SHORTCUT_ICON,
-                createShortcutIconBitmap(dri)
-        );
-        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, mAdapter.intentForDisplayResolveInfo(dri));
-        shortcutIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
-
-        sendBroadcast(shortcutIntent);
-    }
-
-    private Bitmap createShortcutIconBitmap(DisplayResolveInfo dri) {
-        BitmapDrawable originalDrawable = (BitmapDrawable) ResolveListAdapter.loadIconForResolveInfo(mPm, dri.ri, mIconDpi);
-        BitmapDrawable markerDrawable = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.ic_star_mark);
-        return Utils.mergeBitmaps(originalDrawable.getBitmap(), markerDrawable.getBitmap());
     }
 
     private void onIntentSelected(Intent intent, boolean alwaysCheck) {

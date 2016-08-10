@@ -120,7 +120,6 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         rebuildList();
     }
 
-
     public void setPriorityItems(String... packageNames) {
         if (packageNames == null || packageNames.length == 0) {
             mPriorities = null;
@@ -162,11 +161,14 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         return mFilterLastUsed && mLastChosenPosition >= 0;
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
     protected void rebuildList() {
         mList.clear();
         int flag;
-        flag = SDK_INT >= M ? PackageManager.MATCH_ALL : PackageManager.MATCH_DEFAULT_ONLY;
+        if (SDK_INT >= M) {
+            flag = PackageManager.MATCH_ALL;
+        } else {
+            flag = PackageManager.MATCH_DEFAULT_ONLY;
+        }
         flag = flag | (mFilterLastUsed ? PackageManager.GET_RESOLVED_FILTER : 0);
 
         List<ResolveInfo> currentResolveList = new ArrayList<>();
@@ -311,11 +313,13 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
                 if (usePkg) {
                     // Use application name for all entries from start to end-1
                     addResolveInfo(new DisplayResolveInfo(add, roLabel,
-                            add.activityInfo.packageName));
+                                                          add.activityInfo.packageName
+                    ));
                 } else {
                     // Use package name for all entries from start to end-1
                     addResolveInfo(new DisplayResolveInfo(add, roLabel,
-                            add.activityInfo.applicationInfo.loadLabel(mPm)));
+                                                          add.activityInfo.applicationInfo.loadLabel(mPm)
+                    ));
                 }
                 updateLastChosenPosition(add);
             }
@@ -371,8 +375,8 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
 
     @Override
     protected ViewHolder onCreateHeaderViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(mInflater
-                .inflate(R.layout.resolver_different_item_header, parent, false));
+        View headerView = mInflater.inflate(R.layout.resolver_different_item_header, parent, false);
+        return new ViewHolder(headerView);
     }
 
     @Override
@@ -390,8 +394,8 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
 
     @Override
     public ViewHolder onCreateItemViewHolder(ViewGroup viewGroup, int i) {
-        return new ViewHolder(mInflater
-                .inflate(R.layout.resolve_list_item, viewGroup, false));
+        View itemView = mInflater.inflate(R.layout.resolve_list_item, viewGroup, false);
+        return new ViewHolder(itemView);
     }
 
     @Override
@@ -474,9 +478,11 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     public static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.text1)
         public TextView text;
-        @Nullable @BindView(R.id.text2)
+        @Nullable
+        @BindView(R.id.text2)
         public TextView text2;
-        @Nullable @BindView(R.id.icon)
+        @Nullable
+        @BindView(R.id.icon)
         public ImageView icon;
 
         public ViewHolder(View view) {
@@ -586,9 +592,13 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
             }
 
             CharSequence sa = lhs.loadLabel(mPm);
-            if (sa == null) sa = lhs.activityInfo.name;
+            if (sa == null) {
+                sa = lhs.activityInfo.name;
+            }
             CharSequence sb = rhs.loadLabel(mPm);
-            if (sb == null) sb = rhs.activityInfo.name;
+            if (sb == null) {
+                sb = rhs.activityInfo.name;
+            }
 
             return mCollator.compare(sa.toString(), sb.toString());
         }
@@ -614,7 +624,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     Intent intentForDisplayResolveInfo(DisplayResolveInfo dri) {
         Intent intent = new Intent(mIntent);
         intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
-                | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+                                | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
         if (dri != null && dri.ri != null) {
             ActivityInfo ai = dri.ri.activityInfo;
             if (ai != null) {
@@ -631,5 +641,6 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
                 && match <= IntentFilter.MATCH_CATEGORY_PATH;
     }
 
-    public static class Header {}
+    public static class Header {
+    }
 }

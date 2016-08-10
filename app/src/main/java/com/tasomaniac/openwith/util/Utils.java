@@ -62,22 +62,4 @@ public class Utils {
         return intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT);
     }
 
-    public static Bitmap mergeBitmaps(Bitmap background, Bitmap overlay) {
-        final int width = background.getWidth();
-        final int height = background.getHeight();
-        int overlayWidth = overlay.getWidth();
-        int overlayHeight = overlay.getHeight();
-        int left = width - overlayWidth;
-        int top = height - overlayHeight;
-
-        Bitmap bmOverlay = Bitmap.createBitmap(width, height, background.getConfig());
-        Canvas canvas = new Canvas(bmOverlay);
-
-        Paint paint = new Paint();
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER));
-
-        canvas.drawBitmap(background, 0, 0, paint);
-        canvas.drawBitmap(overlay, left, top, paint);
-        return bmOverlay;
-    }
 }

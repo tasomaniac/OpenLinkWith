@@ -69,4 +69,8 @@ public final class DisplayResolveInfo implements Parcelable {
     public CharSequence getExtendedInfo() {
         return extendedInfo;
     }
+
+    public Drawable getDisplayIcon() {
+        return displayIcon;
+    }
 }
