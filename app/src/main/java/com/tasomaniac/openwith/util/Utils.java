@@ -5,6 +5,11 @@ import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -55,5 +60,24 @@ public class Utils {
     @SuppressLint("InlinedApi")
     private static CharSequence getExtraSelectedText(Intent intent) {
         return intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT);
+    }
+
+    public static Bitmap mergeBitmaps(Bitmap background, Bitmap overlay) {
+        final int width = background.getWidth();
+        final int height = background.getHeight();
+        int overlayWidth = overlay.getWidth();
+        int overlayHeight = overlay.getHeight();
+        int left = width - overlayWidth;
+        int top = height - overlayHeight;
+
+        Bitmap bmOverlay = Bitmap.createBitmap(width, height, background.getConfig());
+        Canvas canvas = new Canvas(bmOverlay);
+
+        Paint paint = new Paint();
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER));
+
+        canvas.drawBitmap(background, 0, 0, paint);
+        canvas.drawBitmap(overlay, left, top, paint);
+        return bmOverlay;
     }
 }

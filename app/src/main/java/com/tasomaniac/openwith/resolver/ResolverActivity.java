@@ -25,8 +25,9 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -34,6 +35,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ShareCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -51,6 +53,7 @@ import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.misc.ItemClickListener;
 import com.tasomaniac.openwith.misc.ItemLongClickListener;
 import com.tasomaniac.openwith.util.Intents;
+import com.tasomaniac.openwith.util.Utils;
 
 import java.util.List;
 
@@ -482,9 +485,8 @@ public class ResolverActivity extends Activity
         Intent shortcutIntent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
         shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "Open With: " + dri.displayLabel);
         shortcutIntent.putExtra(
-                Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
-                getShortcutIconResource(dri)
-
+                Intent.EXTRA_SHORTCUT_ICON,
+                createShortcutIconBitmap(dri)
         );
         shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, mAdapter.intentForDisplayResolveInfo(dri));
         shortcutIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
@@ -492,17 +494,10 @@ public class ResolverActivity extends Activity
         sendBroadcast(shortcutIntent);
     }
 
-    private Intent.ShortcutIconResource getShortcutIconResource(DisplayResolveInfo displayResolveInfo) {
-        Intent.ShortcutIconResource icon;
-        try {
-            icon = new Intent.ShortcutIconResource();
-            icon.packageName = displayResolveInfo.ri.activityInfo.packageName;
-            icon.resourceName = mPm.getResourcesForApplication(icon.packageName)
-                    .getResourceName(displayResolveInfo.ri.getIconResource());
-        } catch (PackageManager.NameNotFoundException | Resources.NotFoundException e) {
-            icon = Intent.ShortcutIconResource.fromContext(ResolverActivity.this, R.mipmap.ic_launcher);
-        }
-        return icon;
+    private Bitmap createShortcutIconBitmap(DisplayResolveInfo dri) {
+        BitmapDrawable originalDrawable = (BitmapDrawable) ResolveListAdapter.loadIconForResolveInfo(mPm, dri.ri, mIconDpi);
+        BitmapDrawable markerDrawable = (BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.ic_star_mark);
+        return Utils.mergeBitmaps(originalDrawable.getBitmap(), markerDrawable.getBitmap());
     }
 
     private void onIntentSelected(Intent intent, boolean alwaysCheck) {
