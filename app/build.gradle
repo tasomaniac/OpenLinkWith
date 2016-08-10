@@ -27,7 +27,7 @@ android {
         buildConfigField "String", "ANALYTICS_KEY", local_properties.analytics_key != null ?
                 "\"" + local_properties.analytics_key + "\"" : "\"\""
 
-        resConfigs "en", "es", "in", "it", "ja", "pt-rBR", "pt-rPT", "ru", "tr"
+        resConfigs "ar", "de", "en", "es", "in", "it", "ja", "pt-rBR", "pt-rPT", "ru", "tr"
     }
 
     signingConfigs {

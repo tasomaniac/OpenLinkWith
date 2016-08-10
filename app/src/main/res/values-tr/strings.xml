@@ -30,7 +30,7 @@
   <string name="pref_summary_contact">1 yıldız vermeden önce bana email göderin.</string>
   <string name="pref_title_market">Said Tahsin Dane\'nin diğer uygulamaları</string>
   <string name="pref_summary_market">Beğendin mi? Diğer uygulamalarıma göz at?</string>
-  <string name="pref_title_version">Version</string>
+  <string name="pref_title_version">Versiyon</string>
   <string name="skip">Atla</string>
   <string name="cd_image_tutorial">Başlangıç Resmi</string>
   <string name="title_tutorial_0">Open Link With\'e Hoşgeldin</string>
@@ -47,6 +47,11 @@
   <string name="description_tutorial_4"><![CDATA[
   <strong>KULLANIM İZNİ</strong>\'ne erişim verirsen daha iyi çalışırım. Paylaştığın uygulamayı anlarım ve ona göre davranırım.
   ]]></string>
+  <string name="usage_access_give_access">Erişim Ver</string>
   <string name="error">Hata</string>
   <string name="error_usage_access_not_found">Kullanım Erişimi ayarları açılamıyor.\n\nAyarlar -&gt; Güvenlik kısmına giderek kendiniz ulaşabilirsiniz.</string>
+  <string name="add_to_homescreen">Ana Ekrana Ekle</string>
+  <string name="add">Ekle</string>
+  <string name="cancel">İptal</string>
+  <string name="dialog_hint_add_to_home_screen">Kısayol adı</string>
 </resources>

@@ -46,6 +46,11 @@
   ]]></string>
   <string name="description_tutorial_4"><![CDATA[    <strong>使用状況へのアクセス</strong> を許可していただけると、更により良く機能していきます。あなたが共有するブラウザを検出して、それに応じた動きをするようになります。
   ]]></string>
+  <string name="usage_access_give_access">Give Access</string>
   <string name="error">エラー</string>
   <string name="error_usage_access_not_found">使用状況へのアクセスの設定が見つかりませんでした\n\nYou may access it by going into Settings -&gt; Security</string>
+  <string name="add_to_homescreen">Add To Home screen</string>
+  <string name="add">Add</string>
+  <string name="cancel">Cancel</string>
+  <string name="dialog_hint_add_to_home_screen">Shortcut title</string>
 </resources>

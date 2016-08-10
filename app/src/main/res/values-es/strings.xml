@@ -46,6 +46,11 @@ Eliminar <strong>%1$s</strong> como app preferida para cargar los enlaces de <st
 Selecciona <strong>SIEMPRE</strong> para decirme que abra este enlace siempre con una aplicación específica.  ]]></string>
   <string name="description_tutorial_4"><![CDATA[
 Dar acceso a <strong>ACCESO DE USO</strong> y funcionaré mejor. Detectaré el navegador desde el cual estas compartiendo y actuaré en consecuencia.  ]]></string>
+  <string name="usage_access_give_access">Give Access</string>
   <string name="error">Error</string>
   <string name="error_usage_access_not_found">El Ajuste de Acceso de Uso no se puede encontrar.\n\nYou may access it by going into Settings -&gt; Security</string>
+  <string name="add_to_homescreen">Add To Home screen</string>
+  <string name="add">Add</string>
+  <string name="cancel">Cancel</string>
+  <string name="dialog_hint_add_to_home_screen">Shortcut title</string>
 </resources>
