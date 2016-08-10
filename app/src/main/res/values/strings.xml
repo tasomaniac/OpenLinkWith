@@ -78,5 +78,5 @@
   <string name="add_to_homescreen">Add To Home screen</string>
   <string name="add">Add</string>
   <string name="cancel">Cancel</string>
-  <string name="dialog_hint_add_to_home_screen">Home screen title</string>
+  <string name="dialog_hint_add_to_home_screen">Shortcut title</string>
 </resources>
