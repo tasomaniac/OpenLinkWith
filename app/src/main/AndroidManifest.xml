@@ -88,7 +88,7 @@
       android:excludeFromRecents="true"
       android:finishOnCloseSystemDialogs="true"
       android:label="@string/add_to_homescreen"
-      android:icon="@drawable/ic_star"
+      android:icon="@mipmap/ic_bookmark"
       android:relinquishTaskIdentity="true"
       android:theme="@style/Theme.Transparent.NoAnimation"
       android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
