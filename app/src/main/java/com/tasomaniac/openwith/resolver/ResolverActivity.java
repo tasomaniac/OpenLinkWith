@@ -15,28 +15,20 @@
  */
 package com.tasomaniac.openwith.resolver;
 
-import android.annotation.TargetApi;
 import android.app.ActivityManager;
-import android.app.usage.UsageStats;
-import android.app.usage.UsageStatsManager;
 import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
-import android.text.format.DateUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -45,14 +37,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.tasomaniac.openwith.BuildConfig;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.homescreen.AddToHomeScreenDialogFragment;
 import com.tasomaniac.openwith.misc.ItemClickListener;
 import com.tasomaniac.openwith.misc.ItemLongClickListener;
 import com.tasomaniac.openwith.util.Intents;
-
-import java.util.List;
 
 import timber.log.Timber;
 
@@ -60,7 +49,6 @@ import static android.view.WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR;
 import static android.view.WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.*;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.CONTENT_URI;
-import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withHost;
 
 /**
  * This activity is displayed when the system attempts to start an Intent for
@@ -75,6 +63,7 @@ public class ResolverActivity extends AppCompatActivity
     public static final String EXTRA_PRIORITY_PACKAGES = "EXTRA_PRIORITY_PACKAGES";
     public static final String EXTRA_ADD_TO_HOME_SCREEN = "EXTRA_ADD_TO_HOME_SCREEN";
     private static final String KEY_CHECKED_POS = "KEY_CHECKED_POS";
+    public static final String EXTRA_LAST_CHOSEN_COMPONENT = "last_chosen";
 
     private ResolveListAdapter mAdapter;
     private PackageManager mPm;
@@ -87,7 +76,7 @@ public class ResolverActivity extends AppCompatActivity
     private Button mOnceButton;
     private int mIconDpi;
 
-    private int mLastSelected = ResolveListAdapter.INVALID_POSITION;
+    private int mLastSelected = RecyclerView.NO_POSITION;
 
     private Uri mRequestedUri;
     private ChooserHistory mHistory;
@@ -135,61 +124,23 @@ public class ResolverActivity extends AppCompatActivity
             return;
         }
 
-        boolean isCallerPackagePreferred = false;
-        final String callerPackage = getCallerPackage();
-
-        ResolveInfo lastChosen = null;
-        final Cursor query = queryIntentWith(mRequestedUri.getHost());
-        if (!isAddToHomeScreen && query != null && query.moveToFirst()) {
-            try {
-                final boolean isPreferred = query.getInt(query.getColumnIndex(PREFERRED)) == 1;
-                final boolean isLastChosen = query.getInt(query.getColumnIndex(LAST_CHOSEN)) == 1;
-
-                if (isPreferred || isLastChosen) {
-                    final String componentString = query.getString(query.getColumnIndex(COMPONENT));
-
-                    final Intent lastChosenIntent = new Intent();
-                    final ComponentName lastChosenComponent = ComponentName.unflattenFromString(componentString);
-                    lastChosenIntent.setComponent(lastChosenComponent);
-                    ResolveInfo ri = mPm.resolveActivity(lastChosenIntent, PackageManager.MATCH_DEFAULT_ONLY);
-
-                    if (isPreferred && ri != null) {
-                        isCallerPackagePreferred = ri.activityInfo.packageName.equals(callerPackage);
-                        if (!isCallerPackagePreferred) {
-                            String warning = getString(R.string.warning_open_link_with_name, ri.loadLabel(mPm));
-                            Toast.makeText(this, warning, Toast.LENGTH_SHORT).show();
-
-                            intent.setComponent(lastChosenComponent);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
-                                                    | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
-                            try {
-                                startActivityFixingIntent(intent);
-                                finish();
-                                return;
-                            } catch (SecurityException e) {
-                                Timber.e(e, "Security Exception for %s", lastChosenComponent.flattenToString());
-                                getContentResolver().delete(withHost(mRequestedUri.getHost()), null, null);
-                            }
-                        }
-                    }
-
-                    lastChosen = ri;
-                }
-            } finally {
-                query.close();
-            }
-        }
-
         mPackageMonitor.register(this, getMainLooper(), false);
         mRegistered = true;
 
         final ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
         mIconDpi = am.getLauncherLargeIconDensity();
 
-        mAdapter = new ResolveListAdapter(this, getHistory(), intent, callerPackage, lastChosen, true);
+        mAdapter = new ResolveListAdapter(
+                this,
+                getHistory(),
+                intent,
+                getIntent().getStringExtra(ShareCompat.EXTRA_CALLING_PACKAGE),
+                intent.<ComponentName>getParcelableExtra(EXTRA_LAST_CHOSEN_COMPONENT),
+                true
+        );
         mAdapter.setPriorityItems(intent.getStringArrayExtra(EXTRA_PRIORITY_PACKAGES));
 
-        mAlwaysUseOption = !isAddToHomeScreen && !isCallerPackagePreferred && !mAdapter.hasFilteredItem();
+        mAlwaysUseOption = !isAddToHomeScreen && !mAdapter.hasFilteredItem();
 
         int count = mAdapter.mList.size();
         if (count > 1) {
@@ -260,76 +211,6 @@ public class ResolverActivity extends AppCompatActivity
             mAlwaysButton.setEnabled(true);
             mOnceButton.setEnabled(true);
         }
-    }
-
-    @Nullable
-    private String getCallerPackage() {
-        String callerPackage = getIntent().getStringExtra(ShareCompat.EXTRA_CALLING_PACKAGE);
-
-        if (callerPackage != null) {
-            return callerPackage;
-        }
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            return getCallerPackagerLegacy();
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
-            return getCallerPackageLollipop();
-        }
-
-        return null;
-    }
-
-    @SuppressWarnings("deprecation")
-    private String getCallerPackagerLegacy() {
-        ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-        final List<ActivityManager.RunningTaskInfo> runningTasks = am.getRunningTasks(1);
-        final ComponentName topActivity = runningTasks.get(0).baseActivity;
-        return topActivity.getPackageName();
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP_MR1)
-    private String getCallerPackageLollipop() {
-        UsageStatsManager mUsm = (UsageStatsManager) getSystemService(USAGE_STATS_SERVICE);
-        long time = System.currentTimeMillis();
-        // We get usage stats for the last 10 seconds
-        List<UsageStats> stats = null;
-        try {
-            stats = mUsm.queryUsageStats(
-                    UsageStatsManager.INTERVAL_DAILY,
-                    time - 10 * DateUtils.SECOND_IN_MILLIS,
-                    time
-            );
-        } catch (Exception ignored) {
-        }
-        if (stats == null) {
-            return null;
-        }
-
-        UsageStats lastUsage = null;
-        for (UsageStats currentUsage : stats) {
-            String currentPackage = currentUsage.getPackageName();
-            if (BuildConfig.APPLICATION_ID.equals(currentPackage)
-                    || "android".equals(currentPackage)) {
-                continue;
-            }
-            if (lastUsage == null ||
-                    lastUsage.getLastTimeUsed() < currentUsage.getLastTimeUsed()) {
-                lastUsage = currentUsage;
-            }
-        }
-        if (lastUsage != null) {
-            return lastUsage.getPackageName();
-        }
-
-        return null;
-    }
-
-    @Nullable
-    private Cursor queryIntentWith(String host) {
-        if (TextUtils.isEmpty(host)) {
-            return null;
-        }
-        return getContentResolver().query(withHost(host), null, null, null, null);
     }
 
     private void setupListAdapter() {
@@ -435,7 +316,7 @@ public class ResolverActivity extends AppCompatActivity
 
     @Override
     public void onItemClick(View view, final int position, long id) {
-        final boolean hasValidSelection = position != ResolveListAdapter.INVALID_POSITION;
+        final boolean hasValidSelection = position != RecyclerView.NO_POSITION;
         if (mAlwaysUseOption && (!hasValidSelection || mLastSelected != position)) {
             mAlwaysButton.setEnabled(hasValidSelection);
             mOnceButton.setEnabled(hasValidSelection);
@@ -491,7 +372,6 @@ public class ResolverActivity extends AppCompatActivity
         if (intent.getComponent() == null) {
             return;
         }
-        final ChooserHistory history = getHistory();
         ContentValues values = new ContentValues(4);
         values.put(HOST, mRequestedUri.getHost());
         values.put(COMPONENT, intent.getComponent().flattenToString());
@@ -506,6 +386,7 @@ public class ResolverActivity extends AppCompatActivity
             Timber.e(e, "Error while saving selected Intent");
         }
 
+        final ChooserHistory history = getHistory();
         history.add(intent.getComponent().getPackageName());
         history.save(this);
     }

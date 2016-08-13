@@ -49,8 +49,6 @@ import static android.os.Build.VERSION_CODES.M;
 
 public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAdapter.ViewHolder, ResolveListAdapter.Header, DisplayResolveInfo, Void> {
 
-    public static final int INVALID_POSITION = -1;
-
     private static final Intent BROWSER_INTENT;
 
     static {
@@ -65,7 +63,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
 
     private Intent mIntent;
 
-    private ResolveInfo mLastChosen;
+    private ComponentName mLastChosen;
     private final LayoutInflater mInflater;
 
     protected List<DisplayResolveInfo> mList;
@@ -74,7 +72,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     private boolean mFilterLastUsed;
 
     private boolean selectionEnabled;
-    private int checkedItemPosition = INVALID_POSITION;
+    private int checkedItemPosition = RecyclerView.NO_POSITION;
 
     private PackageManager mPm;
     private Map<String, UsageStats> mStats;
@@ -93,7 +91,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
                               ChooserHistory history,
                               Intent intent,
                               String callerPackage,
-                              ResolveInfo lastChosen,
+                              ComponentName lastChosen,
                               boolean filterLastUsed) {
 
         final ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
@@ -328,8 +326,8 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
 
     private void updateLastChosenPosition(ResolveInfo info) {
         if (mLastChosen != null
-                && mLastChosen.activityInfo.packageName.equals(info.activityInfo.packageName)
-                && mLastChosen.activityInfo.name.equals(info.activityInfo.name)) {
+                && mLastChosen.getPackageName().equals(info.activityInfo.packageName)
+                && mLastChosen.getClassName().equals(info.activityInfo.name)) {
             mLastChosenPosition = mList.size() - 1;
         }
     }
