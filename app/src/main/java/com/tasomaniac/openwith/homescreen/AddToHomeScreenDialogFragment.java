@@ -17,6 +17,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.resolver.DisplayResolveInfo;
@@ -61,7 +62,7 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = getActivity().getLayoutInflater()
-                .inflate(R.layout.dialog_add_to_home_screen, null);
+                .inflate(R.layout.dialog_add_to_home_screen, (ViewGroup) getView(), false);
         ButterKnife.bind(this, view);
 
         return new AlertDialog.Builder(getActivity())

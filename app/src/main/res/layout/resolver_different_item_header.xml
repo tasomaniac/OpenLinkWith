@@ -28,7 +28,7 @@
     android:textAppearance="?android:attr/textAppearanceMedium"
     android:gravity="start|center_vertical"
     android:paddingLeft="?attr/listPreferredItemPaddingLeft"
-    android:paddingRight="?attr/listPreferredItemPaddingRight"
+    android:paddingRight="?attr/listPreferredItemPaddingLeft"
     android:paddingTop="8dp"
     android:paddingBottom="8dp"
     />

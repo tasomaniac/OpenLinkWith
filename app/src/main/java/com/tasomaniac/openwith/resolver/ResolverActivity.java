@@ -45,8 +45,6 @@ import com.tasomaniac.openwith.util.Intents;
 
 import timber.log.Timber;
 
-import static android.view.WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR;
-import static android.view.WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.*;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.CONTENT_URI;
 
@@ -173,10 +171,6 @@ public class ResolverActivity extends AppCompatActivity
         }
 
         mListView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Prevent the Resolver window from becoming the top fullscreen window and thus from taking
-        // control of the system bars.
-        getWindow().clearFlags(FLAG_LAYOUT_IN_SCREEN | FLAG_LAYOUT_INSET_DECOR);
 
         final ResolverDrawerLayout rdl = (ResolverDrawerLayout) findViewById(R.id.contentPanel);
         if (rdl != null) {

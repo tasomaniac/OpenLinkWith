@@ -54,7 +54,7 @@
         android:layout_width="0dp"
         android:layout_height="?attr/listPreferredItemHeight"
         android:layout_marginLeft="?attr/listPreferredItemPaddingLeft"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="?attr/listPreferredItemPaddingLeft"
         android:layout_weight="1"
         android:gravity="start|center_vertical"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
