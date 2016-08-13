@@ -104,6 +104,8 @@ dependencies {
     compile "com.android.support:design:$supportLibVersion"
     compile "com.android.support:preference-v14:$supportLibVersion"
 
+    compile 'com.tasomaniac:delayed-progress:0.3'
+
     compile 'com.karumi:headerrecyclerview:1.1.0'
     compile 'jp.wasabeef:recyclerview-animators:2.2.3'
 
@@ -113,6 +115,8 @@ dependencies {
     compile "com.jakewharton:butterknife:$butterKnifeVersion"
     apt "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
     compile 'com.jakewharton.timber:timber:4.1.2'
+
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
 
     prodCompile "com.google.android.gms:play-services-analytics:9.4.0"
     prodCompile 'com.crashlytics.sdk.android:crashlytics:2.6.1'

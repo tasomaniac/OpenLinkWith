@@ -116,7 +116,7 @@ public class ShareToOpenWith extends Activity {
                             intentToHandle.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
                                                             | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
                             try {
-                                startActivityFixingIntent(intentToHandle);
+                                Intents.startActivityFixingIntent(this, intentToHandle);
                                 finish();
                                 return;
                             } catch (SecurityException e) {
@@ -138,10 +138,6 @@ public class ShareToOpenWith extends Activity {
                               .setClass(this, ResolverActivity.class));
 
         finish();
-    }
-
-    private void startActivityFixingIntent(Intent intent) {
-        startActivity(Intents.fixIntents(this, intent));
     }
 
     @Nullable

@@ -156,7 +156,7 @@ public class ResolverActivity extends AppCompatActivity
                         ),
                         Toast.LENGTH_SHORT
                 ).show();
-                startActivityFixingIntent(mAdapter.intentForDisplayResolveInfo(dri));
+                Intents.startActivityFixingIntent(this, mAdapter.intentForDisplayResolveInfo(dri));
                 mPackageMonitor.unregister();
                 mRegistered = false;
                 finish();
@@ -359,7 +359,7 @@ public class ResolverActivity extends AppCompatActivity
             persistSelectedIntent(intent, alwaysCheck);
         }
 
-        startActivityFixingIntent(intent);
+        Intents.startActivityFixingIntent(this, intent);
     }
 
     private void persistSelectedIntent(Intent intent, boolean alwaysCheck) {
@@ -383,10 +383,6 @@ public class ResolverActivity extends AppCompatActivity
         final ChooserHistory history = getHistory();
         history.add(intent.getComponent().getPackageName());
         history.save(this);
-    }
-
-    private void startActivityFixingIntent(Intent intent) {
-        startActivity(Intents.fixIntents(this, intent));
     }
 
     @Override
