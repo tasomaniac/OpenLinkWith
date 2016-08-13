@@ -11,7 +11,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ShareCompat;
@@ -27,6 +26,9 @@ import java.util.List;
 
 import timber.log.Timber;
 
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.LOLLIPOP;
+import static android.os.Build.VERSION_CODES.LOLLIPOP_MR1;
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.*;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withHost;
 import static com.tasomaniac.openwith.util.Urls.fixUrls;
@@ -149,10 +151,10 @@ public class ShareToOpenWith extends Activity {
         if (callerPackage != null) {
             return callerPackage;
         }
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+        if (SDK_INT < LOLLIPOP) {
             return getCallerPackagerLegacy();
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+        }
+        if (SDK_INT >= LOLLIPOP_MR1) {
             return getCallerPackageLollipop();
         }
 
@@ -167,7 +169,7 @@ public class ShareToOpenWith extends Activity {
         return topActivity.getPackageName();
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP_MR1)
+    @TargetApi(LOLLIPOP_MR1)
     private String getCallerPackageLollipop() {
         UsageStatsManager mUsm = (UsageStatsManager) getSystemService(USAGE_STATS_SERVICE);
         long time = System.currentTimeMillis();
