@@ -136,6 +136,22 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
         });
     }
 
+    private static String extractTitle(ResponseBody body) throws IOException {
+        BufferedSource source = body.source();
+
+        Pattern pattern = Pattern.compile("<title>(.+)</title>");
+
+        String line;
+        //noinspection MethodCallInLoopCondition
+        while ((line = source.readUtf8Line()) != null) {
+            Matcher matcher = pattern.matcher(line);
+            if (matcher.find()) {
+                return matcher.group(1);
+            }
+        }
+        return null;
+    }
+
     private void showProgressBar() {
         progressBar.post(new Runnable() {
             @Override
@@ -154,22 +170,6 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
         });
     }
 
-    private static String extractTitle(ResponseBody body) throws IOException {
-        BufferedSource source = body.source();
-
-        Pattern pattern = Pattern.compile("<title>(.+)</title>");
-
-        String line;
-        //noinspection MethodCallInLoopCondition
-        while ((line = source.readUtf8Line()) != null) {
-            Matcher matcher = pattern.matcher(line);
-            if (matcher.find()) {
-                return matcher.group(1);
-            }
-        }
-        return null;
-    }
-
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -183,11 +183,15 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
                 .setView(view)
                 .setTitle(R.string.add_to_homescreen)
                 .create();
+        forceKeyboardVisible(dialog);
+        return dialog;
+    }
+
+    private static void forceKeyboardVisible(AlertDialog dialog) {
         dialog.getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
                 | WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE
         );
-        return dialog;
     }
 
     @Override
