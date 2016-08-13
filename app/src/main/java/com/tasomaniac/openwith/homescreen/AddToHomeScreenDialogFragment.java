@@ -4,15 +4,10 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.text.TextUtils;
@@ -23,6 +18,7 @@ import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.resolver.DisplayResolveInfo;
 import com.tasomaniac.openwith.util.Intents;
 
+import butterknife.BindBitmap;
 import butterknife.ButterKnife;
 import butterknife.OnTextChanged;
 
@@ -32,7 +28,11 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
     private static final String KEY_DRI = "dri";
     private static final String KEY_INTENT = "intent";
 
+    @BindBitmap(R.drawable.ic_star_mark)
+    Bitmap shortcutMark;
+
     private DisplayResolveInfo dri;
+    private ShortcutIconCreator shortcutIconCreator;
     private Intent intent;
     private String title;
 
@@ -56,6 +56,7 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
     public void onStart() {
         super.onStart();
         onTitleChanged("");
+        shortcutIconCreator = new ShortcutIconCreator(shortcutMark);
     }
 
     @NonNull
@@ -93,37 +94,12 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
         shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, title);
         shortcutIntent.putExtra(
                 Intent.EXTRA_SHORTCUT_ICON,
-                createShortcutIconBitmap(dri)
+                shortcutIconCreator.createShortcutIconFor((BitmapDrawable) dri.getDisplayIcon())
         );
         shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent);
         shortcutIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
 
         getActivity().sendBroadcast(shortcutIntent);
-    }
-
-    private Bitmap createShortcutIconBitmap(DisplayResolveInfo dri) {
-        BitmapDrawable originalDrawable = (BitmapDrawable) dri.getDisplayIcon();
-        BitmapDrawable markerDrawable = (BitmapDrawable) ContextCompat.getDrawable(getActivity(), R.drawable.ic_star_mark);
-        return mergeBitmaps(originalDrawable.getBitmap(), markerDrawable.getBitmap());
-    }
-
-    public static Bitmap mergeBitmaps(Bitmap background, Bitmap overlay) {
-        final int width = background.getWidth();
-        final int height = background.getHeight();
-        int overlayWidth = overlay.getWidth();
-        int overlayHeight = overlay.getHeight();
-        int left = width - overlayWidth;
-        int top = height - overlayHeight;
-
-        Bitmap bmOverlay = Bitmap.createBitmap(width, height, background.getConfig());
-        Canvas canvas = new Canvas(bmOverlay);
-
-        Paint paint = new Paint();
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER));
-
-        canvas.drawBitmap(background, 0, 0, paint);
-        canvas.drawBitmap(overlay, left, top, paint);
-        return bmOverlay;
     }
 
     public void show(FragmentManager fragmentManager) {
