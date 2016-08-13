@@ -139,7 +139,7 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
     private static String extractTitle(ResponseBody body) throws IOException {
         BufferedSource source = body.source();
 
-        Pattern pattern = Pattern.compile("<title>(.+)</title>");
+        Pattern pattern = Pattern.compile("<title(?:\\s.*)?>(.+)</title>");
 
         String line;
         //noinspection MethodCallInLoopCondition
