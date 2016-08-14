@@ -141,34 +141,31 @@ public class ResolverActivity extends AppCompatActivity
         mAlwaysUseOption = !isAddToHomeScreen && !mAdapter.hasFilteredItem();
 
         int count = mAdapter.mList.size();
-        if (count > 1) {
-            setupListAdapter();
-        } else if (count == 1) {
-            if (isAddToHomeScreen) {
-                setupListAdapter();
-            } else {
-                final DisplayResolveInfo dri = mAdapter.displayResolveInfoForPosition(0, false);
-                Toast.makeText(
-                        this,
-                        getString(
-                                R.string.warning_open_link_with_name,
-                                dri.displayLabel()
-                        ),
-                        Toast.LENGTH_SHORT
-                ).show();
-                Intents.startActivityFixingIntent(this, mAdapter.intentForDisplayResolveInfo(dri));
-                mPackageMonitor.unregister();
-                mRegistered = false;
-                finish();
-                return;
-            }
-        } else {
+        if (count == 0) {
             Toast.makeText(this, getString(R.string.empty_resolver_activity), Toast.LENGTH_LONG).show();
             mPackageMonitor.unregister();
             mRegistered = false;
             finish();
             return;
         }
+        if (count == 1 && !isAddToHomeScreen) {
+            final DisplayResolveInfo dri = mAdapter.displayResolveInfoForPosition(0, false);
+            Toast.makeText(
+                    this,
+                    getString(
+                            R.string.warning_open_link_with_name,
+                            dri.displayLabel()
+                    ),
+                    Toast.LENGTH_SHORT
+            ).show();
+            Intents.startActivityFixingIntent(this, mAdapter.intentForDisplayResolveInfo(dri));
+            mPackageMonitor.unregister();
+            mRegistered = false;
+            finish();
+            return;
+        }
+
+        setupListAdapter();
 
         mListView.setLayoutManager(new LinearLayoutManager(this));
 
