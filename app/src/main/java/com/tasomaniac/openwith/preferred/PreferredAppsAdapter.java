@@ -14,9 +14,9 @@ import java.util.List;
 class PreferredAppsAdapter extends ResolveListAdapter {
 
     PreferredAppsAdapter(Context context, List<DisplayResolveInfo> apps) {
-        super(context, null, null, null, null, false);
+        super(context);
 
-        mList = apps;
+        mList.addAll(apps);
         mShowExtended = true;
     }
 
@@ -25,7 +25,8 @@ class PreferredAppsAdapter extends ResolveListAdapter {
     }
 
     void setApplications(List<DisplayResolveInfo> apps) {
-        mList = apps;
+        mList.clear();
+        mList.addAll(apps);
         notifyDataSetChanged();
     }
 

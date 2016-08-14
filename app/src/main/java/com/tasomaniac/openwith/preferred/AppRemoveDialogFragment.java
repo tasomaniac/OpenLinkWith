@@ -51,9 +51,9 @@ public class AppRemoveDialogFragment extends AppCompatDialogFragment {
 
         final String message = getString(
                 R.string.message_remove_preferred,
-                info.getDisplayLabel(),
-                info.getExtendedInfo(),
-                info.getExtendedInfo()
+                info.displayLabel(),
+                info.extendedInfo(),
+                info.extendedInfo()
         );
 
         return new AlertDialog.Builder(getActivity())

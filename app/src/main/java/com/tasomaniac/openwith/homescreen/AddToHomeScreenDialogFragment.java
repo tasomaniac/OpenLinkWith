@@ -226,7 +226,7 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
         shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, titleView.getText().toString());
         shortcutIntent.putExtra(
                 Intent.EXTRA_SHORTCUT_ICON,
-                shortcutIconCreator.createShortcutIconFor((BitmapDrawable) dri.getDisplayIcon())
+                shortcutIconCreator.createShortcutIconFor((BitmapDrawable) dri.displayIcon())
         );
         shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent);
         shortcutIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");

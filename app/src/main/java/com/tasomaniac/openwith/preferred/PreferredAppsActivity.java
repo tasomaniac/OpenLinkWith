@@ -34,8 +34,7 @@ import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.*;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.CONTENT_URI_PREFERRED;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withId;
 
-public class PreferredAppsActivity
-        extends AppCompatActivity
+public class PreferredAppsActivity extends AppCompatActivity
         implements
         LoaderManager.LoaderCallbacks<Cursor>,
         ItemClickListener,
@@ -143,14 +142,14 @@ public class PreferredAppsActivity
 
     @Override
     public void onAppRemoved(DisplayResolveInfo info, int position) {
-        getContentResolver().delete(withId(info.getId()), null, null);
+        getContentResolver().delete(withId(info.id()), null, null);
 
         notifyItemRemoval(position);
 
         analytics.sendEvent(
                 "Preferred",
                 "Removed",
-                info.getDisplayLabel().toString()
+                info.displayLabel().toString()
         );
     }
 }

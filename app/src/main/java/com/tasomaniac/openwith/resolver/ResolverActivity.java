@@ -134,9 +134,9 @@ public class ResolverActivity extends AppCompatActivity
                 intent,
                 getIntent().getStringExtra(ShareCompat.EXTRA_CALLING_PACKAGE),
                 intent.<ComponentName>getParcelableExtra(EXTRA_LAST_CHOSEN_COMPONENT),
-                true
+                true,
+                intent.getStringArrayExtra(EXTRA_PRIORITY_PACKAGES)
         );
-        mAdapter.setPriorityItems(intent.getStringArrayExtra(EXTRA_PRIORITY_PACKAGES));
 
         mAlwaysUseOption = !isAddToHomeScreen && !mAdapter.hasFilteredItem();
 
@@ -152,7 +152,7 @@ public class ResolverActivity extends AppCompatActivity
                         this,
                         getString(
                                 R.string.warning_open_link_with_name,
-                                dri.getDisplayLabel()
+                                dri.displayLabel()
                         ),
                         Toast.LENGTH_SHORT
                 ).show();
@@ -237,7 +237,7 @@ public class ResolverActivity extends AppCompatActivity
 
     private CharSequence getTitleForAction() {
         final DisplayResolveInfo item = mAdapter.getFilteredItem();
-        return item != null ? getString(R.string.which_view_application_named, item.displayLabel) :
+        return item != null ? getString(R.string.which_view_application_named, item.displayLabel()) :
                 getString(R.string.which_view_application);
     }
 
@@ -410,15 +410,15 @@ public class ResolverActivity extends AppCompatActivity
         @Override
         protected DisplayResolveInfo doInBackground(DisplayResolveInfo... params) {
             final DisplayResolveInfo info = params[0];
-            if (info.displayIcon == null) {
-                info.displayIcon = ResolveListAdapter.loadIconForResolveInfo(mPm, info.ri, mIconDpi);
+            if (info.displayIcon() == null) {
+                info.displayIcon(ResolveListAdapter.loadIconForResolveInfo(mPm, info.ri, mIconDpi));
             }
             return info;
         }
 
         @Override
         protected void onPostExecute(DisplayResolveInfo info) {
-            mTargetView.setImageDrawable(info.displayIcon);
+            mTargetView.setImageDrawable(info.displayIcon());
         }
     }
 }

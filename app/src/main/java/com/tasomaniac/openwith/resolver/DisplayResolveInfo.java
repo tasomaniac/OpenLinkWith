@@ -9,21 +9,21 @@ import android.text.TextUtils;
 public final class DisplayResolveInfo implements Parcelable {
     private final int id;
     final ResolveInfo ri;
-    final CharSequence displayLabel;
-    final CharSequence extendedInfo;
-    Drawable displayIcon;
+    private final CharSequence displayLabel;
+    private final CharSequence extendedInfo;
+    private Drawable displayIcon;
 
     DisplayResolveInfo(ResolveInfo pri, CharSequence pLabel,
                        CharSequence pInfo) {
         this(0, pri, pLabel, pInfo);
     }
 
-    public DisplayResolveInfo(int id, ResolveInfo pri, CharSequence pLabel,
-                              CharSequence pInfo) {
+    public DisplayResolveInfo(int id, ResolveInfo ri, CharSequence displayLabel,
+                              CharSequence extendedInfo) {
         this.id = id;
-        ri = pri;
-        displayLabel = pLabel;
-        extendedInfo = pInfo;
+        this.ri = ri;
+        this.displayLabel = displayLabel;
+        this.extendedInfo = extendedInfo;
     }
 
     private DisplayResolveInfo(Parcel in) {
@@ -58,19 +58,23 @@ public final class DisplayResolveInfo implements Parcelable {
         }
     };
 
-    public int getId() {
+    public int id() {
         return id;
     }
 
-    public CharSequence getDisplayLabel() {
+    public CharSequence displayLabel() {
         return displayLabel;
     }
 
-    public CharSequence getExtendedInfo() {
+    public CharSequence extendedInfo() {
         return extendedInfo;
     }
 
-    public Drawable getDisplayIcon() {
+    public Drawable displayIcon() {
         return displayIcon;
+    }
+
+    void displayIcon(Drawable displayIcon) {
+        this.displayIcon = displayIcon;
     }
 }
