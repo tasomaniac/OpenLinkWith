@@ -83,7 +83,7 @@
     </activity>
 
     <activity
-      android:name=".AddToHomeScreen"
+      android:name=".homescreen.AddToHomeScreen"
       android:configChanges="keyboardHidden|orientation|screenLayout"
       android:documentLaunchMode="never"
       android:excludeFromRecents="true"

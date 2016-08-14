@@ -1,4 +1,4 @@
-package com.tasomaniac.openwith;
+package com.tasomaniac.openwith.homescreen;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v4.app.ShareCompat;
 import android.widget.Toast;
 
+import com.tasomaniac.openwith.App;
+import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.resolver.ResolverActivity;
 import com.tasomaniac.openwith.util.Urls;
 
