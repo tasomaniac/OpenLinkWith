@@ -142,6 +142,7 @@ public class ResolverActivity extends AppCompatActivity
 
         int count = mAdapter.mList.size();
         if (count == 0) {
+            Timber.e("No app is found to handle url: %s", intent.getDataString());
             Toast.makeText(this, getString(R.string.empty_resolver_activity), Toast.LENGTH_LONG).show();
             mPackageMonitor.unregister();
             mRegistered = false;
