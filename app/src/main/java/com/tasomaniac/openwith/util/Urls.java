@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 public final class Urls {
 
     private static final Fixer[] URL_FIXERS = new Fixer[]{
+            new FacebookFixer(),
             new TwitterFixer(),
             new EbayFixer(),
             new AmazonFixer(),
@@ -48,6 +49,17 @@ public final class Urls {
             return matcher.group();
         }
         return null;
+    }
+
+    private static class FacebookFixer implements Fixer {
+
+        @Override
+        public String fix(String url) {
+            return  url
+                    .replace("https://facebook.com/", "https://www.facebook.com/")
+                    .replace("http://facebook.com/", "http://www.facebook.com/")
+                    .replace("facebook.com/", "facebook.com/n/?");
+        }
     }
 
     private static class TwitterFixer implements Fixer {
