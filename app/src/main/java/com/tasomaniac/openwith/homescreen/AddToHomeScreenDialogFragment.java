@@ -39,6 +39,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okio.BufferedSource;
+import timber.log.Timber;
 
 import static android.os.Build.VERSION_CODES.M;
 
@@ -105,7 +106,7 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
         }
         call = client.newCall(new Request.Builder()
                                       .url(intent.getDataString())
-                                      .header("User-Agent", "Mozilla/5.0 (Linux; Android) AppleWebKit (KHTML, like Gecko) Mobile Safari")
+                                      .header("User-Agent", "Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit (KHTML, like Gecko) Version/3.0 Mobile Safari")
                                       .build());
         call.enqueue(new Callback() {
             @Override
@@ -118,6 +119,8 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
                 hideProgressBar();
 
                 if (!response.isSuccessful()) {
+                    Timber.tag("Network")
+                            .e("Fail with response: %s", response);
                     return;
                 }
                 if (!TextUtils.isEmpty(titleView.getText())) {
@@ -129,7 +132,7 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
                     titleView.post(new Runnable() {
                         @Override
                         public void run() {
-                            if (title !=null && TextUtils.isEmpty(titleView.getText())) {
+                            if (title != null && TextUtils.isEmpty(titleView.getText())) {
                                 titleView.append(title);
                             }
                         }
@@ -142,14 +145,20 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
     private static String extractTitle(ResponseBody body) throws IOException {
         BufferedSource source = body.source();
 
-        Pattern pattern = Pattern.compile("<title(?:\\s.*)?>(.+)</title>");
+        Pattern pattern = Pattern.compile("(?:<title(?:\\s.*)?>(.+)</title>|<meta\\s.*property=\"og:title\"\\s.*content=\"(.*)\".*>|<meta\\s.*content=\"(.*)\"\\s.*property=\"og:title\".*>)");
 
         String line;
         //noinspection MethodCallInLoopCondition
         while ((line = source.readUtf8Line()) != null) {
             Matcher matcher = pattern.matcher(line);
-            if (matcher.find()) {
-                return matcher.group(1);
+            if (!matcher.find()) {
+                continue;
+            }
+            for (int i = 1, size = matcher.groupCount(); i <= size; i++) {
+                String match = matcher.group(i);
+                if (match != null) {
+                    return match;
+                }
             }
         }
         return null;
@@ -193,7 +202,7 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
     private static void forceKeyboardVisible(AlertDialog dialog) {
         dialog.getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
-                | WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE
+                        | WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE
         );
     }
 
