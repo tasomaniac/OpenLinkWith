@@ -176,7 +176,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         }
 
         //Remove the components from the caller
-        if (!TextUtils.isEmpty(mCallerPackage) && currentResolveList.size() > 1) {
+        if (!TextUtils.isEmpty(mCallerPackage)) {
             removePackageFromList(mCallerPackage, currentResolveList);
         }
 
