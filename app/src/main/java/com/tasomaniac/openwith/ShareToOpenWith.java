@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.tasomaniac.openwith.resolver.ResolverActivity;
 import com.tasomaniac.openwith.util.Intents;
-import com.tasomaniac.openwith.util.Utils;
+import com.tasomaniac.openwith.util.Urls;
 
 import java.util.List;
 
@@ -79,7 +79,7 @@ public class ShareToOpenWith extends Activity {
         }
 
         final ShareCompat.IntentReader reader = ShareCompat.IntentReader.from(this);
-        String foundUrl = Utils.extractUrlFrom(getIntent(), reader);
+        String foundUrl = Urls.extractUrlFrom(getIntent(), reader);
 
         if (foundUrl == null) {
             Toast.makeText(this, R.string.error_invalid_url, Toast.LENGTH_SHORT).show();

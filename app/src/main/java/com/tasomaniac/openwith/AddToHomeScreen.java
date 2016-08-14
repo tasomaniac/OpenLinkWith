@@ -8,7 +8,7 @@ import android.support.v4.app.ShareCompat;
 import android.widget.Toast;
 
 import com.tasomaniac.openwith.resolver.ResolverActivity;
-import com.tasomaniac.openwith.util.Utils;
+import com.tasomaniac.openwith.util.Urls;
 
 import static com.tasomaniac.openwith.util.Urls.fixUrls;
 
@@ -21,7 +21,7 @@ public class AddToHomeScreen extends Activity {
         App.getApp(this).getAnalytics().sendScreenView("AddToHomeScreen");
 
         final ShareCompat.IntentReader reader = ShareCompat.IntentReader.from(this);
-        String foundUrl = Utils.extractUrlFrom(getIntent(), reader);
+        String foundUrl = Urls.extractUrlFrom(getIntent(), reader);
 
         if (foundUrl != null) {
             Intent intentToHandle = new Intent(Intent.ACTION_VIEW, Uri.parse(fixUrls(foundUrl)))

@@ -1,6 +1,9 @@
 package com.tasomaniac.openwith.util;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ShareCompat;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,8 +24,21 @@ public final class Urls {
         return url;
     }
 
+    public static String extractUrlFrom(Intent intent, ShareCompat.IntentReader reader) {
+        CharSequence text = reader.getText();
+        if (text == null) {
+            text = getExtraSelectedText(intent);
+        }
+        return findFirstUrl(text);
+    }
+
+    @SuppressLint("InlinedApi")
+    private static CharSequence getExtraSelectedText(Intent intent) {
+        return intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT);
+    }
+
     @Nullable
-    public static String findFirstUrl(@Nullable CharSequence text) {
+    private static String findFirstUrl(@Nullable CharSequence text) {
         if (text == null) {
             return null;
         }

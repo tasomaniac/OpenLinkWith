@@ -49,17 +49,4 @@ public class Utils {
     private Utils() {
     }
 
-    public static String extractUrlFrom(Intent intent, ShareCompat.IntentReader reader) {
-        CharSequence text = reader.getText();
-        if (text == null) {
-            text = getExtraSelectedText(intent);
-        }
-        return Urls.findFirstUrl(text);
-    }
-
-    @SuppressLint("InlinedApi")
-    private static CharSequence getExtraSelectedText(Intent intent) {
-        return intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT);
-    }
-
 }
