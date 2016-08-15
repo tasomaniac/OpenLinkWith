@@ -88,6 +88,16 @@ public class SettingsFragment extends PreferenceFragmentCompat
                 findPreference(R.string.pref_key_debug_maps),
                 "http://maps.google.com/maps"
         );
+        setupDebugPreference(
+                getActivity(),
+                findPreference(R.string.pref_key_debug_hangouts),
+                "https://hangouts.google.com/hangouts/_/novoda.com/wormhole?authuser=tahsin@novoda.com"
+        );
+        setupDebugPreference(
+                getActivity(),
+                findPreference(R.string.pref_key_debug_play),
+                "https://play.google.com/store/apps/details?id=com.tasomaniac.openwith"
+        );
     }
 
     private static void setupDebugPreference(Activity activity, Preference debugPreference, String debugPrefUrl) {
