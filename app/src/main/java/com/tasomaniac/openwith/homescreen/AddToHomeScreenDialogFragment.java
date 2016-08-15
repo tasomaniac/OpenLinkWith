@@ -106,7 +106,7 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
         }
         call = client.newCall(new Request.Builder()
                                       .url(intent.getDataString())
-                                      .header("User-Agent", "Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit (KHTML, like Gecko) Version/3.0 Mobile Safari")
+                                      .header("User-Agent", "Mozilla/5.0 (Android; Mobile; rv:13.0) Gecko/13.0 Firefox/13.0")
                                       .build());
         call.enqueue(new Callback() {
             @Override
