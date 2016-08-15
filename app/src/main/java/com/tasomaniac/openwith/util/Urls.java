@@ -55,9 +55,28 @@ public final class Urls {
 
         @Override
         public String fix(String url) {
-            return  url
-                    .replace("https://facebook.com/", "https://www.facebook.com/")
+            if (!url.contains("facebook.com")) {
+                return url;
+            }
+
+            // Skip the links that Facebook supports
+            if (url.contains("facebook.com/permalink.php")
+                    || url.contains("facebook.com/story.php")
+                    || url.contains("facebook.com/home.php")
+                    || url.contains("facebook.com/photo.php")
+                    || url.contains("facebook.com/video.php")
+                    || url.contains("facebook.com/donate")
+                    || url.contains("facebook.com/events")
+                    || url.contains("facebook.com/groups")
+                    || url.contains("/posts/")
+                    || url.contains("/dialog/")
+                    || url.contains("/sharer")) {
+                return url;
+            }
+
+            return url.replace("https://facebook.com/", "https://www.facebook.com/")
                     .replace("http://facebook.com/", "http://www.facebook.com/")
+                    .replace("?", "&")
                     .replace("facebook.com/", "facebook.com/n/?");
         }
     }
