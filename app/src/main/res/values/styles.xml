@@ -29,7 +29,7 @@
     <item name="android:windowAnimationStyle">@null</item>
   </style>
 
-  <style name="Base.BottomSheet.Light" parent="Theme.AppCompat.Light">
+  <style name="Base.BottomSheet.Light" parent="Theme.OpenWith">
 
     <item name="android:windowIsTranslucent">true</item>
     <item name="android:windowNoTitle">true</item>
@@ -38,6 +38,7 @@
     <item name="android:windowContentOverlay">@null</item>
     <item name="listPreferredItemPaddingLeft">?attr/dialogPreferredPadding</item>
     <item name="listPreferredItemPaddingRight">?attr/dialogPreferredPadding</item>
+    <item name="colorControlActivated">?attr/colorControlHighlight</item>
   </style>
 
   <style name="BottomSheet.Light" parent="Base.BottomSheet.Light"/>

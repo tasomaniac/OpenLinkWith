@@ -38,14 +38,22 @@ Remover <strong>%1$s</strong> como a aplicação predefinida para abrir ligaçõ
   <string name="title_tutorial_1">Já aconteceu consigo?</string>
   <string name="title_tutorial_2">Partilhar!</string>
   <string name="title_tutorial_3">Aplicações pré-definidas</string>
-  <string name="title_tutorial_4">Acesso de utilização</string>
+  <string name="title_tutorial_5">Acesso de utilização</string>
   <string name="description_tutorial_0">Venho resgatá-lo sempre que fique preso nos navegadores.</string>
   <string name="description_tutorial_1">Você clica numa ligação e de alguma forma acaba por ficar preso na página web ao invés de assistir ao vídeo diretamente.</string>
   <string name="description_tutorial_2">Basta partilhar comigo e irei mudar de aplicação.</string>
   <string name="description_tutorial_3"><![CDATA[
 Selecione <strong>sempre</strong> para abrir essa ligação com um aplicação específica.  ]]></string>
   <string name="description_tutorial_4"><![CDATA[
+    <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.
+  ]]></string>
+  <string name="description_tutorial_5"><![CDATA[
 Dar acesso a <strong>Acesso de uso</strong> e irei trabalhar melhor. Irei detectar o navegador que está a usar para partilhar e agir em conformidade.  ]]></string>
+  <string name="usage_access_give_access">Give Access</string>
   <string name="error">Erro</string>
   <string name="error_usage_access_not_found">Configurações de Acesso de uso não encontradas.\n\nYou may access it by going into Settings -&gt; Security</string>
+  <string name="add_to_homescreen">Add To Home screen</string>
+  <string name="add">Add</string>
+  <string name="cancel">Cancel</string>
+  <string name="dialog_hint_add_to_home_screen">Shortcut title</string>
 </resources>

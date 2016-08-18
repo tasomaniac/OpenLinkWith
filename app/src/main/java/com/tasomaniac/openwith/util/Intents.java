@@ -20,6 +20,13 @@ public class Intents {
             new AmazonFixer(),
     };
 
+    public static void launchHomeScreen(Activity activity) {
+        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+        homeIntent.addCategory(Intent.CATEGORY_HOME);
+        homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+        activity.startActivity(homeIntent);
+    }
+
     @SuppressLint("InlinedApi")
     public static boolean maybeStartUsageAccessSettings(final Activity activity) {
         try {
@@ -32,6 +39,10 @@ public class Intents {
         }
 
         return false;
+    }
+
+    public static void startActivityFixingIntent(Context context, Intent intent) {
+        context.startActivity(fixIntents(context, intent));
     }
 
     public static Intent fixIntents(Context context, Intent intent) {
@@ -68,14 +79,16 @@ public class Intents {
                 String asin = Urls.AmazonFixer.extractAmazonASIN(intent.getDataString());
                 if (asin != null) {
                     if ("0000000000".equals(asin)) {
-                        return context.getPackageManager()
+                        Intent launchIntentForPackage = context.getPackageManager()
                                 .getLaunchIntentForPackage(intent.getComponent().getPackageName());
+                        return new Intent(intent)
+                                .setData(null)
+                                .setComponent(launchIntentForPackage.getComponent());
                     }
-                    return new Intent("android.intent.action.VIEW")
-                            .setDataAndType(
-                                    Uri.parse("mshop://featured?ASIN=" + asin),
-                                    "vnd.android.cursor.item/vnd.amazon.mShop.featured"
-                            );
+                    return new Intent(intent).setDataAndType(
+                            Uri.parse("mshop://featured?ASIN=" + asin),
+                            "vnd.android.cursor.item/vnd.amazon.mShop.featured"
+                    );
                 }
             }
             return intent;
@@ -87,5 +100,6 @@ public class Intents {
     }
 
     private Intents() {
+        //no instance
     }
 }

@@ -30,14 +30,14 @@
   <string name="pref_summary_contact">1 yıldız vermeden önce bana email göderin.</string>
   <string name="pref_title_market">Said Tahsin Dane\'nin diğer uygulamaları</string>
   <string name="pref_summary_market">Beğendin mi? Diğer uygulamalarıma göz at?</string>
-  <string name="pref_title_version">Version</string>
+  <string name="pref_title_version">Versiyon</string>
   <string name="skip">Atla</string>
   <string name="cd_image_tutorial">Başlangıç Resmi</string>
   <string name="title_tutorial_0">Open Link With\'e Hoşgeldin</string>
   <string name="title_tutorial_1">Hiç başınıza geldi mi?</string>
   <string name="title_tutorial_2">Paylaş!</string>
   <string name="title_tutorial_3">Tercih Edilen Uyg.lar</string>
-  <string name="title_tutorial_4">Kullanım Erişimi</string>
+  <string name="title_tutorial_5">Kullanım Erişimi</string>
   <string name="description_tutorial_0">Tarayıcıda sıkıştığın zaman seni kurtarmaya geldim.</string>
   <string name="description_tutorial_1">Kısa linklerden birine tıkladın ve vidyoyu direl izlemek yerine bir şekilde web sayfasında takıldın.</string>
   <string name="description_tutorial_2">Sadece benimle paylaş ve senin için uygulamada açayım.</string>
@@ -45,8 +45,16 @@
   Linki her zaman bir uygulama ile açmak için <strong>HER ZAMAN</strong> seçeneğini seçin.
   ]]></string>
   <string name="description_tutorial_4"><![CDATA[
+Favori linklerinize kolay ulaşmak için <strong>Ana Ekrana ekle</strong> özelliğini kullanın.
+  ]]></string>
+  <string name="description_tutorial_5"><![CDATA[
   <strong>KULLANIM İZNİ</strong>\'ne erişim verirsen daha iyi çalışırım. Paylaştığın uygulamayı anlarım ve ona göre davranırım.
   ]]></string>
+  <string name="usage_access_give_access">Erişim Ver</string>
   <string name="error">Hata</string>
   <string name="error_usage_access_not_found">Kullanım Erişimi ayarları açılamıyor.\n\nAyarlar -&gt; Güvenlik kısmına giderek kendiniz ulaşabilirsiniz.</string>
+  <string name="add_to_homescreen">Ana Ekrana Ekle</string>
+  <string name="add">Ekle</string>
+  <string name="cancel">İptal</string>
+  <string name="dialog_hint_add_to_home_screen">Kısayol adı</string>
 </resources>

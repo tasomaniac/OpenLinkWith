@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.tasomaniac.openwith"
-          xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  package="com.tasomaniac.openwith"
+  android:installLocation="auto">
 
-  <uses-permission android:name="android.permission.INTERNET"/>
-  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+  <uses-permission-sdk-23 android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+  <uses-permission-sdk-23 android:name="com.htc.launcher.permission.UPDATE_SHORTCUT" />
+
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
   <!--suppress DeprecatedClassUsageInspection -->
   <uses-permission
     android:name="android.permission.GET_TASKS"
-    android:maxSdkVersion="20"/>
+    android:maxSdkVersion="20" />
   <uses-permission
     android:name="android.permission.PACKAGE_USAGE_STATS"
-    tools:ignore="ProtectedPermissions"/>
+    tools:ignore="ProtectedPermissions" />
 
   <application
     android:name=".App"
@@ -26,13 +30,12 @@
       android:name=".settings.SettingsActivity"
       android:clearTaskOnLaunch="true"
       android:label="@string/app_name">
-
       <intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
-        <category android:name="android.intent.category.LAUNCHER"/>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-
     <activity
       android:name=".preferred.PreferredAppsActivity"
       android:label="@string/title_preferred_apps"
@@ -43,15 +46,15 @@
         android:value=".settings.SettingsActivity" />
     </activity>
 
-    <activity android:name=".intro.IntroActivity"
-      android:theme="@style/Theme.OpenWith.Intro"/>
+    <activity
+      android:name=".intro.IntroActivity"
+      android:theme="@style/Theme.OpenWith.Intro" />
 
     <activity
       android:name=".ShareToOpenWith"
       android:configChanges="keyboardHidden|orientation|screenLayout"
       android:documentLaunchMode="never"
       android:excludeFromRecents="true"
-      android:exported="true"
       android:finishOnCloseSystemDialogs="true"
       android:label="@string/open_with"
       android:relinquishTaskIdentity="true"
@@ -59,19 +62,19 @@
       android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
 
       <intent-filter android:label="@string/open_with">
-        <action android:name="android.intent.action.SEND"/>
+        <action android:name="android.intent.action.SEND" />
 
-        <category android:name="android.intent.category.DEFAULT"/>
+        <category android:name="android.intent.category.DEFAULT" />
 
-        <data android:mimeType="text/plain"/>
+        <data android:mimeType="text/plain" />
       </intent-filter>
 
       <intent-filter>
-        <action android:name="android.intent.action.PROCESS_TEXT"/>
+        <action android:name="android.intent.action.PROCESS_TEXT" />
 
-        <category android:name="android.intent.category.DEFAULT"/>
+        <category android:name="android.intent.category.DEFAULT" />
 
-        <data android:mimeType="text/plain"/>
+        <data android:mimeType="text/plain" />
 
       </intent-filter>
 
@@ -81,18 +84,41 @@
     </activity>
 
     <activity
+      android:name=".homescreen.AddToHomeScreen"
+      android:configChanges="keyboardHidden|orientation|screenLayout"
+      android:documentLaunchMode="never"
+      android:excludeFromRecents="true"
+      android:finishOnCloseSystemDialogs="true"
+      android:label="@string/add_to_homescreen"
+      android:icon="@mipmap/ic_bookmark"
+      android:relinquishTaskIdentity="true"
+      android:theme="@style/Theme.Transparent.NoAnimation"
+      android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+      android:enabled="@bool/add_to_home_screen_enabled">
+
+      <intent-filter android:label="@string/add_to_homescreen">
+        <action android:name="android.intent.action.SEND" />
+
+        <category android:name="android.intent.category.DEFAULT" />
+
+        <data android:mimeType="text/plain" />
+      </intent-filter>
+
+    </activity>
+
+    <activity
       android:name=".resolver.ResolverActivity"
       android:documentLaunchMode="never"
       android:excludeFromRecents="true"
       android:finishOnCloseSystemDialogs="true"
       android:process=":resolver"
       android:relinquishTaskIdentity="true"
-      android:theme="@style/BottomSheet.Light"/>
+      android:theme="@style/BottomSheet.Light" />
 
     <provider
       android:name=".provider.OpenWithProvider"
       android:authorities="${applicationId}"
-      android:exported="false"/>
+      android:exported="false" />
 
     <service
       android:name=".resolver.ResolverChooserTargetService"
@@ -105,7 +131,7 @@
 
     <meta-data
       android:name="io.fabric.ApiKey"
-      android:value="12d100ee6072b6f8a57cd79b03942ad742ba6916"/>
+      android:value="12d100ee6072b6f8a57cd79b03942ad742ba6916" />
 
   </application>
 

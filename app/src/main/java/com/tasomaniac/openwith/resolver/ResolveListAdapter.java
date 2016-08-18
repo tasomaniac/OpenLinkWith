@@ -39,20 +39,20 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
 import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.LOLLIPOP_MR1;
 import static android.os.Build.VERSION_CODES.M;
 
 public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAdapter.ViewHolder, ResolveListAdapter.Header, DisplayResolveInfo, Void> {
 
-    public static final int INVALID_POSITION = -1;
-
+    private static final long USAGE_STATS_PERIOD = TimeUnit.DAYS.toMillis(14);
     private static final Intent BROWSER_INTENT;
-
     static {
         BROWSER_INTENT = new Intent();
         BROWSER_INTENT.setAction(Intent.ACTION_VIEW);
@@ -60,113 +60,112 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         BROWSER_INTENT.setData(Uri.parse("http:"));
     }
 
-    protected boolean mShowExtended;
-    private final int mIconDpi;
-
-    private Intent mIntent;
-
-    private ResolveInfo mLastChosen;
-    private final LayoutInflater mInflater;
-
-    protected List<DisplayResolveInfo> mList;
-
-    private int mLastChosenPosition = -1;
-    private boolean mFilterLastUsed;
-
-    private boolean selectionEnabled;
-    private int checkedItemPosition = INVALID_POSITION;
-
-    private PackageManager mPm;
-    private Map<String, UsageStats> mStats;
-    private static final long USAGE_STATS_PERIOD = 1000 * 60 * 60 * 24 * 14;
-
-    private ChooserHistory mHistory;
     private final Context mContext;
+    private final ChooserHistory mHistory;
+    private final Intent mIntent;
     private final String mCallerPackage;
+    private final ComponentName lastChosenComponent;
+    private final boolean mFilterLastUsed;
+    private final PackageManager mPm;
+    private final Map<String, UsageStats> mStats;
+    private final int launcherIconDensity;
 
-    private HashMap<String, Integer> mPriorities;
+    private HashMap<String, Integer> priorityPackages;
+
+    protected final List<DisplayResolveInfo> mList = new ArrayList<>();
+
+    protected boolean mShowExtended;
+    private boolean selectionEnabled;
+    private int lastChosenPosition = RecyclerView.NO_POSITION;
+    private int checkedItemPosition = RecyclerView.NO_POSITION;
 
     private ItemClickListener itemClickListener;
     private ItemLongClickListener itemLongClickListener;
 
-    public ResolveListAdapter(Context context,
-                              ChooserHistory history,
-                              Intent intent,
-                              String callerPackage,
-                              ResolveInfo lastChosen,
-                              boolean filterLastUsed) {
+    public ResolveListAdapter(Context context) {
+        this(context, null, null, null, null, false, null);
+    }
+
+    ResolveListAdapter(Context context,
+                       ChooserHistory history,
+                       Intent intent,
+                       String callerPackage,
+                       ComponentName lastChosen,
+                       boolean filterLastUsed,
+                       String[] priorityPackages) {
 
         final ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        mIconDpi = am.getLauncherLargeIconDensity();
+        launcherIconDensity = am.getLauncherLargeIconDensity();
 
-        if (SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+        if (SDK_INT >= LOLLIPOP_MR1) {
             UsageStatsManager mUsm = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
 
             final long sinceTime = System.currentTimeMillis() - USAGE_STATS_PERIOD;
             mStats = mUsm.queryAndAggregateUsageStats(sinceTime, System.currentTimeMillis());
+        } else {
+            mStats = null;
         }
 
         mPm = context.getPackageManager();
-        mInflater = LayoutInflater.from(context);
-        mList = new ArrayList<>();
 
         mContext = context;
         mHistory = history;
         mIntent = intent;
         mCallerPackage = callerPackage;
-        mLastChosen = lastChosen;
+        lastChosenComponent = lastChosen;
         mFilterLastUsed = filterLastUsed;
 
+        setPriorityItems(priorityPackages);
         rebuildList();
     }
 
-
-    public void setPriorityItems(String... packageNames) {
+    private void setPriorityItems(final String... packageNames) {
         if (packageNames == null || packageNames.length == 0) {
-            mPriorities = null;
-            rebuildList();
+            priorityPackages = null;
             return;
         }
 
         int size = packageNames.length;
-        mPriorities = new HashMap<>(size);
+        priorityPackages = new HashMap<>(size);
         for (int i = 0; i < size; i++) {
             // position 0 should have highest priority,
             // starting with 1 for lowest priority.
-            mPriorities.put(packageNames[0], size - i + 1);
+            priorityPackages.put(packageNames[i], size - i + 1);
         }
-        rebuildList();
     }
 
-    public void handlePackagesChanged() {
+    void handlePackagesChanged() {
         rebuildList();
         notifyDataSetChanged();
     }
 
-    public DisplayResolveInfo getFilteredItem() {
-        if (mFilterLastUsed && mLastChosenPosition >= 0) {
+    DisplayResolveInfo getFilteredItem() {
+        if (mFilterLastUsed && lastChosenPosition >= 0) {
             // Not using getItem since it offsets to dodge this position for the list
-            return mList.get(mLastChosenPosition);
+            return mList.get(lastChosenPosition);
         }
         return null;
     }
 
-    public int getFilteredPosition() {
-        if (mFilterLastUsed && mLastChosenPosition >= 0) {
-            return mLastChosenPosition;
+    int getFilteredPosition() {
+        if (mFilterLastUsed && lastChosenPosition >= 0) {
+            return lastChosenPosition;
         }
         return AbsListView.INVALID_POSITION;
     }
 
-    public boolean hasFilteredItem() {
-        return mFilterLastUsed && mLastChosenPosition >= 0;
+    boolean hasFilteredItem() {
+        return mFilterLastUsed && lastChosenPosition >= 0;
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
     protected void rebuildList() {
         mList.clear();
         int flag;
-        flag = SDK_INT >= M ? PackageManager.MATCH_ALL : PackageManager.MATCH_DEFAULT_ONLY;
+        if (SDK_INT >= M) {
+            flag = PackageManager.MATCH_ALL;
+        } else {
+            flag = PackageManager.MATCH_DEFAULT_ONLY;
+        }
         flag = flag | (mFilterLastUsed ? PackageManager.GET_RESOLVED_FILTER : 0);
 
         List<ResolveInfo> currentResolveList = new ArrayList<>();
@@ -177,7 +176,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         }
 
         //Remove the components from the caller
-        if (!TextUtils.isEmpty(mCallerPackage) && currentResolveList.size() > 1) {
+        if (!TextUtils.isEmpty(mCallerPackage)) {
             removePackageFromList(mCallerPackage, currentResolveList);
         }
 
@@ -237,7 +236,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         }
     }
 
-    private void removePackageFromList(final String packageName, List<ResolveInfo> currentResolveList) {
+    private static void removePackageFromList(final String packageName, List<ResolveInfo> currentResolveList) {
         List<ResolveInfo> infosToRemoved = new ArrayList<>();
         for (ResolveInfo info : currentResolveList) {
             if (info.activityInfo.packageName.equals(packageName)) {
@@ -311,11 +310,13 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
                 if (usePkg) {
                     // Use application name for all entries from start to end-1
                     addResolveInfo(new DisplayResolveInfo(add, roLabel,
-                            add.activityInfo.packageName));
+                                                          add.activityInfo.packageName
+                    ));
                 } else {
                     // Use package name for all entries from start to end-1
                     addResolveInfo(new DisplayResolveInfo(add, roLabel,
-                            add.activityInfo.applicationInfo.loadLabel(mPm)));
+                                                          add.activityInfo.applicationInfo.loadLabel(mPm)
+                    ));
                 }
                 updateLastChosenPosition(add);
             }
@@ -323,24 +324,15 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     }
 
     private void updateLastChosenPosition(ResolveInfo info) {
-        if (mLastChosen != null
-                && mLastChosen.activityInfo.packageName.equals(info.activityInfo.packageName)
-                && mLastChosen.activityInfo.name.equals(info.activityInfo.name)) {
-            mLastChosenPosition = mList.size() - 1;
+        if (lastChosenComponent != null
+                && lastChosenComponent.getPackageName().equals(info.activityInfo.packageName)
+                && lastChosenComponent.getClassName().equals(info.activityInfo.name)) {
+            lastChosenPosition = mList.size() - 1;
         }
     }
 
     private void addResolveInfo(DisplayResolveInfo dri) {
         mList.add(dri);
-    }
-
-    public ResolveInfo resolveInfoForPosition(int position, boolean filtered) {
-        return displayResolveInfoForPosition(position, filtered).ri;
-    }
-
-    public Intent intentForPosition(int position, boolean filtered) {
-        DisplayResolveInfo dri = displayResolveInfoForPosition(position, filtered);
-        return intentForDisplayResolveInfo(dri);
     }
 
     DisplayResolveInfo displayResolveInfoForPosition(int position, boolean filtered) {
@@ -350,7 +342,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     @Override
     public int getItemCount() {
         int result = mList.size();
-        if (mFilterLastUsed && mLastChosenPosition >= 0) {
+        if (mFilterLastUsed && lastChosenPosition >= 0) {
             result--;
         }
         result += getHeaderViewsCount();
@@ -363,7 +355,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         if (position < 0) {
             position = 0;
         }
-        if (mFilterLastUsed && mLastChosenPosition >= 0 && position >= mLastChosenPosition) {
+        if (mFilterLastUsed && lastChosenPosition >= 0 && position >= lastChosenPosition) {
             position++;
         }
         return mList.get(position);
@@ -374,14 +366,15 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         return position;
     }
 
-    public int getHeaderViewsCount() {
+    protected int getHeaderViewsCount() {
         return hasHeader() ? 1 : 0;
     }
 
     @Override
     protected ViewHolder onCreateHeaderViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(mInflater
-                .inflate(R.layout.resolver_different_item_header, parent, false));
+        View headerView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.resolver_different_item_header, parent, false);
+        return new ViewHolder(headerView);
     }
 
     @Override
@@ -398,9 +391,10 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     }
 
     @Override
-    public ViewHolder onCreateItemViewHolder(ViewGroup viewGroup, int i) {
-        return new ViewHolder(mInflater
-                .inflate(R.layout.resolve_list_item, viewGroup, false));
+    public ViewHolder onCreateItemViewHolder(ViewGroup parent, int i) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.resolve_list_item, parent, false);
+        return new ViewHolder(itemView);
     }
 
     @Override
@@ -415,20 +409,20 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     public void onBindItemViewHolder(final ViewHolder holder, final int position) {
         final DisplayResolveInfo info = getItem(position);
 
-        holder.text.setText(info.displayLabel);
+        holder.text.setText(info.displayLabel());
         if (holder.text2 != null) {
             if (mShowExtended) {
                 holder.text2.setVisibility(View.VISIBLE);
-                holder.text2.setText(info.extendedInfo);
+                holder.text2.setText(info.extendedInfo());
             } else {
                 holder.text2.setVisibility(View.GONE);
             }
         }
         if (holder.icon != null) {
-            if (info.displayIcon == null) {
+            if (info.displayIcon() == null) {
                 new LoadIconTask().execute(info);
             }
-            holder.icon.setImageDrawable(info.displayIcon);
+            holder.icon.setImageDrawable(info.displayIcon());
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -445,10 +439,8 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                if (itemLongClickListener != null) {
-                    return itemLongClickListener.onItemLongClick(v, holder.getAdapterPosition(), holder.getItemId());
-                }
-                return false;
+                return itemLongClickListener != null
+                        && itemLongClickListener.onItemLongClick(v, holder.getAdapterPosition(), holder.getItemId());
             }
         });
     }
@@ -457,19 +449,19 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         this.itemClickListener = itemClickListener;
     }
 
-    public void setItemLongClickListener(ItemLongClickListener itemLongClickListener) {
+    void setItemLongClickListener(ItemLongClickListener itemLongClickListener) {
         this.itemLongClickListener = itemLongClickListener;
     }
 
-    public int getCheckedItemPosition() {
+    int getCheckedItemPosition() {
         return checkedItemPosition;
     }
 
-    public void setSelectionEnabled(boolean selectionEnabled) {
+    void setSelectionEnabled(boolean selectionEnabled) {
         this.selectionEnabled = selectionEnabled;
     }
 
-    public void setItemChecked(int position) {
+    void setItemChecked(int position) {
         if (!selectionEnabled) {
             return;
         }
@@ -483,9 +475,11 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     public static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.text1)
         public TextView text;
-        @Nullable @BindView(R.id.text2)
+        @Nullable
+        @BindView(R.id.text2)
         public TextView text2;
-        @Nullable @BindView(R.id.icon)
+        @Nullable
+        @BindView(R.id.icon)
         public ImageView icon;
 
         public ViewHolder(View view) {
@@ -498,8 +492,8 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         @Override
         protected DisplayResolveInfo doInBackground(DisplayResolveInfo... params) {
             final DisplayResolveInfo info = params[0];
-            if (info.displayIcon == null) {
-                info.displayIcon = loadIconForResolveInfo(mPm, info.ri, mIconDpi);
+            if (info.displayIcon() == null) {
+                info.displayIcon(loadIconForResolveInfo(mPm, info.ri, launcherIconDensity));
             }
             return info;
         }
@@ -510,7 +504,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         }
     }
 
-    public static Drawable loadIconForResolveInfo(PackageManager mPm, ResolveInfo ri, int mIconDpi) {
+    static Drawable loadIconForResolveInfo(PackageManager mPm, ResolveInfo ri, int mIconDpi) {
         Drawable dr;
         try {
             if (ri.resolvePackageName != null && ri.icon != 0) {
@@ -544,11 +538,11 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         return result;
     }
 
-    class ResolverComparator implements Comparator<ResolveInfo> {
+    private class ResolverComparator implements Comparator<ResolveInfo> {
         private final Collator mCollator;
         private final boolean mHttp;
 
-        public ResolverComparator(Context context, Intent intent) {
+        ResolverComparator(Context context, Intent intent) {
             mCollator = Collator.getInstance(context.getResources().getConfiguration().locale);
             String scheme = intent.getScheme();
             mHttp = "http".equals(scheme) || "https".equals(scheme);
@@ -576,7 +570,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
                 }
             }
 
-            if (mPriorities != null) {
+            if (priorityPackages != null) {
                 int leftPriority = getPriority(lhs);
                 int rightPriority = getPriority(rhs);
                 if (leftPriority != rightPriority) {
@@ -595,9 +589,13 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
             }
 
             CharSequence sa = lhs.loadLabel(mPm);
-            if (sa == null) sa = lhs.activityInfo.name;
+            if (sa == null) {
+                sa = lhs.activityInfo.name;
+            }
             CharSequence sb = rhs.loadLabel(mPm);
-            if (sb == null) sb = rhs.activityInfo.name;
+            if (sb == null) {
+                sb = rhs.activityInfo.name;
+            }
 
             return mCollator.compare(sa.toString(), sb.toString());
         }
@@ -615,7 +613,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         }
 
         private int getPriority(ResolveInfo lhs) {
-            final Integer integer = mPriorities.get(lhs.activityInfo.packageName);
+            final Integer integer = priorityPackages.get(lhs.activityInfo.packageName);
             return integer != null ? integer : 0;
         }
     }
@@ -623,7 +621,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     Intent intentForDisplayResolveInfo(DisplayResolveInfo dri) {
         Intent intent = new Intent(mIntent);
         intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
-                | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+                                | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
         if (dri != null && dri.ri != null) {
             ActivityInfo ai = dri.ri.activityInfo;
             if (ai != null) {
@@ -634,11 +632,12 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         return intent;
     }
 
-    static boolean isSpecificUriMatch(int match) {
+    private static boolean isSpecificUriMatch(int match) {
         match = match & IntentFilter.MATCH_CATEGORY_MASK;
         return match >= IntentFilter.MATCH_CATEGORY_HOST
                 && match <= IntentFilter.MATCH_CATEGORY_PATH;
     }
 
-    public static class Header {}
+    public static class Header {
+    }
 }

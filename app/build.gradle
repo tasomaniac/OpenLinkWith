@@ -27,7 +27,7 @@ android {
         buildConfigField "String", "ANALYTICS_KEY", local_properties.analytics_key != null ?
                 "\"" + local_properties.analytics_key + "\"" : "\"\""
 
-        resConfigs "en", "es", "in", "it", "ja", "pt-rBR", "pt-rPT", "ru", "tr"
+        resConfigs "ar", "de", "en", "es", "in", "it", "ja", "pt-rBR", "pt-rPT", "ru", "tr"
     }
 
     signingConfigs {
@@ -94,7 +94,7 @@ play {
 }
 
 dependencies {
-    def supportLibVersion = "23.4.0"
+    def supportLibVersion = "24.2.0"
     def schematicVersion = '0.6.7'
     def butterKnifeVersion = '8.2.1'
 
@@ -104,6 +104,8 @@ dependencies {
     compile "com.android.support:design:$supportLibVersion"
     compile "com.android.support:preference-v14:$supportLibVersion"
 
+    compile 'com.tasomaniac:delayed-progress:0.3'
+
     compile 'com.karumi:headerrecyclerview:1.1.0'
     compile 'jp.wasabeef:recyclerview-animators:2.2.3'
 
@@ -112,10 +114,12 @@ dependencies {
 
     compile "com.jakewharton:butterknife:$butterKnifeVersion"
     apt "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
-    compile 'com.jakewharton.timber:timber:4.1.2'
+    compile 'com.jakewharton.timber:timber:4.3.0'
 
-    prodCompile "com.google.android.gms:play-services-analytics:9.2.1"
-    prodCompile 'com.crashlytics.sdk.android:crashlytics:2.6.1'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+
+    prodCompile "com.google.android.gms:play-services-analytics:9.4.0"
+    prodCompile 'com.crashlytics.sdk.android:crashlytics:2.6.2'
 
     testCompile 'junit:junit:4.12'
 }

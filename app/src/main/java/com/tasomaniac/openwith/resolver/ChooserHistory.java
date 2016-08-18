@@ -10,51 +10,43 @@ class ChooserHistory {
 
     private static final String KEY_HISTORY = "history";
 
-    private static final char SEPARATOR_KEY_VALUE = '|';
 
+    private static final char SEPARATOR_KEY_VALUE = '|';
+    private static final String SEPARATOR_KEY_VALUE_ESCAPED = "\\|";
     private static final char SEPARATOR_ITEMS = '#';
 
-    private final HashMap<String, Integer> mHistoryMap;
+    private final HashMap<String, Integer> mHistoryMap = new HashMap<>();
 
-    public static ChooserHistory fromSettings(Context context) {
+    static ChooserHistory fromSettings(Context context) {
         return fromSettings(getPreferences(context).getString(KEY_HISTORY, ""));
     }
 
-    public static ChooserHistory fromSettings(String saveString) {
+    static ChooserHistory fromSettings(String saveString) {
         ChooserHistory history = new ChooserHistory();
-        if (saveString == null || saveString.length() == 0) {
+        if (saveString.isEmpty()) {
             return history;
         }
-        StringBuilder packageName = new StringBuilder();
-        StringBuilder number = new StringBuilder();
-        int i = 0;
-        while (i < saveString.length()) {
-            char character = saveString.charAt(i);
-            if (character == SEPARATOR_KEY_VALUE) {
-                // skip separator icon
-                while (++i < saveString.length()) {
-                    character = saveString.charAt(i);
-                    if (character == SEPARATOR_ITEMS) {
-                        break;
-                    }
-                    number.append(character);
-                }
-                history.mHistoryMap.put(packageName.toString(), Integer.valueOf(number.toString()));
-                packageName.delete(0, packageName.length());
-                number.delete(0, number.length());
-            } else {
-                packageName.append(character);
+
+        String[] items = saveString.split(String.valueOf(SEPARATOR_ITEMS));
+        for (String item : items) {
+            String[] split = item.split(SEPARATOR_KEY_VALUE_ESCAPED);
+            if (split.length == 2) {
+                history.mHistoryMap.put(split[0], Integer.valueOf(split[1]));
             }
-            ++i;
         }
         return history;
     }
 
     private ChooserHistory() {
-        mHistoryMap = new HashMap<>();
+        //no instance
     }
 
-    public void add(String packageName) {
+    int get(String packageName) {
+        Integer count = mHistoryMap.get(packageName);
+        return count != null ? count : 0;
+    }
+
+    void add(String packageName) {
         Integer currentCount = mHistoryMap.get(packageName);
         if (currentCount == null) {
             mHistoryMap.put(packageName, 1);
@@ -63,12 +55,12 @@ class ChooserHistory {
         }
     }
 
-    public void save(Context context) {
+    void save(Context context) {
         SharedPreferences prefs = getPreferences(context);
         prefs.edit().putString(KEY_HISTORY, getAsSaveString()).apply();
     }
 
-    private String getAsSaveString() {
+    String getAsSaveString() {
         StringBuilder saveString = new StringBuilder();
         for (Map.Entry<String, Integer> entry : mHistoryMap.entrySet()) {
             saveString.append(entry.getKey());
@@ -84,10 +76,5 @@ class ChooserHistory {
 
     private static SharedPreferences getPreferences(Context context) {
         return context.getSharedPreferences("bs_chooser", Context.MODE_PRIVATE);
-    }
-
-    public int get(String packageName) {
-        Integer count = mHistoryMap.get(packageName);
-        return count != null ? count : 0;
     }
 }

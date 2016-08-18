@@ -13,7 +13,7 @@ import com.tasomaniac.openwith.App;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.ShareToOpenWith;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @TargetApi(Build.VERSION_CODES.M)
@@ -24,21 +24,18 @@ public class ResolverChooserTargetService extends ChooserTargetService {
                                                    IntentFilter matchedFilter) {
         sendAnalyticsEvent();
 
-        ComponentName componentName = new ComponentName(getPackageName(),
-                ShareToOpenWith.class.getCanonicalName());
+        ComponentName componentName = new ComponentName( this, ShareToOpenWith.class);
 
-        ArrayList<ChooserTarget> targets = new ArrayList<>();
-        targets.add(new ChooserTarget(
+        return Collections.singletonList(new ChooserTarget(
                 getString(R.string.open_with),
                 Icon.createWithResource(this, R.mipmap.ic_launcher),
                 0.2f,
                 componentName,
                 createBundleExtra()
         ));
-        return targets;
     }
 
-    private Bundle createBundleExtra() {
+    private static Bundle createBundleExtra() {
         Bundle extras = new Bundle(1);
         extras.putBoolean(ShareToOpenWith.EXTRA_FROM_DIRECT_SHARE, true);
         return extras;

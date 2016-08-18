@@ -1,6 +1,6 @@
 <resources>
   <string name="app_name" translatable="false">Open Link With</string>
-  <string name="open_with">\u0020Open With…</string>
+  <string name="open_with">\u00A0Open With…</string>
 
   <string name="use_a_different_app">Use a different app</string>
   <string name="activity_resolver_use_once">Just Once</string>
@@ -61,7 +61,8 @@
   <string name="title_tutorial_1">Did it ever happen to you?</string>
   <string name="title_tutorial_2">Share it!</string>
   <string name="title_tutorial_3">Preferred Apps</string>
-  <string name="title_tutorial_4">Usage Access</string>
+  <string name="title_tutorial_4" translatable="false">@string/add_to_homescreen</string>
+  <string name="title_tutorial_5">Usage Access</string>
   <string name="description_tutorial_0">I come to rescue you whenever you get stuck in browsers.</string>
   <string name="description_tutorial_1">You click a short-link and somehow you end up being stuck in web page instead of watching the video directly.</string>
   <string name="description_tutorial_2">Just share it with me and I will switch apps for you.</string>
@@ -69,13 +70,17 @@
     Select <strong>ALWAYS</strong> to tell me to open that link always with a specific app.
   ]]></string>
   <string name="description_tutorial_4"><![CDATA[
+    <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.
+  ]]></string>
+  <string name="description_tutorial_5"><![CDATA[
     Give access to <strong>USAGE ACCESS</strong> and I will work better. I will detect the browser you are sharing from to act accordingly.
   ]]></string>
   <string name="usage_access_give_access">Give Access</string>
   <string name="error">Error</string>
   <string name="error_usage_access_not_found">Usage Access Settings cannot be open.\n\nYou may access it by going into Settings -> Security</string>
 
-  <string name="pref_title_category_debug" translatable="false">Debug</string>
-  <string name="pref_key_debug_amazon" translatable="false">pref_debug</string>
-  <string name="pref_title_debug_amazon" translatable="false">Test Amazon Intent</string>
+  <string name="add_to_homescreen">Add To Home screen</string>
+  <string name="add">Add</string>
+  <string name="cancel">Cancel</string>
+  <string name="dialog_hint_add_to_home_screen">Shortcut title</string>
 </resources>

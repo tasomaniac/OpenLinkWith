@@ -32,14 +32,14 @@
   <string name="pref_summary_contact">Отправьте мне сообщение, прежде чем ставить одну звезду.</string>
   <string name="pref_title_market">Больше приложений от Said Tahsin Dane</string>
   <string name="pref_summary_market">Понравилось приложение? Почему бы не посмотреть другие?</string>
-  <string name="pref_title_version">Version</string>
+  <string name="pref_title_version">Версия</string>
   <string name="skip">Пропустить</string>
   <string name="cd_image_tutorial">Изображение в обучении</string>
   <string name="title_tutorial_0">Добро пожаловать в Open Link With</string>
   <string name="title_tutorial_1">У вас когда нибудь такое случалось?</string>
   <string name="title_tutorial_2">Поделитесь этим!</string>
   <string name="title_tutorial_3">Предпочитаемые приложения</string>
-  <string name="title_tutorial_4">Доступ к использованию</string>
+  <string name="title_tutorial_5">Доступ к использованию</string>
   <string name="description_tutorial_0">Я пришёл, чтобы спасти вас от застревания в браузере.</string>
   <string name="description_tutorial_1">Вы нажимаете на короткую ссылку и застреваете в браузере вместо того, чтобы использовать для этого приложение.</string>
   <string name="description_tutorial_2">Просто поделитесь этим со мной и я переключу приложение для вас.</string>
@@ -47,7 +47,15 @@
 Выберите <strong>ВСЕГДА</strong>, чтобы сообщите мне какие ссылки всегда нужно открывать в этом приложении.
   ]]></string>
   <string name="description_tutorial_4"><![CDATA[
+    <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.
+  ]]></string>
+  <string name="description_tutorial_5"><![CDATA[
 Дайте доступ к <strong>СТАТИСТИКЕ ИСПОЛЬЗОВАНИЯ</strong> и я смогу работать лучше. Я буду обнаруживать браузер из которого вы делитесь для соответствия.  ]]></string>
+  <string name="usage_access_give_access">Give Access</string>
   <string name="error">Ошибка</string>
   <string name="error_usage_access_not_found">Настройка статистики использования не может быть найдена.\n\nYou may access it by going into Settings -&gt; Security</string>
+  <string name="add_to_homescreen">Add To Home screen</string>
+  <string name="add">Add</string>
+  <string name="cancel">Cancel</string>
+  <string name="dialog_hint_add_to_home_screen">Shortcut title</string>
 </resources>

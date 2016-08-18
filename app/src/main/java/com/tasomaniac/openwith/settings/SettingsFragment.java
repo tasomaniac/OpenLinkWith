@@ -1,13 +1,13 @@
 package com.tasomaniac.openwith.settings;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.backup.BackupManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.app.ShareCompat;
 import android.support.v4.content.ContextCompat;
@@ -18,7 +18,6 @@ import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceManager;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-import android.view.View;
 
 import com.tasomaniac.openwith.Analytics;
 import com.tasomaniac.openwith.App;
@@ -57,7 +56,8 @@ public class SettingsFragment extends PreferenceFragmentCompat
         analytics = App.getApp(getActivity()).getAnalytics();
         usageAccessPref = new BooleanPreference(
                 PreferenceManager.getDefaultSharedPreferences(getActivity()),
-                "usage_access");
+                "usage_access"
+        );
     }
 
     @Override
@@ -71,20 +71,41 @@ public class SettingsFragment extends PreferenceFragmentCompat
         findPreference(R.string.pref_key_contact).setOnPreferenceClickListener(this);
 
         if (BuildConfig.DEBUG) {
-            addPreferencesFromResource(R.xml.pref_debug);
-
-            setupDebugPreference(R.string.pref_key_debug_amazon,
-                                 "http://www.amazon.com/Garmin-Speed-Cadence-Bike-Sensor/dp/B000BFNOT8");
+            setupDebugPrefCategory();
         }
     }
 
-    private void setupDebugPreference(int debugPrefKey, String debugPrefUrl) {
-        Intent intent = ShareCompat.IntentBuilder.from(getActivity())
+    private void setupDebugPrefCategory() {
+        addPreferencesFromResource(R.xml.pref_debug);
+
+        setupDebugPreference(
+                getActivity(),
+                findPreference(R.string.pref_key_debug_amazon),
+                "http://www.amazon.com/Garmin-Speed-Cadence-Bike-Sensor/dp/B000BFNOT8"
+        );
+        setupDebugPreference(
+                getActivity(),
+                findPreference(R.string.pref_key_debug_maps),
+                "http://maps.google.com/maps"
+        );
+        setupDebugPreference(
+                getActivity(),
+                findPreference(R.string.pref_key_debug_hangouts),
+                "https://hangouts.google.com/hangouts/_/novoda.com/wormhole?authuser=tahsin@novoda.com"
+        );
+        setupDebugPreference(
+                getActivity(),
+                findPreference(R.string.pref_key_debug_play),
+                "https://play.google.com/store/apps/details?id=com.tasomaniac.openwith"
+        );
+    }
+
+    private static void setupDebugPreference(Activity activity, Preference debugPreference, String debugPrefUrl) {
+        Intent intent = ShareCompat.IntentBuilder.from(activity)
                 .setText(debugPrefUrl)
                 .setType("text/plain")
                 .createChooserIntent();
 
-        Preference debugPreference = findPreference(debugPrefKey);
         debugPreference.setIntent(intent);
         debugPreference.setSummary(debugPrefUrl);
     }
@@ -127,9 +148,15 @@ public class SettingsFragment extends PreferenceFragmentCompat
 
                 //Set title and summary in red font.
                 usageStatsPreference.setTitle(
-                        getErrorString(getActivity(), getString(R.string.pref_title_usage_stats)));
+                        coloredErrorString(
+                                getActivity(),
+                                getString(R.string.pref_title_usage_stats)
+                        ));
                 usageStatsPreference.setSummary(
-                        getErrorString(getActivity(), getString(R.string.pref_summary_usage_stats)));
+                        coloredErrorString(
+                                getActivity(),
+                                getString(R.string.pref_summary_usage_stats)
+                        ));
                 usageStatsPreference.setWidgetLayoutResource(R.layout.preference_widget_error);
             }
         }
@@ -140,7 +167,8 @@ public class SettingsFragment extends PreferenceFragmentCompat
             analytics.sendEvent(
                     "Usage Access",
                     "Access Given",
-                    Boolean.toString(usageAccessGiven));
+                    Boolean.toString(usageAccessGiven)
+            );
         }
     }
 
@@ -155,7 +183,6 @@ public class SettingsFragment extends PreferenceFragmentCompat
         preference.setSummary(version);
     }
 
-    @TargetApi(LOLLIPOP)
     @Override
     public boolean onPreferenceClick(Preference preference) {
 
@@ -174,7 +201,8 @@ public class SettingsFragment extends PreferenceFragmentCompat
         analytics.sendEvent(
                 "Preference",
                 "Item Click",
-                preference.getKey());
+                preference.getKey()
+        );
         return true;
     }
 
@@ -205,13 +233,6 @@ public class SettingsFragment extends PreferenceFragmentCompat
                 .startChooser();
     }
 
-    @SuppressWarnings("ConstantConditions")
-    @NonNull
-    @Override
-    public View getView() {
-        return super.getView();
-    }
-
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
         new BackupManager(getActivity()).dataChanged();
@@ -221,7 +242,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
         return findPreference(getString(keyResource));
     }
 
-    private static SpannableString getErrorString(final Context context, CharSequence originalString) {
+    private static CharSequence coloredErrorString(Context context, CharSequence originalString) {
         SpannableString errorSpan = new SpannableString(originalString);
         ForegroundColorSpan colorSpan = new ForegroundColorSpan(
                 ContextCompat.getColor(context, R.color.error_color));

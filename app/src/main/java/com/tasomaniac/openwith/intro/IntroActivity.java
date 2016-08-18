@@ -55,6 +55,13 @@ public class IntroActivity extends AppIntro {
                         .description(R.string.description_tutorial_3)
                         .drawable(R.drawable.tutorial_3).build());
 
+        if (getResources().getBoolean(R.bool.add_to_home_screen_enabled)) {
+            addSlide(new AppIntroFragment.Builder()
+                             .title(R.string.title_tutorial_4)
+                             .description(R.string.description_tutorial_4)
+                             .drawable(R.drawable.tutorial_4).build());
+        }
+
         addUsageStatsSlideIfNeeded();
     }
 
@@ -63,9 +70,9 @@ public class IntroActivity extends AppIntro {
         if (SDK_INT >= LOLLIPOP && !Utils.isUsageStatsEnabled(this)) {
             usageStatsSlideAdded = true;
             addSlide(new AppIntroFragment.Builder()
-                             .title(R.string.title_tutorial_4)
-                             .description(R.string.description_tutorial_4)
-                             .drawable(R.drawable.tutorial_4).build());
+                             .title(R.string.title_tutorial_5)
+                             .description(R.string.description_tutorial_5)
+                             .drawable(R.drawable.tutorial_5).build());
 
             setDoneText(getString(R.string.usage_access_give_access));
         }

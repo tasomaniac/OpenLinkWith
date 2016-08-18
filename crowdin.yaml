@@ -7,6 +7,8 @@ files:
     translation: '/app/src/main/res/values-%android_code%/strings.xml'
     languages_mapping:
       android_code:
+        ar: ar
+        de: de
         es-ES: es
         fi: fi
         in-ID: in

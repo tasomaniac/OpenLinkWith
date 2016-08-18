@@ -1,6 +1,9 @@
 package com.tasomaniac.openwith.util;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ShareCompat;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,6 +11,7 @@ import java.util.regex.Pattern;
 public final class Urls {
 
     private static final Fixer[] URL_FIXERS = new Fixer[]{
+            new FacebookFixer(),
             new TwitterFixer(),
             new EbayFixer(),
             new AmazonFixer(),
@@ -21,8 +25,21 @@ public final class Urls {
         return url;
     }
 
+    public static String extractUrlFrom(Intent intent, ShareCompat.IntentReader reader) {
+        CharSequence text = reader.getText();
+        if (text == null) {
+            text = getExtraSelectedText(intent);
+        }
+        return findFirstUrl(text);
+    }
+
+    @SuppressLint("InlinedApi")
+    private static CharSequence getExtraSelectedText(Intent intent) {
+        return intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT);
+    }
+
     @Nullable
-    public static String findFirstUrl(@Nullable CharSequence text) {
+    private static String findFirstUrl(@Nullable CharSequence text) {
         if (text == null) {
             return null;
         }
@@ -32,6 +49,36 @@ public final class Urls {
             return matcher.group();
         }
         return null;
+    }
+
+    private static class FacebookFixer implements Fixer {
+
+        @Override
+        public String fix(String url) {
+            if (!url.contains("facebook.com")) {
+                return url;
+            }
+
+            // Skip the links that Facebook supports
+            if (url.contains("facebook.com/permalink.php")
+                    || url.contains("facebook.com/story.php")
+                    || url.contains("facebook.com/home.php")
+                    || url.contains("facebook.com/photo.php")
+                    || url.contains("facebook.com/video.php")
+                    || url.contains("facebook.com/donate")
+                    || url.contains("facebook.com/events")
+                    || url.contains("facebook.com/groups")
+                    || url.contains("/posts/")
+                    || url.contains("/dialog/")
+                    || url.contains("/sharer")) {
+                return url;
+            }
+
+            return url.replace("https://facebook.com/", "https://www.facebook.com/")
+                    .replace("http://facebook.com/", "http://www.facebook.com/")
+                    .replace("?", "&")
+                    .replace("facebook.com/", "facebook.com/n/?");
+        }
     }
 
     private static class TwitterFixer implements Fixer {

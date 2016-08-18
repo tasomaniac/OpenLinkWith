@@ -1,11 +1,19 @@
 package com.tasomaniac.openwith.util;
 
+import android.annotation.SuppressLint;
 import android.app.AppOpsManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ShareCompat;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 
@@ -40,4 +48,5 @@ public class Utils {
 
     private Utils() {
     }
+
 }

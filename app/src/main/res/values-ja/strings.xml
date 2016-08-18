@@ -38,14 +38,22 @@
   <string name="title_tutorial_1">今まであなたはどうしてましたか？</string>
   <string name="title_tutorial_2">共有してください！</string>
   <string name="title_tutorial_3">優先アプリ</string>
-  <string name="title_tutorial_4">使用状況へのアクセス</string>
+  <string name="title_tutorial_5">使用状況へのアクセス</string>
   <string name="description_tutorial_0">ブラウザに飛ばされてしまっても、いつでも助けに行きます</string>
   <string name="description_tutorial_1">短縮リンクを踏んだとき、動画が直接再生されずにウェブページへ飛ばされてしまっていたと思います</string>
   <string name="description_tutorial_2">一度このアプリで共有していただければ、以後常にあなたが望むアプリに切り替えさせていただきます</string>
   <string name="description_tutorial_3"><![CDATA[    <strong>常時</strong> を選択していただくことで、そのリンクを常に特定のアプリで開くようになります
   ]]></string>
-  <string name="description_tutorial_4"><![CDATA[    <strong>使用状況へのアクセス</strong> を許可していただけると、更により良く機能していきます。あなたが共有するブラウザを検出して、それに応じた動きをするようになります。
+  <string name="description_tutorial_4"><![CDATA[
+    <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.
   ]]></string>
+  <string name="description_tutorial_5"><![CDATA[    <strong>使用状況へのアクセス</strong> を許可していただけると、更により良く機能していきます。あなたが共有するブラウザを検出して、それに応じた動きをするようになります。
+  ]]></string>
+  <string name="usage_access_give_access">Give Access</string>
   <string name="error">エラー</string>
   <string name="error_usage_access_not_found">使用状況へのアクセスの設定が見つかりませんでした\n\nYou may access it by going into Settings -&gt; Security</string>
+  <string name="add_to_homescreen">Add To Home screen</string>
+  <string name="add">Add</string>
+  <string name="cancel">Cancel</string>
+  <string name="dialog_hint_add_to_home_screen">Shortcut title</string>
 </resources>

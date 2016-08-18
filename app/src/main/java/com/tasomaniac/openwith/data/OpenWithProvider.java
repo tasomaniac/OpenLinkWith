@@ -56,7 +56,6 @@ public final class OpenWithProvider {
                     .appendPath(host).build();
         }
 
-
         @ContentUri(
                 path = OpenWithDatabase.OPENWITH + "/preferred",
                 type = "vnd.android.cursor.dir/openwith",
