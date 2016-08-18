@@ -39,14 +39,14 @@ Descredenciar <strong>%1$s</strong> como aplicativo preferencial para abrir link
   <string name="title_tutorial_1">Já aconteceu com você?</string>
   <string name="title_tutorial_2">Compartilhar!</string>
   <string name="title_tutorial_3">Aplicativos Preferidos</string>
-  <string name="title_tutorial_4">Acesso ao Uso</string>
+  <string name="title_tutorial_5">Acesso ao Uso</string>
   <string name="description_tutorial_0">Vim resgatá-lo sempre que você ficar agarrado em navegadores.</string>
   <string name="description_tutorial_1">Você clica em um link curto e de alguma forma você acaba ficando preso na página da web ao invés de assistir o vídeo diretamente.</string>
   <string name="description_tutorial_2">Apenas compartilhe o link comigo e eu irei mudar de app para você.</string>
   <string name="description_tutorial_3"><![CDATA[
     Escolha <strong>SEMPRE</strong> para me dizer que o link deve ser sempre aberto naquele determinado app.
   ]]></string>
-  <string name="description_tutorial_4"><![CDATA[
+  <string name="description_tutorial_5"><![CDATA[
 Conceda <strong>ACESSO AO USO</strong> e eu vou funcionar melhor. Vou saber de qual navegador você está compartilhando para executar a ação certa.  ]]></string>
   <string name="usage_access_give_access">Conceder Acesso</string>
   <string name="error">Erro</string>

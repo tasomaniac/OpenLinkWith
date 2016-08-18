@@ -38,13 +38,13 @@ Eliminar <strong>%1$s</strong> como app preferida para cargar los enlaces de <st
   <string name="title_tutorial_1">Alguna vez te ha pasado?</string>
   <string name="title_tutorial_2">¡Compártelo!</string>
   <string name="title_tutorial_3">Apps Preferidas</string>
-  <string name="title_tutorial_4">Acceso de uso</string>
+  <string name="title_tutorial_5">Acceso de uso</string>
   <string name="description_tutorial_0">Vengo a rescatarte cuando te quedas atascado en los navegadores.</string>
   <string name="description_tutorial_1">Tu clicas un enlace corto y de alguna manera terminas encallado en una web, en lugar de ver el vídeo directamente.</string>
   <string name="description_tutorial_2">Solo compártelo conmigo y cambiaré las apps por ti.</string>
   <string name="description_tutorial_3"><![CDATA[
 Selecciona <strong>SIEMPRE</strong> para decirme que abra este enlace siempre con una aplicación específica.  ]]></string>
-  <string name="description_tutorial_4"><![CDATA[
+  <string name="description_tutorial_5"><![CDATA[
 Dar acceso a <strong>ACCESO DE USO</strong> y funcionaré mejor. Detectaré el navegador desde el cual estas compartiendo y actuaré en consecuencia.  ]]></string>
   <string name="usage_access_give_access">Give Access</string>
   <string name="error">Error</string>

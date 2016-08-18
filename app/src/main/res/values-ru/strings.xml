@@ -39,14 +39,14 @@
   <string name="title_tutorial_1">У вас когда нибудь такое случалось?</string>
   <string name="title_tutorial_2">Поделитесь этим!</string>
   <string name="title_tutorial_3">Предпочитаемые приложения</string>
-  <string name="title_tutorial_4">Доступ к использованию</string>
+  <string name="title_tutorial_5">Доступ к использованию</string>
   <string name="description_tutorial_0">Я пришёл, чтобы спасти вас от застревания в браузере.</string>
   <string name="description_tutorial_1">Вы нажимаете на короткую ссылку и застреваете в браузере вместо того, чтобы использовать для этого приложение.</string>
   <string name="description_tutorial_2">Просто поделитесь этим со мной и я переключу приложение для вас.</string>
   <string name="description_tutorial_3"><![CDATA[
 Выберите <strong>ВСЕГДА</strong>, чтобы сообщите мне какие ссылки всегда нужно открывать в этом приложении.
   ]]></string>
-  <string name="description_tutorial_4"><![CDATA[
+  <string name="description_tutorial_5"><![CDATA[
 Дайте доступ к <strong>СТАТИСТИКЕ ИСПОЛЬЗОВАНИЯ</strong> и я смогу работать лучше. Я буду обнаруживать браузер из которого вы делитесь для соответствия.  ]]></string>
   <string name="usage_access_give_access">Give Access</string>
   <string name="error">Ошибка</string>

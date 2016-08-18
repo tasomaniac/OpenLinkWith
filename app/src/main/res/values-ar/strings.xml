@@ -39,14 +39,14 @@
   <string name="title_tutorial_1">هل حدث لك هذا من قبل؟</string>
   <string name="title_tutorial_2">قم بنشره!</string>
   <string name="title_tutorial_3">التطبيقات المفضلة</string>
-  <string name="title_tutorial_4">بيانات الإستخدام</string>
+  <string name="title_tutorial_5">بيانات الإستخدام</string>
   <string name="description_tutorial_0">وهنا يأتي دوري لإنقاذك عندما تكون عالقاً في المتصفحات.</string>
   <string name="description_tutorial_1">فأحياناً تضغط على رابط وبطريقة ما تجد نفسك في نهاية المطاف عالق في موقع إلكتروني بدلاً من مشاهدة المحتوى مباشرة في التطبيق الخاص به.</string>
   <string name="description_tutorial_2">فقط قم بمشاركة الرابط معي وسأقوم انا بفتح التطبيق المناسب من أجلك.</string>
   <string name="description_tutorial_3"><![CDATA[
     اضغط <strong>دائماً</strong> لأقوم بفتح هذا الرابط دائماً بواسطة التطبيق المحدد. 
   ]]></string>
-  <string name="description_tutorial_4"><![CDATA[
+  <string name="description_tutorial_5"><![CDATA[
     أعطني صلاحية الوصول إلى <strong>بيانات الإستخدام</strong> وسأعمل بشكل أفضل. سيكون بإمكاني التعرف على المتصفح الذي تقوم بعمل مشاركة من خلاله، ومن ثم أتخذ ما يلزم.  ]]></string>
   <string name="usage_access_give_access">إعطاء صلاحية الوصول</string>
   <string name="error">خطأ</string>

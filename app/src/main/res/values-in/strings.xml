@@ -39,14 +39,14 @@
   <string name="title_tutorial_1">Apakah ini pernah terjadi pada Anda?</string>
   <string name="title_tutorial_2">Bagikan!</string>
   <string name="title_tutorial_3">Aplikasi Preferensi</string>
-  <string name="title_tutorial_4">Akses Penggunaan</string>
+  <string name="title_tutorial_5">Akses Penggunaan</string>
   <string name="description_tutorial_0">Saya datang menyelamatkan Anda saat Anda terjebak dalam browser.</string>
   <string name="description_tutorial_1">Anda mengklik tautan pendek dan entah bagaimana Anda akhirnya terjebak di laman web bukannya menonton video secara langsung.</string>
   <string name="description_tutorial_2">Cukup bagikan tautan itu dengan saya dan saya akan alihkan apl untuk Anda.</string>
   <string name="description_tutorial_3"><![CDATA[
     Pilih <strong>SELALU</strong> untuk memberitahu saya agar dapat selalu membuka tautan dengan apl tertentu.
   ]]></string>
-  <string name="description_tutorial_4"><![CDATA[
+  <string name="description_tutorial_5"><![CDATA[
     Berikan izin ke <strong>AKSES PENGGUNAAN</strong> dan saya akan bekerja lebih baik. Saya akan mendeteksi peramban yang anda bagikan dari tindakkan yang sesuai.
   ]]></string>
   <string name="usage_access_give_access">Give Access</string>

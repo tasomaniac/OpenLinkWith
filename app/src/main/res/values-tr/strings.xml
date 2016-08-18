@@ -37,14 +37,14 @@
   <string name="title_tutorial_1">Hiç başınıza geldi mi?</string>
   <string name="title_tutorial_2">Paylaş!</string>
   <string name="title_tutorial_3">Tercih Edilen Uyg.lar</string>
-  <string name="title_tutorial_4">Kullanım Erişimi</string>
+  <string name="title_tutorial_5">Kullanım Erişimi</string>
   <string name="description_tutorial_0">Tarayıcıda sıkıştığın zaman seni kurtarmaya geldim.</string>
   <string name="description_tutorial_1">Kısa linklerden birine tıkladın ve vidyoyu direl izlemek yerine bir şekilde web sayfasında takıldın.</string>
   <string name="description_tutorial_2">Sadece benimle paylaş ve senin için uygulamada açayım.</string>
   <string name="description_tutorial_3"><![CDATA[
   Linki her zaman bir uygulama ile açmak için <strong>HER ZAMAN</strong> seçeneğini seçin.
   ]]></string>
-  <string name="description_tutorial_4"><![CDATA[
+  <string name="description_tutorial_5"><![CDATA[
   <strong>KULLANIM İZNİ</strong>\'ne erişim verirsen daha iyi çalışırım. Paylaştığın uygulamayı anlarım ve ona göre davranırım.
   ]]></string>
   <string name="usage_access_give_access">Erişim Ver</string>
