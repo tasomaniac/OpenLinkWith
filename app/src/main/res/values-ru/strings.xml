@@ -46,6 +46,9 @@
   <string name="description_tutorial_3"><![CDATA[
 Выберите <strong>ВСЕГДА</strong>, чтобы сообщите мне какие ссылки всегда нужно открывать в этом приложении.
   ]]></string>
+  <string name="description_tutorial_4"><![CDATA[
+    <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.
+  ]]></string>
   <string name="description_tutorial_5"><![CDATA[
 Дайте доступ к <strong>СТАТИСТИКЕ ИСПОЛЬЗОВАНИЯ</strong> и я смогу работать лучше. Я буду обнаруживать браузер из которого вы делитесь для соответствия.  ]]></string>
   <string name="usage_access_give_access">Give Access</string>

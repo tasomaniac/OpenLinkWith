@@ -55,6 +55,13 @@ public class IntroActivity extends AppIntro {
                         .description(R.string.description_tutorial_3)
                         .drawable(R.drawable.tutorial_3).build());
 
+        if (getResources().getBoolean(R.bool.add_to_home_screen_enabled)) {
+            addSlide(new AppIntroFragment.Builder()
+                             .title(R.string.title_tutorial_4)
+                             .description(R.string.description_tutorial_4)
+                             .drawable(R.drawable.tutorial_4).build());
+        }
+
         addUsageStatsSlideIfNeeded();
     }
 

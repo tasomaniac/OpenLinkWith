@@ -44,6 +44,9 @@
   <string name="description_tutorial_2">一度このアプリで共有していただければ、以後常にあなたが望むアプリに切り替えさせていただきます</string>
   <string name="description_tutorial_3"><![CDATA[    <strong>常時</strong> を選択していただくことで、そのリンクを常に特定のアプリで開くようになります
   ]]></string>
+  <string name="description_tutorial_4"><![CDATA[
+    <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.
+  ]]></string>
   <string name="description_tutorial_5"><![CDATA[    <strong>使用状況へのアクセス</strong> を許可していただけると、更により良く機能していきます。あなたが共有するブラウザを検出して、それに応じた動きをするようになります。
   ]]></string>
   <string name="usage_access_give_access">Give Access</string>

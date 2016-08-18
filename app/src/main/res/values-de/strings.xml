@@ -46,6 +46,9 @@
   <string name="description_tutorial_3"><![CDATA[
     Select <strong>ALWAYS</strong> to tell me to open that link always with a specific app.
   ]]></string>
+  <string name="description_tutorial_4"><![CDATA[
+    <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.
+  ]]></string>
   <string name="description_tutorial_5"><![CDATA[
     Give access to <strong>USAGE ACCESS</strong> and I will work better. I will detect the browser you are sharing from to act accordingly.
   ]]></string>

@@ -44,6 +44,9 @@ Remover <strong>%1$s</strong> como a aplicação predefinida para abrir ligaçõ
   <string name="description_tutorial_2">Basta partilhar comigo e irei mudar de aplicação.</string>
   <string name="description_tutorial_3"><![CDATA[
 Selecione <strong>sempre</strong> para abrir essa ligação com um aplicação específica.  ]]></string>
+  <string name="description_tutorial_4"><![CDATA[
+    <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.
+  ]]></string>
   <string name="description_tutorial_5"><![CDATA[
 Dar acesso a <strong>Acesso de uso</strong> e irei trabalhar melhor. Irei detectar o navegador que está a usar para partilhar e agir em conformidade.  ]]></string>
   <string name="usage_access_give_access">Give Access</string>
