@@ -24,7 +24,7 @@
   <string name="pref_summary_preferred">تغيير إعدادات التطبيق المفضل.</string>
   <string name="pref_title_category_usage">بيانات الإستخدام</string>
   <string name="pref_title_usage_stats">إحصائيات الاستخدام</string>
-  <string name="pref_summary_usage_stats">Improve the application sorting by giving access to Usage Stats.</string>
+  <string name="pref_summary_usage_stats">قم بإعطاء التطبيق صلاحية الوصول إلى بيانات الإستخدام ليظهر في بداية قائمة المشاركة.</string>
   <string name="pref_title_category_others">أخرى</string>
   <string name="pref_title_open_source">تراخيص البرامج مفتوحة المصدر</string>
   <string name="pref_summary_open_source">شاهد تراخيص المكتبات مفتوحة المصدر.</string>
@@ -48,11 +48,11 @@
   ]]></string>
   <string name="description_tutorial_4"><![CDATA[
     أعطني صلاحية الوصول إلى <strong>بيانات الإستخدام</strong> وسأعمل بشكل أفضل. سيكون بإمكاني التعرف على المتصفح الذي تقوم بعمل مشاركة من خلاله، ومن ثم أتخذ ما يلزم.  ]]></string>
-  <string name="usage_access_give_access">Give Access</string>
+  <string name="usage_access_give_access">إعطاء صلاحية الوصول</string>
   <string name="error">خطأ</string>
   <string name="error_usage_access_not_found">ليس بإمكاني الوصول إلي إعدادات بيانات الإستخدام.\n\n بإمكانك الوصول إليها عن طريق الذهاب إلى الإعدادات -&gt; الأمان</string>
-  <string name="add_to_homescreen">Add To Home screen</string>
-  <string name="add">Add</string>
-  <string name="cancel">Cancel</string>
-  <string name="dialog_hint_add_to_home_screen">Shortcut title</string>
+  <string name="add_to_homescreen">إضافة إلى الشاشة الرئيسية</string>
+  <string name="add">أضف</string>
+  <string name="cancel">إلغاء</string>
+  <string name="dialog_hint_add_to_home_screen">عنوان الإختصار</string>
 </resources>
