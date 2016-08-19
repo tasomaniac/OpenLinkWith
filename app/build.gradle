@@ -109,6 +109,8 @@ dependencies {
     compile 'com.karumi:headerrecyclerview:1.1.0'
     compile 'jp.wasabeef:recyclerview-animators:2.2.3'
 
+    compile 'de.cketti.mailto:email-intent-builder:1.0.0'
+
     apt "net.simonvt.schematic:schematic-compiler:$schematicVersion"
     compile "net.simonvt.schematic:schematic:$schematicVersion"
 
