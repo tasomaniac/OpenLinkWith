@@ -34,6 +34,7 @@ import butterknife.OnEditorAction;
 import butterknife.OnTextChanged;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -104,8 +105,12 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
         if (call != null) {
             call.cancel();
         }
+        HttpUrl httpUrl = HttpUrl.parse(intent.getDataString());
+        if (httpUrl == null) {
+            return;
+        }
         call = client.newCall(new Request.Builder()
-                                      .url(intent.getDataString())
+                                      .url(httpUrl)
                                       .header("User-Agent", "Mozilla/5.0 (Android; Mobile; rv:13.0) Gecko/13.0 Firefox/13.0")
                                       .build());
         call.enqueue(new Callback() {
