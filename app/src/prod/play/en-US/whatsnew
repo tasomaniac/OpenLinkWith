@@ -1,8 +1,9 @@
 Help translate the app into your language:
 https://crowdin.com/project/open-link-with
 
-v1.1.1
+v1.2
 
-- 7 new languages are added. (Indonesian, Italian, Japanese, Portuguese, Portuguese - Brazilian, Russian, Spanish)
-- Fix issues with the height of the "Open With" dialog.
-- Crash fixes.
+- New Add To Home screen feature.
+- Facebook URL support
+- Small bug fixes
+- 2 new languages (Arabic and German)
