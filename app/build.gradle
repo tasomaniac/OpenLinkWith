@@ -64,7 +64,7 @@ android {
             applicationIdSuffix ".floss"
             versionName rootProject.ext.versionName + "-floss"
         }
-        prod
+        play {}
     }
 
     lintOptions {
@@ -118,8 +118,8 @@ dependencies {
 
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
 
-    prodCompile "com.google.android.gms:play-services-analytics:9.4.0"
-    prodCompile 'com.crashlytics.sdk.android:crashlytics:2.6.2'
+    playCompile "com.google.android.gms:play-services-analytics:9.4.0"
+    playCompile 'com.crashlytics.sdk.android:crashlytics:2.6.2'
 
     testCompile 'junit:junit:4.12'
 }
