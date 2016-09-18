@@ -24,9 +24,6 @@ android {
         versionName rootProject.ext.versionName
         buildConfigField "String", "GIT_SHA", "\"${gitSha}\""
 
-        buildConfigField "String", "ANALYTICS_KEY", local_properties.analytics_key != null ?
-                "\"" + local_properties.analytics_key + "\"" : "\"\""
-
         resConfigs "ar", "de", "en", "es", "in", "it", "ja", "pt-rBR", "pt-rPT", "ru", "tr"
     }
 
@@ -68,12 +65,10 @@ android {
     }
 
     lintOptions {
-        abortOnError true
         textReport true
         textOutput 'stdout'
 
         fatal 'UnusedResources'
-        warning 'InvalidPackage'
     }
 
     compileOptions {
@@ -94,7 +89,7 @@ play {
 }
 
 dependencies {
-    def supportLibVersion = "24.2.0"
+    def supportLibVersion = "24.2.1"
     def schematicVersion = '0.6.7'
     def butterKnifeVersion = '8.2.1'
 
@@ -118,7 +113,6 @@ dependencies {
 
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
 
-    playCompile "com.google.android.gms:play-services-analytics:9.4.0"
     playCompile 'com.crashlytics.sdk.android:crashlytics:2.6.2'
 
     testCompile 'junit:junit:4.12'
