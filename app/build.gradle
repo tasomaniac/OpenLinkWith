@@ -69,6 +69,7 @@ android {
         textOutput 'stdout'
 
         fatal 'UnusedResources'
+        warning 'InvalidPackage'
     }
 
     compileOptions {

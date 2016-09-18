@@ -36,7 +36,7 @@ ext {
     versionName = "${versionMajor}.${versionMinor}"
 
     compileSdkVersion = 24
-    buildToolsVersion = '24.0.1'
+    buildToolsVersion = '24.0.2'
 }
 
 task clean(type: Delete) {
