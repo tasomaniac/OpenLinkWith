@@ -1,4 +1,4 @@
-package com.tasomaniac.openwith;
+package com.tasomaniac.openwith.data;
 
 import timber.log.Timber;
 

@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.support.v4.app.ShareCompat;
 import android.widget.Toast;
 
-import com.tasomaniac.openwith.App;
 import com.tasomaniac.openwith.R;
+import com.tasomaniac.openwith.data.Injector;
 import com.tasomaniac.openwith.resolver.ResolverActivity;
 import com.tasomaniac.openwith.util.Urls;
 
@@ -19,8 +19,7 @@ public class AddToHomeScreen extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        App.getApp(this).getAnalytics().sendScreenView("AddToHomeScreen");
+        Injector.obtain(this).analytics().sendScreenView("AddToHomeScreen");
 
         final ShareCompat.IntentReader reader = ShareCompat.IntentReader.from(this);
         String foundUrl = Urls.extractUrlFrom(getIntent(), reader);

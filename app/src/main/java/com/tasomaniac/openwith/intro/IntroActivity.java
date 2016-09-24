@@ -7,11 +7,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.tasomaniac.openwith.Analytics;
-import com.tasomaniac.openwith.App;
 import com.tasomaniac.openwith.R;
+import com.tasomaniac.openwith.data.Analytics;
+import com.tasomaniac.openwith.data.Injector;
 import com.tasomaniac.openwith.util.Intents;
 import com.tasomaniac.openwith.util.Utils;
+
+import javax.inject.Inject;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.LOLLIPOP;
@@ -22,7 +24,8 @@ public class IntroActivity extends AppIntro {
 
     private boolean usageStatsSlideAdded;
 
-    private Analytics analytics;
+    @Inject
+    Analytics analytics;
 
     public static Intent newIntent(Context context, boolean firstStart) {
         return new Intent(context, IntroActivity.class)
@@ -30,9 +33,13 @@ public class IntroActivity extends AppIntro {
     }
 
     @Override
-    public void init(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Injector.obtain(this).inject(this);
+    }
 
-        analytics = App.getApp(this).getAnalytics();
+    @Override
+    public void init(@Nullable Bundle savedInstanceState) {
         analytics.sendScreenView("App Intro");
 
         addSlide(new AppIntroFragment.Builder()

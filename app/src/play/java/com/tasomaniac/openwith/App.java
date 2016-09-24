@@ -17,16 +17,8 @@ public class App extends BaseApp {
             Fabric.with(this, new Crashlytics());
             Timber.plant(new CrashReportingTree());
         }
-
-        analytics = provideAnalytics();
     }
 
-    private static Analytics provideAnalytics() {
-        if (BuildConfig.DEBUG) {
-            return new Analytics.DebugAnalytics();
-        }
-        return new AnalyticsImpl();
-    }
 
     /** A tree which logs important information for crash reporting. */
     private static class CrashReportingTree extends Timber.Tree {

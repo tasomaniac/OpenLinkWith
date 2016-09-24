@@ -8,8 +8,6 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.provider.Settings;
 
-import com.tasomaniac.openwith.App;
-
 import java.util.List;
 
 import timber.log.Timber;
@@ -34,8 +32,6 @@ public class Intents {
             return true;
         } catch (Exception e) {
             Timber.e(e, "Usage Access Open");
-
-            App.getApp(activity).getAnalytics().sendEvent("Usage Access", "Not Found", null);
         }
 
         return false;

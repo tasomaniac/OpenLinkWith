@@ -37,7 +37,7 @@ public abstract class AppIntro extends AppCompatActivity {
     private int savedCurrentItem;
 
     @Override
-    final protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         super.onCreate(savedInstanceState);

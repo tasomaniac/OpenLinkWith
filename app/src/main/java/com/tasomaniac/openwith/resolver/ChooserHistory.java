@@ -10,7 +10,6 @@ class ChooserHistory {
 
     private static final String KEY_HISTORY = "history";
 
-
     private static final char SEPARATOR_KEY_VALUE = '|';
     private static final String SEPARATOR_KEY_VALUE_ESCAPED = "\\|";
     private static final char SEPARATOR_ITEMS = '#';

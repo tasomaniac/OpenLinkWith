@@ -15,19 +15,21 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceFragmentCompat;
-import android.support.v7.preference.PreferenceManager;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 
-import com.tasomaniac.openwith.Analytics;
-import com.tasomaniac.openwith.App;
 import com.tasomaniac.openwith.BuildConfig;
 import com.tasomaniac.openwith.R;
+import com.tasomaniac.openwith.data.Analytics;
+import com.tasomaniac.openwith.data.Injector;
 import com.tasomaniac.openwith.data.prefs.BooleanPreference;
+import com.tasomaniac.openwith.data.prefs.UsageAccess;
 import com.tasomaniac.openwith.intro.IntroActivity;
 import com.tasomaniac.openwith.preferred.PreferredAppsActivity;
 import com.tasomaniac.openwith.util.Intents;
 import com.tasomaniac.openwith.util.Utils;
+
+import javax.inject.Inject;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.LOLLIPOP;
@@ -36,9 +38,10 @@ public class SettingsFragment extends PreferenceFragmentCompat
         implements SharedPreferences.OnSharedPreferenceChangeListener,
         Preference.OnPreferenceClickListener {
 
+    @Inject Analytics analytics;
+    @Inject @UsageAccess BooleanPreference usageAccessPref;
+
     private PreferenceCategory usageStatsPreferenceCategory;
-    private Analytics analytics;
-    private BooleanPreference usageAccessPref;
 
     public SettingsFragment() {
     }
@@ -53,11 +56,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        analytics = App.getApp(getActivity()).getAnalytics();
-        usageAccessPref = new BooleanPreference(
-                PreferenceManager.getDefaultSharedPreferences(getActivity()),
-                "usage_access"
-        );
+        Injector.obtain(getContext()).inject(this);
     }
 
     @Override

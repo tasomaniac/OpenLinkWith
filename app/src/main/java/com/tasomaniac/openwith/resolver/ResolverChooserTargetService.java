@@ -9,9 +9,9 @@ import android.os.Bundle;
 import android.service.chooser.ChooserTarget;
 import android.service.chooser.ChooserTargetService;
 
-import com.tasomaniac.openwith.App;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.ShareToOpenWith;
+import com.tasomaniac.openwith.data.Injector;
 
 import java.util.Collections;
 import java.util.List;
@@ -42,7 +42,7 @@ public class ResolverChooserTargetService extends ChooserTargetService {
     }
 
     private void sendAnalyticsEvent() {
-        App.getApp(this).getAnalytics().sendEvent(
+        Injector.obtain(this).analytics().sendEvent(
                 "Direct Share",
                 "Shown",
                 "true"

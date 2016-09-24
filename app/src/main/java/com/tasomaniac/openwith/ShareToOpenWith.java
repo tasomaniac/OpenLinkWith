@@ -18,6 +18,8 @@ import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.widget.Toast;
 
+import com.tasomaniac.openwith.data.Analytics;
+import com.tasomaniac.openwith.data.Injector;
 import com.tasomaniac.openwith.resolver.ResolverActivity;
 import com.tasomaniac.openwith.util.Intents;
 import com.tasomaniac.openwith.util.Urls;
@@ -69,9 +71,10 @@ public class ShareToOpenWith extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        App.getApp(this).getAnalytics().sendScreenView("ShareToOpenWith");
+        Analytics analytics = Injector.obtain(this).analytics();
+        analytics.sendScreenView("ShareToOpenWith");
         if (isFromDirectShare(getIntent())) {
-            App.getApp(this).getAnalytics().sendEvent(
+            analytics.sendEvent(
                     "Direct Share",
                     "Clicked",
                     "true"

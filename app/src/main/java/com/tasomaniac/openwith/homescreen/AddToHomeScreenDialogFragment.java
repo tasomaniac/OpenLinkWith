@@ -20,9 +20,11 @@ import android.widget.EditText;
 
 import com.tasomaniac.android.widget.DelayedProgressBar;
 import com.tasomaniac.openwith.R;
+import com.tasomaniac.openwith.data.Injector;
 import com.tasomaniac.openwith.resolver.DisplayResolveInfo;
 import com.tasomaniac.openwith.util.Intents;
 
+import javax.inject.Inject;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -51,14 +53,11 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
     private static final String KEY_DRI = "dri";
     private static final String KEY_INTENT = "intent";
 
-    private final OkHttpClient client = new OkHttpClient();
+    @Inject OkHttpClient client;
 
-    @BindView(R.id.add_to_home_screen_title)
-    EditText titleView;
-    @BindView(R.id.add_to_home_screen_progress)
-    DelayedProgressBar progressBar;
-    @BindBitmap(R.drawable.ic_star_mark)
-    Bitmap shortcutMark;
+    @BindView(R.id.add_to_home_screen_title) EditText titleView;
+    @BindView(R.id.add_to_home_screen_progress) DelayedProgressBar progressBar;
+    @BindBitmap(R.drawable.ic_star_mark) Bitmap shortcutMark;
 
     private DisplayResolveInfo dri;
     private ShortcutIconCreator shortcutIconCreator;
@@ -77,6 +76,7 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Injector.obtain(getContext()).inject(this);
         dri = getArguments().getParcelable(KEY_DRI);
         intent = getArguments().getParcelable(KEY_INTENT);
     }

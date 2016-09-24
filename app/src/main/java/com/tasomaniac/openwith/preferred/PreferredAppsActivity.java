@@ -15,14 +15,15 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.tasomaniac.openwith.Analytics;
-import com.tasomaniac.openwith.App;
 import com.tasomaniac.openwith.R;
+import com.tasomaniac.openwith.data.Analytics;
+import com.tasomaniac.openwith.data.Injector;
 import com.tasomaniac.openwith.misc.DividerItemDecoration;
 import com.tasomaniac.openwith.misc.ItemClickListener;
 import com.tasomaniac.openwith.resolver.DisplayResolveInfo;
 import com.tasomaniac.openwith.resolver.ResolveListAdapter;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,19 +41,19 @@ public class PreferredAppsActivity extends AppCompatActivity
         ItemClickListener,
         AppRemoveDialogFragment.Callbacks {
 
-    @BindView(R.id.recycler_view)
-    RecyclerView recyclerView;
-    private PreferredAppsAdapter adapter;
+    @Inject Analytics analytics;
 
-    private Analytics analytics;
+    @BindView(R.id.recycler_view) RecyclerView recyclerView;
+
+    private PreferredAppsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferred_apps);
+        Injector.obtain(this).inject(this);
         ButterKnife.bind(this);
 
-        analytics = App.getApp(this).getAnalytics();
         analytics.sendScreenView("Preferred Apps");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
