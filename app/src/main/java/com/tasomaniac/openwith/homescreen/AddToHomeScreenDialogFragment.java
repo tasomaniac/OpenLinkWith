@@ -236,16 +236,37 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
     }
 
     private void createShortcutFor(DisplayResolveInfo dri) {
+        try {
+            Intent shortcutIntent = createShortcutIntent();
+            shortcutIntent.putExtra(
+                    Intent.EXTRA_SHORTCUT_ICON,
+                    shortcutIconCreator.createShortcutIconFor((BitmapDrawable) dri.displayIcon())
+            );
+            getActivity().sendBroadcast(Intents.fixIntents(getContext(), shortcutIntent));
+        } catch (Exception e) {
+            // This method started to fire android.os.TransactionTooLargeException
+            Timber.e(e, "Exception while adding shortcut");
+            createShortcutWithoutIcon();
+        }
+    }
+
+    private void createShortcutWithoutIcon() {
+        try {
+            Intent shortcutIntent = createShortcutIntent();
+            Intent.ShortcutIconResource icon = Intent.ShortcutIconResource.fromContext(getContext(), R.mipmap.ic_bookmark);
+            shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, icon);
+            getActivity().sendBroadcast(Intents.fixIntents(getContext(), shortcutIntent));
+        } catch (Exception e) {
+            Timber.e(e, "Exception while adding shortcut without icon");
+        }
+    }
+
+    private Intent createShortcutIntent() {
         Intent shortcutIntent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
         shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, titleView.getText().toString());
-        shortcutIntent.putExtra(
-                Intent.EXTRA_SHORTCUT_ICON,
-                shortcutIconCreator.createShortcutIconFor((BitmapDrawable) dri.displayIcon())
-        );
         shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent);
         shortcutIntent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
-
-        getActivity().sendBroadcast(Intents.fixIntents(getContext(), shortcutIntent));
+        return shortcutIntent;
     }
 
     public void show(FragmentManager fragmentManager) {
