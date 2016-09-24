@@ -26,7 +26,6 @@ allprojects {
 
 ext {
     ci = "true".equals(System.getenv("CI"))
-    preDexEnabled = "true".equals(System.getProperty("pre-dex", "true"))
 
     versionMajor = 1
     versionMinor = 2

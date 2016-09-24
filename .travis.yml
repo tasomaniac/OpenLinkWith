@@ -9,17 +9,11 @@ android:
     - android-24
     - extra-google-m2repository
     - extra-android-m2repository
-  licenses:
-      - 'android-sdk-license-.+'
 
 jdk:
   - oraclejdk8
 
 script: "./gradlew clean check"
-
-env:
-  global:
-    secure: ""
 
 branches:
   except:
