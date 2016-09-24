@@ -75,13 +75,10 @@ public class Intents {
                 String asin = Urls.AmazonFixer.extractAmazonASIN(intent.getDataString());
                 if (asin != null) {
                     if ("0000000000".equals(asin)) {
-                        Intent launchIntentForPackage = context.getPackageManager()
+                        return context.getPackageManager()
                                 .getLaunchIntentForPackage(intent.getComponent().getPackageName());
-                        return new Intent(intent)
-                                .setData(null)
-                                .setComponent(launchIntentForPackage.getComponent());
                     }
-                    return new Intent(intent).setDataAndType(
+                    return new Intent(Intent.ACTION_VIEW).setDataAndType(
                             Uri.parse("mshop://featured?ASIN=" + asin),
                             "vnd.android.cursor.item/vnd.amazon.mShop.featured"
                     );
