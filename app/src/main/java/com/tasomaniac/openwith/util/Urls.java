@@ -118,7 +118,7 @@ public final class Urls {
             String asin = extractAmazonASIN(url);
 
             //Use fake ASIN to make Amazon App popup for the Intent.
-            final Matcher matcher = Pattern.compile("((?:http|https)://)?www\\.amazon\\.(?:com|co\\.uk|co\\.jp|de)/?")
+            final Matcher matcher = Pattern.compile("((?:http|https)://)?www\\.amazon\\.(?:com|co\\.uk|co\\.jp|com\\.au|com\\.br|ca|cn|fr|de|in|it|com\\.mx|nl|es)/?")
                     .matcher(url);
             if (matcher.matches()) {
                 asin = "0000000000";
@@ -133,7 +133,7 @@ public final class Urls {
         @Nullable
         static String extractAmazonASIN(String foundUrl) {
             try {
-                final Matcher matcher = Pattern.compile(".*//www.amazon.(?:com|co\\.uk|co.jp|de)/gp/aw/d/(\\w{10})/.*", Pattern.CASE_INSENSITIVE)
+                final Matcher matcher = Pattern.compile(".*//www.amazon.(?:com|co\\.uk|co.jp|com\\.au|com\\.br|ca|cn|fr|de|in|it|com\\.mx|nl|es)/gp/aw/d/(\\w{10})/.*", Pattern.CASE_INSENSITIVE)
                         .matcher(foundUrl);
                 if (matcher.find()) {
                     return matcher.group(1);
@@ -142,7 +142,7 @@ public final class Urls {
             }
             try {
                 //http://www.amazon.com/Garmin-Speed-Cadence-Bike-Sensor/dp/B000BFNOT8
-                final Matcher matcher = Pattern.compile(".*//www.amazon.(?:com|co\\.uk|co.jp|de)/(?:.+/)?dp/(\\w{10}).*", Pattern.CASE_INSENSITIVE)
+                final Matcher matcher = Pattern.compile(".*//www.amazon.(?:com|co\\.uk|co.jp|com\\.au|com\\.br|ca|cn|fr|de|in|it|com\\.mx|nl|es)/(?:.+/)?dp/(\\w{10}).*", Pattern.CASE_INSENSITIVE)
                         .matcher(foundUrl);
                 if (matcher.find()) {
                     return matcher.group(1);
