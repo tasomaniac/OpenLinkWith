@@ -28,8 +28,8 @@ ext {
     ci = "true".equals(System.getenv("CI"))
 
     versionMajor = 1
-    versionMinor = 2
-    versionBuild = 8
+    versionMinor = 3
+    versionBuild = 0
 
     versionCode = versionMajor * 10000 + versionMinor * 1000 + versionBuild
     versionName = "${versionMajor}.${versionMinor}"
