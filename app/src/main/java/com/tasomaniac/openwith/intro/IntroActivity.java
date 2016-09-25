@@ -24,8 +24,7 @@ public class IntroActivity extends AppIntro {
 
     private boolean usageStatsSlideAdded;
 
-    @Inject
-    Analytics analytics;
+    @Inject Analytics analytics;
 
     public static Intent newIntent(Context context, boolean firstStart) {
         return new Intent(context, IntroActivity.class)
@@ -34,8 +33,8 @@ public class IntroActivity extends AppIntro {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         Injector.obtain(this).inject(this);
+        super.onCreate(savedInstanceState);
     }
 
     @Override
