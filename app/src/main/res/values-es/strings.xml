@@ -10,7 +10,7 @@
   <string name="title_preferred_apps">Apps Preferidas</string>
   <string name="desc_preferred">Aplicaciones preferidas para ser usadas directamente cuando los enlaces siguientes son compartidos con esta app.\n\n Toca para quitar una app preferida.</string>
   <string name="desc_preferred_empty">Aplicaciones preferidas para ser usadas directamente cuando los siguientes enlaces son compartidos con esta app.\n\nuedes seleccionar las apps preferidas compartiendo enlaces con esta app y luego eligiendo \"Siempre\"</string>
-  <string name="title_remove_preferred">Borrar preferida?</string>
+  <string name="title_remove_preferred">¿Borrar preferida?</string>
   <string name="message_remove_preferred"><![CDATA[
 Eliminar <strong>%1$s</strong> como app preferida para cargar los enlaces de <strong>%2$s</strong>?<br><br><strong>Nota:</strong> Puedes seleccionar una nueva app preferida para usar la próxima vez que compartas el enlace <strong>%3$s</strong>.    ]]></string>
   <string name="error_invalid_url">El contenido compartido no tenía ninguna URL válida.</string>
@@ -31,7 +31,7 @@ Eliminar <strong>%1$s</strong> como app preferida para cargar los enlaces de <st
   <string name="pref_summary_contact">Envíeme un correo electrónico antes de dar una 1 estrella.</string>
   <string name="pref_title_market">Más aplicaciones de Tahsin Dane</string>
   <string name="pref_summary_market">Te gusta? Por qué no mirar mis otras apps?</string>
-  <string name="pref_title_version">Version</string>
+  <string name="pref_title_version">Versión</string>
   <string name="skip">Saltar</string>
   <string name="cd_image_tutorial">Tutorial Imagen</string>
   <string name="title_tutorial_0">Bienvenido a Abrir Enlace Con</string>
@@ -49,11 +49,11 @@ Selecciona <strong>SIEMPRE</strong> para decirme que abra este enlace siempre co
   ]]></string>
   <string name="description_tutorial_5"><![CDATA[
 Dar acceso a <strong>ACCESO DE USO</strong> y funcionaré mejor. Detectaré el navegador desde el cual estas compartiendo y actuaré en consecuencia.  ]]></string>
-  <string name="usage_access_give_access">Give Access</string>
+  <string name="usage_access_give_access">Dar acceso</string>
   <string name="error">Error</string>
   <string name="error_usage_access_not_found">El Ajuste de Acceso de Uso no se puede encontrar.\n\nYou may access it by going into Settings -&gt; Security</string>
   <string name="add_to_homescreen">Add To Home screen</string>
-  <string name="add">Add</string>
-  <string name="cancel">Cancel</string>
-  <string name="dialog_hint_add_to_home_screen">Shortcut title</string>
+  <string name="add">Añadir</string>
+  <string name="cancel">Cancelar</string>
+  <string name="dialog_hint_add_to_home_screen">Título del acceso directo</string>
 </resources>

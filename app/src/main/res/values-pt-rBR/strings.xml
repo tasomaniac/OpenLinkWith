@@ -3,7 +3,7 @@
 <resources>
   <string name="open_with">\u0020Abrir Com&#8230;</string>
   <string name="use_a_different_app">Usar um app diferente</string>
-  <string name="activity_resolver_use_once">Esta Vez</string>
+  <string name="activity_resolver_use_once">Desta Vez</string>
   <string name="activity_resolver_use_always">Sempre</string>
   <string name="which_view_application">Abrir com</string>
   <string name="which_view_application_named">Abrir com %1$s</string>
@@ -12,10 +12,10 @@
   <string name="desc_preferred_empty">Aplicativos para serem usados diretamente quando os links abaixo forem compartilhados com este app.\n\nVocê pode definir os apps preferidos compartilhando links com este app e escolhendo a opção \"Sempre\"</string>
   <string name="title_remove_preferred">Remover preferido?</string>
   <string name="message_remove_preferred"><![CDATA[
-Descredenciar <strong>%1$s</strong> como aplicativo preferencial para abrir links de <strong>%2$s</strong>?<br><br><strong>Nota:</strong> Você pode definir apps preferidos sempre quando compartilhar links de <strong>%3$s</strong>.
+Remover <strong>%1$s</strong> como aplicativo preferencial para abrir links de <strong>%2$s</strong>?<br><br><strong>Nota:</strong> Você pode definir um novo app preferido na próxima vez em que compartilhar um link de <strong>%3$s</strong>.
     ]]></string>
   <string name="error_invalid_url">O conteúdo compartilhado não tinha nenhuma URL válida.</string>
-  <string name="empty_resolver_activity">Nenhum outro aplicativo encontrado para lidar com a URL.</string>
+  <string name="empty_resolver_activity">Nenhum outro aplicativo encontrado para manusear a URL.</string>
   <string name="warning_open_link_with_name">Abrindo link com %s.</string>
   <string name="done">Concluído</string>
   <string name="pref_title_general">Geral</string>
@@ -39,22 +39,21 @@ Descredenciar <strong>%1$s</strong> como aplicativo preferencial para abrir link
   <string name="title_tutorial_1">Já aconteceu com você?</string>
   <string name="title_tutorial_2">Compartilhar!</string>
   <string name="title_tutorial_3">Aplicativos Preferidos</string>
-  <string name="title_tutorial_5">Acesso ao Uso</string>
-  <string name="description_tutorial_0">Vim resgatá-lo sempre que você ficar agarrado em navegadores.</string>
+  <string name="title_tutorial_5">Acesso de Uso</string>
+  <string name="description_tutorial_0">Venho te resgatar sempre que você ficar preso nos navegadores.</string>
   <string name="description_tutorial_1">Você clica em um link curto e de alguma forma você acaba ficando preso na página da web ao invés de assistir o vídeo diretamente.</string>
   <string name="description_tutorial_2">Apenas compartilhe o link comigo e eu irei mudar de app para você.</string>
   <string name="description_tutorial_3"><![CDATA[
-    Escolha <strong>SEMPRE</strong> para me dizer que o link deve ser sempre aberto naquele determinado app.
+    Escolha <strong>SEMPRE</strong> para me dizer que o link deve ser sempre aberto com um aplicativo específico.
   ]]></string>
   <string name="description_tutorial_4"><![CDATA[
-    <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.
-  ]]></string>
+<strong>Adicione à tela inicial</strong> para acessar rapidamente os seus links favoritos com seus apps favoritos.  ]]></string>
   <string name="description_tutorial_5"><![CDATA[
-Conceda <strong>ACESSO AO USO</strong> e eu vou funcionar melhor. Vou saber de qual navegador você está compartilhando para executar a ação certa.  ]]></string>
-  <string name="usage_access_give_access">Conceder Acesso</string>
+Dê permissão ao <strong>ACESSO DE USO</strong> e eu vou funcionar melhor. Vou saber de qual navegador você está compartilhando para executar a ação certa.  ]]></string>
+  <string name="usage_access_give_access">Permitir Acesso</string>
   <string name="error">Erro</string>
-  <string name="error_usage_access_not_found">Configurações de Acesso ao Uso não encontradas.\n\nYou may access it by going into Settings -&gt; Security</string>
-  <string name="add_to_homescreen">Criar Atalho</string>
+  <string name="error_usage_access_not_found">Configurações de Acesso de Uso não pode ser aberto.\n\nVocê pode acessá-lo entrando em Configurar -&gt; Segurança</string>
+  <string name="add_to_homescreen">Adicionar ao Tela Inicial</string>
   <string name="add">Adicionar</string>
   <string name="cancel">Cancelar</string>
   <string name="dialog_hint_add_to_home_screen">Nome do atalho</string>

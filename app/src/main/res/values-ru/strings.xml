@@ -47,15 +47,15 @@
 Выберите <strong>ВСЕГДА</strong>, чтобы сообщите мне какие ссылки всегда нужно открывать в этом приложении.
   ]]></string>
   <string name="description_tutorial_4"><![CDATA[
-    <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.
+    <strong>Добавить на рабочий стол</strong> для быстрого доступа к вашим любимым ссылкам с помощью любимых приложений.
   ]]></string>
   <string name="description_tutorial_5"><![CDATA[
 Дайте доступ к <strong>СТАТИСТИКЕ ИСПОЛЬЗОВАНИЯ</strong> и я смогу работать лучше. Я буду обнаруживать браузер из которого вы делитесь для соответствия.  ]]></string>
-  <string name="usage_access_give_access">Give Access</string>
+  <string name="usage_access_give_access">Предоставить доступ</string>
   <string name="error">Ошибка</string>
   <string name="error_usage_access_not_found">Настройка статистики использования не может быть найдена.\n\nYou may access it by going into Settings -&gt; Security</string>
-  <string name="add_to_homescreen">Add To Home screen</string>
-  <string name="add">Add</string>
-  <string name="cancel">Cancel</string>
-  <string name="dialog_hint_add_to_home_screen">Shortcut title</string>
+  <string name="add_to_homescreen">Добавить на рабочий стол</string>
+  <string name="add">Добавить</string>
+  <string name="cancel">Отмена</string>
+  <string name="dialog_hint_add_to_home_screen">Имя ярлыка</string>
 </resources>

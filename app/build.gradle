@@ -24,7 +24,7 @@ android {
         versionName rootProject.ext.versionName
         buildConfigField "String", "GIT_SHA", "\"${gitSha}\""
 
-        resConfigs "ar", "de", "en", "es", "in", "it", "ja", "pt-rBR", "pt-rPT", "ru", "tr"
+        resConfigs "ar", "de", "en", "es", "in", "it", "ja", "pl", "pt-rBR", "pt-rPT", "ru", "tr", "zh-rCN"
     }
 
     signingConfigs {

@@ -31,14 +31,14 @@ Rimuovi <strong>%1$s</strong> come app preferita per caricare i link di <strong>
   <string name="pref_summary_contact">Inviami una mail prima di dare 1 stella.</string>
   <string name="pref_title_market">Più app da Said Tahsin Dane</string>
   <string name="pref_summary_market">Ti piace? Perché non dai un\'occhiata alle mie altre app?</string>
-  <string name="pref_title_version">Version</string>
+  <string name="pref_title_version">Versione</string>
   <string name="skip">Ignora</string>
   <string name="cd_image_tutorial">Immagine tutorial</string>
   <string name="title_tutorial_0">Benvenuto in Apri Link Con</string>
   <string name="title_tutorial_1">Ti è mai successo?</string>
   <string name="title_tutorial_2">Condividilo!</string>
   <string name="title_tutorial_3">Applicazioni preferite</string>
-  <string name="title_tutorial_5">Accesso a dati di utilizzo</string>
+  <string name="title_tutorial_5">Accesso ai dati di utilizzo</string>
   <string name="description_tutorial_0">Ti vengo a salvare ogni volta che rimani bloccato nei browser.</string>
   <string name="description_tutorial_1">Clicchi un link corto e in qualche modo ti ritrovi bloccato in una pagina web invece di guardare il video direttamente.</string>
   <string name="description_tutorial_2">Condividilo semplicemente con me e cambierò le app per te.</string>
@@ -46,16 +46,15 @@ Rimuovi <strong>%1$s</strong> come app preferita per caricare i link di <strong>
 Seleziona <strong>SEMPRE</strong> per dirmi di aprire sempre quel link con un\'app specifica.
   ]]></string>
   <string name="description_tutorial_4"><![CDATA[
-    <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.
-  ]]></string>
+<strong>Aggiungi alla schermata Home</strong> per accedere velocemente ai tuoi link preferiti con le tue app preferiteo.  ]]></string>
   <string name="description_tutorial_5"><![CDATA[
 Dammi l\'accesso ad <strong>ACCESSO A DATI DI UTILIZZO</strong> e lavorerò meglio. Rileverò il browser dal quale stai condividendo per agire di conseguenza.
   ]]></string>
-  <string name="usage_access_give_access">Give Access</string>
+  <string name="usage_access_give_access">Consenti Accesso</string>
   <string name="error">Errore</string>
-  <string name="error_usage_access_not_found">Impostazioni di Accesso a dati di utilizzo non trovate.\n\nYou may access it by going into Settings -&gt; Security</string>
-  <string name="add_to_homescreen">Add To Home screen</string>
-  <string name="add">Add</string>
-  <string name="cancel">Cancel</string>
-  <string name="dialog_hint_add_to_home_screen">Shortcut title</string>
+  <string name="error_usage_access_not_found">Impostazioni di Accesso a dati di utilizzo non trovate.\n\nCi potrai accedere entrando nelle Impostazioni -&gt; Sicurezza</string>
+  <string name="add_to_homescreen">Aggiungi alla home</string>
+  <string name="add">Aggiungi</string>
+  <string name="cancel">Annulla</string>
+  <string name="dialog_hint_add_to_home_screen">Titolo della Scorciatoia</string>
 </resources>
