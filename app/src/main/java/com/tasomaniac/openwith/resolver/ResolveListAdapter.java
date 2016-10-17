@@ -38,6 +38,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -60,7 +61,6 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         BROWSER_INTENT.setData(Uri.parse("http:"));
     }
 
-    private final Context mContext;
     private final ChooserHistory mHistory;
     private final Intent mIntent;
     private final String mCallerPackage;
@@ -108,7 +108,6 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
 
         mPm = context.getPackageManager();
 
-        mContext = context;
         mHistory = history;
         mIntent = intent;
         mCallerPackage = callerPackage;
@@ -203,8 +202,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
             }
 
             if (N > 1) {
-                Comparator<ResolveInfo> rComparator =
-                        new ResolverComparator(mContext, mIntent);
+                Comparator<ResolveInfo> rComparator = new ResolverComparator(mIntent);
                 Collections.sort(currentResolveList, rComparator);
             }
 
@@ -542,8 +540,8 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         private final Collator mCollator;
         private final boolean mHttp;
 
-        ResolverComparator(Context context, Intent intent) {
-            mCollator = Collator.getInstance(context.getResources().getConfiguration().locale);
+        ResolverComparator(Intent intent) {
+            mCollator = Collator.getInstance(Locale.getDefault());
             String scheme = intent.getScheme();
             mHttp = "http".equals(scheme) || "https".equals(scheme);
         }
