@@ -82,7 +82,7 @@ play {
 dependencies {
     def supportLibVersion = "24.2.1"
     def schematicVersion = '0.6.7'
-    def butterKnifeVersion = '8.2.1'
+    def butterKnifeVersion = '8.4.0'
 
     compile "com.android.support:support-v4:$supportLibVersion"
     compile "com.android.support:appcompat-v7:$supportLibVersion"
@@ -93,7 +93,7 @@ dependencies {
     compile 'com.tasomaniac:delayed-progress:0.3'
 
     compile 'com.karumi:headerrecyclerview:1.1.0'
-    compile 'jp.wasabeef:recyclerview-animators:2.2.3'
+    compile 'jp.wasabeef:recyclerview-animators:2.2.4'
 
     apt "net.simonvt.schematic:schematic-compiler:$schematicVersion"
     compile "net.simonvt.schematic:schematic:$schematicVersion"
@@ -104,11 +104,11 @@ dependencies {
 
     compile "com.jakewharton:butterknife:$butterKnifeVersion"
     apt "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
-    compile 'com.jakewharton.timber:timber:4.3.0'
+    compile 'com.jakewharton.timber:timber:4.3.1'
 
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
 
-    playCompile 'com.crashlytics.sdk.android:crashlytics:2.6.2'
+    playCompile 'com.crashlytics.sdk.android:crashlytics:2.6.5'
 
     testCompile 'junit:junit:4.12'
 }
