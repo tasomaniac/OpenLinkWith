@@ -1,4 +1,4 @@
-package com.tasomaniac.openwith.misc;
+package com.tasomaniac.openwith.preferred;
 
 import android.content.Context;
 import android.content.res.TypedArray;

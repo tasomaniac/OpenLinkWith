@@ -18,8 +18,7 @@ import android.view.View;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.Analytics;
 import com.tasomaniac.openwith.data.Injector;
-import com.tasomaniac.openwith.misc.DividerItemDecoration;
-import com.tasomaniac.openwith.misc.ItemClickListener;
+import com.tasomaniac.openwith.resolver.ItemClickListener;
 import com.tasomaniac.openwith.resolver.DisplayResolveInfo;
 import com.tasomaniac.openwith.resolver.ResolveListAdapter;
 
@@ -73,6 +72,12 @@ public class PreferredAppsActivity extends AppCompatActivity
         adapter.setHeader(new ResolveListAdapter.Header());
 
         getSupportLoaderManager().initLoader(0, null, this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        adapter.setItemClickListener(null);
     }
 
     @Override

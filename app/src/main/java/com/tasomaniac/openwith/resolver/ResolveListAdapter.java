@@ -28,7 +28,6 @@ import android.widget.TextView;
 
 import com.karumi.headerrecyclerview.HeaderRecyclerViewAdapter;
 import com.tasomaniac.openwith.R;
-import com.tasomaniac.openwith.misc.ItemClickListener;
 import com.tasomaniac.openwith.misc.ItemLongClickListener;
 
 import java.text.Collator;
@@ -426,10 +425,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (itemClickListener != null) {
-                    itemClickListener.onItemClick(v, holder.getAdapterPosition(), holder.getItemId());
-                }
-
+                itemClickListener.onItemClick(v, holder.getAdapterPosition(), holder.getItemId());
                 setItemChecked(holder.getAdapterPosition());
             }
         });
@@ -443,8 +439,8 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         });
     }
 
-    public void setItemClickListener(ItemClickListener itemClickListener) {
-        this.itemClickListener = itemClickListener;
+    public void setItemClickListener(@Nullable ItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener == null ? ItemClickListener.EMPTY : itemClickListener;
     }
 
     void setItemLongClickListener(ItemLongClickListener itemLongClickListener) {
