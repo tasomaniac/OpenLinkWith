@@ -25,6 +25,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -60,6 +61,7 @@ public class ResolverActivity extends AppCompatActivity
     public static final String EXTRA_PRIORITY_PACKAGES = "EXTRA_PRIORITY_PACKAGES";
     public static final String EXTRA_ADD_TO_HOME_SCREEN = "EXTRA_ADD_TO_HOME_SCREEN";
     private static final String KEY_CHECKED_POS = "KEY_CHECKED_POS";
+    private static final String KEY_CHECKED_ITEM = "KEY_CHECKED_ITEM";
     public static final String EXTRA_LAST_CHOSEN_COMPONENT = "last_chosen";
 
     private ResolveListAdapter mAdapter;
@@ -73,7 +75,7 @@ public class ResolverActivity extends AppCompatActivity
     private Button mOnceButton;
     private int mIconDpi;
 
-    private int mLastSelected = RecyclerView.NO_POSITION;
+    @Nullable private DisplayResolveInfo lastSelected;
 
     private Uri mRequestedUri;
     private ChooserHistory mHistory;
@@ -275,7 +277,7 @@ public class ResolverActivity extends AppCompatActivity
             // to the recent tasks shown to the user, and we need to make sure
             // that each time we are launched we get the correct launching
             // uid (not re-using the same resolver from an old launching uid),
-            // so we will now finish ourself since being no longer visible,
+            // so we will now finish ourselves since being no longer visible,
             // the user probably can't get back to us.
             if (!isChangingConfigurations()) {
                 finish();
@@ -288,15 +290,16 @@ public class ResolverActivity extends AppCompatActivity
         super.onSaveInstanceState(outState);
 
         outState.putInt(KEY_CHECKED_POS, mAdapter.getCheckedItemPosition());
+        outState.putParcelable(KEY_CHECKED_ITEM, lastSelected);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         if (mAlwaysUseOption) {
+            lastSelected = savedInstanceState.getParcelable(KEY_CHECKED_ITEM);
             final int checkedPos = savedInstanceState.getInt(KEY_CHECKED_POS);
             final boolean hasValidSelection = checkedPos != ListView.INVALID_POSITION;
-            mLastSelected = checkedPos;
             mAlwaysButton.setEnabled(hasValidSelection);
             mOnceButton.setEnabled(hasValidSelection);
             if (hasValidSelection) {
@@ -306,40 +309,30 @@ public class ResolverActivity extends AppCompatActivity
     }
 
     @Override
-    public void onItemClick(View view, final int position, long id) {
-        final boolean hasValidSelection = position != RecyclerView.NO_POSITION;
-        if (mAlwaysUseOption && (!hasValidSelection || mLastSelected != position)) {
+    public void onItemClick(DisplayResolveInfo dri) {
+        final boolean hasValidSelection = true;
+        if (mAlwaysUseOption && !dri.equals(lastSelected)) {
             mAlwaysButton.setEnabled(hasValidSelection);
             mOnceButton.setEnabled(hasValidSelection);
-            if (hasValidSelection) {
-                mListView.smoothScrollToPosition(position);
-            }
-            mLastSelected = position;
+            lastSelected = dri;
         } else {
-            startSelected(position, false, true);
+            startSelected(dri, false);
         }
     }
 
     public void onButtonClick(View v) {
-        final int id = v.getId();
-        startSelected(
-                getSelectedIntentPosition(),
-                id == R.id.button_always,
-                mAlwaysUseOption
-        );
+        startSelected(getSelectedItem(), v.getId() == R.id.button_always);
         dismiss();
     }
 
-    int getSelectedIntentPosition() {
-        return mAlwaysUseOption ?
-                mAdapter.getCheckedItemPosition() : mAdapter.getFilteredPosition();
+    private DisplayResolveInfo getSelectedItem() {
+        return mAlwaysUseOption ? lastSelected : mAdapter.getFilteredItem();
     }
 
-    private void startSelected(int which, boolean always, boolean filtered) {
+    private void startSelected(DisplayResolveInfo dri, boolean always) {
         if (isFinishing()) {
             return;
         }
-        DisplayResolveInfo dri = mAdapter.displayResolveInfoForPosition(which, filtered);
         Intent intent = mAdapter.intentForDisplayResolveInfo(dri);
         if (isAddToHomeScreen) {
             AddToHomeScreenDialogFragment

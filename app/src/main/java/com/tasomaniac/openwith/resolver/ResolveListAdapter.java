@@ -22,7 +22,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -143,13 +142,6 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
             return mList.get(lastChosenPosition);
         }
         return null;
-    }
-
-    int getFilteredPosition() {
-        if (mFilterLastUsed && lastChosenPosition >= 0) {
-            return lastChosenPosition;
-        }
-        return AbsListView.INVALID_POSITION;
     }
 
     boolean hasFilteredItem() {
@@ -425,8 +417,9 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemClickListener.onItemClick(v, holder.getAdapterPosition(), holder.getItemId());
-                setItemChecked(holder.getAdapterPosition());
+                int adapterPosition = holder.getAdapterPosition();
+                itemClickListener.onItemClick(getItem(adapterPosition));
+                setItemChecked(adapterPosition);
             }
         });
 

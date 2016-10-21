@@ -13,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.Analytics;
@@ -83,33 +82,9 @@ public class PreferredAppsActivity extends AppCompatActivity
     }
 
     @Override
-    public void onItemClick(View view, int position, long id) {
-
-        final DisplayResolveInfo info = adapter.getItem(position);
-        if (info == null) {
-            return;
-        }
-
-        AppRemoveDialogFragment.newInstance(info, position)
+    public void onItemClick(DisplayResolveInfo info) {
+        AppRemoveDialogFragment.newInstance(info)
                 .show(getSupportFragmentManager(), AppRemoveDialogFragment.class.getSimpleName());
-    }
-
-    private void notifyItemRemoval(final int position) {
-        recyclerView.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                adapter.remove(adapter.getItem(position));
-                adapter.notifyItemRemoved(position);
-
-                recyclerView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapter.notifyItemChanged(0);
-                    }
-                }, 200);
-            }
-        }, 300);
     }
 
     @Override
@@ -149,10 +124,10 @@ public class PreferredAppsActivity extends AppCompatActivity
     }
 
     @Override
-    public void onAppRemoved(DisplayResolveInfo info, int position) {
+    public void onAppRemoved(DisplayResolveInfo info) {
         getContentResolver().delete(withId(info.id()), null, null);
 
-        notifyItemRemoval(position);
+        notifyItemRemoval(info);
 
         analytics.sendEvent(
                 "Preferred",
@@ -160,4 +135,34 @@ public class PreferredAppsActivity extends AppCompatActivity
                 info.displayLabel().toString()
         );
     }
+
+    private void notifyItemRemoval(final DisplayResolveInfo info) {
+        recyclerView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                int position = positionInAdapter(info);
+                adapter.remove(adapter.getItem(position));
+                adapter.notifyItemRemoved(position);
+
+                recyclerView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.notifyItemChanged(0);
+                    }
+                }, 200);
+            }
+        }, 300);
+    }
+
+    private int positionInAdapter(DisplayResolveInfo info) {
+        int itemCount = adapter.getItemCount();
+        for (int i = 0; i < itemCount; i++) {
+            DisplayResolveInfo item = adapter.getItem(i);
+            if (info == item) {
+                return i;
+            }
+        }
+        return RecyclerView.NO_POSITION;
+    }
+
 }

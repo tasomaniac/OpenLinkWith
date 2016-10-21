@@ -15,12 +15,10 @@ import com.tasomaniac.openwith.resolver.DisplayResolveInfo;
 public class AppRemoveDialogFragment extends AppCompatDialogFragment {
 
     private static final String EXTRA_INFO = "EXTRA_INFO";
-    private static final String EXTRA_POSITION = "EXTRA_POSITION";
 
-    static AppRemoveDialogFragment newInstance(DisplayResolveInfo info, int position) {
+    static AppRemoveDialogFragment newInstance(DisplayResolveInfo info) {
         Bundle args = new Bundle();
         args.putParcelable(EXTRA_INFO, info);
-        args.putInt(EXTRA_POSITION, position);
         AppRemoveDialogFragment fragment = new AppRemoveDialogFragment();
         fragment.setArguments(args);
         return fragment;
@@ -45,9 +43,10 @@ public class AppRemoveDialogFragment extends AppCompatDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
         final DisplayResolveInfo info = getArguments().getParcelable(EXTRA_INFO);
-        final int position = getArguments().getInt(EXTRA_POSITION);
+        if (info == null) {
+            throw new IllegalArgumentException("Use newInstance method to create the Dialog");
+        }
 
         final String message = getString(
                 R.string.message_remove_preferred,
@@ -56,13 +55,14 @@ public class AppRemoveDialogFragment extends AppCompatDialogFragment {
                 info.extendedInfo()
         );
 
+        //noinspection deprecation
         return new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.title_remove_preferred)
                 .setMessage(Html.fromHtml(message))
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        callbacks.onAppRemoved(info, position);
+                        callbacks.onAppRemoved(info);
                     }
                 })
                 .setNegativeButton(android.R.string.cancel, null)
@@ -70,11 +70,11 @@ public class AppRemoveDialogFragment extends AppCompatDialogFragment {
     }
 
     interface Callbacks {
-        void onAppRemoved(DisplayResolveInfo info, int position);
+        void onAppRemoved(DisplayResolveInfo info);
 
         Callbacks EMPTY = new Callbacks() {
             @Override
-            public void onAppRemoved(DisplayResolveInfo info, int position) {
+            public void onAppRemoved(DisplayResolveInfo info) {
             }
         };
     }

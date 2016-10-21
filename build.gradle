@@ -6,7 +6,7 @@ buildscript {
         maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.1'
+        classpath 'com.android.tools.build:gradle:2.2.2'
         classpath 'net.sf.proguard:proguard-gradle:5.3'
         classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'

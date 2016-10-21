@@ -1,13 +1,11 @@
 package com.tasomaniac.openwith.resolver;
 
-import android.view.View;
-
 public interface ItemClickListener {
-    void onItemClick(View view, final int position, long id);
+    void onItemClick(DisplayResolveInfo dri);
 
     ItemClickListener EMPTY = new ItemClickListener() {
         @Override
-        public void onItemClick(View view, int position, long id) {
+        public void onItemClick(DisplayResolveInfo dri) {
 
         }
     };
