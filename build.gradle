@@ -35,8 +35,8 @@ ext {
     versionCode = versionMajor * 10000 + versionMinor * 1000 + versionBuild
     versionName = "${versionMajor}.${versionMinor}"
 
-    compileSdkVersion = 24
-    buildToolsVersion = '24.0.3'
+    compileSdkVersion = 25
+    buildToolsVersion = '25.0.0'
 }
 
 task clean(type: Delete) {
