@@ -219,7 +219,7 @@ public class ResolverActivity extends AppCompatActivity implements
             mAdapter.setSelectionEnabled(true);
         }
         if (useHeader) {
-            mAdapter.setHeader(new ResolveListAdapter.Header());
+            mAdapter.displayHeader();
         }
     }
 

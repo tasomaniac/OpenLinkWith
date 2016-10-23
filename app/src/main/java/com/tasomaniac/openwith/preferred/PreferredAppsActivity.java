@@ -19,7 +19,6 @@ import com.tasomaniac.openwith.data.Analytics;
 import com.tasomaniac.openwith.data.Injector;
 import com.tasomaniac.openwith.resolver.DisplayResolveInfo;
 import com.tasomaniac.openwith.resolver.ItemClickListener;
-import com.tasomaniac.openwith.resolver.ResolveListAdapter;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -70,7 +69,7 @@ public class PreferredAppsActivity extends AppCompatActivity
         adapter.setItemClickListener(this);
         recyclerView.setAdapter(adapter);
 
-        adapter.setHeader(new ResolveListAdapter.Header());
+        adapter.displayHeader();
 
         getSupportLoaderManager().initLoader(0, null, this);
     }

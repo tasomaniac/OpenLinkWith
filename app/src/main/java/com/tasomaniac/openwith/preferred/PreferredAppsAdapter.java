@@ -41,8 +41,8 @@ class PreferredAppsAdapter extends ResolveListAdapter {
     }
 
     @Override
-    protected void onBindHeaderViewHolder(ViewHolder holder, int position) {
-        if (getItemCount() - getHeaderViewsCount() == 0) {
+    protected void onBindHeaderViewHolder(ViewHolder holder) {
+        if (getItemCount() - getHeadersCount() == 0) {
             holder.text.setText(R.string.desc_preferred_empty);
         } else {
             holder.text.setText(R.string.desc_preferred);
@@ -50,8 +50,8 @@ class PreferredAppsAdapter extends ResolveListAdapter {
     }
 
     @Override
-    public ViewHolder onCreateItemViewHolder(ViewGroup viewGroup, int i) {
-        final ViewHolder viewHolder = super.onCreateItemViewHolder(viewGroup, i);
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        final ViewHolder viewHolder = super.onCreateViewHolder(viewGroup, i);
         viewHolder.itemView.setMinimumHeight(Utils.dpToPx(viewGroup.getResources(), 72));
         return viewHolder;
     }

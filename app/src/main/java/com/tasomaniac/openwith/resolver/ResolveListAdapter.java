@@ -25,7 +25,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.karumi.headerrecyclerview.HeaderRecyclerViewAdapter;
 import com.tasomaniac.openwith.R;
 
 import java.text.Collator;
@@ -47,10 +46,13 @@ import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.LOLLIPOP_MR1;
 import static android.os.Build.VERSION_CODES.M;
 
-public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAdapter.ViewHolder, ResolveListAdapter.Header, DisplayResolveInfo, Void> {
+public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.ViewHolder> {
 
+    private static final int TYPE_ITEM = 2;
+    private static final int TYPE_HEADER = 1;
     private static final long USAGE_STATS_PERIOD = TimeUnit.DAYS.toMillis(14);
     private static final Intent BROWSER_INTENT;
+
     static {
         BROWSER_INTENT = new Intent();
         BROWSER_INTENT.setAction(Intent.ACTION_VIEW);
@@ -72,6 +74,7 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     protected final List<DisplayResolveInfo> mList = new ArrayList<>();
 
     protected boolean mShowExtended;
+    private boolean hasHeader;
     private boolean selectionEnabled;
     private int lastChosenPosition = RecyclerView.NO_POSITION;
     private int checkedItemPosition = RecyclerView.NO_POSITION;
@@ -333,13 +336,12 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         if (mFilterLastUsed && lastChosenPosition >= 0) {
             result--;
         }
-        result += getHeaderViewsCount();
+        result += getHeadersCount();
         return result;
     }
 
-    @Override
     public DisplayResolveInfo getItem(int position) {
-        position -= getHeaderViewsCount();
+        position -= getHeadersCount();
         if (position < 0) {
             position = 0;
         }
@@ -354,35 +356,42 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         return position;
     }
 
-    protected int getHeaderViewsCount() {
-        return hasHeader() ? 1 : 0;
+    protected int getHeadersCount() {
+        return hasHeader ? 1 : 0;
+    }
+
+    public void displayHeader() {
+        hasHeader = true;
     }
 
     @Override
+    public int getItemViewType(int position) {
+        if (hasHeader && position == 0) {
+            return TYPE_HEADER;
+        }
+        return TYPE_ITEM;
+    }
+
     protected ViewHolder onCreateHeaderViewHolder(ViewGroup parent, int viewType) {
         View headerView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.resolver_different_item_header, parent, false);
         return new ViewHolder(headerView);
     }
 
-    @Override
-    protected void onBindHeaderViewHolder(ViewHolder holder, int position) {
+    protected void onBindHeaderViewHolder(ViewHolder holder) {
     }
 
     @Override
-    protected ViewHolder onCreateFooterViewHolder(ViewGroup parent, int viewType) {
-        return null;
-    }
-
-    @Override
-    protected void onBindFooterViewHolder(ViewHolder holder, int position) {
-    }
-
-    @Override
-    public ViewHolder onCreateItemViewHolder(ViewGroup parent, int i) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.resolve_list_item, parent, false);
-        return new ViewHolder(itemView);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (TYPE_HEADER == viewType) {
+            return onCreateHeaderViewHolder(parent, viewType);
+        }
+        if (TYPE_ITEM == viewType) {
+            View itemView = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.resolve_list_item, parent, false);
+            return new ViewHolder(itemView);
+        }
+        throw new IllegalStateException("Unknown viewType: + " + viewType);
     }
 
     @Override
@@ -394,7 +403,12 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
     }
 
     @Override
-    public void onBindItemViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
+        if (TYPE_HEADER == getItemViewType(position)) {
+            onBindHeaderViewHolder(holder);
+            return;
+        }
+
         final DisplayResolveInfo info = getItem(position);
 
         holder.text.setText(info.displayLabel());
@@ -622,8 +636,5 @@ public class ResolveListAdapter extends HeaderRecyclerViewAdapter<ResolveListAda
         match = match & IntentFilter.MATCH_CATEGORY_MASK;
         return match >= IntentFilter.MATCH_CATEGORY_HOST
                 && match <= IntentFilter.MATCH_CATEGORY_PATH;
-    }
-
-    public static class Header {
     }
 }
