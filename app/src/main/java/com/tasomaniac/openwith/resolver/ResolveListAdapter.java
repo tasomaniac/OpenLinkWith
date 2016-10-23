@@ -27,7 +27,6 @@ import android.widget.TextView;
 
 import com.karumi.headerrecyclerview.HeaderRecyclerViewAdapter;
 import com.tasomaniac.openwith.R;
-import com.tasomaniac.openwith.misc.ItemLongClickListener;
 
 import java.text.Collator;
 import java.util.ArrayList;

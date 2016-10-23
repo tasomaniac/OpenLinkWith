@@ -1,4 +1,4 @@
-package com.tasomaniac.openwith.misc;
+package com.tasomaniac.openwith.resolver;
 
 import android.view.View;
 

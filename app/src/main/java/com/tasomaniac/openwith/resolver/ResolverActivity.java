@@ -40,7 +40,6 @@ import android.widget.Toast;
 
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.homescreen.AddToHomeScreenDialogFragment;
-import com.tasomaniac.openwith.misc.ItemLongClickListener;
 import com.tasomaniac.openwith.util.Intents;
 
 import timber.log.Timber;
