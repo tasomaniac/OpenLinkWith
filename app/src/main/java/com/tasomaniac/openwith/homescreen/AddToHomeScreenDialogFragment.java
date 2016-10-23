@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatDialogFragment;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -200,12 +201,12 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
                 .setView(view)
                 .setTitle(R.string.add_to_homescreen)
                 .create();
-        forceKeyboardVisible(dialog);
+        forceKeyboardVisible(dialog.getWindow());
         return dialog;
     }
 
-    private static void forceKeyboardVisible(AlertDialog dialog) {
-        dialog.getWindow().setSoftInputMode(
+    private static void forceKeyboardVisible(Window window) {
+        window.setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
                         | WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE
         );

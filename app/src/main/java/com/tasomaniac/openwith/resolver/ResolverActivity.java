@@ -52,8 +52,7 @@ import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.CONTEN
  * which there is more than one matching activity, allowing the user to decide
  * which to go to.  It is not normally used directly by application developers.
  */
-public class ResolverActivity extends AppCompatActivity
-        implements
+public class ResolverActivity extends AppCompatActivity implements
         ItemClickListener,
         ItemLongClickListener {
 
@@ -383,7 +382,7 @@ public class ResolverActivity extends AppCompatActivity
 
     @SuppressWarnings("deprecation")
     private void showAppDetails(ResolveInfo ri) {
-        Intent in = new Intent().setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        Intent in = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                 .setData(Uri.fromParts("package", ri.activityInfo.packageName, null))
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         startActivity(in);
