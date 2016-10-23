@@ -18,13 +18,15 @@ import android.view.View;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.Analytics;
 import com.tasomaniac.openwith.data.Injector;
-import com.tasomaniac.openwith.resolver.ItemClickListener;
 import com.tasomaniac.openwith.resolver.DisplayResolveInfo;
+import com.tasomaniac.openwith.resolver.ItemClickListener;
 import com.tasomaniac.openwith.resolver.ResolveListAdapter;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+
+import net.simonvt.schematic.Cursors;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -122,9 +124,9 @@ public class PreferredAppsActivity extends AppCompatActivity
         List<DisplayResolveInfo> apps = new ArrayList<>(data.getCount());
         while (data.moveToNext()) {
 
-            final int id = data.getInt(data.getColumnIndex(ID));
-            final String host = data.getString(data.getColumnIndex(HOST));
-            final String componentString = data.getString(data.getColumnIndex(COMPONENT));
+            final int id = Cursors.getInt(data, ID);
+            final String host = Cursors.getString(data, HOST);
+            final String componentString = Cursors.getString(data, COMPONENT);
 
             Intent intent = new Intent();
             intent.setComponent(ComponentName.unflattenFromString(componentString));

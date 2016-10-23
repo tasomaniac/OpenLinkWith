@@ -26,6 +26,8 @@ import com.tasomaniac.openwith.util.Urls;
 
 import java.util.List;
 
+import net.simonvt.schematic.Cursors;
+
 import timber.log.Timber;
 
 import static android.os.Build.VERSION.SDK_INT;
@@ -97,11 +99,11 @@ public class ShareToOpenWith extends Activity {
         final Cursor query = queryIntentWith(uri.getHost());
         if (query != null && query.moveToFirst()) {
             try {
-                final boolean isPreferred = query.getInt(query.getColumnIndex(PREFERRED)) == 1;
-                final boolean isLastChosen = query.getInt(query.getColumnIndex(LAST_CHOSEN)) == 1;
+                final boolean isPreferred = Cursors.getInt(query, PREFERRED) == 1;
+                final boolean isLastChosen = Cursors.getInt(query, LAST_CHOSEN) == 1;
 
                 if (isPreferred || isLastChosen) {
-                    final String componentString = query.getString(query.getColumnIndex(COMPONENT));
+                    final String componentString = Cursors.getString(query, COMPONENT);
 
                     lastChosenComponent = ComponentName.unflattenFromString(componentString);
                     ResolveInfo ri = getPackageManager().resolveActivity(
