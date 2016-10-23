@@ -81,7 +81,7 @@ play {
 
 dependencies {
     def supportLibVersion = "25.0.0"
-    def schematicVersion = '0.6.7'
+    def schematicVersion = '0.6.8'
     def butterKnifeVersion = '8.4.0'
 
     compile "com.android.support:support-v4:$supportLibVersion"
@@ -90,7 +90,7 @@ dependencies {
     compile "com.android.support:design:$supportLibVersion"
     compile "com.android.support:preference-v14:$supportLibVersion"
 
-    compile 'com.tasomaniac:delayed-progress:0.3'
+    compile 'com.tasomaniac:delayed-progress:0.4'
 
     compile 'com.karumi:headerrecyclerview:1.1.0'
     compile 'jp.wasabeef:recyclerview-animators:2.2.4'
