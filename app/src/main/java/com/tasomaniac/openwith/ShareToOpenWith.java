@@ -1,6 +1,5 @@
 package com.tasomaniac.openwith;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.usage.UsageStats;
@@ -13,6 +12,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ShareCompat;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -170,7 +170,7 @@ public class ShareToOpenWith extends Activity {
         return topActivity.getPackageName();
     }
 
-    @TargetApi(LOLLIPOP_MR1)
+    @RequiresApi(LOLLIPOP_MR1)
     private String getCallerPackageLollipop() {
         UsageStatsManager mUsm = (UsageStatsManager) getSystemService(USAGE_STATS_SERVICE);
         long time = System.currentTimeMillis();

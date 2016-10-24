@@ -1,6 +1,5 @@
 package com.tasomaniac.openwith.settings;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.backup.BackupManager;
 import android.content.Context;
@@ -8,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
 import android.support.v4.app.ShareCompat;
 import android.support.v4.content.ContextCompat;
@@ -128,7 +128,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
                 .unregisterOnSharedPreferenceChangeListener(this);
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private void setupUsagePreference() {
         boolean usageAccessGiven = Utils.isUsageStatsEnabled(getActivity());
 

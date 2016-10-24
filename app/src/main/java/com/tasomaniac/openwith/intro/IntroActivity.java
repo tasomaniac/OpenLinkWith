@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.Analytics;
@@ -42,24 +43,24 @@ public class IntroActivity extends AppIntro {
         analytics.sendScreenView("App Intro");
 
         addSlide(new AppIntroFragment.Builder()
-                        .title(R.string.title_tutorial_0)
-                        .description(R.string.description_tutorial_0)
-                        .drawable(R.drawable.tutorial_0).build());
+                         .title(R.string.title_tutorial_0)
+                         .description(R.string.description_tutorial_0)
+                         .drawable(R.drawable.tutorial_0).build());
 
         addSlide(new AppIntroFragment.Builder()
-                        .title(R.string.title_tutorial_1)
-                        .description(R.string.description_tutorial_1)
-                        .drawable(R.drawable.tutorial_1).build());
+                         .title(R.string.title_tutorial_1)
+                         .description(R.string.description_tutorial_1)
+                         .drawable(R.drawable.tutorial_1).build());
 
         addSlide(new AppIntroFragment.Builder()
-                        .title(R.string.title_tutorial_2)
-                        .description(R.string.description_tutorial_2)
-                        .drawable(R.drawable.tutorial_2).build());
+                         .title(R.string.title_tutorial_2)
+                         .description(R.string.description_tutorial_2)
+                         .drawable(R.drawable.tutorial_2).build());
 
         addSlide(new AppIntroFragment.Builder()
-                        .title(R.string.title_tutorial_3)
-                        .description(R.string.description_tutorial_3)
-                        .drawable(R.drawable.tutorial_3).build());
+                         .title(R.string.title_tutorial_3)
+                         .description(R.string.description_tutorial_3)
+                         .drawable(R.drawable.tutorial_3).build());
 
         if (getResources().getBoolean(R.bool.add_to_home_screen_enabled)) {
             addSlide(new AppIntroFragment.Builder()
@@ -68,20 +69,20 @@ public class IntroActivity extends AppIntro {
                              .drawable(R.drawable.tutorial_4).build());
         }
 
-        addUsageStatsSlideIfNeeded();
+        if (SDK_INT >= LOLLIPOP && !Utils.isUsageStatsEnabled(this)) {
+            addUsageStatsSlide();
+        }
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private void addUsageStatsSlideIfNeeded() {
-        if (SDK_INT >= LOLLIPOP && !Utils.isUsageStatsEnabled(this)) {
-            usageStatsSlideAdded = true;
-            addSlide(new AppIntroFragment.Builder()
-                             .title(R.string.title_tutorial_5)
-                             .description(R.string.description_tutorial_5)
-                             .drawable(R.drawable.tutorial_5).build());
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    private void addUsageStatsSlide() {
+        usageStatsSlideAdded = true;
+        addSlide(new AppIntroFragment.Builder()
+                         .title(R.string.title_tutorial_5)
+                         .description(R.string.description_tutorial_5)
+                         .drawable(R.drawable.tutorial_5).build());
 
-            setDoneText(getString(R.string.usage_access_give_access));
-        }
+        setDoneText(getString(R.string.usage_access_give_access));
     }
 
     @Override
@@ -116,12 +117,11 @@ public class IntroActivity extends AppIntro {
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onDestroy() {
         super.onDestroy();
 
-        if (shouldTrackUsageAccess()) {
+        if (SDK_INT >= LOLLIPOP && shouldTrackUsageAccess()) {
             analytics.sendEvent(
                     "Usage Access",
                     "Given in first intro",
@@ -131,6 +131,6 @@ public class IntroActivity extends AppIntro {
     }
 
     private boolean shouldTrackUsageAccess() {
-        return SDK_INT >= LOLLIPOP && getIntent().getBooleanExtra(EXTRA_FIRST_START, false);
+        return getIntent().getBooleanExtra(EXTRA_FIRST_START, false);
     }
 }
