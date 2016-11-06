@@ -10,12 +10,12 @@
   <string name="title_preferred_apps">App preferite</string>
   <string name="desc_preferred">Applicazioni preferite da usare direttamente quando i link qui sotto sono condivisi con questa app.\n\nPremi per rimuovere un\'app preferita.</string>
   <string name="desc_preferred_empty">Applicazioni preferite da usare direttamente quando i link qui sotto sono condivisi con questa app.\n\nPuoi selezionare le app preferite condividendo il link con quest\'app e scegliendo \"Sempre\"</string>
-  <string name="title_remove_preferred">Rimuovi preferito?</string>
+  <string name="title_remove_preferred">Rimuovere il preferito?</string>
   <string name="message_remove_preferred"><![CDATA[
 Rimuovi <strong>%1$s</strong> come app preferita per caricare i link di <strong>%2$s</strong>?<br><br><strong>Nota:</strong> Puoi selezionare una nuova app preferita da usare la prossima volta che condividi un link <strong>%3$s</strong>.    ]]></string>
   <string name="error_invalid_url">Il contenuto condiviso non ha nessun URL valido.</string>
   <string name="empty_resolver_activity">Nessun\'altra applicazione trovata per gestire l\'URL.</string>
-  <string name="warning_open_link_with_name">Aprendo il link con %s.</string>
+  <string name="warning_open_link_with_name">Apertura del link con %s.</string>
   <string name="done">Fatto</string>
   <string name="pref_title_general">Generali</string>
   <string name="pref_title_about">Informazioni</string>
@@ -34,7 +34,7 @@ Rimuovi <strong>%1$s</strong> come app preferita per caricare i link di <strong>
   <string name="pref_title_version">Versione</string>
   <string name="skip">Ignora</string>
   <string name="cd_image_tutorial">Immagine tutorial</string>
-  <string name="title_tutorial_0">Benvenuto in Apri Link Con</string>
+  <string name="title_tutorial_0">Benvenuto in Open Link With</string>
   <string name="title_tutorial_1">Ti è mai successo?</string>
   <string name="title_tutorial_2">Condividilo!</string>
   <string name="title_tutorial_3">Applicazioni preferite</string>
@@ -43,18 +43,18 @@ Rimuovi <strong>%1$s</strong> come app preferita per caricare i link di <strong>
   <string name="description_tutorial_1">Clicchi un link corto e in qualche modo ti ritrovi bloccato in una pagina web invece di guardare il video direttamente.</string>
   <string name="description_tutorial_2">Condividilo semplicemente con me e cambierò le app per te.</string>
   <string name="description_tutorial_3"><![CDATA[
-Seleziona <strong>SEMPRE</strong> per dirmi di aprire sempre quel link con un\'app specifica.
+Seleziona <strong>SEMPRE</strong> per dirmi di aprire sempre quel link con una applicazione specifica.
   ]]></string>
   <string name="description_tutorial_4"><![CDATA[
-<strong>Aggiungi alla schermata Home</strong> per accedere velocemente ai tuoi link preferiti con le tue app preferiteo.  ]]></string>
+<strong>Aggiungi alla schermata Home</strong> per accedere velocemente ai tuoi link preferiti con le tue app preferite.  ]]></string>
   <string name="description_tutorial_5"><![CDATA[
-Dammi l\'accesso ad <strong>ACCESSO A DATI DI UTILIZZO</strong> e lavorerò meglio. Rileverò il browser dal quale stai condividendo per agire di conseguenza.
+Dammi l\'accesso a <strong>ACCESSO A DATI DI UTILIZZO</strong> e lavorerò meglio. Rileverò il browser dal quale stai condividendo per agire di conseguenza.
   ]]></string>
-  <string name="usage_access_give_access">Consenti Accesso</string>
+  <string name="usage_access_give_access">Garantisci l\'accesso</string>
   <string name="error">Errore</string>
-  <string name="error_usage_access_not_found">Impostazioni di Accesso a dati di utilizzo non trovate.\n\nCi potrai accedere entrando nelle Impostazioni -&gt; Sicurezza</string>
+  <string name="error_usage_access_not_found">Impostazioni di accesso a dati di utilizzo non trovate.\n\nPotrai accedervi entrando in Impostazioni -&gt; Sicurezza</string>
   <string name="add_to_homescreen">Aggiungi alla home</string>
   <string name="add">Aggiungi</string>
   <string name="cancel">Annulla</string>
-  <string name="dialog_hint_add_to_home_screen">Titolo della Scorciatoia</string>
+  <string name="dialog_hint_add_to_home_screen">Titolo della scorciatoia</string>
 </resources>

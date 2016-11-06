@@ -3,7 +3,7 @@
 <resources>
   <string name="open_with">\u0020Abrir com&#8230;</string>
   <string name="use_a_different_app">Usar outra aplicação</string>
-  <string name="activity_resolver_use_once">Só uma vez</string>
+  <string name="activity_resolver_use_once">Apenas uma vez</string>
   <string name="activity_resolver_use_always">Sempre</string>
   <string name="which_view_application">Abrir com</string>
   <string name="which_view_application_named">Abrir com %1$s</string>
@@ -21,19 +21,19 @@ Remover <strong>%1$s</strong> como a aplicação predefinida para abrir ligaçõ
   <string name="pref_title_about">Acerca de</string>
   <string name="pref_summary_about">Ver o tutorial novamente.</string>
   <string name="pref_summary_preferred">Altere as configurações da aplicação predefinida.</string>
-  <string name="pref_title_category_usage">Acesso de uso</string>
-  <string name="pref_title_usage_stats">Estatísticas de uso</string>
-  <string name="pref_summary_usage_stats">Melhore a aplicação, dando acesso a Estatísticas de uso.</string>
+  <string name="pref_title_category_usage">Acesso de utilização</string>
+  <string name="pref_title_usage_stats">Estatísticas de utilização</string>
+  <string name="pref_summary_usage_stats">Melhore a aplicação, dando acesso a estatísticas de utilização.</string>
   <string name="pref_title_category_others">Outros</string>
   <string name="pref_title_open_source">Licenças de Código Aberto</string>
   <string name="pref_summary_open_source">Ver licenças de bibliotecas de código aberto.</string>
   <string name="pref_title_contact">Entre em contato comigo</string>
   <string name="pref_summary_contact">Envie-me um e-mail antes de classificar com 1 estrela.</string>
   <string name="pref_title_market">Mais aplicações de Said Tahsin Dane</string>
-  <string name="pref_summary_market">Gostou? Por que não verificar as minhas outras aplicações?</string>
-  <string name="pref_title_version">Version</string>
+  <string name="pref_summary_market">Gostou? Por que não verifica as minhas outras aplicações?</string>
+  <string name="pref_title_version">Versão</string>
   <string name="skip">Ignorar</string>
-  <string name="cd_image_tutorial">Imagem do Tutorial</string>
+  <string name="cd_image_tutorial">Imagem do tutorial</string>
   <string name="title_tutorial_0">Bem-vindo ao Abrir a Ligação Com</string>
   <string name="title_tutorial_1">Já aconteceu consigo?</string>
   <string name="title_tutorial_2">Partilhar!</string>
@@ -45,15 +45,14 @@ Remover <strong>%1$s</strong> como a aplicação predefinida para abrir ligaçõ
   <string name="description_tutorial_3"><![CDATA[
 Selecione <strong>sempre</strong> para abrir essa ligação com um aplicação específica.  ]]></string>
   <string name="description_tutorial_4"><![CDATA[
-    <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.
-  ]]></string>
+<strong>Adicionar ao ecrã principal</strong> para aceder rapidamente aos seus links favoritos com as suas aplicações favoritas.  ]]></string>
   <string name="description_tutorial_5"><![CDATA[
-Dar acesso a <strong>Acesso de uso</strong> e irei trabalhar melhor. Irei detectar o navegador que está a usar para partilhar e agir em conformidade.  ]]></string>
-  <string name="usage_access_give_access">Give Access</string>
+Dê acesso a <strong>Acesso de utilização</strong> e irei trabalhar melhor. Vou detectar o navegador que está a usar para agir em conformidade.  ]]></string>
+  <string name="usage_access_give_access">Conceder acesso</string>
   <string name="error">Erro</string>
-  <string name="error_usage_access_not_found">Configurações de Acesso de uso não encontradas.\n\nYou may access it by going into Settings -&gt; Security</string>
+  <string name="error_usage_access_not_found">Configurações de Acesso de utilização não encontradas.\n\nPode ter acesso indo a Configurações -&gt; Segurança</string>
   <string name="add_to_homescreen">Add To Home screen</string>
-  <string name="add">Add</string>
-  <string name="cancel">Cancel</string>
-  <string name="dialog_hint_add_to_home_screen">Shortcut title</string>
+  <string name="add">Adicionar</string>
+  <string name="cancel">Cancelar</string>
+  <string name="dialog_hint_add_to_home_screen">Título do atalho</string>
 </resources>

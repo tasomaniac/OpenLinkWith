@@ -53,7 +53,7 @@ Dê permissão ao <strong>ACESSO DE USO</strong> e eu vou funcionar melhor. Vou 
   <string name="usage_access_give_access">Permitir Acesso</string>
   <string name="error">Erro</string>
   <string name="error_usage_access_not_found">Configurações de Acesso de Uso não pode ser aberto.\n\nVocê pode acessá-lo entrando em Configurar -&gt; Segurança</string>
-  <string name="add_to_homescreen">Adicionar ao Tela Inicial</string>
+  <string name="add_to_homescreen">Adicionar à Tela Inicial</string>
   <string name="add">Adicionar</string>
   <string name="cancel">Cancelar</string>
   <string name="dialog_hint_add_to_home_screen">Nome do atalho</string>
