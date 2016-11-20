@@ -28,6 +28,7 @@ import com.tasomaniac.openwith.intro.IntroActivity;
 import com.tasomaniac.openwith.preferred.PreferredAppsActivity;
 import com.tasomaniac.openwith.util.Intents;
 import com.tasomaniac.openwith.util.Utils;
+import de.cketti.mailto.EmailIntentBuilder;
 
 import javax.inject.Inject;
 
@@ -225,11 +226,10 @@ public class SettingsFragment extends PreferenceFragmentCompat
     }
 
     private void startContactEmailChooser() {
-        ShareCompat.IntentBuilder.from(getActivity())
-                .addEmailTo("Said Tahsin Dane <tasomaniac+openlinkwith@gmail.com>")
-                .setSubject(getString(R.string.app_name))
-                .setType("message/rfc822")
-                .startChooser();
+        EmailIntentBuilder.from(getActivity())
+                .to("tasomaniac+openlinkwith@gmail.com")
+                .subject(getString(R.string.app_name))
+                .start();
     }
 
     @Override

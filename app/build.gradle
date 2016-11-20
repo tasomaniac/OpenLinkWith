@@ -94,6 +94,8 @@ dependencies {
 
     compile 'jp.wasabeef:recyclerview-animators:2.2.4'
 
+    compile 'de.cketti.mailto:email-intent-builder:1.0.0'
+
     apt "net.simonvt.schematic:schematic-compiler:$schematicVersion"
     compile "net.simonvt.schematic:schematic:$schematicVersion"
 
