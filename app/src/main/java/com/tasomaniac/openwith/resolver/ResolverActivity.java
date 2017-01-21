@@ -75,7 +75,6 @@ public class ResolverActivity extends AppCompatActivity implements
 
     @Nullable private DisplayResolveInfo lastSelected;
 
-    private Uri mRequestedUri;
     private ChooserHistory mHistory;
 
     private ChooserHistory getHistory() {
@@ -115,8 +114,7 @@ public class ResolverActivity extends AppCompatActivity implements
         isAddToHomeScreen = intent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
         mPm = getPackageManager();
 
-        mRequestedUri = intent.getData();
-        if (mRequestedUri == null) {
+        if (intent.getData() == null) {
             finish();
             return;
         }
@@ -355,7 +353,7 @@ public class ResolverActivity extends AppCompatActivity implements
             return;
         }
         ContentValues values = new ContentValues(4);
-        values.put(HOST, mRequestedUri.getHost());
+        values.put(HOST, intent.getData().getHost());
         values.put(COMPONENT, intent.getComponent().flattenToString());
 
         if (alwaysCheck) {
