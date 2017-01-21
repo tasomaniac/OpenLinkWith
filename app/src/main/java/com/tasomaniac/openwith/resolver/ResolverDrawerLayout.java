@@ -177,8 +177,8 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
 
         switch (action) {
             case MotionEvent.ACTION_DOWN: {
-                final float x = MotionEventCompat.getX(ev, 0);
-                final float y = MotionEventCompat.getY(ev, 0);
+                final float x = ev.getX(0);
+                final float y = ev.getY(0);
                 mInitialTouchX = x;
                 mInitialTouchY = mLastTouchY = y;
                 mOpenOnClick = isListChildUnderClipped(x, y) && mCollapsibleHeight > 0;
@@ -186,12 +186,12 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
             break;
 
             case MotionEvent.ACTION_MOVE: {
-                final float x = MotionEventCompat.getX(ev, 0);
-                final float y = MotionEventCompat.getY(ev, 0);
+                final float x = ev.getX(0);
+                final float y = ev.getY(0);
                 final float dy = y - mInitialTouchY;
                 if (Math.abs(dy) > mTouchSlop && findChildUnder(x, y) != null &&
                         (getNestedScrollAxes() & ViewCompat.SCROLL_AXIS_VERTICAL) == 0) {
-                    mActivePointerId = MotionEventCompat.getPointerId(ev, 0);
+                    mActivePointerId = ev.getPointerId(0);
                     mIsDragging = true;
                     mLastTouchY = Math.max(mLastTouchY - mTouchSlop,
                             Math.min(mLastTouchY + dy, mLastTouchY + mTouchSlop));
@@ -226,11 +226,11 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
         boolean handled = false;
         switch (action) {
             case MotionEvent.ACTION_DOWN: {
-                final float x = MotionEventCompat.getX(ev, 0);
-                final float y = MotionEventCompat.getY(ev, 0);
+                final float x = ev.getX(0);
+                final float y = ev.getY(0);
                 mInitialTouchX = x;
                 mInitialTouchY = mLastTouchY = y;
-                mActivePointerId = MotionEventCompat.getPointerId(ev, 0);
+                mActivePointerId = ev.getPointerId(0);
                 final boolean hitView = findChildUnder(mInitialTouchX, mInitialTouchY) != null;
                 handled = (!hitView && mOnDismissedListener != null) || mCollapsibleHeight > 0;
                 mIsDragging = hitView && handled;
@@ -239,16 +239,16 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
             break;
 
             case MotionEvent.ACTION_MOVE: {
-                int index = MotionEventCompat.findPointerIndex(ev, mActivePointerId);
+                int index = ev.findPointerIndex(mActivePointerId);
                 if (index < 0) {
                     Timber.e("Bad pointer id %d, resetting", mActivePointerId);
                     index = 0;
-                    mActivePointerId = MotionEventCompat.getPointerId(ev, 0);
-                    mInitialTouchX = MotionEventCompat.getX(ev, 0);
-                    mInitialTouchY = mLastTouchY = MotionEventCompat.getY(ev, 0);
+                    mActivePointerId = ev.getPointerId(0);
+                    mInitialTouchX = ev.getX(0);
+                    mInitialTouchY = mLastTouchY = ev.getY(0);
                 }
-                final float x = MotionEventCompat.getX(ev, index);
-                final float y = MotionEventCompat.getY(ev, index);
+                final float x = ev.getX(index);
+                final float y = ev.getY(index);
                 if (!mIsDragging) {
                     final float dy = y - mInitialTouchY;
                     if (Math.abs(dy) > mTouchSlop && findChildUnder(x, y) != null) {
@@ -268,9 +268,9 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
             case MotionEvent.ACTION_POINTER_DOWN: {
                 final int pointerIndex = MotionEventCompat.getActionIndex(ev);
 
-                mActivePointerId = MotionEventCompat.getPointerId(ev, pointerIndex);
-                mInitialTouchX = MotionEventCompat.getX(ev, pointerIndex);
-                mInitialTouchY = mLastTouchY = MotionEventCompat.getY(ev, pointerIndex);
+                mActivePointerId = ev.getPointerId(pointerIndex);
+                mInitialTouchX = ev.getX(pointerIndex);
+                mInitialTouchY = mLastTouchY = ev.getY(pointerIndex);
             }
             break;
 
@@ -283,15 +283,15 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
                 final boolean wasDragging = mIsDragging;
                 mIsDragging = false;
                 if (!wasDragging && findChildUnder(mInitialTouchX, mInitialTouchY) == null &&
-                        findChildUnder(MotionEventCompat.getX(ev, 0), MotionEventCompat.getY(ev, 0)) == null) {
+                        findChildUnder(ev.getX(0), ev.getY(0)) == null) {
                     if (mOnDismissedListener != null) {
                         dispatchOnDismissed();
                         resetTouch();
                         return true;
                     }
                 }
-                if (mOpenOnClick && Math.abs(MotionEventCompat.getX(ev, 0) - mInitialTouchX) < mTouchSlop &&
-                        Math.abs(MotionEventCompat.getY(ev, 0) - mInitialTouchY) < mTouchSlop) {
+                if (mOpenOnClick && Math.abs(ev.getX(0) - mInitialTouchX) < mTouchSlop &&
+                        Math.abs(ev.getY(0) - mInitialTouchY) < mTouchSlop) {
                     smoothScrollTo(0, 0);
                     return true;
                 }
@@ -329,14 +329,14 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
     private void onSecondaryPointerUp(MotionEvent ev) {
         final int pointerIndex = MotionEventCompat.getActionIndex(ev);
 
-        final int pointerId = MotionEventCompat.getPointerId(ev, pointerIndex);
+        final int pointerId = ev.getPointerId(pointerIndex);
         if (pointerId == mActivePointerId) {
             // This was our active pointer going up. Choose a new
             // active pointer and adjust accordingly.
             final int newPointerIndex = pointerIndex == 0 ? 1 : 0;
-            mInitialTouchX = MotionEventCompat.getX(ev, newPointerIndex);
-            mInitialTouchY = mLastTouchY = MotionEventCompat.getY(ev, newPointerIndex);
-            mActivePointerId = MotionEventCompat.getPointerId(ev, newPointerIndex);
+            mInitialTouchX = ev.getX(newPointerIndex);
+            mInitialTouchY = mLastTouchY = ev.getY(newPointerIndex);
+            mActivePointerId = ev.getPointerId(newPointerIndex);
         }
     }
 
@@ -428,7 +428,7 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
         ViewCompat.postInvalidateOnAnimation(this);
     }
 
-    private float distanceInfluenceForSnapDuration(float f) {
+    private static float distanceInfluenceForSnapDuration(float f) {
         f -= 0.5f; // center the values about 0.
         f *= 0.3f * Math.PI / 2.0f;
         return (float) Math.sin(f);
@@ -833,7 +833,7 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
                 };
     }
 
-    public interface OnDismissedListener {
+    interface OnDismissedListener {
         void onDismissed();
     }
 
