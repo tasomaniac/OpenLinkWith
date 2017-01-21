@@ -80,8 +80,8 @@ play {
 }
 
 dependencies {
-    def supportLibVersion = "25.0.0"
-    def schematicVersion = '0.6.8'
+    def supportLibVersion = "25.1.0"
+    def schematicVersion = '0.7.0'
     def butterKnifeVersion = '8.4.0'
 
     compile "com.android.support:support-v4:$supportLibVersion"
@@ -92,22 +92,21 @@ dependencies {
 
     compile 'com.tasomaniac:delayed-progress:0.4'
 
-    compile 'jp.wasabeef:recyclerview-animators:2.2.4'
+    compile 'jp.wasabeef:recyclerview-animators:2.2.5'
 
     apt "net.simonvt.schematic:schematic-compiler:$schematicVersion"
     compile "net.simonvt.schematic:schematic:$schematicVersion"
 
-    compile 'com.google.dagger:dagger:2.7'
-    apt 'com.google.dagger:dagger-compiler:2.7'
-    provided 'org.glassfish:javax.annotation:10.0-b28'
+    compile 'com.google.dagger:dagger:2.8'
+    apt 'com.google.dagger:dagger-compiler:2.8'
 
     compile "com.jakewharton:butterknife:$butterKnifeVersion"
     apt "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
-    compile 'com.jakewharton.timber:timber:4.3.1'
+    compile 'com.jakewharton.timber:timber:4.5.1'
 
-    compile 'com.squareup.okhttp3:okhttp:3.4.2'
+    compile 'com.squareup.okhttp3:okhttp:3.5.0'
 
-    playCompile 'com.crashlytics.sdk.android:crashlytics:2.6.5'
+    playCompile 'com.crashlytics.sdk.android:crashlytics:2.6.6'
 
     testCompile 'junit:junit:4.12'
 }
