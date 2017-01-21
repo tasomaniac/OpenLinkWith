@@ -1,9 +1,6 @@
 package com.tasomaniac.openwith;
 
 import android.app.Activity;
-import android.app.ActivityManager;
-import android.app.usage.UsageStats;
-import android.app.usage.UsageStatsManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,27 +9,21 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.ShareCompat;
 import android.text.TextUtils;
-import android.text.format.DateUtils;
 import android.widget.Toast;
 
 import com.tasomaniac.openwith.data.Analytics;
 import com.tasomaniac.openwith.data.Injector;
 import com.tasomaniac.openwith.resolver.ResolverActivity;
+import com.tasomaniac.openwith.util.CallerPackageExtractor;
 import com.tasomaniac.openwith.util.Intents;
 import com.tasomaniac.openwith.util.Urls;
-
-import java.util.List;
 
 import net.simonvt.schematic.Cursors;
 
 import timber.log.Timber;
 
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.LOLLIPOP;
-import static android.os.Build.VERSION_CODES.LOLLIPOP_MR1;
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.*;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withHost;
 import static com.tasomaniac.openwith.util.Urls.fixUrls;
@@ -91,7 +82,7 @@ public class ShareToOpenWith extends Activity {
             finish();
             return;
         }
-        final String callerPackage = getCallerPackage();
+        String callerPackage = CallerPackageExtractor.from(this).extract();
         Uri uri = Uri.parse(fixUrls(foundUrl));
         Intent intentToHandle = new Intent(Intent.ACTION_VIEW, uri);
 
@@ -143,68 +134,6 @@ public class ShareToOpenWith extends Activity {
                               .setClass(this, ResolverActivity.class));
 
         finish();
-    }
-
-    @Nullable
-    private String getCallerPackage() {
-        String callerPackage = getIntent().getStringExtra(ShareCompat.EXTRA_CALLING_PACKAGE);
-
-        if (callerPackage != null) {
-            return callerPackage;
-        }
-        if (SDK_INT < LOLLIPOP) {
-            return getCallerPackagerLegacy();
-        }
-        if (SDK_INT >= LOLLIPOP_MR1) {
-            return getCallerPackageLollipop();
-        }
-
-        return null;
-    }
-
-    @SuppressWarnings("deprecation")
-    private String getCallerPackagerLegacy() {
-        ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-        final List<ActivityManager.RunningTaskInfo> runningTasks = am.getRunningTasks(1);
-        final ComponentName topActivity = runningTasks.get(0).baseActivity;
-        return topActivity.getPackageName();
-    }
-
-    @RequiresApi(LOLLIPOP_MR1)
-    private String getCallerPackageLollipop() {
-        UsageStatsManager mUsm = (UsageStatsManager) getSystemService(USAGE_STATS_SERVICE);
-        long time = System.currentTimeMillis();
-        // We get usage stats for the last 10 seconds
-        List<UsageStats> stats = null;
-        try {
-            stats = mUsm.queryUsageStats(
-                    UsageStatsManager.INTERVAL_DAILY,
-                    time - 10 * DateUtils.SECOND_IN_MILLIS,
-                    time
-            );
-        } catch (Exception ignored) {
-        }
-        if (stats == null) {
-            return null;
-        }
-
-        UsageStats lastUsage = null;
-        for (UsageStats currentUsage : stats) {
-            String currentPackage = currentUsage.getPackageName();
-            if (BuildConfig.APPLICATION_ID.equals(currentPackage)
-                    || "android".equals(currentPackage)) {
-                continue;
-            }
-            if (lastUsage == null ||
-                    lastUsage.getLastTimeUsed() < currentUsage.getLastTimeUsed()) {
-                lastUsage = currentUsage;
-            }
-        }
-        if (lastUsage != null) {
-            return lastUsage.getPackageName();
-        }
-
-        return null;
     }
 
     @Nullable
