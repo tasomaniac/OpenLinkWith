@@ -22,27 +22,27 @@ final class AppModule {
 
     @Provides
     @Singleton
-    SharedPreferences provideSharedPreferences(Application app) {
+    static SharedPreferences provideSharedPreferences(Application app) {
         return PreferenceManager.getDefaultSharedPreferences(app);
     }
 
     @Provides
     @Singleton
     @TutorialShown
-    BooleanPreference provideTutorialShown(SharedPreferences prefs) {
+    static BooleanPreference provideTutorialShown(SharedPreferences prefs) {
         return new BooleanPreference(prefs, "pref_tutorial_shown");
     }
 
     @Provides
     @Singleton
     @UsageAccess
-    BooleanPreference provideUsageAccess(SharedPreferences prefs) {
+    static BooleanPreference provideUsageAccess(SharedPreferences prefs) {
         return new BooleanPreference(prefs, "usage_access");
     }
 
     @Provides
     @Singleton
-    OkHttpClient provideOkHttpClient(Application app) {
+    static OkHttpClient provideOkHttpClient(Application app) {
         File cacheDir = new File(app.getCacheDir(), "http");
         Cache cache = new Cache(cacheDir, DISK_CACHE_SIZE);
 

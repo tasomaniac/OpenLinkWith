@@ -12,7 +12,7 @@ class AnalyticsModule {
 
     @Provides
     @Singleton
-    Analytics provideAnalytics() {
+    static Analytics provideAnalytics() {
         return new Analytics.DebugAnalytics();
     }
 

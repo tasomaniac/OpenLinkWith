@@ -15,7 +15,7 @@ class AnalyticsModule {
 
     @Provides
     @Singleton
-    Analytics provideAnalytics() {
+    static Analytics provideAnalytics() {
         if (BuildConfig.DEBUG) {
             return new Analytics.DebugAnalytics();
         }
