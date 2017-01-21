@@ -130,6 +130,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
     }
 
     protected void onBindHeaderViewHolder(ViewHolder holder) {
+        // no-op
     }
 
     @Override
