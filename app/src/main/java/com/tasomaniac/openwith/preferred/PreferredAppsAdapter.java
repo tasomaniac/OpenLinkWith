@@ -31,10 +31,6 @@ class PreferredAppsAdapter extends ResolveListAdapter {
     }
 
     @Override
-    protected void rebuildList() {
-    }
-
-    @Override
     protected ViewHolder onCreateHeaderViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         return new ViewHolder(inflater.inflate(R.layout.preferred_header, parent, false));

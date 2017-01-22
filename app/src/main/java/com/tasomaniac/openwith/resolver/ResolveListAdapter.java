@@ -63,7 +63,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
     @Inject IconLoader iconLoader;
 
     private final ChooserHistory history;
-    private final Intent mIntent;
+    private final Intent sourceIntent;
     private final String mCallerPackage;
     private final ComponentName lastChosenComponent;
     private final boolean mFilterLastUsed;
@@ -104,13 +104,15 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         }
 
         this.history = history;
-        mIntent = intent;
+        this.sourceIntent = intent;
         mCallerPackage = callerPackage;
         lastChosenComponent = lastChosen;
         mFilterLastUsed = filterLastUsed;
 
         setPriorityItems(priorityPackages);
-        rebuildList();
+        if (sourceIntent != null) {
+            rebuildList(sourceIntent);
+        }
     }
 
     private void setPriorityItems(final String... packageNames) {
@@ -129,7 +131,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
     }
 
     void handlePackagesChanged() {
-        rebuildList();
+        rebuildList(sourceIntent);
         notifyDataSetChanged();
     }
 
@@ -145,7 +147,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         return mFilterLastUsed && lastChosenPosition >= 0;
     }
 
-    protected void rebuildList() {
+    private void rebuildList(Intent intent) {
         mList.clear();
         int flag;
         if (SDK_INT >= M) {
@@ -156,7 +158,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         flag = flag | (mFilterLastUsed ? PackageManager.GET_RESOLVED_FILTER : 0);
 
         List<ResolveInfo> currentResolveList = new ArrayList<>();
-        currentResolveList.addAll(mPm.queryIntentActivities(mIntent, flag));
+        currentResolveList.addAll(mPm.queryIntentActivities(intent, flag));
 
         if (SDK_INT >= M) {
             addBrowsersToList(currentResolveList, flag);
@@ -190,7 +192,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
             }
 
             if (N > 1) {
-                Comparator<ResolveInfo> rComparator = new ResolverComparator(mIntent);
+                Comparator<ResolveInfo> rComparator = new ResolverComparator(intent);
                 Collections.sort(currentResolveList, rComparator);
             }
 
@@ -580,7 +582,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
     }
 
     Intent intentForDisplayResolveInfo(DisplayResolveInfo dri) {
-        Intent intent = new Intent(mIntent);
+        Intent intent = new Intent(sourceIntent);
         intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
                                 | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
         if (dri != null && dri.ri != null) {
