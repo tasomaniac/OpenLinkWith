@@ -1,7 +1,6 @@
 package com.tasomaniac.openwith.resolver;
 
 import android.annotation.TargetApi;
-import android.app.ActivityManager;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.ComponentName;
@@ -11,8 +10,6 @@ import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -25,8 +22,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.tasomaniac.openwith.IconLoader;
 import com.tasomaniac.openwith.R;
+import com.tasomaniac.openwith.data.Injector;
 
+import javax.inject.Inject;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,7 +40,6 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import timber.log.Timber;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.LOLLIPOP_MR1;
@@ -60,14 +59,15 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         BROWSER_INTENT.setData(Uri.parse("http:"));
     }
 
+    @Inject PackageManager mPm;
+    @Inject IconLoader iconLoader;
+
     private final ChooserHistory mHistory;
     private final Intent mIntent;
     private final String mCallerPackage;
     private final ComponentName lastChosenComponent;
     private final boolean mFilterLastUsed;
-    private final PackageManager mPm;
     private final Map<String, UsageStats> mStats;
-    private final int launcherIconDensity;
 
     private HashMap<String, Integer> priorityPackages;
 
@@ -93,10 +93,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
                        ComponentName lastChosen,
                        boolean filterLastUsed,
                        String[] priorityPackages) {
-
-        final ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        launcherIconDensity = am.getLauncherLargeIconDensity();
-
+        Injector.obtain(context).inject(this);
         if (SDK_INT >= LOLLIPOP_MR1) {
             UsageStatsManager mUsm = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
 
@@ -105,8 +102,6 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         } else {
             mStats = null;
         }
-
-        mPm = context.getPackageManager();
 
         mHistory = history;
         mIntent = intent;
@@ -493,7 +488,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         protected DisplayResolveInfo doInBackground(DisplayResolveInfo... params) {
             final DisplayResolveInfo info = params[0];
             if (info.displayIcon() == null) {
-                info.displayIcon(loadIconForResolveInfo(mPm, info.ri, launcherIconDensity));
+                info.displayIcon(iconLoader.loadFor(info.ri));
             }
             return info;
         }
@@ -502,40 +497,6 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         protected void onPostExecute(DisplayResolveInfo info) {
             notifyDataSetChanged();
         }
-    }
-
-    static Drawable loadIconForResolveInfo(PackageManager mPm, ResolveInfo ri, int mIconDpi) {
-        Drawable dr;
-        try {
-            if (ri.resolvePackageName != null && ri.icon != 0) {
-                dr = getIcon(mPm.getResourcesForApplication(ri.resolvePackageName), ri.icon, mIconDpi);
-                if (dr != null) {
-                    return dr;
-                }
-            }
-            final int iconRes = ri.getIconResource();
-            if (iconRes != 0) {
-                dr = getIcon(mPm.getResourcesForApplication(ri.activityInfo.packageName), iconRes, mIconDpi);
-                if (dr != null) {
-                    return dr;
-                }
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            Timber.e(e, "Couldn't find resources for package");
-        }
-        return ri.loadIcon(mPm);
-    }
-
-    private static Drawable getIcon(Resources res, int resId, int mIconDpi) {
-        Drawable result;
-        try {
-            //noinspection deprecation
-            result = res.getDrawableForDensity(resId, mIconDpi);
-        } catch (Resources.NotFoundException e) {
-            result = null;
-        }
-
-        return result;
     }
 
     private class ResolverComparator implements Comparator<ResolveInfo> {

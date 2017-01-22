@@ -1,6 +1,8 @@
 package com.tasomaniac.openwith;
 
+import android.app.ActivityManager;
 import android.app.Application;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
@@ -21,9 +23,19 @@ final class AppModule {
     private static final int DISK_CACHE_SIZE = 5 * 1024 * 1024;
 
     @Provides
-    @Singleton
     static SharedPreferences provideSharedPreferences(Application app) {
         return PreferenceManager.getDefaultSharedPreferences(app);
+    }
+
+    @Provides
+    static ActivityManager provideActivityManager(Application app) {
+        return (ActivityManager) app.getSystemService(Context.ACTIVITY_SERVICE);
+    }
+
+    @Provides
+    static IconLoader provideIconLoader(Application app, ActivityManager am) {
+        int iconDpi = am.getLauncherLargeIconDensity();
+        return new IconLoader(app.getPackageManager(), iconDpi);
     }
 
     @Provides

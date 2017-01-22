@@ -15,11 +15,9 @@
  */
 package com.tasomaniac.openwith.resolver;
 
-import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -38,9 +36,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tasomaniac.openwith.IconLoader;
 import com.tasomaniac.openwith.R;
+import com.tasomaniac.openwith.data.Injector;
 import com.tasomaniac.openwith.homescreen.AddToHomeScreenDialogFragment;
 import com.tasomaniac.openwith.util.Intents;
+
+import javax.inject.Inject;
 
 import timber.log.Timber;
 
@@ -62,8 +64,9 @@ public class ResolverActivity extends AppCompatActivity implements
     private static final String KEY_CHECKED_ITEM = "KEY_CHECKED_ITEM";
     public static final String EXTRA_LAST_CHOSEN_COMPONENT = "last_chosen";
 
+    @Inject IconLoader iconLoader;
+
     private ResolveListAdapter mAdapter;
-    private PackageManager mPm;
     private boolean mAlwaysUseOption;
     private boolean isAddToHomeScreen;
 
@@ -71,7 +74,6 @@ public class ResolverActivity extends AppCompatActivity implements
 
     private Button mAlwaysButton;
     private Button mOnceButton;
-    private int mIconDpi;
 
     @Nullable private DisplayResolveInfo lastSelected;
 
@@ -110,9 +112,9 @@ public class ResolverActivity extends AppCompatActivity implements
 
         setTheme(R.style.BottomSheet_Light);
         super.onCreate(savedInstanceState);
+        Injector.obtain(this).inject(this);
 
         isAddToHomeScreen = intent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
-        mPm = getPackageManager();
 
         if (intent.getData() == null) {
             finish();
@@ -121,9 +123,6 @@ public class ResolverActivity extends AppCompatActivity implements
 
         mPackageMonitor.register(this, getMainLooper(), false);
         mRegistered = true;
-
-        final ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-        mIconDpi = am.getLauncherLargeIconDensity();
 
         mAdapter = new ResolveListAdapter(
                 this,
@@ -387,24 +386,24 @@ public class ResolverActivity extends AppCompatActivity implements
     }
 
     private class LoadIconIntoViewTask extends AsyncTask<DisplayResolveInfo, Void, DisplayResolveInfo> {
-        final ImageView mTargetView;
+        final ImageView targetView;
 
         LoadIconIntoViewTask(ImageView target) {
-            mTargetView = target;
+            targetView = target;
         }
 
         @Override
         protected DisplayResolveInfo doInBackground(DisplayResolveInfo... params) {
             final DisplayResolveInfo info = params[0];
             if (info.displayIcon() == null) {
-                info.displayIcon(ResolveListAdapter.loadIconForResolveInfo(mPm, info.ri, mIconDpi));
+                info.displayIcon(iconLoader.loadFor(info.ri));
             }
             return info;
         }
 
         @Override
         protected void onPostExecute(DisplayResolveInfo info) {
-            mTargetView.setImageDrawable(info.displayIcon());
+            targetView.setImageDrawable(info.displayIcon());
         }
     }
 }
