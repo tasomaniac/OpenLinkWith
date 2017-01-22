@@ -62,7 +62,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
     }
 
     DisplayResolveInfo getFilteredItem() {
-        if (shouldFilterLastUsed() && lastChosenPosition() >= 0) {
+        if (hasFilteredItem()) {
             // Not using getItem since it offsets to dodge this position for the list
             return mList.get(lastChosenPosition());
         }
@@ -70,7 +70,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
     }
 
     boolean hasFilteredItem() {
-        return shouldFilterLastUsed() && lastChosenPosition() >= 0;
+        return lastChosenPosition() >= 0;
     }
 
     DisplayResolveInfo displayResolveInfoForPosition(int position, boolean filtered) {
@@ -80,7 +80,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
     @Override
     public int getItemCount() {
         int result = mList.size();
-        if (shouldFilterLastUsed() && lastChosenPosition() >= 0) {
+        if (hasFilteredItem()) {
             result--;
         }
         result += getHeadersCount();
@@ -92,7 +92,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         if (position < 0) {
             position = 0;
         }
-        if (shouldFilterLastUsed() && lastChosenPosition() >= 0 && position >= lastChosenPosition()) {
+        if (hasFilteredItem() && position >= lastChosenPosition()) {
             position++;
         }
         return mList.get(position);
@@ -196,12 +196,12 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         });
     }
 
+    /**
+     * When {@code true} a second extended line will be displayed for items in the list.
+     * Default value is false
+     */
     protected boolean shouldShowExtended() {
         return intentResolver != null && intentResolver.shouldShowExtended();
-    }
-
-    private boolean shouldFilterLastUsed() {
-        return intentResolver != null;
     }
 
     public void setItemClickListener(@Nullable ItemClickListener itemClickListener) {
