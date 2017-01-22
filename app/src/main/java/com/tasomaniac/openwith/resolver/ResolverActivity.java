@@ -83,7 +83,7 @@ public class ResolverActivity extends AppCompatActivity implements
         }
     };
 
-    private Intent makeMyIntent() {
+    private Intent configureIntent() {
         Intent intent = new Intent(getIntent());
         intent.setComponent(null);
         // The resolver activity is set to be hidden from recent tasks.
@@ -97,22 +97,21 @@ public class ResolverActivity extends AppCompatActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final Intent intent = makeMyIntent();
-
         setTheme(R.style.BottomSheet_Light);
         super.onCreate(savedInstanceState);
-        component(intent).inject(this);
 
-        isAddToHomeScreen = intent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
-
+        final Intent intent = configureIntent();
         if (intent.getData() == null) {
             finish();
             return;
         }
+        component(intent).inject(this);
+        isAddToHomeScreen = intent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
 
         mPackageMonitor.register(this, getMainLooper(), false);
         mRegistered = true;
 
+        mAdapter.rebuildList();
         mAlwaysUseOption = !isAddToHomeScreen && !mAdapter.hasFilteredItem();
 
         int count = mAdapter.mList.size();
@@ -234,7 +233,7 @@ public class ResolverActivity extends AppCompatActivity implements
     }
 
     private void handlePackagesChanged() {
-        mAdapter.handlePackagesChanged();
+        mAdapter.rebuildList();
         if (mAdapter.getItemCount() == 0) {
             // We no longer have any items...  just finish the activity.
             finish();

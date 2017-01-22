@@ -49,13 +49,9 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         this.iconLoader = iconLoader;
         this.intentResolver = intentResolver;
         this.sourceIntent = sourceIntent;
-
-        if (intentResolver != null) {
-            mList.addAll(intentResolver.rebuildList());
-        }
     }
 
-    void handlePackagesChanged() {
+    void rebuildList() {
         mList.clear();
         mList.addAll(intentResolver.rebuildList());
         notifyDataSetChanged();
