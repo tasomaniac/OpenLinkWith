@@ -18,7 +18,6 @@ class PreferredAppsAdapter extends ResolveListAdapter {
         super(context, iconLoader);
 
         mList.addAll(apps);
-        mShowExtended = true;
     }
 
     void remove(DisplayResolveInfo item) {
@@ -51,5 +50,10 @@ class PreferredAppsAdapter extends ResolveListAdapter {
         final ViewHolder viewHolder = super.onCreateViewHolder(viewGroup, i);
         viewHolder.itemView.setMinimumHeight(Utils.dpToPx(viewGroup.getResources(), 72));
         return viewHolder;
+    }
+
+    @Override
+    protected boolean shouldShowExtended() {
+        return true;
     }
 }
