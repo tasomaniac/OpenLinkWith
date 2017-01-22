@@ -441,10 +441,10 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         public TextView text;
         @Nullable
         @BindView(R.id.text2)
-        public TextView text2;
+        TextView text2;
         @Nullable
         @BindView(R.id.icon)
-        public ImageView icon;
+        ImageView icon;
 
         public ViewHolder(View view) {
             super(view);
