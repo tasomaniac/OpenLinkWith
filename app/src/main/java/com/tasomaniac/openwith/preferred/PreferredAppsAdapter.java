@@ -13,10 +13,8 @@ import java.util.List;
 
 class PreferredAppsAdapter extends ResolveListAdapter {
 
-    PreferredAppsAdapter(IconLoader iconLoader, List<DisplayResolveInfo> apps) {
+    PreferredAppsAdapter(IconLoader iconLoader) {
         super(iconLoader);
-
-        mList.addAll(apps);
     }
 
     void remove(DisplayResolveInfo item) {

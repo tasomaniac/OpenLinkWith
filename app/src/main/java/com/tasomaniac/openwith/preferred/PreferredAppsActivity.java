@@ -23,6 +23,7 @@ import com.tasomaniac.openwith.resolver.ItemClickListener;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import net.simonvt.schematic.Cursors;
@@ -67,7 +68,7 @@ public class PreferredAppsActivity extends AppCompatActivity
                 DividerItemDecoration.VERTICAL_LIST
         ));
         recyclerView.setItemAnimator(new SlideInRightAnimator());
-        adapter = new PreferredAppsAdapter(iconLoader, new ArrayList<DisplayResolveInfo>());
+        adapter = new PreferredAppsAdapter(iconLoader);
         adapter.setItemClickListener(this);
         recyclerView.setAdapter(adapter);
 
@@ -121,7 +122,7 @@ public class PreferredAppsActivity extends AppCompatActivity
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        adapter.setApplications(new ArrayList<DisplayResolveInfo>());
+        adapter.setApplications(Collections.<DisplayResolveInfo>emptyList());
     }
 
     @Override
