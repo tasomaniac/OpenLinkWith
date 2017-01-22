@@ -18,6 +18,7 @@ package com.tasomaniac.openwith.resolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,7 +31,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -124,7 +124,7 @@ public class ResolverActivity extends AppCompatActivity implements
             return;
         }
         if (count == 1 && !isAddToHomeScreen) {
-            final DisplayResolveInfo dri = adapter.displayResolveInfoForPosition(0, false);
+            DisplayResolveInfo dri = adapter.displayResolveInfoForPosition(0, false);
             Toast.makeText(this, getString(
                     R.string.warning_open_link_with_name,
                     dri.displayLabel()
@@ -136,11 +136,14 @@ public class ResolverActivity extends AppCompatActivity implements
             return;
         }
 
-        setupListAdapter();
-
-        mListView.setLayoutManager(new LinearLayoutManager(this));
-
-        final ResolverDrawerLayout rdl = (ResolverDrawerLayout) findViewById(R.id.contentPanel);
+        setContentView(shouldDisplayHeader() ? R.layout.resolver_list_with_default : R.layout.resolver_list);
+        setupList();
+        setupTitle();
+        setupFilteredView();
+        if (shouldUseAlwaysOption || adapter.hasFilteredItem()) {
+            setupButtons();
+        }
+        ResolverDrawerLayout rdl = (ResolverDrawerLayout) findViewById(R.id.contentPanel);
         if (rdl != null) {
             rdl.setOnDismissedListener(new ResolverDrawerLayout.OnDismissedListener() {
                 @Override
@@ -148,30 +151,6 @@ public class ResolverActivity extends AppCompatActivity implements
                     finish();
                 }
             });
-        }
-
-        setupTitle();
-
-        final ImageView iconView = (ImageView) findViewById(R.id.icon);
-        final DisplayResolveInfo iconInfo = adapter.getFilteredItem();
-        if (iconView != null && iconInfo != null) {
-            new LoadIconIntoViewTask(iconView).execute(iconInfo);
-        }
-
-        if (shouldUseAlwaysOption || adapter.hasFilteredItem()) {
-            final ViewGroup buttonLayout = (ViewGroup) findViewById(R.id.button_bar);
-            if (buttonLayout != null) {
-                buttonLayout.setVisibility(View.VISIBLE);
-                mAlwaysButton = (Button) buttonLayout.findViewById(R.id.button_always);
-                mOnceButton = (Button) buttonLayout.findViewById(R.id.button_once);
-            } else {
-                shouldUseAlwaysOption = false;
-            }
-        }
-
-        if (adapter.hasFilteredItem()) {
-            mAlwaysButton.setEnabled(true);
-            mOnceButton.setEnabled(true);
         }
     }
 
@@ -182,12 +161,13 @@ public class ResolverActivity extends AppCompatActivity implements
                 .build();
     }
 
-    private void setupListAdapter() {
-        boolean useHeader = !isAddToHomeScreen && adapter.hasFilteredItem();
-        int layoutId = useHeader ? R.layout.resolver_list_with_default : R.layout.resolver_list;
+    private boolean shouldDisplayHeader() {
+        return !isAddToHomeScreen && adapter.hasFilteredItem();
+    }
 
-        setContentView(layoutId);
+    private void setupList() {
         mListView = (RecyclerView) findViewById(R.id.resolver_list);
+        mListView.setLayoutManager(new LinearLayoutManager(this));
         mListView.setAdapter(adapter);
 
         adapter.setItemClickListener(this);
@@ -196,7 +176,7 @@ public class ResolverActivity extends AppCompatActivity implements
         if (shouldUseAlwaysOption) {
             adapter.setSelectionEnabled(true);
         }
-        if (useHeader) {
+        if (shouldDisplayHeader()) {
             adapter.displayHeader();
         }
     }
@@ -214,6 +194,21 @@ public class ResolverActivity extends AppCompatActivity implements
         final DisplayResolveInfo item = adapter.getFilteredItem();
         return item != null ? getString(R.string.which_view_application_named, item.displayLabel()) :
                 getString(R.string.which_view_application);
+    }
+
+    private void setupFilteredView() {
+        ImageView iconView = (ImageView) findViewById(R.id.icon);
+        DisplayResolveInfo filteredItem = adapter.getFilteredItem();
+        if (iconView != null && filteredItem != null) {
+            new LoadIconIntoViewTask(iconLoader, iconView).execute(filteredItem);
+        }
+    }
+
+    private void setupButtons() {
+        ViewGroup buttonLayout = (ViewGroup) findViewById(R.id.button_bar);
+        buttonLayout.setVisibility(View.VISIBLE);
+        mAlwaysButton = (Button) buttonLayout.findViewById(R.id.button_always);
+        mOnceButton = (Button) buttonLayout.findViewById(R.id.button_once);
     }
 
     private void dismiss() {
@@ -274,8 +269,9 @@ public class ResolverActivity extends AppCompatActivity implements
         super.onRestoreInstanceState(savedInstanceState);
         if (shouldUseAlwaysOption) {
             lastSelected = savedInstanceState.getParcelable(KEY_CHECKED_ITEM);
-            final int checkedPos = savedInstanceState.getInt(KEY_CHECKED_POS);
-            final boolean hasValidSelection = checkedPos != ListView.INVALID_POSITION;
+
+            int checkedPos = savedInstanceState.getInt(KEY_CHECKED_POS);
+            boolean hasValidSelection = checkedPos != RecyclerView.NO_POSITION;
             mAlwaysButton.setEnabled(hasValidSelection);
             mOnceButton.setEnabled(hasValidSelection);
             if (hasValidSelection) {
@@ -314,17 +310,10 @@ public class ResolverActivity extends AppCompatActivity implements
                     .newInstance(dri, intent)
                     .show(getSupportFragmentManager());
         } else {
-            onIntentSelected(intent, always);
+            persistSelectedIntent(intent, always);
+            Intents.startActivityFixingIntent(this, intent);
             finish();
         }
-    }
-
-    private void onIntentSelected(Intent intent, boolean alwaysCheck) {
-        if (shouldUseAlwaysOption || adapter.hasFilteredItem()) {
-            persistSelectedIntent(intent, alwaysCheck);
-        }
-
-        Intents.startActivityFixingIntent(this, intent);
     }
 
     private void persistSelectedIntent(Intent intent, boolean alwaysCheck) {
@@ -364,25 +353,27 @@ public class ResolverActivity extends AppCompatActivity implements
         startActivity(in);
     }
 
-    private class LoadIconIntoViewTask extends AsyncTask<DisplayResolveInfo, Void, DisplayResolveInfo> {
-        final ImageView targetView;
+    private static class LoadIconIntoViewTask extends AsyncTask<DisplayResolveInfo, Void, Drawable> {
+        private final ImageView target;
+        private final IconLoader iconLoader;
 
-        LoadIconIntoViewTask(ImageView target) {
-            targetView = target;
+        LoadIconIntoViewTask(IconLoader iconLoader, ImageView target) {
+            this.iconLoader = iconLoader;
+            this.target = target;
         }
 
         @Override
-        protected DisplayResolveInfo doInBackground(DisplayResolveInfo... params) {
+        protected Drawable doInBackground(DisplayResolveInfo... params) {
             final DisplayResolveInfo info = params[0];
             if (info.displayIcon() == null) {
                 info.displayIcon(iconLoader.loadFor(info.ri));
             }
-            return info;
+            return info.displayIcon();
         }
 
         @Override
-        protected void onPostExecute(DisplayResolveInfo info) {
-            targetView.setImageDrawable(info.displayIcon());
+        protected void onPostExecute(Drawable drawable) {
+            target.setImageDrawable(drawable);
         }
     }
 }

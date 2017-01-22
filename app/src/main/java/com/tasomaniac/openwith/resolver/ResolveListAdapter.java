@@ -57,6 +57,9 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         notifyDataSetChanged();
     }
 
+    /**
+     * Filtered item that is staying at the top header with Always and Just Once buttons.
+     */
     DisplayResolveInfo getFilteredItem() {
         if (hasFilteredItem()) {
             // Not using getItem since it offsets to dodge this position for the list
@@ -65,6 +68,9 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         return null;
     }
 
+    /**
+     * true if one of the items is filtered and stays at the top header
+     */
     boolean hasFilteredItem() {
         return lastChosenPosition() >= 0;
     }
