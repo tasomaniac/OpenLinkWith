@@ -68,8 +68,6 @@ public class ResolverActivity extends AppCompatActivity implements
     private boolean shouldUseAlwaysOption;
     private boolean isAddToHomeScreen;
 
-    private RecyclerView mListView;
-
     private Button mAlwaysButton;
     private Button mOnceButton;
 
@@ -166,9 +164,9 @@ public class ResolverActivity extends AppCompatActivity implements
     }
 
     private void setupList() {
-        mListView = (RecyclerView) findViewById(R.id.resolver_list);
-        mListView.setLayoutManager(new LinearLayoutManager(this));
-        mListView.setAdapter(adapter);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.resolver_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
 
         adapter.setItemClickListener(this);
         adapter.setItemLongClickListener(this);
