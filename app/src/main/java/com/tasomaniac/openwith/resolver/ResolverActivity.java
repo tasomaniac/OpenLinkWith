@@ -126,14 +126,10 @@ public class ResolverActivity extends AppCompatActivity implements
         }
         if (count == 1 && !isAddToHomeScreen) {
             final DisplayResolveInfo dri = mAdapter.displayResolveInfoForPosition(0, false);
-            Toast.makeText(
-                    this,
-                    getString(
-                            R.string.warning_open_link_with_name,
-                            dri.displayLabel()
-                    ),
-                    Toast.LENGTH_SHORT
-            ).show();
+            Toast.makeText(this, getString(
+                    R.string.warning_open_link_with_name,
+                    dri.displayLabel()
+            ), Toast.LENGTH_SHORT).show();
             Intents.startActivityFixingIntent(this, mAdapter.intentForDisplayResolveInfo(dri));
             mPackageMonitor.unregister();
             mRegistered = false;
