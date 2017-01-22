@@ -6,7 +6,6 @@ import com.tasomaniac.openwith.data.Analytics;
 import com.tasomaniac.openwith.homescreen.AddToHomeScreenDialogFragment;
 import com.tasomaniac.openwith.intro.IntroActivity;
 import com.tasomaniac.openwith.preferred.PreferredAppsActivity;
-import com.tasomaniac.openwith.resolver.ResolveListAdapter;
 import com.tasomaniac.openwith.settings.SettingsActivity;
 import com.tasomaniac.openwith.settings.SettingsFragment;
 
@@ -39,5 +38,4 @@ public interface AppComponent {
 
     void inject(AddToHomeScreenDialogFragment fragment);
 
-    void inject(ResolveListAdapter adapter);
 }

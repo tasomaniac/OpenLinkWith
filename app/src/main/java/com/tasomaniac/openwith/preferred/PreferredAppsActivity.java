@@ -14,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
+import com.tasomaniac.openwith.IconLoader;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.Analytics;
 import com.tasomaniac.openwith.data.Injector;
@@ -41,6 +42,7 @@ public class PreferredAppsActivity extends AppCompatActivity
         AppRemoveDialogFragment.Callbacks {
 
     @Inject Analytics analytics;
+    @Inject IconLoader iconLoader;
 
     @BindView(R.id.recycler_view) RecyclerView recyclerView;
 
@@ -65,7 +67,7 @@ public class PreferredAppsActivity extends AppCompatActivity
                 DividerItemDecoration.VERTICAL_LIST
         ));
         recyclerView.setItemAnimator(new SlideInRightAnimator());
-        adapter = new PreferredAppsAdapter(this, new ArrayList<DisplayResolveInfo>());
+        adapter = new PreferredAppsAdapter(iconLoader, new ArrayList<DisplayResolveInfo>());
         adapter.setItemClickListener(this);
         recyclerView.setAdapter(adapter);
 

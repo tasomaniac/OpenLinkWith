@@ -9,4 +9,6 @@ import dagger.Component;
 @Component(dependencies = AppComponent.class, modules = ResolverModule.class)
 interface ResolverComponent {
     void inject(ResolverActivity activity);
+
+    void inject(ResolveListAdapter adapter);
 }

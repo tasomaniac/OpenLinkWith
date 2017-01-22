@@ -30,30 +30,6 @@ import static com.tasomaniac.openwith.util.Urls.fixUrls;
 
 public class ShareToOpenWith extends Activity {
 
-    private static final String[] PRIORITY_PACKAGES = new String[]{
-            "com.whatsapp",
-            "com.twitter.android",
-            "com.facebook.katana",
-            "com.facebook.orca",
-            "com.google.android.youtube",
-            "com.google.android.gm",
-            "com.google.android.talk",
-            "com.google.android.apps.plus",
-            "com.google.android.apps.photos",
-            "com.pandora.android",
-            "com.instagram.android",
-            "com.linkedin.android",
-            "com.spotify.music",
-            "com.pinterest",
-            "com.medium.reader",
-            "com.ubercab",
-            "com.meetup",
-            "com.tumblr",
-            "com.badoo.mobile",
-            "tv.periscope.android",
-            "com.skype.raider"
-    };
-
     public static final String EXTRA_FROM_DIRECT_SHARE = "EXTRA_FROM_DIRECT_SHARE";
 
     private static boolean isFromDirectShare(Intent intent) {
@@ -129,7 +105,6 @@ public class ShareToOpenWith extends Activity {
 
         startActivity(intentToHandle
                               .putExtra(ShareCompat.EXTRA_CALLING_PACKAGE, callerPackage)
-                              .putExtra(ResolverActivity.EXTRA_PRIORITY_PACKAGES, PRIORITY_PACKAGES)
                               .putExtra(ResolverActivity.EXTRA_LAST_CHOSEN_COMPONENT, lastChosenComponent)
                               .setClass(this, ResolverActivity.class));
 

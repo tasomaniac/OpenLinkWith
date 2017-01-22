@@ -1,9 +1,9 @@
 package com.tasomaniac.openwith.preferred;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.tasomaniac.openwith.IconLoader;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.resolver.DisplayResolveInfo;
 import com.tasomaniac.openwith.resolver.ResolveListAdapter;
@@ -13,11 +13,10 @@ import java.util.List;
 
 class PreferredAppsAdapter extends ResolveListAdapter {
 
-    PreferredAppsAdapter(Context context, List<DisplayResolveInfo> apps) {
-        super(context);
+    PreferredAppsAdapter(IconLoader iconLoader, List<DisplayResolveInfo> apps) {
+        super(iconLoader);
 
         mList.addAll(apps);
-        mShowExtended = true;
     }
 
     void remove(DisplayResolveInfo item) {
@@ -28,10 +27,6 @@ class PreferredAppsAdapter extends ResolveListAdapter {
         mList.clear();
         mList.addAll(apps);
         notifyDataSetChanged();
-    }
-
-    @Override
-    protected void rebuildList() {
     }
 
     @Override
@@ -54,5 +49,10 @@ class PreferredAppsAdapter extends ResolveListAdapter {
         final ViewHolder viewHolder = super.onCreateViewHolder(viewGroup, i);
         viewHolder.itemView.setMinimumHeight(Utils.dpToPx(viewGroup.getResources(), 72));
         return viewHolder;
+    }
+
+    @Override
+    protected boolean shouldShowExtended() {
+        return true;
     }
 }
