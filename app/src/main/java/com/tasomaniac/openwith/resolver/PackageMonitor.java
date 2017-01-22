@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.tasomaniac.openwith.resolver;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -30,7 +30,7 @@ import java.util.HashSet;
  * updating, and disappearing and reappearing on the SD card.
  */
 @SuppressWarnings("unused")
-public abstract class PackageMonitor extends android.content.BroadcastReceiver {
+public abstract class PackageMonitor extends BroadcastReceiver {
     static final IntentFilter sPackageFilt = new IntentFilter();
     static final IntentFilter sExternalFilt = new IntentFilter();
 
