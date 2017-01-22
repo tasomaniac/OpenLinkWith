@@ -63,9 +63,9 @@ public class ResolverActivity extends AppCompatActivity implements
 
     @Inject IconLoader iconLoader;
     @Inject ChooserHistory history;
-    @Inject ResolveListAdapter mAdapter;
+    @Inject ResolveListAdapter adapter;
 
-    private boolean mAlwaysUseOption;
+    private boolean shouldUseAlwaysOption;
     private boolean isAddToHomeScreen;
 
     private RecyclerView mListView;
@@ -75,8 +75,8 @@ public class ResolverActivity extends AppCompatActivity implements
 
     @Nullable private DisplayResolveInfo lastSelected;
 
-    private boolean mRegistered;
-    private final PackageMonitor mPackageMonitor = new PackageMonitor() {
+    private boolean packageMonitorRegistered;
+    private final PackageMonitor packageMonitor = new PackageMonitor() {
         @Override
         public void onSomePackagesChanged() {
             handlePackagesChanged();
@@ -108,30 +108,30 @@ public class ResolverActivity extends AppCompatActivity implements
         component(intent).inject(this);
         isAddToHomeScreen = intent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
 
-        mPackageMonitor.register(this, getMainLooper(), false);
-        mRegistered = true;
+        packageMonitor.register(this, getMainLooper(), false);
+        packageMonitorRegistered = true;
 
-        mAdapter.rebuildList();
-        mAlwaysUseOption = !isAddToHomeScreen && !mAdapter.hasFilteredItem();
+        adapter.rebuildList();
+        shouldUseAlwaysOption = !isAddToHomeScreen && !adapter.hasFilteredItem();
 
-        int count = mAdapter.mList.size();
+        int count = adapter.mList.size();
         if (count == 0) {
             Timber.e("No app is found to handle url: %s", intent.getDataString());
-            Toast.makeText(this, getString(R.string.empty_resolver_activity), Toast.LENGTH_LONG).show();
-            mPackageMonitor.unregister();
-            mRegistered = false;
+            Toast.makeText(this, R.string.empty_resolver_activity, Toast.LENGTH_LONG).show();
+            packageMonitor.unregister();
+            packageMonitorRegistered = false;
             finish();
             return;
         }
         if (count == 1 && !isAddToHomeScreen) {
-            final DisplayResolveInfo dri = mAdapter.displayResolveInfoForPosition(0, false);
+            final DisplayResolveInfo dri = adapter.displayResolveInfoForPosition(0, false);
             Toast.makeText(this, getString(
                     R.string.warning_open_link_with_name,
                     dri.displayLabel()
             ), Toast.LENGTH_SHORT).show();
-            Intents.startActivityFixingIntent(this, mAdapter.intentForDisplayResolveInfo(dri));
-            mPackageMonitor.unregister();
-            mRegistered = false;
+            Intents.startActivityFixingIntent(this, adapter.intentForDisplayResolveInfo(dri));
+            packageMonitor.unregister();
+            packageMonitorRegistered = false;
             finish();
             return;
         }
@@ -153,23 +153,23 @@ public class ResolverActivity extends AppCompatActivity implements
         setupTitle();
 
         final ImageView iconView = (ImageView) findViewById(R.id.icon);
-        final DisplayResolveInfo iconInfo = mAdapter.getFilteredItem();
+        final DisplayResolveInfo iconInfo = adapter.getFilteredItem();
         if (iconView != null && iconInfo != null) {
             new LoadIconIntoViewTask(iconView).execute(iconInfo);
         }
 
-        if (mAlwaysUseOption || mAdapter.hasFilteredItem()) {
+        if (shouldUseAlwaysOption || adapter.hasFilteredItem()) {
             final ViewGroup buttonLayout = (ViewGroup) findViewById(R.id.button_bar);
             if (buttonLayout != null) {
                 buttonLayout.setVisibility(View.VISIBLE);
                 mAlwaysButton = (Button) buttonLayout.findViewById(R.id.button_always);
                 mOnceButton = (Button) buttonLayout.findViewById(R.id.button_once);
             } else {
-                mAlwaysUseOption = false;
+                shouldUseAlwaysOption = false;
             }
         }
 
-        if (mAdapter.hasFilteredItem()) {
+        if (adapter.hasFilteredItem()) {
             mAlwaysButton.setEnabled(true);
             mOnceButton.setEnabled(true);
         }
@@ -183,21 +183,21 @@ public class ResolverActivity extends AppCompatActivity implements
     }
 
     private void setupListAdapter() {
-        boolean useHeader = !isAddToHomeScreen && mAdapter.hasFilteredItem();
+        boolean useHeader = !isAddToHomeScreen && adapter.hasFilteredItem();
         int layoutId = useHeader ? R.layout.resolver_list_with_default : R.layout.resolver_list;
 
         setContentView(layoutId);
         mListView = (RecyclerView) findViewById(R.id.resolver_list);
-        mListView.setAdapter(mAdapter);
+        mListView.setAdapter(adapter);
 
-        mAdapter.setItemClickListener(this);
-        mAdapter.setItemLongClickListener(this);
+        adapter.setItemClickListener(this);
+        adapter.setItemLongClickListener(this);
 
-        if (mAlwaysUseOption) {
-            mAdapter.setSelectionEnabled(true);
+        if (shouldUseAlwaysOption) {
+            adapter.setSelectionEnabled(true);
         }
         if (useHeader) {
-            mAdapter.displayHeader();
+            adapter.displayHeader();
         }
     }
 
@@ -211,7 +211,7 @@ public class ResolverActivity extends AppCompatActivity implements
     }
 
     private CharSequence getTitleForAction() {
-        final DisplayResolveInfo item = mAdapter.getFilteredItem();
+        final DisplayResolveInfo item = adapter.getFilteredItem();
         return item != null ? getString(R.string.which_view_application_named, item.displayLabel()) :
                 getString(R.string.which_view_application);
     }
@@ -225,16 +225,16 @@ public class ResolverActivity extends AppCompatActivity implements
     @Override
     protected void onRestart() {
         super.onRestart();
-        if (!mRegistered) {
-            mPackageMonitor.register(this, getMainLooper(), false);
-            mRegistered = true;
+        if (!packageMonitorRegistered) {
+            packageMonitor.register(this, getMainLooper(), false);
+            packageMonitorRegistered = true;
         }
         handlePackagesChanged();
     }
 
     private void handlePackagesChanged() {
-        mAdapter.rebuildList();
-        if (mAdapter.getItemCount() == 0) {
+        adapter.rebuildList();
+        if (adapter.getItemCount() == 0) {
             // We no longer have any items...  just finish the activity.
             finish();
         }
@@ -243,9 +243,9 @@ public class ResolverActivity extends AppCompatActivity implements
     @Override
     protected void onStop() {
         super.onStop();
-        if (mRegistered) {
-            mPackageMonitor.unregister();
-            mRegistered = false;
+        if (packageMonitorRegistered) {
+            packageMonitor.unregister();
+            packageMonitorRegistered = false;
         }
         if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_NEW_TASK) != 0) {
             // This resolver is in the unusual situation where it has been
@@ -265,28 +265,28 @@ public class ResolverActivity extends AppCompatActivity implements
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        outState.putInt(KEY_CHECKED_POS, mAdapter.getCheckedItemPosition());
+        outState.putInt(KEY_CHECKED_POS, adapter.getCheckedItemPosition());
         outState.putParcelable(KEY_CHECKED_ITEM, lastSelected);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        if (mAlwaysUseOption) {
+        if (shouldUseAlwaysOption) {
             lastSelected = savedInstanceState.getParcelable(KEY_CHECKED_ITEM);
             final int checkedPos = savedInstanceState.getInt(KEY_CHECKED_POS);
             final boolean hasValidSelection = checkedPos != ListView.INVALID_POSITION;
             mAlwaysButton.setEnabled(hasValidSelection);
             mOnceButton.setEnabled(hasValidSelection);
             if (hasValidSelection) {
-                mAdapter.setItemChecked(checkedPos);
+                adapter.setItemChecked(checkedPos);
             }
         }
     }
 
     @Override
     public void onItemClick(DisplayResolveInfo dri) {
-        if (mAlwaysUseOption && !dri.equals(lastSelected)) {
+        if (shouldUseAlwaysOption && !dri.equals(lastSelected)) {
             mAlwaysButton.setEnabled(true);
             mOnceButton.setEnabled(true);
             lastSelected = dri;
@@ -301,14 +301,14 @@ public class ResolverActivity extends AppCompatActivity implements
     }
 
     private DisplayResolveInfo getSelectedItem() {
-        return mAlwaysUseOption ? lastSelected : mAdapter.getFilteredItem();
+        return shouldUseAlwaysOption ? lastSelected : adapter.getFilteredItem();
     }
 
     private void startSelected(DisplayResolveInfo dri, boolean always) {
         if (isFinishing()) {
             return;
         }
-        Intent intent = mAdapter.intentForDisplayResolveInfo(dri);
+        Intent intent = adapter.intentForDisplayResolveInfo(dri);
         if (isAddToHomeScreen) {
             AddToHomeScreenDialogFragment
                     .newInstance(dri, intent)
@@ -320,7 +320,7 @@ public class ResolverActivity extends AppCompatActivity implements
     }
 
     private void onIntentSelected(Intent intent, boolean alwaysCheck) {
-        if (mAlwaysUseOption || mAdapter.hasFilteredItem()) {
+        if (shouldUseAlwaysOption || adapter.hasFilteredItem()) {
             persistSelectedIntent(intent, alwaysCheck);
         }
 
@@ -351,7 +351,7 @@ public class ResolverActivity extends AppCompatActivity implements
 
     @Override
     public boolean onItemLongClick(View view, int position, long id) {
-        ResolveInfo ri = mAdapter.displayResolveInfoForPosition(position, true).ri;
+        ResolveInfo ri = adapter.displayResolveInfoForPosition(position, true).ri;
         showAppDetails(ri);
         return true;
     }
