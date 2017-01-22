@@ -62,7 +62,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
     @Inject PackageManager mPm;
     @Inject IconLoader iconLoader;
 
-    private final ChooserHistory mHistory;
+    private final ChooserHistory history;
     private final Intent mIntent;
     private final String mCallerPackage;
     private final ComponentName lastChosenComponent;
@@ -103,7 +103,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
             mStats = null;
         }
 
-        mHistory = history;
+        this.history = history;
         mIntent = intent;
         mCallerPackage = callerPackage;
         lastChosenComponent = lastChosen;
@@ -523,9 +523,9 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
                 }
             }
 
-            if (mHistory != null) {
-                int leftCount = mHistory.get(lhs.activityInfo.packageName);
-                int rightCount = mHistory.get(rhs.activityInfo.packageName);
+            if (history != null) {
+                int leftCount = history.get(lhs.activityInfo.packageName);
+                int rightCount = history.get(rhs.activityInfo.packageName);
                 if (leftCount != rightCount) {
                     return rightCount - leftCount;
                 }

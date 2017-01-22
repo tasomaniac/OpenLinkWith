@@ -7,7 +7,6 @@ import com.tasomaniac.openwith.homescreen.AddToHomeScreenDialogFragment;
 import com.tasomaniac.openwith.intro.IntroActivity;
 import com.tasomaniac.openwith.preferred.PreferredAppsActivity;
 import com.tasomaniac.openwith.resolver.ResolveListAdapter;
-import com.tasomaniac.openwith.resolver.ResolverActivity;
 import com.tasomaniac.openwith.settings.SettingsActivity;
 import com.tasomaniac.openwith.settings.SettingsFragment;
 
@@ -24,15 +23,17 @@ import dagger.Component;
 })
 public interface AppComponent {
 
+    Application app();
+
     Analytics analytics();
+
+    IconLoader iconLoader();
 
     void inject(IntroActivity activity);
 
     void inject(PreferredAppsActivity activity);
 
     void inject(SettingsActivity activity);
-
-    void inject(ResolverActivity activity);
 
     void inject(SettingsFragment fragment);
 

@@ -65,6 +65,7 @@ public class ResolverActivity extends AppCompatActivity implements
     public static final String EXTRA_LAST_CHOSEN_COMPONENT = "last_chosen";
 
     @Inject IconLoader iconLoader;
+    @Inject ChooserHistory history;
 
     private ResolveListAdapter mAdapter;
     private boolean mAlwaysUseOption;
@@ -76,15 +77,6 @@ public class ResolverActivity extends AppCompatActivity implements
     private Button mOnceButton;
 
     @Nullable private DisplayResolveInfo lastSelected;
-
-    private ChooserHistory mHistory;
-
-    private ChooserHistory getHistory() {
-        if (mHistory == null) {
-            mHistory = ChooserHistory.fromSettings(this);
-        }
-        return mHistory;
-    }
 
     private boolean mRegistered;
     private final PackageMonitor mPackageMonitor = new PackageMonitor() {
@@ -112,7 +104,7 @@ public class ResolverActivity extends AppCompatActivity implements
 
         setTheme(R.style.BottomSheet_Light);
         super.onCreate(savedInstanceState);
-        Injector.obtain(this).inject(this);
+        component().inject(this);
 
         isAddToHomeScreen = intent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
 
@@ -126,7 +118,7 @@ public class ResolverActivity extends AppCompatActivity implements
 
         mAdapter = new ResolveListAdapter(
                 this,
-                getHistory(),
+                history,
                 intent,
                 getIntent().getStringExtra(ShareCompat.EXTRA_CALLING_PACKAGE),
                 intent.<ComponentName>getParcelableExtra(EXTRA_LAST_CHOSEN_COMPONENT),
@@ -199,6 +191,12 @@ public class ResolverActivity extends AppCompatActivity implements
             mAlwaysButton.setEnabled(true);
             mOnceButton.setEnabled(true);
         }
+    }
+
+    private ResolverComponent component() {
+        return DaggerResolverComponent.builder()
+                .appComponent(Injector.obtain(this))
+                .build();
     }
 
     private void setupListAdapter() {
@@ -365,7 +363,6 @@ public class ResolverActivity extends AppCompatActivity implements
             Timber.e(e, "Error while saving selected Intent");
         }
 
-        final ChooserHistory history = getHistory();
         history.add(intent.getComponent().getPackageName());
         history.save(this);
     }
