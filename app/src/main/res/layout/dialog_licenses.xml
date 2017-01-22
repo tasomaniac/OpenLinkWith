@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WebView
-  xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  />
+  android:layout_height="match_parent">
+
+  <WebView
+    android:id="@+id/licenses"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/keyline_1"
+    android:layout_marginRight="@dimen/keyline_1" />
+</ScrollView>
