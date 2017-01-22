@@ -287,10 +287,9 @@ public class ResolverActivity extends AppCompatActivity implements
 
     @Override
     public void onItemClick(DisplayResolveInfo dri) {
-        final boolean hasValidSelection = true;
         if (mAlwaysUseOption && !dri.equals(lastSelected)) {
-            mAlwaysButton.setEnabled(hasValidSelection);
-            mOnceButton.setEnabled(hasValidSelection);
+            mAlwaysButton.setEnabled(true);
+            mOnceButton.setEnabled(true);
             lastSelected = dri;
         } else {
             startSelected(dri, false);
