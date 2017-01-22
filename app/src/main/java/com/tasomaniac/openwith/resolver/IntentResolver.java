@@ -169,16 +169,20 @@ public class IntentResolver {
         return packageManager.queryIntentActivities(BROWSER_INTENT, flags);
     }
 
-    private void processGroup(
-            List<DisplayResolveInfo> resolved,
-            List<ResolveInfo> rList, int start, int end, ResolveInfo ro,
-                              CharSequence roLabel) {
+    private void processGroup(List<DisplayResolveInfo> resolved,
+                              List<ResolveInfo> rList,
+                              int start,
+                              int end,
+                              ResolveInfo ro,
+                              CharSequence displayLabel) {
         // Process labels from start to i
         int num = end - start + 1;
         if (num == 1) {
             // No duplicate labels. Use label for entry at start
-            resolved.add(new DisplayResolveInfo(ro, roLabel, null));
-            updateLastChosenPosition(resolved, ro);
+            resolved.add(new DisplayResolveInfo(ro, displayLabel, null));
+            if (isLastChosenPosition(ro)) {
+                lastChosenPosition = resolved.size() - 1;
+            }
         } else {
             mShowExtended = true;
             boolean usePkg = false;
@@ -188,8 +192,7 @@ public class IntentResolver {
             }
             if (!usePkg) {
                 // Use HashSet to track duplicates
-                HashSet<CharSequence> duplicates =
-                        new HashSet<>();
+                HashSet<CharSequence> duplicates = new HashSet<>();
                 duplicates.add(startApp);
                 for (int j = start + 1; j <= end; j++) {
                     ResolveInfo jRi = rList.get(j);
@@ -208,25 +211,22 @@ public class IntentResolver {
                 ResolveInfo add = rList.get(k);
                 if (usePkg) {
                     // Use application name for all entries from start to end-1
-                    resolved.add(new DisplayResolveInfo(add, roLabel,
-                                                          add.activityInfo.packageName
-                    ));
+                    resolved.add(new DisplayResolveInfo(add, displayLabel, add.activityInfo.packageName));
                 } else {
                     // Use package name for all entries from start to end-1
-                    resolved.add(new DisplayResolveInfo(add, roLabel,
-                                                          add.activityInfo.applicationInfo.loadLabel(packageManager)
-                    ));
+                    CharSequence extendedLabel = add.activityInfo.applicationInfo.loadLabel(packageManager);
+                    resolved.add(new DisplayResolveInfo(add, displayLabel, extendedLabel));
                 }
-                updateLastChosenPosition(resolved, add);
+                if (isLastChosenPosition(add)) {
+                    lastChosenPosition = resolved.size() - 1;
+                }
             }
         }
     }
 
-    private void updateLastChosenPosition(List<DisplayResolveInfo> resolved, ResolveInfo info) {
-        if (lastChosenComponent != null
+    private boolean isLastChosenPosition(ResolveInfo info) {
+        return lastChosenComponent != null
                 && lastChosenComponent.getPackageName().equals(info.activityInfo.packageName)
-                && lastChosenComponent.getClassName().equals(info.activityInfo.name)) {
-            lastChosenPosition = resolved.size() - 1;
-        }
+                && lastChosenComponent.getClassName().equals(info.activityInfo.name);
     }
 }

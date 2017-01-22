@@ -13,13 +13,11 @@ public final class DisplayResolveInfo implements Parcelable {
     private final CharSequence extendedInfo;
     private Drawable displayIcon;
 
-    DisplayResolveInfo(ResolveInfo pri, CharSequence pLabel,
-                       CharSequence pInfo) {
-        this(0, pri, pLabel, pInfo);
+    DisplayResolveInfo(ResolveInfo pri, CharSequence displayLabel, CharSequence extendedInfo) {
+        this(0, pri, displayLabel, extendedInfo);
     }
 
-    public DisplayResolveInfo(int id, ResolveInfo ri, CharSequence displayLabel,
-                              CharSequence extendedInfo) {
+    public DisplayResolveInfo(int id, ResolveInfo ri, CharSequence displayLabel, CharSequence extendedInfo) {
         this.id = id;
         this.ri = ri;
         this.displayLabel = displayLabel;
