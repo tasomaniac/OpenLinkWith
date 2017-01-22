@@ -33,6 +33,7 @@ final class AppModule {
     }
 
     @Provides
+    @Singleton
     static IconLoader provideIconLoader(Application app, ActivityManager am) {
         int iconDpi = am.getLauncherLargeIconDensity();
         return new IconLoader(app.getPackageManager(), iconDpi);
