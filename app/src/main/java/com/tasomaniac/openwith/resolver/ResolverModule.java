@@ -52,8 +52,7 @@ class ResolverModule {
 
     @Provides
     @PerActivity
-    ResolverComparator provideResolverComparator(Application app,
-                                                 ChooserHistory history) {
+    ResolverComparator provideResolverComparator(Application app, ChooserHistory history) {
         return new ResolverComparator(
                 app.getPackageManager(),
                 history,
