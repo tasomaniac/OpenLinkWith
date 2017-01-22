@@ -1,7 +1,6 @@
 package com.tasomaniac.openwith.resolver;
 
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
@@ -21,7 +20,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.Lazy;
 
 public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.ViewHolder> {
 
@@ -29,8 +27,8 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
     private static final int TYPE_HEADER = 1;
 
     private final IconLoader iconLoader;
-    private final Intent sourceIntent;
     private final IntentResolver intentResolver;
+    private final Intent sourceIntent;
 
     protected final List<DisplayResolveInfo> mList = new ArrayList<>();
 
@@ -41,27 +39,19 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
     private ItemClickListener itemClickListener;
     private ItemLongClickListener itemLongClickListener;
 
-    public ResolveListAdapter(Context context, IconLoader iconLoader) {
-        this(context, new Lazy<ResolverComparator>() {
-            @Override
-            public ResolverComparator get() {
-                return null;
-            }
-        }, iconLoader, null);
+    public ResolveListAdapter(IconLoader iconLoader) {
+        this(iconLoader, null, null);
     }
 
-    public ResolveListAdapter(Context context,
-                              Lazy<ResolverComparator> resolverComparator,
-                              IconLoader iconLoader,
-                              Intent intent) {
+    public ResolveListAdapter(IconLoader iconLoader,
+                              IntentResolver intentResolver,
+                              Intent sourceIntent) {
         this.iconLoader = iconLoader;
-        this.sourceIntent = intent;
+        this.intentResolver = intentResolver;
+        this.sourceIntent = sourceIntent;
 
-        if (sourceIntent != null) {
-            intentResolver = new IntentResolver(context.getPackageManager(), resolverComparator, sourceIntent);
+        if (intentResolver != null) {
             mList.addAll(intentResolver.rebuildList());
-        } else {
-            intentResolver = null;
         }
     }
 

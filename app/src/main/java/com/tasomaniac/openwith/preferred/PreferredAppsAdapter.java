@@ -1,6 +1,5 @@
 package com.tasomaniac.openwith.preferred;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -14,8 +13,8 @@ import java.util.List;
 
 class PreferredAppsAdapter extends ResolveListAdapter {
 
-    PreferredAppsAdapter(Context context, IconLoader iconLoader, List<DisplayResolveInfo> apps) {
-        super(context, iconLoader);
+    PreferredAppsAdapter(IconLoader iconLoader, List<DisplayResolveInfo> apps) {
+        super(iconLoader);
 
         mList.addAll(apps);
     }

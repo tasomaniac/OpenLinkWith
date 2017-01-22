@@ -41,9 +41,13 @@ class ResolverModule {
     }
 
     @Provides
-    ResolveListAdapter provideResolveListAdapter(Lazy<ResolverComparator> resolverComparator,
-                                                 IconLoader iconLoader) {
-        return new ResolveListAdapter(activity, resolverComparator, iconLoader, sourceIntent);
+    IntentResolver intentResolver(Lazy<ResolverComparator> resolverComparator) {
+        return new IntentResolver(activity.getPackageManager(), resolverComparator, sourceIntent);
+    }
+
+    @Provides
+    ResolveListAdapter provideResolveListAdapter(IconLoader iconLoader, IntentResolver intentResolver) {
+        return new ResolveListAdapter(iconLoader, intentResolver, sourceIntent);
     }
 
     @Provides

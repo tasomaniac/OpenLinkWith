@@ -67,7 +67,7 @@ public class PreferredAppsActivity extends AppCompatActivity
                 DividerItemDecoration.VERTICAL_LIST
         ));
         recyclerView.setItemAnimator(new SlideInRightAnimator());
-        adapter = new PreferredAppsAdapter(this, iconLoader, new ArrayList<DisplayResolveInfo>());
+        adapter = new PreferredAppsAdapter(iconLoader, new ArrayList<DisplayResolveInfo>());
         adapter.setItemClickListener(this);
         recyclerView.setAdapter(adapter);
 
