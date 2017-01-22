@@ -3,6 +3,9 @@ package com.tasomaniac.openwith.homescreen;
 import android.annotation.TargetApi;
 import android.support.annotation.Nullable;
 
+import com.tasomaniac.openwith.PerActivity;
+
+import javax.inject.Inject;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,6 +23,7 @@ import timber.log.Timber;
 import static android.os.Build.VERSION_CODES.M;
 
 @TargetApi(M)
+@PerActivity
 class TitleFetcher {
 
     private final OkHttpClient client;
@@ -27,6 +31,7 @@ class TitleFetcher {
     private Listener listener = Listener.EMPTY;
     private Call call;
 
+    @Inject
     TitleFetcher(OkHttpClient client) {
         this.client = client;
     }
@@ -57,21 +62,21 @@ class TitleFetcher {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                listener.onFailure();
+                listener.onFinished();
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+                listener.onFinished();
+
                 if (!response.isSuccessful()) {
                     Timber.tag("Network")
                             .e("Fail with response: %s", response);
-                    listener.onSuccess(null);
                     return;
                 }
 
                 try (ResponseBody body = response.body()) {
-                    final String title = extractTitle(body);
-                    listener.onSuccess(title);
+                    listener.onSuccess(extractTitle(body));
                 }
             }
         });
@@ -101,13 +106,13 @@ class TitleFetcher {
 
     interface Listener {
 
-        void onFailure();
+        void onFinished();
 
         void onSuccess(String title);
 
         Listener EMPTY = new Listener() {
             @Override
-            public void onFailure() {
+            public void onFinished() {
                 // no-op
             }
 

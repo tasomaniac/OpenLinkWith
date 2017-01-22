@@ -32,7 +32,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnEditorAction;
 import butterknife.OnTextChanged;
-import okhttp3.OkHttpClient;
 import timber.log.Timber;
 
 import static android.os.Build.VERSION_CODES.M;
@@ -44,7 +43,7 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
     private static final String KEY_DRI = "dri";
     private static final String KEY_INTENT = "intent";
 
-    @Inject OkHttpClient client;
+    @Inject TitleFetcher titleFetcher;
 
     @BindView(R.id.add_to_home_screen_title) EditText titleView;
     @BindView(R.id.add_to_home_screen_progress) DelayedProgressBar progressBar;
@@ -53,7 +52,6 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
     private DisplayResolveInfo dri;
     private ShortcutIconCreator shortcutIconCreator;
     private Intent intent;
-    private TitleFetcher titleFetcher;
 
     public static AddToHomeScreenDialogFragment newInstance(DisplayResolveInfo dri, Intent intent) {
         AddToHomeScreenDialogFragment fragment = new AddToHomeScreenDialogFragment();
@@ -67,19 +65,17 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Injector.obtain(getContext()).inject(this);
+        component().inject(this);
         dri = getArguments().getParcelable(KEY_DRI);
         intent = getArguments().getParcelable(KEY_INTENT);
-        titleFetcher = new TitleFetcher(client);
         titleFetcher.setListener(new TitleFetcher.Listener() {
             @Override
-            public void onFailure() {
+            public void onFinished() {
                 hideProgressBar();
             }
 
             @Override
             public void onSuccess(final String title) {
-                hideProgressBar();
                 if (!TextUtils.isEmpty(titleView.getText())) {
                     return;
                 }
@@ -93,6 +89,12 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
                 });
             }
         });
+    }
+
+    private AddToHomeScreenComponent component() {
+        return DaggerAddToHomeScreenComponent.builder()
+                .appComponent(Injector.obtain(getContext()))
+                .build();
     }
 
     @Override
