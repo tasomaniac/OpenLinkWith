@@ -1,19 +1,15 @@
 package com.tasomaniac.openwith.resolver;
 
-import android.annotation.TargetApi;
-import android.app.usage.UsageStats;
-import android.app.usage.UsageStatsManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ShareCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -24,32 +20,25 @@ import android.widget.TextView;
 
 import com.tasomaniac.openwith.IconLoader;
 import com.tasomaniac.openwith.R;
-import com.tasomaniac.openwith.data.Injector;
 
 import javax.inject.Inject;
-import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.Lazy;
 
 import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.LOLLIPOP_MR1;
 import static android.os.Build.VERSION_CODES.M;
+import static com.tasomaniac.openwith.resolver.ResolverActivity.EXTRA_LAST_CHOSEN_COMPONENT;
 
 public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.ViewHolder> {
 
     private static final int TYPE_ITEM = 2;
     private static final int TYPE_HEADER = 1;
-    private static final long USAGE_STATS_PERIOD = TimeUnit.DAYS.toMillis(14);
     private static final Intent BROWSER_INTENT;
 
     static {
@@ -59,17 +48,13 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         BROWSER_INTENT.setData(Uri.parse("http:"));
     }
 
-    @Inject PackageManager mPm;
-    @Inject IconLoader iconLoader;
-
-    private final ChooserHistory history;
+    private final PackageManager packageManager;
+    private final Lazy<ResolverComparator> resolverComparator;
+    private final IconLoader iconLoader;
     private final Intent sourceIntent;
-    private final String mCallerPackage;
+    private final String callerPackage;
     private final ComponentName lastChosenComponent;
     private final boolean mFilterLastUsed;
-    private final Map<String, UsageStats> mStats;
-
-    private HashMap<String, Integer> priorityPackages;
 
     protected final List<DisplayResolveInfo> mList = new ArrayList<>();
 
@@ -82,51 +67,34 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
     private ItemClickListener itemClickListener;
     private ItemLongClickListener itemLongClickListener;
 
-    public ResolveListAdapter(Context context) {
-        this(context, null, null, null, null, false, null);
+    public ResolveListAdapter(Context context, IconLoader iconLoader) {
+        this(context, new Lazy<ResolverComparator>() {
+            @Override
+            public ResolverComparator get() {
+                return null;
+            }
+        }, iconLoader, null);
     }
 
-    ResolveListAdapter(Context context,
-                       ChooserHistory history,
-                       Intent intent,
-                       String callerPackage,
-                       ComponentName lastChosen,
-                       boolean filterLastUsed,
-                       String[] priorityPackages) {
-        Injector.obtain(context).inject(this);
-        if (SDK_INT >= LOLLIPOP_MR1) {
-            UsageStatsManager mUsm = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
-
-            final long sinceTime = System.currentTimeMillis() - USAGE_STATS_PERIOD;
-            mStats = mUsm.queryAndAggregateUsageStats(sinceTime, System.currentTimeMillis());
-        } else {
-            mStats = null;
-        }
-
-        this.history = history;
+    @Inject
+    public ResolveListAdapter(Context context,
+                              Lazy<ResolverComparator> resolverComparator,
+                              IconLoader iconLoader,
+                              Intent intent) {
+        this.packageManager = context.getPackageManager();
+        this.resolverComparator = resolverComparator;
+        this.iconLoader = iconLoader;
         this.sourceIntent = intent;
-        mCallerPackage = callerPackage;
-        lastChosenComponent = lastChosen;
-        mFilterLastUsed = filterLastUsed;
 
-        setPriorityItems(priorityPackages);
         if (sourceIntent != null) {
+            callerPackage = sourceIntent.getStringExtra(ShareCompat.EXTRA_CALLING_PACKAGE);
+            lastChosenComponent = sourceIntent.getParcelableExtra(EXTRA_LAST_CHOSEN_COMPONENT);
+            mFilterLastUsed = true;
             rebuildList(sourceIntent);
-        }
-    }
-
-    private void setPriorityItems(final String... packageNames) {
-        if (packageNames == null || packageNames.length == 0) {
-            priorityPackages = null;
-            return;
-        }
-
-        int size = packageNames.length;
-        priorityPackages = new HashMap<>(size);
-        for (int i = 0; i < size; i++) {
-            // position 0 should have highest priority,
-            // starting with 1 for lowest priority.
-            priorityPackages.put(packageNames[i], size - i + 1);
+        } else {
+            callerPackage = null;
+            lastChosenComponent = null;
+            mFilterLastUsed = false;
         }
     }
 
@@ -158,15 +126,15 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         flag = flag | (mFilterLastUsed ? PackageManager.GET_RESOLVED_FILTER : 0);
 
         List<ResolveInfo> currentResolveList = new ArrayList<>();
-        currentResolveList.addAll(mPm.queryIntentActivities(intent, flag));
+        currentResolveList.addAll(packageManager.queryIntentActivities(intent, flag));
 
         if (SDK_INT >= M) {
             addBrowsersToList(currentResolveList, flag);
         }
 
         //Remove the components from the caller
-        if (!TextUtils.isEmpty(mCallerPackage)) {
-            removePackageFromList(mCallerPackage, currentResolveList);
+        if (!TextUtils.isEmpty(callerPackage)) {
+            removePackageFromList(callerPackage, currentResolveList);
         }
 
         int N;
@@ -192,22 +160,21 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
             }
 
             if (N > 1) {
-                Comparator<ResolveInfo> rComparator = new ResolverComparator(intent);
-                Collections.sort(currentResolveList, rComparator);
+                Collections.sort(currentResolveList, resolverComparator.get());
             }
 
             // Check for applications with same name and use application name or
             // package name if necessary
             r0 = currentResolveList.get(0);
             int start = 0;
-            CharSequence r0Label = r0.loadLabel(mPm);
+            CharSequence r0Label = r0.loadLabel(packageManager);
             mShowExtended = false;
             for (int i = 1; i < N; i++) {
                 if (r0Label == null) {
                     r0Label = r0.activityInfo.packageName;
                 }
                 ResolveInfo ri = currentResolveList.get(i);
-                CharSequence riLabel = ri.loadLabel(mPm);
+                CharSequence riLabel = ri.loadLabel(packageManager);
                 if (riLabel == null) {
                     riLabel = ri.activityInfo.packageName;
                 }
@@ -257,7 +224,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
     }
 
     private List<ResolveInfo> queryBrowserIntentActivities(int flags) {
-        return mPm.queryIntentActivities(BROWSER_INTENT, flags);
+        return packageManager.queryIntentActivities(BROWSER_INTENT, flags);
     }
 
     private void processGroup(List<ResolveInfo> rList, int start, int end, ResolveInfo ro,
@@ -271,7 +238,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         } else {
             mShowExtended = true;
             boolean usePkg = false;
-            CharSequence startApp = ro.activityInfo.applicationInfo.loadLabel(mPm);
+            CharSequence startApp = ro.activityInfo.applicationInfo.loadLabel(packageManager);
             if (startApp == null) {
                 usePkg = true;
             }
@@ -282,7 +249,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
                 duplicates.add(startApp);
                 for (int j = start + 1; j <= end; j++) {
                     ResolveInfo jRi = rList.get(j);
-                    CharSequence jApp = jRi.activityInfo.applicationInfo.loadLabel(mPm);
+                    CharSequence jApp = jRi.activityInfo.applicationInfo.loadLabel(packageManager);
                     if ((jApp == null) || (duplicates.contains(jApp))) {
                         usePkg = true;
                         break;
@@ -303,7 +270,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
                 } else {
                     // Use package name for all entries from start to end-1
                     addResolveInfo(new DisplayResolveInfo(add, roLabel,
-                                                          add.activityInfo.applicationInfo.loadLabel(mPm)
+                                                          add.activityInfo.applicationInfo.loadLabel(packageManager)
                     ));
                 }
                 updateLastChosenPosition(add);
@@ -501,86 +468,6 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         }
     }
 
-    private class ResolverComparator implements Comparator<ResolveInfo> {
-        private final Collator mCollator;
-        private final boolean mHttp;
-
-        ResolverComparator(Intent intent) {
-            mCollator = Collator.getInstance(Locale.getDefault());
-            String scheme = intent.getScheme();
-            mHttp = "http".equals(scheme) || "https".equals(scheme);
-        }
-
-        @Override
-        public int compare(ResolveInfo lhs, ResolveInfo rhs) {
-
-            if (mHttp) {
-                // Special case: we want filters that match URI paths/schemes to be
-                // ordered before others.  This is for the case when opening URIs,
-                // to make native apps go above browsers.
-                final boolean lhsSpecific = isSpecificUriMatch(lhs.match);
-                final boolean rhsSpecific = isSpecificUriMatch(rhs.match);
-                if (lhsSpecific != rhsSpecific) {
-                    return lhsSpecific ? -1 : 1;
-                }
-            }
-
-            if (history != null) {
-                int leftCount = history.get(lhs.activityInfo.packageName);
-                int rightCount = history.get(rhs.activityInfo.packageName);
-                if (leftCount != rightCount) {
-                    return rightCount - leftCount;
-                }
-            }
-
-            if (priorityPackages != null) {
-                int leftPriority = getPriority(lhs);
-                int rightPriority = getPriority(rhs);
-                if (leftPriority != rightPriority) {
-                    return rightPriority - leftPriority;
-                }
-            }
-
-            if (mStats != null) {
-                final long timeDiff =
-                        getPackageTimeSpent(rhs.activityInfo.packageName) -
-                                getPackageTimeSpent(lhs.activityInfo.packageName);
-
-                if (timeDiff != 0) {
-                    return timeDiff > 0 ? 1 : -1;
-                }
-            }
-
-            CharSequence sa = lhs.loadLabel(mPm);
-            if (sa == null) {
-                sa = lhs.activityInfo.name;
-            }
-            CharSequence sb = rhs.loadLabel(mPm);
-            if (sb == null) {
-                sb = rhs.activityInfo.name;
-            }
-
-            return mCollator.compare(sa.toString(), sb.toString());
-        }
-
-        @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-        private long getPackageTimeSpent(String packageName) {
-            if (mStats != null) {
-                final UsageStats stats = mStats.get(packageName);
-                if (stats != null) {
-                    return stats.getTotalTimeInForeground();
-                }
-
-            }
-            return 0;
-        }
-
-        private int getPriority(ResolveInfo lhs) {
-            final Integer integer = priorityPackages.get(lhs.activityInfo.packageName);
-            return integer != null ? integer : 0;
-        }
-    }
-
     Intent intentForDisplayResolveInfo(DisplayResolveInfo dri) {
         Intent intent = new Intent(sourceIntent);
         intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
@@ -593,11 +480,5 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
             }
         }
         return intent;
-    }
-
-    private static boolean isSpecificUriMatch(int match) {
-        match = match & IntentFilter.MATCH_CATEGORY_MASK;
-        return match >= IntentFilter.MATCH_CATEGORY_HOST
-                && match <= IntentFilter.MATCH_CATEGORY_PATH;
     }
 }

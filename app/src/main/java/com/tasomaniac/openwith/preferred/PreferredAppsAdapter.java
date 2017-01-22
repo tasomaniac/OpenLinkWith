@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.tasomaniac.openwith.IconLoader;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.resolver.DisplayResolveInfo;
 import com.tasomaniac.openwith.resolver.ResolveListAdapter;
@@ -13,8 +14,8 @@ import java.util.List;
 
 class PreferredAppsAdapter extends ResolveListAdapter {
 
-    PreferredAppsAdapter(Context context, List<DisplayResolveInfo> apps) {
-        super(context);
+    PreferredAppsAdapter(Context context, IconLoader iconLoader, List<DisplayResolveInfo> apps) {
+        super(context, iconLoader);
 
         mList.addAll(apps);
         mShowExtended = true;

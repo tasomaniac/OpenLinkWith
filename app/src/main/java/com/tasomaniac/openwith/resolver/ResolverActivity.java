@@ -15,7 +15,6 @@
  */
 package com.tasomaniac.openwith.resolver;
 
-import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
@@ -24,7 +23,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -58,7 +56,6 @@ public class ResolverActivity extends AppCompatActivity implements
         ItemClickListener,
         ItemLongClickListener {
 
-    public static final String EXTRA_PRIORITY_PACKAGES = "EXTRA_PRIORITY_PACKAGES";
     public static final String EXTRA_ADD_TO_HOME_SCREEN = "EXTRA_ADD_TO_HOME_SCREEN";
     private static final String KEY_CHECKED_POS = "KEY_CHECKED_POS";
     private static final String KEY_CHECKED_ITEM = "KEY_CHECKED_ITEM";
@@ -66,8 +63,8 @@ public class ResolverActivity extends AppCompatActivity implements
 
     @Inject IconLoader iconLoader;
     @Inject ChooserHistory history;
+    @Inject ResolveListAdapter mAdapter;
 
-    private ResolveListAdapter mAdapter;
     private boolean mAlwaysUseOption;
     private boolean isAddToHomeScreen;
 
@@ -104,7 +101,7 @@ public class ResolverActivity extends AppCompatActivity implements
 
         setTheme(R.style.BottomSheet_Light);
         super.onCreate(savedInstanceState);
-        component().inject(this);
+        component(intent).inject(this);
 
         isAddToHomeScreen = intent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
 
@@ -115,16 +112,6 @@ public class ResolverActivity extends AppCompatActivity implements
 
         mPackageMonitor.register(this, getMainLooper(), false);
         mRegistered = true;
-
-        mAdapter = new ResolveListAdapter(
-                this,
-                history,
-                intent,
-                getIntent().getStringExtra(ShareCompat.EXTRA_CALLING_PACKAGE),
-                intent.<ComponentName>getParcelableExtra(EXTRA_LAST_CHOSEN_COMPONENT),
-                true,
-                intent.getStringArrayExtra(EXTRA_PRIORITY_PACKAGES)
-        );
 
         mAlwaysUseOption = !isAddToHomeScreen && !mAdapter.hasFilteredItem();
 
@@ -193,9 +180,10 @@ public class ResolverActivity extends AppCompatActivity implements
         }
     }
 
-    private ResolverComponent component() {
+    private ResolverComponent component(Intent sourceIntent) {
         return DaggerResolverComponent.builder()
                 .appComponent(Injector.obtain(this))
+                .resolverModule(new ResolverModule(this, sourceIntent))
                 .build();
     }
 
