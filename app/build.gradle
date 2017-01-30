@@ -9,6 +9,7 @@ buildProperties {
     secrets.file file('props/secrets.properties')
 }
 
+def secrets = buildProperties.secrets
 def gitSha = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
 
 android {
@@ -27,12 +28,8 @@ android {
     }
 
     signingConfigs {
-        debug {
-            storeFile file("props/debug.keystore")
-        }
-        release {
-            signingConfigProperties buildProperties.signing
-        }
+        debug.storeFile file("props/debug.keystore")
+        release.signingConfigProperties buildProperties.signing
     }
 
     buildTypes {
@@ -69,8 +66,8 @@ android {
 }
 
 play {
-    serviceAccountEmail = buildProperties.secrets['play_service_account'].or('fake').string
-    pk12File = file(buildProperties.secrets['play_key_file'].or('no-file.p12').string)
+    serviceAccountEmail = secrets['play_service_account'].string
+    pk12File = file(secrets['play_key_file'].string)
     track = 'beta'
 }
 
