@@ -3,9 +3,8 @@ language: android
 android:
   components:
     - tools
-    - tools
     - platform-tools
-    - build-tools-25.0.0
+    - build-tools-25.0.2
     - android-25
     - extra-google-m2repository
     - extra-android-m2repository
@@ -13,7 +12,8 @@ android:
 jdk:
   - oraclejdk8
 
-script: "./gradlew clean check"
+script:
+  - ./gradlew build
 
 branches:
   except:
