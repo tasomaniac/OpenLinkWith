@@ -67,8 +67,8 @@ android {
 }
 
 play {
-    serviceAccountEmail = secrets['play_service_account'].string
-    pk12File = file(secrets['play_key_file'].string)
+    serviceAccountEmail = secrets['play_service_account'].or('').string
+    pk12File = file(secrets['play_key_file'].or('no_file.p12').string)
     track = 'beta'
 }
 
