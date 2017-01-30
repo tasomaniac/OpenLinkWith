@@ -4,8 +4,9 @@ apply plugin: 'com.jakewharton.hugo'
 apply plugin: 'com.github.triplet.play'
 apply plugin: 'io.fabric'
 
+def signingFile = file('props/release.signing')
 buildProperties {
-    signing.file file('props/signing.properties')
+    signing.file signingFile.exists() ? signingFile : file('props/debug.signing')
     secrets.file file('props/secrets.properties')
 }
 
