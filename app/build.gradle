@@ -1,14 +1,16 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.novoda.build-properties'
 apply plugin: 'com.jakewharton.hugo'
 apply plugin: 'com.github.triplet.play'
 apply plugin: 'io.fabric'
 
-Properties local_properties = new Properties()
-File localPropertiesFile = project.rootProject.file('local.properties')
-if (localPropertiesFile.exists()) {
-    local_properties.load(localPropertiesFile.newDataInputStream())
+def signingFile = file('props/release.signing')
+buildProperties {
+    signing.file signingFile.exists() ? signingFile : file('props/debug.signing')
+    secrets.file file('props/secrets.properties')
 }
 
+def secrets = buildProperties.secrets
 def gitSha = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
 
 android {
@@ -27,16 +29,8 @@ android {
     }
 
     signingConfigs {
-        debug {
-            storeFile file("../distribution/debug.keystore")
-        }
-
-        release {
-            storeFile file("../distribution/" + (local_properties.release_keystore_name ?: "debug.keystore"))
-            keyAlias(local_properties.release_keystore_alias ?: "androiddebugkey")
-            storePassword(local_properties.release_keystore_pwd ?: "android")
-            keyPassword(local_properties.release_keystore_pwd2 ?: "android")
-        }
+        debug.storeFile file("props/debug.keystore")
+        release.signingConfigProperties buildProperties.signing
     }
 
     buildTypes {
@@ -73,8 +67,8 @@ android {
 }
 
 play {
-    serviceAccountEmail = local_properties.play_service_account ?: ''
-    pk12File = file("../distribution/" + (local_properties.play_key_file ?: 'no-file.p12'))
+    serviceAccountEmail = secrets['play_service_account'].or('').string
+    pk12File = file(secrets['play_key_file'].or('no_file.p12').string)
     track = 'beta'
 }
 

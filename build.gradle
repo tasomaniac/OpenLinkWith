@@ -11,6 +11,7 @@ buildscript {
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
         classpath 'com.github.triplet.gradle:play-publisher:1.2.0-beta1'
         classpath 'io.fabric.tools:gradle:1.22.1'
+        classpath 'com.novoda:build-properties-plugin:1.2.1'
     }
 }
 
@@ -34,7 +35,7 @@ ext {
     versionName = "${versionMajor}.${versionMinor}"
 
     compileSdkVersion = 25
-    buildToolsVersion = '25.0.0'
+    buildToolsVersion = '25.0.2'
 }
 
 task clean(type: Delete) {

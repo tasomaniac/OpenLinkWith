@@ -8,3 +8,5 @@
 *.iml
 my-release-key.keystore
 tasomaniac.p12
+release.signing
+secrets.properties
