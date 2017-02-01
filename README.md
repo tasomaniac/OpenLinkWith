@@ -20,7 +20,7 @@ Why
 
 Although the problem discovered above is not huge, it is missing in the Android ecosystem. And I couldn't find anything doing this. So I wrote one. :)
 
-I hope you find this useful. The idea is still immature. Please help me by trying it ans sending feedback to me. 
+Although it is not the most useful app, it does save you when you stuck in a browser where you want the native app to be open. I hope you find it useful.
 
 
 Translation
