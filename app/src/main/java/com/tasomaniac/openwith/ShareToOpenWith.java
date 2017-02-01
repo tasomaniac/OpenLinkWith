@@ -1,16 +1,10 @@
 package com.tasomaniac.openwith;
 
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ShareCompat;
-import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.tasomaniac.openwith.data.Analytics;
@@ -20,11 +14,8 @@ import com.tasomaniac.openwith.util.CallerPackageExtractor;
 import com.tasomaniac.openwith.util.Intents;
 import com.tasomaniac.openwith.util.Urls;
 
-import net.simonvt.schematic.Cursors;
-
 import timber.log.Timber;
 
-import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.*;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withHost;
 import static com.tasomaniac.openwith.util.Urls.fixUrls;
 
@@ -60,62 +51,31 @@ public class ShareToOpenWith extends Activity {
         }
         String callerPackage = CallerPackageExtractor.from(this).extract();
         Uri uri = Uri.parse(fixUrls(foundUrl));
-        Intent intentToHandle = new Intent(Intent.ACTION_VIEW, uri);
+        PreferredResolver preferredResolver = new PreferredResolver(getPackageManager(), getContentResolver(), callerPackage);
+        preferredResolver.resolve(uri);
 
-        ComponentName lastChosenComponent = null;
-        final Cursor query = queryIntentWith(uri.getHost());
-        if (query != null && query.moveToFirst()) {
+        if (preferredResolver.shouldStartPreferred()) {
+            String warning = getString(R.string.warning_open_link_with_name, preferredResolver.loadLabel());
+            Toast.makeText(this, warning, Toast.LENGTH_SHORT).show();
+
             try {
-                final boolean isPreferred = Cursors.getInt(query, PREFERRED) == 1;
-                final boolean isLastChosen = Cursors.getInt(query, LAST_CHOSEN) == 1;
-
-                if (isPreferred || isLastChosen) {
-                    final String componentString = Cursors.getString(query, COMPONENT);
-
-                    lastChosenComponent = ComponentName.unflattenFromString(componentString);
-                    ResolveInfo ri = getPackageManager().resolveActivity(
-                            new Intent().setComponent(lastChosenComponent),
-                            PackageManager.MATCH_DEFAULT_ONLY
-                    );
-
-                    if (isPreferred && ri != null) {
-                        boolean isCallerPackagePreferred = ri.activityInfo.packageName.equals(callerPackage);
-                        if (!isCallerPackagePreferred) {
-                            String warning = getString(R.string.warning_open_link_with_name, ri.loadLabel(getPackageManager()));
-                            Toast.makeText(this, warning, Toast.LENGTH_SHORT).show();
-
-                            intentToHandle.setComponent(lastChosenComponent);
-                            intentToHandle.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
-                                                            | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
-                            try {
-                                Intents.startActivityFixingIntent(this, intentToHandle);
-                                finish();
-                                return;
-                            } catch (SecurityException e) {
-                                Timber.e(e, "Security Exception for %s", lastChosenComponent.flattenToString());
-                                getContentResolver().delete(withHost(uri.getHost()), null, null);
-                            }
-                        }
-                    }
-                }
-            } finally {
-                query.close();
+                Intents.startActivityFixingIntent(this, preferredResolver.preferredIntent()
+                        .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
+                                          | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP));
+                finish();
+                return;
+            } catch (SecurityException e) {
+                Timber.e(e, "Security Exception for the url %s", uri);
+                getContentResolver().delete(withHost(uri.getHost()), null, null);
             }
         }
 
-        startActivity(intentToHandle
-                              .putExtra(ShareCompat.EXTRA_CALLING_PACKAGE, callerPackage)
-                              .putExtra(ResolverActivity.EXTRA_LAST_CHOSEN_COMPONENT, lastChosenComponent)
-                              .setClass(this, ResolverActivity.class));
-
+        Intent resolverIntent = new Intent(Intent.ACTION_VIEW, uri)
+                .putExtra(ShareCompat.EXTRA_CALLING_PACKAGE, callerPackage)
+                .putExtra(ResolverActivity.EXTRA_LAST_CHOSEN_COMPONENT, preferredResolver.lastChosenComponent())
+                .setClass(this, ResolverActivity.class);
+        startActivity(resolverIntent);
         finish();
     }
 
-    @Nullable
-    private Cursor queryIntentWith(String host) {
-        if (TextUtils.isEmpty(host)) {
-            return null;
-        }
-        return getContentResolver().query(withHost(host), null, null, null, null);
-    }
 }

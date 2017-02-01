@@ -30,7 +30,6 @@
   </style>
 
   <style name="Base.BottomSheet.Light" parent="Theme.OpenWith">
-
     <item name="android:windowIsTranslucent">true</item>
     <item name="android:windowNoTitle">true</item>
     <item name="android:windowBackground">@android:color/transparent</item>
