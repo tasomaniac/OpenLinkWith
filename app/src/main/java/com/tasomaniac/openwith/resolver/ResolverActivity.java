@@ -15,6 +15,7 @@
  */
 package com.tasomaniac.openwith.resolver;
 
+import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
@@ -46,6 +47,7 @@ import timber.log.Timber;
 
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.*;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.CONTENT_URI;
+import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withHost;
 
 /**
  * This activity is displayed when the system attempts to start an Intent for
@@ -59,7 +61,6 @@ public class ResolverActivity extends AppCompatActivity implements
     public static final String EXTRA_ADD_TO_HOME_SCREEN = "EXTRA_ADD_TO_HOME_SCREEN";
     private static final String KEY_CHECKED_POS = "KEY_CHECKED_POS";
     private static final String KEY_CHECKED_ITEM = "KEY_CHECKED_ITEM";
-    public static final String EXTRA_LAST_CHOSEN_COMPONENT = "last_chosen";
 
     @Inject IconLoader iconLoader;
     @Inject ChooserHistory history;
@@ -99,11 +100,24 @@ public class ResolverActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
 
         final Intent intent = configureIntent();
-        if (intent.getData() == null) {
+        Uri uri = intent.getData();
+        if (uri == null) {
             finish();
             return;
         }
-        component(intent).inject(this);
+        PreferredResolver preferredResolver = PreferredResolver.createFrom(this);
+        preferredResolver.resolve(uri);
+
+        if (preferredResolver.shouldStartPreferred()) {
+            try {
+                preferredResolver.startPreferred(this);
+                return;
+            } catch (SecurityException e) {
+                Timber.e(e, "Security Exception for the url %s", uri);
+                getContentResolver().delete(withHost(uri.getHost()), null, null);
+            }
+        }
+        component(intent, preferredResolver.lastChosenComponent()).inject(this);
 
         isAddToHomeScreen = intent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
         adapter.rebuildList();
@@ -118,12 +132,7 @@ public class ResolverActivity extends AppCompatActivity implements
         }
         if (count == 1 && !isAddToHomeScreen) {
             DisplayResolveInfo dri = adapter.displayResolveInfoForPosition(0, false);
-            Toast.makeText(this, getString(
-                    R.string.warning_open_link_with_name,
-                    dri.displayLabel()
-            ), Toast.LENGTH_SHORT).show();
-            Intents.startActivityFixingIntent(this, adapter.intentForDisplayResolveInfo(dri));
-            finish();
+            PreferredResolver.startPreferred(this, adapter.intentForDisplayResolveInfo(dri), dri.displayLabel());
             return;
         }
 
@@ -146,10 +155,10 @@ public class ResolverActivity extends AppCompatActivity implements
         }
     }
 
-    private ResolverComponent component(Intent sourceIntent) {
+    private ResolverComponent component(Intent sourceIntent, ComponentName lastChosenComponent) {
         return DaggerResolverComponent.builder()
                 .appComponent(Injector.obtain(this))
-                .resolverModule(new ResolverModule(this, sourceIntent))
+                .resolverModule(new ResolverModule(this, sourceIntent, lastChosenComponent))
                 .build();
     }
 

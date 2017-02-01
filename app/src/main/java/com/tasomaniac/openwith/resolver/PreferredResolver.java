@@ -1,5 +1,6 @@
-package com.tasomaniac.openwith;
+package com.tasomaniac.openwith.resolver;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -8,7 +9,12 @@ import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ShareCompat;
 import android.text.TextUtils;
+import android.widget.Toast;
+
+import com.tasomaniac.openwith.R;
+import com.tasomaniac.openwith.util.Intents;
 
 import net.simonvt.schematic.Cursors;
 
@@ -27,10 +33,25 @@ class PreferredResolver {
     @Nullable private ComponentName lastChosenComponent;
     @Nullable private ResolveInfo ri;
 
+    public static PreferredResolver createFrom(Activity activity) {
+        return new PreferredResolver(activity.getPackageManager(), activity.getContentResolver(), ShareCompat.getCallingPackage(activity));
+    }
+
     PreferredResolver(PackageManager packageManager, ContentResolver contentResolver, @Nullable String callerPackage) {
         this.packageManager = packageManager;
         this.contentResolver = contentResolver;
         this.callerPackage = callerPackage;
+    }
+
+    void startPreferred(ResolverActivity activity) {
+        startPreferred(activity, preferredIntent(), loadLabel());
+    }
+
+    static void startPreferred(ResolverActivity activity, Intent intent, CharSequence appLabel) {
+        String message = activity.getString(R.string.warning_open_link_with_name, appLabel);
+        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+        Intents.startActivityFixingIntent(activity, intent);
+        activity.finish();
     }
 
     void resolve(Uri uri) {

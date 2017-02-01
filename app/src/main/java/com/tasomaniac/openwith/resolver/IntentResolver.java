@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.support.v4.app.ShareCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 
@@ -18,7 +17,6 @@ import dagger.Lazy;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.M;
-import static com.tasomaniac.openwith.resolver.ResolverActivity.EXTRA_LAST_CHOSEN_COMPONENT;
 
 public class IntentResolver {
 
@@ -40,12 +38,16 @@ public class IntentResolver {
     private boolean mShowExtended;
     private int lastChosenPosition = RecyclerView.NO_POSITION;
 
-    public IntentResolver(PackageManager packageManager, Lazy<ResolverComparator> resolverComparator, Intent sourceIntent) {
+    public IntentResolver(PackageManager packageManager,
+                          Lazy<ResolverComparator> resolverComparator,
+                          Intent sourceIntent,
+                          String callerPackage,
+                          ComponentName lastChosenComponent) {
         this.packageManager = packageManager;
         this.resolverComparator = resolverComparator;
         this.sourceIntent = sourceIntent;
-        this.callerPackage = sourceIntent.getStringExtra(ShareCompat.EXTRA_CALLING_PACKAGE);
-        this.lastChosenComponent = sourceIntent.getParcelableExtra(EXTRA_LAST_CHOSEN_COMPONENT);
+        this.callerPackage = callerPackage;
+        this.lastChosenComponent = lastChosenComponent;
     }
 
     public int lastChosenPosition() {

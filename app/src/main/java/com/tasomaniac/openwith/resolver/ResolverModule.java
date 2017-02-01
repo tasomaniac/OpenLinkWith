@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.app.Application;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.ShareCompat;
 
 import com.tasomaniac.openwith.IconLoader;
 import com.tasomaniac.openwith.PerActivity;
@@ -28,10 +30,12 @@ class ResolverModule {
 
     private final Activity activity;
     private final Intent sourceIntent;
+    private final ComponentName lastChosenComponent;
 
-    ResolverModule(Activity activity, Intent sourceIntent) {
+    ResolverModule(Activity activity, Intent sourceIntent, ComponentName lastChosenComponent) {
         this.activity = activity;
         this.sourceIntent = sourceIntent;
+        this.lastChosenComponent = lastChosenComponent;
     }
 
     @Provides
@@ -42,7 +46,8 @@ class ResolverModule {
 
     @Provides
     IntentResolver intentResolver(Lazy<ResolverComparator> resolverComparator) {
-        return new IntentResolver(activity.getPackageManager(), resolverComparator, sourceIntent);
+        String callerPackage = ShareCompat.getCallingPackage(activity);
+        return new IntentResolver(activity.getPackageManager(), resolverComparator, sourceIntent, callerPackage, lastChosenComponent);
     }
 
     @Provides
