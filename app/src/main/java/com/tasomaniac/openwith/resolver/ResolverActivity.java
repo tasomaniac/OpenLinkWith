@@ -104,11 +104,8 @@ public class ResolverActivity extends AppCompatActivity implements
             return;
         }
         component(intent).inject(this);
+
         isAddToHomeScreen = intent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
-
-        packageMonitor.register(this, getMainLooper(), false);
-        packageMonitorRegistered = true;
-
         adapter.rebuildList();
         shouldUseAlwaysOption = !isAddToHomeScreen && !adapter.hasFilteredItem();
 
@@ -116,8 +113,6 @@ public class ResolverActivity extends AppCompatActivity implements
         if (count == 0) {
             Timber.e("No app is found to handle url: %s", intent.getDataString());
             Toast.makeText(this, R.string.empty_resolver_activity, Toast.LENGTH_LONG).show();
-            packageMonitor.unregister();
-            packageMonitorRegistered = false;
             finish();
             return;
         }
@@ -128,13 +123,12 @@ public class ResolverActivity extends AppCompatActivity implements
                     dri.displayLabel()
             ), Toast.LENGTH_SHORT).show();
             Intents.startActivityFixingIntent(this, adapter.intentForDisplayResolveInfo(dri));
-            packageMonitor.unregister();
-            packageMonitorRegistered = false;
             finish();
             return;
         }
 
         setContentView(shouldDisplayHeader() ? R.layout.resolver_list_with_default : R.layout.resolver_list);
+        registerPackageMonitor();
         setupList();
         setupTitle();
         setupFilteredView();
@@ -219,10 +213,14 @@ public class ResolverActivity extends AppCompatActivity implements
     protected void onRestart() {
         super.onRestart();
         if (!packageMonitorRegistered) {
-            packageMonitor.register(this, getMainLooper(), false);
-            packageMonitorRegistered = true;
+            registerPackageMonitor();
         }
         handlePackagesChanged();
+    }
+
+    private void registerPackageMonitor() {
+        packageMonitor.register(this, getMainLooper(), false);
+        packageMonitorRegistered = true;
     }
 
     private void handlePackagesChanged() {
