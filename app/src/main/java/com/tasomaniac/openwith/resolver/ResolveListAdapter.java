@@ -61,18 +61,14 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
      * Filtered item that is staying at the top header with Always and Just Once buttons.
      */
     DisplayResolveInfo getFilteredItem() {
-        if (hasFilteredItem()) {
-            // Not using getItem since it offsets to dodge this position for the list
-            return mList.get(lastChosenPosition());
-        }
-        return null;
+        return intentResolver.lastChosenDisplayResolveInfo();
     }
 
     /**
      * true if one of the items is filtered and stays at the top header
      */
     boolean hasFilteredItem() {
-        return lastChosenPosition() >= 0;
+        return getFilteredItem() != null;
     }
 
     DisplayResolveInfo displayResolveInfoForPosition(int position, boolean filtered) {
@@ -82,9 +78,6 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
     @Override
     public int getItemCount() {
         int result = mList.size();
-        if (hasFilteredItem()) {
-            result--;
-        }
         result += getHeadersCount();
         return result;
     }
@@ -94,14 +87,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         if (position < 0) {
             position = 0;
         }
-        if (hasFilteredItem() && position >= lastChosenPosition()) {
-            position++;
-        }
         return mList.get(position);
-    }
-
-    private int lastChosenPosition() {
-        return intentResolver != null ? intentResolver.lastChosenPosition() : RecyclerView.NO_POSITION;
     }
 
     @Override

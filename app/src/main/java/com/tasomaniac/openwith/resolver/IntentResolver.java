@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.support.v7.widget.RecyclerView;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class IntentResolver {
     private final ComponentName lastChosenComponent;
 
     private boolean mShowExtended;
-    private int lastChosenPosition = RecyclerView.NO_POSITION;
+    @Nullable private DisplayResolveInfo lastChosenDri;
 
     public IntentResolver(PackageManager packageManager,
                           Lazy<ResolverComparator> resolverComparator,
@@ -50,8 +50,9 @@ public class IntentResolver {
         this.lastChosenComponent = lastChosenComponent;
     }
 
-    public int lastChosenPosition() {
-        return lastChosenPosition;
+    @Nullable
+    public DisplayResolveInfo lastChosenDisplayResolveInfo() {
+        return lastChosenDri;
     }
 
     public boolean shouldShowExtended() {
@@ -181,9 +182,11 @@ public class IntentResolver {
         int num = end - start + 1;
         if (num == 1) {
             // No duplicate labels. Use label for entry at start
-            resolved.add(new DisplayResolveInfo(ro, displayLabel, null));
+            DisplayResolveInfo dri = new DisplayResolveInfo(ro, displayLabel, null);
             if (isLastChosenPosition(ro)) {
-                lastChosenPosition = resolved.size() - 1;
+                lastChosenDri = dri;
+            } else {
+                resolved.add(dri);
             }
         } else {
             mShowExtended = true;
@@ -211,18 +214,24 @@ public class IntentResolver {
             }
             for (int k = start; k <= end; k++) {
                 ResolveInfo add = rList.get(k);
-                if (usePkg) {
-                    // Use application name for all entries from start to end-1
-                    resolved.add(new DisplayResolveInfo(add, displayLabel, add.activityInfo.packageName));
-                } else {
-                    // Use package name for all entries from start to end-1
-                    CharSequence extendedLabel = add.activityInfo.applicationInfo.loadLabel(packageManager);
-                    resolved.add(new DisplayResolveInfo(add, displayLabel, extendedLabel));
-                }
+                DisplayResolveInfo dri = displayResolveInfoToAdd(usePkg, add, displayLabel);
                 if (isLastChosenPosition(add)) {
-                    lastChosenPosition = resolved.size() - 1;
+                    lastChosenDri = dri;
+                } else {
+                    resolved.add(dri);
                 }
             }
+        }
+    }
+
+    private DisplayResolveInfo displayResolveInfoToAdd(boolean usePackageName, ResolveInfo add, CharSequence displayLabel) {
+        if (usePackageName) {
+            // Use package name for all entries from start to end-1
+            return new DisplayResolveInfo(add, displayLabel, add.activityInfo.packageName);
+        } else {
+            // Use application name for all entries from start to end-1
+            CharSequence extendedLabel = add.activityInfo.applicationInfo.loadLabel(packageManager);
+            return new DisplayResolveInfo(add, displayLabel, extendedLabel);
         }
     }
 
