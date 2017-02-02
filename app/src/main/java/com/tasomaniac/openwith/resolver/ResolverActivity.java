@@ -43,6 +43,8 @@ import com.tasomaniac.openwith.util.Intents;
 
 import javax.inject.Inject;
 
+import java.util.List;
+
 import timber.log.Timber;
 
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.*;
@@ -64,8 +66,9 @@ public class ResolverActivity extends AppCompatActivity implements
 
     @Inject IconLoader iconLoader;
     @Inject ChooserHistory history;
-    @Inject ResolveListAdapter adapter;
+    @Inject IntentResolver intentResolver;
 
+    private ResolveListAdapter adapter;
     private boolean shouldUseAlwaysOption;
     private boolean isAddToHomeScreen;
 
@@ -120,8 +123,10 @@ public class ResolverActivity extends AppCompatActivity implements
         component(intent, preferredResolver.lastChosenComponent()).inject(this);
 
         isAddToHomeScreen = intent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
-        adapter.rebuildList();
-        shouldUseAlwaysOption = !isAddToHomeScreen && !adapter.hasFilteredItem();
+        List<DisplayResolveInfo> list = intentResolver.rebuildList();
+        adapter = new ResolveListAdapter(iconLoader, intentResolver, intent);
+        adapter.mList.addAll(list);
+        shouldUseAlwaysOption = !isAddToHomeScreen && !intentResolver.hasFilteredItem();
 
         int count = adapter.mList.size();
         if (count == 0) {
@@ -141,7 +146,7 @@ public class ResolverActivity extends AppCompatActivity implements
         setupList();
         setupTitle();
         setupFilteredView();
-        if (shouldUseAlwaysOption || adapter.hasFilteredItem()) {
+        if (shouldUseAlwaysOption || intentResolver.hasFilteredItem()) {
             setupButtons();
         }
         ResolverDrawerLayout rdl = (ResolverDrawerLayout) findViewById(R.id.contentPanel);
@@ -163,7 +168,7 @@ public class ResolverActivity extends AppCompatActivity implements
     }
 
     private boolean shouldDisplayHeader() {
-        return !isAddToHomeScreen && adapter.hasFilteredItem();
+        return !isAddToHomeScreen && intentResolver.hasFilteredItem();
     }
 
     private void setupList() {
@@ -192,14 +197,14 @@ public class ResolverActivity extends AppCompatActivity implements
     }
 
     private CharSequence getTitleForAction() {
-        final DisplayResolveInfo item = adapter.getFilteredItem();
+        final DisplayResolveInfo item = intentResolver.getFilteredItem();
         return item != null ? getString(R.string.which_view_application_named, item.displayLabel()) :
                 getString(R.string.which_view_application);
     }
 
     private void setupFilteredView() {
         ImageView iconView = (ImageView) findViewById(R.id.icon);
-        DisplayResolveInfo filteredItem = adapter.getFilteredItem();
+        DisplayResolveInfo filteredItem = intentResolver.getFilteredItem();
         if (iconView != null && filteredItem != null) {
             new LoadIconIntoViewTask(iconLoader, iconView).execute(filteredItem);
         }
@@ -233,7 +238,9 @@ public class ResolverActivity extends AppCompatActivity implements
     }
 
     private void handlePackagesChanged() {
-        adapter.rebuildList();
+        adapter.mList.clear();
+        adapter.mList.addAll(intentResolver.rebuildList());
+        adapter.notifyDataSetChanged();
         if (adapter.getItemCount() == 0) {
             // We no longer have any items...  just finish the activity.
             finish();
@@ -302,7 +309,7 @@ public class ResolverActivity extends AppCompatActivity implements
     }
 
     private DisplayResolveInfo getSelectedItem() {
-        return shouldUseAlwaysOption ? lastSelected : adapter.getFilteredItem();
+        return shouldUseAlwaysOption ? lastSelected : intentResolver.getFilteredItem();
     }
 
     private void startSelected(DisplayResolveInfo dri, boolean always) {

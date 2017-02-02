@@ -36,7 +36,7 @@ public class IntentResolver {
     private final ComponentName lastChosenComponent;
 
     private boolean mShowExtended;
-    @Nullable private DisplayResolveInfo lastChosenDri;
+    @Nullable private DisplayResolveInfo filteredItem;
 
     public IntentResolver(PackageManager packageManager,
                           Lazy<ResolverComparator> resolverComparator,
@@ -51,8 +51,15 @@ public class IntentResolver {
     }
 
     @Nullable
-    public DisplayResolveInfo lastChosenDisplayResolveInfo() {
-        return lastChosenDri;
+    public DisplayResolveInfo getFilteredItem() {
+        return filteredItem;
+    }
+
+    /**
+     * true if one of the items is filtered and stays at the top header
+     */
+    boolean hasFilteredItem() {
+        return filteredItem != null;
     }
 
     public boolean shouldShowExtended() {
@@ -184,7 +191,7 @@ public class IntentResolver {
             // No duplicate labels. Use label for entry at start
             DisplayResolveInfo dri = new DisplayResolveInfo(ro, displayLabel, null);
             if (isLastChosenPosition(ro)) {
-                lastChosenDri = dri;
+                filteredItem = dri;
             } else {
                 resolved.add(dri);
             }
@@ -216,7 +223,7 @@ public class IntentResolver {
                 ResolveInfo add = rList.get(k);
                 DisplayResolveInfo dri = displayResolveInfoToAdd(usePkg, add, displayLabel);
                 if (isLastChosenPosition(add)) {
-                    lastChosenDri = dri;
+                    filteredItem = dri;
                 } else {
                     resolved.add(dri);
                 }

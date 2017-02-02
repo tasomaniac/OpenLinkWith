@@ -51,26 +51,6 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         this.sourceIntent = sourceIntent;
     }
 
-    void rebuildList() {
-        mList.clear();
-        mList.addAll(intentResolver.rebuildList());
-        notifyDataSetChanged();
-    }
-
-    /**
-     * Filtered item that is staying at the top header with Always and Just Once buttons.
-     */
-    DisplayResolveInfo getFilteredItem() {
-        return intentResolver.lastChosenDisplayResolveInfo();
-    }
-
-    /**
-     * true if one of the items is filtered and stays at the top header
-     */
-    boolean hasFilteredItem() {
-        return getFilteredItem() != null;
-    }
-
     DisplayResolveInfo displayResolveInfoForPosition(int position, boolean filtered) {
         return filtered ? getItem(position) : mList.get(position);
     }

@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.ShareCompat;
 
-import com.tasomaniac.openwith.IconLoader;
 import com.tasomaniac.openwith.PerActivity;
 
 import java.util.HashMap;
@@ -48,11 +47,6 @@ class ResolverModule {
     IntentResolver intentResolver(Lazy<ResolverComparator> resolverComparator) {
         String callerPackage = ShareCompat.getCallingPackage(activity);
         return new IntentResolver(activity.getPackageManager(), resolverComparator, sourceIntent, callerPackage, lastChosenComponent);
-    }
-
-    @Provides
-    ResolveListAdapter provideResolveListAdapter(IconLoader iconLoader, IntentResolver intentResolver) {
-        return new ResolveListAdapter(iconLoader, intentResolver, sourceIntent);
     }
 
     @Provides
