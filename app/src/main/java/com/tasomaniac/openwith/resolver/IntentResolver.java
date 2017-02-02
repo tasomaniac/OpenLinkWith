@@ -86,7 +86,7 @@ public class IntentResolver {
         return intent;
     }
 
-    public List<DisplayResolveInfo> rebuildList() {
+    public void rebuildList() {
         List<DisplayResolveInfo> resolved = new ArrayList<>();
         int flag;
         if (SDK_INT >= M) {
@@ -127,7 +127,8 @@ public class IntentResolver {
 
             //If there is no left, return
             if (N <= 0) {
-                return resolved;
+                listener.onIntentResolved(resolved, filteredItem);
+                return;
             }
 
             if (N > 1) {
@@ -161,7 +162,6 @@ public class IntentResolver {
             processGroup(resolved, currentResolveList, start, (N - 1), r0, r0Label);
         }
         listener.onIntentResolved(resolved, filteredItem);
-        return resolved;
     }
 
     private static void removePackageFromList(final String packageName, List<ResolveInfo> currentResolveList) {

@@ -85,26 +85,15 @@ public class ResolverActivity extends AppCompatActivity implements
             handlePackagesChanged();
         }
     };
-
-    private Intent configureIntent() {
-        Intent intent = new Intent(getIntent());
-        intent.setComponent(null);
-        // The resolver activity is set to be hidden from recent tasks.
-        // we don't want this attribute to be propagated to the next activity
-        // being launched.  Note that if the original Intent also had this
-        // flag set, we are now losing it.  That should be a very rare case
-        // and we can live with this.
-        intent.setFlags(intent.getFlags() & ~Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-        return intent;
-    }
+    private Intent sourceIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.BottomSheet_Light);
         super.onCreate(savedInstanceState);
 
-        final Intent intent = configureIntent();
-        Uri uri = intent.getData();
+        configureIntent();
+        Uri uri = sourceIntent.getData();
         if (uri == null) {
             finish();
             return;
@@ -121,32 +110,23 @@ public class ResolverActivity extends AppCompatActivity implements
                 getContentResolver().delete(withHost(uri.getHost()), null, null);
             }
         }
-        component(intent, preferredResolver.lastChosenComponent()).inject(this);
+        component(sourceIntent, preferredResolver.lastChosenComponent()).inject(this);
         intentResolver.setListener(this);
 
-        isAddToHomeScreen = intent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
-        List<DisplayResolveInfo> list = intentResolver.rebuildList();
-        adapter = new ResolveListAdapter(iconLoader, intent, intentResolver.shouldShowExtended());
-        adapter.mList.addAll(list);
-        shouldUseAlwaysOption = !isAddToHomeScreen && !intentResolver.hasFilteredItem();
-
-        setContentView(shouldDisplayHeader() ? R.layout.resolver_list_with_default : R.layout.resolver_list);
         registerPackageMonitor();
-        setupList();
-        setupTitle();
-        setupFilteredView();
-        if (shouldUseAlwaysOption || intentResolver.hasFilteredItem()) {
-            setupButtons();
-        }
-        ResolverDrawerLayout rdl = (ResolverDrawerLayout) findViewById(R.id.contentPanel);
-        if (rdl != null) {
-            rdl.setOnDismissedListener(new ResolverDrawerLayout.OnDismissedListener() {
-                @Override
-                public void onDismissed() {
-                    finish();
-                }
-            });
-        }
+        isAddToHomeScreen = sourceIntent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
+        intentResolver.rebuildList();
+    }
+
+    private void configureIntent() {
+        sourceIntent = new Intent(getIntent());
+        sourceIntent.setComponent(null);
+        // The resolver activity is set to be hidden from recent tasks.
+        // we don't want this attribute to be propagated to the next activity
+        // being launched.  Note that if the original Intent also had this
+        // flag set, we are now losing it.  That should be a very rare case
+        // and we can live with this.
+        sourceIntent.setFlags(sourceIntent.getFlags() & ~Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
     }
 
     @Override
@@ -166,7 +146,7 @@ public class ResolverActivity extends AppCompatActivity implements
     public void onIntentResolved(List<DisplayResolveInfo> list, @Nullable DisplayResolveInfo filteredItem) {
         int totalCount = list.size() + (filteredItem != null ? 1 : 0);
         if (totalCount == 0) {
-            Timber.e("No app is found to handle url: %s", getIntent().getDataString());
+            Timber.e("No app is found to handle url: %s", sourceIntent.getDataString());
             Toast.makeText(this, R.string.empty_resolver_activity, Toast.LENGTH_LONG).show();
             finish();
             return;
@@ -175,6 +155,27 @@ public class ResolverActivity extends AppCompatActivity implements
             DisplayResolveInfo dri = filteredItem == null ? list.get(0) : filteredItem;
             PreferredResolver.startPreferred(this, intentResolver.intentForDisplayResolveInfo(dri), dri.displayLabel());
             return;
+        }
+
+        adapter = new ResolveListAdapter(iconLoader, sourceIntent, intentResolver.shouldShowExtended());
+        adapter.mList.addAll(list);
+        shouldUseAlwaysOption = !isAddToHomeScreen && !intentResolver.hasFilteredItem();
+
+        setContentView(shouldDisplayHeader() ? R.layout.resolver_list_with_default : R.layout.resolver_list);
+        setupList();
+        setupTitle();
+        setupFilteredView();
+        if (shouldUseAlwaysOption || intentResolver.hasFilteredItem()) {
+            setupButtons();
+        }
+        ResolverDrawerLayout rdl = (ResolverDrawerLayout) findViewById(R.id.contentPanel);
+        if (rdl != null) {
+            rdl.setOnDismissedListener(new ResolverDrawerLayout.OnDismissedListener() {
+                @Override
+                public void onDismissed() {
+                    finish();
+                }
+            });
         }
     }
 
@@ -249,9 +250,7 @@ public class ResolverActivity extends AppCompatActivity implements
     }
 
     private void handlePackagesChanged() {
-        adapter.mList.clear();
-        adapter.mList.addAll(intentResolver.rebuildList());
-        adapter.notifyDataSetChanged();
+        intentResolver.rebuildList();
         if (adapter.getItemCount() == 0) {
             // We no longer have any items...  just finish the activity.
             finish();
