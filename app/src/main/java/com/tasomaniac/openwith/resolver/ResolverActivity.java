@@ -58,7 +58,8 @@ import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withHo
  */
 public class ResolverActivity extends AppCompatActivity implements
         ItemClickListener,
-        ItemLongClickListener {
+        ItemLongClickListener,
+        IntentResolver.Listener {
 
     public static final String EXTRA_ADD_TO_HOME_SCREEN = "EXTRA_ADD_TO_HOME_SCREEN";
     private static final String KEY_CHECKED_POS = "KEY_CHECKED_POS";
@@ -121,25 +122,13 @@ public class ResolverActivity extends AppCompatActivity implements
             }
         }
         component(intent, preferredResolver.lastChosenComponent()).inject(this);
+        intentResolver.setListener(this);
 
         isAddToHomeScreen = intent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
         List<DisplayResolveInfo> list = intentResolver.rebuildList();
         adapter = new ResolveListAdapter(iconLoader, intent, intentResolver.shouldShowExtended());
         adapter.mList.addAll(list);
         shouldUseAlwaysOption = !isAddToHomeScreen && !intentResolver.hasFilteredItem();
-
-        int count = adapter.mList.size() + (intentResolver.hasFilteredItem() ? 1 : 0);
-        if (count == 0) {
-            Timber.e("No app is found to handle url: %s", intent.getDataString());
-            Toast.makeText(this, R.string.empty_resolver_activity, Toast.LENGTH_LONG).show();
-            finish();
-            return;
-        }
-        if (count == 1 && !isAddToHomeScreen) {
-            DisplayResolveInfo dri = adapter.displayResolveInfoForPosition(0, false);
-            PreferredResolver.startPreferred(this, adapter.intentForDisplayResolveInfo(dri), dri.displayLabel());
-            return;
-        }
 
         setContentView(shouldDisplayHeader() ? R.layout.resolver_list_with_default : R.layout.resolver_list);
         registerPackageMonitor();
@@ -160,11 +149,33 @@ public class ResolverActivity extends AppCompatActivity implements
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        intentResolver.setListener(null);
+        super.onDestroy();
+    }
+
     private ResolverComponent component(Intent sourceIntent, ComponentName lastChosenComponent) {
         return DaggerResolverComponent.builder()
                 .appComponent(Injector.obtain(this))
                 .resolverModule(new ResolverModule(this, sourceIntent, lastChosenComponent))
                 .build();
+    }
+
+    @Override
+    public void onIntentResolved(List<DisplayResolveInfo> list, @Nullable DisplayResolveInfo filteredItem) {
+        int totalCount = list.size() + (filteredItem != null ? 1 : 0);
+        if (totalCount == 0) {
+            Timber.e("No app is found to handle url: %s", getIntent().getDataString());
+            Toast.makeText(this, R.string.empty_resolver_activity, Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+        if (totalCount == 1 && !isAddToHomeScreen) {
+            DisplayResolveInfo dri = filteredItem == null ? list.get(0) : filteredItem;
+            PreferredResolver.startPreferred(this, intentResolver.intentForDisplayResolveInfo(dri), dri.displayLabel());
+            return;
+        }
     }
 
     private boolean shouldDisplayHeader() {
@@ -316,7 +327,7 @@ public class ResolverActivity extends AppCompatActivity implements
         if (isFinishing()) {
             return;
         }
-        Intent intent = adapter.intentForDisplayResolveInfo(dri);
+        Intent intent = intentResolver.intentForDisplayResolveInfo(dri);
         if (isAddToHomeScreen) {
             AddToHomeScreenDialogFragment
                     .newInstance(dri, intent)
@@ -352,7 +363,7 @@ public class ResolverActivity extends AppCompatActivity implements
 
     @Override
     public boolean onItemLongClick(View view, int position, long id) {
-        ResolveInfo ri = adapter.displayResolveInfoForPosition(position, true).ri;
+        ResolveInfo ri = adapter.getItem(position).ri;
         showAppDetails(ri);
         return true;
     }

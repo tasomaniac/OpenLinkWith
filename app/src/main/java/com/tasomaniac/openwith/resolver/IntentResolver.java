@@ -2,6 +2,7 @@ package com.tasomaniac.openwith.resolver;
 
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
@@ -37,6 +38,7 @@ public class IntentResolver {
 
     private boolean mShowExtended;
     @Nullable private DisplayResolveInfo filteredItem;
+    private Listener listener = Listener.NO_OP;
 
     public IntentResolver(PackageManager packageManager,
                           Lazy<ResolverComparator> resolverComparator,
@@ -48,6 +50,10 @@ public class IntentResolver {
         this.sourceIntent = sourceIntent;
         this.callerPackage = callerPackage;
         this.lastChosenComponent = lastChosenComponent;
+    }
+
+    public void setListener(@Nullable Listener listener) {
+        this.listener = listener == null ? Listener.NO_OP : listener;
     }
 
     @Nullable
@@ -64,6 +70,20 @@ public class IntentResolver {
 
     public boolean shouldShowExtended() {
         return mShowExtended;
+    }
+
+    Intent intentForDisplayResolveInfo(DisplayResolveInfo dri) {
+        Intent intent = new Intent(sourceIntent);
+        intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
+                                | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+        if (dri != null && dri.ri != null) {
+            ActivityInfo ai = dri.ri.activityInfo;
+            if (ai != null) {
+                intent.setComponent(new ComponentName(
+                        ai.applicationInfo.packageName, ai.name));
+            }
+        }
+        return intent;
     }
 
     public List<DisplayResolveInfo> rebuildList() {
@@ -140,6 +160,7 @@ public class IntentResolver {
             // Process last group
             processGroup(resolved, currentResolveList, start, (N - 1), r0, r0Label);
         }
+        listener.onIntentResolved(resolved, filteredItem);
         return resolved;
     }
 
@@ -246,5 +267,16 @@ public class IntentResolver {
         return lastChosenComponent != null
                 && lastChosenComponent.getPackageName().equals(info.activityInfo.packageName)
                 && lastChosenComponent.getClassName().equals(info.activityInfo.name);
+    }
+
+    interface Listener {
+        void onIntentResolved(List<DisplayResolveInfo> list, @Nullable DisplayResolveInfo filteredItem);
+
+        Listener NO_OP = new Listener() {
+            @Override
+            public void onIntentResolved(List<DisplayResolveInfo> list, @Nullable DisplayResolveInfo filteredItem) {
+                // no-op
+            }
+        };
     }
 }

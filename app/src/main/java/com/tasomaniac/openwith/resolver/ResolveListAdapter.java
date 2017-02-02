@@ -1,8 +1,6 @@
 package com.tasomaniac.openwith.resolver;
 
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -47,10 +45,6 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         this.iconLoader = iconLoader;
         this.sourceIntent = sourceIntent;
         this.shouldShowExtended = shouldShowExtended;
-    }
-
-    DisplayResolveInfo displayResolveInfoForPosition(int position, boolean filtered) {
-        return filtered ? getItem(position) : mList.get(position);
     }
 
     @Override
@@ -228,19 +222,5 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         protected void onPostExecute(DisplayResolveInfo info) {
             notifyDataSetChanged();
         }
-    }
-
-    Intent intentForDisplayResolveInfo(DisplayResolveInfo dri) {
-        Intent intent = new Intent(sourceIntent);
-        intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
-                                | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
-        if (dri != null && dri.ri != null) {
-            ActivityInfo ai = dri.ri.activityInfo;
-            if (ai != null) {
-                intent.setComponent(new ComponentName(
-                        ai.applicationInfo.packageName, ai.name));
-            }
-        }
-        return intent;
     }
 }
