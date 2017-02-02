@@ -27,8 +27,8 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
     private static final int TYPE_HEADER = 1;
 
     private final IconLoader iconLoader;
-    private final IntentResolver intentResolver;
     private final Intent sourceIntent;
+    private final boolean shouldShowExtended;
 
     protected final List<DisplayResolveInfo> mList = new ArrayList<>();
 
@@ -40,15 +40,13 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
     private ItemLongClickListener itemLongClickListener;
 
     public ResolveListAdapter(IconLoader iconLoader) {
-        this(iconLoader, null, null);
+        this(iconLoader, null, false);
     }
 
-    public ResolveListAdapter(IconLoader iconLoader,
-                              IntentResolver intentResolver,
-                              Intent sourceIntent) {
+    public ResolveListAdapter(IconLoader iconLoader, Intent sourceIntent, boolean shouldShowExtended) {
         this.iconLoader = iconLoader;
-        this.intentResolver = intentResolver;
         this.sourceIntent = sourceIntent;
+        this.shouldShowExtended = shouldShowExtended;
     }
 
     DisplayResolveInfo displayResolveInfoForPosition(int position, boolean filtered) {
@@ -170,7 +168,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
      * Default value is false
      */
     protected boolean shouldShowExtended() {
-        return intentResolver != null && intentResolver.shouldShowExtended();
+        return shouldShowExtended;
     }
 
     public void setItemClickListener(@Nullable ItemClickListener itemClickListener) {

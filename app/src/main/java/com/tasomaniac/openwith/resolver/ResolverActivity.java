@@ -124,11 +124,11 @@ public class ResolverActivity extends AppCompatActivity implements
 
         isAddToHomeScreen = intent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
         List<DisplayResolveInfo> list = intentResolver.rebuildList();
-        adapter = new ResolveListAdapter(iconLoader, intentResolver, intent);
+        adapter = new ResolveListAdapter(iconLoader, intent, intentResolver.shouldShowExtended());
         adapter.mList.addAll(list);
         shouldUseAlwaysOption = !isAddToHomeScreen && !intentResolver.hasFilteredItem();
 
-        int count = adapter.mList.size();
+        int count = adapter.mList.size() + (intentResolver.hasFilteredItem() ? 1 : 0);
         if (count == 0) {
             Timber.e("No app is found to handle url: %s", intent.getDataString());
             Toast.makeText(this, R.string.empty_resolver_activity, Toast.LENGTH_LONG).show();
