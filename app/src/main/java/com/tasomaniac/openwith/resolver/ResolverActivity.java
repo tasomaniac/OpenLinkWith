@@ -109,23 +109,19 @@ public class ResolverActivity extends AppCompatActivity implements
             finish();
             return;
         }
+        isAddToHomeScreen = sourceIntent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
         PreferredResolver preferredResolver = PreferredResolver.createFrom(this);
-        preferredResolver.resolve(uri);
-
-        if (preferredResolver.shouldStartPreferred()) {
-            try {
-                preferredResolver.startPreferred(this);
+        if (!isAddToHomeScreen) {
+            preferredResolver.resolve(uri);
+            if (preferredResolver.startPreferred(this)) {
+                finish();
                 return;
-            } catch (SecurityException e) {
-                Timber.e(e, "Security Exception for the url %s", uri);
-                getContentResolver().delete(withHost(uri.getHost()), null, null);
             }
         }
         component(sourceIntent, preferredResolver.lastChosenComponent()).inject(this);
         intentResolver.setListener(this);
 
         registerPackageMonitor();
-        isAddToHomeScreen = sourceIntent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
         intentResolver.rebuildList();
     }
 
@@ -146,7 +142,7 @@ public class ResolverActivity extends AppCompatActivity implements
         super.onDestroy();
     }
 
-    private ResolverComponent component(Intent sourceIntent, ComponentName lastChosenComponent) {
+    private ResolverComponent component(Intent sourceIntent, @Nullable ComponentName lastChosenComponent) {
         return DaggerResolverComponent.builder()
                 .appComponent(Injector.obtain(this))
                 .resolverModule(new ResolverModule(this, sourceIntent, lastChosenComponent))
@@ -165,6 +161,7 @@ public class ResolverActivity extends AppCompatActivity implements
         if (totalCount == 1 && !isAddToHomeScreen) {
             DisplayResolveInfo dri = filteredItem == null ? list.get(0) : filteredItem;
             PreferredResolver.startPreferred(this, intentResolver.intentForDisplayResolveInfo(dri), dri.displayLabel());
+            finish();
             return;
         }
 

@@ -18,6 +18,8 @@ import com.tasomaniac.openwith.util.Intents;
 
 import net.simonvt.schematic.Cursors;
 
+import timber.log.Timber;
+
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.COMPONENT;
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.PREFERRED;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withHost;
@@ -43,15 +45,32 @@ class PreferredResolver {
         this.callerPackage = callerPackage;
     }
 
-    void startPreferred(ResolverActivity activity) {
-        startPreferred(activity, preferredIntent(), loadLabel());
+    /**
+     * Starts the preferred Activity if necessary.
+     * It is started when preferred Activity is available for this host and it is not the same as caller.
+     *
+     * Can throw SecurityException because we store the component name by String.
+     * With app updates, public Activities may become private.
+     *
+     * @return true if the Activity start is successful.
+     */
+    boolean startPreferred(ResolverActivity activity) {
+        if (shouldStartPreferred()) {
+            try {
+                startPreferred(activity, preferredIntent(), loadLabel());
+                return true;
+            } catch (SecurityException e) {
+                Timber.e(e, "Security Exception for the url %s", uri);
+                activity.getContentResolver().delete(withHost(uri.getHost()), null, null);
+            }
+        }
+        return false;
     }
 
     static void startPreferred(ResolverActivity activity, Intent intent, CharSequence appLabel) {
         String message = activity.getString(R.string.warning_open_link_with_name, appLabel);
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
         Intents.startActivityFixingIntent(activity, intent);
-        activity.finish();
     }
 
     void resolve(Uri uri) {
@@ -88,17 +107,17 @@ class PreferredResolver {
         return lastChosenComponent;
     }
 
-    Intent preferredIntent() {
+    private Intent preferredIntent() {
         return new Intent(Intent.ACTION_VIEW, uri)
                 .setComponent(lastChosenComponent);
     }
 
     @Nullable
-    CharSequence loadLabel() {
+    private CharSequence loadLabel() {
         return ri == null ? null : ri.loadLabel(packageManager);
     }
 
-    boolean shouldStartPreferred() {
+    private boolean shouldStartPreferred() {
         return isPreferred && !isCallerPackagePreferred();
     }
 

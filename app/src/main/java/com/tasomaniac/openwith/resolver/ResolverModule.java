@@ -7,6 +7,7 @@ import android.app.usage.UsageStatsManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ShareCompat;
 
 import com.tasomaniac.openwith.PerActivity;
@@ -29,9 +30,10 @@ class ResolverModule {
 
     private final Activity activity;
     private final Intent sourceIntent;
+    @Nullable
     private final ComponentName lastChosenComponent;
 
-    ResolverModule(Activity activity, Intent sourceIntent, ComponentName lastChosenComponent) {
+    ResolverModule(Activity activity, Intent sourceIntent, @Nullable ComponentName lastChosenComponent) {
         this.activity = activity;
         this.sourceIntent = sourceIntent;
         this.lastChosenComponent = lastChosenComponent;

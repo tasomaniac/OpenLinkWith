@@ -34,7 +34,7 @@ public class IntentResolver {
     private final Lazy<ResolverComparator> resolverComparator;
     private final Intent sourceIntent;
     private final String callerPackage;
-    private final ComponentName lastChosenComponent;
+    @Nullable private final ComponentName lastChosenComponent;
 
     private boolean mShowExtended;
     @Nullable private DisplayResolveInfo filteredItem;
@@ -44,7 +44,7 @@ public class IntentResolver {
                           Lazy<ResolverComparator> resolverComparator,
                           Intent sourceIntent,
                           String callerPackage,
-                          ComponentName lastChosenComponent) {
+                          @Nullable ComponentName lastChosenComponent) {
         this.packageManager = packageManager;
         this.resolverComparator = resolverComparator;
         this.sourceIntent = sourceIntent;
