@@ -87,7 +87,7 @@ public class IntentResolver {
     }
 
     public void rebuildList() {
-        List<DisplayResolveInfo> resolved = new ArrayList<>();
+        filteredItem = null;
         int flag;
         if (SDK_INT >= M) {
             flag = PackageManager.MATCH_ALL;
@@ -96,9 +96,7 @@ public class IntentResolver {
         }
         flag = flag | PackageManager.GET_RESOLVED_FILTER;
 
-        List<ResolveInfo> currentResolveList = new ArrayList<>();
-        currentResolveList.addAll(packageManager.queryIntentActivities(sourceIntent, flag));
-
+        List<ResolveInfo> currentResolveList = new ArrayList<>(packageManager.queryIntentActivities(sourceIntent, flag));
         if (SDK_INT >= M) {
             addBrowsersToList(currentResolveList, flag);
         }
@@ -108,8 +106,8 @@ public class IntentResolver {
             removePackageFromList(callerPackage, currentResolveList);
         }
 
-        int N;
-        if ((N = currentResolveList.size()) > 0) {
+        int N = currentResolveList.size();
+        if (N > 0) {
             // Only display the first matches that are either of equal
             // priority or have asked to be default options.
             ResolveInfo r0 = currentResolveList.get(0);
@@ -127,41 +125,14 @@ public class IntentResolver {
 
             //If there is no left, return
             if (N <= 0) {
-                listener.onIntentResolved(resolved, filteredItem);
-                return;
+                return Collections.emptyList();
             }
-
             if (N > 1) {
                 Collections.sort(currentResolveList, resolverComparator.get());
             }
-
-            // Check for applications with same name and use application name or
-            // package name if necessary
-            r0 = currentResolveList.get(0);
-            int start = 0;
-            CharSequence r0Label = r0.loadLabel(packageManager);
-            mShowExtended = false;
-            for (int i = 1; i < N; i++) {
-                if (r0Label == null) {
-                    r0Label = r0.activityInfo.packageName;
-                }
-                ResolveInfo ri = currentResolveList.get(i);
-                CharSequence riLabel = ri.loadLabel(packageManager);
-                if (riLabel == null) {
-                    riLabel = ri.activityInfo.packageName;
-                }
-                if (riLabel.equals(r0Label)) {
-                    continue;
-                }
-                processGroup(resolved, currentResolveList, start, (i - 1), r0, r0Label);
-                r0 = ri;
-                r0Label = riLabel;
-                start = i;
-            }
-            // Process last group
-            processGroup(resolved, currentResolveList, start, (N - 1), r0, r0Label);
+            return groupResolveList(currentResolveList);
         }
-        listener.onIntentResolved(resolved, filteredItem);
+        return Collections.emptyList();
     }
 
     private static void removePackageFromList(final String packageName, List<ResolveInfo> currentResolveList) {
@@ -200,7 +171,45 @@ public class IntentResolver {
         return packageManager.queryIntentActivities(BROWSER_INTENT, flags);
     }
 
-    private void processGroup(List<DisplayResolveInfo> resolved,
+    /**
+     * Taken from AOSP, don't try to understand what's going on.
+     */
+    private List<DisplayResolveInfo> groupResolveList(List<ResolveInfo> current) {
+        List<DisplayResolveInfo> grouped = new ArrayList<>();
+
+        // Check for applications with same name and use application name or
+        // package name if necessary
+        ResolveInfo r0 = current.get(0);
+        int start = 0;
+        CharSequence r0Label = r0.loadLabel(packageManager);
+        mShowExtended = false;
+        int size = current.size();
+        for (int i = 1; i < size; i++) {
+            if (r0Label == null) {
+                r0Label = r0.activityInfo.packageName;
+            }
+            ResolveInfo ri = current.get(i);
+            CharSequence riLabel = ri.loadLabel(packageManager);
+            if (riLabel == null) {
+                riLabel = ri.activityInfo.packageName;
+            }
+            if (riLabel.equals(r0Label)) {
+                continue;
+            }
+            processGroup(grouped, current, start, (i - 1), r0, r0Label);
+            r0 = ri;
+            r0Label = riLabel;
+            start = i;
+        }
+        // Process last group
+        processGroup(grouped, current, start, (size - 1), r0, r0Label);
+        return grouped;
+    }
+
+    /**
+     * Taken from AOSP, don't try to understand what's going on.
+     */
+    private void processGroup(List<DisplayResolveInfo> grouped,
                               List<ResolveInfo> rList,
                               int start,
                               int end,
@@ -214,7 +223,7 @@ public class IntentResolver {
             if (isLastChosenPosition(ro)) {
                 filteredItem = dri;
             } else {
-                resolved.add(dri);
+                grouped.add(dri);
             }
         } else {
             mShowExtended = true;
@@ -246,7 +255,7 @@ public class IntentResolver {
                 if (isLastChosenPosition(add)) {
                     filteredItem = dri;
                 } else {
-                    resolved.add(dri);
+                    grouped.add(dri);
                 }
             }
         }
