@@ -169,7 +169,7 @@ public class ResolverActivity extends AppCompatActivity implements
         adapter.mList.addAll(list);
         shouldUseAlwaysOption = !isAddToHomeScreen && !intentResolver.hasFilteredItem();
 
-        setContentView(shouldDisplayHeader() ? R.layout.resolver_list_with_default : R.layout.resolver_list);
+        setContentView(intentResolver.hasFilteredItem() ? R.layout.resolver_list_with_default : R.layout.resolver_list);
         setupList();
         setupTitle();
         setupFilteredView();
@@ -187,10 +187,6 @@ public class ResolverActivity extends AppCompatActivity implements
         }
     }
 
-    private boolean shouldDisplayHeader() {
-        return !isAddToHomeScreen && intentResolver.hasFilteredItem();
-    }
-
     private void setupList() {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.resolver_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -202,7 +198,7 @@ public class ResolverActivity extends AppCompatActivity implements
         if (shouldUseAlwaysOption) {
             adapter.setSelectionEnabled(true);
         }
-        if (shouldDisplayHeader()) {
+        if (intentResolver.hasFilteredItem()) {
             adapter.displayHeader();
         }
     }
