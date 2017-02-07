@@ -26,25 +26,24 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
 
     private final IconLoader iconLoader;
     private final Intent sourceIntent;
-    private final boolean shouldShowExtended;
 
     protected final List<DisplayResolveInfo> mList = new ArrayList<>();
 
-    private boolean hasHeader;
-    private boolean selectionEnabled;
+    private boolean displayExtendedInfo = false;
+    private boolean hasHeader = false;
+    private boolean selectionEnabled = false;
     private int checkedItemPosition = RecyclerView.NO_POSITION;
 
     private ItemClickListener itemClickListener;
     private ItemLongClickListener itemLongClickListener;
 
     public ResolveListAdapter(IconLoader iconLoader) {
-        this(iconLoader, null, false);
+        this(iconLoader, null);
     }
 
-    public ResolveListAdapter(IconLoader iconLoader, Intent sourceIntent, boolean shouldShowExtended) {
+    public ResolveListAdapter(IconLoader iconLoader, Intent sourceIntent) {
         this.iconLoader = iconLoader;
         this.sourceIntent = sourceIntent;
-        this.shouldShowExtended = shouldShowExtended;
     }
 
     @Override
@@ -71,8 +70,12 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         return hasHeader ? 1 : 0;
     }
 
-    public void displayHeader() {
-        hasHeader = true;
+    public void setDisplayExtendedInfo(boolean displayExtendedInfo) {
+        this.displayExtendedInfo = displayExtendedInfo;
+    }
+
+    public void setDisplayHeader(boolean hasHeader) {
+        this.hasHeader = hasHeader;
     }
 
     @Override
@@ -125,7 +128,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
 
         holder.text.setText(info.displayLabel());
         if (holder.text2 != null) {
-            if (shouldShowExtended()) {
+            if (displayExtendedInfo) {
                 holder.text2.setVisibility(View.VISIBLE);
                 holder.text2.setText(info.extendedInfo());
             } else {
@@ -155,14 +158,6 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
                         && itemLongClickListener.onItemLongClick(v, holder.getAdapterPosition(), holder.getItemId());
             }
         });
-    }
-
-    /**
-     * When {@code true} a second extended line will be displayed for items in the list.
-     * Default value is false
-     */
-    protected boolean shouldShowExtended() {
-        return shouldShowExtended;
     }
 
     public void setItemClickListener(@Nullable ItemClickListener itemClickListener) {

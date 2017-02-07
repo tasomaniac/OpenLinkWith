@@ -70,8 +70,6 @@ public class PreferredAppsActivity extends AppCompatActivity
         adapter.setItemClickListener(this);
         recyclerView.setAdapter(adapter);
 
-        adapter.displayHeader();
-
         getSupportLoaderManager().initLoader(0, null, this);
     }
 

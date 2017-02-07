@@ -25,6 +25,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,6 +37,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tasomaniac.android.widget.DelayedProgressBar;
 import com.tasomaniac.openwith.IconLoader;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.Injector;
@@ -43,14 +45,14 @@ import com.tasomaniac.openwith.homescreen.AddToHomeScreenDialogFragment;
 import com.tasomaniac.openwith.util.Intents;
 
 import javax.inject.Inject;
-
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import timber.log.Timber;
 
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.*;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.CONTENT_URI;
-import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withHost;
 import static com.tasomaniac.openwith.util.Urls.fixUrls;
 
 /**
@@ -77,9 +79,8 @@ public class ResolverActivity extends AppCompatActivity implements
     @Inject ChooserHistory history;
     @Inject IntentResolver intentResolver;
 
-    @BindView(R.id.resolver_progress)
-    DelayedProgressBar progressBar;
-
+    @BindView(R.id.resolver_root) ViewGroup rootView;
+    private DelayedProgressBar progress;
     private ResolveListAdapter adapter;
     private boolean shouldUseAlwaysOption;
     private boolean isAddToHomeScreen;
@@ -102,6 +103,8 @@ public class ResolverActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.BottomSheet_Light);
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.resolver_activity);
+        ButterKnife.bind(this);
 
         configureIntent();
         Uri uri = sourceIntent.getData();
@@ -119,9 +122,12 @@ public class ResolverActivity extends AppCompatActivity implements
             }
         }
         component(sourceIntent, preferredResolver.lastChosenComponent()).inject(this);
+        adapter = new ResolveListAdapter(iconLoader, sourceIntent);
         intentResolver.setListener(this);
 
         registerPackageMonitor();
+
+        displayProgress();
         intentResolver.rebuildList();
     }
 
@@ -134,6 +140,12 @@ public class ResolverActivity extends AppCompatActivity implements
         // flag set, we are now losing it.  That should be a very rare case
         // and we can live with this.
         sourceIntent.setFlags(sourceIntent.getFlags() & ~Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+    }
+
+    private void displayProgress() {
+        progress = (DelayedProgressBar) getLayoutInflater().inflate(R.layout.resolver_progress, rootView, false);
+        rootView.addView(progress);
+        progress.show(true);
     }
 
     @Override
@@ -165,42 +177,50 @@ public class ResolverActivity extends AppCompatActivity implements
             return;
         }
 
-        adapter = new ResolveListAdapter(iconLoader, sourceIntent, intentResolver.shouldShowExtended());
+        adapter.mList.clear();
         adapter.mList.addAll(list);
         shouldUseAlwaysOption = !isAddToHomeScreen && !intentResolver.hasFilteredItem();
 
-        setContentView(intentResolver.hasFilteredItem() ? R.layout.resolver_list_with_default : R.layout.resolver_list);
+        getLayoutInflater().inflate(layoutRes(), rootView);
         setupList();
         setupTitle();
         setupFilteredView();
         if (shouldUseAlwaysOption || intentResolver.hasFilteredItem()) {
             setupButtons();
         }
-        ResolverDrawerLayout rdl = (ResolverDrawerLayout) findViewById(R.id.contentPanel);
-        if (rdl != null) {
-            rdl.setOnDismissedListener(new ResolverDrawerLayout.OnDismissedListener() {
-                @Override
-                public void onDismissed() {
-                    finish();
-                }
-            });
-        }
+        final ResolverDrawerLayout rdl = (ResolverDrawerLayout) findViewById(R.id.contentPanel);
+        rdl.setOnDismissedListener(new ResolverDrawerLayout.OnDismissedListener() {
+            @Override
+            public void onDismissed() {
+                finish();
+            }
+        });
+        progress.hide(true, new Runnable() {
+            @Override
+            public void run() {
+                rdl.setVisibility(View.VISIBLE);
+                rdl.setAlpha(0.0f);
+                rdl.animate().alpha(1.0f);
+            }
+        });
+    }
+
+    @LayoutRes
+    private int layoutRes() {
+        return intentResolver.hasFilteredItem() ? R.layout.resolver_list_with_default : R.layout.resolver_list;
     }
 
     private void setupList() {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.resolver_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
 
         adapter.setItemClickListener(this);
         adapter.setItemLongClickListener(this);
+        adapter.setSelectionEnabled(shouldUseAlwaysOption);
+        adapter.setDisplayHeader(intentResolver.hasFilteredItem());
+        adapter.setDisplayExtendedInfo(intentResolver.shouldShowExtended());
 
-        if (shouldUseAlwaysOption) {
-            adapter.setSelectionEnabled(true);
-        }
-        if (intentResolver.hasFilteredItem()) {
-            adapter.displayHeader();
-        }
+        recyclerView.setAdapter(adapter);
     }
 
     private void setupTitle() {
@@ -254,11 +274,9 @@ public class ResolverActivity extends AppCompatActivity implements
     }
 
     private void handlePackagesChanged() {
+        rootView.removeAllViews();
+        displayProgress();
         intentResolver.rebuildList();
-        if (adapter.getItemCount() == 0) {
-            // We no longer have any items...  just finish the activity.
-            finish();
-        }
     }
 
     @Override
