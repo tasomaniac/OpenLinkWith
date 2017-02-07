@@ -17,6 +17,7 @@ package com.tasomaniac.openwith.resolver;
 
 import android.content.ComponentName;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
@@ -50,6 +51,7 @@ import timber.log.Timber;
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.*;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.CONTENT_URI;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withHost;
+import static com.tasomaniac.openwith.util.Urls.fixUrls;
 
 /**
  * This activity is displayed when the system attempts to start an Intent for
@@ -65,9 +67,18 @@ public class ResolverActivity extends AppCompatActivity implements
     private static final String KEY_CHECKED_POS = "KEY_CHECKED_POS";
     private static final String KEY_CHECKED_ITEM = "KEY_CHECKED_ITEM";
 
+    public static Intent createIntent(Context context, String foundUrl) {
+        return new Intent(context, ResolverActivity.class)
+                .setAction(Intent.ACTION_VIEW)
+                .setData(Uri.parse(fixUrls(foundUrl)));
+    }
+
     @Inject IconLoader iconLoader;
     @Inject ChooserHistory history;
     @Inject IntentResolver intentResolver;
+
+    @BindView(R.id.resolver_progress)
+    DelayedProgressBar progressBar;
 
     private ResolveListAdapter adapter;
     private boolean shouldUseAlwaysOption;

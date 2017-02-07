@@ -2,7 +2,6 @@ package com.tasomaniac.openwith;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ShareCompat;
 import android.widget.Toast;
@@ -12,8 +11,6 @@ import com.tasomaniac.openwith.data.Injector;
 import com.tasomaniac.openwith.resolver.ResolverActivity;
 import com.tasomaniac.openwith.util.CallerPackageExtractor;
 import com.tasomaniac.openwith.util.Urls;
-
-import static com.tasomaniac.openwith.util.Urls.fixUrls;
 
 public class ShareToOpenWith extends Activity {
 
@@ -42,10 +39,9 @@ public class ShareToOpenWith extends Activity {
 
         if (foundUrl != null) {
             String callerPackage = CallerPackageExtractor.from(this).extract();
-            Intent resolverIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(fixUrls(foundUrl)))
-                    .putExtra(ShareCompat.EXTRA_CALLING_PACKAGE, callerPackage)
-                    .setClass(this, ResolverActivity.class);
-            startActivity(resolverIntent);
+            Intent intent = ResolverActivity.createIntent(this, foundUrl)
+                    .putExtra(ShareCompat.EXTRA_CALLING_PACKAGE, callerPackage);
+            startActivity(intent);
         } else {
             Toast.makeText(this, R.string.error_invalid_url, Toast.LENGTH_SHORT).show();
         }
