@@ -10,25 +10,18 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 
 public final class DisplayResolveInfo implements Parcelable {
-    private final int id;
     private final ResolveInfo ri;
     private final CharSequence displayLabel;
     private final CharSequence extendedInfo;
     private Drawable displayIcon;
 
-    DisplayResolveInfo(ResolveInfo pri, CharSequence displayLabel, CharSequence extendedInfo) {
-        this(0, pri, displayLabel, extendedInfo);
-    }
-
-    public DisplayResolveInfo(int id, ResolveInfo ri, CharSequence displayLabel, CharSequence extendedInfo) {
-        this.id = id;
+    public DisplayResolveInfo(ResolveInfo ri, CharSequence displayLabel, CharSequence extendedInfo) {
         this.ri = ri;
         this.displayLabel = displayLabel;
         this.extendedInfo = extendedInfo;
     }
 
     private DisplayResolveInfo(Parcel in) {
-        id = in.readInt();
         ri = in.readParcelable(ResolveInfo.class.getClassLoader());
         displayLabel = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in);
         extendedInfo = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in);
@@ -50,7 +43,6 @@ public final class DisplayResolveInfo implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
         dest.writeParcelable(ri, flags);
         TextUtils.writeToParcel(displayLabel, dest, flags);
         TextUtils.writeToParcel(extendedInfo, dest, flags);
@@ -72,10 +64,6 @@ public final class DisplayResolveInfo implements Parcelable {
             return new DisplayResolveInfo[size];
         }
     };
-
-    public int id() {
-        return id;
-    }
 
     public ResolveInfo resolveInfo() {
         return ri;

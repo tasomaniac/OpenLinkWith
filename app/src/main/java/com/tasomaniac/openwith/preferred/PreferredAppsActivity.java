@@ -33,9 +33,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 
-import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.*;
+import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.COMPONENT;
+import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.HOST;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.CONTENT_URI_PREFERRED;
-import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withId;
+import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withHost;
 
 public class PreferredAppsActivity extends AppCompatActivity
         implements
@@ -96,8 +97,6 @@ public class PreferredAppsActivity extends AppCompatActivity
 
         List<DisplayResolveInfo> apps = new ArrayList<>(data.getCount());
         while (data.moveToNext()) {
-
-            final int id = Cursors.getInt(data, ID);
             final String host = Cursors.getString(data, HOST);
             final String componentString = Cursors.getString(data, COMPONENT);
 
@@ -108,7 +107,7 @@ public class PreferredAppsActivity extends AppCompatActivity
 
             if (resolveInfo != null) {
                 CharSequence roLabel = resolveInfo.loadLabel(mPm);
-                final DisplayResolveInfo info = new DisplayResolveInfo(id, resolveInfo, roLabel, host);
+                final DisplayResolveInfo info = new DisplayResolveInfo(resolveInfo, roLabel, host);
                 apps.add(info);
             }
         }
@@ -123,7 +122,7 @@ public class PreferredAppsActivity extends AppCompatActivity
 
     @Override
     public void onAppRemoved(DisplayResolveInfo info) {
-        getContentResolver().delete(withId(info.id()), null, null);
+        getContentResolver().delete(withHost(info.extendedInfo().toString()), null, null);
 
         notifyItemRemoval(info);
 
