@@ -22,7 +22,7 @@ import okhttp3.HttpUrl;
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.M;
 
-public class IntentResolver {
+class IntentResolver {
 
     private static final Intent BROWSER_INTENT;
 
@@ -45,7 +45,7 @@ public class IntentResolver {
     @Nullable private DisplayResolveInfo filteredItem;
     private Listener listener = Listener.NO_OP;
 
-    public IntentResolver(RedirectFixer redirectFixer,
+    IntentResolver(RedirectFixer redirectFixer,
                           PackageManager packageManager,
                           Lazy<ResolverComparator> resolverComparator,
                           SchedulingStrategy schedulingStrategy,
@@ -61,16 +61,16 @@ public class IntentResolver {
         this.lastChosenComponent = lastChosenComponent;
     }
 
-    public void setListener(@Nullable Listener listener) {
+    void setListener(@Nullable Listener listener) {
         this.listener = listener == null ? Listener.NO_OP : listener;
     }
 
-    public Intent getSourceIntent() {
+    Intent getSourceIntent() {
         return sourceIntent;
     }
 
     @Nullable
-    public DisplayResolveInfo getFilteredItem() {
+    DisplayResolveInfo getFilteredItem() {
         return filteredItem;
     }
 
@@ -81,7 +81,7 @@ public class IntentResolver {
         return filteredItem != null;
     }
 
-    public void rebuildList() {
+    void resolve() {
         Single.just(sourceIntent)
                 .flatMap(this::followRedirectsIfHttpUrl)
                 .map(this::doResolve)

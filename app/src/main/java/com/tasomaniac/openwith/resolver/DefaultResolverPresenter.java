@@ -37,7 +37,7 @@ class DefaultResolverPresenter implements ResolverPresenter {
         intentResolver.setListener(new IntentResolverListener(view));
 
         view.displayProgress();
-        intentResolver.rebuildList();
+        intentResolver.resolve();
     }
 
     @Override
@@ -148,7 +148,7 @@ class DefaultResolverPresenter implements ResolverPresenter {
         @Override
         public void onPackagesChanged() {
             view.displayProgress();
-            intentResolver.rebuildList();
+            intentResolver.resolve();
         }
 
         private boolean shouldUseAlwaysOption() {
