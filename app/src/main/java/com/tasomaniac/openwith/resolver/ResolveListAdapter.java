@@ -210,7 +210,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         protected DisplayResolveInfo doInBackground(DisplayResolveInfo... params) {
             final DisplayResolveInfo info = params[0];
             if (info.displayIcon() == null) {
-                info.displayIcon(iconLoader.loadFor(info.ri));
+                info.displayIcon(iconLoader.loadFor(info.resolveInfo()));
             }
             return info;
         }

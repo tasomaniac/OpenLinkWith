@@ -11,7 +11,7 @@ import android.text.TextUtils;
 
 public final class DisplayResolveInfo implements Parcelable {
     private final int id;
-    final ResolveInfo ri;
+    private final ResolveInfo ri;
     private final CharSequence displayLabel;
     private final CharSequence extendedInfo;
     private Drawable displayIcon;
@@ -75,6 +75,10 @@ public final class DisplayResolveInfo implements Parcelable {
 
     public int id() {
         return id;
+    }
+
+    public ResolveInfo resolveInfo() {
+        return ri;
     }
 
     public CharSequence displayLabel() {

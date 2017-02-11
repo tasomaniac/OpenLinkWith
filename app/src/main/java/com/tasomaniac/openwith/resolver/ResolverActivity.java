@@ -295,7 +295,7 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
 
     @Override
     public boolean onItemLongClick(View view, int position, long id) {
-        ResolveInfo ri = adapter.getItem(position).ri;
+        ResolveInfo ri = adapter.getItem(position).resolveInfo();
         showAppDetails(ri);
         return true;
     }
@@ -360,7 +360,7 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
         protected Drawable doInBackground(DisplayResolveInfo... params) {
             final DisplayResolveInfo info = params[0];
             if (info.displayIcon() == null) {
-                info.displayIcon(iconLoader.loadFor(info.ri));
+                info.displayIcon(iconLoader.loadFor(info.resolveInfo()));
             }
             return info.displayIcon();
         }
