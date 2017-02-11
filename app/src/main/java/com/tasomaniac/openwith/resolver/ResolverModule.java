@@ -7,6 +7,7 @@ import android.app.usage.UsageStatsManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ShareCompat;
 
@@ -22,6 +23,7 @@ import dagger.Provides;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.LOLLIPOP_MR1;
+import static com.tasomaniac.openwith.resolver.ResolverActivity.EXTRA_ADD_TO_HOME_SCREEN;
 
 @Module
 class ResolverModule {
@@ -40,9 +42,20 @@ class ResolverModule {
     }
 
     @Provides
+    static Resources resources(Application app) {
+        return app.getResources();
+    }
+
+    @Provides
     @PerActivity
     static ChooserHistory provideChooserHistory(Application app) {
         return ChooserHistory.fromSettings(app);
+    }
+
+    @Provides
+    ResolverPresenter resolverPresenter(Resources resources, IntentResolver intentResolver, LastSelectedHolder lastSelectedHolder) {
+        boolean isAddToHomeScreen = sourceIntent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
+        return new ResolverPresenter(resources, intentResolver, lastSelectedHolder, isAddToHomeScreen);
     }
 
     @Provides

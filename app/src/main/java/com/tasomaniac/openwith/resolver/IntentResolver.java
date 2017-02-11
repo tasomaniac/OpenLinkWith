@@ -2,7 +2,6 @@ package com.tasomaniac.openwith.resolver;
 
 import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
@@ -56,31 +55,24 @@ public class IntentResolver {
         this.listener = listener == null ? Listener.NO_OP : listener;
     }
 
+    public Intent getSourceIntent() {
+        return sourceIntent;
+    }
+
     @Nullable
     public DisplayResolveInfo getFilteredItem() {
         return filteredItem;
     }
 
-    public boolean shouldShowExtended() {
-        return mShowExtended;
-    }
-
-    Intent intentForDisplayResolveInfo(DisplayResolveInfo dri) {
-        Intent intent = new Intent(sourceIntent);
-        intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
-                                | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
-        if (dri != null && dri.ri != null) {
-            ActivityInfo ai = dri.ri.activityInfo;
-            if (ai != null) {
-                intent.setComponent(new ComponentName(
-                        ai.applicationInfo.packageName, ai.name));
-            }
-        }
-        return intent;
+    /**
+     * true if one of the items is filtered and stays at the top header
+     */
+    boolean hasFilteredItem() {
+        return filteredItem != null;
     }
 
     public void rebuildList() {
-        listener.onIntentResolved(doResolve(), filteredItem);
+        listener.onIntentResolved(doResolve(), filteredItem, mShowExtended);
     }
 
     private List<DisplayResolveInfo> doResolve() {
@@ -276,11 +268,11 @@ public class IntentResolver {
     }
 
     interface Listener {
-        void onIntentResolved(List<DisplayResolveInfo> list, @Nullable DisplayResolveInfo filteredItem);
+        void onIntentResolved(List<DisplayResolveInfo> list, @Nullable DisplayResolveInfo filteredItem, boolean showExtended);
 
         Listener NO_OP = new Listener() {
             @Override
-            public void onIntentResolved(List<DisplayResolveInfo> list, @Nullable DisplayResolveInfo filteredItem) {
+            public void onIntentResolved(List<DisplayResolveInfo> list, @Nullable DisplayResolveInfo filteredItem, boolean showExtended) {
                 // no-op
             }
         };

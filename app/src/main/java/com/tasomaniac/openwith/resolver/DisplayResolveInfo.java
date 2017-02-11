@@ -1,5 +1,8 @@
 package com.tasomaniac.openwith.resolver;
 
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
@@ -29,6 +32,20 @@ public final class DisplayResolveInfo implements Parcelable {
         ri = in.readParcelable(ResolveInfo.class.getClassLoader());
         displayLabel = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in);
         extendedInfo = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in);
+    }
+
+    Intent intentFrom(Intent sourceIntent) {
+        Intent intent = new Intent(sourceIntent);
+        intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
+                                | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+        if (ri != null) {
+            ActivityInfo ai = ri.activityInfo;
+            if (ai != null) {
+                intent.setComponent(new ComponentName(
+                        ai.applicationInfo.packageName, ai.name));
+            }
+        }
+        return intent;
     }
 
     @Override

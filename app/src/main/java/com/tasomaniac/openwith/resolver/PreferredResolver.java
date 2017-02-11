@@ -11,10 +11,6 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ShareCompat;
 import android.text.TextUtils;
-import android.widget.Toast;
-
-import com.tasomaniac.openwith.R;
-import com.tasomaniac.openwith.util.Intents;
 
 import net.simonvt.schematic.Cursors;
 
@@ -57,7 +53,7 @@ class PreferredResolver {
     boolean startPreferred(ResolverActivity activity) {
         if (shouldStartPreferred()) {
             try {
-                startPreferred(activity, preferredIntent(), loadLabel());
+                activity.startWithMessage(preferredIntent(), loadLabel());
                 return true;
             } catch (SecurityException e) {
                 Timber.e(e, "Security Exception for the url %s", uri);
@@ -65,12 +61,6 @@ class PreferredResolver {
             }
         }
         return false;
-    }
-
-    static void startPreferred(ResolverActivity activity, Intent intent, CharSequence appLabel) {
-        String message = activity.getString(R.string.warning_open_link_with_name, appLabel);
-        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
-        Intents.startActivityFixingIntent(activity, intent);
     }
 
     void resolve(Uri uri) {
