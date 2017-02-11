@@ -104,9 +104,7 @@ class DefaultResolverPresenter implements ResolverPresenter {
         @Override
         public void onActionButtonClick(boolean always) {
             DisplayResolveInfo dri = shouldUseAlwaysOption() ? lastSelectedHolder.lastSelected : intentResolver.getFilteredItem();
-            Intent intent = dri.intentFrom(intentResolver.getSourceIntent());
-            view.startSelected(intent);
-            persistSelectedIntent(intent, always);
+            startAndPersist(dri, always);
         }
 
         private void persistSelectedIntent(Intent intent, boolean alwaysCheck) {
@@ -137,9 +135,14 @@ class DefaultResolverPresenter implements ResolverPresenter {
                 view.enableActionButtons();
                 lastSelectedHolder.lastSelected = dri;
             } else {
-                Intent intent = dri.intentFrom(intentResolver.getSourceIntent());
-                view.startSelected(intent);
+                startAndPersist(dri, false);
             }
+        }
+
+        private void startAndPersist(DisplayResolveInfo dri, boolean alwaysCheck) {
+            Intent intent = dri.intentFrom(intentResolver.getSourceIntent());
+            view.startSelected(intent);
+            persistSelectedIntent(intent, alwaysCheck);
         }
 
         @Override
