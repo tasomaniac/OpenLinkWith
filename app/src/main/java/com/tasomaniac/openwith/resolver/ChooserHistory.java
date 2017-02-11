@@ -2,6 +2,7 @@ package com.tasomaniac.openwith.resolver;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.VisibleForTesting;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +22,7 @@ class ChooserHistory {
         return fromSettings(getPreferences(context));
     }
 
+    @VisibleForTesting
     static ChooserHistory fromSettings(SharedPreferences preferences) {
         ChooserHistory history = new ChooserHistory(preferences);
         String saveString = preferences.getString(KEY_HISTORY, "");
