@@ -25,7 +25,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -170,8 +169,9 @@ public class ResolverActivity extends AppCompatActivity implements
             finish();
             return;
         }
+        boolean hasFilteredItem = filteredItem != null;
         if (totalCount == 1 && !isAddToHomeScreen) {
-            DisplayResolveInfo dri = filteredItem == null ? list.get(0) : filteredItem;
+            DisplayResolveInfo dri = hasFilteredItem ? filteredItem: list.get(0);
             PreferredResolver.startPreferred(this, intentResolver.intentForDisplayResolveInfo(dri), dri.displayLabel());
             finish();
             return;
@@ -179,13 +179,14 @@ public class ResolverActivity extends AppCompatActivity implements
 
         adapter.mList.clear();
         adapter.mList.addAll(list);
-        shouldUseAlwaysOption = !isAddToHomeScreen && !intentResolver.hasFilteredItem();
+        shouldUseAlwaysOption = !isAddToHomeScreen && !hasFilteredItem;
 
-        getLayoutInflater().inflate(layoutRes(), rootView);
-        setupList();
+        int layout = hasFilteredItem ? R.layout.resolver_list_with_default : R.layout.resolver_list;
+        getLayoutInflater().inflate(layout, rootView);
+        setupList(hasFilteredItem);
         setupTitle();
         setupFilteredView();
-        if (shouldUseAlwaysOption || intentResolver.hasFilteredItem()) {
+        if (shouldUseAlwaysOption || hasFilteredItem) {
             setupButtons();
         }
         final ResolverDrawerLayout rdl = (ResolverDrawerLayout) findViewById(R.id.contentPanel);
@@ -205,19 +206,14 @@ public class ResolverActivity extends AppCompatActivity implements
         });
     }
 
-    @LayoutRes
-    private int layoutRes() {
-        return intentResolver.hasFilteredItem() ? R.layout.resolver_list_with_default : R.layout.resolver_list;
-    }
-
-    private void setupList() {
+    private void setupList(boolean hasFilteredItem) {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.resolver_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         adapter.setItemClickListener(this);
         adapter.setItemLongClickListener(this);
         adapter.setSelectionEnabled(shouldUseAlwaysOption);
-        adapter.setDisplayHeader(intentResolver.hasFilteredItem());
+        adapter.setDisplayHeader(hasFilteredItem);
         adapter.setDisplayExtendedInfo(intentResolver.shouldShowExtended());
 
         recyclerView.setAdapter(adapter);

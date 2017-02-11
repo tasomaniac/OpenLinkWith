@@ -61,13 +61,6 @@ public class IntentResolver {
         return filteredItem;
     }
 
-    /**
-     * true if one of the items is filtered and stays at the top header
-     */
-    boolean hasFilteredItem() {
-        return filteredItem != null;
-    }
-
     public boolean shouldShowExtended() {
         return mShowExtended;
     }
@@ -87,6 +80,10 @@ public class IntentResolver {
     }
 
     public void rebuildList() {
+        listener.onIntentResolved(doResolve(), filteredItem);
+    }
+
+    private List<DisplayResolveInfo> doResolve() {
         filteredItem = null;
         int flag;
         if (SDK_INT >= M) {
