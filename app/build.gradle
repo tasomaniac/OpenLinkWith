@@ -3,6 +3,7 @@ apply plugin: 'com.novoda.build-properties'
 apply plugin: 'com.jakewharton.hugo'
 apply plugin: 'com.github.triplet.play'
 apply plugin: 'io.fabric'
+apply plugin: 'me.tatarka.retrolambda'
 
 def signingFile = file('props/release.signing')
 buildProperties {
@@ -47,6 +48,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     productFlavors {

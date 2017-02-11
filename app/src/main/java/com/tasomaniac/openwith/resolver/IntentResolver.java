@@ -17,9 +17,6 @@ import java.util.List;
 
 import dagger.Lazy;
 import io.reactivex.Single;
-import io.reactivex.SingleSource;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 import okhttp3.HttpUrl;
 
 import static android.os.Build.VERSION.SDK_INT;
@@ -86,38 +83,22 @@ public class IntentResolver {
 
     public void rebuildList() {
         Single.just(sourceIntent)
-                .flatMap(new Function<Intent, SingleSource<Intent>>() {
-                    @Override
-                    public SingleSource<Intent> apply(Intent intent) throws Exception {
-                        HttpUrl url = HttpUrl.parse(intent.getDataString());
-                        return url == null ?
-                                Single.just(intent) :
-                                followRedirects(url);
-                    }
-                })
-                .map(new Function<Intent, List<DisplayResolveInfo>>() {
-                    @Override
-                    public List<DisplayResolveInfo> apply(Intent intent) throws Exception {
-                        return doResolve(intent);
-                    }
-                })
-                .compose(schedulingStrategy.<List<DisplayResolveInfo>>applyToSingle())
-                .subscribe(new Consumer<List<DisplayResolveInfo>>() {
-                    @Override
-                    public void accept(List<DisplayResolveInfo> resolvedList) throws Exception {
-                        listener.onIntentResolved(resolvedList, filteredItem, mShowExtended);
-                    }
+                .flatMap(this::followRedirectsIfHttpUrl)
+                .map(this::doResolve)
+                .compose(schedulingStrategy.applyToSingle())
+                .subscribe(resolvedList -> {
+                    listener.onIntentResolved(resolvedList, filteredItem, mShowExtended);
                 });
+    }
+
+    private Single<Intent> followRedirectsIfHttpUrl(Intent intent) {
+        HttpUrl url = HttpUrl.parse(intent.getDataString());
+        return url == null ? Single.just(intent) : followRedirects(url);
     }
 
     private Single<Intent> followRedirects(HttpUrl url) {
         return redirectFixer.followRedirects(url)
-                .map(new Function<HttpUrl, Intent>() {
-                    @Override
-                    public Intent apply(HttpUrl httpUrl) throws Exception {
-                        return sourceIntent.setData(Uri.parse(httpUrl.toString()));
-                    }
-                });
+                .map(httpUrl -> sourceIntent.setData(Uri.parse(httpUrl.toString())));
     }
 
     private List<DisplayResolveInfo> doResolve(Intent sourceIntent) {
@@ -315,11 +296,8 @@ public class IntentResolver {
     interface Listener {
         void onIntentResolved(List<DisplayResolveInfo> list, @Nullable DisplayResolveInfo filteredItem, boolean showExtended);
 
-        Listener NO_OP = new Listener() {
-            @Override
-            public void onIntentResolved(List<DisplayResolveInfo> list, @Nullable DisplayResolveInfo filteredItem, boolean showExtended) {
-                // no-op
-            }
+        Listener NO_OP = (list, filteredItem1, showExtended) -> {
+            // no-op
         };
     }
 }

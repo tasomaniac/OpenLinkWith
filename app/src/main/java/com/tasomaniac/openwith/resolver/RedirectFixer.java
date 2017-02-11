@@ -4,10 +4,8 @@ import com.tasomaniac.openwith.rx.SchedulingStrategy;
 
 import javax.inject.Inject;
 import java.io.IOException;
-import java.util.concurrent.Callable;
 
 import io.reactivex.Single;
-import io.reactivex.functions.Action;
 import okhttp3.Call;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -30,23 +28,10 @@ public class RedirectFixer {
 
     public Single<HttpUrl> followRedirects(final HttpUrl url) {
         return Single
-                .fromCallable(new Callable<HttpUrl>() {
-                    @Override
-                    public HttpUrl call() {
-                        try {
-                            return doFollowRedirects(url);
-                        } catch (IOException e) {
-                            return url;
-                        }
-                    }
-                })
-                .doOnDispose(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        cancel();
-                    }
-                })
-                .compose(scheduling.<HttpUrl>applyToSingle());
+                .fromCallable(() -> doFollowRedirects(url))
+                .onErrorReturnItem(url)
+                .doOnDispose(this::cancel)
+                .compose(scheduling.applyToSingle());
     }
 
     private HttpUrl doFollowRedirects(HttpUrl url) throws IOException {

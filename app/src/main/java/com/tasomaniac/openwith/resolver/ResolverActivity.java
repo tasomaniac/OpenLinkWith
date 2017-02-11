@@ -15,7 +15,6 @@
  */
 package com.tasomaniac.openwith.resolver;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
@@ -118,13 +117,6 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
         super.onDestroy();
     }
 
-    private ResolverComponent component(Intent sourceIntent, @Nullable ComponentName lastChosenComponent) {
-        return DaggerResolverComponent.builder()
-                .appComponent(Injector.obtain(this))
-                .resolverModule(new ResolverModule(this, sourceIntent, lastChosenComponent))
-                .build();
-    }
-
     @Override
     public void setResolvedList(List<DisplayResolveInfo> list) {
         adapter.mList.clear();
@@ -137,20 +129,12 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
         int layout = hasFilteredItem ? R.layout.resolver_list_with_default : R.layout.resolver_list;
         getLayoutInflater().inflate(layout, rootView);
         setupList(hasFilteredItem, shouldDisplayExtendedInfo);
-        final ResolverDrawerLayout rdl = (ResolverDrawerLayout) findViewById(R.id.contentPanel);
-        rdl.setOnDismissedListener(new ResolverDrawerLayout.OnDismissedListener() {
-            @Override
-            public void onDismissed() {
-                finish();
-            }
-        });
-        progress.hide(true, new Runnable() {
-            @Override
-            public void run() {
-                rdl.setVisibility(View.VISIBLE);
-                rdl.setAlpha(0.0f);
-                rdl.animate().alpha(1.0f);
-            }
+        ResolverDrawerLayout rdl = (ResolverDrawerLayout) findViewById(R.id.contentPanel);
+        rdl.setOnDismissedListener(this::finish);
+        progress.hide(true, () -> {
+            rdl.setVisibility(View.VISIBLE);
+            rdl.setAlpha(0.0f);
+            rdl.animate().alpha(1.0f);
         });
     }
 
