@@ -73,9 +73,11 @@ play {
 }
 
 dependencies {
-    def supportLibVersion = "25.1.0"
+    def supportLibVersion = '25.1.1'
     def schematicVersion = '0.7.0'
     def butterKnifeVersion = '8.4.0'
+    def okHttpVersion = '3.5.0'
+    def rxJavaVersion = '2.0.1'
 
     compile "com.android.support:support-v4:$supportLibVersion"
     compile "com.android.support:appcompat-v7:$supportLibVersion"
@@ -97,9 +99,13 @@ dependencies {
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
     compile 'com.jakewharton.timber:timber:4.5.1'
 
-    compile 'com.squareup.okhttp3:okhttp:3.5.0'
+    compile "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    compile "io.reactivex.rxjava2:rxandroid:$rxJavaVersion"
+    compile "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
 
     playCompile 'com.crashlytics.sdk.android:crashlytics:2.6.6'
 
     testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:2.7.5'
+    testCompile "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
 }
