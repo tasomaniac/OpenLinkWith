@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ShareCompat;
 
 import com.tasomaniac.openwith.PerActivity;
+import com.tasomaniac.openwith.rx.SchedulingStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +20,8 @@ import java.util.concurrent.TimeUnit;
 import dagger.Lazy;
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.LOLLIPOP_MR1;
@@ -46,6 +49,11 @@ class ResolverModule {
     }
 
     @Provides
+    static SchedulingStrategy schedulingStrategy() {
+        return new SchedulingStrategy(Schedulers.io(), AndroidSchedulers.mainThread());
+    }
+
+    @Provides
     static Resources resources(Application app) {
         return app.getResources();
     }
@@ -66,9 +74,9 @@ class ResolverModule {
     }
 
     @Provides
-    IntentResolver intentResolver(Lazy<ResolverComparator> resolverComparator) {
+    IntentResolver intentResolver(RedirectFixer redirectFixer, SchedulingStrategy schedulingStrategy, Lazy<ResolverComparator> resolverComparator) {
         String callerPackage = ShareCompat.getCallingPackage(activity);
-        return new IntentResolver(activity.getPackageManager(), resolverComparator, sourceIntent, callerPackage, lastChosenComponent);
+        return new IntentResolver(redirectFixer, activity.getPackageManager(), resolverComparator, schedulingStrategy, sourceIntent, callerPackage, lastChosenComponent);
     }
 
     @Provides

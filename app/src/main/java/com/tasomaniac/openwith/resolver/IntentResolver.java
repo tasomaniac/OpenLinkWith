@@ -8,12 +8,19 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
+import com.tasomaniac.openwith.rx.SchedulingStrategy;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
 import dagger.Lazy;
+import io.reactivex.Single;
+import io.reactivex.SingleSource;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import okhttp3.HttpUrl;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.M;
@@ -29,8 +36,10 @@ public class IntentResolver {
         BROWSER_INTENT.setData(Uri.parse("http:"));
     }
 
+    private final RedirectFixer redirectFixer;
     private final PackageManager packageManager;
     private final Lazy<ResolverComparator> resolverComparator;
+    private final SchedulingStrategy schedulingStrategy;
     private final Intent sourceIntent;
     private final String callerPackage;
     @Nullable private final ComponentName lastChosenComponent;
@@ -39,13 +48,17 @@ public class IntentResolver {
     @Nullable private DisplayResolveInfo filteredItem;
     private Listener listener = Listener.NO_OP;
 
-    public IntentResolver(PackageManager packageManager,
+    public IntentResolver(RedirectFixer redirectFixer,
+                          PackageManager packageManager,
                           Lazy<ResolverComparator> resolverComparator,
+                          SchedulingStrategy schedulingStrategy,
                           Intent sourceIntent,
                           String callerPackage,
                           @Nullable ComponentName lastChosenComponent) {
+        this.redirectFixer = redirectFixer;
         this.packageManager = packageManager;
         this.resolverComparator = resolverComparator;
+        this.schedulingStrategy = schedulingStrategy;
         this.sourceIntent = sourceIntent;
         this.callerPackage = callerPackage;
         this.lastChosenComponent = lastChosenComponent;
@@ -72,10 +85,42 @@ public class IntentResolver {
     }
 
     public void rebuildList() {
-        listener.onIntentResolved(doResolve(), filteredItem, mShowExtended);
+        Single.just(sourceIntent)
+                .flatMap(new Function<Intent, SingleSource<Intent>>() {
+                    @Override
+                    public SingleSource<Intent> apply(Intent intent) throws Exception {
+                        HttpUrl url = HttpUrl.parse(intent.getDataString());
+                        return url == null ?
+                                Single.just(intent) :
+                                followRedirects(url);
+                    }
+                })
+                .map(new Function<Intent, List<DisplayResolveInfo>>() {
+                    @Override
+                    public List<DisplayResolveInfo> apply(Intent intent) throws Exception {
+                        return doResolve(intent);
+                    }
+                })
+                .compose(schedulingStrategy.<List<DisplayResolveInfo>>applyToSingle())
+                .subscribe(new Consumer<List<DisplayResolveInfo>>() {
+                    @Override
+                    public void accept(List<DisplayResolveInfo> resolvedList) throws Exception {
+                        listener.onIntentResolved(resolvedList, filteredItem, mShowExtended);
+                    }
+                });
     }
 
-    private List<DisplayResolveInfo> doResolve() {
+    private Single<Intent> followRedirects(HttpUrl url) {
+        return redirectFixer.followRedirects(url)
+                .map(new Function<HttpUrl, Intent>() {
+                    @Override
+                    public Intent apply(HttpUrl httpUrl) throws Exception {
+                        return sourceIntent.setData(Uri.parse(httpUrl.toString()));
+                    }
+                });
+    }
+
+    private List<DisplayResolveInfo> doResolve(Intent sourceIntent) {
         filteredItem = null;
         int flag;
         if (SDK_INT >= M) {

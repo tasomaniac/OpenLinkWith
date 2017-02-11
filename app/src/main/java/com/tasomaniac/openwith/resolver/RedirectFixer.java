@@ -2,6 +2,7 @@ package com.tasomaniac.openwith.resolver;
 
 import com.tasomaniac.openwith.rx.SchedulingStrategy;
 
+import javax.inject.Inject;
 import java.io.IOException;
 import java.util.concurrent.Callable;
 
@@ -19,6 +20,7 @@ public class RedirectFixer {
 
     private Call call;
 
+    @Inject
     public RedirectFixer(OkHttpClient client, SchedulingStrategy scheduling) {
         this.client = client.newBuilder()
                 .followRedirects(false)
