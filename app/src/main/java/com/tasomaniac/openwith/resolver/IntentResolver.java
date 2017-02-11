@@ -199,7 +199,7 @@ public class IntentResolver {
      * Taken from AOSP, don't try to understand what's going on.
      */
     private void processGroup(List<DisplayResolveInfo> grouped,
-                              List<ResolveInfo> rList,
+                              List<ResolveInfo> current,
                               int start,
                               int end,
                               ResolveInfo ro,
@@ -226,7 +226,7 @@ public class IntentResolver {
                 HashSet<CharSequence> duplicates = new HashSet<>();
                 duplicates.add(startApp);
                 for (int j = start + 1; j <= end; j++) {
-                    ResolveInfo jRi = rList.get(j);
+                    ResolveInfo jRi = current.get(j);
                     CharSequence jApp = jRi.activityInfo.applicationInfo.loadLabel(packageManager);
                     if ((jApp == null) || (duplicates.contains(jApp))) {
                         usePkg = true;
@@ -239,7 +239,7 @@ public class IntentResolver {
                 duplicates.clear();
             }
             for (int k = start; k <= end; k++) {
-                ResolveInfo add = rList.get(k);
+                ResolveInfo add = current.get(k);
                 DisplayResolveInfo dri = displayResolveInfoToAdd(usePkg, add, displayLabel);
                 if (isLastChosenPosition(add)) {
                     filteredItem = dri;

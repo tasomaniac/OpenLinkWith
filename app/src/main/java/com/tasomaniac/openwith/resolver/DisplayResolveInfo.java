@@ -28,17 +28,32 @@ public final class DisplayResolveInfo implements Parcelable {
     }
 
     Intent intentFrom(Intent sourceIntent) {
-        Intent intent = new Intent(sourceIntent);
-        intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
-                                | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
-        if (ri != null) {
-            ActivityInfo ai = ri.activityInfo;
-            if (ai != null) {
-                intent.setComponent(new ComponentName(
-                        ai.applicationInfo.packageName, ai.name));
-            }
+        return new Intent(sourceIntent)
+                .setComponent(componentName())
+                .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
+                                  | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+    }
+
+    private ComponentName componentName() {
+        ActivityInfo ai = ri.activityInfo;
+        return new ComponentName(ai.applicationInfo.packageName, ai.name);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
         }
-        return intent;
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        DisplayResolveInfo that = (DisplayResolveInfo) o;
+        return componentName().equals(that.componentName());
+    }
+
+    @Override
+    public int hashCode() {
+        return componentName().hashCode();
     }
 
     @Override
