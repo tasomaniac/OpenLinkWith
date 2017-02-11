@@ -55,7 +55,10 @@ class ResolverModule {
     @Provides
     ResolverPresenter resolverPresenter(Resources resources, IntentResolver intentResolver, LastSelectedHolder lastSelectedHolder) {
         boolean isAddToHomeScreen = sourceIntent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
-        return new ResolverPresenter(resources, intentResolver, lastSelectedHolder, isAddToHomeScreen);
+        if (isAddToHomeScreen) {
+            return new HomeScreenResolverPresenter(resources, intentResolver);
+        }
+        return new DefaultResolverPresenter(resources, intentResolver, lastSelectedHolder);
     }
 
     @Provides
