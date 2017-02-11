@@ -121,33 +121,14 @@ public class IntentResolver {
             removePackageFromList(callerPackage, currentResolveList);
         }
 
-        int N = currentResolveList.size();
-        if (N > 0) {
-            // Only display the first matches that are either of equal
-            // priority or have asked to be default options.
-            ResolveInfo r0 = currentResolveList.get(0);
-            for (int i = 1; i < N; i++) {
-                ResolveInfo ri = currentResolveList.get(i);
-
-                if (r0.priority != ri.priority ||
-                        r0.isDefault != ri.isDefault) {
-                    while (i < N) {
-                        currentResolveList.remove(i);
-                        N--;
-                    }
-                }
-            }
-
-            //If there is no left, return
-            if (N <= 0) {
-                return Collections.emptyList();
-            }
-            if (N > 1) {
-                Collections.sort(currentResolveList, resolverComparator.get());
-            }
-            return groupResolveList(currentResolveList);
+        int size = currentResolveList.size();
+        if (size <= 0) {
+            return Collections.emptyList();
         }
-        return Collections.emptyList();
+        if (size > 1) {
+            Collections.sort(currentResolveList, resolverComparator.get());
+        }
+        return groupResolveList(currentResolveList);
     }
 
     private static void removePackageFromList(final String packageName, List<ResolveInfo> currentResolveList) {
