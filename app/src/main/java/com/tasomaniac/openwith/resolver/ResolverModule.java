@@ -41,6 +41,11 @@ class ResolverModule {
     }
 
     @Provides
+    Intent intent() {
+        return sourceIntent;
+    }
+
+    @Provides
     static Resources resources(Application app) {
         return app.getResources();
     }

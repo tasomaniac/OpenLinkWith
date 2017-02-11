@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.tasomaniac.openwith.IconLoader;
 import com.tasomaniac.openwith.R;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +42,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         this(iconLoader, null);
     }
 
+    @Inject
     public ResolveListAdapter(IconLoader iconLoader, Intent sourceIntent) {
         this.iconLoader = iconLoader;
         this.sourceIntent = sourceIntent;

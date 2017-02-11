@@ -26,7 +26,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -37,6 +36,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tasomaniac.android.widget.DelayedProgressBar;
+import com.tasomaniac.openwith.ComponentActivity;
 import com.tasomaniac.openwith.IconLoader;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.Injector;
@@ -55,7 +55,7 @@ import static com.tasomaniac.openwith.util.Urls.fixUrls;
  * which there is more than one matching activity, allowing the user to decide
  * which to go to.  It is not normally used directly by application developers.
  */
-public class ResolverActivity extends AppCompatActivity implements
+public class ResolverActivity extends ComponentActivity<ResolverComponent> implements
         ItemClickListener,
         ItemLongClickListener,
         ResolverView {
@@ -71,10 +71,10 @@ public class ResolverActivity extends AppCompatActivity implements
 
     @Inject IconLoader iconLoader;
     @Inject ResolverPresenter presenter;
+    @Inject ResolveListAdapter adapter;
 
     @BindView(R.id.resolver_root) ViewGroup rootView;
     private DelayedProgressBar progress;
-    private ResolveListAdapter adapter;
     private boolean shouldUseAlwaysOption;
 
     private Button mAlwaysButton;
@@ -87,7 +87,6 @@ public class ResolverActivity extends AppCompatActivity implements
             handlePackagesChanged();
         }
     };
-    private Intent sourceIntent;
 
     private Listener listener = Listener.EMPTY;
 
@@ -95,40 +94,13 @@ public class ResolverActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.BottomSheet_Light);
         super.onCreate(savedInstanceState);
+        getComponent().inject(this);
+
         setContentView(R.layout.resolver_activity);
         ButterKnife.bind(this);
-
-        configureIntent();
-        Uri uri = sourceIntent.getData();
-        if (uri == null) {
-            finish();
-            return;
-        }
-        boolean isAddToHomeScreen = sourceIntent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
-        PreferredResolver preferredResolver = PreferredResolver.createFrom(this);
-        if (!isAddToHomeScreen) {
-            preferredResolver.resolve(uri);
-            if (preferredResolver.startPreferred(this)) {
-                finish();
-                return;
-            }
-        }
-        component(sourceIntent, preferredResolver.lastChosenComponent()).inject(this);
-        adapter = new ResolveListAdapter(iconLoader, sourceIntent);
         presenter.bind(this);
 
         registerPackageMonitor();
-    }
-
-    private void configureIntent() {
-        sourceIntent = new Intent(getIntent());
-        sourceIntent.setComponent(null);
-        // The resolver activity is set to be hidden from recent tasks.
-        // we don't want this attribute to be propagated to the next activity
-        // being launched.  Note that if the original Intent also had this
-        // flag set, we are now losing it.  That should be a very rare case
-        // and we can live with this.
-        sourceIntent.setFlags(sourceIntent.getFlags() & ~Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
     }
 
     @Override
@@ -344,6 +316,35 @@ public class ResolverActivity extends AppCompatActivity implements
     @Override
     public void setListener(@Nullable Listener listener) {
         this.listener = listener == null ? Listener.EMPTY : listener;
+    }
+
+    @Override
+    protected ResolverComponent createComponent() {
+        Intent sourceIntent = configureIntent();
+        boolean isAddToHomeScreen = sourceIntent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
+        PreferredResolver preferredResolver = PreferredResolver.createFrom(this);
+        if (!isAddToHomeScreen) {
+            preferredResolver.resolve(sourceIntent.getData());
+            if (preferredResolver.startPreferred(this)) {
+                finish();
+            }
+        }
+        return DaggerResolverComponent.builder()
+                .appComponent(Injector.obtain(this))
+                .resolverModule(new ResolverModule(this, sourceIntent, preferredResolver.lastChosenComponent()))
+                .build();
+    }
+
+    private Intent configureIntent() {
+        Intent sourceIntent = new Intent(getIntent());
+        sourceIntent.setComponent(null);
+        // The resolver activity is set to be hidden from recent tasks.
+        // we don't want this attribute to be propagated to the next activity
+        // being launched.  Note that if the original Intent also had this
+        // flag set, we are now losing it.  That should be a very rare case
+        // and we can live with this.
+        sourceIntent.setFlags(sourceIntent.getFlags() & ~Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        return sourceIntent;
     }
 
     private static class LoadIconIntoViewTask extends AsyncTask<DisplayResolveInfo, Void, Drawable> {
