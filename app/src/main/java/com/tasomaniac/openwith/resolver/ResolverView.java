@@ -12,11 +12,13 @@ interface ResolverView {
 
     void setListener(@Nullable Listener listener);
 
-    void startSelected(DisplayResolveInfo dri, boolean always);
+    void startSelected(Intent intent);
 
     void startWithMessage(Intent intent, CharSequence appLabel);
 
     void enableActionButtons();
+
+    void setupActionButtons();
 
     void setTitle(String title);
 
@@ -25,6 +27,8 @@ interface ResolverView {
     void setupList(DisplayResolveInfo filteredItem, boolean shouldDisplayExtendedInfo);
 
     void setupFilteredView(DisplayResolveInfo filteredItem);
+
+    void enableListSelection(boolean value);
 
     void toast(@StringRes int titleRes);
 

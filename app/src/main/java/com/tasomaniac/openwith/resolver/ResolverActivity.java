@@ -16,7 +16,6 @@
 package com.tasomaniac.openwith.resolver;
 
 import android.content.ComponentName;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
@@ -41,7 +40,6 @@ import com.tasomaniac.android.widget.DelayedProgressBar;
 import com.tasomaniac.openwith.IconLoader;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.Injector;
-import com.tasomaniac.openwith.homescreen.AddToHomeScreenDialogFragment;
 import com.tasomaniac.openwith.util.Intents;
 
 import javax.inject.Inject;
@@ -49,10 +47,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import timber.log.Timber;
 
-import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.*;
-import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.CONTENT_URI;
 import static com.tasomaniac.openwith.util.Urls.fixUrls;
 
 /**
@@ -75,14 +70,12 @@ public class ResolverActivity extends AppCompatActivity implements
     }
 
     @Inject IconLoader iconLoader;
-    @Inject ChooserHistory history;
     @Inject ResolverPresenter presenter;
 
     @BindView(R.id.resolver_root) ViewGroup rootView;
     private DelayedProgressBar progress;
     private ResolveListAdapter adapter;
     private boolean shouldUseAlwaysOption;
-    private boolean isAddToHomeScreen;
 
     private Button mAlwaysButton;
     private Button mOnceButton;
@@ -111,7 +104,7 @@ public class ResolverActivity extends AppCompatActivity implements
             finish();
             return;
         }
-        isAddToHomeScreen = sourceIntent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
+        boolean isAddToHomeScreen = sourceIntent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
         PreferredResolver preferredResolver = PreferredResolver.createFrom(this);
         if (!isAddToHomeScreen) {
             preferredResolver.resolve(uri);
@@ -169,15 +162,9 @@ public class ResolverActivity extends AppCompatActivity implements
     @Override
     public void setupList(DisplayResolveInfo filteredItem, boolean shouldDisplayExtendedInfo) {
         boolean hasFilteredItem = filteredItem != null;
-
-        shouldUseAlwaysOption = !isAddToHomeScreen && !hasFilteredItem;
-
         int layout = hasFilteredItem ? R.layout.resolver_list_with_default : R.layout.resolver_list;
         getLayoutInflater().inflate(layout, rootView);
         setupList(hasFilteredItem, shouldDisplayExtendedInfo);
-        if (!isAddToHomeScreen) {
-            setupButtons();
-        }
         final ResolverDrawerLayout rdl = (ResolverDrawerLayout) findViewById(R.id.contentPanel);
         rdl.setOnDismissedListener(new ResolverDrawerLayout.OnDismissedListener() {
             @Override
@@ -201,18 +188,16 @@ public class ResolverActivity extends AppCompatActivity implements
 
         adapter.setItemClickListener(this);
         adapter.setItemLongClickListener(this);
-        adapter.setSelectionEnabled(shouldUseAlwaysOption);
         adapter.setDisplayHeader(hasFilteredItem);
         adapter.setDisplayExtendedInfo(shouldDisplayExtendedInfo);
 
         recyclerView.setAdapter(adapter);
     }
 
-    private void setupButtons() {
-        ViewGroup buttonLayout = (ViewGroup) findViewById(R.id.button_bar);
-        buttonLayout.setVisibility(View.VISIBLE);
-        mAlwaysButton = (Button) buttonLayout.findViewById(R.id.button_always);
-        mOnceButton = (Button) buttonLayout.findViewById(R.id.button_once);
+    @Override
+    public void enableListSelection(boolean value) {
+        shouldUseAlwaysOption = value;
+        adapter.setSelectionEnabled(value);
     }
 
     @Override
@@ -227,6 +212,14 @@ public class ResolverActivity extends AppCompatActivity implements
         if (iconView != null) {
             new LoadIconIntoViewTask(iconLoader, iconView).execute(filteredItem);
         }
+    }
+
+    @Override
+    public void setupActionButtons() {
+        ViewGroup buttonLayout = (ViewGroup) findViewById(R.id.button_bar);
+        buttonLayout.setVisibility(View.VISIBLE);
+        mAlwaysButton = (Button) buttonLayout.findViewById(R.id.button_always);
+        mOnceButton = (Button) buttonLayout.findViewById(R.id.button_once);
     }
 
     private void dismiss() {
@@ -307,20 +300,12 @@ public class ResolverActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void startSelected(DisplayResolveInfo dri, boolean always) {
+    public void startSelected(Intent intent) {
         if (isFinishing()) {
             return;
         }
-        Intent intent = dri.intentFrom(sourceIntent);
-        if (isAddToHomeScreen) {
-            AddToHomeScreenDialogFragment
-                    .newInstance(dri, intent)
-                    .show(getSupportFragmentManager());
-        } else {
-            persistSelectedIntent(intent, always);
-            Intents.startActivityFixingIntent(this, intent);
-            finish();
-        }
+        Intents.startActivityFixingIntent(this, intent);
+        finish();
     }
 
     @Override
@@ -334,28 +319,6 @@ public class ResolverActivity extends AppCompatActivity implements
     public void enableActionButtons() {
         mAlwaysButton.setEnabled(true);
         mOnceButton.setEnabled(true);
-    }
-
-    private void persistSelectedIntent(Intent intent, boolean alwaysCheck) {
-        if (intent.getComponent() == null) {
-            return;
-        }
-        ContentValues values = new ContentValues(4);
-        values.put(HOST, intent.getData().getHost());
-        values.put(COMPONENT, intent.getComponent().flattenToString());
-
-        if (alwaysCheck) {
-            values.put(PREFERRED, true);
-        }
-        values.put(LAST_CHOSEN, true);
-        try {
-            getContentResolver().insert(CONTENT_URI, values);
-        } catch (Exception e) {
-            Timber.e(e, "Error while saving selected Intent");
-        }
-
-        history.add(intent.getComponent().getPackageName());
-        history.save(this);
     }
 
     @Override

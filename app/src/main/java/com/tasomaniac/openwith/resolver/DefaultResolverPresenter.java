@@ -1,5 +1,8 @@
 package com.tasomaniac.openwith.resolver;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.annotation.Nullable;
 
@@ -9,14 +12,21 @@ import java.util.List;
 
 import timber.log.Timber;
 
+import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.*;
+import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.CONTENT_URI;
+
 class DefaultResolverPresenter implements ResolverPresenter {
 
     private final Resources resources;
+    private final ChooserHistory history;
+    private final ContentResolver contentResolver;
     private final IntentResolver intentResolver;
     private final LastSelectedHolder lastSelectedHolder;
 
-    DefaultResolverPresenter(Resources resources, IntentResolver intentResolver, LastSelectedHolder lastSelectedHolder) {
+    DefaultResolverPresenter(Resources resources, ChooserHistory history, ContentResolver contentResolver, IntentResolver intentResolver, LastSelectedHolder lastSelectedHolder) {
         this.resources = resources;
+        this.history = history;
+        this.contentResolver = contentResolver;
         this.intentResolver = intentResolver;
         this.lastSelectedHolder = lastSelectedHolder;
     }
@@ -64,9 +74,12 @@ class DefaultResolverPresenter implements ResolverPresenter {
             view.setResolvedList(list);
             view.setupList(filteredItem, showExtended);
             view.setTitle(titleForAction(filteredItem));
-            if (filteredItem != null) {
+            if (hasFilteredItem) {
                 view.setupFilteredView(filteredItem);
+
             }
+            view.enableListSelection(!hasFilteredItem);
+            view.setupActionButtons();
         }
 
         private String titleForAction(DisplayResolveInfo item) {
@@ -90,7 +103,32 @@ class DefaultResolverPresenter implements ResolverPresenter {
 
         @Override
         public void onActionButtonClick(boolean always) {
-            view.startSelected(shouldUseAlwaysOption() ? lastSelectedHolder.lastSelected : intentResolver.getFilteredItem(), always);
+            DisplayResolveInfo dri = shouldUseAlwaysOption() ? lastSelectedHolder.lastSelected : intentResolver.getFilteredItem();
+            Intent intent = dri.intentFrom(intentResolver.getSourceIntent());
+            view.startSelected(intent);
+            persistSelectedIntent(intent, always);
+        }
+
+        private void persistSelectedIntent(Intent intent, boolean alwaysCheck) {
+            if (intent.getComponent() == null) {
+                return;
+            }
+            ContentValues values = new ContentValues(4);
+            values.put(HOST, intent.getData().getHost());
+            values.put(COMPONENT, intent.getComponent().flattenToString());
+
+            if (alwaysCheck) {
+                values.put(PREFERRED, true);
+            }
+            values.put(LAST_CHOSEN, true);
+            try {
+                contentResolver.insert(CONTENT_URI, values);
+            } catch (Exception e) {
+                Timber.e(e, "Error while saving selected Intent");
+            }
+
+            history.add(intent.getComponent().getPackageName());
+            history.save();
         }
 
         @Override
@@ -99,7 +137,8 @@ class DefaultResolverPresenter implements ResolverPresenter {
                 view.enableActionButtons();
                 lastSelectedHolder.lastSelected = dri;
             } else {
-                view.startSelected(dri, false);
+                Intent intent = dri.intentFrom(intentResolver.getSourceIntent());
+                view.startSelected(intent);
             }
         }
 

@@ -1,6 +1,5 @@
 package com.tasomaniac.openwith.resolver;
 
-import android.app.Activity;
 import android.app.Application;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
@@ -30,12 +29,12 @@ class ResolverModule {
 
     private static final long USAGE_STATS_PERIOD = TimeUnit.DAYS.toMillis(14);
 
-    private final Activity activity;
+    private final ResolverActivity activity;
     private final Intent sourceIntent;
     @Nullable
     private final ComponentName lastChosenComponent;
 
-    ResolverModule(Activity activity, Intent sourceIntent, @Nullable ComponentName lastChosenComponent) {
+    ResolverModule(ResolverActivity activity, Intent sourceIntent, @Nullable ComponentName lastChosenComponent) {
         this.activity = activity;
         this.sourceIntent = sourceIntent;
         this.lastChosenComponent = lastChosenComponent;
@@ -53,12 +52,12 @@ class ResolverModule {
     }
 
     @Provides
-    ResolverPresenter resolverPresenter(Resources resources, IntentResolver intentResolver, LastSelectedHolder lastSelectedHolder) {
+    ResolverPresenter resolverPresenter(Resources resources, ChooserHistory history, IntentResolver intentResolver, LastSelectedHolder lastSelectedHolder) {
         boolean isAddToHomeScreen = sourceIntent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
         if (isAddToHomeScreen) {
-            return new HomeScreenResolverPresenter(resources, intentResolver);
+            return new HomeScreenResolverPresenter(resources, intentResolver, activity.getSupportFragmentManager());
         }
-        return new DefaultResolverPresenter(resources, intentResolver, lastSelectedHolder);
+        return new DefaultResolverPresenter(resources, history, activity.getContentResolver(), intentResolver, lastSelectedHolder);
     }
 
     @Provides

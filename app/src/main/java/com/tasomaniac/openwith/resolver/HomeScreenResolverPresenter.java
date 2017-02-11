@@ -1,9 +1,12 @@
 package com.tasomaniac.openwith.resolver;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 
 import com.tasomaniac.openwith.R;
+import com.tasomaniac.openwith.homescreen.AddToHomeScreenDialogFragment;
 
 import java.util.List;
 
@@ -13,10 +16,12 @@ class HomeScreenResolverPresenter implements ResolverPresenter {
 
     private final Resources resources;
     private final IntentResolver intentResolver;
+    private final FragmentManager fragmentManager;
 
-    HomeScreenResolverPresenter(Resources resources, IntentResolver intentResolver) {
+    HomeScreenResolverPresenter(Resources resources, IntentResolver intentResolver, FragmentManager fragmentManager) {
         this.resources = resources;
         this.intentResolver = intentResolver;
+        this.fragmentManager = fragmentManager;
     }
 
     @Override
@@ -54,9 +59,6 @@ class HomeScreenResolverPresenter implements ResolverPresenter {
             view.setResolvedList(list);
             view.setupList(filteredItem, showExtended);
             view.setTitle(resources.getString(R.string.add_to_homescreen));
-            if (filteredItem != null) {
-                view.setupFilteredView(filteredItem);
-            }
         }
 
     }
@@ -78,7 +80,10 @@ class HomeScreenResolverPresenter implements ResolverPresenter {
 
         @Override
         public void onItemClick(DisplayResolveInfo dri) {
-            view.startSelected(dri, false);
+            Intent intent = dri.intentFrom(intentResolver.getSourceIntent());
+            AddToHomeScreenDialogFragment
+                    .newInstance(dri, intent)
+                    .show(fragmentManager);
         }
 
         @Override

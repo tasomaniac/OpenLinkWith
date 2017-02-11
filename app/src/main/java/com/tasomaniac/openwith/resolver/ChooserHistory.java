@@ -14,14 +14,16 @@ class ChooserHistory {
     private static final String SEPARATOR_KEY_VALUE_ESCAPED = "\\|";
     private static final char SEPARATOR_ITEMS = '#';
 
+    private final SharedPreferences preferences;
     private final HashMap<String, Integer> mHistoryMap = new HashMap<>();
 
     static ChooserHistory fromSettings(Context context) {
-        return fromSettings(getPreferences(context).getString(KEY_HISTORY, ""));
+        return fromSettings(getPreferences(context));
     }
 
-    static ChooserHistory fromSettings(String saveString) {
-        ChooserHistory history = new ChooserHistory();
+    static ChooserHistory fromSettings(SharedPreferences preferences) {
+        ChooserHistory history = new ChooserHistory(preferences);
+        String saveString = preferences.getString(KEY_HISTORY, "");
         if (saveString.isEmpty()) {
             return history;
         }
@@ -36,8 +38,8 @@ class ChooserHistory {
         return history;
     }
 
-    private ChooserHistory() {
-        //no instance
+    private ChooserHistory(SharedPreferences preferences) {
+        this.preferences = preferences;
     }
 
     int get(String packageName) {
@@ -54,9 +56,8 @@ class ChooserHistory {
         }
     }
 
-    void save(Context context) {
-        SharedPreferences prefs = getPreferences(context);
-        prefs.edit().putString(KEY_HISTORY, getAsSaveString()).apply();
+    void save() {
+        preferences.edit().putString(KEY_HISTORY, getAsSaveString()).apply();
     }
 
     String getAsSaveString() {
