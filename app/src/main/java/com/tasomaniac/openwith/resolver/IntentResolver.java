@@ -112,7 +112,7 @@ class IntentResolver {
         flag = flag | PackageManager.GET_RESOLVED_FILTER;
 
         List<ResolveInfo> currentResolveList = new ArrayList<>(packageManager.queryIntentActivities(sourceIntent, flag));
-        if (SDK_INT >= M) {
+        if (isBrowserIntent(sourceIntent) && SDK_INT >= M) {
             addBrowsersToList(currentResolveList, flag);
         }
 
@@ -129,6 +129,10 @@ class IntentResolver {
             Collections.sort(currentResolveList, resolverComparator.get());
         }
         return groupResolveList(currentResolveList);
+    }
+
+    private boolean isBrowserIntent(Intent intent) {
+        return HttpUrl.parse(intent.getDataString()) != null;
     }
 
     private static void removePackageFromList(final String packageName, List<ResolveInfo> currentResolveList) {
