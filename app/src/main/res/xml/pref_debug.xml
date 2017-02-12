@@ -20,6 +20,14 @@
       android:key="@string/pref_key_debug_play"
       android:title="@string/pref_title_debug_play" />
 
+    <Preference
+      android:key="@string/pref_key_debug_redirect"
+      android:title="@string/pref_title_debug_redirect" />
+
+    <Preference
+      android:key="@string/pref_key_debug_non_http"
+      android:title="@string/pref_title_debug_non_http" />
+
   </PreferenceCategory>
 
 </PreferenceScreen>
