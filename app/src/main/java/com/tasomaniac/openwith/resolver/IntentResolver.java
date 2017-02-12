@@ -42,16 +42,17 @@ class IntentResolver {
     @Nullable private final ComponentName lastChosenComponent;
 
     private boolean showExtended;
+    private boolean onlyBrowsers;
     @Nullable private DisplayResolveInfo filteredItem;
     private Listener listener = Listener.NO_OP;
 
     IntentResolver(RedirectFixer redirectFixer,
-                          PackageManager packageManager,
-                          Lazy<ResolverComparator> resolverComparator,
-                          SchedulingStrategy schedulingStrategy,
-                          Intent sourceIntent,
-                          String callerPackage,
-                          @Nullable ComponentName lastChosenComponent) {
+                   PackageManager packageManager,
+                   Lazy<ResolverComparator> resolverComparator,
+                   SchedulingStrategy schedulingStrategy,
+                   Intent sourceIntent,
+                   String callerPackage,
+                   @Nullable ComponentName lastChosenComponent) {
         this.redirectFixer = redirectFixer;
         this.packageManager = packageManager;
         this.resolverComparator = resolverComparator;
@@ -83,16 +84,14 @@ class IntentResolver {
 
     void resolve() {
         Single.just(sourceIntent)
-                .flatMap(this::followRedirectsIfHttpUrl)
                 .map(this::doResolve)
+                .flatMap(list -> onlyBrowsers
+                        ? redirectFixer.followRedirects(sourceIntent).map(this::doResolve)
+                        : Single.just(list))
                 .compose(schedulingStrategy.applyToSingle())
                 .subscribe(resolvedList -> {
                     listener.onIntentResolved(resolvedList, filteredItem, showExtended);
                 });
-    }
-
-    private Single<Intent> followRedirectsIfHttpUrl(Intent intent) {
-        return Intents.isHttp(intent) ? redirectFixer.followRedirects(intent) : Single.just(intent);
     }
 
     private List<DisplayResolveInfo> doResolve(Intent sourceIntent) {
@@ -107,7 +106,11 @@ class IntentResolver {
 
         List<ResolveInfo> currentResolveList = new ArrayList<>(packageManager.queryIntentActivities(sourceIntent, flag));
         if (Intents.isHttp(sourceIntent) && SDK_INT >= M) {
-            addBrowsersToList(currentResolveList, flag);
+            List<ResolveInfo> browsers = queryBrowsers(flag);
+            addBrowsersToList(currentResolveList, browsers);
+            if (browsers.size() == currentResolveList.size()) {
+                onlyBrowsers = true;
+            }
         }
 
         //Remove the components from the caller
@@ -125,39 +128,38 @@ class IntentResolver {
         return groupResolveList(currentResolveList);
     }
 
-    private static void removePackageFromList(final String packageName, List<ResolveInfo> currentResolveList) {
-        List<ResolveInfo> infosToRemoved = new ArrayList<>();
-        for (ResolveInfo info : currentResolveList) {
+    private static void removePackageFromList(String packageName, List<ResolveInfo> list) {
+        List<ResolveInfo> remove = new ArrayList<>();
+        for (ResolveInfo info : list) {
             if (info.activityInfo.packageName.equals(packageName)) {
-                infosToRemoved.add(info);
+                remove.add(info);
             }
         }
-        currentResolveList.removeAll(infosToRemoved);
+        list.removeAll(remove);
     }
 
-    private void addBrowsersToList(List<ResolveInfo> currentResolveList, int flag) {
-        final int initialSize = currentResolveList.size();
+    private void addBrowsersToList(List<ResolveInfo> list, List<ResolveInfo> browsers) {
+        final int initialSize = list.size();
 
-        List<ResolveInfo> browsers = queryBrowserIntentActivities(flag);
         for (ResolveInfo browser : browsers) {
             boolean browserFound = false;
 
             for (int i = 0; i < initialSize; i++) {
-                ResolveInfo info = currentResolveList.get(i);
+                ResolveInfo info = list.get(i);
 
-                if (info.activityInfo.packageName.equals(browser.activityInfo.packageName)) {
+                if (DisplayResolveInfo.equals(info, browser)) {
                     browserFound = true;
                     break;
                 }
             }
 
             if (!browserFound) {
-                currentResolveList.add(browser);
+                list.add(browser);
             }
         }
     }
 
-    private List<ResolveInfo> queryBrowserIntentActivities(int flags) {
+    private List<ResolveInfo> queryBrowsers(int flags) {
         return packageManager.queryIntentActivities(BROWSER_INTENT, flags);
     }
 

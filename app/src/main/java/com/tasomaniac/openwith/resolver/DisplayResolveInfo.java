@@ -29,12 +29,12 @@ public final class DisplayResolveInfo implements Parcelable {
 
     Intent intentFrom(Intent sourceIntent) {
         return new Intent(sourceIntent)
-                .setComponent(componentName())
+    }                .setComponent(componentName(ri))
                 .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
                                   | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
     }
 
-    private ComponentName componentName() {
+    private static ComponentName componentName(ResolveInfo ri) {
         ActivityInfo ai = ri.activityInfo;
         return new ComponentName(ai.applicationInfo.packageName, ai.name);
     }
@@ -48,12 +48,16 @@ public final class DisplayResolveInfo implements Parcelable {
             return false;
         }
         DisplayResolveInfo that = (DisplayResolveInfo) o;
-        return componentName().equals(that.componentName());
+        return equals(ri, that.ri);
+    }
+
+    static boolean equals(ResolveInfo left, ResolveInfo right) {
+        return componentName(left).equals(componentName(right));
     }
 
     @Override
     public int hashCode() {
-        return componentName().hashCode();
+        return componentName(ri).hashCode();
     }
 
     @Override
