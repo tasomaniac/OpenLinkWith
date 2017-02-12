@@ -22,20 +22,12 @@ import static android.os.Build.VERSION_CODES.M;
 
 class IntentResolver {
 
-    private static final Intent BROWSER_INTENT;
     private static final int FLAG;
 
     static {
-        BROWSER_INTENT = new Intent();
-        BROWSER_INTENT.setAction(Intent.ACTION_VIEW);
-        BROWSER_INTENT.addCategory(Intent.CATEGORY_BROWSABLE);
-        BROWSER_INTENT.setData(Uri.parse("http:"));
-    }
-
-    static {
-        if(SDK_INT >= M) {
+        if (SDK_INT >= M) {
             FLAG = PackageManager.MATCH_ALL | PackageManager.GET_RESOLVED_FILTER;
-        }else{
+        } else {
             FLAG = PackageManager.MATCH_DEFAULT_ONLY | PackageManager.GET_RESOLVED_FILTER;
         }
     }
@@ -156,7 +148,11 @@ class IntentResolver {
     }
 
     private List<ResolveInfo> queryBrowsers(int flags) {
-        return packageManager.queryIntentActivities(BROWSER_INTENT, flags);
+        Intent browserIntent = new Intent()
+                .setAction(Intent.ACTION_VIEW)
+                .addCategory(Intent.CATEGORY_BROWSABLE)
+                .setData(Uri.parse("http:"));
+        return packageManager.queryIntentActivities(browserIntent, flags);
     }
 
     abstract static class State {
