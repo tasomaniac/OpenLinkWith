@@ -78,9 +78,8 @@ class DefaultResolverPresenter implements ResolverPresenter {
                 view.dismiss();
                 return;
             }
-            boolean hasFilteredItem = filteredItem != null;
             if (totalCount == 1) {
-                DisplayResolveInfo dri = hasFilteredItem ? filteredItem : list.get(0);
+                DisplayResolveInfo dri = filteredItem != null ? filteredItem : list.get(0);
                 view.startPreferred(dri.intentFrom(intentResolver.getSourceIntent()), dri.displayLabel());
                 view.dismiss();
                 return;
@@ -93,9 +92,9 @@ class DefaultResolverPresenter implements ResolverPresenter {
             view.setupActionButtons();
         }
 
-        private String titleForAction(DisplayResolveInfo item) {
-            return item != null ?
-                    resources.getString(R.string.which_view_application_named, item.displayLabel()) :
+        private String titleForAction(DisplayResolveInfo filteredItem) {
+            return filteredItem != null ?
+                    resources.getString(R.string.which_view_application_named, filteredItem.displayLabel()) :
                     resources.getString(R.string.which_view_application);
         }
     }

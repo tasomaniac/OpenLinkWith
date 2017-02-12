@@ -98,15 +98,24 @@ public class HomeScreenResolverPresenterTest {
     }
 
     @Test
-    public void givenResolveListShouldDisplayWarningAndDismiss() {
+    public void givenResolveListShouldSetupUI() {
         IntentResolver.Listener listener = captureIntentResolverListener();
-        given(resources.getString(R.string.add_to_homescreen)).willReturn(TITLE);
 
         DisplayResolveInfo item = mock(DisplayResolveInfo.class);
         listener.onIntentResolved(Collections.singletonList(item), null, false);
 
         then(view).should().setResolvedList(Collections.singletonList(item));
         then(view).should().setupUI(R.layout.resolver_list, false);
+    }
+
+    @Test
+    public void givenResolveListShouldDisplayTitle() {
+        IntentResolver.Listener listener = captureIntentResolverListener();
+        given(resources.getString(R.string.add_to_homescreen)).willReturn(TITLE);
+
+        DisplayResolveInfo item = mock(DisplayResolveInfo.class);
+        listener.onIntentResolved(Collections.singletonList(item), null, false);
+
         then(view).should().setTitle(TITLE);
     }
 
