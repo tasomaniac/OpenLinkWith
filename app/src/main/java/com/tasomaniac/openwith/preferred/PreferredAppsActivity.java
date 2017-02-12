@@ -117,7 +117,7 @@ public class PreferredAppsActivity extends AppCompatActivity
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        adapter.setApplications(Collections.<DisplayResolveInfo>emptyList());
+        adapter.setApplications(Collections.emptyList());
     }
 
     @Override
@@ -134,20 +134,12 @@ public class PreferredAppsActivity extends AppCompatActivity
     }
 
     private void notifyItemRemoval(final DisplayResolveInfo info) {
-        recyclerView.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                int position = positionInAdapter(info);
-                adapter.remove(adapter.getItem(position));
-                adapter.notifyItemRemoved(position);
+        recyclerView.postDelayed(() -> {
+            int position = positionInAdapter(info);
+            adapter.remove(adapter.getItem(position));
+            adapter.notifyItemRemoved(position);
 
-                recyclerView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapter.notifyItemChanged(0);
-                    }
-                }, 200);
-            }
+            recyclerView.postDelayed(() -> adapter.notifyItemChanged(0), 200);
         }, 300);
     }
 
