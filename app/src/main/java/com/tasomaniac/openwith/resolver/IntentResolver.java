@@ -41,7 +41,7 @@ class IntentResolver {
     private final String callerPackage;
     @Nullable private final ComponentName lastChosenComponent;
 
-    private boolean mShowExtended;
+    private boolean showExtended;
     @Nullable private DisplayResolveInfo filteredItem;
     private Listener listener = Listener.NO_OP;
 
@@ -87,7 +87,7 @@ class IntentResolver {
                 .map(this::doResolve)
                 .compose(schedulingStrategy.applyToSingle())
                 .subscribe(resolvedList -> {
-                    listener.onIntentResolved(resolvedList, filteredItem, mShowExtended);
+                    listener.onIntentResolved(resolvedList, filteredItem, showExtended);
                 });
     }
 
@@ -182,7 +182,7 @@ class IntentResolver {
         ResolveInfo r0 = current.get(0);
         int start = 0;
         CharSequence r0Label = r0.loadLabel(packageManager);
-        mShowExtended = false;
+        showExtended = false;
         int size = current.size();
         for (int i = 1; i < size; i++) {
             if (r0Label == null) {
@@ -226,7 +226,7 @@ class IntentResolver {
                 grouped.add(dri);
             }
         } else {
-            mShowExtended = true;
+            showExtended = true;
             boolean usePkg = false;
             CharSequence startApp = ro.activityInfo.applicationInfo.loadLabel(packageManager);
             if (startApp == null) {
