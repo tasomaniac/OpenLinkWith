@@ -34,10 +34,14 @@ class DefaultResolverPresenter implements ResolverPresenter {
     @Override
     public void bind(ResolverView view) {
         view.setListener(new ViewListener(view, intentResolver, lastSelectedHolder));
-        intentResolver.setListener(new IntentResolverListener(view));
 
-        view.displayProgress();
-        intentResolver.resolve();
+        IntentResolverListener listener = new IntentResolverListener(view);
+        intentResolver.setListener(listener);
+        if (intentResolver.getState() == IntentResolver.State.IDLE) {
+            intentResolver.resolve();
+        } else {
+            intentResolver.getState().notify(listener);
+        }
     }
 
     @Override
@@ -55,19 +59,24 @@ class DefaultResolverPresenter implements ResolverPresenter {
         }
 
         @Override
+        public void onLoading() {
+            view.displayProgress();
+        }
+
+        @Override
         public void onIntentResolved(List<DisplayResolveInfo> list, @Nullable DisplayResolveInfo filteredItem, boolean showExtended) {
             int totalCount = list.size() + (filteredItem != null ? 1 : 0);
             if (totalCount == 0) {
                 Timber.e("No app is found to handle url: %s", intentResolver.getSourceIntent().getDataString());
                 view.toast(R.string.empty_resolver_activity);
-                view.finish();
+                view.dismiss();
                 return;
             }
             boolean hasFilteredItem = filteredItem != null;
             if (totalCount == 1) {
                 DisplayResolveInfo dri = hasFilteredItem ? filteredItem : list.get(0);
-                view.startWithMessage(dri.intentFrom(intentResolver.getSourceIntent()), dri.displayLabel());
-                view.finish();
+                view.startPreferred(dri.intentFrom(intentResolver.getSourceIntent()), dri.displayLabel());
+                view.dismiss();
                 return;
             }
 
@@ -147,7 +156,6 @@ class DefaultResolverPresenter implements ResolverPresenter {
 
         @Override
         public void onPackagesChanged() {
-            view.displayProgress();
             intentResolver.resolve();
         }
 

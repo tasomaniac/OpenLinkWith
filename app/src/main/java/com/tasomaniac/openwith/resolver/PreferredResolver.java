@@ -53,7 +53,7 @@ class PreferredResolver {
     boolean startPreferred(ResolverActivity activity) {
         if (shouldStartPreferred()) {
             try {
-                activity.startWithMessage(preferredIntent(), loadLabel());
+                activity.startPreferred(preferredIntent(), loadLabel());
                 return true;
             } catch (SecurityException e) {
                 Timber.e(e, "Security Exception for the url %s", uri);

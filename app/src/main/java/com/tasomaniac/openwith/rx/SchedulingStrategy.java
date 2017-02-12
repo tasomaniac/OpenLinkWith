@@ -2,6 +2,7 @@ package com.tasomaniac.openwith.rx;
 
 import io.reactivex.CompletableTransformer;
 import io.reactivex.FlowableTransformer;
+import io.reactivex.ObservableTransformer;
 import io.reactivex.Scheduler;
 import io.reactivex.SingleTransformer;
 import io.reactivex.disposables.Disposable;
@@ -16,7 +17,13 @@ public class SchedulingStrategy {
         this.notifier = notifier;
     }
 
-    public <T> FlowableTransformer<T, T> apply() {
+    public <T> ObservableTransformer<T, T> apply() {
+        return observable -> observable
+                .subscribeOn(executor)
+                .observeOn(notifier);
+    }
+
+    public <T> FlowableTransformer<T, T> applyToFlowable() {
         return flowable -> flowable
                 .subscribeOn(executor)
                 .observeOn(notifier);

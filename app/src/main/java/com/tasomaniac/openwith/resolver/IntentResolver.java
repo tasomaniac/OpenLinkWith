@@ -17,7 +17,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import dagger.Lazy;
-import io.reactivex.Single;
+import io.reactivex.Observable;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.M;
@@ -41,9 +41,9 @@ class IntentResolver {
     private final String callerPackage;
     @Nullable private final ComponentName lastChosenComponent;
 
-    private boolean showExtended;
-    private boolean onlyBrowsers;
+    private boolean showExtended = false;
     @Nullable private DisplayResolveInfo filteredItem;
+    private State state = State.IDLE;
     private Listener listener = Listener.NO_OP;
 
     IntentResolver(RedirectFixer redirectFixer,
@@ -70,31 +70,39 @@ class IntentResolver {
         return sourceIntent;
     }
 
+    State getState() {
+        return state;
+    }
+
     @Nullable
     DisplayResolveInfo getFilteredItem() {
-        return filteredItem;
+        return state instanceof Success ? ((Success) state).filteredItem : null;
     }
 
     /**
      * true if one of the items is filtered and stays at the top header
      */
     boolean hasFilteredItem() {
-        return filteredItem != null;
+        return state instanceof Success && ((Success) state).hasFilteredItem();
     }
 
     void resolve() {
-        Single.just(sourceIntent)
+        Observable.just(sourceIntent)
                 .map(this::doResolve)
-                .flatMap(list -> onlyBrowsers
-                        ? redirectFixer.followRedirects(sourceIntent).map(this::doResolve)
-                        : Single.just(list))
-                .compose(schedulingStrategy.applyToSingle())
-                .subscribe(resolvedList -> {
-                    listener.onIntentResolved(resolvedList, filteredItem, showExtended);
+                .flatMap(state -> state.onlyBrowsers
+                        ? redirectFixer.followRedirects(sourceIntent).map(this::doResolve).toObservable()
+                        : Observable.just(state))
+                .cast(State.class)
+                .startWith(State.LOADING)
+                .compose(schedulingStrategy.apply())
+                .subscribe(state -> {
+                    this.state = state;
+                    state.notify(listener);
                 });
     }
 
-    private List<DisplayResolveInfo> doResolve(Intent sourceIntent) {
+    private Success doResolve(Intent sourceIntent) {
+        boolean onlyBrowsers = false;
         filteredItem = null;
         int flag;
         if (SDK_INT >= M) {
@@ -118,14 +126,15 @@ class IntentResolver {
             removePackageFromList(callerPackage, currentResolveList);
         }
 
+        final List<DisplayResolveInfo> resolved;
         int size = currentResolveList.size();
         if (size <= 0) {
-            return Collections.emptyList();
-        }
-        if (size > 1) {
+            resolved = Collections.emptyList();
+        } else {
             Collections.sort(currentResolveList, resolverComparator.get());
+            resolved = groupResolveList(currentResolveList);
         }
-        return groupResolveList(currentResolveList);
+        return new Success(resolved, filteredItem, showExtended, onlyBrowsers);
     }
 
     private static void removePackageFromList(String packageName, List<ResolveInfo> list) {
@@ -174,7 +183,6 @@ class IntentResolver {
         ResolveInfo r0 = current.get(0);
         int start = 0;
         CharSequence r0Label = r0.loadLabel(packageManager);
-        showExtended = false;
         int size = current.size();
         for (int i = 1; i < size; i++) {
             if (r0Label == null) {
@@ -270,11 +278,69 @@ class IntentResolver {
                 && lastChosenComponent.getClassName().equals(info.activityInfo.name);
     }
 
+    abstract static class State {
+
+        static final State LOADING = new Loading();
+        static final State IDLE = new Idle();
+
+        abstract void notify(Listener listener);
+    }
+
+    private static class Idle extends State {
+        @Override
+        void notify(Listener listener) {
+            // no-op
+        }
+    }
+
+    private static class Loading extends State {
+
+        @Override
+        void notify(Listener listener) {
+            listener.onLoading();
+        }
+    }
+
+    private static class Success extends State {
+        final List<DisplayResolveInfo> resolved;
+        @Nullable final DisplayResolveInfo filteredItem;
+        final boolean showExtended;
+        final boolean onlyBrowsers;
+
+        Success(List<DisplayResolveInfo> resolved, @Nullable DisplayResolveInfo filteredItem, boolean showExtended, boolean onlyBrowsers) {
+            this.resolved = resolved;
+            this.filteredItem = filteredItem;
+            this.showExtended = showExtended;
+            this.onlyBrowsers = onlyBrowsers;
+        }
+
+        boolean hasFilteredItem() {
+            return filteredItem != null;
+        }
+
+        @Override
+        void notify(Listener listener) {
+            listener.onIntentResolved(resolved, filteredItem, showExtended);
+        }
+    }
+
     interface Listener {
+
+        void onLoading();
+
         void onIntentResolved(List<DisplayResolveInfo> list, @Nullable DisplayResolveInfo filteredItem, boolean showExtended);
 
-        Listener NO_OP = (list, filteredItem1, showExtended) -> {
-            // no-op
+        Listener NO_OP = new Listener() {
+            @Override
+            public void onLoading() {
+                // no-op
+            }
+
+            @Override
+            public void onIntentResolved(List<DisplayResolveInfo> list, @Nullable DisplayResolveInfo filteredItem, boolean showExtended) {
+                // no-op
+            }
         };
+
     }
 }

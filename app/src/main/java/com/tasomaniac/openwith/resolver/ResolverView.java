@@ -10,29 +10,29 @@ interface ResolverView {
 
     void displayProgress();
 
-    void setListener(@Nullable Listener listener);
-
     void startSelected(Intent intent);
 
-    void startWithMessage(Intent intent, CharSequence appLabel);
-
-    void enableActionButtons();
-
-    void setupActionButtons();
-
-    void setTitle(String title);
+    void startPreferred(Intent intent, CharSequence appLabel);
 
     void setResolvedList(List<DisplayResolveInfo> list);
 
     void setupList(DisplayResolveInfo filteredItem, boolean shouldDisplayExtendedInfo);
 
+    void setTitle(String title);
+
     void setupFilteredView(DisplayResolveInfo filteredItem);
 
     void enableListSelection(boolean value);
 
+    void setupActionButtons();
+
+    void enableActionButtons();
+
     void toast(@StringRes int titleRes);
 
-    void finish();
+    void dismiss();
+
+    void setListener(@Nullable Listener listener);
 
     interface Listener {
         void onActionButtonClick(boolean always);

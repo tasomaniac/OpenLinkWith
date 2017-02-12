@@ -6,6 +6,7 @@ import android.app.usage.UsageStatsManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ShareCompat;
@@ -49,6 +50,11 @@ class ResolverModule {
     }
 
     @Provides
+    static PackageManager packageManager(Application app) {
+        return app.getPackageManager();
+    }
+
+    @Provides
     static SchedulingStrategy schedulingStrategy() {
         return new SchedulingStrategy(Schedulers.io(), AndroidSchedulers.mainThread());
     }
@@ -74,9 +80,10 @@ class ResolverModule {
     }
 
     @Provides
-    IntentResolver intentResolver(RedirectFixer redirectFixer, SchedulingStrategy schedulingStrategy, Lazy<ResolverComparator> resolverComparator) {
+    @PerActivity
+    IntentResolver intentResolver(RedirectFixer redirectFixer, PackageManager packageManager, Lazy<ResolverComparator> resolverComparator, SchedulingStrategy schedulingStrategy) {
         String callerPackage = ShareCompat.getCallingPackage(activity);
-        return new IntentResolver(redirectFixer, activity.getPackageManager(), resolverComparator, schedulingStrategy, sourceIntent, callerPackage, lastChosenComponent);
+        return new IntentResolver(redirectFixer, packageManager, resolverComparator, schedulingStrategy, sourceIntent, callerPackage, lastChosenComponent);
     }
 
     @Provides

@@ -1,6 +1,5 @@
 package com.tasomaniac.openwith.resolver;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -26,7 +25,6 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
     private static final int TYPE_HEADER = 1;
 
     private final IconLoader iconLoader;
-    private final Intent sourceIntent;
 
     protected final List<DisplayResolveInfo> mList = new ArrayList<>();
 
@@ -38,14 +36,9 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
     private ItemClickListener itemClickListener;
     private ItemLongClickListener itemLongClickListener;
 
-    public ResolveListAdapter(IconLoader iconLoader) {
-        this(iconLoader, null);
-    }
-
     @Inject
-    public ResolveListAdapter(IconLoader iconLoader, Intent sourceIntent) {
+    public ResolveListAdapter(IconLoader iconLoader) {
         this.iconLoader = iconLoader;
-        this.sourceIntent = sourceIntent;
     }
 
     @Override
@@ -144,22 +137,14 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
             holder.icon.setImageDrawable(info.displayIcon());
         }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int adapterPosition = holder.getAdapterPosition();
-                itemClickListener.onItemClick(getItem(adapterPosition));
-                setItemChecked(adapterPosition);
-            }
+        holder.itemView.setOnClickListener(v -> {
+            int adapterPosition = holder.getAdapterPosition();
+            itemClickListener.onItemClick(getItem(adapterPosition));
+            setItemChecked(adapterPosition);
         });
 
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                return itemLongClickListener != null
-                        && itemLongClickListener.onItemLongClick(v, holder.getAdapterPosition(), holder.getItemId());
-            }
-        });
+        holder.itemView.setOnLongClickListener(v -> itemLongClickListener != null
+                && itemLongClickListener.onItemLongClick(v, holder.getAdapterPosition(), holder.getItemId()));
     }
 
     public void setItemClickListener(@Nullable ItemClickListener itemClickListener) {

@@ -73,8 +73,7 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     @Inject ResolveListAdapter adapter;
 
     @BindView(R.id.resolver_root) ViewGroup rootView;
-    private DelayedProgressBar progress;
-    private boolean shouldUseAlwaysOption;
+    @BindView(R.id.resolver_progress) DelayedProgressBar progress;
 
     private Button mAlwaysButton;
     private Button mOnceButton;
@@ -103,18 +102,16 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     }
 
     @Override
-    public void displayProgress() {
-        progress = (DelayedProgressBar) getLayoutInflater().inflate(R.layout.resolver_progress, rootView, false);
-        rootView.addView(progress);
-        progress.show(true);
-    }
-
-    @Override
     protected void onDestroy() {
         if (presenter != null) {
             presenter.unbind(this);
         }
         super.onDestroy();
+    }
+
+    @Override
+    public void displayProgress() {
+        progress.show(true);
     }
 
     @Override
@@ -151,12 +148,6 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     }
 
     @Override
-    public void enableListSelection(boolean value) {
-        shouldUseAlwaysOption = value;
-        adapter.setSelectionEnabled(value);
-    }
-
-    @Override
     public void setTitle(String title) {
         TextView titleView = (TextView) findViewById(R.id.title);
         titleView.setText(title);
@@ -171,6 +162,11 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     }
 
     @Override
+    public void enableListSelection(boolean value) {
+        adapter.setSelectionEnabled(value);
+    }
+
+    @Override
     public void setupActionButtons() {
         ViewGroup buttonLayout = (ViewGroup) findViewById(R.id.button_bar);
         buttonLayout.setVisibility(View.VISIBLE);
@@ -178,7 +174,14 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
         mOnceButton = (Button) buttonLayout.findViewById(R.id.button_once);
     }
 
-    private void dismiss() {
+    @Override
+    public void enableActionButtons() {
+        mAlwaysButton.setEnabled(true);
+        mOnceButton.setEnabled(true);
+    }
+
+    @Override
+    public void dismiss() {
         if (!isFinishing()) {
             finish();
         }
@@ -234,14 +237,17 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        if (shouldUseAlwaysOption) {
-            int checkedPos = savedInstanceState.getInt(KEY_CHECKED_POS);
-            boolean hasValidSelection = checkedPos != RecyclerView.NO_POSITION;
+
+        int checkedPos = savedInstanceState.getInt(KEY_CHECKED_POS);
+        boolean hasValidSelection = checkedPos != RecyclerView.NO_POSITION;
+        if (mAlwaysButton != null) {
             mAlwaysButton.setEnabled(hasValidSelection);
+        }
+        if (mOnceButton != null) {
             mOnceButton.setEnabled(hasValidSelection);
-            if (hasValidSelection) {
-                adapter.setItemChecked(checkedPos);
-            }
+        }
+        if (hasValidSelection) {
+            adapter.setItemChecked(checkedPos);
         }
     }
 
@@ -261,20 +267,14 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
             return;
         }
         Intents.startActivityFixingIntent(this, intent);
-        finish();
+        dismiss();
     }
 
     @Override
-    public void startWithMessage(Intent intent, CharSequence appLabel) {
+    public void startPreferred(Intent intent, CharSequence appLabel) {
         String message = getString(R.string.warning_open_link_with_name, appLabel);
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         Intents.startActivityFixingIntent(this, intent);
-    }
-
-    @Override
-    public void enableActionButtons() {
-        mAlwaysButton.setEnabled(true);
-        mOnceButton.setEnabled(true);
     }
 
     @Override
@@ -310,7 +310,7 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
         if (!isAddToHomeScreen) {
             preferredResolver.resolve(sourceIntent.getData());
             if (preferredResolver.startPreferred(this)) {
-                finish();
+                dismiss();
             }
         }
         return DaggerResolverComponent.builder()
