@@ -29,7 +29,7 @@ public final class DisplayResolveInfo implements Parcelable {
 
     Intent intentFrom(Intent sourceIntent) {
         return new Intent(sourceIntent)
-    }                .setComponent(componentName(ri))
+                .setComponent(componentName(ri))
                 .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
                                   | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
     }

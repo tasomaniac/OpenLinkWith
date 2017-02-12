@@ -31,9 +31,9 @@ class RedirectFixer {
     @Inject
     RedirectFixer(OkHttpClient client, SchedulingStrategy scheduling) {
         this.client = client.newBuilder()
-                .connectTimeout(1, SECONDS)
-                .readTimeout(1, SECONDS)
-                .writeTimeout(1, SECONDS)
+                .connectTimeout(2, SECONDS)
+                .readTimeout(2, SECONDS)
+                .writeTimeout(2, SECONDS)
                 .followRedirects(false)
                 .followSslRedirects(false)
                 .build();
@@ -49,7 +49,7 @@ class RedirectFixer {
         this.lastUrl = url;
         return Single
                 .fromCallable(() -> doFollowRedirects(url))
-                .timeout(2, SECONDS)
+                .timeout(5, SECONDS)
                 .onErrorReturnItem(lastUrl)
                 .doOnDispose(this::cancel)
                 .doOnSuccess(httpUrl -> Timber.e(httpUrl.toString()))
