@@ -23,6 +23,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.widget.LinearLayoutManager;
@@ -121,11 +122,9 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     }
 
     @Override
-    public void setupList(DisplayResolveInfo filteredItem, boolean shouldDisplayExtendedInfo) {
-        boolean hasFilteredItem = filteredItem != null;
-        int layout = hasFilteredItem ? R.layout.resolver_list_with_default : R.layout.resolver_list;
-        getLayoutInflater().inflate(layout, rootView);
-        setupList(hasFilteredItem, shouldDisplayExtendedInfo);
+    public void setupUI(@LayoutRes int layoutRes, boolean shouldDisplayExtendedInfo) {
+        getLayoutInflater().inflate(layoutRes, rootView);
+        setupList(shouldDisplayExtendedInfo);
         ResolverDrawerLayout rdl = (ResolverDrawerLayout) findViewById(R.id.contentPanel);
         rdl.setOnDismissedListener(this::finish);
         progress.hide(true, () -> {
@@ -135,13 +134,12 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
         });
     }
 
-    private void setupList(boolean hasFilteredItem, boolean shouldDisplayExtendedInfo) {
+    private void setupList(boolean shouldDisplayExtendedInfo) {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.resolver_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         adapter.setItemClickListener(this);
         adapter.setItemLongClickListener(this);
-        adapter.setDisplayHeader(hasFilteredItem);
         adapter.setDisplayExtendedInfo(shouldDisplayExtendedInfo);
 
         recyclerView.setAdapter(adapter);
@@ -154,16 +152,13 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     }
 
     @Override
-    public void setupFilteredView(DisplayResolveInfo filteredItem) {
+    public void setFilteredItem(@Nullable DisplayResolveInfo filteredItem) {
         ImageView iconView = (ImageView) findViewById(R.id.icon);
-        if (iconView != null) {
+        if (iconView != null && filteredItem != null) {
             new LoadIconIntoViewTask(iconLoader, iconView).execute(filteredItem);
         }
-    }
-
-    @Override
-    public void enableListSelection(boolean value) {
-        adapter.setSelectionEnabled(value);
+        adapter.setSelectionEnabled(filteredItem == null);
+        adapter.setDisplayHeader(filteredItem != null);
     }
 
     @Override
@@ -239,14 +234,13 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
         super.onRestoreInstanceState(savedInstanceState);
 
         int checkedPos = savedInstanceState.getInt(KEY_CHECKED_POS);
-        boolean hasValidSelection = checkedPos != RecyclerView.NO_POSITION;
-        if (mAlwaysButton != null) {
-            mAlwaysButton.setEnabled(hasValidSelection);
-        }
-        if (mOnceButton != null) {
-            mOnceButton.setEnabled(hasValidSelection);
-        }
-        if (hasValidSelection) {
+        if (checkedPos != RecyclerView.NO_POSITION) {
+            if (mAlwaysButton != null) {
+                mAlwaysButton.setEnabled(true);
+            }
+            if (mOnceButton != null) {
+                mOnceButton.setEnabled(true);
+            }
             adapter.setItemChecked(checkedPos);
         }
     }

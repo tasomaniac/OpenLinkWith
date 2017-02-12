@@ -1,6 +1,5 @@
 package com.tasomaniac.openwith.resolver;
 
-import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -13,7 +12,6 @@ import com.tasomaniac.openwith.util.Intents;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 
 import dagger.Lazy;
@@ -25,6 +23,7 @@ import static android.os.Build.VERSION_CODES.M;
 class IntentResolver {
 
     private static final Intent BROWSER_INTENT;
+    private static final int FLAG;
 
     static {
         BROWSER_INTENT = new Intent();
@@ -33,16 +32,22 @@ class IntentResolver {
         BROWSER_INTENT.setData(Uri.parse("http:"));
     }
 
+    static {
+        if(SDK_INT >= M) {
+            FLAG = PackageManager.MATCH_ALL | PackageManager.GET_RESOLVED_FILTER;
+        }else{
+            FLAG = PackageManager.MATCH_DEFAULT_ONLY | PackageManager.GET_RESOLVED_FILTER;
+        }
+    }
+
     private final RedirectFixer redirectFixer;
     private final PackageManager packageManager;
     private final Lazy<ResolverComparator> resolverComparator;
     private final SchedulingStrategy schedulingStrategy;
+    private final ResolveListGrouper resolveListGrouper;
     private final Intent sourceIntent;
     private final String callerPackage;
-    @Nullable private final ComponentName lastChosenComponent;
 
-    private boolean showExtended = false;
-    @Nullable private DisplayResolveInfo filteredItem;
     private State state = State.IDLE;
     private Listener listener = Listener.NO_OP;
 
@@ -52,14 +57,14 @@ class IntentResolver {
                    SchedulingStrategy schedulingStrategy,
                    Intent sourceIntent,
                    String callerPackage,
-                   @Nullable ComponentName lastChosenComponent) {
+                   ResolveListGrouper resolveListGrouper) {
         this.redirectFixer = redirectFixer;
         this.packageManager = packageManager;
         this.resolverComparator = resolverComparator;
         this.schedulingStrategy = schedulingStrategy;
         this.sourceIntent = sourceIntent;
         this.callerPackage = callerPackage;
-        this.lastChosenComponent = lastChosenComponent;
+        this.resolveListGrouper = resolveListGrouper;
     }
 
     void setListener(@Nullable Listener listener) {
@@ -74,22 +79,10 @@ class IntentResolver {
         return state;
     }
 
-    @Nullable
-    DisplayResolveInfo getFilteredItem() {
-        return state instanceof Success ? ((Success) state).filteredItem : null;
-    }
-
-    /**
-     * true if one of the items is filtered and stays at the top header
-     */
-    boolean hasFilteredItem() {
-        return state instanceof Success && ((Success) state).hasFilteredItem();
-    }
-
     void resolve() {
         Observable.just(sourceIntent)
                 .map(this::doResolve)
-                .flatMap(state -> state.onlyBrowsers
+                .flatMap(state -> state.hasOnlyBrowsers
                         ? redirectFixer.followRedirects(sourceIntent).map(this::doResolve).toObservable()
                         : Observable.just(state))
                 .cast(State.class)
@@ -102,22 +95,13 @@ class IntentResolver {
     }
 
     private Success doResolve(Intent sourceIntent) {
-        boolean onlyBrowsers = false;
-        filteredItem = null;
-        int flag;
-        if (SDK_INT >= M) {
-            flag = PackageManager.MATCH_ALL;
-        } else {
-            flag = PackageManager.MATCH_DEFAULT_ONLY;
-        }
-        flag = flag | PackageManager.GET_RESOLVED_FILTER;
-
-        List<ResolveInfo> currentResolveList = new ArrayList<>(packageManager.queryIntentActivities(sourceIntent, flag));
+        boolean hasOnlyBrowsers = false;
+        List<ResolveInfo> currentResolveList = new ArrayList<>(packageManager.queryIntentActivities(sourceIntent, FLAG));
         if (Intents.isHttp(sourceIntent) && SDK_INT >= M) {
-            List<ResolveInfo> browsers = queryBrowsers(flag);
+            List<ResolveInfo> browsers = queryBrowsers(FLAG);
             addBrowsersToList(currentResolveList, browsers);
             if (browsers.size() == currentResolveList.size()) {
-                onlyBrowsers = true;
+                hasOnlyBrowsers = true;
             }
         }
 
@@ -126,15 +110,18 @@ class IntentResolver {
             removePackageFromList(callerPackage, currentResolveList);
         }
 
-        final List<DisplayResolveInfo> resolved;
+        List<DisplayResolveInfo> resolved = groupResolveList(currentResolveList);
+        return new Success(resolved, resolveListGrouper.filteredItem, resolveListGrouper.showExtended, hasOnlyBrowsers);
+    }
+
+    private List<DisplayResolveInfo> groupResolveList(List<ResolveInfo> currentResolveList) {
         int size = currentResolveList.size();
         if (size <= 0) {
-            resolved = Collections.emptyList();
-        } else {
-            Collections.sort(currentResolveList, resolverComparator.get());
-            resolved = groupResolveList(currentResolveList);
+            return Collections.emptyList();
         }
-        return new Success(resolved, filteredItem, showExtended, onlyBrowsers);
+
+        Collections.sort(currentResolveList, resolverComparator.get());
+        return resolveListGrouper.groupResolveList(currentResolveList);
     }
 
     private static void removePackageFromList(String packageName, List<ResolveInfo> list) {
@@ -172,112 +159,6 @@ class IntentResolver {
         return packageManager.queryIntentActivities(BROWSER_INTENT, flags);
     }
 
-    /**
-     * Taken from AOSP, don't try to understand what's going on.
-     */
-    private List<DisplayResolveInfo> groupResolveList(List<ResolveInfo> current) {
-        List<DisplayResolveInfo> grouped = new ArrayList<>();
-
-        // Check for applications with same name and use application name or
-        // package name if necessary
-        ResolveInfo r0 = current.get(0);
-        int start = 0;
-        CharSequence r0Label = r0.loadLabel(packageManager);
-        int size = current.size();
-        for (int i = 1; i < size; i++) {
-            if (r0Label == null) {
-                r0Label = r0.activityInfo.packageName;
-            }
-            ResolveInfo ri = current.get(i);
-            CharSequence riLabel = ri.loadLabel(packageManager);
-            if (riLabel == null) {
-                riLabel = ri.activityInfo.packageName;
-            }
-            if (riLabel.equals(r0Label)) {
-                continue;
-            }
-            processGroup(grouped, current, start, (i - 1), r0, r0Label);
-            r0 = ri;
-            r0Label = riLabel;
-            start = i;
-        }
-        // Process last group
-        processGroup(grouped, current, start, (size - 1), r0, r0Label);
-        return grouped;
-    }
-
-    /**
-     * Taken from AOSP, don't try to understand what's going on.
-     */
-    private void processGroup(List<DisplayResolveInfo> grouped,
-                              List<ResolveInfo> current,
-                              int start,
-                              int end,
-                              ResolveInfo ro,
-                              CharSequence displayLabel) {
-        // Process labels from start to i
-        int num = end - start + 1;
-        if (num == 1) {
-            // No duplicate labels. Use label for entry at start
-            DisplayResolveInfo dri = new DisplayResolveInfo(ro, displayLabel, null);
-            if (isLastChosenPosition(ro)) {
-                filteredItem = dri;
-            } else {
-                grouped.add(dri);
-            }
-        } else {
-            showExtended = true;
-            boolean usePkg = false;
-            CharSequence startApp = ro.activityInfo.applicationInfo.loadLabel(packageManager);
-            if (startApp == null) {
-                usePkg = true;
-            }
-            if (!usePkg) {
-                // Use HashSet to track duplicates
-                HashSet<CharSequence> duplicates = new HashSet<>();
-                duplicates.add(startApp);
-                for (int j = start + 1; j <= end; j++) {
-                    ResolveInfo jRi = current.get(j);
-                    CharSequence jApp = jRi.activityInfo.applicationInfo.loadLabel(packageManager);
-                    if ((jApp == null) || (duplicates.contains(jApp))) {
-                        usePkg = true;
-                        break;
-                    } else {
-                        duplicates.add(jApp);
-                    }
-                }
-                // Clear HashSet for later use
-                duplicates.clear();
-            }
-            for (int k = start; k <= end; k++) {
-                ResolveInfo add = current.get(k);
-                DisplayResolveInfo dri = displayResolveInfoToAdd(usePkg, add, displayLabel);
-                if (isLastChosenPosition(add)) {
-                    filteredItem = dri;
-                } else {
-                    grouped.add(dri);
-                }
-            }
-        }
-    }
-
-    private DisplayResolveInfo displayResolveInfoToAdd(boolean usePackageName, ResolveInfo add, CharSequence displayLabel) {
-        if (usePackageName) {
-            // Use package name for all entries from start to end-1
-            return new DisplayResolveInfo(add, displayLabel, add.activityInfo.packageName);
-        } else {
-            // Use application name for all entries from start to end-1
-            CharSequence extendedLabel = add.activityInfo.applicationInfo.loadLabel(packageManager);
-            return new DisplayResolveInfo(add, displayLabel, extendedLabel);
-        }
-    }
-
-    private boolean isLastChosenPosition(ResolveInfo info) {
-        return lastChosenComponent != null
-                && lastChosenComponent.getPackageName().equals(info.activityInfo.packageName)
-                && lastChosenComponent.getClassName().equals(info.activityInfo.name);
-    }
-
     abstract static class State {
 
         static final State LOADING = new Loading();
@@ -305,17 +186,13 @@ class IntentResolver {
         final List<DisplayResolveInfo> resolved;
         @Nullable final DisplayResolveInfo filteredItem;
         final boolean showExtended;
-        final boolean onlyBrowsers;
+        final boolean hasOnlyBrowsers;
 
-        Success(List<DisplayResolveInfo> resolved, @Nullable DisplayResolveInfo filteredItem, boolean showExtended, boolean onlyBrowsers) {
+        Success(List<DisplayResolveInfo> resolved, @Nullable DisplayResolveInfo filteredItem, boolean showExtended, boolean hasOnlyBrowsers) {
             this.resolved = resolved;
             this.filteredItem = filteredItem;
             this.showExtended = showExtended;
-            this.onlyBrowsers = onlyBrowsers;
-        }
-
-        boolean hasFilteredItem() {
-            return filteredItem != null;
+            this.hasOnlyBrowsers = hasOnlyBrowsers;
         }
 
         @Override

@@ -21,19 +21,23 @@ class DefaultResolverPresenter implements ResolverPresenter {
     private final ChooserHistory history;
     private final ContentResolver contentResolver;
     private final IntentResolver intentResolver;
-    private final LastSelectedHolder lastSelectedHolder;
+    private final ViewState viewState;
 
-    DefaultResolverPresenter(Resources resources, ChooserHistory history, ContentResolver contentResolver, IntentResolver intentResolver, LastSelectedHolder lastSelectedHolder) {
+    DefaultResolverPresenter(Resources resources,
+                             ChooserHistory history,
+                             ContentResolver contentResolver,
+                             IntentResolver intentResolver,
+                             ViewState viewState) {
         this.resources = resources;
         this.history = history;
         this.contentResolver = contentResolver;
         this.intentResolver = intentResolver;
-        this.lastSelectedHolder = lastSelectedHolder;
+        this.viewState = viewState;
     }
 
     @Override
     public void bind(ResolverView view) {
-        view.setListener(new ViewListener(view, intentResolver, lastSelectedHolder));
+        view.setListener(new ViewListener(view, intentResolver));
 
         IntentResolverListener listener = new IntentResolverListener(view);
         intentResolver.setListener(listener);
@@ -65,6 +69,8 @@ class DefaultResolverPresenter implements ResolverPresenter {
 
         @Override
         public void onIntentResolved(List<DisplayResolveInfo> list, @Nullable DisplayResolveInfo filteredItem, boolean showExtended) {
+            viewState.filteredItem = filteredItem;
+
             int totalCount = list.size() + (filteredItem != null ? 1 : 0);
             if (totalCount == 0) {
                 Timber.e("No app is found to handle url: %s", intentResolver.getSourceIntent().getDataString());
@@ -81,13 +87,9 @@ class DefaultResolverPresenter implements ResolverPresenter {
             }
 
             view.setResolvedList(list);
-            view.setupList(filteredItem, showExtended);
+            view.setupUI(filteredItem != null ? R.layout.resolver_list_with_default : R.layout.resolver_list, showExtended);
             view.setTitle(titleForAction(filteredItem));
-            if (hasFilteredItem) {
-                view.setupFilteredView(filteredItem);
-
-            }
-            view.enableListSelection(!hasFilteredItem);
+            view.setFilteredItem(filteredItem);
             view.setupActionButtons();
         }
 
@@ -102,18 +104,15 @@ class DefaultResolverPresenter implements ResolverPresenter {
 
         private final ResolverView view;
         private final IntentResolver intentResolver;
-        private final LastSelectedHolder lastSelectedHolder;
 
-        ViewListener(ResolverView view, IntentResolver intentResolver, LastSelectedHolder lastSelectedHolder) {
+        ViewListener(ResolverView view, IntentResolver intentResolver) {
             this.view = view;
             this.intentResolver = intentResolver;
-            this.lastSelectedHolder = lastSelectedHolder;
         }
 
         @Override
         public void onActionButtonClick(boolean always) {
-            DisplayResolveInfo dri = shouldUseAlwaysOption() ? lastSelectedHolder.lastSelected : intentResolver.getFilteredItem();
-            startAndPersist(dri, always);
+            startAndPersist(viewState.checkedItem(), always);
         }
 
         private void persistSelectedIntent(Intent intent, boolean alwaysCheck) {
@@ -140,9 +139,9 @@ class DefaultResolverPresenter implements ResolverPresenter {
 
         @Override
         public void onItemClick(DisplayResolveInfo dri) {
-            if (shouldUseAlwaysOption() && !dri.equals(lastSelectedHolder.lastSelected)) {
+            if (viewState.shouldUseAlwaysOption() && !dri.equals(viewState.lastSelected)) {
                 view.enableActionButtons();
-                lastSelectedHolder.lastSelected = dri;
+                viewState.lastSelected = dri;
             } else {
                 startAndPersist(dri, false);
             }
@@ -157,10 +156,6 @@ class DefaultResolverPresenter implements ResolverPresenter {
         @Override
         public void onPackagesChanged() {
             intentResolver.resolve();
-        }
-
-        private boolean shouldUseAlwaysOption() {
-            return !intentResolver.hasFilteredItem();
         }
     }
 }

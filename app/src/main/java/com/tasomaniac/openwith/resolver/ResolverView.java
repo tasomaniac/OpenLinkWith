@@ -1,6 +1,7 @@
 package com.tasomaniac.openwith.resolver;
 
 import android.content.Intent;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 
@@ -16,13 +17,11 @@ interface ResolverView {
 
     void setResolvedList(List<DisplayResolveInfo> list);
 
-    void setupList(DisplayResolveInfo filteredItem, boolean shouldDisplayExtendedInfo);
+    void setupUI(@LayoutRes int layoutRes, boolean shouldDisplayExtendedInfo);
 
     void setTitle(String title);
 
-    void setupFilteredView(DisplayResolveInfo filteredItem);
-
-    void enableListSelection(boolean value);
+    void setFilteredItem(@Nullable DisplayResolveInfo filteredItem);
 
     void setupActionButtons();
 

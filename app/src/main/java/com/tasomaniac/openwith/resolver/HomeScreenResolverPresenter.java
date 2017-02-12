@@ -26,7 +26,7 @@ class HomeScreenResolverPresenter implements ResolverPresenter {
 
     @Override
     public void bind(ResolverView view) {
-        view.setListener(new ViewListener(view, intentResolver));
+        view.setListener(new ViewListener(intentResolver));
 
         IntentResolverListener listener = new IntentResolverListener(view);
         intentResolver.setListener(listener);
@@ -58,7 +58,7 @@ class HomeScreenResolverPresenter implements ResolverPresenter {
 
         @Override
         public void onIntentResolved(List<DisplayResolveInfo> list, @Nullable DisplayResolveInfo filteredItem, boolean showExtended) {
-            int totalCount = list.size() + (filteredItem != null ? 1 : 0);
+            int totalCount = list.size();
             if (totalCount == 0) {
                 Timber.e("No app is found to handle url: %s", intentResolver.getSourceIntent().getDataString());
                 view.toast(R.string.empty_resolver_activity);
@@ -66,19 +66,16 @@ class HomeScreenResolverPresenter implements ResolverPresenter {
                 return;
             }
             view.setResolvedList(list);
-            view.setupList(filteredItem, showExtended);
+            view.setupUI(R.layout.resolver_list, showExtended);
             view.setTitle(resources.getString(R.string.add_to_homescreen));
         }
-
     }
 
     private class ViewListener implements ResolverView.Listener {
 
-        private final ResolverView view;
         private final IntentResolver intentResolver;
 
-        ViewListener(ResolverView view, IntentResolver intentResolver) {
-            this.view = view;
+        ViewListener(IntentResolver intentResolver) {
             this.intentResolver = intentResolver;
         }
 

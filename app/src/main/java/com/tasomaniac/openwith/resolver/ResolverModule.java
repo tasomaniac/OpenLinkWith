@@ -71,19 +71,24 @@ class ResolverModule {
     }
 
     @Provides
-    ResolverPresenter resolverPresenter(Resources resources, ChooserHistory history, IntentResolver intentResolver, LastSelectedHolder lastSelectedHolder) {
+    ResolverPresenter resolverPresenter(Resources resources, ChooserHistory history, IntentResolver intentResolver, ViewState viewState) {
         boolean isAddToHomeScreen = sourceIntent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
         if (isAddToHomeScreen) {
             return new HomeScreenResolverPresenter(resources, intentResolver, activity.getSupportFragmentManager());
         }
-        return new DefaultResolverPresenter(resources, history, activity.getContentResolver(), intentResolver, lastSelectedHolder);
+        return new DefaultResolverPresenter(resources, history, activity.getContentResolver(), intentResolver, viewState);
+    }
+
+    @Provides
+    ResolveListGrouper resolveListGrouper(PackageManager packageManager) {
+        return new ResolveListGrouper(packageManager, lastChosenComponent);
     }
 
     @Provides
     @PerActivity
-    IntentResolver intentResolver(RedirectFixer redirectFixer, PackageManager packageManager, Lazy<ResolverComparator> resolverComparator, SchedulingStrategy schedulingStrategy) {
+    IntentResolver intentResolver(RedirectFixer redirectFixer, PackageManager packageManager, Lazy<ResolverComparator> resolverComparator, SchedulingStrategy schedulingStrategy, ResolveListGrouper resolveListGrouper) {
         String callerPackage = ShareCompat.getCallingPackage(activity);
-        return new IntentResolver(redirectFixer, packageManager, resolverComparator, schedulingStrategy, sourceIntent, callerPackage, lastChosenComponent);
+        return new IntentResolver(redirectFixer, packageManager, resolverComparator, schedulingStrategy, sourceIntent, callerPackage, resolveListGrouper);
     }
 
     @Provides
