@@ -2,7 +2,7 @@ package com.tasomaniac.openwith.resolver;
 
 import android.support.annotation.Nullable;
 
-import java.io.IOException;
+import com.tasomaniac.openwith.rx.ImmediateScheduling;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -10,11 +10,12 @@ import org.junit.Test;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import io.reactivex.Single;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
+import okhttp3.mockwebserver.Dispatcher;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.RecordedRequest;
 
 public class RedirectFixerTest {
 
@@ -25,48 +26,72 @@ public class RedirectFixerTest {
 
     @Before
     public void setUp() throws Exception {
-        redirectFixer = new RedirectFixer(new OkHttpClient(), new ImmediateScheduling());
+        redirectFixer = new RedirectFixer(new OkHttpClient(), new ImmediateScheduling(), 1);
     }
 
     @Test
-    public void givenNoRedirectShouldReturnOriginalUrl() {
+    public void givenNoRedirectShouldReturnOriginalUrl() throws InterruptedException {
         server.enqueue(noRedirect());
 
-        Single<HttpUrl> single = redirectFixer.followRedirects(server.url("original"));
-
-        single.test().assertValue(server.url("original"));
+        redirectFixer.followRedirects(server.url("original"))
+                .test().assertValue(server.url("original"));
     }
 
     @Test
-    public void givenRedirectShouldFollowRedirect() {
+    public void givenRedirectShouldFollowRedirect() throws InterruptedException {
         server.enqueue(redirectTo(server.url("redirect")));
         server.enqueue(noRedirect());
 
-        Single<HttpUrl> single = redirectFixer.followRedirects(server.url("original"));
-
-        single.test().assertValue(server.url("redirect"));
+        redirectFixer.followRedirects(server.url("original"))
+                .test().assertValue(server.url("redirect"));
     }
 
     @Test
-    public void givenTwoRedirectsShouldReturnTheLastRedirect() {
+    public void givenTwoRedirectsShouldReturnTheLastRedirect() throws InterruptedException {
         server.enqueue(redirectTo(server.url("redirect")));
         server.enqueue(redirectTo(server.url("redirect/2")));
         server.enqueue(noRedirect());
 
-        Single<HttpUrl> single = redirectFixer.followRedirects(server.url("original"));
-
-        single.test().assertValue(server.url("redirect/2"));
+        redirectFixer.followRedirects(server.url("original"))
+                .test().assertValue(server.url("redirect/2"));
     }
 
     @Test
-    public void givenNetworkErrorReturnOriginal() throws IOException {
+    public void givenNetworkErrorReturnOriginal() throws Exception {
         server.enqueue(redirectTo(server.url("redirect")));
         server.shutdown();
         server.enqueue(noRedirect());
 
-        Single<HttpUrl> single = redirectFixer.followRedirects(server.url("original"));
+        redirectFixer.followRedirects(server.url("original"))
+                .test().assertValue(server.url("original"));
+    }
 
-        single.test().assertValue(server.url("original"));
+    @Test
+    public void givenNetworkTimeoutReturnOriginal() throws Exception {
+        server.setDispatcher(new Dispatcher() {
+            @Override
+            public MockResponse dispatch(RecordedRequest request) throws InterruptedException {
+                Thread.sleep(1500);
+                return redirectTo(server.url("redirect"));
+            }
+        });
+
+        redirectFixer.followRedirects(server.url("original"))
+                .test().assertValue(server.url("original"));
+    }
+
+    @Test
+    public void givenWithinNetworkTimeoutLimitReturnRedirect() throws Exception {
+        server.setDispatcher(new Dispatcher() {
+            @Override
+            public MockResponse dispatch(RecordedRequest request) throws InterruptedException {
+                Thread.sleep(500);
+                return redirectTo(server.url("redirect"));
+            }
+        });
+
+        redirectFixer.followRedirects(server.url("original"))
+                .test().assertValue(server.url("redirect"));
     }
 
     private MockResponse noRedirect() {
