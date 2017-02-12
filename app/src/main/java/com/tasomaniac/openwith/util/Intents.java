@@ -37,6 +37,11 @@ public class Intents {
         return false;
     }
 
+    public static boolean isHttp(Intent intent) {
+        String scheme = intent.getScheme();
+        return "http".equals(scheme) || "https".equals(scheme);
+    }
+
     public static void startActivityFixingIntent(Context context, Intent intent) {
         context.startActivity(fixIntents(context, intent));
     }

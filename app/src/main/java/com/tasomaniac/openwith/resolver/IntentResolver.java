@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.tasomaniac.openwith.rx.SchedulingStrategy;
+import com.tasomaniac.openwith.util.Intents;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,7 +18,6 @@ import java.util.List;
 
 import dagger.Lazy;
 import io.reactivex.Single;
-import okhttp3.HttpUrl;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.M;
@@ -92,13 +92,7 @@ class IntentResolver {
     }
 
     private Single<Intent> followRedirectsIfHttpUrl(Intent intent) {
-        HttpUrl url = HttpUrl.parse(intent.getDataString());
-        return url == null ? Single.just(intent) : followRedirects(url);
-    }
-
-    private Single<Intent> followRedirects(HttpUrl url) {
-        return redirectFixer.followRedirects(url)
-                .map(httpUrl -> sourceIntent.setData(Uri.parse(httpUrl.toString())));
+        return Intents.isHttp(intent) ? redirectFixer.followRedirects(intent) : Single.just(intent);
     }
 
     private List<DisplayResolveInfo> doResolve(Intent sourceIntent) {
@@ -112,7 +106,7 @@ class IntentResolver {
         flag = flag | PackageManager.GET_RESOLVED_FILTER;
 
         List<ResolveInfo> currentResolveList = new ArrayList<>(packageManager.queryIntentActivities(sourceIntent, flag));
-        if (isBrowserIntent(sourceIntent) && SDK_INT >= M) {
+        if (Intents.isHttp(sourceIntent) && SDK_INT >= M) {
             addBrowsersToList(currentResolveList, flag);
         }
 
@@ -129,10 +123,6 @@ class IntentResolver {
             Collections.sort(currentResolveList, resolverComparator.get());
         }
         return groupResolveList(currentResolveList);
-    }
-
-    private boolean isBrowserIntent(Intent intent) {
-        return HttpUrl.parse(intent.getDataString()) != null;
     }
 
     private static void removePackageFromList(final String packageName, List<ResolveInfo> currentResolveList) {

@@ -1,5 +1,7 @@
 package com.tasomaniac.openwith.resolver;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 
 import com.tasomaniac.openwith.rx.SchedulingStrategy;
@@ -36,6 +38,11 @@ class RedirectFixer {
                 .followSslRedirects(false)
                 .build();
         this.scheduling = scheduling;
+    }
+
+    Single<Intent> followRedirects(Intent intent) {
+        return followRedirects(HttpUrl.parse(intent.getDataString()))
+                .map(httpUrl -> intent.setData(Uri.parse(httpUrl.toString())));
     }
 
     Single<HttpUrl> followRedirects(final HttpUrl url) {
