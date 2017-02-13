@@ -22,16 +22,6 @@ import static android.os.Build.VERSION_CODES.M;
 
 class IntentResolver {
 
-    private static final int FLAG;
-
-    static {
-        if (SDK_INT >= M) {
-            FLAG = PackageManager.MATCH_ALL | PackageManager.GET_RESOLVED_FILTER;
-        } else {
-            FLAG = PackageManager.MATCH_DEFAULT_ONLY | PackageManager.GET_RESOLVED_FILTER;
-        }
-    }
-
     private final RedirectFixer redirectFixer;
     private final PackageManager packageManager;
     private final Lazy<ResolverComparator> resolverComparator;
@@ -88,9 +78,10 @@ class IntentResolver {
 
     private Success doResolve(Intent sourceIntent) {
         boolean hasOnlyBrowsers = false;
-        List<ResolveInfo> currentResolveList = new ArrayList<>(packageManager.queryIntentActivities(sourceIntent, FLAG));
+        int flag = SDK_INT >= M ? PackageManager.MATCH_ALL :PackageManager.MATCH_DEFAULT_ONLY;
+        List<ResolveInfo> currentResolveList = new ArrayList<>(packageManager.queryIntentActivities(sourceIntent, flag));
         if (Intents.isHttp(sourceIntent) && SDK_INT >= M) {
-            List<ResolveInfo> browsers = queryBrowsers(FLAG);
+            List<ResolveInfo> browsers = queryBrowsers();
             addBrowsersToList(currentResolveList, browsers);
             if (browsers.size() == currentResolveList.size()) {
                 hasOnlyBrowsers = true;
@@ -147,12 +138,12 @@ class IntentResolver {
         }
     }
 
-    private List<ResolveInfo> queryBrowsers(int flags) {
+    private List<ResolveInfo> queryBrowsers() {
         Intent browserIntent = new Intent()
                 .setAction(Intent.ACTION_VIEW)
                 .addCategory(Intent.CATEGORY_BROWSABLE)
                 .setData(Uri.parse("http:"));
-        return packageManager.queryIntentActivities(browserIntent, flags);
+        return packageManager.queryIntentActivities(browserIntent, 0);
     }
 
     abstract static class State {
