@@ -197,6 +197,21 @@ public class DefaultResolverPresenterTest {
     }
 
     @Test
+    public void givenNoFilteredItemActionButtonShouldStartLastClickedItem() {
+        ResolverView.Listener listener = captureViewListener();
+        IntentResolver.Listener resolverListener = captureIntentResolverListener();
+
+        Intent intent = mock(Intent.class);
+        DisplayResolveInfo item = givenDisplayResolveInfoWithIntentAndLabel(intent, "filtered");
+        resolverListener.onIntentResolved(Collections.singletonList(item), null, false);
+
+        listener.onItemClick(item);
+        listener.onActionButtonClick(false);
+
+        then(view).should().startSelected(intent);
+    }
+
+    @Test
     public void givenNoFilteredItemActionButtonShouldBeEnabledWhenItemClicked() {
         ResolverView.Listener listener = captureViewListener();
         IntentResolver.Listener resolverListener = captureIntentResolverListener();
