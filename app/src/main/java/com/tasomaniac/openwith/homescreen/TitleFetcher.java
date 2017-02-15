@@ -55,10 +55,7 @@ class TitleFetcher {
         if (httpUrl == null) {
             return;
         }
-        call = client.newCall(new Request.Builder()
-                                      .url(httpUrl)
-                                      .header("User-Agent", "Mozilla/5.0 (Android; Mobile; rv:13.0) Gecko/13.0 Firefox/13.0")
-                                      .build());
+        call = client.newCall(request(httpUrl));
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -80,6 +77,13 @@ class TitleFetcher {
                 }
             }
         });
+    }
+
+    private Request request(HttpUrl httpUrl) {
+        return new Request.Builder()
+                                      .url(httpUrl)
+                                      .header("User-Agent", "Mozilla/5.0 (Android; Mobile; rv:13.0) Gecko/13.0 Firefox/13.0")
+                                      .build();
     }
 
     private static String extractTitle(ResponseBody body) throws IOException {

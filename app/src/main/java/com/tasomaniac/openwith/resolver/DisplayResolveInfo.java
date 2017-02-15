@@ -1,39 +1,58 @@
 package com.tasomaniac.openwith.resolver;
 
+import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
+import com.tasomaniac.openwith.util.ResolverInfos;
+
 public final class DisplayResolveInfo implements Parcelable {
-    private final int id;
-    final ResolveInfo ri;
+    private final ResolveInfo ri;
     private final CharSequence displayLabel;
     private final CharSequence extendedInfo;
     private Drawable displayIcon;
 
-    DisplayResolveInfo(ResolveInfo pri, CharSequence displayLabel, CharSequence extendedInfo) {
-        this(0, pri, displayLabel, extendedInfo);
-    }
-
-    public DisplayResolveInfo(int id, ResolveInfo ri, CharSequence displayLabel, CharSequence extendedInfo) {
-        this.id = id;
+    public DisplayResolveInfo(ResolveInfo ri, CharSequence displayLabel, CharSequence extendedInfo) {
         this.ri = ri;
         this.displayLabel = displayLabel;
         this.extendedInfo = extendedInfo;
     }
 
     private DisplayResolveInfo(Parcel in) {
-        id = in.readInt();
         ri = in.readParcelable(ResolveInfo.class.getClassLoader());
         displayLabel = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in);
         extendedInfo = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in);
     }
 
+    Intent intentFrom(Intent sourceIntent) {
+        return new Intent(sourceIntent)
+                .setComponent(ResolverInfos.componentName(ri))
+                .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
+                                  | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        DisplayResolveInfo that = (DisplayResolveInfo) o;
+        return ResolverInfos.equals(ri, that.ri);
+    }
+
+    @Override
+    public int hashCode() {
+        return ResolverInfos.componentName(ri).hashCode();
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
         dest.writeParcelable(ri, flags);
         TextUtils.writeToParcel(displayLabel, dest, flags);
         TextUtils.writeToParcel(extendedInfo, dest, flags);
@@ -56,8 +75,8 @@ public final class DisplayResolveInfo implements Parcelable {
         }
     };
 
-    public int id() {
-        return id;
+    public ResolveInfo resolveInfo() {
+        return ri;
     }
 
     public CharSequence displayLabel() {

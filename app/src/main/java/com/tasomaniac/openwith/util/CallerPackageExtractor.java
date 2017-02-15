@@ -23,7 +23,7 @@ import static android.os.Build.VERSION_CODES.LOLLIPOP_MR1;
 public abstract class CallerPackageExtractor {
 
     public static CallerPackageExtractor from(Activity activity) {
-        String callerPackage = activity.getIntent().getStringExtra(ShareCompat.EXTRA_CALLING_PACKAGE);
+        String callerPackage = ShareCompat.getCallingPackage(activity);
 
         if (callerPackage != null) {
             return new SimpleExtractor(callerPackage);

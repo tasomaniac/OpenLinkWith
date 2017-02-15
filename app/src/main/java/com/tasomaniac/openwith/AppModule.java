@@ -4,17 +4,21 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
 
 import com.tasomaniac.openwith.data.prefs.BooleanPreference;
 import com.tasomaniac.openwith.data.prefs.TutorialShown;
 import com.tasomaniac.openwith.data.prefs.UsageAccess;
+import com.tasomaniac.openwith.rx.SchedulingStrategy;
 
 import javax.inject.Singleton;
 import java.io.File;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 
@@ -33,10 +37,15 @@ final class AppModule {
     }
 
     @Provides
+    static SchedulingStrategy schedulingStrategy() {
+        return new SchedulingStrategy(Schedulers.io(), AndroidSchedulers.mainThread());
+    }
+
+    @Provides
     @Singleton
-    static IconLoader provideIconLoader(Application app, ActivityManager am) {
+    static IconLoader provideIconLoader(PackageManager pm, ActivityManager am) {
         int iconDpi = am.getLauncherLargeIconDensity();
-        return new IconLoader(app.getPackageManager(), iconDpi);
+        return new IconLoader(pm, iconDpi);
     }
 
     @Provides

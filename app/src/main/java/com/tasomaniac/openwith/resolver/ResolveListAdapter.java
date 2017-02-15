@@ -1,8 +1,5 @@
 package com.tasomaniac.openwith.resolver;
 
-import android.content.ComponentName;
-import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +12,7 @@ import android.widget.TextView;
 import com.tasomaniac.openwith.IconLoader;
 import com.tasomaniac.openwith.R;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,64 +25,25 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
     private static final int TYPE_HEADER = 1;
 
     private final IconLoader iconLoader;
-    private final IntentResolver intentResolver;
-    private final Intent sourceIntent;
 
     protected final List<DisplayResolveInfo> mList = new ArrayList<>();
 
-    private boolean hasHeader;
-    private boolean selectionEnabled;
+    private boolean displayExtendedInfo = false;
+    private boolean hasHeader = false;
+    private boolean selectionEnabled = false;
     private int checkedItemPosition = RecyclerView.NO_POSITION;
 
     private ItemClickListener itemClickListener;
     private ItemLongClickListener itemLongClickListener;
 
+    @Inject
     public ResolveListAdapter(IconLoader iconLoader) {
-        this(iconLoader, null, null);
-    }
-
-    public ResolveListAdapter(IconLoader iconLoader,
-                              IntentResolver intentResolver,
-                              Intent sourceIntent) {
         this.iconLoader = iconLoader;
-        this.intentResolver = intentResolver;
-        this.sourceIntent = sourceIntent;
-    }
-
-    void rebuildList() {
-        mList.clear();
-        mList.addAll(intentResolver.rebuildList());
-        notifyDataSetChanged();
-    }
-
-    /**
-     * Filtered item that is staying at the top header with Always and Just Once buttons.
-     */
-    DisplayResolveInfo getFilteredItem() {
-        if (hasFilteredItem()) {
-            // Not using getItem since it offsets to dodge this position for the list
-            return mList.get(lastChosenPosition());
-        }
-        return null;
-    }
-
-    /**
-     * true if one of the items is filtered and stays at the top header
-     */
-    boolean hasFilteredItem() {
-        return lastChosenPosition() >= 0;
-    }
-
-    DisplayResolveInfo displayResolveInfoForPosition(int position, boolean filtered) {
-        return filtered ? getItem(position) : mList.get(position);
     }
 
     @Override
     public int getItemCount() {
         int result = mList.size();
-        if (hasFilteredItem()) {
-            result--;
-        }
         result += getHeadersCount();
         return result;
     }
@@ -94,14 +53,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         if (position < 0) {
             position = 0;
         }
-        if (hasFilteredItem() && position >= lastChosenPosition()) {
-            position++;
-        }
         return mList.get(position);
-    }
-
-    private int lastChosenPosition() {
-        return intentResolver != null ? intentResolver.lastChosenPosition() : RecyclerView.NO_POSITION;
     }
 
     @Override
@@ -113,8 +65,12 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         return hasHeader ? 1 : 0;
     }
 
-    public void displayHeader() {
-        hasHeader = true;
+    public void setDisplayExtendedInfo(boolean displayExtendedInfo) {
+        this.displayExtendedInfo = displayExtendedInfo;
+    }
+
+    public void setDisplayHeader(boolean hasHeader) {
+        this.hasHeader = hasHeader;
     }
 
     @Override
@@ -167,7 +123,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
 
         holder.text.setText(info.displayLabel());
         if (holder.text2 != null) {
-            if (shouldShowExtended()) {
+            if (displayExtendedInfo) {
                 holder.text2.setVisibility(View.VISIBLE);
                 holder.text2.setText(info.extendedInfo());
             } else {
@@ -181,30 +137,14 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
             holder.icon.setImageDrawable(info.displayIcon());
         }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int adapterPosition = holder.getAdapterPosition();
-                itemClickListener.onItemClick(getItem(adapterPosition));
-                setItemChecked(adapterPosition);
-            }
+        holder.itemView.setOnClickListener(v -> {
+            int adapterPosition = holder.getAdapterPosition();
+            itemClickListener.onItemClick(getItem(adapterPosition));
+            setItemChecked(adapterPosition);
         });
 
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                return itemLongClickListener != null
-                        && itemLongClickListener.onItemLongClick(v, holder.getAdapterPosition(), holder.getItemId());
-            }
-        });
-    }
-
-    /**
-     * When {@code true} a second extended line will be displayed for items in the list.
-     * Default value is false
-     */
-    protected boolean shouldShowExtended() {
-        return intentResolver != null && intentResolver.shouldShowExtended();
+        holder.itemView.setOnLongClickListener(v -> itemLongClickListener != null
+                && itemLongClickListener.onItemLongClick(v, holder.getAdapterPosition(), holder.getItemId()));
     }
 
     public void setItemClickListener(@Nullable ItemClickListener itemClickListener) {
@@ -255,7 +195,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         protected DisplayResolveInfo doInBackground(DisplayResolveInfo... params) {
             final DisplayResolveInfo info = params[0];
             if (info.displayIcon() == null) {
-                info.displayIcon(iconLoader.loadFor(info.ri));
+                info.displayIcon(iconLoader.loadFor(info.resolveInfo()));
             }
             return info;
         }
@@ -264,19 +204,5 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         protected void onPostExecute(DisplayResolveInfo info) {
             notifyDataSetChanged();
         }
-    }
-
-    Intent intentForDisplayResolveInfo(DisplayResolveInfo dri) {
-        Intent intent = new Intent(sourceIntent);
-        intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
-                                | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
-        if (dri != null && dri.ri != null) {
-            ActivityInfo ai = dri.ri.activityInfo;
-            if (ai != null) {
-                intent.setComponent(new ComponentName(
-                        ai.applicationInfo.packageName, ai.name));
-            }
-        }
-        return intent;
     }
 }

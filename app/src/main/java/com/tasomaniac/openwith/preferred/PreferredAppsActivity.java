@@ -33,9 +33,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 
-import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.*;
+import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.COMPONENT;
+import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.HOST;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.CONTENT_URI_PREFERRED;
-import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withId;
+import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withHost;
 
 public class PreferredAppsActivity extends AppCompatActivity
         implements
@@ -70,8 +71,6 @@ public class PreferredAppsActivity extends AppCompatActivity
         adapter.setItemClickListener(this);
         recyclerView.setAdapter(adapter);
 
-        adapter.displayHeader();
-
         getSupportLoaderManager().initLoader(0, null, this);
     }
 
@@ -98,8 +97,6 @@ public class PreferredAppsActivity extends AppCompatActivity
 
         List<DisplayResolveInfo> apps = new ArrayList<>(data.getCount());
         while (data.moveToNext()) {
-
-            final int id = Cursors.getInt(data, ID);
             final String host = Cursors.getString(data, HOST);
             final String componentString = Cursors.getString(data, COMPONENT);
 
@@ -110,7 +107,7 @@ public class PreferredAppsActivity extends AppCompatActivity
 
             if (resolveInfo != null) {
                 CharSequence roLabel = resolveInfo.loadLabel(mPm);
-                final DisplayResolveInfo info = new DisplayResolveInfo(id, resolveInfo, roLabel, host);
+                final DisplayResolveInfo info = new DisplayResolveInfo(resolveInfo, roLabel, host);
                 apps.add(info);
             }
         }
@@ -120,12 +117,12 @@ public class PreferredAppsActivity extends AppCompatActivity
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        adapter.setApplications(Collections.<DisplayResolveInfo>emptyList());
+        adapter.setApplications(Collections.emptyList());
     }
 
     @Override
     public void onAppRemoved(DisplayResolveInfo info) {
-        getContentResolver().delete(withId(info.id()), null, null);
+        getContentResolver().delete(withHost(info.extendedInfo().toString()), null, null);
 
         notifyItemRemoval(info);
 
@@ -137,20 +134,12 @@ public class PreferredAppsActivity extends AppCompatActivity
     }
 
     private void notifyItemRemoval(final DisplayResolveInfo info) {
-        recyclerView.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                int position = positionInAdapter(info);
-                adapter.remove(adapter.getItem(position));
-                adapter.notifyItemRemoved(position);
+        recyclerView.postDelayed(() -> {
+            int position = positionInAdapter(info);
+            adapter.remove(adapter.getItem(position));
+            adapter.notifyItemRemoved(position);
 
-                recyclerView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapter.notifyItemChanged(0);
-                    }
-                }, 200);
-            }
+            recyclerView.postDelayed(() -> adapter.notifyItemChanged(0), 200);
         }, 300);
     }
 

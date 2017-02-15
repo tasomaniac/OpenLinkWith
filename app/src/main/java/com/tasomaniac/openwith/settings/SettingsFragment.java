@@ -97,6 +97,16 @@ public class SettingsFragment extends PreferenceFragmentCompat
                 findPreference(R.string.pref_key_debug_play),
                 "https://play.google.com/store/apps/details?id=com.tasomaniac.openwith"
         );
+        setupDebugPreference(
+                getActivity(),
+                findPreference(R.string.pref_key_debug_redirect),
+                "http://forward.immobilienscout24.de/9004STF/expose/78069302"
+        );
+        setupDebugPreference(
+                getActivity(),
+                findPreference(R.string.pref_key_debug_non_http),
+                "is24://retargetShowSearchForm"
+        );
     }
 
     private static void setupDebugPreference(Activity activity, Preference debugPreference, String debugPrefUrl) {

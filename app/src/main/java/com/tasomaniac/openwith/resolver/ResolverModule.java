@@ -1,14 +1,18 @@
 package com.tasomaniac.openwith.resolver;
 
-import android.app.Activity;
 import android.app.Application;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ShareCompat;
 
-import com.tasomaniac.openwith.IconLoader;
 import com.tasomaniac.openwith.PerActivity;
+import com.tasomaniac.openwith.rx.SchedulingStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,18 +24,32 @@ import dagger.Provides;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.LOLLIPOP_MR1;
+import static com.tasomaniac.openwith.resolver.ResolverActivity.EXTRA_ADD_TO_HOME_SCREEN;
 
 @Module
 class ResolverModule {
 
     private static final long USAGE_STATS_PERIOD = TimeUnit.DAYS.toMillis(14);
 
-    private final Activity activity;
     private final Intent sourceIntent;
+    @Nullable
+    private final ComponentName lastChosenComponent;
+    private final String callerPackage;
 
-    ResolverModule(Activity activity, Intent sourceIntent) {
-        this.activity = activity;
+    ResolverModule(ResolverActivity activity, Intent sourceIntent, @Nullable ComponentName lastChosenComponent) {
         this.sourceIntent = sourceIntent;
+        this.lastChosenComponent = lastChosenComponent;
+        this.callerPackage = ShareCompat.getCallingPackage(activity);
+    }
+
+    @Provides
+    Intent intent() {
+        return sourceIntent;
+    }
+
+    @Provides
+    static Resources resources(Application app) {
+        return app.getResources();
     }
 
     @Provides
@@ -41,13 +59,23 @@ class ResolverModule {
     }
 
     @Provides
-    IntentResolver intentResolver(Lazy<ResolverComparator> resolverComparator) {
-        return new IntentResolver(activity.getPackageManager(), resolverComparator, sourceIntent);
+    ResolverPresenter resolverPresenter(Application app, Resources resources, ChooserHistory history, IntentResolver intentResolver, ViewState viewState) {
+        boolean isAddToHomeScreen = sourceIntent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
+        if (isAddToHomeScreen) {
+            return new HomeScreenResolverPresenter(resources, intentResolver);
+        }
+        return new DefaultResolverPresenter(resources, history, app.getContentResolver(), intentResolver, viewState);
     }
 
     @Provides
-    ResolveListAdapter provideResolveListAdapter(IconLoader iconLoader, IntentResolver intentResolver) {
-        return new ResolveListAdapter(iconLoader, intentResolver, sourceIntent);
+    ResolveListGrouper resolveListGrouper(PackageManager packageManager) {
+        return new ResolveListGrouper(packageManager, lastChosenComponent);
+    }
+
+    @Provides
+    @PerActivity
+    IntentResolver intentResolver(PackageManager packageManager, Lazy<ResolverComparator> resolverComparator, SchedulingStrategy schedulingStrategy, ResolveListGrouper resolveListGrouper) {
+        return new IntentResolver(packageManager, resolverComparator, schedulingStrategy, sourceIntent, callerPackage, resolveListGrouper);
     }
 
     @Provides

@@ -8,6 +8,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Build;
 
+import com.tasomaniac.openwith.util.Intents;
+
 import java.text.Collator;
 import java.util.Comparator;
 import java.util.Locale;
@@ -32,12 +34,7 @@ class ResolverComparator implements Comparator<ResolveInfo> {
         this.usageStatsMap = usageStatsMap;
         this.priorityPackages = priorityPackages;
         this.collator = Collator.getInstance(Locale.getDefault());
-        this.isHttp = isHttp(sourceIntent);
-    }
-
-    private static boolean isHttp(Intent sourceIntent) {
-        String scheme = sourceIntent.getScheme();
-        return "http".equals(scheme) || "https".equals(scheme);
+        this.isHttp = Intents.isHttp(sourceIntent);
     }
 
     @Override

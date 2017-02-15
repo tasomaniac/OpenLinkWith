@@ -13,4 +13,10 @@
 
   <string name="pref_key_debug_play" translatable="false">pref_debug_play</string>
   <string name="pref_title_debug_play" translatable="false">Play Store Intent</string>
+
+  <string name="pref_key_debug_redirect" translatable="false">pref_debug_redirect</string>
+  <string name="pref_title_debug_redirect" translatable="false">Url with redirect</string>
+
+  <string name="pref_key_debug_non_http" translatable="false">pref_debug_non_http</string>
+  <string name="pref_title_debug_non_http" translatable="false">Non-http url</string>
 </resources>
