@@ -26,7 +26,7 @@ class HomeScreenResolverPresenter implements ResolverPresenter {
 
         IntentResolverListener listener = new IntentResolverListener(view);
         intentResolver.setListener(listener);
-        if (intentResolver.getState() == IntentResolver.State.IDLE) {
+        if (intentResolver.getState() == null) {
             intentResolver.resolve();
         } else {
             intentResolver.getState().notify(listener);

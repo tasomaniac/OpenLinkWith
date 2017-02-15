@@ -30,7 +30,7 @@ class IntentResolver {
     private final Intent sourceIntent;
     private final String callerPackage;
 
-    private State state = State.IDLE;
+    @Nullable private State state;
     private Listener listener = Listener.NO_OP;
 
     IntentResolver(PackageManager packageManager,
@@ -55,6 +55,7 @@ class IntentResolver {
         return sourceIntent;
     }
 
+    @Nullable
     State getState() {
         return state;
     }
@@ -62,7 +63,6 @@ class IntentResolver {
     void resolve() {
         Observable.just(sourceIntent)
                 .map(this::doResolve)
-                .cast(State.class)
                 .compose(schedulingStrategy.apply())
                 .subscribe(state -> {
                     this.state = state;
@@ -70,7 +70,7 @@ class IntentResolver {
                 });
     }
 
-    private Success doResolve(Intent sourceIntent) {
+    private State doResolve(Intent sourceIntent) {
         int flag = SDK_INT >= M ? PackageManager.MATCH_ALL :PackageManager.MATCH_DEFAULT_ONLY;
         List<ResolveInfo> currentResolveList = new ArrayList<>(packageManager.queryIntentActivities(sourceIntent, flag));
         if (Intents.isHttp(sourceIntent) && SDK_INT >= M) {
@@ -84,7 +84,7 @@ class IntentResolver {
         }
 
         List<DisplayResolveInfo> resolved = groupResolveList(currentResolveList);
-        return new Success(resolved, resolveListGrouper.filteredItem, resolveListGrouper.showExtended);
+        return new State(resolved, resolveListGrouper.filteredItem, resolveListGrouper.showExtended);
     }
 
     private List<DisplayResolveInfo> groupResolveList(List<ResolveInfo> currentResolveList) {
@@ -136,32 +136,17 @@ class IntentResolver {
         return packageManager.queryIntentActivities(browserIntent, 0);
     }
 
-    abstract static class State {
-
-        static final State IDLE = new Idle();
-
-        abstract void notify(Listener listener);
-    }
-
-    private static class Idle extends State {
-        @Override
-        void notify(Listener listener) {
-            // no-op
-        }
-    }
-
-    private static class Success extends State {
+    static class State {
         final List<DisplayResolveInfo> resolved;
         @Nullable final DisplayResolveInfo filteredItem;
         final boolean showExtended;
 
-        Success(List<DisplayResolveInfo> resolved, @Nullable DisplayResolveInfo filteredItem, boolean showExtended) {
+        State(List<DisplayResolveInfo> resolved, @Nullable DisplayResolveInfo filteredItem, boolean showExtended) {
             this.resolved = resolved;
             this.filteredItem = filteredItem;
             this.showExtended = showExtended;
         }
 
-        @Override
         void notify(Listener listener) {
             listener.onIntentResolved(resolved, filteredItem, showExtended);
         }

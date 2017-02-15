@@ -40,7 +40,6 @@ public class DefaultResolverPresenterTest {
     @Before
     public void setUp() throws Exception {
         presenter = new DefaultResolverPresenter(resources, chooserHistory, contentResolver, intentResolver, viewState);
-        given(intentResolver.getState()).willReturn(IntentResolver.State.IDLE);
         given(intentResolver.getSourceIntent()).willReturn(sourceIntent);
 
         presenter.bind(view);
@@ -68,15 +67,6 @@ public class DefaultResolverPresenterTest {
         IntentResolver.Listener listener = captureIntentResolverListener();
 
         then(state).should().notify(listener);
-    }
-
-    @Test
-    public void shouldDisplayLoadingOnLoadingState() {
-        IntentResolver.Listener listener = captureIntentResolverListener();
-
-        listener.onLoading();
-
-        then(view).should().displayProgress();
     }
 
     @Test

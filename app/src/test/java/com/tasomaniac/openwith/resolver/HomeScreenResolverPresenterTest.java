@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 
 import com.tasomaniac.openwith.R;
-import com.tasomaniac.openwith.resolver.IntentResolver.State;
 
 import java.util.Collections;
 
@@ -35,7 +34,6 @@ public class HomeScreenResolverPresenterTest {
     @Before
     public void setUp() throws Exception {
         presenter = new HomeScreenResolverPresenter(resources, intentResolver);
-        given(intentResolver.getState()).willReturn(State.IDLE);
         given(intentResolver.getSourceIntent()).willReturn(sourceIntent);
 
         presenter.bind(view);
@@ -56,22 +54,13 @@ public class HomeScreenResolverPresenterTest {
 
     @Test
     public void givenNonIdleStateShouldNotifyListener() {
-        State state = mock(State.class);
+        IntentResolver.State state = mock(IntentResolver.State.class);
         given(intentResolver.getState()).willReturn(state);
 
         presenter.bind(view);
         IntentResolver.Listener listener = captureIntentResolverListener();
 
         then(state).should().notify(listener);
-    }
-
-    @Test
-    public void shouldDisplayLoadingOnLoadingState() {
-        IntentResolver.Listener listener = captureIntentResolverListener();
-
-        listener.onLoading();
-
-        then(view).should().displayProgress();
     }
 
     @Test
