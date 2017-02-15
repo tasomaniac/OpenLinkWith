@@ -1,13 +1,13 @@
 package com.tasomaniac.openwith.resolver;
 
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
+import com.tasomaniac.openwith.util.ResolverInfos;
 
 public final class DisplayResolveInfo implements Parcelable {
     private final ResolveInfo ri;
@@ -29,14 +29,9 @@ public final class DisplayResolveInfo implements Parcelable {
 
     Intent intentFrom(Intent sourceIntent) {
         return new Intent(sourceIntent)
-                .setComponent(componentName(ri))
+                .setComponent(ResolverInfos.componentName(ri))
                 .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
                                   | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
-    }
-
-    private static ComponentName componentName(ResolveInfo ri) {
-        ActivityInfo ai = ri.activityInfo;
-        return new ComponentName(ai.applicationInfo.packageName, ai.name);
     }
 
     @Override
@@ -48,16 +43,12 @@ public final class DisplayResolveInfo implements Parcelable {
             return false;
         }
         DisplayResolveInfo that = (DisplayResolveInfo) o;
-        return equals(ri, that.ri);
-    }
-
-    static boolean equals(ResolveInfo left, ResolveInfo right) {
-        return componentName(left).equals(componentName(right));
+        return ResolverInfos.equals(ri, that.ri);
     }
 
     @Override
     public int hashCode() {
-        return componentName(ri).hashCode();
+        return ResolverInfos.componentName(ri).hashCode();
     }
 
     @Override

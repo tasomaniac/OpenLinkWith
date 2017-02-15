@@ -1,4 +1,4 @@
-package com.tasomaniac.openwith.resolver;
+package com.tasomaniac.openwith.redirect;
 
 import android.support.annotation.Nullable;
 

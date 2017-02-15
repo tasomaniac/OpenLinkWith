@@ -9,6 +9,7 @@ import android.text.TextUtils;
 
 import com.tasomaniac.openwith.rx.SchedulingStrategy;
 import com.tasomaniac.openwith.util.Intents;
+import com.tasomaniac.openwith.util.ResolverInfos;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -126,7 +127,7 @@ class IntentResolver {
             for (int i = 0; i < initialSize; i++) {
                 ResolveInfo info = list.get(i);
 
-                if (DisplayResolveInfo.equals(info, browser)) {
+                if (ResolverInfos.equals(info, browser)) {
                     browserFound = true;
                     break;
                 }

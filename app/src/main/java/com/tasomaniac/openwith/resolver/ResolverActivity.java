@@ -92,7 +92,6 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.BottomSheet_Light);
         super.onCreate(savedInstanceState);
         getComponent().inject(this);
 
