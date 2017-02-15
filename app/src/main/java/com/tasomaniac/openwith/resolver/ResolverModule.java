@@ -33,15 +33,15 @@ class ResolverModule {
 
     private static final long USAGE_STATS_PERIOD = TimeUnit.DAYS.toMillis(14);
 
-    private final ResolverActivity activity;
     private final Intent sourceIntent;
     @Nullable
     private final ComponentName lastChosenComponent;
+    private final String callerPackage;
 
     ResolverModule(ResolverActivity activity, Intent sourceIntent, @Nullable ComponentName lastChosenComponent) {
-        this.activity = activity;
         this.sourceIntent = sourceIntent;
         this.lastChosenComponent = lastChosenComponent;
+        this.callerPackage = ShareCompat.getCallingPackage(activity);
     }
 
     @Provides
@@ -71,12 +71,12 @@ class ResolverModule {
     }
 
     @Provides
-    ResolverPresenter resolverPresenter(Resources resources, ChooserHistory history, IntentResolver intentResolver, ViewState viewState) {
+    ResolverPresenter resolverPresenter(Application app, Resources resources, ChooserHistory history, IntentResolver intentResolver, ViewState viewState) {
         boolean isAddToHomeScreen = sourceIntent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
         if (isAddToHomeScreen) {
-            return new HomeScreenResolverPresenter(resources, intentResolver, activity.getSupportFragmentManager());
+            return new HomeScreenResolverPresenter(resources, intentResolver);
         }
-        return new DefaultResolverPresenter(resources, history, activity.getContentResolver(), intentResolver, viewState);
+        return new DefaultResolverPresenter(resources, history, app.getContentResolver(), intentResolver, viewState);
     }
 
     @Provides
@@ -87,7 +87,6 @@ class ResolverModule {
     @Provides
     @PerActivity
     IntentResolver intentResolver(RedirectFixer redirectFixer, PackageManager packageManager, Lazy<ResolverComparator> resolverComparator, SchedulingStrategy schedulingStrategy, ResolveListGrouper resolveListGrouper) {
-        String callerPackage = ShareCompat.getCallingPackage(activity);
         return new IntentResolver(redirectFixer, packageManager, resolverComparator, schedulingStrategy, sourceIntent, callerPackage, resolveListGrouper);
     }
 

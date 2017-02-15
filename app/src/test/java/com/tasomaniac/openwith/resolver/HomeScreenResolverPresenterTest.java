@@ -2,7 +2,6 @@ package com.tasomaniac.openwith.resolver;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.support.v4.app.FragmentManager;
 
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.resolver.IntentResolver.State;
@@ -35,7 +34,7 @@ public class HomeScreenResolverPresenterTest {
 
     @Before
     public void setUp() throws Exception {
-        presenter = new HomeScreenResolverPresenter(resources, intentResolver, mock(FragmentManager.class));
+        presenter = new HomeScreenResolverPresenter(resources, intentResolver);
         given(intentResolver.getState()).willReturn(State.IDLE);
         given(intentResolver.getSourceIntent()).willReturn(sourceIntent);
 

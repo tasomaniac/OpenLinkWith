@@ -15,6 +15,8 @@ interface ResolverView {
 
     void startPreferred(Intent intent, CharSequence appLabel);
 
+    void displayAddToHomeScreenDialog(DisplayResolveInfo dri, Intent intent);
+
     void setResolvedList(List<DisplayResolveInfo> list);
 
     void setupUI(@LayoutRes int layoutRes, boolean shouldDisplayExtendedInfo);

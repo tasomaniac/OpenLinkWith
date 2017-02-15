@@ -40,6 +40,7 @@ import com.tasomaniac.openwith.ComponentActivity;
 import com.tasomaniac.openwith.IconLoader;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.Injector;
+import com.tasomaniac.openwith.homescreen.AddToHomeScreenDialogFragment;
 import com.tasomaniac.openwith.util.Intents;
 
 import javax.inject.Inject;
@@ -269,6 +270,13 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
         String message = getString(R.string.warning_open_link_with_name, appLabel);
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         Intents.startActivityFixingIntent(this, intent);
+    }
+
+    @Override
+    public void displayAddToHomeScreenDialog(DisplayResolveInfo dri, Intent intent) {
+        AddToHomeScreenDialogFragment
+                .newInstance(dri, intent)
+                .show(getSupportFragmentManager());
     }
 
     @Override

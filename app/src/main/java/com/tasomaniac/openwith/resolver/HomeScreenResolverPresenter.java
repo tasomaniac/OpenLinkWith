@@ -3,10 +3,8 @@ package com.tasomaniac.openwith.resolver;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
 
 import com.tasomaniac.openwith.R;
-import com.tasomaniac.openwith.homescreen.AddToHomeScreenDialogFragment;
 
 import java.util.List;
 
@@ -16,17 +14,15 @@ class HomeScreenResolverPresenter implements ResolverPresenter {
 
     private final Resources resources;
     private final IntentResolver intentResolver;
-    private final FragmentManager fragmentManager;
 
-    HomeScreenResolverPresenter(Resources resources, IntentResolver intentResolver, FragmentManager fragmentManager) {
+    HomeScreenResolverPresenter(Resources resources, IntentResolver intentResolver) {
         this.resources = resources;
         this.intentResolver = intentResolver;
-        this.fragmentManager = fragmentManager;
     }
 
     @Override
     public void bind(ResolverView view) {
-        view.setListener(new ViewListener(intentResolver));
+        view.setListener(new ViewListener(intentResolver, view));
 
         IntentResolverListener listener = new IntentResolverListener(view);
         intentResolver.setListener(listener);
@@ -74,9 +70,11 @@ class HomeScreenResolverPresenter implements ResolverPresenter {
     private class ViewListener implements ResolverView.Listener {
 
         private final IntentResolver intentResolver;
+        private final ResolverView view;
 
-        ViewListener(IntentResolver intentResolver) {
+        ViewListener(IntentResolver intentResolver, ResolverView view) {
             this.intentResolver = intentResolver;
+            this.view = view;
         }
 
         @Override
@@ -87,9 +85,7 @@ class HomeScreenResolverPresenter implements ResolverPresenter {
         @Override
         public void onItemClick(DisplayResolveInfo dri) {
             Intent intent = dri.intentFrom(intentResolver.getSourceIntent());
-            AddToHomeScreenDialogFragment
-                    .newInstance(dri, intent)
-                    .show(fragmentManager);
+            view.displayAddToHomeScreenDialog(dri, intent);
         }
 
         @Override
