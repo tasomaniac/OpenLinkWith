@@ -87,9 +87,7 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
 
     @Override
     protected void onDestroy() {
-        if (presenter != null) {
-            presenter.unbind(this);
-        }
+        presenter.unbind(this);
         super.onDestroy();
     }
 
@@ -127,12 +125,13 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
 
     @Override
     public void setFilteredItem(@Nullable DisplayResolveInfo filteredItem) {
+        boolean hasFilteredItem = filteredItem != null;
         ImageView iconView = (ImageView) findViewById(R.id.icon);
-        if (iconView != null && filteredItem != null) {
+        if (iconView != null && hasFilteredItem) {
             new LoadIconIntoViewTask(iconLoader, iconView).execute(filteredItem);
         }
-        adapter.setSelectionEnabled(filteredItem == null);
-        adapter.setDisplayHeader(filteredItem != null);
+        adapter.setSelectionEnabled(!hasFilteredItem);
+        adapter.setDisplayHeader(hasFilteredItem);
     }
 
     @Override
