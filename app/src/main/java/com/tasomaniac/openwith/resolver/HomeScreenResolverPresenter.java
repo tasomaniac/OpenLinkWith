@@ -48,11 +48,6 @@ class HomeScreenResolverPresenter implements ResolverPresenter {
         }
 
         @Override
-        public void onLoading() {
-            view.displayProgress();
-        }
-
-        @Override
         public void onIntentResolved(List<DisplayResolveInfo> list, @Nullable DisplayResolveInfo filteredItem, boolean showExtended) {
             int totalCount = list.size();
             if (totalCount == 0) {

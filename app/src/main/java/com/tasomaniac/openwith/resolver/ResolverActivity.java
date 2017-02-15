@@ -34,7 +34,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.tasomaniac.android.widget.DelayedProgressBar;
 import com.tasomaniac.openwith.ComponentActivity;
 import com.tasomaniac.openwith.IconLoader;
 import com.tasomaniac.openwith.R;
@@ -65,11 +64,8 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     @Inject ResolverPresenter presenter;
     @Inject ResolveListAdapter adapter;
 
-    @BindView(R.id.resolver_root) ViewGroup rootView;
-    @BindView(R.id.resolver_progress) DelayedProgressBar progress;
-
-    private Button mAlwaysButton;
-    private Button mOnceButton;
+    @BindView(R.id.button_always) Button alwaysButton;
+    @BindView(R.id.button_once) Button onceButton;
 
     private boolean packageMonitorRegistered;
     private final PackageMonitor packageMonitor = new PackageMonitor() {
@@ -85,11 +81,7 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getComponent().inject(this);
-
-        setContentView(R.layout.resolver_activity);
-        ButterKnife.bind(this);
         presenter.bind(this);
-
         registerPackageMonitor();
     }
 
@@ -102,11 +94,6 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     }
 
     @Override
-    public void displayProgress() {
-        progress.show(true);
-    }
-
-    @Override
     public void setResolvedList(List<DisplayResolveInfo> list) {
         adapter.mList.clear();
         adapter.mList.addAll(list);
@@ -114,15 +101,11 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
 
     @Override
     public void setupUI(@LayoutRes int layoutRes, boolean shouldDisplayExtendedInfo) {
-        getLayoutInflater().inflate(layoutRes, rootView);
+        setContentView(layoutRes);
+        ButterKnife.bind(this);
         setupList(shouldDisplayExtendedInfo);
         ResolverDrawerLayout rdl = (ResolverDrawerLayout) findViewById(R.id.contentPanel);
         rdl.setOnDismissedListener(this::finish);
-        progress.hide(true, () -> {
-            rdl.setVisibility(View.VISIBLE);
-            rdl.setAlpha(0.0f);
-            rdl.animate().alpha(1.0f);
-        });
     }
 
     private void setupList(boolean shouldDisplayExtendedInfo) {
@@ -156,14 +139,12 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     public void setupActionButtons() {
         ViewGroup buttonLayout = (ViewGroup) findViewById(R.id.button_bar);
         buttonLayout.setVisibility(View.VISIBLE);
-        mAlwaysButton = (Button) buttonLayout.findViewById(R.id.button_always);
-        mOnceButton = (Button) buttonLayout.findViewById(R.id.button_once);
     }
 
     @Override
     public void enableActionButtons() {
-        mAlwaysButton.setEnabled(true);
-        mOnceButton.setEnabled(true);
+        alwaysButton.setEnabled(true);
+        onceButton.setEnabled(true);
     }
 
     @Override
@@ -188,7 +169,6 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     }
 
     private void handlePackagesChanged() {
-        rootView.removeAllViews();
         listener.onPackagesChanged();
     }
 
@@ -226,11 +206,11 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
 
         int checkedPos = savedInstanceState.getInt(KEY_CHECKED_POS);
         if (checkedPos != RecyclerView.NO_POSITION) {
-            if (mAlwaysButton != null) {
-                mAlwaysButton.setEnabled(true);
+            if (alwaysButton != null) {
+                alwaysButton.setEnabled(true);
             }
-            if (mOnceButton != null) {
-                mOnceButton.setEnabled(true);
+            if (onceButton != null) {
+                onceButton.setEnabled(true);
             }
             adapter.setItemChecked(checkedPos);
         }

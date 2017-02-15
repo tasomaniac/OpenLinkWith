@@ -9,8 +9,6 @@ import java.util.List;
 
 interface ResolverView {
 
-    void displayProgress();
-
     void startSelected(Intent intent);
 
     void startPreferred(Intent intent, CharSequence appLabel);

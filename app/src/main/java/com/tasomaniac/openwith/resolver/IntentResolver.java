@@ -63,7 +63,6 @@ class IntentResolver {
         Observable.just(sourceIntent)
                 .map(this::doResolve)
                 .cast(State.class)
-                .startWith(State.LOADING)
                 .compose(schedulingStrategy.apply())
                 .subscribe(state -> {
                     this.state = state;
@@ -139,7 +138,6 @@ class IntentResolver {
 
     abstract static class State {
 
-        static final State LOADING = new Loading();
         static final State IDLE = new Idle();
 
         abstract void notify(Listener listener);
@@ -149,14 +147,6 @@ class IntentResolver {
         @Override
         void notify(Listener listener) {
             // no-op
-        }
-    }
-
-    private static class Loading extends State {
-
-        @Override
-        void notify(Listener listener) {
-            listener.onLoading();
         }
     }
 
@@ -179,20 +169,10 @@ class IntentResolver {
 
     interface Listener {
 
-        void onLoading();
-
         void onIntentResolved(List<DisplayResolveInfo> list, @Nullable DisplayResolveInfo filteredItem, boolean showExtended);
 
-        Listener NO_OP = new Listener() {
-            @Override
-            public void onLoading() {
-                // no-op
-            }
-
-            @Override
-            public void onIntentResolved(List<DisplayResolveInfo> list, @Nullable DisplayResolveInfo filteredItem, boolean showExtended) {
-                // no-op
-            }
+        Listener NO_OP = (list, filteredItem, showExtended) -> {
+            // no-op
         };
 
     }
