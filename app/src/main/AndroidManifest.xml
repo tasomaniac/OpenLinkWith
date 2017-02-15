@@ -107,6 +107,16 @@
     </activity>
 
     <activity
+      android:name=".redirect.RedirectFixActivity"
+      android:configChanges="keyboardHidden|orientation|screenLayout"
+      android:documentLaunchMode="never"
+      android:excludeFromRecents="true"
+      android:finishOnCloseSystemDialogs="true"
+      android:process=":resolver"
+      android:relinquishTaskIdentity="true"
+      android:theme="@style/BottomSheet.Light" />
+
+    <activity
       android:name=".resolver.ResolverActivity"
       android:documentLaunchMode="never"
       android:excludeFromRecents="true"

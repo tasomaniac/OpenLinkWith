@@ -23,7 +23,6 @@ import static android.os.Build.VERSION_CODES.M;
 
 class IntentResolver {
 
-    private final RedirectFixer redirectFixer;
     private final PackageManager packageManager;
     private final Lazy<ResolverComparator> resolverComparator;
     private final SchedulingStrategy schedulingStrategy;
@@ -34,14 +33,12 @@ class IntentResolver {
     private State state = State.IDLE;
     private Listener listener = Listener.NO_OP;
 
-    IntentResolver(RedirectFixer redirectFixer,
-                   PackageManager packageManager,
+    IntentResolver(PackageManager packageManager,
                    Lazy<ResolverComparator> resolverComparator,
                    SchedulingStrategy schedulingStrategy,
                    Intent sourceIntent,
                    String callerPackage,
                    ResolveListGrouper resolveListGrouper) {
-        this.redirectFixer = redirectFixer;
         this.packageManager = packageManager;
         this.resolverComparator = resolverComparator;
         this.schedulingStrategy = schedulingStrategy;
@@ -65,9 +62,6 @@ class IntentResolver {
     void resolve() {
         Observable.just(sourceIntent)
                 .map(this::doResolve)
-                .flatMap(state -> state.hasOnlyBrowsers
-                        ? redirectFixer.followRedirects(sourceIntent).map(this::doResolve).toObservable()
-                        : Observable.just(state))
                 .cast(State.class)
                 .startWith(State.LOADING)
                 .compose(schedulingStrategy.apply())

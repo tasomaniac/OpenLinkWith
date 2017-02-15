@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import com.tasomaniac.openwith.data.Analytics;
 import com.tasomaniac.openwith.data.Injector;
-import com.tasomaniac.openwith.resolver.ResolverActivity;
+import com.tasomaniac.openwith.redirect.RedirectFixActivity;
 import com.tasomaniac.openwith.util.CallerPackageExtractor;
 import com.tasomaniac.openwith.util.Urls;
 
@@ -39,7 +39,7 @@ public class ShareToOpenWith extends Activity {
 
         if (foundUrl != null) {
             String callerPackage = CallerPackageExtractor.from(this).extract();
-            Intent intent = ResolverActivity.createIntent(this, foundUrl)
+            Intent intent = RedirectFixActivity.createIntent(this, foundUrl)
                     .putExtra(ShareCompat.EXTRA_CALLING_PACKAGE, callerPackage);
             startActivity(intent);
         } else {

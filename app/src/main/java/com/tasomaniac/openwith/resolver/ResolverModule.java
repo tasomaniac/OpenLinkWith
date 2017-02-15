@@ -21,8 +21,6 @@ import java.util.concurrent.TimeUnit;
 import dagger.Lazy;
 import dagger.Module;
 import dagger.Provides;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.LOLLIPOP_MR1;
@@ -47,16 +45,6 @@ class ResolverModule {
     @Provides
     Intent intent() {
         return sourceIntent;
-    }
-
-    @Provides
-    static PackageManager packageManager(Application app) {
-        return app.getPackageManager();
-    }
-
-    @Provides
-    static SchedulingStrategy schedulingStrategy() {
-        return new SchedulingStrategy(Schedulers.io(), AndroidSchedulers.mainThread());
     }
 
     @Provides
@@ -86,8 +74,8 @@ class ResolverModule {
 
     @Provides
     @PerActivity
-    IntentResolver intentResolver(RedirectFixer redirectFixer, PackageManager packageManager, Lazy<ResolverComparator> resolverComparator, SchedulingStrategy schedulingStrategy, ResolveListGrouper resolveListGrouper) {
-        return new IntentResolver(redirectFixer, packageManager, resolverComparator, schedulingStrategy, sourceIntent, callerPackage, resolveListGrouper);
+    IntentResolver intentResolver(PackageManager packageManager, Lazy<ResolverComparator> resolverComparator, SchedulingStrategy schedulingStrategy, ResolveListGrouper resolveListGrouper) {
+        return new IntentResolver(packageManager, resolverComparator, schedulingStrategy, sourceIntent, callerPackage, resolveListGrouper);
     }
 
     @Provides

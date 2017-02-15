@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.Injector;
+import com.tasomaniac.openwith.redirect.RedirectFixActivity;
 import com.tasomaniac.openwith.resolver.ResolverActivity;
 import com.tasomaniac.openwith.util.Urls;
 
@@ -22,7 +23,7 @@ public class AddToHomeScreen extends Activity {
         String foundUrl = Urls.extractUrlFrom(getIntent(), reader);
 
         if (foundUrl != null) {
-            Intent intent = ResolverActivity.createIntent(this, foundUrl)
+            Intent intent = RedirectFixActivity.createIntent(this, foundUrl)
                     .putExtra(ResolverActivity.EXTRA_ADD_TO_HOME_SCREEN, true);
             startActivity(intent);
         } else {

@@ -15,7 +15,6 @@
  */
 package com.tasomaniac.openwith.resolver;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
@@ -49,8 +48,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.tasomaniac.openwith.util.Urls.fixUrls;
-
 /**
  * This activity is displayed when the system attempts to start an Intent for
  * which there is more than one matching activity, allowing the user to decide
@@ -63,12 +60,6 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
 
     public static final String EXTRA_ADD_TO_HOME_SCREEN = "EXTRA_ADD_TO_HOME_SCREEN";
     private static final String KEY_CHECKED_POS = "KEY_CHECKED_POS";
-
-    public static Intent createIntent(Context context, String foundUrl) {
-        return new Intent(context, ResolverActivity.class)
-                .setAction(Intent.ACTION_VIEW)
-                .setData(Uri.parse(fixUrls(foundUrl)));
-    }
 
     @Inject IconLoader iconLoader;
     @Inject ResolverPresenter presenter;
