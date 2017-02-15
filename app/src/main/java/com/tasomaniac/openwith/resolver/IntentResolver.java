@@ -72,15 +72,11 @@ class IntentResolver {
     }
 
     private Success doResolve(Intent sourceIntent) {
-        boolean hasOnlyBrowsers = false;
         int flag = SDK_INT >= M ? PackageManager.MATCH_ALL :PackageManager.MATCH_DEFAULT_ONLY;
         List<ResolveInfo> currentResolveList = new ArrayList<>(packageManager.queryIntentActivities(sourceIntent, flag));
         if (Intents.isHttp(sourceIntent) && SDK_INT >= M) {
             List<ResolveInfo> browsers = queryBrowsers();
             addBrowsersToList(currentResolveList, browsers);
-            if (browsers.size() == currentResolveList.size()) {
-                hasOnlyBrowsers = true;
-            }
         }
 
         //Remove the components from the caller
@@ -89,7 +85,7 @@ class IntentResolver {
         }
 
         List<DisplayResolveInfo> resolved = groupResolveList(currentResolveList);
-        return new Success(resolved, resolveListGrouper.filteredItem, resolveListGrouper.showExtended, hasOnlyBrowsers);
+        return new Success(resolved, resolveListGrouper.filteredItem, resolveListGrouper.showExtended);
     }
 
     private List<DisplayResolveInfo> groupResolveList(List<ResolveInfo> currentResolveList) {
@@ -168,13 +164,11 @@ class IntentResolver {
         final List<DisplayResolveInfo> resolved;
         @Nullable final DisplayResolveInfo filteredItem;
         final boolean showExtended;
-        final boolean hasOnlyBrowsers;
 
-        Success(List<DisplayResolveInfo> resolved, @Nullable DisplayResolveInfo filteredItem, boolean showExtended, boolean hasOnlyBrowsers) {
+        Success(List<DisplayResolveInfo> resolved, @Nullable DisplayResolveInfo filteredItem, boolean showExtended) {
             this.resolved = resolved;
             this.filteredItem = filteredItem;
             this.showExtended = showExtended;
-            this.hasOnlyBrowsers = hasOnlyBrowsers;
         }
 
         @Override
