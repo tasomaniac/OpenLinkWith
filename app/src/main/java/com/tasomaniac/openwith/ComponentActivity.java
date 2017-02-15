@@ -10,12 +10,10 @@ public abstract class ComponentActivity<Component> extends AppCompatActivity {
     protected final Component getComponent() {
         if (component == null) {
             component = getLastCustomNonConfigurationInstance();
-
-            if (component == null) {
-                component = createComponent();
-            }
         }
-
+        if (component == null) {
+            component = createComponent();
+        }
         return component;
     }
 
