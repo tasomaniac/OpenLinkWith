@@ -4,13 +4,6 @@ Please send bugs and problems using <strong>Contact Me</strong> option in the ap
 Help translate the app into your language:
 https://crowdin.com/project/open-link-with
 
-v1.3
-- Fix Amazon links (again)
-- Bug fixes
-- Polish and Simplified Chinese support
-
-v1.2
-- New Add To Home screen feature.
-- Facebook support
-- Small bug fixes.
-- 2 new languages (Arabic and German)
+v1.4
+- New feature: We now automatically follow shortened links (e.g bit.ly t.co goo.gl) and figure out what apps we can use to open the link with.
+- French translation
