@@ -47,8 +47,7 @@
     اضغط <strong>دائماً</strong> لأقوم بفتح هذا الرابط دائماً بواسطة التطبيق المحدد. 
   ]]></string>
   <string name="description_tutorial_4"><![CDATA[
-    <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.
-  ]]></string>
+    <strong>أضف للشاشة الرئيسية</strong> كي تتمكن من الوصول السريع لروابطك المفضلة من خلال تطبيقاتك المفضلة.  ]]></string>
   <string name="description_tutorial_5"><![CDATA[
     أعطني صلاحية الوصول إلى <strong>بيانات الإستخدام</strong> وسأعمل بشكل أفضل. سيكون بإمكاني التعرف على المتصفح الذي تقوم بعمل مشاركة من خلاله، ومن ثم أتخذ ما يلزم.  ]]></string>
   <string name="usage_access_give_access">إعطاء صلاحية الوصول</string>

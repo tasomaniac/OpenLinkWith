@@ -5,14 +5,14 @@
   <string name="use_a_different_app">使用不同的应用</string>
   <string name="activity_resolver_use_once">仅此一次</string>
   <string name="activity_resolver_use_always">总是</string>
-  <string name="which_view_application">打开方式…</string>
+  <string name="which_view_application">打开方式</string>
   <string name="which_view_application_named">用%1$s打开</string>
   <string name="title_preferred_apps">默认应用</string>
   <string name="desc_preferred">当下面的链接分享到此应用的时候，会直接打开默认应用。\n\n点击以删除默认应用。</string>
   <string name="desc_preferred_empty">当下面的链接分享到此应用的时候，会直接打开默认应用。\n\n分享链接到此应用，然后选择“始终”以设定默认应用。</string>
   <string name="title_remove_preferred">删除默认？</string>
   <string name="message_remove_preferred"><![CDATA[
-删除 <strong>%1$s</strong> 作为加载 <strong>%2$s</strong> 链接的默认应用吗？<br><br><strong>注︰</strong> 下次分享 <strong>%3$s</strong> 链接的时候你可以设置新的默认应用来使用。    ]]></string>
+删除 <strong>%1$s</strong> 作为加载 <strong>%2$s</strong> 链接的默认应用吗？<br><br><strong>注︰</strong> 你可以在下次分享 <strong>%3$s</strong> 链接的时候设置新的默认应用。    ]]></string>
   <string name="error_invalid_url">共享的内容没有任何有效的链接。</string>
   <string name="empty_resolver_activity">没有找到其他应用来处理链接。</string>
   <string name="warning_open_link_with_name">正在用 %s 打开链接。</string>
