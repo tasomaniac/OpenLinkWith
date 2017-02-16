@@ -51,4 +51,8 @@
     <item name="android:divider">@null</item>
   </style>
 
+  <style name="ThemeOverlay.Progress" parent="">
+    <item name="colorControlActivated">?colorAccent</item>
+  </style>
+
 </resources>
