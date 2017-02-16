@@ -19,27 +19,27 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.tasomaniac.openwith"
+        applicationId 'com.tasomaniac.openwith'
         minSdkVersion 15
         targetSdkVersion rootProject.ext.compileSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
-        buildConfigField "String", "GIT_SHA", "\"${gitSha}\""
+        buildConfigField 'String', 'GIT_SHA', "\"${gitSha}\""
 
-        resConfigs "ar", "de", "en", "es", "in", "it", "ja", "pl", "pt-rBR", "pt-rPT", "ru", "tr", "uk", "zh-rCN"
+        resConfigs 'ar', 'de', 'en', 'es', 'fr', 'in', 'it', 'ja', 'pl', 'pt-rBR', 'pt-rPT', 'ru', 'tr', 'uk', 'zh-rCN'
     }
 
     signingConfigs {
-        debug.storeFile file("props/debug.keystore")
+        debug.storeFile file('props/debug.keystore')
         release.signingConfigProperties buildProperties.signing
     }
 
     buildTypes {
         debug {
             ext.enableCrashlytics = false
-            applicationIdSuffix ".debug"
+            applicationIdSuffix '.debug'
             signingConfig signingConfigs.debug
-            versionNameSuffix "-debug"
+            versionNameSuffix '-debug'
         }
 
         release {
@@ -57,8 +57,8 @@ android {
 
     productFlavors {
         floss {
-            applicationIdSuffix ".floss"
-            versionName rootProject.ext.versionName + "-floss"
+            applicationIdSuffix '.floss'
+            versionName "${rootProject.ext.versionName}-floss"
         }
         play {}
     }
