@@ -13,13 +13,6 @@
   <string name="title_remove_preferred">Supprimer l\'application préférée?</string>
   <string name="message_remove_preferred"><![CDATA[
 Ne plus ouvrir les liens de <strong>%2$s</strong> avec <strong>%1$s</strong> ? <br><br><strong>Note:</strong>Vous pouvez définir une nouvelle application préférée à utiliser pour les prochains lien de <strong>%3$s</strong>.    ]]></string>
-  <string name="title_blocked_apps">Applications Bloquées</string>
-  <string name="desc_blocked_apps">Les applications bloquées seront ignorées lorsque vous partagerez un lien avec OLW.\n\nAppuyez pour retirer une application bloquées.</string>
-  <string name="desc_blocked_apps_empty">Les applications bloquées seront ignorées lorsque vous partagerez un lien avec OLW.\n\nVous pouvez bloquer une application en appuyant longuement dessus et en sélectionnant bloquer quand vous partagez un lien avec OLW.</string>
-  <string name="title_remove_blocked">Débloquer l\'application ?</string>
-  <string name="message_remove_blocked"><![CDATA[
-    Débloquer <strong>%1$s</strong>?<br><br>L'application peut réapparaître de nouveau lorsque vous partagez un lien avec OLW.
-    ]]></string>
   <string name="error_invalid_url">Le contenu partagé n\'avait aucune URL valide.</string>
   <string name="empty_resolver_activity">Aucune autre application n\'a été trouvé pour gérer l\'URL.</string>
   <string name="warning_open_link_with_name">Ouverture du lien avec %s.</string>
@@ -28,7 +21,6 @@ Ne plus ouvrir les liens de <strong>%2$s</strong> avec <strong>%1$s</strong> ? <
   <string name="pref_title_about">À Propos</string>
   <string name="pref_summary_about">Revoir le tutoriel.</string>
   <string name="pref_summary_preferred">Changer les paramètres d\'applications préférées.</string>
-  <string name="pref_summary_blocked">Voir/débloquer les applications bloquées.</string>
   <string name="pref_title_category_usage">Habitudes d\'Utilisations</string>
   <string name="pref_title_usage_stats">Statistiques d\'Utilisations</string>
   <string name="pref_summary_usage_stats">Améliorez le tri de l\'application en lui donnant accès aux Statistiques d\'Utilisations.</string>
@@ -54,10 +46,10 @@ Ne plus ouvrir les liens de <strong>%2$s</strong> avec <strong>%1$s</strong> ? <
     Sélectionner <strong>TOUJOURS</strong> pour me dire de toujours ouvrir ce lien avec une application spécifique.
   ]]></string>
   <string name="description_tutorial_4"><![CDATA[
-    <strong>Ajouter à l'écran d'accueil</strong>pour rapidement avoir accès à vos liens préférés avec vos applications préférées.
+    <strong>Ajouter à l\'écran d\'accueil</strong>pour rapidement avoir accès à vos liens préférés avec vos applications préférées.
   ]]></string>
   <string name="description_tutorial_5"><![CDATA[
-Donnez moi l'accès au <strong>HABITUDES D'UTILISATIONS</strong> et je fonctionnerai mieux. Je détecterai avec quel navigateur vous partagez pour agir en conséquence.
+Donnez moi l\'accès au <strong>HABITUDES D\'UTILISATIONS</strong> et je fonctionnerai mieux. Je détecterai avec quel navigateur vous partagez pour agir en conséquence.
   ]]></string>
   <string name="usage_access_give_access">Donnez l\'accès</string>
   <string name="error">Erreur</string>
@@ -66,6 +58,4 @@ Donnez moi l'accès au <strong>HABITUDES D'UTILISATIONS</strong> et je fonctionn
   <string name="add">Ajouter</string>
   <string name="cancel">Annuler</string>
   <string name="dialog_hint_add_to_home_screen">Nom du raccourci</string>
-  <string name="app_info">Informations de l\'application</string>
-  <string name="block_app">Bloquer l\'application</string>
 </resources>
