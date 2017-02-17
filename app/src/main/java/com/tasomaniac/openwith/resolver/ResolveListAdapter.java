@@ -48,6 +48,10 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         return result;
     }
 
+    public int getAdapterPositionOf(DisplayResolveInfo dri) {
+        return mList.indexOf(dri) + getHeadersCount();
+    }
+
     public DisplayResolveInfo getItem(int position) {
         position -= getHeadersCount();
         if (position < 0) {

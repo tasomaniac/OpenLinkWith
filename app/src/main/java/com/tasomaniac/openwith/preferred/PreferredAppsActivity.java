@@ -31,7 +31,6 @@ import net.simonvt.schematic.Cursors;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.COMPONENT;
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.HOST;
@@ -66,7 +65,6 @@ public class PreferredAppsActivity extends AppCompatActivity
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        recyclerView.setItemAnimator(new SlideInRightAnimator());
         adapter = new PreferredAppsAdapter(iconLoader);
         adapter.setItemClickListener(this);
         recyclerView.setAdapter(adapter);
@@ -133,25 +131,14 @@ public class PreferredAppsActivity extends AppCompatActivity
         );
     }
 
-    private void notifyItemRemoval(final DisplayResolveInfo info) {
+    private void notifyItemRemoval(DisplayResolveInfo info) {
         recyclerView.postDelayed(() -> {
-            int position = positionInAdapter(info);
-            adapter.remove(adapter.getItem(position));
+            int position = adapter.getAdapterPositionOf(info);
+            adapter.remove(info);
             adapter.notifyItemRemoved(position);
 
             recyclerView.postDelayed(() -> adapter.notifyItemChanged(0), 200);
         }, 300);
-    }
-
-    private int positionInAdapter(DisplayResolveInfo info) {
-        int itemCount = adapter.getItemCount();
-        for (int i = 0; i < itemCount; i++) {
-            DisplayResolveInfo item = adapter.getItem(i);
-            if (info == item) {
-                return i;
-            }
-        }
-        return RecyclerView.NO_POSITION;
     }
 
 }

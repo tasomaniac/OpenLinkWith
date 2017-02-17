@@ -27,6 +27,12 @@ android {
         buildConfigField 'String', 'GIT_SHA', "\"${gitSha}\""
 
         resConfigs 'ar', 'de', 'en', 'es', 'fr', 'in', 'it', 'ja', 'pl', 'pt-rBR', 'pt-rPT', 'ru', 'tr', 'uk', 'zh-rCN'
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                argument('butterknife.minSdk', minSdkVersion.apiString)
+            }
+        }
     }
 
     signingConfigs {
@@ -81,8 +87,9 @@ play {
 dependencies {
     def supportLibVersion = '25.1.1'
     def schematicVersion = '0.7.0'
-    def butterKnifeVersion = '8.4.0'
-    def okHttpVersion = '3.5.0'
+    def butterKnifeVersion = '8.5.1'
+    def daggerVersion = '2.9'
+    def okHttpVersion = '3.6.0'
     def rxJavaVersion = '2.0.1'
 
     compile "com.android.support:support-v4:$supportLibVersion"
@@ -93,13 +100,11 @@ dependencies {
 
     compile 'com.tasomaniac:delayed-progress:0.4'
 
-    compile 'jp.wasabeef:recyclerview-animators:2.2.5'
-
     compile "net.simonvt.schematic:schematic:$schematicVersion"
     annotationProcessor "net.simonvt.schematic:schematic-compiler:$schematicVersion"
 
-    compile 'com.google.dagger:dagger:2.8'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.8'
+    compile "com.google.dagger:dagger:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
 
     compile "com.jakewharton:butterknife:$butterKnifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
@@ -112,6 +117,6 @@ dependencies {
     playCompile 'com.crashlytics.sdk.android:crashlytics:2.6.6'
 
     testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:2.7.5'
+    testCompile 'org.mockito:mockito-core:2.7.9'
     testCompile "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
 }
