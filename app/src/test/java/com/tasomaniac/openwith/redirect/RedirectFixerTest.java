@@ -94,6 +94,19 @@ public class RedirectFixerTest {
                 .test().assertValue(server.url("redirect"));
     }
 
+    @Test
+    public void givenNetworkIsInterruptedReturnOriginal() throws Exception {
+        server.setDispatcher(new Dispatcher() {
+            @Override
+            public MockResponse dispatch(RecordedRequest request) throws InterruptedException {
+                throw new InterruptedException();
+            }
+        });
+
+        redirectFixer.followRedirects(server.url("original"))
+                .test().assertValue(server.url("original"));
+    }
+
     private MockResponse noRedirect() {
         return redirectTo(null);
     }
