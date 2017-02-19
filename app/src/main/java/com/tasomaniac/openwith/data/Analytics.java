@@ -12,15 +12,12 @@ public interface Analytics {
 
         @Override
         public void sendScreenView(String screenName) {
-            Timber.tag("Analytics").d("Screen: " + screenName);
+            Timber.tag("Analytics").d("Screen: %s", screenName);
         }
 
         @Override
         public void sendEvent(String category, String action, String label) {
-            Timber.tag("Analytics").d("Event recorded:"
-                    + "\n\tCategory: " + category
-                    + "\n\tAction: " + action
-                    + "\n\tLabel: " + label);
+            Timber.tag("Analytics").d("Event recorded:\n\tCategory: %s\n\tAction: %s\n\tLabel: %s", category, action, label);
         }
     }
 }
