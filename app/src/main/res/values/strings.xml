@@ -78,6 +78,7 @@
   <string name="usage_access_give_access">Give Access</string>
   <string name="error">Error</string>
   <string name="error_usage_access_not_found">Usage Access Settings cannot be open.\n\nYou may access it by going into Settings -> Security</string>
+  <string name="error_cannot_start_activity">Failed to open the link with selected app. Try again later.</string>
 
   <string name="add_to_homescreen">Add To Home screen</string>
   <string name="add">Add</string>

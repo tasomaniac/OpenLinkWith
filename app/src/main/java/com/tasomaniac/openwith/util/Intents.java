@@ -2,6 +2,7 @@ package com.tasomaniac.openwith.util;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
@@ -42,7 +43,8 @@ public class Intents {
         return "http".equals(scheme) || "https".equals(scheme);
     }
 
-    public static void startActivityFixingIntent(Context context, Intent intent) {
+    public static void startActivityFixingIntent(Context context, Intent intent)
+            throws SecurityException, ActivityNotFoundException {
         context.startActivity(fixIntents(context, intent));
     }
 

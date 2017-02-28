@@ -55,7 +55,7 @@ class PreferredResolver {
             try {
                 activity.startPreferred(preferredIntent(), loadLabel());
                 return true;
-            } catch (SecurityException e) {
+            } catch (Exception e) {
                 Timber.e(e, "Security Exception for the url %s", uri);
                 activity.getContentResolver().delete(withHost(uri.getHost()), null, null);
             }

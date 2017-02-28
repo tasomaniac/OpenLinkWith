@@ -75,9 +75,13 @@ class DefaultResolverPresenter implements ResolverPresenter {
             }
             if (totalCount == 1) {
                 DisplayResolveInfo dri = filteredItem != null ? filteredItem : list.get(0);
-                view.startPreferred(dri.intentFrom(intentResolver.getSourceIntent()), dri.displayLabel());
-                view.dismiss();
-                return;
+                try {
+                    view.startPreferred(dri.intentFrom(intentResolver.getSourceIntent()), dri.displayLabel());
+                    view.dismiss();
+                    return;
+                } catch (Exception e) {
+                    Timber.e(e);
+                }
             }
 
             view.setResolvedList(list);

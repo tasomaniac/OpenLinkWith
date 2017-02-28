@@ -46,6 +46,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 /**
  * This activity is displayed when the system attempts to start an Intent for
@@ -226,8 +227,13 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
         if (isFinishing()) {
             return;
         }
-        Intents.startActivityFixingIntent(this, intent);
-        dismiss();
+        try {
+            Intents.startActivityFixingIntent(this, intent);
+            dismiss();
+        } catch (Exception e) {
+            Timber.e(e);
+            Toast.makeText(this, R.string.error_cannot_start_activity, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
