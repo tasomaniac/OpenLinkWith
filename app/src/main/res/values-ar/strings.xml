@@ -53,6 +53,7 @@
   <string name="usage_access_give_access">إعطاء صلاحية الوصول</string>
   <string name="error">خطأ</string>
   <string name="error_usage_access_not_found">ليس بإمكاني الوصول إلي إعدادات بيانات الإستخدام.\n\n بإمكانك الوصول إليها عن طريق الذهاب إلى الإعدادات -&gt; الأمان</string>
+  <string name="error_cannot_start_activity">Failed to open the link with selected app. Try again later.</string>
   <string name="add_to_homescreen">إضافة إلى الشاشة الرئيسية</string>
   <string name="add">أضف</string>
   <string name="cancel">إلغاء</string>

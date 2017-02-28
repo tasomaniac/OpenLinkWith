@@ -54,6 +54,7 @@ Donnez moi l\'accès au <strong>HABITUDES D\'UTILISATIONS</strong> et je fonctio
   <string name="usage_access_give_access">Donnez l\'accès</string>
   <string name="error">Erreur</string>
   <string name="error_usage_access_not_found">Les Paramètres des Habitudes d\'Usages ne peuvent pas être ouvert.\n\nVous pouvez y accéder en allant dans Paramètres -&gt; Sécurité</string>
+  <string name="error_cannot_start_activity">Failed to open the link with selected app. Try again later.</string>
   <string name="add_to_homescreen">Ajouter à l\'écran d\'accueil</string>
   <string name="add">Ajouter</string>
   <string name="cancel">Annuler</string>

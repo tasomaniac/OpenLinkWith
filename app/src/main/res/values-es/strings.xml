@@ -52,6 +52,7 @@ Dar acceso a <strong>ACCESO DE USO</strong> y funcionaré mejor. Detectaré el n
   <string name="error">Error</string>
   <string name="error_usage_access_not_found">El Ajuste de Acceso de Uso no se puede encontrar.\n\nYou may access it by going into Settings -&gt; Security</string>
   <string name="add_to_homescreen">Add To Home screen</string>
+  <string name="error_cannot_start_activity">Failed to open the link with selected app. Try again later.</string>
   <string name="add">Añadir</string>
   <string name="cancel">Cancelar</string>
   <string name="dialog_hint_add_to_home_screen">Título del acceso directo</string>

@@ -52,6 +52,7 @@
   <string name="usage_access_give_access">Give Access</string>
   <string name="error">エラー</string>
   <string name="error_usage_access_not_found">使用状況へのアクセスの設定が見つかりませんでした\n\nYou may access it by going into Settings -&gt; Security</string>
+  <string name="error_cannot_start_activity">Failed to open the link with selected app. Try again later.</string>
   <string name="add_to_homescreen">Add To Home screen</string>
   <string name="add">Add</string>
   <string name="cancel">Cancel</string>

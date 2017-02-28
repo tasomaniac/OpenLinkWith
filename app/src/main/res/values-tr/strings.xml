@@ -53,6 +53,7 @@ Favori linklerinize kolay ulaşmak için <strong>Ana Ekrana ekle</strong> özell
   <string name="usage_access_give_access">Erişim Ver</string>
   <string name="error">Hata</string>
   <string name="error_usage_access_not_found">Kullanım Erişimi ayarları açılamıyor.\n\nAyarlar -&gt; Güvenlik kısmına giderek kendiniz ulaşabilirsiniz.</string>
+  <string name="error_cannot_start_activity">Link seçilen uygulama ile açılamadı. Lütfen tekrar deneyin.</string>
   <string name="add_to_homescreen">Ana Ekrana Ekle</string>
   <string name="add">Ekle</string>
   <string name="cancel">İptal</string>

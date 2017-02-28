@@ -54,6 +54,7 @@
   <string name="usage_access_give_access">授权</string>
   <string name="error">错误</string>
   <string name="error_usage_access_not_found">不能打开查看使用情况设置。\n\n你可以通过进入 设置 -&gt; 安全 访问它</string>
+  <string name="error_cannot_start_activity">Failed to open the link with selected app. Try again later.</string>
   <string name="add_to_homescreen">添加到主屏幕</string>
   <string name="add">新增</string>
   <string name="cancel">取消</string>
