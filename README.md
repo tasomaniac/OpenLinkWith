@@ -1,7 +1,10 @@
 Open Link With [![Build Status](https://travis-ci.org/tasomaniac/OpenLinkWith.png?branch=master)][2]
 ==============
 
- [![Get it on Google Play](art/en_generic_rgb_wo_60.png)][1]
+<a href="https://f-droid.org/repository/browse/?fdid=com.tasomaniac.openwith.floss" target="_blank">
+<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="90"/></a>
+<a href="https://play.google.com/store/apps/details?id=com.tasomaniac.openwith" target="_blank">
+<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="90"/></a>
 
 What
 ----
@@ -47,5 +50,4 @@ License
     limitations under the License.
 
 
-[1]: https://play.google.com/store/apps/details?id=com.tasomaniac.openwith
 [2]: https://travis-ci.org/tasomaniac/OpenLinkWith
