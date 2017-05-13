@@ -98,12 +98,9 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
     private final Rect mTempRect = new Rect();
 
     private final ViewTreeObserver.OnTouchModeChangeListener mTouchModeChangeListener =
-            new ViewTreeObserver.OnTouchModeChangeListener() {
-                @Override
-                public void onTouchModeChanged(boolean isInTouchMode) {
-                    if (!isInTouchMode && hasFocus() && isDescendantClipped(getFocusedChild())) {
-                        smoothScrollTo(0, 0);
-                    }
+            isInTouchMode -> {
+                if (!isInTouchMode && hasFocus() && isDescendantClipped(getFocusedChild())) {
+                    smoothScrollTo(0, 0);
                 }
             };
 

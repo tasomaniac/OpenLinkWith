@@ -56,35 +56,26 @@ public abstract class AppIntro extends AppCompatActivity {
             restoreLockingState(savedInstanceState);
         }
 
-        skipButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isVibrateOn) {
-                    mVibrator.vibrate(vibrateIntensity);
-                }
-                onSkipPressed();
+        skipButton.setOnClickListener(v -> {
+            if (isVibrateOn) {
+                mVibrator.vibrate(vibrateIntensity);
             }
+            onSkipPressed();
         });
 
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isVibrateOn) {
-                    mVibrator.vibrate(vibrateIntensity);
-                }
-                pager.setCurrentItem(pager.getCurrentItem() + 1);
-                onNextPressed();
+        nextButton.setOnClickListener(v -> {
+            if (isVibrateOn) {
+                mVibrator.vibrate(vibrateIntensity);
             }
+            pager.setCurrentItem(pager.getCurrentItem() + 1);
+            onNextPressed();
         });
 
-        doneButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isVibrateOn) {
-                    mVibrator.vibrate(vibrateIntensity);
-                }
-                onDonePressed();
+        doneButton.setOnClickListener(v -> {
+            if (isVibrateOn) {
+                mVibrator.vibrate(vibrateIntensity);
             }
+            onDonePressed();
         });
 
         mPagerAdapter = new PagerAdapter(getSupportFragmentManager(), fragments);

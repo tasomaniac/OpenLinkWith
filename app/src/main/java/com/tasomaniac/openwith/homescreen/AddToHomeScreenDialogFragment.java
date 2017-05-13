@@ -79,12 +79,9 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
                 if (!TextUtils.isEmpty(titleView.getText())) {
                     return;
                 }
-                titleView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (title != null) {
-                            titleView.append(title);
-                        }
+                titleView.post(() -> {
+                    if (title != null) {
+                        titleView.append(title);
                     }
                 });
             }
@@ -116,21 +113,11 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
     }
 
     private void showProgressBar() {
-        progressBar.post(new Runnable() {
-            @Override
-            public void run() {
-                progressBar.show();
-            }
-        });
+        progressBar.post(() -> progressBar.show());
     }
 
     private void hideProgressBar() {
-        progressBar.post(new Runnable() {
-            @Override
-            public void run() {
-                progressBar.hide(true);
-            }
-        });
+        progressBar.post(() -> progressBar.hide(true));
     }
 
     @NonNull

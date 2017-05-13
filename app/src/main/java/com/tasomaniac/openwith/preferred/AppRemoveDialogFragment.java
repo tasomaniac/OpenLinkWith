@@ -2,7 +2,6 @@ package com.tasomaniac.openwith.preferred;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -59,12 +58,7 @@ public class AppRemoveDialogFragment extends AppCompatDialogFragment {
         return new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.title_remove_preferred)
                 .setMessage(Html.fromHtml(message))
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        callbacks.onAppRemoved(info);
-                    }
-                })
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> callbacks.onAppRemoved(info))
                 .setNegativeButton(android.R.string.cancel, null)
                 .show();
     }
@@ -72,10 +66,7 @@ public class AppRemoveDialogFragment extends AppCompatDialogFragment {
     interface Callbacks {
         void onAppRemoved(DisplayResolveInfo info);
 
-        Callbacks EMPTY = new Callbacks() {
-            @Override
-            public void onAppRemoved(DisplayResolveInfo info) {
-            }
+        Callbacks EMPTY = info -> {
         };
     }
 }
