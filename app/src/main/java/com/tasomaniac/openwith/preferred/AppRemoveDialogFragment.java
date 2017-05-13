@@ -2,6 +2,7 @@ package com.tasomaniac.openwith.preferred;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -16,57 +17,61 @@ public class AppRemoveDialogFragment extends AppCompatDialogFragment {
     private static final String EXTRA_INFO = "EXTRA_INFO";
 
     static AppRemoveDialogFragment newInstance(DisplayResolveInfo info) {
+        AppRemoveDialogFragment fragment = new AppRemoveDialogFragment();
         Bundle args = new Bundle();
         args.putParcelable(EXTRA_INFO, info);
-        AppRemoveDialogFragment fragment = new AppRemoveDialogFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
-    private Callbacks callbacks = Callbacks.EMPTY;
+    private Callbacks callbacks;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof Callbacks) {
-            callbacks = (Callbacks) context;
-        }
+        callbacks = (Callbacks) context;
     }
 
     @Override
     public void onDetach() {
+        callbacks = null;
         super.onDetach();
-        callbacks = Callbacks.EMPTY;
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final DisplayResolveInfo info = getArguments().getParcelable(EXTRA_INFO);
-        if (info == null) {
-            throw new IllegalArgumentException("Use newInstance method to create the Dialog");
-        }
+        DisplayResolveInfo info = getInfo();
+        CharSequence message = appRemoveDialogContentFrom(getResources(), info);
 
-        final String message = getString(
-                R.string.message_remove_preferred,
-                info.displayLabel(),
-                info.extendedInfo(),
-                info.extendedInfo()
-        );
-
-        //noinspection deprecation
         return new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.title_remove_preferred)
-                .setMessage(Html.fromHtml(message))
+                .setMessage(message)
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> callbacks.onAppRemoved(info))
                 .setNegativeButton(android.R.string.cancel, null)
                 .show();
     }
 
+    private DisplayResolveInfo getInfo() {
+        final DisplayResolveInfo info = getArguments().getParcelable(EXTRA_INFO);
+        if (info == null) {
+            throw new IllegalArgumentException("Use newInstance method to create the Dialog");
+        }
+        return info;
+    }
+
+    private static CharSequence appRemoveDialogContentFrom(Resources resources, DisplayResolveInfo info) {
+        String content = resources.getString(
+                R.string.message_remove_preferred,
+                info.displayLabel(),
+                info.extendedInfo(),
+                info.extendedInfo()
+        );
+        //noinspection deprecation
+        return Html.fromHtml(content);
+    }
+
     interface Callbacks {
         void onAppRemoved(DisplayResolveInfo info);
-
-        Callbacks EMPTY = info -> {
-        };
     }
 }
