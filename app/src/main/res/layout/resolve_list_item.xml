@@ -60,8 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="marquee"
-        android:maxLines="1"
-        android:minLines="1"
+        android:singleLine="true"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="?android:attr/textColorPrimary"/>
       <!-- Extended activity info to distinguish between duplicate activity names -->
@@ -70,8 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="marquee"
-        android:maxLines="1"
-        android:minLines="1"
+        android:singleLine="true"
         android:textAppearance="?android:attr/textAppearanceSmall"/>
     </LinearLayout>
   </LinearLayout>
