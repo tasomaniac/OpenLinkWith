@@ -1,16 +1,16 @@
 buildscript {
     repositories {
+        google()
         jcenter()
         maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.2'
+        classpath 'com.android.tools.build:gradle:3.0.0-alpha2'
         classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.14.0'
         classpath 'com.github.triplet.gradle:play-publisher:1.2.0-beta1'
         classpath 'io.fabric.tools:gradle:1.22.1'
         classpath 'com.novoda:build-properties-plugin:1.2.1'
-        classpath 'me.tatarka:gradle-retrolambda:3.5.0'
     }
 }
 
@@ -34,9 +34,5 @@ ext {
     versionName = "${versionMajor}.${versionMinor}"
 
     compileSdkVersion = 25
-    buildToolsVersion = '25.0.2'
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
+    buildToolsVersion = '25.0.3'
 }
