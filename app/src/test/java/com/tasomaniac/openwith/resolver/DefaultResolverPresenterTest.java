@@ -25,6 +25,7 @@ import static org.mockito.Mockito.*;
 
 public class DefaultResolverPresenterTest {
     private static final List<DisplayResolveInfo> NON_EMPTY_LIST = Collections.singletonList(mock(DisplayResolveInfo.class));
+
     @Rule public MockitoRule rule = MockitoJUnit.rule();
 
     @Mock private IntentResolver intentResolver;
@@ -38,7 +39,7 @@ public class DefaultResolverPresenterTest {
     private ViewState viewState = new ViewState();
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         presenter = new DefaultResolverPresenter(resources, chooserHistory, contentResolver, intentResolver, viewState);
         given(intentResolver.getSourceIntent()).willReturn(sourceIntent);
 
