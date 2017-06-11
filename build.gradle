@@ -34,6 +34,6 @@ ext {
     versionCode = versionMajor * 10000 + versionMinor * 1000 + versionBuild
     versionName = "${versionMajor}.${versionMinor}"
 
-    compileSdkVersion = 25
-    buildToolsVersion = '25.0.3'
+    compileSdkVersion = 26
+    buildToolsVersion = '26.0.0'
 }

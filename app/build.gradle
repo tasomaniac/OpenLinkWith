@@ -85,7 +85,7 @@ play {
 }
 
 dependencies {
-    def supportLibVersion = '25.4.0'
+    def supportLibVersion = '26.0.0-beta2'
     def schematicVersion = '0.7.0'
     def butterKnifeVersion = '8.6.0'
     def daggerVersion = '2.11'
@@ -115,6 +115,6 @@ dependencies {
     playImplementation 'com.crashlytics.sdk.android:crashlytics:2.6.8'
 
     testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:2.7.13'
+    testImplementation 'org.mockito:mockito-core:2.8.9'
     testImplementation "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
 }
