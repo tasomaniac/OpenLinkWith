@@ -10,6 +10,11 @@ android:
 jdk:
   - oraclejdk8
 
+before_script:
+  - echo "org.gradle.configureondemand=true" >> $HOME/.gradle/gradle.properties
+  - echo "org.gradle.jvmargs=-Xmx1536M" >> $HOME/.gradle/gradle.properties
+  - echo "org.gradle.caching=true" >> $HOME/.gradle/gradle.properties
+
 script:
   - ./gradlew build
 
