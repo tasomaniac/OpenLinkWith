@@ -85,12 +85,11 @@ play {
 }
 
 dependencies {
-    def supportLibVersion = '25.3.1'
+    def supportLibVersion = '25.4.0'
     def schematicVersion = '0.7.0'
-    def butterKnifeVersion = '8.5.1'
-    def daggerVersion = '2.9'
-    def okHttpVersion = '3.6.0'
-    def rxJavaVersion = '2.0.1'
+    def butterKnifeVersion = '8.6.0'
+    def daggerVersion = '2.11'
+    def okHttpVersion = '3.8.0'
 
     implementation "com.android.support:support-v4:$supportLibVersion"
     implementation "com.android.support:appcompat-v7:$supportLibVersion"
@@ -111,10 +110,10 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.5.1'
 
     implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxJavaVersion"
-    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.0'
 
-    playImplementation 'com.crashlytics.sdk.android:crashlytics:2.6.6'
+    playImplementation 'com.crashlytics.sdk.android:crashlytics:2.6.8'
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.7.13'

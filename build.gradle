@@ -5,11 +5,11 @@ buildscript {
         maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-alpha2'
+        classpath 'com.android.tools.build:gradle:3.0.0-alpha3'
         classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.14.0'
-        classpath 'com.github.triplet.gradle:play-publisher:1.2.0-beta1'
-        classpath 'io.fabric.tools:gradle:1.22.1'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.15.0'
+        classpath 'com.github.triplet.gradle:play-publisher:1.2.0'
+        classpath 'io.fabric.tools:gradle:1.22.2'
         classpath 'com.novoda:build-properties-plugin:1.2.1'
     }
 }
@@ -18,13 +18,14 @@ apply plugin: 'com.github.ben-manes.versions'
 
 allprojects {
     repositories {
+        google()
         jcenter()
         maven { url 'https://maven.fabric.io/public' }
     }
 }
 
 ext {
-    ci = "true" == System.getenv("CI")
+    ci = 'true' == System.getenv('CI')
 
     versionMajor = 1
     versionMinor = 4
