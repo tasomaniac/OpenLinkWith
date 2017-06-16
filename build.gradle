@@ -1,11 +1,11 @@
 buildscript {
     repositories {
-        maven { url 'https://maven.google.com' }
+        google()
         jcenter()
         maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-alpha3'
+        classpath 'com.android.tools.build:gradle:3.0.0-alpha4'
         classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.15.0'
         classpath 'com.github.triplet.gradle:play-publisher:1.2.0'
@@ -19,7 +19,7 @@ apply plugin: 'com.github.ben-manes.versions'
 
 allprojects {
     repositories {
-        maven { url 'https://maven.google.com' }
+        google()
         jcenter()
         maven { url 'https://maven.fabric.io/public' }
     }
