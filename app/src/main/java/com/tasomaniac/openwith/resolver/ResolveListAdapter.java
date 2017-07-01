@@ -132,7 +132,8 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.text1) public TextView text;
+        @BindView(R.id.text1)
+        TextView text;
         @Nullable
         @BindView(R.id.text2)
         TextView text2;
