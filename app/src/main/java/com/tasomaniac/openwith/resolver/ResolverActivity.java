@@ -94,8 +94,7 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
 
     @Override
     public void setResolvedList(List<DisplayResolveInfo> list) {
-        adapter.mList.clear();
-        adapter.mList.addAll(list);
+        adapter.setApplications(list);
     }
 
     @Override
@@ -103,12 +102,12 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
         setContentView(layoutRes);
         ButterKnife.bind(this);
         setupList(shouldDisplayExtendedInfo);
-        ResolverDrawerLayout rdl = (ResolverDrawerLayout) findViewById(R.id.contentPanel);
+        ResolverDrawerLayout rdl = findViewById(R.id.contentPanel);
         rdl.setOnDismissedListener(this::finish);
     }
 
     private void setupList(boolean shouldDisplayExtendedInfo) {
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.resolver_list);
+        RecyclerView recyclerView = findViewById(R.id.resolver_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         adapter.setItemClickListener(this);
@@ -120,14 +119,14 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
 
     @Override
     public void setTitle(String title) {
-        TextView titleView = (TextView) findViewById(R.id.title);
+        TextView titleView = findViewById(R.id.title);
         titleView.setText(title);
     }
 
     @Override
     public void setFilteredItem(@Nullable DisplayResolveInfo filteredItem) {
         boolean hasFilteredItem = filteredItem != null;
-        ImageView iconView = (ImageView) findViewById(R.id.icon);
+        ImageView iconView = findViewById(R.id.icon);
         if (iconView != null && hasFilteredItem) {
             new LoadIconIntoViewTask(iconLoader, iconView).execute(filteredItem);
         }
@@ -137,7 +136,7 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
 
     @Override
     public void setupActionButtons() {
-        ViewGroup buttonLayout = (ViewGroup) findViewById(R.id.button_bar);
+        ViewGroup buttonLayout = findViewById(R.id.button_bar);
         buttonLayout.setVisibility(View.VISIBLE);
     }
 

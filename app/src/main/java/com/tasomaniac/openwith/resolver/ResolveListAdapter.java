@@ -13,7 +13,7 @@ import com.tasomaniac.openwith.IconLoader;
 import com.tasomaniac.openwith.R;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -26,8 +26,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
 
     private final IconLoader iconLoader;
 
-    protected final List<DisplayResolveInfo> mList = new ArrayList<>();
-
+    private List<DisplayResolveInfo> mList = Collections.emptyList();
     private boolean displayExtendedInfo = false;
     private boolean hasHeader = false;
     private boolean selectionEnabled = false;
@@ -178,9 +177,19 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         checkedItemPosition = position;
     }
 
+    public void setApplications(List<DisplayResolveInfo> list) {
+        this.mList = list;
+        notifyDataSetChanged();
+    }
+
+    public void remove(DisplayResolveInfo item) {
+        int position = getAdapterPositionOf(item);
+        mList.remove(item);
+        notifyItemRemoved(position);
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.text1)
-        public TextView text;
+        @BindView(R.id.text1) public TextView text;
         @Nullable
         @BindView(R.id.text2)
         TextView text2;

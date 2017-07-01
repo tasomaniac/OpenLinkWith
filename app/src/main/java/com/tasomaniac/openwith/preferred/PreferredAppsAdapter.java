@@ -5,11 +5,8 @@ import android.view.ViewGroup;
 
 import com.tasomaniac.openwith.IconLoader;
 import com.tasomaniac.openwith.R;
-import com.tasomaniac.openwith.resolver.DisplayResolveInfo;
 import com.tasomaniac.openwith.resolver.ResolveListAdapter;
 import com.tasomaniac.openwith.util.Utils;
-
-import java.util.List;
 
 class PreferredAppsAdapter extends ResolveListAdapter {
 
@@ -17,16 +14,6 @@ class PreferredAppsAdapter extends ResolveListAdapter {
         super(iconLoader);
         setDisplayHeader(true);
         setDisplayExtendedInfo(true);
-    }
-
-    void remove(DisplayResolveInfo item) {
-        mList.remove(item);
-    }
-
-    void setApplications(List<DisplayResolveInfo> apps) {
-        mList.clear();
-        mList.addAll(apps);
-        notifyDataSetChanged();
     }
 
     @Override

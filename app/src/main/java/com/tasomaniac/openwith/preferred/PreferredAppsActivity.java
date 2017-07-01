@@ -37,8 +37,7 @@ import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.HOST
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.CONTENT_URI_PREFERRED;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withHost;
 
-public class PreferredAppsActivity extends AppCompatActivity
-        implements
+public class PreferredAppsActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor>,
         ItemClickListener,
         AppRemoveDialogFragment.Callbacks {
@@ -59,8 +58,9 @@ public class PreferredAppsActivity extends AppCompatActivity
 
         analytics.sendScreenView("Preferred Apps");
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //noinspection ConstantConditions
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -109,7 +109,6 @@ public class PreferredAppsActivity extends AppCompatActivity
                 apps.add(info);
             }
         }
-
         adapter.setApplications(apps);
     }
 
@@ -133,12 +132,14 @@ public class PreferredAppsActivity extends AppCompatActivity
 
     private void notifyItemRemoval(DisplayResolveInfo info) {
         recyclerView.postDelayed(() -> {
-            int position = adapter.getAdapterPositionOf(info);
             adapter.remove(info);
-            adapter.notifyItemRemoved(position);
 
-            recyclerView.postDelayed(() -> adapter.notifyItemChanged(0), 200);
+            notifyHeaderChanged();
         }, 300);
+    }
+
+    private void notifyHeaderChanged() {
+        recyclerView.postDelayed(() -> adapter.notifyItemChanged(0), 200);
     }
 
 }
