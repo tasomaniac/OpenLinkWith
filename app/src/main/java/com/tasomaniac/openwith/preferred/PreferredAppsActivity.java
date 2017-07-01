@@ -136,7 +136,7 @@ public class PreferredAppsActivity extends AppCompatActivity implements
     }
 
     private void notifyHeaderChanged() {
-        recyclerView.postDelayed(() -> adapter.notifyItemChanged(0), 200);
+        recyclerView.postDelayed(() -> recyclerView.getAdapter().notifyItemChanged(0), 200);
     }
 
 }
