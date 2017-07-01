@@ -41,10 +41,6 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         return mList.size();
     }
 
-    DisplayResolveInfo getItem(int position) {
-        return mList.get(position);
-    }
-
     @Override
     public long getItemId(int position) {
         return position;
@@ -94,7 +90,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         });
 
         holder.itemView.setOnLongClickListener(v -> itemLongClickListener != null
-                && itemLongClickListener.onItemLongClick(v, holder.getAdapterPosition(), holder.getItemId()));
+                && itemLongClickListener.onItemLongClick(info));
     }
 
     public void setItemClickListener(@Nullable ItemClickListener itemClickListener) {

@@ -247,9 +247,8 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     }
 
     @Override
-    public boolean onItemLongClick(View view, int position, long id) {
-        ResolveInfo ri = adapter.getItem(position).resolveInfo();
-        showAppDetails(ri);
+    public boolean onItemLongClick(DisplayResolveInfo info) {
+        showAppDetails(info.resolveInfo());
         return true;
     }
 
