@@ -3,8 +3,8 @@ package com.tasomaniac.openwith.preferred;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
+import com.tasomaniac.openwith.HeaderAdapter;
 import com.tasomaniac.openwith.R;
-import com.tasomaniac.openwith.resolver.HeaderAdapter;
 import com.tasomaniac.openwith.resolver.ResolveListAdapter;
 import com.tasomaniac.openwith.util.Utils;
 

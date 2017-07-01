@@ -1,4 +1,4 @@
-package com.tasomaniac.openwith.resolver;
+package com.tasomaniac.openwith;
 
 import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
@@ -7,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.tasomaniac.openwith.R;
 
 import java.util.List;
 

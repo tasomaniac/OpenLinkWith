@@ -34,6 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tasomaniac.openwith.ComponentActivity;
+import com.tasomaniac.openwith.HeaderAdapter;
 import com.tasomaniac.openwith.IconLoader;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.Injector;
