@@ -30,7 +30,7 @@ class IntentResolver {
     private final Intent sourceIntent;
     private final String callerPackage;
 
-    @Nullable private State state;
+    @Nullable private Data data;
     private Listener listener = Listener.NO_OP;
 
     IntentResolver(PackageManager packageManager,
@@ -56,22 +56,22 @@ class IntentResolver {
     }
 
     @Nullable
-    State getState() {
-        return state;
+    Data getData() {
+        return data;
     }
 
     void resolve() {
         Observable.just(sourceIntent)
                 .map(this::doResolve)
                 .compose(schedulingStrategy.apply())
-                .subscribe(state -> {
-                    this.state = state;
-                    state.notify(listener);
+                .subscribe(data -> {
+                    this.data = data;
+                    listener.onIntentResolved(data);
                 });
     }
 
-    private State doResolve(Intent sourceIntent) {
-        int flag = SDK_INT >= M ? PackageManager.MATCH_ALL :PackageManager.MATCH_DEFAULT_ONLY;
+    private Data doResolve(Intent sourceIntent) {
+        int flag = SDK_INT >= M ? PackageManager.MATCH_ALL : PackageManager.MATCH_DEFAULT_ONLY;
         List<ResolveInfo> currentResolveList = new ArrayList<>(packageManager.queryIntentActivities(sourceIntent, flag));
         if (Intents.isHttp(sourceIntent) && SDK_INT >= M) {
             List<ResolveInfo> browsers = queryBrowsers();
@@ -84,7 +84,7 @@ class IntentResolver {
         }
 
         List<DisplayResolveInfo> resolved = groupResolveList(currentResolveList);
-        return new State(resolved, resolveListGrouper.filteredItem, resolveListGrouper.showExtended);
+        return new Data(resolved, resolveListGrouper.filteredItem, resolveListGrouper.showExtended);
     }
 
     private List<DisplayResolveInfo> groupResolveList(List<ResolveInfo> currentResolveList) {
@@ -136,27 +136,31 @@ class IntentResolver {
         return packageManager.queryIntentActivities(browserIntent, 0);
     }
 
-    static class State {
+    static class Data {
         final List<DisplayResolveInfo> resolved;
         @Nullable final DisplayResolveInfo filteredItem;
         final boolean showExtended;
 
-        State(List<DisplayResolveInfo> resolved, @Nullable DisplayResolveInfo filteredItem, boolean showExtended) {
+        Data(List<DisplayResolveInfo> resolved, @Nullable DisplayResolveInfo filteredItem, boolean showExtended) {
             this.resolved = resolved;
             this.filteredItem = filteredItem;
             this.showExtended = showExtended;
         }
 
-        void notify(Listener listener) {
-            listener.onIntentResolved(resolved, filteredItem, showExtended);
+        boolean isEmpty() {
+            return totalCount() == 0;
+        }
+
+        int totalCount() {
+            return resolved.size() + (filteredItem != null ? 1 : 0);
         }
     }
 
     interface Listener {
 
-        void onIntentResolved(List<DisplayResolveInfo> list, @Nullable DisplayResolveInfo filteredItem, boolean showExtended);
+        void onIntentResolved(Data data);
 
-        Listener NO_OP = (list, filteredItem, showExtended) -> {
+        Listener NO_OP = data -> {
             // no-op
         };
 

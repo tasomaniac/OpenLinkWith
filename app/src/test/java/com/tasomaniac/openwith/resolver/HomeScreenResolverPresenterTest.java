@@ -22,6 +22,8 @@ import static org.mockito.Mockito.*;
 public class HomeScreenResolverPresenterTest {
 
     private static final String TITLE = "title";
+    private static final IntentResolver.Data EMPTY_DATA = new IntentResolver.Data(Collections.emptyList(), null, false);
+
     @Rule public MockitoRule rule = MockitoJUnit.rule();
 
     @Mock private IntentResolver intentResolver;
@@ -53,14 +55,14 @@ public class HomeScreenResolverPresenterTest {
     }
 
     @Test
-    public void givenNonIdleStateShouldNotifyListener() {
-        IntentResolver.State state = mock(IntentResolver.State.class);
-        given(intentResolver.getState()).willReturn(state);
+    public void givenNonEmptyStateShouldNotifyListener() {
+        IntentResolver.Data data = mock(IntentResolver.Data.class);
+        given(intentResolver.getData()).willReturn(data);
 
         presenter.bind(view);
         IntentResolver.Listener listener = captureIntentResolverListener();
 
-        then(state).should().notify(listener);
+        then(listener).should().onIntentResolved(data);
     }
 
     @Test
@@ -68,7 +70,7 @@ public class HomeScreenResolverPresenterTest {
         IntentResolver.Listener listener = captureIntentResolverListener();
 
         DisplayResolveInfo filteredItem = mock(DisplayResolveInfo.class);
-        listener.onIntentResolved(Collections.emptyList(), filteredItem, false);
+        listener.onIntentResolved(new IntentResolver.Data(Collections.emptyList(), filteredItem, false));
 
         then(filteredItem).shouldHaveZeroInteractions();
     }
@@ -78,7 +80,7 @@ public class HomeScreenResolverPresenterTest {
         IntentResolver.Listener listener = captureIntentResolverListener();
         reset(view);
 
-        listener.onIntentResolved(Collections.emptyList(), null, false);
+        listener.onIntentResolved(EMPTY_DATA);
 
         then(view).should().toast(R.string.empty_resolver_activity);
         then(view).should().dismiss();
@@ -90,10 +92,10 @@ public class HomeScreenResolverPresenterTest {
         IntentResolver.Listener listener = captureIntentResolverListener();
 
         DisplayResolveInfo item = mock(DisplayResolveInfo.class);
-        listener.onIntentResolved(Collections.singletonList(item), null, false);
+        IntentResolver.Data data = dataWithItem(item);
+        listener.onIntentResolved(data);
 
-        then(view).should().setResolvedList(Collections.singletonList(item));
-        then(view).should().setupUI(R.layout.resolver_list, false);
+        then(view).should().displayData(data, R.layout.resolver_list);
     }
 
     @Test
@@ -102,7 +104,7 @@ public class HomeScreenResolverPresenterTest {
         given(resources.getString(R.string.add_to_homescreen)).willReturn(TITLE);
 
         DisplayResolveInfo item = mock(DisplayResolveInfo.class);
-        listener.onIntentResolved(Collections.singletonList(item), null, false);
+        listener.onIntentResolved(dataWithItem(item));
 
         then(view).should().setTitle(TITLE);
     }
@@ -134,5 +136,9 @@ public class HomeScreenResolverPresenterTest {
         ArgumentCaptor<ResolverView.Listener> argumentCaptor = ArgumentCaptor.forClass(ResolverView.Listener.class);
         then(view).should().setListener(argumentCaptor.capture());
         return argumentCaptor.getValue();
+    }
+
+    private static IntentResolver.Data dataWithItem(DisplayResolveInfo item) {
+        return new IntentResolver.Data(Collections.singletonList(item), null, false);
     }
 }

@@ -2,11 +2,8 @@ package com.tasomaniac.openwith.resolver;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.support.annotation.Nullable;
 
 import com.tasomaniac.openwith.R;
-
-import java.util.List;
 
 import timber.log.Timber;
 
@@ -26,10 +23,10 @@ class HomeScreenResolverPresenter implements ResolverPresenter {
 
         IntentResolverListener listener = new IntentResolverListener(view);
         intentResolver.setListener(listener);
-        if (intentResolver.getState() == null) {
+        if (intentResolver.getData() == null) {
             intentResolver.resolve();
         } else {
-            intentResolver.getState().notify(listener);
+            listener.onIntentResolved(intentResolver.getData());
         }
     }
 
@@ -48,18 +45,17 @@ class HomeScreenResolverPresenter implements ResolverPresenter {
         }
 
         @Override
-        public void onIntentResolved(List<DisplayResolveInfo> list, @Nullable DisplayResolveInfo filteredItem, boolean showExtended) {
-            int totalCount = list.size();
-            if (totalCount == 0) {
+        public void onIntentResolved(IntentResolver.Data data) {
+            if (data.isEmpty()) {
                 Timber.e("No app is found to handle url: %s", intentResolver.getSourceIntent().getDataString());
                 view.toast(R.string.empty_resolver_activity);
                 view.dismiss();
                 return;
             }
-            view.setResolvedList(list);
-            view.setupUI(R.layout.resolver_list, showExtended);
+            view.displayData(data, R.layout.resolver_list);
             view.setTitle(resources.getString(R.string.add_to_homescreen));
         }
+
     }
 
     private class ViewListener implements ResolverView.Listener {

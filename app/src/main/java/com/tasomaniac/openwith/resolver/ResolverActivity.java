@@ -22,7 +22,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,7 +41,6 @@ import com.tasomaniac.openwith.homescreen.AddToHomeScreenDialogFragment;
 import com.tasomaniac.openwith.util.Intents;
 
 import javax.inject.Inject;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -93,45 +91,44 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     }
 
     @Override
-    public void setResolvedList(List<DisplayResolveInfo> list) {
-        adapter.setApplications(list);
-    }
-
-    @Override
-    public void setupUI(@LayoutRes int layoutRes, boolean shouldDisplayExtendedInfo) {
+    public void displayData(IntentResolver.Data data, int layoutRes) {
         setContentView(layoutRes);
         ButterKnife.bind(this);
-        setupList(shouldDisplayExtendedInfo);
+        setupList(data, data.showExtended);
+        setupFilteredItem(data.filteredItem);
         ResolverDrawerLayout rdl = findViewById(R.id.contentPanel);
         rdl.setOnDismissedListener(this::finish);
     }
 
-    private void setupList(boolean shouldDisplayExtendedInfo) {
+    private void setupList(IntentResolver.Data data, boolean shouldDisplayExtendedInfo) {
         RecyclerView recyclerView = findViewById(R.id.resolver_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        adapter.setApplications(data.resolved);
         adapter.setItemClickListener(this);
         adapter.setItemLongClickListener(this);
         adapter.setDisplayExtendedInfo(shouldDisplayExtendedInfo);
 
-        recyclerView.setAdapter(adapter);
+        if (data.filteredItem != null) {
+            recyclerView.setAdapter(new HeaderAdapter(adapter, R.layout.resolver_different_item_header));
+        } else {
+            recyclerView.setAdapter(adapter);
+        }
     }
 
-    @Override
-    public void setTitle(String title) {
-        TextView titleView = findViewById(R.id.title);
-        titleView.setText(title);
-    }
-
-    @Override
-    public void setFilteredItem(@Nullable DisplayResolveInfo filteredItem) {
+    private void setupFilteredItem(@Nullable DisplayResolveInfo filteredItem) {
         boolean hasFilteredItem = filteredItem != null;
         ImageView iconView = findViewById(R.id.icon);
         if (iconView != null && hasFilteredItem) {
             new LoadIconIntoViewTask(iconLoader, iconView).execute(filteredItem);
         }
         adapter.setSelectionEnabled(!hasFilteredItem);
-        adapter.setDisplayHeader(hasFilteredItem);
+    }
+
+    @Override
+    public void setTitle(String title) {
+        TextView titleView = findViewById(R.id.title);
+        titleView.setText(title);
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.tasomaniac.openwith.resolver;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.support.annotation.Nullable;
 
 import com.tasomaniac.openwith.R;
 
@@ -24,6 +25,7 @@ import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.*;
 
 public class DefaultResolverPresenterTest {
+    private static final IntentResolver.Data EMPTY_DATA = dataWith(Collections.emptyList(), null);
     private static final List<DisplayResolveInfo> NON_EMPTY_LIST = Collections.singletonList(mock(DisplayResolveInfo.class));
 
     @Rule public MockitoRule rule = MockitoJUnit.rule();
@@ -60,14 +62,14 @@ public class DefaultResolverPresenterTest {
     }
 
     @Test
-    public void givenNonIdleStateShouldNotifyListener() {
-        IntentResolver.State state = mock(IntentResolver.State.class);
-        given(intentResolver.getState()).willReturn(state);
+    public void givenNonEmptyDateShouldNotifyListener() {
+        IntentResolver.Data data = mock(IntentResolver.Data.class);
+        given(intentResolver.getData()).willReturn(data);
 
         presenter.bind(view);
         IntentResolver.Listener listener = captureIntentResolverListener();
 
-        then(state).should().notify(listener);
+        then(listener).should().onIntentResolved(data);
     }
 
     @Test
@@ -75,7 +77,7 @@ public class DefaultResolverPresenterTest {
         IntentResolver.Listener listener = captureIntentResolverListener();
         reset(view);
 
-        listener.onIntentResolved(Collections.emptyList(), null, false);
+        listener.onIntentResolved(EMPTY_DATA);
 
         then(view).should().toast(R.string.empty_resolver_activity);
         then(view).should().dismiss();
@@ -90,7 +92,7 @@ public class DefaultResolverPresenterTest {
         String label = "label";
         DisplayResolveInfo item = givenDisplayResolveInfoWithIntentAndLabel(intent, label);
 
-        listener.onIntentResolved(Collections.singletonList(item), null, false);
+        listener.onIntentResolved(dataWith(item));
 
         then(view).should().startPreferred(intent, label);
         then(view).should().dismiss();
@@ -105,7 +107,7 @@ public class DefaultResolverPresenterTest {
         String label = "label";
         DisplayResolveInfo filteredItem = givenDisplayResolveInfoWithIntentAndLabel(intent, label);
 
-        listener.onIntentResolved(Collections.emptyList(), filteredItem, false);
+        listener.onIntentResolved(dataWith(Collections.emptyList(), filteredItem));
 
         then(view).should().startPreferred(intent, label);
         then(view).should().dismiss();
@@ -125,7 +127,7 @@ public class DefaultResolverPresenterTest {
         givenResources();
 
         DisplayResolveInfo filteredItem = givenDisplayResolveInfoWithIntentAndLabel(null, "filtered");
-        listener.onIntentResolved(NON_EMPTY_LIST, filteredItem, false);
+        listener.onIntentResolved(dataWith(NON_EMPTY_LIST, filteredItem));
 
         then(view).should().setTitle("filtered");
     }
@@ -136,7 +138,7 @@ public class DefaultResolverPresenterTest {
         givenResources();
 
         List<DisplayResolveInfo> multipleItems = Arrays.asList(mock(DisplayResolveInfo.class), mock(DisplayResolveInfo.class));
-        listener.onIntentResolved(multipleItems, null, false);
+        listener.onIntentResolved(dataWith(multipleItems, null));
 
         then(view).should().setTitle("fixed");
     }
@@ -146,7 +148,7 @@ public class DefaultResolverPresenterTest {
         IntentResolver.Listener listener = captureIntentResolverListener();
 
         List<DisplayResolveInfo> multipleItems = Arrays.asList(mock(DisplayResolveInfo.class), mock(DisplayResolveInfo.class));
-        listener.onIntentResolved(multipleItems, null, false);
+        listener.onIntentResolved(dataWith(multipleItems, null));
 
         then(view).should().setupActionButtons();
     }
@@ -180,7 +182,7 @@ public class DefaultResolverPresenterTest {
 
         Intent intent = mock(Intent.class);
         DisplayResolveInfo filteredItem = givenDisplayResolveInfoWithIntentAndLabel(intent, "filtered");
-        resolverListener.onIntentResolved(NON_EMPTY_LIST, filteredItem, false);
+        resolverListener.onIntentResolved(dataWith(NON_EMPTY_LIST, filteredItem));
 
         listener.onActionButtonClick(false);
 
@@ -194,7 +196,7 @@ public class DefaultResolverPresenterTest {
 
         Intent intent = mock(Intent.class);
         DisplayResolveInfo item = givenDisplayResolveInfoWithIntentAndLabel(intent, "filtered");
-        resolverListener.onIntentResolved(Collections.singletonList(item), null, false);
+        resolverListener.onIntentResolved(dataWith(item));
 
         listener.onItemClick(item);
         listener.onActionButtonClick(false);
@@ -207,7 +209,7 @@ public class DefaultResolverPresenterTest {
         ResolverView.Listener listener = captureViewListener();
         IntentResolver.Listener resolverListener = captureIntentResolverListener();
 
-        resolverListener.onIntentResolved(NON_EMPTY_LIST, null, false);
+        resolverListener.onIntentResolved(dataWith(NON_EMPTY_LIST, null));
 
         DisplayResolveInfo item = mock(DisplayResolveInfo.class);
         listener.onItemClick(item);
@@ -220,7 +222,7 @@ public class DefaultResolverPresenterTest {
         ResolverView.Listener listener = captureViewListener();
         IntentResolver.Listener resolverListener = captureIntentResolverListener();
 
-        resolverListener.onIntentResolved(NON_EMPTY_LIST, null, false);
+        resolverListener.onIntentResolved(dataWith(NON_EMPTY_LIST, null));
 
         DisplayResolveInfo item = mock(DisplayResolveInfo.class);
         listener.onItemClick(item);
@@ -235,7 +237,7 @@ public class DefaultResolverPresenterTest {
         Intent intent = mock(Intent.class);
         DisplayResolveInfo item = givenDisplayResolveInfoWithIntentAndLabel(intent, "");
 
-        resolverListener.onIntentResolved(NON_EMPTY_LIST, null, false);
+        resolverListener.onIntentResolved(dataWith(NON_EMPTY_LIST, null));
 
         listener.onItemClick(item);
         listener.onItemClick(item);
@@ -250,7 +252,7 @@ public class DefaultResolverPresenterTest {
         Intent intent = mock(Intent.class);
         DisplayResolveInfo item = givenDisplayResolveInfoWithIntentAndLabel(intent, "");
 
-        resolverListener.onIntentResolved(NON_EMPTY_LIST, item, false);
+        resolverListener.onIntentResolved(dataWith(NON_EMPTY_LIST, item));
 
         listener.onItemClick(item);
 
@@ -267,5 +269,17 @@ public class DefaultResolverPresenterTest {
         ArgumentCaptor<ResolverView.Listener> argumentCaptor = ArgumentCaptor.forClass(ResolverView.Listener.class);
         then(view).should().setListener(argumentCaptor.capture());
         return argumentCaptor.getValue();
+    }
+
+    private static IntentResolver.Data dataWith(DisplayResolveInfo item) {
+        return dataWith(item, null);
+    }
+
+    private static IntentResolver.Data dataWith(DisplayResolveInfo item, @Nullable DisplayResolveInfo filteredItem) {
+        return dataWith(Collections.singletonList(item), filteredItem);
+    }
+
+    private static IntentResolver.Data dataWith(List<DisplayResolveInfo> resolved, @Nullable DisplayResolveInfo filteredItem) {
+        return new IntentResolver.Data(resolved, filteredItem, false);
     }
 }

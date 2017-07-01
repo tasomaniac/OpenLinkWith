@@ -4,11 +4,8 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.support.annotation.Nullable;
 
 import com.tasomaniac.openwith.R;
-
-import java.util.List;
 
 import timber.log.Timber;
 
@@ -41,10 +38,10 @@ class DefaultResolverPresenter implements ResolverPresenter {
 
         IntentResolverListener listener = new IntentResolverListener(view);
         intentResolver.setListener(listener);
-        if (intentResolver.getState() == null) {
+        if (intentResolver.getData() == null) {
             intentResolver.resolve();
         } else {
-            intentResolver.getState().notify(listener);
+            listener.onIntentResolved(intentResolver.getData());
         }
     }
 
@@ -63,18 +60,17 @@ class DefaultResolverPresenter implements ResolverPresenter {
         }
 
         @Override
-        public void onIntentResolved(List<DisplayResolveInfo> list, @Nullable DisplayResolveInfo filteredItem, boolean showExtended) {
-            viewState.filteredItem = filteredItem;
+        public void onIntentResolved(IntentResolver.Data data) {
+            viewState.filteredItem = data.filteredItem;
 
-            int totalCount = list.size() + (filteredItem != null ? 1 : 0);
-            if (totalCount == 0) {
+            if (data.isEmpty()) {
                 Timber.e("No app is found to handle url: %s", intentResolver.getSourceIntent().getDataString());
                 view.toast(R.string.empty_resolver_activity);
                 view.dismiss();
                 return;
             }
-            if (totalCount == 1) {
-                DisplayResolveInfo dri = filteredItem != null ? filteredItem : list.get(0);
+            if (data.totalCount() == 1) {
+                DisplayResolveInfo dri = data.filteredItem != null ? data.filteredItem : data.resolved.get(0);
                 try {
                     view.startPreferred(dri.intentFrom(intentResolver.getSourceIntent()), dri.displayLabel());
                     view.dismiss();
@@ -84,10 +80,8 @@ class DefaultResolverPresenter implements ResolverPresenter {
                 }
             }
 
-            view.setResolvedList(list);
-            view.setupUI(filteredItem != null ? R.layout.resolver_list_with_default : R.layout.resolver_list, showExtended);
-            view.setTitle(titleForAction(filteredItem));
-            view.setFilteredItem(filteredItem);
+            view.displayData(data, data.filteredItem != null ? R.layout.resolver_list_with_default : R.layout.resolver_list);
+            view.setTitle(titleForAction(data.filteredItem));
             view.setupActionButtons();
         }
 

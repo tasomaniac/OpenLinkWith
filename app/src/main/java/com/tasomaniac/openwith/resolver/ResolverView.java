@@ -5,8 +5,6 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 
-import java.util.List;
-
 interface ResolverView {
 
     void startSelected(Intent intent);
@@ -15,13 +13,9 @@ interface ResolverView {
 
     void displayAddToHomeScreenDialog(DisplayResolveInfo dri, Intent intent);
 
-    void setResolvedList(List<DisplayResolveInfo> list);
-
-    void setupUI(@LayoutRes int layoutRes, boolean shouldDisplayExtendedInfo);
+    void displayData(IntentResolver.Data data, @LayoutRes int layoutRes);
 
     void setTitle(String title);
-
-    void setFilteredItem(@Nullable DisplayResolveInfo filteredItem);
 
     void setupActionButtons();
 

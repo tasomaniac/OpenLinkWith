@@ -21,14 +21,10 @@ import butterknife.ButterKnife;
 
 public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.ViewHolder> {
 
-    private static final int TYPE_ITEM = 2;
-    private static final int TYPE_HEADER = 1;
-
     private final IconLoader iconLoader;
 
     private List<DisplayResolveInfo> mList = Collections.emptyList();
     private boolean displayExtendedInfo = false;
-    private boolean hasHeader = false;
     private boolean selectionEnabled = false;
     private int checkedItemPosition = RecyclerView.NO_POSITION;
 
@@ -42,20 +38,10 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
 
     @Override
     public int getItemCount() {
-        int result = mList.size();
-        result += getHeadersCount();
-        return result;
+        return mList.size();
     }
 
-    public int getAdapterPositionOf(DisplayResolveInfo dri) {
-        return mList.indexOf(dri) + getHeadersCount();
-    }
-
-    public DisplayResolveInfo getItem(int position) {
-        position -= getHeadersCount();
-        if (position < 0) {
-            position = 0;
-        }
+    DisplayResolveInfo getItem(int position) {
         return mList.get(position);
     }
 
@@ -64,47 +50,13 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         return position;
     }
 
-    protected int getHeadersCount() {
-        return hasHeader ? 1 : 0;
-    }
-
     public void setDisplayExtendedInfo(boolean displayExtendedInfo) {
         this.displayExtendedInfo = displayExtendedInfo;
     }
 
-    public void setDisplayHeader(boolean hasHeader) {
-        this.hasHeader = hasHeader;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        if (hasHeader && position == 0) {
-            return TYPE_HEADER;
-        }
-        return TYPE_ITEM;
-    }
-
-    protected ViewHolder onCreateHeaderViewHolder(ViewGroup parent, int viewType) {
-        View headerView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.resolver_different_item_header, parent, false);
-        return new ViewHolder(headerView);
-    }
-
-    protected void onBindHeaderViewHolder(ViewHolder holder) {
-        // no-op
-    }
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (TYPE_HEADER == viewType) {
-            return onCreateHeaderViewHolder(parent, viewType);
-        }
-        if (TYPE_ITEM == viewType) {
-            View itemView = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.resolve_list_item, parent, false);
-            return new ViewHolder(itemView);
-        }
-        throw new IllegalStateException("Unknown viewType: + " + viewType);
+        return ViewHolder.create(parent);
     }
 
     @Override
@@ -117,12 +69,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        if (TYPE_HEADER == getItemViewType(position)) {
-            onBindHeaderViewHolder(holder);
-            return;
-        }
-
-        final DisplayResolveInfo info = getItem(position);
+        final DisplayResolveInfo info = mList.get(position);
 
         holder.text.setText(info.displayLabel());
         if (holder.text2 != null) {
@@ -142,7 +89,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
 
         holder.itemView.setOnClickListener(v -> {
             int adapterPosition = holder.getAdapterPosition();
-            itemClickListener.onItemClick(getItem(adapterPosition));
+            itemClickListener.onItemClick(info);
             setItemChecked(adapterPosition);
         });
 
@@ -183,7 +130,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
     }
 
     public void remove(DisplayResolveInfo item) {
-        int position = getAdapterPositionOf(item);
+        int position = mList.indexOf(item);
         mList.remove(item);
         notifyItemRemoved(position);
     }
@@ -197,7 +144,12 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         @BindView(R.id.icon)
         ImageView icon;
 
-        public ViewHolder(View view) {
+        public static ViewHolder create(ViewGroup parent) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.resolve_list_item, parent, false);
+            return new ViewHolder(view);
+        }
+
+        private ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
