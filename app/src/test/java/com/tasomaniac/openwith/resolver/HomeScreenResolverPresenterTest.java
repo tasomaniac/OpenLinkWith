@@ -55,14 +55,13 @@ public class HomeScreenResolverPresenterTest {
     }
 
     @Test
-    public void givenNonEmptyStateShouldNotifyListener() {
+    public void givenNonEmptyDataShouldNotifyListenerOnBind() {
         IntentResolver.Data data = mock(IntentResolver.Data.class);
         given(intentResolver.getData()).willReturn(data);
 
         presenter.bind(view);
-        IntentResolver.Listener listener = captureIntentResolverListener();
 
-        then(listener).should().onIntentResolved(data);
+        then(view).should().displayData(data, R.layout.resolver_list);
     }
 
     @Test
