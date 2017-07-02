@@ -36,6 +36,7 @@ public class DefaultResolverPresenterTest {
     @Mock private ChooserHistory chooserHistory;
     @Mock private ContentResolver contentResolver;
     @Mock private Intent sourceIntent;
+    @Mock private ResolverNavigation navigation;
 
     private ResolverPresenter presenter;
     private ViewState viewState = new ViewState();
@@ -45,7 +46,7 @@ public class DefaultResolverPresenterTest {
         presenter = new DefaultResolverPresenter(resources, chooserHistory, contentResolver, intentResolver, viewState);
         given(intentResolver.getSourceIntent()).willReturn(sourceIntent);
 
-        presenter.bind(view);
+        presenter.bind(view, navigation);
     }
 
     @Test
@@ -66,7 +67,7 @@ public class DefaultResolverPresenterTest {
         IntentResolver.Data data = mock(IntentResolver.Data.class);
         given(intentResolver.getData()).willReturn(data);
 
-        presenter.bind(view);
+        presenter.bind(view, navigation);
 
         then(view).should().displayData(data);
     }
@@ -79,7 +80,7 @@ public class DefaultResolverPresenterTest {
         listener.onIntentResolved(EMPTY_DATA);
 
         then(view).should().toast(R.string.empty_resolver_activity);
-        then(view).should().dismiss();
+        then(navigation).should().dismiss();
         then(view).shouldHaveNoMoreInteractions();
     }
 
@@ -93,9 +94,9 @@ public class DefaultResolverPresenterTest {
 
         listener.onIntentResolved(dataWith(item));
 
-        then(view).should().startPreferred(intent, label);
-        then(view).should().dismiss();
-        then(view).shouldHaveNoMoreInteractions();
+        then(navigation).should().startPreferred(intent, label);
+        then(navigation).should().dismiss();
+        then(view).shouldHaveZeroInteractions();
     }
 
     @Test
@@ -108,9 +109,9 @@ public class DefaultResolverPresenterTest {
 
         listener.onIntentResolved(dataWith(Collections.emptyList(), filteredItem));
 
-        then(view).should().startPreferred(intent, label);
-        then(view).should().dismiss();
-        then(view).shouldHaveNoMoreInteractions();
+        then(navigation).should().startPreferred(intent, label);
+        then(navigation).should().dismiss();
+        then(view).shouldHaveZeroInteractions();
     }
 
     private DisplayResolveInfo givenDisplayResolveInfoWithIntentAndLabel(Intent intent, String label) {
@@ -185,7 +186,7 @@ public class DefaultResolverPresenterTest {
 
         listener.onActionButtonClick(false);
 
-        then(view).should().startSelected(intent);
+        then(navigation).should().startSelected(intent);
     }
 
     @Test
@@ -200,7 +201,7 @@ public class DefaultResolverPresenterTest {
         listener.onItemClick(item);
         listener.onActionButtonClick(false);
 
-        then(view).should().startSelected(intent);
+        then(navigation).should().startSelected(intent);
     }
 
     @Test
@@ -241,7 +242,7 @@ public class DefaultResolverPresenterTest {
         listener.onItemClick(item);
         listener.onItemClick(item);
 
-        then(view).should().startSelected(intent);
+        then(navigation).should().startSelected(intent);
     }
 
     @Test
@@ -255,7 +256,7 @@ public class DefaultResolverPresenterTest {
 
         listener.onItemClick(item);
 
-        then(view).should().startSelected(intent);
+        then(navigation).should().startSelected(intent);
     }
 
     private IntentResolver.Listener captureIntentResolverListener() {

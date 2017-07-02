@@ -39,13 +39,11 @@ import com.tasomaniac.openwith.IconLoader;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.Injector;
 import com.tasomaniac.openwith.homescreen.AddToHomeScreenDialogFragment;
-import com.tasomaniac.openwith.util.Intents;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import timber.log.Timber;
 
 /**
  * This activity is displayed when the system attempts to start an Intent for
@@ -81,7 +79,7 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getComponent().inject(this);
-        presenter.bind(this);
+        presenter.bind(this, new ResolverNavigation(this));
         registerPackageMonitor();
     }
 
@@ -142,13 +140,6 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     public void enableActionButtons() {
         alwaysButton.setEnabled(true);
         onceButton.setEnabled(true);
-    }
-
-    @Override
-    public void dismiss() {
-        if (!isFinishing()) {
-            finish();
-        }
     }
 
     @Override
@@ -216,28 +207,6 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
 
     public void onButtonClick(View v) {
         listener.onActionButtonClick(v.getId() == R.id.button_always);
-        dismiss();
-    }
-
-    @Override
-    public void startSelected(Intent intent) {
-        if (isFinishing()) {
-            return;
-        }
-        try {
-            Intents.startActivityFixingIntent(this, intent);
-            dismiss();
-        } catch (Exception e) {
-            Timber.e(e);
-            Toast.makeText(this, R.string.error_cannot_start_activity, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void startPreferred(Intent intent, CharSequence appLabel) {
-        String message = getString(R.string.warning_open_link_with_name, appLabel);
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-        Intents.startActivityFixingIntent(this, intent);
     }
 
     @Override
@@ -285,6 +254,12 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
                 .appComponent(Injector.obtain(this))
                 .resolverModule(new ResolverModule(this, sourceIntent, preferredResolver.lastChosenComponent()))
                 .build();
+    }
+
+    private void dismiss() {
+        if (!isFinishing()) {
+            finish();
+        }
     }
 
     private Intent configureIntent() {

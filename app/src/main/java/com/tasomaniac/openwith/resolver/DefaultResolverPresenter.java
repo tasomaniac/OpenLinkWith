@@ -33,10 +33,10 @@ class DefaultResolverPresenter implements ResolverPresenter {
     }
 
     @Override
-    public void bind(ResolverView view) {
-        view.setListener(new ViewListener(view, intentResolver));
+    public void bind(ResolverView view, ResolverView.Navigation navigation) {
+        view.setListener(new ViewListener(view, intentResolver, navigation));
 
-        IntentResolverListener listener = new IntentResolverListener(view);
+        IntentResolverListener listener = new IntentResolverListener(view, navigation);
         intentResolver.setListener(listener);
         if (intentResolver.getData() == null) {
             intentResolver.resolve();
@@ -54,9 +54,11 @@ class DefaultResolverPresenter implements ResolverPresenter {
     private class IntentResolverListener implements IntentResolver.Listener {
 
         private final ResolverView view;
+        private final ResolverView.Navigation navigation;
 
-        IntentResolverListener(ResolverView view) {
+        IntentResolverListener(ResolverView view, ResolverView.Navigation navigation) {
             this.view = view;
+            this.navigation = navigation;
         }
 
         @Override
@@ -66,14 +68,14 @@ class DefaultResolverPresenter implements ResolverPresenter {
             if (data.isEmpty()) {
                 Timber.e("No app is found to handle url: %s", intentResolver.getSourceIntent().getDataString());
                 view.toast(R.string.empty_resolver_activity);
-                view.dismiss();
+                navigation.dismiss();
                 return;
             }
             if (data.totalCount() == 1) {
                 DisplayResolveInfo dri = data.filteredItem != null ? data.filteredItem : data.resolved.get(0);
                 try {
-                    view.startPreferred(dri.intentFrom(intentResolver.getSourceIntent()), dri.displayLabel());
-                    view.dismiss();
+                    navigation.startPreferred(dri.intentFrom(intentResolver.getSourceIntent()), dri.displayLabel());
+                    navigation.dismiss();
                     return;
                 } catch (Exception e) {
                     Timber.e(e);
@@ -96,15 +98,18 @@ class DefaultResolverPresenter implements ResolverPresenter {
 
         private final ResolverView view;
         private final IntentResolver intentResolver;
+        private final ResolverView.Navigation navigation;
 
-        ViewListener(ResolverView view, IntentResolver intentResolver) {
+        ViewListener(ResolverView view, IntentResolver intentResolver, ResolverView.Navigation navigation) {
             this.view = view;
             this.intentResolver = intentResolver;
+            this.navigation = navigation;
         }
 
         @Override
         public void onActionButtonClick(boolean always) {
             startAndPersist(viewState.checkedItem(), always);
+            navigation.dismiss();
         }
 
         private void persistSelectedIntent(Intent intent, boolean alwaysCheck) {
@@ -141,7 +146,7 @@ class DefaultResolverPresenter implements ResolverPresenter {
 
         private void startAndPersist(DisplayResolveInfo dri, boolean alwaysCheck) {
             Intent intent = dri.intentFrom(intentResolver.getSourceIntent());
-            view.startSelected(intent);
+            navigation.startSelected(intent);
             persistSelectedIntent(intent, alwaysCheck);
         }
 

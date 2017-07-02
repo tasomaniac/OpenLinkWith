@@ -30,6 +30,7 @@ public class HomeScreenResolverPresenterTest {
     @Mock private ResolverView view;
     @Mock private Resources resources;
     @Mock private Intent sourceIntent;
+    @Mock private ResolverNavigation navigation;
 
     private HomeScreenResolverPresenter presenter;
 
@@ -38,7 +39,7 @@ public class HomeScreenResolverPresenterTest {
         presenter = new HomeScreenResolverPresenter(resources, intentResolver);
         given(intentResolver.getSourceIntent()).willReturn(sourceIntent);
 
-        presenter.bind(view);
+        presenter.bind(view, navigation);
     }
 
     @Test
@@ -59,7 +60,7 @@ public class HomeScreenResolverPresenterTest {
         IntentResolver.Data data = mock(IntentResolver.Data.class);
         given(intentResolver.getData()).willReturn(data);
 
-        presenter.bind(view);
+        presenter.bind(view, navigation);
 
         then(view).should().displayData(data);
     }
@@ -82,7 +83,7 @@ public class HomeScreenResolverPresenterTest {
         listener.onIntentResolved(EMPTY_DATA);
 
         then(view).should().toast(R.string.empty_resolver_activity);
-        then(view).should().dismiss();
+        then(navigation).should().dismiss();
         then(view).shouldHaveNoMoreInteractions();
     }
 

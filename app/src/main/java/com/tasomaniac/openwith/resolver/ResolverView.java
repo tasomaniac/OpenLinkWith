@@ -6,10 +6,6 @@ import android.support.annotation.StringRes;
 
 interface ResolverView {
 
-    void startSelected(Intent intent);
-
-    void startPreferred(Intent intent, CharSequence appLabel);
-
     void displayAddToHomeScreenDialog(DisplayResolveInfo dri, Intent intent);
 
     void displayData(IntentResolver.Data data);
@@ -22,9 +18,15 @@ interface ResolverView {
 
     void toast(@StringRes int titleRes);
 
-    void dismiss();
-
     void setListener(@Nullable Listener listener);
+
+    interface Navigation {
+        void startSelected(Intent intent);
+
+        void startPreferred(Intent intent, CharSequence appLabel);
+
+        void dismiss();
+    }
 
     interface Listener {
         void onActionButtonClick(boolean always);

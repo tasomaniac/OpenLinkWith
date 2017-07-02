@@ -18,10 +18,10 @@ class HomeScreenResolverPresenter implements ResolverPresenter {
     }
 
     @Override
-    public void bind(ResolverView view) {
+    public void bind(ResolverView view, ResolverView.Navigation navigation) {
         view.setListener(new ViewListener(intentResolver, view));
 
-        IntentResolverListener listener = new IntentResolverListener(view);
+        IntentResolverListener listener = new IntentResolverListener(view, navigation);
         intentResolver.setListener(listener);
         if (intentResolver.getData() == null) {
             intentResolver.resolve();
@@ -39,9 +39,11 @@ class HomeScreenResolverPresenter implements ResolverPresenter {
     private class IntentResolverListener implements IntentResolver.Listener {
 
         private final ResolverView view;
+        private final ResolverView.Navigation navigation;
 
-        IntentResolverListener(ResolverView view) {
+        IntentResolverListener(ResolverView view, ResolverView.Navigation navigation) {
             this.view = view;
+            this.navigation = navigation;
         }
 
         @Override
@@ -49,7 +51,7 @@ class HomeScreenResolverPresenter implements ResolverPresenter {
             if (data.isEmpty()) {
                 Timber.e("No app is found to handle url: %s", intentResolver.getSourceIntent().getDataString());
                 view.toast(R.string.empty_resolver_activity);
-                view.dismiss();
+                navigation.dismiss();
                 return;
             }
             view.displayData(data);
