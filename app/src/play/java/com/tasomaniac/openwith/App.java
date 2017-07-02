@@ -4,10 +4,11 @@ import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
 
+import dagger.android.support.DaggerApplication;
 import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
 
-public class App extends BaseApp {
+public class App extends DaggerApplication {
 
     @Override
     public void onCreate() {
@@ -16,13 +17,22 @@ public class App extends BaseApp {
         if (!BuildConfig.DEBUG) {
             Fabric.with(this, new Crashlytics());
             Timber.plant(new CrashReportingTree());
+        } else {
+            Timber.plant(new Timber.DebugTree());
         }
     }
 
+    @Override
+    public AppComponent applicationInjector() {
+        return DaggerAppComponent.builder().build(this);
+    }
 
-    /** A tree which logs important information for crash reporting. */
+    /**
+     * A tree which logs important information for crash reporting.
+     */
     private static class CrashReportingTree extends Timber.Tree {
-        @Override protected void log(int priority, String tag, String message, Throwable t) {
+        @Override
+        protected void log(int priority, String tag, String message, Throwable t) {
             if (priority == Log.VERBOSE || priority == Log.DEBUG) {
                 return;
             }

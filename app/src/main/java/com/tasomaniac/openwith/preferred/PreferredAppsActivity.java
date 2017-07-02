@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,7 +16,6 @@ import android.support.v7.widget.Toolbar;
 
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.Analytics;
-import com.tasomaniac.openwith.data.Injector;
 import com.tasomaniac.openwith.resolver.DisplayResolveInfo;
 import com.tasomaniac.openwith.resolver.ItemClickListener;
 import com.tasomaniac.openwith.resolver.ResolveListAdapter;
@@ -31,13 +29,14 @@ import net.simonvt.schematic.Cursors;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.support.DaggerAppCompatActivity;
 
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.COMPONENT;
 import static com.tasomaniac.openwith.data.OpenWithDatabase.OpenWithColumns.HOST;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.CONTENT_URI_PREFERRED;
 import static com.tasomaniac.openwith.data.OpenWithProvider.OpenWithHosts.withHost;
 
-public class PreferredAppsActivity extends AppCompatActivity implements
+public class PreferredAppsActivity extends DaggerAppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor>,
         ItemClickListener,
         AppRemoveDialogFragment.Callbacks {
@@ -51,7 +50,6 @@ public class PreferredAppsActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferred_apps);
-        Injector.obtain(this).inject(this);
         ButterKnife.bind(this);
 
         analytics.sendScreenView("Preferred Apps");

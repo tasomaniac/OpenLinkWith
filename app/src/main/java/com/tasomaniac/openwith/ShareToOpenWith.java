@@ -7,10 +7,13 @@ import android.support.v4.app.ShareCompat;
 import android.widget.Toast;
 
 import com.tasomaniac.openwith.data.Analytics;
-import com.tasomaniac.openwith.data.Injector;
 import com.tasomaniac.openwith.redirect.RedirectFixActivity;
 import com.tasomaniac.openwith.util.CallerPackageExtractor;
 import com.tasomaniac.openwith.util.Urls;
+
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
 
 public class ShareToOpenWith extends Activity {
 
@@ -20,11 +23,13 @@ public class ShareToOpenWith extends Activity {
         return intent.getBooleanExtra(EXTRA_FROM_DIRECT_SHARE, false);
     }
 
+    @Inject Analytics analytics;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
 
-        Analytics analytics = Injector.obtain(this).analytics();
         analytics.sendScreenView("ShareToOpenWith");
         if (isFromDirectShare(getIntent())) {
             analytics.sendEvent(

@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -18,7 +17,9 @@ import com.tasomaniac.openwith.R;
 import java.util.List;
 import java.util.Vector;
 
-public abstract class AppIntro extends AppCompatActivity {
+import dagger.android.support.DaggerAppCompatActivity;
+
+public abstract class AppIntro extends DaggerAppCompatActivity {
 
     private PagerAdapter mPagerAdapter;
     private AppIntroViewPager pager;

@@ -21,7 +21,6 @@ import android.text.style.ForegroundColorSpan;
 import com.tasomaniac.openwith.BuildConfig;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.Analytics;
-import com.tasomaniac.openwith.data.Injector;
 import com.tasomaniac.openwith.data.prefs.BooleanPreference;
 import com.tasomaniac.openwith.data.prefs.UsageAccess;
 import com.tasomaniac.openwith.intro.IntroActivity;
@@ -30,6 +29,8 @@ import com.tasomaniac.openwith.util.Intents;
 import com.tasomaniac.openwith.util.Utils;
 
 import javax.inject.Inject;
+
+import dagger.android.support.AndroidSupportInjection;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.LOLLIPOP;
@@ -56,7 +57,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Injector.obtain(getContext()).inject(this);
+        AndroidSupportInjection.inject(this);
     }
 
     @Override

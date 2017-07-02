@@ -16,6 +16,7 @@ import com.tasomaniac.openwith.rx.SchedulingStrategy;
 import javax.inject.Singleton;
 import java.io.File;
 
+import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -24,8 +25,16 @@ import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 
 @Module
-final class AppModule {
+abstract class AppModule {
     private static final int DISK_CACHE_SIZE = 5 * 1024 * 1024;
+
+    @Binds
+    abstract Application application(App app);
+
+    @Provides
+    static PackageManager packageManager(Application app) {
+        return app.getPackageManager();
+    }
 
     @Provides
     static SharedPreferences provideSharedPreferences(Application app) {

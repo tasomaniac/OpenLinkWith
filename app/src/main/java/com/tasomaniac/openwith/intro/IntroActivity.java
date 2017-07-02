@@ -10,7 +10,6 @@ import android.support.annotation.RequiresApi;
 
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.Analytics;
-import com.tasomaniac.openwith.data.Injector;
 import com.tasomaniac.openwith.util.Intents;
 import com.tasomaniac.openwith.util.Utils;
 
@@ -30,12 +29,6 @@ public class IntroActivity extends AppIntro {
     public static Intent newIntent(Context context, boolean firstStart) {
         return new Intent(context, IntroActivity.class)
                 .putExtra(IntroActivity.EXTRA_FIRST_START, firstStart);
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        Injector.obtain(this).inject(this);
-        super.onCreate(savedInstanceState);
     }
 
     @Override

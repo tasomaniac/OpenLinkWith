@@ -1,47 +1,35 @@
 package com.tasomaniac.openwith;
 
-import android.app.Application;
-import android.content.pm.PackageManager;
-
-import com.tasomaniac.openwith.data.Analytics;
-import com.tasomaniac.openwith.intro.IntroActivity;
-import com.tasomaniac.openwith.preferred.PreferredAppsActivity;
-import com.tasomaniac.openwith.rx.SchedulingStrategy;
-import com.tasomaniac.openwith.settings.SettingsActivity;
-import com.tasomaniac.openwith.settings.SettingsFragment;
+import com.tasomaniac.openwith.resolver.ResolverBindingModule;
+import com.tasomaniac.openwith.resolver.ResolverComponent;
 
 import javax.inject.Singleton;
 
 import dagger.Component;
-import okhttp3.OkHttpClient;
+import dagger.android.AndroidInjector;
+import dagger.android.support.AndroidSupportInjectionModule;
 
 @Singleton
 @Component(modules = {
+        AndroidSupportInjectionModule.class,
         AppModule.class,
-        AnalyticsModule.class
-}, dependencies = {
-        Application.class
+        AnalyticsModule.class,
+        BindingModule.class,
+        ResolverBindingModule.class
 })
-public interface AppComponent {
+public interface AppComponent extends AndroidInjector<App> {
 
-    Application app();
+    ResolverComponent.Builder resolverComponentBuilder();
+    
+    @Component.Builder
+    abstract class Builder extends AndroidInjector.Builder<App> {
 
-    PackageManager packageManager();
+        public final AppComponent build(App instance) {
+            seedInstance(instance);
+            return build();
+        }
 
-    SchedulingStrategy schedulingStrategy();
-
-    Analytics analytics();
-
-    IconLoader iconLoader();
-
-    OkHttpClient okHttpClient();
-
-    void inject(IntroActivity activity);
-
-    void inject(PreferredAppsActivity activity);
-
-    void inject(SettingsActivity activity);
-
-    void inject(SettingsFragment fragment);
-
+        @Override
+        public abstract AppComponent build();
+    }
 }

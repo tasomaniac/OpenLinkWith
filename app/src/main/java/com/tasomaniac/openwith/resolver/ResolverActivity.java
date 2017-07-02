@@ -33,11 +33,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tasomaniac.openwith.App;
 import com.tasomaniac.openwith.ComponentActivity;
 import com.tasomaniac.openwith.HeaderAdapter;
 import com.tasomaniac.openwith.IconLoader;
 import com.tasomaniac.openwith.R;
-import com.tasomaniac.openwith.data.Injector;
 import com.tasomaniac.openwith.homescreen.AddToHomeScreenDialogFragment;
 
 import javax.inject.Inject;
@@ -250,8 +250,9 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
                 dismiss();
             }
         }
-        return DaggerResolverComponent.builder()
-                .appComponent(Injector.obtain(this))
+        App app = (App) getApplicationContext();
+        return app.applicationInjector()
+                .resolverComponentBuilder()
                 .resolverModule(new ResolverModule(this, sourceIntent, preferredResolver.lastChosenComponent()))
                 .build();
     }

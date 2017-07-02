@@ -11,13 +11,24 @@ import android.service.chooser.ChooserTargetService;
 
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.ShareToOpenWith;
-import com.tasomaniac.openwith.data.Injector;
+import com.tasomaniac.openwith.data.Analytics;
 
+import javax.inject.Inject;
 import java.util.Collections;
 import java.util.List;
 
+import dagger.android.AndroidInjection;
+
 @TargetApi(Build.VERSION_CODES.M)
 public class ResolverChooserTargetService extends ChooserTargetService {
+
+    @Inject Analytics analytics;
+
+    @Override
+    public void onCreate() {
+        AndroidInjection.inject(this);
+        super.onCreate();
+    }
 
     @Override
     public List<ChooserTarget> onGetChooserTargets(ComponentName targetActivityName,
@@ -42,7 +53,7 @@ public class ResolverChooserTargetService extends ChooserTargetService {
     }
 
     private void sendAnalyticsEvent() {
-        Injector.obtain(this).analytics().sendEvent(
+        analytics.sendEvent(
                 "Direct Share",
                 "Shown",
                 "true"

@@ -8,20 +8,19 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.tasomaniac.android.widget.DelayedProgressBar;
-import com.tasomaniac.openwith.ComponentActivity;
 import com.tasomaniac.openwith.R;
-import com.tasomaniac.openwith.data.Injector;
 import com.tasomaniac.openwith.resolver.ResolverActivity;
 import com.tasomaniac.openwith.rx.SchedulingStrategy;
 
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
+import dagger.android.support.DaggerAppCompatActivity;
 import io.reactivex.Single;
 
 import static com.tasomaniac.openwith.util.Urls.fixUrls;
 
-public class RedirectFixActivity extends ComponentActivity<RedirectFixComponent> {
+public class RedirectFixActivity extends DaggerAppCompatActivity {
 
     @Inject BrowserIntentChecker browserIntentChecker;
     @Inject RedirectFixer redirectFixer;
@@ -37,7 +36,6 @@ public class RedirectFixActivity extends ComponentActivity<RedirectFixComponent>
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resolver_activity);
-        getComponent().inject(this);
 
         DelayedProgressBar progress = ButterKnife.findById(this, R.id.resolver_progress);
         progress.show(true);
@@ -52,12 +50,5 @@ public class RedirectFixActivity extends ComponentActivity<RedirectFixComponent>
                     startActivity(intent.setComponent(new ComponentName(this, ResolverActivity.class)));
                     finish();
                 });
-    }
-
-    @Override
-    protected RedirectFixComponent createComponent() {
-        return DaggerRedirectFixComponent.builder()
-                .appComponent(Injector.obtain(this))
-                .build();
     }
 }

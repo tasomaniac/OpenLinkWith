@@ -2,12 +2,10 @@ package com.tasomaniac.openwith.settings;
 
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.Analytics;
-import com.tasomaniac.openwith.data.Injector;
 import com.tasomaniac.openwith.data.prefs.BooleanPreference;
 import com.tasomaniac.openwith.data.prefs.TutorialShown;
 import com.tasomaniac.openwith.intro.IntroActivity;
@@ -16,8 +14,9 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.support.DaggerAppCompatActivity;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends DaggerAppCompatActivity {
 
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsingToolbar;
@@ -27,13 +26,12 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Injector.obtain(this).inject(this);
+        super.onCreate(savedInstanceState);
         if (!tutorialShown.get()) {
             startActivity(IntroActivity.newIntent(this, true));
             tutorialShown.set(true);
         }
 
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         ButterKnife.bind(this);
 

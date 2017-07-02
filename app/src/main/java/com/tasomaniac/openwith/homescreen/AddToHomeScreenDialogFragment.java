@@ -21,7 +21,6 @@ import android.widget.EditText;
 
 import com.tasomaniac.android.widget.DelayedProgressBar;
 import com.tasomaniac.openwith.R;
-import com.tasomaniac.openwith.data.Injector;
 import com.tasomaniac.openwith.resolver.DisplayResolveInfo;
 import com.tasomaniac.openwith.util.Intents;
 
@@ -32,6 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnEditorAction;
 import butterknife.OnTextChanged;
+import dagger.android.support.AndroidSupportInjection;
 import timber.log.Timber;
 
 import static android.os.Build.VERSION_CODES.M;
@@ -65,7 +65,7 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        component().inject(this);
+        AndroidSupportInjection.inject(this);
         dri = getArguments().getParcelable(KEY_DRI);
         intent = getArguments().getParcelable(KEY_INTENT);
         titleFetcher.setListener(new TitleFetcher.Listener() {
@@ -86,12 +86,6 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
                 });
             }
         });
-    }
-
-    private AddToHomeScreenComponent component() {
-        return DaggerAddToHomeScreenComponent.builder()
-                .appComponent(Injector.obtain(getContext()))
-                .build();
     }
 
     @Override
