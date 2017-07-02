@@ -54,12 +54,7 @@ public class DefaultResolverPresenterTest {
         presenter.unbind(view);
 
         then(view).should().setListener(null);
-        then(intentResolver).should().bind(null);
-    }
-
-    @Test
-    public void shouldStartResolvingByDefault() {
-        then(intentResolver).should().resolve();
+        then(intentResolver).should().unbind();
     }
 
     @Test
