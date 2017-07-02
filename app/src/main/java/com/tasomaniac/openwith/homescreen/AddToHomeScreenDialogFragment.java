@@ -1,5 +1,6 @@
 package com.tasomaniac.openwith.homescreen;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -13,7 +14,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
@@ -117,8 +117,8 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        View view = getActivity().getLayoutInflater()
-                .inflate(R.layout.dialog_add_to_home_screen, (ViewGroup) getView(), false);
+        @SuppressLint("InflateParams") View view = getActivity().getLayoutInflater()
+                .inflate(R.layout.dialog_add_to_home_screen, null);
         ButterKnife.bind(this, view);
 
         AlertDialog dialog = new AlertDialog.Builder(getActivity())
@@ -132,23 +132,18 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
     }
 
     private static void forceKeyboardVisible(Window window) {
-        window.setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
-                        | WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE
-        );
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
     }
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        createShortcutFor(dri);
-        Intents.launchHomeScreen(getActivity());
+        createShortcut();
     }
 
     @OnEditorAction(R.id.add_to_home_screen_title)
     boolean onKeyboardDoneClicked(int actionId) {
         if (EditorInfo.IME_ACTION_GO == actionId) {
-            createShortcutFor(dri);
-            Intents.launchHomeScreen(getActivity());
+            createShortcut();
             return true;
         }
         return false;
@@ -160,6 +155,11 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
         AlertDialog dialog = (AlertDialog) getDialog();
         dialog.getButton(DialogInterface.BUTTON_POSITIVE)
                 .setEnabled(!TextUtils.isEmpty(title));
+    }
+
+    private void createShortcut() {
+        createShortcutFor(dri);
+        Intents.launchHomeScreen(getActivity());
     }
 
     private void createShortcutFor(DisplayResolveInfo dri) {

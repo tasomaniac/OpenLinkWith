@@ -13,7 +13,7 @@
     android:layout_marginStart="20dp"
     android:hint="@string/dialog_hint_add_to_home_screen"
     android:singleLine="true"
-    android:imeOptions="flagNoFullscreen|actionGo"
+    android:imeOptions="actionGo"
     android:imeActionLabel="@string/add"/>
 
   <com.tasomaniac.android.widget.DelayedProgressBar
