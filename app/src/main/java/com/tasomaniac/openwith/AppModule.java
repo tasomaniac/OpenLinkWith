@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.preference.PreferenceManager;
 
 import com.tasomaniac.openwith.data.prefs.BooleanPreference;
@@ -36,6 +37,11 @@ final class AppModule {
         return (ActivityManager) app.getSystemService(Context.ACTIVITY_SERVICE);
     }
 
+    @Provides
+    static Resources resources(Application app) {
+        return app.getResources();
+    }
+    
     @Provides
     static SchedulingStrategy schedulingStrategy() {
         return new SchedulingStrategy(Schedulers.io(), AndroidSchedulers.mainThread());

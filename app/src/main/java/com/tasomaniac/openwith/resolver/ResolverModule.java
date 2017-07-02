@@ -48,11 +48,6 @@ class ResolverModule {
     }
 
     @Provides
-    static Resources resources(Application app) {
-        return app.getResources();
-    }
-
-    @Provides
     @PerActivity
     static ChooserHistory provideChooserHistory(Application app) {
         return ChooserHistory.fromSettings(app);
@@ -79,7 +74,6 @@ class ResolverModule {
     }
 
     @Provides
-    @PerActivity
     ResolverComparator provideResolverComparator(Application app, ChooserHistory history) {
         return new ResolverComparator(
                 app.getPackageManager(),
