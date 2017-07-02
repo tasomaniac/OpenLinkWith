@@ -19,5 +19,4 @@
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
 -dontwarn okio.**
 
-# Dontwarn until the bug is fixed https://issuetracker.google.com/issues/62473599
--dontwarn android.content.**
+-dontwarn com.google.errorprone.annotations.*
