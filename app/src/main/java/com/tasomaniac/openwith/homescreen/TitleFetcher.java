@@ -89,7 +89,7 @@ class TitleFetcher {
     private static String extractTitle(ResponseBody body) throws IOException {
         BufferedSource source = body.source();
 
-        Pattern pattern = Pattern.compile("(?:<title(?:\\s.*)?>(.+)</title>|<meta\\s.*property=\"og:title\"\\s.*content=\"(.*)\".*>|<meta\\s.*content=\"(.*)\"\\s.*property=\"og:title\".*>)");
+        Pattern pattern = Pattern.compile("<title(?:\\s.*)?>(.+)</title>|<meta\\s*property=\"og:title\"\\s*content=\"(.*)\".*>|<meta\\s*content=\"(.*)\"\\s*property=\"og:title\".*>");
 
         String line;
         //noinspection MethodCallInLoopCondition
