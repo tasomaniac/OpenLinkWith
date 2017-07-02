@@ -1,4 +1,4 @@
-package com.tasomaniac.openwith;
+package com.tasomaniac.openwith.resolver;
 
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -12,12 +12,12 @@ public class IconLoader {
     private final PackageManager packageManager;
     private final int iconDpi;
 
-    IconLoader(PackageManager packageManager, int iconDpi) {
+    public IconLoader(PackageManager packageManager, int iconDpi) {
         this.packageManager = packageManager;
         this.iconDpi = iconDpi;
     }
 
-    public Drawable loadFor(ResolveInfo ri) {
+    Drawable loadFor(ResolveInfo ri) {
         try {
             if (ri.resolvePackageName != null && ri.icon != 0) {
                 return getIcon(ri.resolvePackageName, ri.icon);

@@ -11,6 +11,7 @@ import android.preference.PreferenceManager;
 import com.tasomaniac.openwith.data.prefs.BooleanPreference;
 import com.tasomaniac.openwith.data.prefs.TutorialShown;
 import com.tasomaniac.openwith.data.prefs.UsageAccess;
+import com.tasomaniac.openwith.resolver.IconLoader;
 import com.tasomaniac.openwith.rx.SchedulingStrategy;
 
 import javax.inject.Singleton;

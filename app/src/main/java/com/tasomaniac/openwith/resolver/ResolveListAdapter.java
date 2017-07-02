@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.tasomaniac.openwith.IconLoader;
 import com.tasomaniac.openwith.R;
 
 import javax.inject.Inject;
