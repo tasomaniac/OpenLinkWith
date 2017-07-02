@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import dagger.Lazy;
 import io.reactivex.Observable;
 
 import static android.os.Build.VERSION.SDK_INT;
@@ -26,7 +25,6 @@ import static android.os.Build.VERSION_CODES.M;
 class IntentResolver {
 
     private final PackageManager packageManager;
-    private final Lazy<ResolverComparator> resolverComparator;
     private final SchedulingStrategy schedulingStrategy;
     private final ResolveListGrouper resolveListGrouper;
     private final Intent sourceIntent;
@@ -37,13 +35,11 @@ class IntentResolver {
 
     @Inject
     IntentResolver(PackageManager packageManager,
-                   Lazy<ResolverComparator> resolverComparator,
                    SchedulingStrategy schedulingStrategy,
                    Intent sourceIntent,
                    CallerPackage callerPackage,
                    ResolveListGrouper resolveListGrouper) {
         this.packageManager = packageManager;
-        this.resolverComparator = resolverComparator;
         this.schedulingStrategy = schedulingStrategy;
         this.sourceIntent = sourceIntent;
         this.callerPackage = callerPackage;
@@ -69,8 +65,7 @@ class IntentResolver {
     }
 
     void resolve() {
-        Observable.just(sourceIntent)
-                .map(this::doResolve)
+        Observable.fromCallable(this::doResolve)
                 .compose(schedulingStrategy.apply())
                 .subscribe(data -> {
                     this.data = data;
@@ -78,12 +73,11 @@ class IntentResolver {
                 });
     }
 
-    private Data doResolve(Intent sourceIntent) {
+    private Data doResolve() {
         int flag = SDK_INT >= M ? PackageManager.MATCH_ALL : PackageManager.MATCH_DEFAULT_ONLY;
         List<ResolveInfo> currentResolveList = new ArrayList<>(packageManager.queryIntentActivities(sourceIntent, flag));
         if (Intents.isHttp(sourceIntent) && SDK_INT >= M) {
-            List<ResolveInfo> browsers = queryBrowsers();
-            addBrowsersToList(currentResolveList, browsers);
+            addBrowsersToList(currentResolveList);
         }
 
         callerPackage.removeFrom(currentResolveList);
@@ -93,19 +87,16 @@ class IntentResolver {
     }
 
     private List<DisplayResolveInfo> groupResolveList(List<ResolveInfo> currentResolveList) {
-        int size = currentResolveList.size();
-        if (size <= 0) {
+        if (currentResolveList.size() <= 0) {
             return Collections.emptyList();
         }
-
-        Collections.sort(currentResolveList, resolverComparator.get());
         return resolveListGrouper.groupResolveList(currentResolveList);
     }
 
-    private void addBrowsersToList(List<ResolveInfo> list, List<ResolveInfo> browsers) {
+    private void addBrowsersToList(List<ResolveInfo> list) {
         final int initialSize = list.size();
 
-        for (ResolveInfo browser : browsers) {
+        for (ResolveInfo browser : queryBrowsers()) {
             boolean browserFound = false;
 
             for (int i = 0; i < initialSize; i++) {

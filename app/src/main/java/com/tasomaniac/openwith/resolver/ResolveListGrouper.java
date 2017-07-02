@@ -7,20 +7,27 @@ import android.support.annotation.Nullable;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+
+import dagger.Lazy;
 
 class ResolveListGrouper {
 
     private final PackageManager packageManager;
+    private final Lazy<ResolverComparator> resolverComparator;
     @Nullable private final ComponentName lastChosenComponent;
 
     boolean showExtended;
     @Nullable DisplayResolveInfo filteredItem;
 
     @Inject
-    ResolveListGrouper(PackageManager packageManager, @Nullable ComponentName lastChosenComponent) {
+    ResolveListGrouper(PackageManager packageManager,
+                       Lazy<ResolverComparator> resolverComparator,
+                       @Nullable ComponentName lastChosenComponent) {
         this.packageManager = packageManager;
+        this.resolverComparator = resolverComparator;
         this.lastChosenComponent = lastChosenComponent;
     }
 
@@ -28,6 +35,7 @@ class ResolveListGrouper {
      * Taken from AOSP, don't try to understand what's going on.
      */
     List<DisplayResolveInfo> groupResolveList(List<ResolveInfo> current) {
+        Collections.sort(current, resolverComparator.get());
         filteredItem = null;
         showExtended = false;
         List<DisplayResolveInfo> grouped = new ArrayList<>();
