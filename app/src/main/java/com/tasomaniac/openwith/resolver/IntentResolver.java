@@ -47,17 +47,22 @@ class IntentResolver {
         this.resolveListGrouper = resolveListGrouper;
     }
 
-    void setListener(@Nullable Listener listener) {
-        this.listener = listener == null ? Listener.NO_OP : listener;
+    void bind(Listener listener) {
+        this.listener = listener;
+
+        if (data == null) {
+            resolve();
+        } else {
+            listener.onIntentResolved(data);
+        }
+    }
+
+    public void unbind() {
+        this.listener = Listener.NO_OP;
     }
 
     Intent getSourceIntent() {
         return sourceIntent;
-    }
-
-    @Nullable
-    Data getData() {
-        return data;
     }
 
     void resolve() {

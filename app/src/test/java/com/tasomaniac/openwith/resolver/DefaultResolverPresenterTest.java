@@ -54,22 +54,12 @@ public class DefaultResolverPresenterTest {
         presenter.unbind(view);
 
         then(view).should().setListener(null);
-        then(intentResolver).should().setListener(null);
+        then(intentResolver).should().bind(null);
     }
 
     @Test
     public void shouldStartResolvingByDefault() {
         then(intentResolver).should().resolve();
-    }
-
-    @Test
-    public void givenNonEmptyDataShouldNotifyListenerOnBind() {
-        IntentResolver.Data data = mock(IntentResolver.Data.class);
-        given(intentResolver.getData()).willReturn(data);
-
-        presenter.bind(view, navigation);
-
-        then(view).should().displayData(data);
     }
 
     @Test
@@ -261,7 +251,7 @@ public class DefaultResolverPresenterTest {
 
     private IntentResolver.Listener captureIntentResolverListener() {
         ArgumentCaptor<IntentResolver.Listener> argumentCaptor = ArgumentCaptor.forClass(IntentResolver.Listener.class);
-        then(intentResolver).should(atLeastOnce()).setListener(argumentCaptor.capture());
+        then(intentResolver).should(atLeastOnce()).bind(argumentCaptor.capture());
         return argumentCaptor.getValue();
     }
 

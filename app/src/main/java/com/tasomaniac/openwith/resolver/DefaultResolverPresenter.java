@@ -35,20 +35,13 @@ class DefaultResolverPresenter implements ResolverPresenter {
     @Override
     public void bind(ResolverView view, ResolverView.Navigation navigation) {
         view.setListener(new ViewListener(view, intentResolver, navigation));
-
-        IntentResolverListener listener = new IntentResolverListener(view, navigation);
-        intentResolver.setListener(listener);
-        if (intentResolver.getData() == null) {
-            intentResolver.resolve();
-        } else {
-            listener.onIntentResolved(intentResolver.getData());
-        }
+        intentResolver.bind(new IntentResolverListener(view, navigation));
     }
 
     @Override
     public void unbind(ResolverView view) {
         view.setListener(null);
-        intentResolver.setListener(null);
+        intentResolver.unbind();
     }
 
     private class IntentResolverListener implements IntentResolver.Listener {
