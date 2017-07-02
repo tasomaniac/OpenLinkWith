@@ -90,7 +90,7 @@ dependencies {
     def schematicVersion = '0.7.0'
     def butterKnifeVersion = '8.6.0'
     def daggerVersion = '2.11'
-    def okHttpVersion = '3.8.0'
+    def okHttpVersion = '3.8.1'
 
     implementation "com.android.support:appcompat-v7:$supportLibVersion"
     implementation "com.android.support:recyclerview-v7:$supportLibVersion"
@@ -111,11 +111,11 @@ dependencies {
 
     implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.1'
 
     playImplementation 'com.crashlytics.sdk.android:crashlytics:2.6.8'
 
     testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:2.8.9'
+    testImplementation 'org.mockito:mockito-core:2.8.47'
     testImplementation "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
 }
