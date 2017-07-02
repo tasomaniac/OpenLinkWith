@@ -1,7 +1,6 @@
 package com.tasomaniac.openwith.resolver;
 
 import android.content.Intent;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 
@@ -13,7 +12,7 @@ interface ResolverView {
 
     void displayAddToHomeScreenDialog(DisplayResolveInfo dri, Intent intent);
 
-    void displayData(IntentResolver.Data data, @LayoutRes int layoutRes);
+    void displayData(IntentResolver.Data data);
 
     void setTitle(String title);
 

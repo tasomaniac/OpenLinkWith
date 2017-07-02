@@ -52,7 +52,7 @@ class HomeScreenResolverPresenter implements ResolverPresenter {
                 view.dismiss();
                 return;
             }
-            view.displayData(data, R.layout.resolver_list);
+            view.displayData(data);
             view.setTitle(resources.getString(R.string.add_to_homescreen));
         }
 

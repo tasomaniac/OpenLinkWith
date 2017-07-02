@@ -80,7 +80,7 @@ class DefaultResolverPresenter implements ResolverPresenter {
                 }
             }
 
-            view.displayData(data, data.filteredItem != null ? R.layout.resolver_list_with_default : R.layout.resolver_list);
+            view.displayData(data);
             view.setTitle(titleForAction(data.filteredItem));
             view.setupActionButtons();
         }

@@ -61,7 +61,7 @@ public class HomeScreenResolverPresenterTest {
 
         presenter.bind(view);
 
-        then(view).should().displayData(data, R.layout.resolver_list);
+        then(view).should().displayData(data);
     }
 
     @Test
@@ -94,7 +94,7 @@ public class HomeScreenResolverPresenterTest {
         IntentResolver.Data data = dataWithItem(item);
         listener.onIntentResolved(data);
 
-        then(view).should().displayData(data, R.layout.resolver_list);
+        then(view).should().displayData(data);
     }
 
     @Test

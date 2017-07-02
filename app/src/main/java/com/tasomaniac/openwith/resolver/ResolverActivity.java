@@ -92,8 +92,8 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     }
 
     @Override
-    public void displayData(IntentResolver.Data data, int layoutRes) {
-        setContentView(layoutRes);
+    public void displayData(IntentResolver.Data data) {
+        setContentView(data.filteredItem != null ? R.layout.resolver_list_with_default : R.layout.resolver_list);
         ButterKnife.bind(this);
         setupList(data, data.showExtended);
         setupFilteredItem(data.filteredItem);

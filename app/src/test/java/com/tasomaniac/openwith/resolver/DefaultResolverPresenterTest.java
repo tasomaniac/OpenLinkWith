@@ -68,7 +68,7 @@ public class DefaultResolverPresenterTest {
 
         presenter.bind(view);
 
-        then(view).should().displayData(data, R.layout.resolver_list);
+        then(view).should().displayData(data);
     }
 
     @Test
