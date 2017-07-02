@@ -249,12 +249,11 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
 
     @Override
     public boolean onItemLongClick(DisplayResolveInfo info) {
-        showAppDetails(info.resolveInfo());
+        navigateToAppDetails(info.resolveInfo());
         return true;
     }
 
-    @SuppressWarnings("deprecation")
-    private void showAppDetails(ResolveInfo ri) {
+    private void navigateToAppDetails(ResolveInfo ri) {
         Intent in = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                 .setData(Uri.fromParts("package", ri.activityInfo.packageName, null))
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
