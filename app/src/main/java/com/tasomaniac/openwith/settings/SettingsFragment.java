@@ -1,7 +1,6 @@
 package com.tasomaniac.openwith.settings;
 
 import android.app.backup.BackupManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -39,7 +38,9 @@ public class SettingsFragment extends PreferenceFragmentCompat
         Preference.OnPreferenceClickListener {
 
     @Inject Analytics analytics;
-    @Inject @UsageAccess BooleanPreference usageAccessPref;
+    @Inject
+    @UsageAccess
+    BooleanPreference usageAccessPref;
 
     private PreferenceCategory usageStatsPreferenceCategory;
 
@@ -111,16 +112,8 @@ public class SettingsFragment extends PreferenceFragmentCompat
                 usageStatsPreference.setOnPreferenceClickListener(this);
 
                 //Set title and summary in red font.
-                usageStatsPreference.setTitle(
-                        coloredErrorString(
-                                getActivity(),
-                                getString(R.string.pref_title_usage_stats)
-                        ));
-                usageStatsPreference.setSummary(
-                        coloredErrorString(
-                                getActivity(),
-                                getString(R.string.pref_summary_usage_stats)
-                        ));
+                usageStatsPreference.setTitle(coloredErrorString(R.string.pref_title_usage_stats));
+                usageStatsPreference.setSummary(coloredErrorString(R.string.pref_summary_usage_stats));
                 usageStatsPreference.setWidgetLayoutResource(R.layout.preference_widget_error);
             }
         }
@@ -185,8 +178,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
     }
 
     private void displayLicensesDialogFragment() {
-        LicensesDialogFragment dialog = LicensesDialogFragment.newInstance();
-        dialog.show(getFragmentManager(), "LicensesDialog");
+        LicensesDialogFragment.newInstance().show(getFragmentManager(), "LicensesDialog");
     }
 
     private void startContactEmailChooser() {
@@ -206,11 +198,11 @@ public class SettingsFragment extends PreferenceFragmentCompat
         return findPreference(getString(keyResource));
     }
 
-    private static CharSequence coloredErrorString(Context context, CharSequence originalString) {
-        SpannableString errorSpan = new SpannableString(originalString);
+    private CharSequence coloredErrorString(@StringRes int stringRes) {
+        SpannableString errorSpan = new SpannableString(getString(stringRes));
         ForegroundColorSpan colorSpan = new ForegroundColorSpan(
-                ContextCompat.getColor(context, R.color.error_color));
-        errorSpan.setSpan(colorSpan, 0, originalString.length(), 0);
+                ContextCompat.getColor(getContext(), R.color.error_color));
+        errorSpan.setSpan(colorSpan, 0, errorSpan.length(), 0);
         return errorSpan;
     }
 }
