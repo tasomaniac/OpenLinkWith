@@ -1,6 +1,5 @@
 package com.tasomaniac.openwith.settings;
 
-import android.app.Activity;
 import android.app.backup.BackupManager;
 import android.content.Context;
 import android.content.Intent;
@@ -71,53 +70,8 @@ public class SettingsFragment extends PreferenceFragmentCompat
         findPreference(R.string.pref_key_contact).setOnPreferenceClickListener(this);
 
         if (BuildConfig.DEBUG) {
-            setupDebugPrefCategory();
+            DebugPreferences.setup(this);
         }
-    }
-
-    private void setupDebugPrefCategory() {
-        addPreferencesFromResource(R.xml.pref_debug);
-
-        setupDebugPreference(
-                getActivity(),
-                findPreference(R.string.pref_key_debug_amazon),
-                "http://www.amazon.com/Garmin-Speed-Cadence-Bike-Sensor/dp/B000BFNOT8"
-        );
-        setupDebugPreference(
-                getActivity(),
-                findPreference(R.string.pref_key_debug_maps),
-                "http://maps.google.com/maps"
-        );
-        setupDebugPreference(
-                getActivity(),
-                findPreference(R.string.pref_key_debug_hangouts),
-                "https://hangouts.google.com/hangouts/_/novoda.com/wormhole?authuser=tahsin@novoda.com"
-        );
-        setupDebugPreference(
-                getActivity(),
-                findPreference(R.string.pref_key_debug_play),
-                "https://play.google.com/store/apps/details?id=com.tasomaniac.openwith"
-        );
-        setupDebugPreference(
-                getActivity(),
-                findPreference(R.string.pref_key_debug_redirect),
-                "http://forward.immobilienscout24.de/9004STF/expose/78069302"
-        );
-        setupDebugPreference(
-                getActivity(),
-                findPreference(R.string.pref_key_debug_non_http),
-                "is24://retargetShowSearchForm"
-        );
-    }
-
-    private static void setupDebugPreference(Activity activity, Preference debugPreference, String debugPrefUrl) {
-        Intent intent = ShareCompat.IntentBuilder.from(activity)
-                .setText(debugPrefUrl)
-                .setType("text/plain")
-                .createChooserIntent();
-
-        debugPreference.setIntent(intent);
-        debugPreference.setSummary(debugPrefUrl);
     }
 
     @Override
