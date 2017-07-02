@@ -23,7 +23,7 @@ android {
 
     defaultConfig {
         applicationId 'com.tasomaniac.openwith'
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion rootProject.ext.compileSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
