@@ -37,15 +37,16 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+
     <activity
       android:name=".preferred.PreferredAppsActivity"
       android:label="@string/title_preferred_apps"
-      android:parentActivityName=".settings.SettingsActivity"
-      tools:ignore="UnusedAttribute">
-      <meta-data
-        android:name="android.support.PARENT_ACTIVITY"
-        android:value=".settings.SettingsActivity" />
-    </activity>
+      android:parentActivityName=".settings.SettingsActivity" />
+
+    <activity
+      android:name=".browser.PreferredBrowserActivity"
+      android:label="@string/title_browser"
+      android:parentActivityName=".settings.SettingsActivity" />
 
     <activity
       android:name=".intro.IntroActivity"
@@ -89,14 +90,14 @@
       android:name=".homescreen.AddToHomeScreen"
       android:configChanges="keyboardHidden|orientation|screenLayout"
       android:documentLaunchMode="never"
+      android:enabled="@bool/add_to_home_screen_enabled"
       android:excludeFromRecents="true"
       android:finishOnCloseSystemDialogs="true"
-      android:label="@string/add_to_homescreen"
       android:icon="@mipmap/ic_launcher_bookmark"
+      android:label="@string/add_to_homescreen"
       android:relinquishTaskIdentity="true"
       android:theme="@style/Theme.Transparent.NoAnimation"
       android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
-      android:enabled="@bool/add_to_home_screen_enabled"
       tools:targetApi="lollipop">
 
       <intent-filter android:label="@string/add_to_homescreen">

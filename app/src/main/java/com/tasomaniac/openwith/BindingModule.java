@@ -1,5 +1,6 @@
 package com.tasomaniac.openwith;
 
+import com.tasomaniac.openwith.browser.PreferredBrowserActivity;
 import com.tasomaniac.openwith.homescreen.AddToHomeScreen;
 import com.tasomaniac.openwith.homescreen.AddToHomeScreenDialogFragment;
 import com.tasomaniac.openwith.intro.IntroActivity;
@@ -33,6 +34,9 @@ interface BindingModule {
     PreferredAppsActivity preferredAppsActivity();
 
     @ContributesAndroidInjector
+    PreferredBrowserActivity preferredBrowserActivity();
+
+    @ContributesAndroidInjector
     SettingsActivity settingsActivity();
 
     @ContributesAndroidInjector(modules = SettingsModule.class)
@@ -46,4 +50,5 @@ interface BindingModule {
 
     @ContributesAndroidInjector
     ShareToOpenWith shareToOpenWith();
+
 }
