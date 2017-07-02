@@ -3,22 +3,16 @@ package com.tasomaniac.openwith.resolver;
 import android.app.Application;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ShareCompat;
 
 import com.tasomaniac.openwith.PerActivity;
-import com.tasomaniac.openwith.rx.SchedulingStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import dagger.Lazy;
 import dagger.Module;
 import dagger.Provides;
 
@@ -27,25 +21,9 @@ import static android.os.Build.VERSION_CODES.LOLLIPOP_MR1;
 import static com.tasomaniac.openwith.resolver.ResolverActivity.EXTRA_ADD_TO_HOME_SCREEN;
 
 @Module
-public class ResolverModule {
+public abstract class ResolverModule {
 
     private static final long USAGE_STATS_PERIOD = TimeUnit.DAYS.toMillis(14);
-
-    private final Intent sourceIntent;
-    @Nullable
-    private final ComponentName lastChosenComponent;
-    private final String callerPackage;
-
-    ResolverModule(ResolverActivity activity, Intent sourceIntent, @Nullable ComponentName lastChosenComponent) {
-        this.sourceIntent = sourceIntent;
-        this.lastChosenComponent = lastChosenComponent;
-        this.callerPackage = ShareCompat.getCallingPackage(activity);
-    }
-
-    @Provides
-    Intent intent() {
-        return sourceIntent;
-    }
 
     @Provides
     @PerActivity
@@ -54,7 +32,13 @@ public class ResolverModule {
     }
 
     @Provides
-    ResolverPresenter resolverPresenter(Application app, Resources resources, ChooserHistory history, IntentResolver intentResolver, ViewState viewState) {
+    static ResolverPresenter resolverPresenter(
+            Application app,
+            Resources resources,
+            Intent sourceIntent,
+            ChooserHistory history,
+            IntentResolver intentResolver,
+            ViewState viewState) {
         boolean isAddToHomeScreen = sourceIntent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
         if (isAddToHomeScreen) {
             return new HomeScreenResolverPresenter(resources, intentResolver);
@@ -63,18 +47,7 @@ public class ResolverModule {
     }
 
     @Provides
-    ResolveListGrouper resolveListGrouper(PackageManager packageManager) {
-        return new ResolveListGrouper(packageManager, lastChosenComponent);
-    }
-
-    @Provides
-    @PerActivity
-    IntentResolver intentResolver(PackageManager packageManager, Lazy<ResolverComparator> resolverComparator, SchedulingStrategy schedulingStrategy, ResolveListGrouper resolveListGrouper) {
-        return new IntentResolver(packageManager, resolverComparator, schedulingStrategy, sourceIntent, callerPackage, resolveListGrouper);
-    }
-
-    @Provides
-    ResolverComparator provideResolverComparator(Application app, ChooserHistory history) {
+    static ResolverComparator provideResolverComparator(Application app, ChooserHistory history, Intent sourceIntent) {
         return new ResolverComparator(
                 app.getPackageManager(),
                 history,

@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.support.annotation.Nullable;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -17,6 +18,7 @@ class ResolveListGrouper {
     boolean showExtended;
     @Nullable DisplayResolveInfo filteredItem;
 
+    @Inject
     ResolveListGrouper(PackageManager packageManager, @Nullable ComponentName lastChosenComponent) {
         this.packageManager = packageManager;
         this.lastChosenComponent = lastChosenComponent;

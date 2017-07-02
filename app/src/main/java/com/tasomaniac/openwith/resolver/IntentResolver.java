@@ -5,12 +5,13 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 
+import com.tasomaniac.openwith.PerActivity;
 import com.tasomaniac.openwith.rx.SchedulingStrategy;
 import com.tasomaniac.openwith.util.Intents;
 import com.tasomaniac.openwith.util.ResolverInfos;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,6 +22,7 @@ import io.reactivex.Observable;
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.M;
 
+@PerActivity
 class IntentResolver {
 
     private final PackageManager packageManager;
@@ -28,16 +30,17 @@ class IntentResolver {
     private final SchedulingStrategy schedulingStrategy;
     private final ResolveListGrouper resolveListGrouper;
     private final Intent sourceIntent;
-    private final String callerPackage;
+    private final CallerPackage callerPackage;
 
     @Nullable private Data data;
     private Listener listener = Listener.NO_OP;
 
+    @Inject
     IntentResolver(PackageManager packageManager,
                    Lazy<ResolverComparator> resolverComparator,
                    SchedulingStrategy schedulingStrategy,
                    Intent sourceIntent,
-                   String callerPackage,
+                   CallerPackage callerPackage,
                    ResolveListGrouper resolveListGrouper) {
         this.packageManager = packageManager;
         this.resolverComparator = resolverComparator;
@@ -83,10 +86,7 @@ class IntentResolver {
             addBrowsersToList(currentResolveList, browsers);
         }
 
-        //Remove the components from the caller
-        if (!TextUtils.isEmpty(callerPackage)) {
-            removePackageFromList(callerPackage, currentResolveList);
-        }
+        callerPackage.removeFrom(currentResolveList);
 
         List<DisplayResolveInfo> resolved = groupResolveList(currentResolveList);
         return new Data(resolved, resolveListGrouper.filteredItem, resolveListGrouper.showExtended);
@@ -100,16 +100,6 @@ class IntentResolver {
 
         Collections.sort(currentResolveList, resolverComparator.get());
         return resolveListGrouper.groupResolveList(currentResolveList);
-    }
-
-    private static void removePackageFromList(String packageName, List<ResolveInfo> list) {
-        List<ResolveInfo> remove = new ArrayList<>();
-        for (ResolveInfo info : list) {
-            if (info.activityInfo.packageName.equals(packageName)) {
-                remove.add(info);
-            }
-        }
-        list.removeAll(remove);
     }
 
     private void addBrowsersToList(List<ResolveInfo> list, List<ResolveInfo> browsers) {

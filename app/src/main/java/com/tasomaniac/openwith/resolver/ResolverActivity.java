@@ -252,7 +252,9 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
         App app = (App) getApplicationContext();
         return app.applicationInjector()
                 .resolverComponentBuilder()
-                .resolverModule(new ResolverModule(this, sourceIntent, preferredResolver.lastChosenComponent()))
+                .callerPackage(CallerPackage.from(this))
+                .sourceIntent(sourceIntent)
+                .lastChosenComponent(preferredResolver.lastChosenComponent())
                 .build();
     }
 
