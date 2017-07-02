@@ -24,11 +24,6 @@ public interface AppComponent extends AndroidInjector<App> {
     @Component.Builder
     abstract class Builder extends AndroidInjector.Builder<App> {
 
-        public final AppComponent build(App instance) {
-            seedInstance(instance);
-            return build();
-        }
-
         @Override
         public abstract AppComponent build();
     }

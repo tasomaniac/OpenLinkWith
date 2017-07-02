@@ -78,14 +78,13 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getComponent().inject(this);
-        presenter.bind(this, new ResolverNavigation(this));
         registerPackageMonitor();
     }
 
     @Override
-    protected void onDestroy() {
-        presenter.unbind(this);
-        super.onDestroy();
+    protected void onStart() {
+        presenter.bind(this, new ResolverNavigation(this));
+        super.onStart();
     }
 
     @Override
@@ -161,29 +160,20 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
 
     @Override
     protected void onStop() {
-        super.onStop();
+        presenter.unbind(this);
         if (packageMonitorRegistered) {
             packageMonitor.unregister();
             packageMonitorRegistered = false;
         }
-        if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_NEW_TASK) != 0) {
-            // This resolver is in the unusual situation where it has been
-            // launched at the top of a new task.  We don't let it be added
-            // to the recent tasks shown to the user, and we need to make sure
-            // that each time we are launched we get the correct launching
-            // uid (not re-using the same resolver from an old launching uid),
-            // so we will now finish ourselves since being no longer visible,
-            // the user probably can't get back to us.
-            if (!isChangingConfigurations()) {
-                finish();
-            }
+        if (!isChangingConfigurations()) {
+            presenter.release();
         }
+        super.onStop();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
         outState.putInt(KEY_CHECKED_POS, adapter.getCheckedItemPosition());
     }
 
@@ -250,7 +240,7 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
             }
         }
         App app = (App) getApplicationContext();
-        return app.applicationInjector()
+        return app.component()
                 .resolverComponentBuilder()
                 .callerPackage(CallerPackage.from(this))
                 .sourceIntent(sourceIntent)

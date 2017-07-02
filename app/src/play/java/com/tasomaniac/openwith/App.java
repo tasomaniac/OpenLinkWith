@@ -10,6 +10,8 @@ import timber.log.Timber;
 
 public class App extends DaggerApplication {
 
+    private AppComponent component;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -23,8 +25,13 @@ public class App extends DaggerApplication {
     }
 
     @Override
-    public AppComponent applicationInjector() {
-        return DaggerAppComponent.builder().build(this);
+    protected AppComponent applicationInjector() {
+        component = (AppComponent) DaggerAppComponent.builder().create(this);
+        return component;
+    }
+
+    public AppComponent component() {
+        return component;
     }
 
     /**

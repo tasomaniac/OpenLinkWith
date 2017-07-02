@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.M;
@@ -32,6 +33,7 @@ class IntentResolver {
 
     @Nullable private Data data;
     private Listener listener = Listener.NO_OP;
+    private Disposable disposable;
 
     @Inject
     IntentResolver(PackageManager packageManager,
@@ -65,12 +67,16 @@ class IntentResolver {
     }
 
     void resolve() {
-        Observable.fromCallable(this::doResolve)
+        disposable = Observable.fromCallable(this::doResolve)
                 .compose(schedulingStrategy.apply())
                 .subscribe(data -> {
                     this.data = data;
                     listener.onIntentResolved(data);
                 });
+    }
+
+    void release() {
+        disposable.dispose();
     }
 
     private Data doResolve() {

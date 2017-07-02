@@ -5,4 +5,6 @@ interface ResolverPresenter {
     void bind(ResolverView view, ResolverView.Navigation navigation);
 
     void unbind(ResolverView view);
+
+    void release();
 }

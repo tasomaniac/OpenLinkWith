@@ -29,6 +29,11 @@ class HomeScreenResolverPresenter implements ResolverPresenter {
         intentResolver.unbind();
     }
 
+    @Override
+    public void release() {
+        intentResolver.release();
+    }
+
     private class IntentResolverListener implements IntentResolver.Listener {
 
         private final ResolverView view;
@@ -53,7 +58,7 @@ class HomeScreenResolverPresenter implements ResolverPresenter {
 
     }
 
-    private class ViewListener implements ResolverView.Listener {
+    private static class ViewListener implements ResolverView.Listener {
 
         private final IntentResolver intentResolver;
         private final ResolverView view;

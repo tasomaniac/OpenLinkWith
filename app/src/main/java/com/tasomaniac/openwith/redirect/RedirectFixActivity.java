@@ -17,6 +17,7 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerAppCompatActivity;
 import io.reactivex.Single;
+import io.reactivex.disposables.Disposable;
 
 import static com.tasomaniac.openwith.util.Urls.fixUrls;
 
@@ -25,6 +26,7 @@ public class RedirectFixActivity extends DaggerAppCompatActivity {
     @Inject BrowserIntentChecker browserIntentChecker;
     @Inject RedirectFixer redirectFixer;
     @Inject SchedulingStrategy schedulingStrategy;
+    private Disposable disposable;
 
     public static Intent createIntent(Context context, String foundUrl) {
         return new Intent(context, RedirectFixActivity.class)
@@ -41,7 +43,7 @@ public class RedirectFixActivity extends DaggerAppCompatActivity {
         progress.show(true);
 
         Intent source = getIntent().setComponent(null);
-        Single.just(source)
+        disposable = Single.just(source)
                 .filter(browserIntentChecker::hasOnlyBrowsers)
                 .flatMap(intent -> redirectFixer.followRedirects(intent).toMaybe())
                 .defaultIfEmpty(source)
@@ -50,5 +52,11 @@ public class RedirectFixActivity extends DaggerAppCompatActivity {
                     startActivity(intent.setComponent(new ComponentName(this, ResolverActivity.class)));
                     finish();
                 });
+    }
+
+    @Override
+    protected void onDestroy() {
+        disposable.dispose();
+        super.onDestroy();
     }
 }

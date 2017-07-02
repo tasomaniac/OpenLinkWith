@@ -380,7 +380,7 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
                 }
             }
             mCollapseOffset = newPos;
-            mTopOffset += dy;
+            mTopOffset += (int) dy;
             ViewCompat.postInvalidateOnAnimation(this);
             return dy;
         }
@@ -427,7 +427,7 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
 
     private static float distanceInfluenceForSnapDuration(float f) {
         f -= 0.5f; // center the values about 0.
-        f *= 0.3f * Math.PI / 2.0f;
+        f *= 0.3f * (float) Math.PI / 2.0f;
         return (float) Math.sin(f);
     }
 
@@ -712,7 +712,7 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
 
             int top = ypos + lp.topMargin;
             if (lp.ignoreOffset) {
-                top -= mCollapseOffset;
+                top -= (int) mCollapseOffset;
             }
             final int bottom = top + child.getMeasuredHeight();
 

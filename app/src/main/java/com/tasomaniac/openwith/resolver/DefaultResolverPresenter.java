@@ -44,6 +44,11 @@ class DefaultResolverPresenter implements ResolverPresenter {
         intentResolver.unbind();
     }
 
+    @Override
+    public void release() {
+        intentResolver.release();
+    }
+
     private class IntentResolverListener implements IntentResolver.Listener {
 
         private final ResolverView view;
