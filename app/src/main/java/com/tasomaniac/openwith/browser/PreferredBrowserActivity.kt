@@ -14,6 +14,8 @@ import com.tasomaniac.openwith.resolver.DisplayResolveInfo
 import com.tasomaniac.openwith.resolver.ItemClickListener
 import com.tasomaniac.openwith.resolver.ResolveListAdapter
 import dagger.android.support.DaggerAppCompatActivity
+import io.reactivex.disposables.Disposable
+import io.reactivex.disposables.Disposables
 import javax.inject.Inject
 
 class PreferredBrowserActivity : DaggerAppCompatActivity(), ItemClickListener {
@@ -24,6 +26,8 @@ class PreferredBrowserActivity : DaggerAppCompatActivity(), ItemClickListener {
 
     @BindView(R.id.recycler_view) lateinit var recyclerView: RecyclerView
 
+    var disposable: Disposable = Disposables.empty()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_preferred_apps)
@@ -31,8 +35,7 @@ class PreferredBrowserActivity : DaggerAppCompatActivity(), ItemClickListener {
 
         analytics.sendScreenView("Browser Apps")
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(findViewById<Toolbar>(R.id.toolbar))
         supportActionBar.setDisplayHomeAsUpEnabled(true)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -40,14 +43,16 @@ class PreferredBrowserActivity : DaggerAppCompatActivity(), ItemClickListener {
         adapter.setItemClickListener(this)
         recyclerView.adapter = BrowsersAdapter(adapter)
 
-        adapter.setApplications(browserResolver.doResolve().resolved)
+        disposable = browserResolver.resolve()
+                .subscribe(adapter::setApplications)
     }
 
     override fun onDestroy() {
+        disposable.dispose()
         adapter.setItemClickListener(null)
         super.onDestroy()
     }
-    
+
     override fun onItemClick(dri: DisplayResolveInfo) {
         TODO("not implemented")
     }
