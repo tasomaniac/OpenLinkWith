@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 /*
 * Copyright 2012, The Android Open Source Project
 *
@@ -16,15 +15,16 @@
 * limitations under the License.
 */
 -->
-<com.tasomaniac.openwith.resolver.ResolverDrawerLayout
-  android:id="@+id/contentPanel"
-  xmlns:android="http://schemas.android.com/apk/res/android"
+<com.tasomaniac.openwith.resolver.ResolverDrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/contentPanel"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   app:maxCollapsedHeight="192dp"
   app:maxCollapsedHeightSmall="56dp"
-  app:resolverMaxWidth="@dimen/resolver_max_width">
+  app:resolverMaxWidth="@dimen/resolver_max_width"
+  tools:targetApi="lollipop">
 
   <LinearLayout
     android:layout_width="match_parent"
@@ -41,10 +41,10 @@
       android:gravity="start|center_vertical"
       android:minHeight="56dp"
       android:paddingBottom="8dp"
-      android:paddingLeft="?attr/listPreferredItemPaddingLeft"
-      android:paddingRight="?attr/listPreferredItemPaddingRight"
+      android:paddingEnd="?attr/listPreferredItemPaddingRight"
+      android:paddingStart="?attr/listPreferredItemPaddingLeft"
       android:paddingTop="8dp"
-      android:textAppearance="?android:attr/textAppearanceMedium"/>
+      android:textAppearance="?android:attr/textAppearanceMedium" />
   </LinearLayout>
 
   <android.support.v7.widget.RecyclerView
@@ -55,7 +55,7 @@
     android:clipToPadding="false"
     android:divider="@null"
     android:elevation="8dp"
-    android:scrollbarStyle="outsideOverlay"/>
+    android:scrollbarStyle="outsideOverlay" />
 
   <LinearLayout
     android:id="@+id/button_bar"
@@ -85,7 +85,7 @@
       android:maxLines="2"
       android:minHeight="@dimen/alert_dialog_button_bar_height"
       android:onClick="onButtonClick"
-      android:text="@string/activity_resolver_use_once"/>
+      android:text="@string/activity_resolver_use_once" />
 
     <Button
       android:id="@+id/button_always"
@@ -97,7 +97,7 @@
       android:maxLines="2"
       android:minHeight="@dimen/alert_dialog_button_bar_height"
       android:onClick="onButtonClick"
-      android:text="@string/activity_resolver_use_always"/>
+      android:text="@string/activity_resolver_use_always" />
   </LinearLayout>
 
 </com.tasomaniac.openwith.resolver.ResolverDrawerLayout>

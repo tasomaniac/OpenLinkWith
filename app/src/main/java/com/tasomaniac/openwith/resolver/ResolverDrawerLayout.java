@@ -22,12 +22,9 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.NestedScrollingParent;
 import android.support.v4.view.NestedScrollingParentHelper;
-import android.support.v4.view.VelocityTrackerCompat;
 import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.ScrollerCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -41,6 +38,7 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
+import android.widget.OverScroller;
 
 import com.tasomaniac.openwith.R;
 
@@ -82,7 +80,7 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
     private boolean mDismissOnScrollerFinished;
     private final int mTouchSlop;
     private final float mMinFlingVelocity;
-    private final ScrollerCompat mScroller;
+    private final OverScroller mScroller;
     private final VelocityTracker mVelocityTracker;
 
     private OnDismissedListener mOnDismissedListener;
@@ -127,8 +125,7 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
 
         mParentHelper = new NestedScrollingParentHelper(this);
 
-        //noinspection ResourceType
-        mScroller = ScrollerCompat.create(context, AnimationUtils.loadInterpolator(context,
+        mScroller = new OverScroller(context, AnimationUtils.loadInterpolator(context,
                 android.R.interpolator.decelerate_quint));
         mVelocityTracker = VelocityTracker.obtain();
 
@@ -164,7 +161,7 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        final int action = MotionEventCompat.getActionMasked(ev);
+        final int action = ev.getActionMasked();
 
         if (action == MotionEvent.ACTION_DOWN) {
             mVelocityTracker.clear();
@@ -215,8 +212,9 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
     }
 
     @Override
+    @SuppressLint("ClickableViewAccessibility")
     public boolean onTouchEvent(MotionEvent ev) {
-        final int action = MotionEventCompat.getActionMasked(ev);
+        final int action = ev.getActionMasked();
 
         mVelocityTracker.addMovement(ev);
 
@@ -263,7 +261,7 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
             break;
 
             case MotionEvent.ACTION_POINTER_DOWN: {
-                final int pointerIndex = MotionEventCompat.getActionIndex(ev);
+                final int pointerIndex = ev.getActionIndex();
 
                 mActivePointerId = ev.getPointerId(pointerIndex);
                 mInitialTouchX = ev.getX(pointerIndex);
@@ -293,7 +291,7 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
                     return true;
                 }
                 mVelocityTracker.computeCurrentVelocity(1000);
-                final float yvel = VelocityTrackerCompat.getYVelocity(mVelocityTracker, mActivePointerId);
+                final float yvel = mVelocityTracker.getYVelocity(mActivePointerId);
                 if (Math.abs(yvel) > mMinFlingVelocity) {
                     if (mOnDismissedListener != null
                             && yvel > 0 && mCollapseOffset > mCollapsibleHeight) {
@@ -324,7 +322,7 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
     }
 
     private void onSecondaryPointerUp(MotionEvent ev) {
-        final int pointerIndex = MotionEventCompat.getActionIndex(ev);
+        final int pointerIndex = ev.getActionIndex();
 
         final int pointerId = ev.getPointerId(pointerIndex);
         if (pointerId == mActivePointerId) {
@@ -462,7 +460,7 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
             }
             v = v instanceof ViewGroup ? findChildUnder((ViewGroup) v, x, y) : null;
         }
-        return v;
+        return null;
     }
 
     /**
@@ -651,7 +649,7 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
 
         final int widthSpec = MeasureSpec.makeMeasureSpec(widthSize, MeasureSpec.EXACTLY);
         final int heightSpec = MeasureSpec.makeMeasureSpec(heightSize, MeasureSpec.EXACTLY);
-        final int widthPadding = getPaddingLeft() + getPaddingRight();
+        final int widthPadding = getPaddingStart() + getPaddingEnd();
         int heightUsed = getPaddingTop() + getPaddingBottom();
 
         // Measure always-show children first.
@@ -698,8 +696,8 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
         final int width = getWidth();
 
         int ypos = mTopOffset;
-        int leftEdge = getPaddingLeft();
-        int rightEdge = width - getPaddingRight();
+        int leftEdge = getPaddingStart();
+        int rightEdge = width - getPaddingEnd();
 
         final int childCount = getChildCount();
         for (int i = 0; i < childCount; i++) {
@@ -769,12 +767,12 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
             super(c, attrs);
 
             final TypedArray a = c.obtainStyledAttributes(attrs,
-                    R.styleable.ResolverDrawerLayout_LayoutParams);
+                    R.styleable.ResolverDrawerLayout_Layout);
             alwaysShow = a.getBoolean(
-                    R.styleable.ResolverDrawerLayout_LayoutParams_layout_alwaysShow,
+                    R.styleable.ResolverDrawerLayout_Layout_layout_alwaysShow,
                     false);
             ignoreOffset = a.getBoolean(
-                    R.styleable.ResolverDrawerLayout_LayoutParams_layout_ignoreOffset,
+                    R.styleable.ResolverDrawerLayout_Layout_layout_ignoreOffset,
                     false);
             a.recycle();
         }

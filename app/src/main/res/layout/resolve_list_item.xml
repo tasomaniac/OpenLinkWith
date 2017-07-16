@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 /* //device/apps/common/res/any/layout/resolve_list_item.xml
 **
 ** Copyright 2006, The Android Open Source Project
@@ -18,14 +17,14 @@
 */
 -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-   android:layout_height="wrap_content"
-   android:minHeight="?attr/listPreferredItemHeightSmall"
-   android:foreground="?selectableItemBackground"
-   android:background="?android:attr/activatedBackgroundIndicator"
-   android:paddingBottom="4dp"
-   android:paddingTop="4dp">
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:background="?android:attr/activatedBackgroundIndicator"
+  android:foreground="?selectableItemBackground"
+  android:minHeight="?attr/listPreferredItemHeightSmall"
+  android:paddingBottom="4dp"
+  android:paddingTop="4dp">
 
   <LinearLayout
     android:layout_width="match_parent"
@@ -42,18 +41,19 @@
       android:layout_height="24dp"
       android:layout_gravity="start|center_vertical"
       android:layout_marginBottom="12dp"
-      android:layout_marginLeft="?attr/listPreferredItemPaddingLeft"
+      android:layout_marginStart="?attr/listPreferredItemPaddingLeft"
       android:layout_marginTop="12dp"
-      android:scaleType="fitCenter"
-      android:contentDescription="@null"/>
+      android:contentDescription="@null"
+      android:scaleType="fitCenter" />
 
-    <LinearLayout android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_gravity="start|center_vertical"
-                  android:gravity="start|center_vertical"
-                  android:orientation="vertical"
-                  android:paddingLeft="?attr/listPreferredItemPaddingLeft"
-                  android:paddingRight="?attr/listPreferredItemPaddingRight">
+    <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="start|center_vertical"
+      android:gravity="start|center_vertical"
+      android:orientation="vertical"
+      android:paddingStart="?attr/listPreferredItemPaddingLeft"
+      android:paddingEnd="?attr/listPreferredItemPaddingRight">
       <!-- Activity name -->
       <TextView
         android:id="@+id/text1"
@@ -62,7 +62,7 @@
         android:ellipsize="marquee"
         android:singleLine="true"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="?android:attr/textColorPrimary"/>
+        android:textColor="?android:attr/textColorPrimary" />
       <!-- Extended activity info to distinguish between duplicate activity names -->
       <TextView
         android:id="@+id/text2"
@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:ellipsize="marquee"
         android:singleLine="true"
-        android:textAppearance="?android:attr/textAppearanceSmall"/>
+        android:textAppearance="?android:attr/textAppearanceSmall" />
     </LinearLayout>
   </LinearLayout>
 </FrameLayout>

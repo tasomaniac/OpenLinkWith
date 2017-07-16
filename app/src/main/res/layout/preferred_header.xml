@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 /*
  * Copyright 2014, The Android Open Source Project
  *
@@ -16,16 +15,14 @@
  * limitations under the License.
  */
 -->
-<TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/text1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/desc_preferred"
-    android:textAppearance="?android:attr/textAppearanceSmall"
-    android:gravity="start|center_vertical"
-    android:paddingLeft="?attr/listPreferredItemPaddingLeft"
-    android:paddingRight="?attr/listPreferredItemPaddingRight"
-    android:paddingTop="@dimen/content_padding"
-    android:paddingBottom="@dimen/content_padding"
-    />
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/text1"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:gravity="start|center_vertical"
+  android:paddingBottom="@dimen/content_padding"
+  android:paddingEnd="?attr/listPreferredItemPaddingRight"
+  android:paddingStart="?attr/listPreferredItemPaddingLeft"
+  android:paddingTop="@dimen/content_padding"
+  android:text="@string/desc_preferred"
+  android:textAppearance="?android:attr/textAppearanceSmall" />

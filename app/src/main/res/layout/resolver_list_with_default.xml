@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 /*
 * Copyright 2014, The Android Open Source Project
 *
@@ -16,15 +15,15 @@
 * limitations under the License.
 */
 -->
-<com.tasomaniac.openwith.resolver.ResolverDrawerLayout
-  android:id="@+id/contentPanel"
-  xmlns:android="http://schemas.android.com/apk/res/android"
+<com.tasomaniac.openwith.resolver.ResolverDrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/contentPanel"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   app:maxCollapsedHeight="144dp"
   app:resolverMaxWidth="@dimen/resolver_max_width"
-  >
+  tools:targetApi="lollipop">
 
   <LinearLayout
     android:layout_width="match_parent"
@@ -44,20 +43,20 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_gravity="start|top"
-        android:layout_marginLeft="?attr/listPreferredItemPaddingLeft"
+        android:layout_marginStart="?attr/listPreferredItemPaddingLeft"
         android:layout_marginTop="20dp"
-        android:scaleType="fitCenter"
-        android:contentDescription="@null"/>
+        android:contentDescription="@null"
+        android:scaleType="fitCenter" />
 
       <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="?attr/listPreferredItemHeight"
-        android:layout_marginLeft="?attr/listPreferredItemPaddingLeft"
-        android:layout_marginRight="?attr/listPreferredItemPaddingLeft"
+        android:layout_marginStart="?attr/listPreferredItemPaddingLeft"
+        android:layout_marginEnd="?attr/listPreferredItemPaddingLeft"
         android:layout_weight="1"
         android:gravity="start|center_vertical"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
 
     <LinearLayout
@@ -85,7 +84,7 @@
         android:maxLines="2"
         android:minHeight="@dimen/alert_dialog_button_bar_height"
         android:onClick="onButtonClick"
-        android:text="@string/activity_resolver_use_once"/>
+        android:text="@string/activity_resolver_use_once" />
 
       <Button
         android:id="@+id/button_always"
@@ -96,13 +95,13 @@
         android:maxLines="2"
         android:minHeight="@dimen/alert_dialog_button_bar_height"
         android:onClick="onButtonClick"
-        android:text="@string/activity_resolver_use_always"/>
+        android:text="@string/activity_resolver_use_always" />
     </LinearLayout>
 
     <View
       android:layout_width="match_parent"
       android:layout_height="1dp"
-      android:background="?attr/dividerVertical"/>
+      android:background="?attr/dividerVertical" />
   </LinearLayout>
 
   <android.support.v7.widget.RecyclerView
@@ -113,7 +112,6 @@
     android:clipToPadding="false"
     android:divider="@null"
     android:elevation="8dp"
-    android:scrollbarStyle="outsideOverlay"
-    />
+    android:scrollbarStyle="outsideOverlay" />
 
 </com.tasomaniac.openwith.resolver.ResolverDrawerLayout>

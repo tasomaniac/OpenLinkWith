@@ -77,6 +77,7 @@ android {
         textOutput 'stdout'
 
         fatal 'UnusedResources'
+        fatal 'RtlHardcoded'
         warning 'InvalidPackage'
     }
 }

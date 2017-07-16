@@ -1,5 +1,6 @@
 package com.tasomaniac.openwith.intro;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -52,6 +53,7 @@ public class AppIntroViewPager extends ViewPager {
     }
 
     @Override
+    @SuppressLint("ClickableViewAccessibility")
     public boolean onTouchEvent(MotionEvent event) {
         return !checkPagingState(event) && super.onTouchEvent(event);
 
