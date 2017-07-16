@@ -9,11 +9,11 @@ import com.tasomaniac.openwith.util.Intents;
 
 import timber.log.Timber;
 
-public class ResolverNavigation implements ResolverView.Navigation {
+class ResolverNavigation implements ResolverView.Navigation {
 
     private final Activity activity;
 
-    public ResolverNavigation(Activity activity) {
+    ResolverNavigation(Activity activity) {
         this.activity = activity;
     }
 
