@@ -4,7 +4,6 @@ plugins {
 apply plugin: 'com.android.application'
 apply plugin: 'com.novoda.android-command'
 apply plugin: 'com.novoda.build-properties'
-apply plugin: 'com.jakewharton.hugo'
 apply plugin: 'com.github.triplet.play'
 apply plugin: 'io.fabric'
 
