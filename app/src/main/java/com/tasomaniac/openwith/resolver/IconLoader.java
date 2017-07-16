@@ -32,7 +32,6 @@ public class IconLoader {
         return ri.loadIcon(packageManager);
     }
 
-    @SuppressWarnings("deprecation")
     private Drawable getIcon(String packageName, int resId) throws PackageManager.NameNotFoundException {
         Resources res = packageManager.getResourcesForApplication(packageName);
         return res.getDrawableForDensity(resId, iconDpi);
