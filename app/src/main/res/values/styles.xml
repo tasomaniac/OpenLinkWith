@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <style name="Base.Theme.OpenWith" parent="Theme.AppCompat.Light.NoActionBar">
+  <style name="Theme.OpenWith" parent="Theme.AppCompat.Light.NoActionBar">
     <item name="colorPrimary">@color/theme_primary</item>
     <item name="colorPrimaryDark">@color/theme_primary_dark</item>
     <item name="colorAccent">@color/theme_accent</item>
 
     <item name="preferenceTheme">@style/PreferenceThemeOverlay.OpenWith</item>
+    <item name="android:listPreferredItemPaddingStart">?listPreferredItemPaddingLeft</item>
+    <item name="android:listPreferredItemPaddingEnd">?listPreferredItemPaddingRight</item>
   </style>
-
-  <style name="Theme.OpenWith" parent="Base.Theme.OpenWith"/>
 
   <style name="Theme.OpenWith.Intro" parent="Theme.OpenWith">
     <item name="android:windowBackground">@color/theme_primary</item>
@@ -35,6 +35,8 @@
     <item name="android:windowBackground">@android:color/transparent</item>
     <item name="android:backgroundDimEnabled">true</item>
     <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowTranslucentStatus">false</item>
+    <item name="android:windowTranslucentNavigation">false</item>
     <item name="listPreferredItemPaddingLeft">?attr/dialogPreferredPadding</item>
     <item name="listPreferredItemPaddingRight">?attr/dialogPreferredPadding</item>
     <item name="colorControlActivated">?attr/colorControlHighlight</item>

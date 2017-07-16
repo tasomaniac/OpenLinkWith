@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <style name="Theme.OpenWith" parent="Base.Theme.OpenWith">
-        <item name="android:listPreferredItemPaddingStart">?listPreferredItemPaddingLeft</item>
-        <item name="android:listPreferredItemPaddingEnd">?listPreferredItemPaddingRight</item>
-    </style>
-</resources>
