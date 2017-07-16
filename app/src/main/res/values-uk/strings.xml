@@ -51,8 +51,9 @@
 ]]></string>
   <string name="usage_access_give_access">Надати доступ</string>
   <string name="error">Помилка</string>
+  <string name="next">Далі</string>
   <string name="error_usage_access_not_found">Використання параметрів доступу не може бути open.\n\n Ви можете отримати до нього доступ, перейшовши в Налаштування -&gt; Безпека</string>
-  <string name="error_cannot_start_activity">Failed to open the link with selected app. Try again later.</string>
+  <string name="error_cannot_start_activity">Не вдалося відкрити посилання з обраного додатку. Спробуйте ще раз.</string>
   <string name="add_to_homescreen">Додати на Домашній екран</string>
   <string name="add">Додати</string>
   <string name="cancel">Завершити</string>

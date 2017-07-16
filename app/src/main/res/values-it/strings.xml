@@ -52,6 +52,7 @@ Dammi l\'accesso a <strong>ACCESSO A DATI DI UTILIZZO</strong> e lavorerò megli
   ]]></string>
   <string name="usage_access_give_access">Garantisci l\'accesso</string>
   <string name="error">Errore</string>
+  <string name="next">Prossimo</string>
   <string name="error_usage_access_not_found">Impostazioni di accesso a dati di utilizzo non trovate.\n\nPotrai accedervi entrando in Impostazioni -&gt; Sicurezza</string>
   <string name="error_cannot_start_activity">Failed to open the link with selected app. Try again later.</string>
   <string name="add_to_homescreen">Aggiungi alla home</string>

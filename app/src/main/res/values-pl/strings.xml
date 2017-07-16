@@ -50,6 +50,7 @@ Naciśnij przycisk <strong>ZAWSZE</strong>, a ja zapamiętam Twój wybór i zaws
 Aby aplikacja działała poprawnie, potrzebuje <strong>DOSTĘPU DO UŻYCIA</strong>. Automatycznie wykryję z jakiej korzystasz przeglądarki i ustawię odpowiednie funkcje.  ]]></string>
   <string name="usage_access_give_access">Zapewnić Dostęp</string>
   <string name="error">Błąd</string>
+  <string name="next">Dalej</string>
   <string name="error_usage_access_not_found">Aby nasza aplikacja mogła poprawnie działać musisz przypisać jej tzw. prawo do użycia.\n\nMożesz to zrobić wchodząc w Ustawienia -&gt; Bezpieczeństwo</string>
   <string name="error_cannot_start_activity">Failed to open the link with selected app. Try again later.</string>
   <string name="add_to_homescreen">Dodaj do ekranu głównego</string>

@@ -50,6 +50,7 @@ Selecione <strong>sempre</strong> para abrir essa ligação com um aplicação e
 Dê acesso a <strong>Acesso de utilização</strong> e irei trabalhar melhor. Vou detectar o navegador que está a usar para agir em conformidade.  ]]></string>
   <string name="usage_access_give_access">Conceder acesso</string>
   <string name="error">Erro</string>
+  <string name="next">Seguinte</string>
   <string name="error_usage_access_not_found">Configurações de Acesso de utilização não encontradas.\n\nPode ter acesso indo a Configurações -&gt; Segurança</string>
   <string name="add_to_homescreen">Add To Home screen</string>
   <string name="error_cannot_start_activity">Failed to open the link with selected app. Try again later.</string>

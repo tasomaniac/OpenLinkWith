@@ -50,6 +50,7 @@ Selecciona <strong>SIEMPRE</strong> para decirme que abra este enlace siempre co
 Dar acceso a <strong>ACCESO DE USO</strong> y funcionaré mejor. Detectaré el navegador desde el cual estas compartiendo y actuaré en consecuencia.  ]]></string>
   <string name="usage_access_give_access">Dar acceso</string>
   <string name="error">Error</string>
+  <string name="next">Siguiente</string>
   <string name="error_usage_access_not_found">El Ajuste de Acceso de Uso no se puede encontrar.\n\nYou may access it by going into Settings -&gt; Security</string>
   <string name="add_to_homescreen">Add To Home screen</string>
   <string name="error_cannot_start_activity">Failed to open the link with selected app. Try again later.</string>
