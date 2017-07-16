@@ -13,6 +13,10 @@
       android:title="@string/pref_title_debug_maps" />
 
     <Preference
+      android:key="@string/pref_key_debug_instagram"
+      android:title="@string/pref_title_debug_instagram" />
+
+    <Preference
       android:key="@string/pref_key_debug_hangouts"
       android:title="@string/pref_title_debug_hangouts" />
 

@@ -8,6 +8,9 @@
   <string name="pref_key_debug_maps" translatable="false">pref_debug_maps</string>
   <string name="pref_title_debug_maps" translatable="false">Maps Intent</string>
 
+  <string name="pref_key_debug_instagram" translatable="false">pref_debug_instagram</string>
+  <string name="pref_title_debug_instagram" translatable="false">Instagram Intent</string>
+
   <string name="pref_key_debug_hangouts" translatable="false">pref_debug_hangouts</string>
   <string name="pref_title_debug_hangouts" translatable="false">Hangouts Intent</string>
 

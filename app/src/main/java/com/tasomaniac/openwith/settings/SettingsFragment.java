@@ -71,7 +71,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
         findPreference(R.string.pref_key_contact).setOnPreferenceClickListener(this);
 
         if (BuildConfig.DEBUG) {
-            DebugPreferences.setup(this);
+            new DebugPreferences(this).setup();
         }
     }
 
