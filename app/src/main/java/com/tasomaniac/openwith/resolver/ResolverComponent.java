@@ -7,14 +7,12 @@ import android.support.annotation.Nullable;
 import com.tasomaniac.openwith.PerActivity;
 
 import dagger.BindsInstance;
+import dagger.MembersInjector;
 import dagger.Subcomponent;
 
 @PerActivity
 @Subcomponent(modules = ResolverModule.class)
-public interface ResolverComponent {
-    void inject(ResolverActivity activity);
-
-    void inject(ResolveListAdapter adapter);
+public interface ResolverComponent extends MembersInjector<ResolverActivity> {
 
     @Subcomponent.Builder
     interface Builder {

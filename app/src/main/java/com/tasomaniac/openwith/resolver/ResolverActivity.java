@@ -77,7 +77,7 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getComponent().inject(this);
+        getComponent().injectMembers(this);
         registerPackageMonitor();
     }
 
