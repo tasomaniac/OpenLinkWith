@@ -1,11 +1,9 @@
-plugins {
-    id 'net.ltgt.errorprone' version '0.0.10'
-}
 apply plugin: 'com.android.application'
 apply plugin: 'com.novoda.android-command'
 apply plugin: 'com.novoda.build-properties'
 apply plugin: 'com.github.triplet.play'
 apply plugin: 'io.fabric'
+apply plugin: 'net.ltgt.errorprone'
 
 def signingFile = file('props/release.signing')
 buildProperties {
