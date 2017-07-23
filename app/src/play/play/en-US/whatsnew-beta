@@ -4,10 +4,6 @@ Please send bugs and problems using <strong>Contact Me</strong> option in the ap
 Help translate the app into your language:
 https://crowdin.com/project/open-link-with
 
-v1.4.3
-- Some minor bugs fixed
-- Translation updates
-
-v1.4
-- New feature: We now automatically follow shortened links (e.g bit.ly t.co goo.gl) and figure out what apps we can use to open the link with.
-- French translation
+v1.5
+- Maintenance update
+- Translation are updated
