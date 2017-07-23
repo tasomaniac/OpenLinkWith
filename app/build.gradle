@@ -74,9 +74,9 @@ android {
         textReport true
         textOutput 'stdout'
 
-        fatal 'UnusedResources'
-        fatal 'RtlHardcoded'
-        warning 'InvalidPackage'
+        lintConfig file('props/lint.xml')
+        // We run a full lint analysis as build part in CI, so skip vital checks for assemble tasks.
+        checkReleaseBuilds false
     }
 }
 
