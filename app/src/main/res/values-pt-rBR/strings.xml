@@ -49,7 +49,7 @@ Remover <strong>%1$s</strong> como aplicativo preferencial para abrir links de <
   <string name="description_tutorial_4"><![CDATA[
 <strong>Adicione à tela inicial</strong> para acessar rapidamente os seus links favoritos com seus apps favoritos.  ]]></string>
   <string name="description_tutorial_5"><![CDATA[
-Dê permissão ao <strong>ACESSO DE USO</strong> e eu vou funcionar melhor. Vou saber de qual navegador você está compartilhando para executar a ação certa.  ]]></string>
+Dê permissão ao <strong>ACESSO DE USO</strong> e eu vou funcionar melhor. Vou detectar de qual navegador você está compartilhando para executar a ação certa.  ]]></string>
   <string name="usage_access_give_access">Permitir Acesso</string>
   <string name="error">Erro</string>
   <string name="next">Seguinte</string>
