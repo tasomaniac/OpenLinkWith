@@ -87,7 +87,7 @@ play {
 }
 
 dependencies {
-    def supportLibVersion = '26.0.0-beta2'
+    def supportLibVersion = '26.0.0'
     def schematicVersion = '0.7.0'
     def butterKnifeVersion = '8.7.0'
     def daggerVersion = '2.11'
