@@ -28,7 +28,7 @@ public class SettingsActivity extends DaggerAppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (!tutorialShown.get()) {
-            startActivity(IntroActivity.newIntent(this, true));
+            startActivity(IntroActivity.newIntent(this));
             tutorialShown.set(true);
         }
 

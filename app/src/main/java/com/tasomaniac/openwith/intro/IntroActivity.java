@@ -26,9 +26,9 @@ public class IntroActivity extends AppIntro {
 
     @Inject Analytics analytics;
 
-    public static Intent newIntent(Context context, boolean firstStart) {
+    public static Intent newIntent(Context context) {
         return new Intent(context, IntroActivity.class)
-                .putExtra(IntroActivity.EXTRA_FIRST_START, firstStart);
+                .putExtra(IntroActivity.EXTRA_FIRST_START, true);
     }
 
     @Override
