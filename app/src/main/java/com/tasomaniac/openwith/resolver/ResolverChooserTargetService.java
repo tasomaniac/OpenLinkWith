@@ -29,7 +29,7 @@ public class ResolverChooserTargetService extends ChooserTargetService {
 
         return Collections.singletonList(new ChooserTarget(
                 getString(R.string.open_with),
-                Icon.createWithResource(this, R.mipmap.ic_launcher),
+                Icon.createWithResource(this, R.mipmap.ic_launcher_main),
                 0.2f,
                 componentName,
                 createBundleExtra()

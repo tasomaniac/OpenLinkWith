@@ -86,6 +86,11 @@ play {
     track = 'beta'
 }
 
+configurations {
+    implementation.exclude module: 'support-v4'
+    compile.exclude module: 'support-v4'
+}
+
 dependencies {
     def supportLibVersion = '26.0.0'
     def schematicVersion = '0.7.0'
@@ -93,6 +98,7 @@ dependencies {
     def daggerVersion = '2.11'
     def okHttpVersion = '3.8.1'
 
+    implementation "com.android.support:support-fragment:$supportLibVersion"
     implementation "com.android.support:appcompat-v7:$supportLibVersion"
     implementation "com.android.support:recyclerview-v7:$supportLibVersion"
     implementation "com.android.support:design:$supportLibVersion"

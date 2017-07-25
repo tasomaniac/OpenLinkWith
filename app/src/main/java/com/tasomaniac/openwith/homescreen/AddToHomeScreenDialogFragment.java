@@ -47,7 +47,7 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
 
     @BindView(R.id.add_to_home_screen_title) EditText titleView;
     @BindView(R.id.add_to_home_screen_progress) DelayedProgressBar progressBar;
-    @BindBitmap(R.drawable.ic_star_mark) Bitmap shortcutMark;
+    @BindBitmap(R.drawable.ic_bookmark) Bitmap shortcutMark;
 
     private DisplayResolveInfo dri;
     private ShortcutIconCreator shortcutIconCreator;
@@ -180,7 +180,7 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
     private void createShortcutWithoutIcon() {
         try {
             Intent shortcutIntent = createShortcutIntent();
-            Intent.ShortcutIconResource icon = Intent.ShortcutIconResource.fromContext(getContext(), R.mipmap.ic_bookmark);
+            Intent.ShortcutIconResource icon = Intent.ShortcutIconResource.fromContext(getContext(), R.mipmap.ic_launcher_bookmark);
             shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, icon);
             getActivity().sendBroadcast(Intents.fixIntents(getContext(), shortcutIntent));
         } catch (Exception e) {
