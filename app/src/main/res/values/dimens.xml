@@ -9,5 +9,5 @@
 
   <dimen name="appbar_height">196dp</dimen>
 
-  <dimen name="size_image_tutorial">240dp</dimen>
+  <dimen name="size_image_tutorial">160dp</dimen>
 </resources>
