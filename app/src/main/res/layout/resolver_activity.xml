@@ -16,6 +16,7 @@
     android:elevation="8dp"
     android:padding="24dp"
     android:visibility="invisible"
-    tools:visibility="visible"/>
+    tools:visibility="visible"
+    tools:targetApi="lollipop" />
 
 </FrameLayout>
