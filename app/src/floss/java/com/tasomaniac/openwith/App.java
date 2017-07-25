@@ -6,7 +6,7 @@ import timber.log.Timber;
 public class App extends DaggerApplication {
 
     private AppComponent component;
-    
+
     @Override
     public void onCreate() {
         super.onCreate();

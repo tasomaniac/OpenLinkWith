@@ -1,5 +1,6 @@
 package com.tasomaniac.openwith;
 
+import com.tasomaniac.openwith.data.Analytics;
 import com.tasomaniac.openwith.resolver.ResolverBindingModule;
 import com.tasomaniac.openwith.resolver.ResolverComponent;
 
@@ -20,7 +21,8 @@ import dagger.android.support.AndroidSupportInjectionModule;
 public interface AppComponent extends AndroidInjector<App> {
 
     ResolverComponent.Builder resolverComponentBuilder();
-    
+    Analytics analytics();
+
     @Component.Builder
     abstract class Builder extends AndroidInjector.Builder<App> {
 
