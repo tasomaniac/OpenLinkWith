@@ -103,6 +103,7 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:$supportLibVersion"
     implementation "com.android.support:design:$supportLibVersion"
     implementation "com.android.support:preference-v14:$supportLibVersion"
+    implementation 'com.duolingo.open:rtl-viewpager:1.0.2'
 
     implementation 'com.tasomaniac:delayed-progress:0.4'
 
