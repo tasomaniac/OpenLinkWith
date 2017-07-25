@@ -105,7 +105,7 @@ dependencies {
 
     implementation "com.google.dagger:dagger:$daggerVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
-    compile "com.google.dagger:dagger-android-support:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
     annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
 
     implementation "com.jakewharton:butterknife:$butterKnifeVersion"
