@@ -9,7 +9,7 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 
-internal class BrowserResolver @Inject
+class BrowserResolver @Inject
 constructor(private val packageManager: PackageManager) {
 
     fun resolve(): Single<List<DisplayResolveInfo>> =
