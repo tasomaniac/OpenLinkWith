@@ -9,22 +9,20 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 
-class BrowserResolver @Inject
-constructor(private val packageManager: PackageManager) {
+class BrowserResolver @Inject constructor(private val packageManager: PackageManager) {
 
-    fun resolve(): Single<List<DisplayResolveInfo>> =
-            Single.fromCallable<List<DisplayResolveInfo>> {
-                queryBrowsers().map {
-                    DisplayResolveInfo(it, it.loadLabel(packageManager), null)
-                }
-            }
-
-    private fun queryBrowsers(): List<ResolveInfo> {
-        val browserIntent = Intent()
-                .setAction(Intent.ACTION_VIEW)
-                .addCategory(Intent.CATEGORY_BROWSABLE)
-                .setData(Uri.parse("http:"))
-        return packageManager.queryIntentActivities(browserIntent, 0)
+  fun resolve(): Single<List<DisplayResolveInfo>> = Single.fromCallable {
+    queryBrowsers().map {
+      DisplayResolveInfo(it, it.loadLabel(packageManager), null)
     }
+  }
+
+  private fun queryBrowsers(): List<ResolveInfo> {
+    val browserIntent = Intent()
+        .setAction(Intent.ACTION_VIEW)
+        .addCategory(Intent.CATEGORY_BROWSABLE)
+        .setData(Uri.parse("http:"))
+    return packageManager.queryIntentActivities(browserIntent, 0)
+  }
 
 }
