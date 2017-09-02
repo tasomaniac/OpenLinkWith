@@ -179,7 +179,7 @@ public class ResolverActivity extends DaggerAppCompatActivity implements
             if (alwaysButton != null && onceButton != null) {
                 enableActionButtons();
             }
-            adapter.setItemChecked(checkedPos);
+            adapter.setCheckedItemPosition(checkedPos);
         }
     }
 
