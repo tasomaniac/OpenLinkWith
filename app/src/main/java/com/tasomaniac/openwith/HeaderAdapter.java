@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 public class HeaderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int TYPE_HEADER = Integer.MAX_VALUE;
+    private static final int HEADER_COUNT = 1;
 
     private final RecyclerView.Adapter innerAdapter;
     @LayoutRes private final int headerLayoutRes;
@@ -45,25 +46,25 @@ public class HeaderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position, List<Object> payloads) {
-        if (position == 0) {
+        if (position < HEADER_COUNT) {
             onBindHeaderViewHolder((HeaderViewHolder) holder);
         } else {
             //noinspection unchecked
-            innerAdapter.onBindViewHolder(holder, position - 1, payloads);
+            innerAdapter.onBindViewHolder(holder, position - HEADER_COUNT, payloads);
         }
     }
 
     @Override
     public int getItemCount() {
-        return innerAdapter.getItemCount() + 1;
+        return innerAdapter.getItemCount() + HEADER_COUNT;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 0) {
+        if (position < HEADER_COUNT) {
             return TYPE_HEADER;
         }
-        return super.getItemViewType(position);
+        return super.getItemViewType(position - HEADER_COUNT);
     }
 
     protected static class HeaderViewHolder extends RecyclerView.ViewHolder {
