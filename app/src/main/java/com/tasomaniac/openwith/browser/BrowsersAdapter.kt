@@ -10,17 +10,17 @@ import com.tasomaniac.openwith.util.Utils
 
 class BrowsersAdapter(innerAdapter: ResolveListAdapter) : HeaderAdapter(innerAdapter, R.layout.preferred_header) {
 
-    override fun onBindHeaderViewHolder(holder: HeaderAdapter.HeaderViewHolder) {
-        holder.setText(R.string.browser_description)
-    }
+  override fun onBindHeaderViewHolder(holder: HeaderAdapter.HeaderViewHolder) {
+    holder.setText(R.string.browser_description)
+  }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return super.onCreateViewHolder(parent, viewType).withMinHeight()
-    }
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    return super.onCreateViewHolder(parent, viewType).withMinHeight()
+  }
 
-    private fun RecyclerView.ViewHolder.withMinHeight(): RecyclerView.ViewHolder {
-        itemView.minimumHeight = Utils.dpToPx(itemView.resources, 72)
-        return this
-    }
+  private fun RecyclerView.ViewHolder.withMinHeight(): RecyclerView.ViewHolder {
+    itemView.minimumHeight = Utils.dpToPx(itemView.resources, 72)
+    return this
+  }
 
 }
