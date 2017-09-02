@@ -8,19 +8,19 @@ import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.resolver.ResolveListAdapter
 import com.tasomaniac.openwith.util.Utils
 
-internal class BrowsersAdapter(innerAdapter: ResolveListAdapter) : HeaderAdapter(innerAdapter, R.layout.preferred_header) {
+class BrowsersAdapter(innerAdapter: ResolveListAdapter) : HeaderAdapter(innerAdapter, R.layout.preferred_header) {
 
     override fun onBindHeaderViewHolder(holder: HeaderAdapter.HeaderViewHolder) {
         holder.setText(R.string.browser_description)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return holderWithMinHeight(super.onCreateViewHolder(parent, viewType))
+        return super.onCreateViewHolder(parent, viewType).withMinHeight()
     }
 
-    private fun holderWithMinHeight(viewHolder: RecyclerView.ViewHolder): RecyclerView.ViewHolder {
-        viewHolder.itemView.minimumHeight = Utils.dpToPx(viewHolder.itemView.resources, 72)
-        return viewHolder
+    private fun RecyclerView.ViewHolder.withMinHeight(): RecyclerView.ViewHolder {
+        itemView.minimumHeight = Utils.dpToPx(itemView.resources, 72)
+        return this
     }
 
 }
