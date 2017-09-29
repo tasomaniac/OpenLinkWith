@@ -28,10 +28,8 @@ android {
 
         resConfigs 'ar', 'de', 'en', 'es', 'fr', 'in', 'it', 'ja', 'pl', 'pt-rBR', 'pt-rPT', 'ru', 'tr', 'uk', 'zh-rCN'
 
-        javaCompileOptions {
-            annotationProcessorOptions {
-                argument('butterknife.minSdk', minSdkVersion.apiString)
-            }
+        javaCompileOptions.annotationProcessorOptions {
+            arguments['butterknife.minSdk'] = minSdkVersion.apiString
         }
     }
 
@@ -53,6 +51,10 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
+
+            javaCompileOptions.annotationProcessorOptions {
+                arguments['butterknife.debuggable'] = 'false'
+            }
         }
     }
 
@@ -94,9 +96,9 @@ configurations {
 dependencies {
     def supportLibVersion = '26.1.0'
     def schematicVersion = '0.7.0'
-    def butterKnifeVersion = '8.7.0'
+    def butterKnifeVersion = '8.8.1'
     def daggerVersion = '2.11'
-    def okHttpVersion = '3.8.1'
+    def okHttpVersion = '3.9.0'
 
     implementation "com.android.support:support-fragment:$supportLibVersion"
     implementation "com.android.support:appcompat-v7:$supportLibVersion"
