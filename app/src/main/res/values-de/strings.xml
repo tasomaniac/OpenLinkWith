@@ -8,8 +8,8 @@
   <string name="which_view_application">Öffnen mit</string>
   <string name="which_view_application_named">Öffnen mit %1$s</string>
   <string name="title_preferred_apps">Bevorzugte Apps</string>
-  <string name="desc_preferred">Bevorzugte Apps, welche für die unten stehenden Links direkt verwendet werden.\n\nDrücken um eine bevorzugte App zu entfernen.</string>
-  <string name="desc_preferred_empty">Bevorzugte Apps, welche direkt verwendet werden wenn die unten stehenden Links mit dieser App geteilt werden.\n\n Sie können bevorzugte Apps auswählen, indem Sie Links mit dieser App teilen und dann auf \"Immer\" klicken</string>
+  <string name="desc_preferred">Bevorzugte Apps, welche für die unten stehenden Links direkt verwendet werden.\n\nDrücken, um eine bevorzugte App zu entfernen.</string>
+  <string name="desc_preferred_empty">Bevorzugte Apps, welche direkt verwendet werden, wenn die untenstehenden Links mit dieser App geteilt werden.\n\n Sie können bevorzugte Apps auswählen, indem Sie Links mit dieser App teilen und dann auf \"Immer\" klicken.</string>
   <string name="title_remove_preferred">Bevorzugte entfernen?</string>
   <string name="message_remove_preferred"><![CDATA[     Entfernen <strong>%1$s</strong> als die bevorzugte app, <strong>%2$s</strong> Links zu laden? <br><br><strong>Hinweis:</strong>  Sie eine neue bevorzugte app das nächste Mal verwenden wenn sie einen <strong>%3$s</strong> Link teilen.     ]]></string>
   <string name="error_invalid_url">Der ausgewählte Inhalt beinhaltet keine gültigen URLs.</string>
@@ -44,16 +44,16 @@
   <string name="description_tutorial_3"><![CDATA[
      Wählen Sie <strong>immer öffnen</strong> um einen Link immer mit der spezifischen App zu öffnen.   ]]></string>
   <string name="description_tutorial_4"><![CDATA[
- <strong>Zum Startbildschim hinzufügen</strong> um deinen lieblings Links ditekt mit der passenden App aus dem Startbildschirm zu starten.   ]]></string>
+ <strong>Zum Startbildschirm hinzufügen</strong>, um deine Lieblingslinks direkt mit der passenden App vom Startbildschirm aus zu starten.  ]]></string>
   <string name="description_tutorial_5"><![CDATA[
 Zugriff auf <strong>Nutzer Zugriff</strong> gewähren und ich werde besser arbeiten. Ich erkenne den Browser, den sie benutzen um entsprend zu funktionieren.  ]]></string>
-  <string name="usage_access_give_access">Zugang erlauben</string>
+  <string name="usage_access_give_access">Zugriff erlauben</string>
   <string name="error">Fehler</string>
   <string name="next">Weiter</string>
-  <string name="error_usage_access_not_found">Usage Access Settings cannot be open.\n\nYou may access it by going into Settings -&gt; Security</string>
-  <string name="error_cannot_start_activity">Fehler beim Öffnen des Links, mit der ausgewählten App versuchen Sie es später erneut.</string>
+  <string name="error_usage_access_not_found">Zugriffseinstellungen können nicht geöffnet werden.\n\nDu kannst über Einstellungen -&gt; Sicherheit darauf zugreifen</string>
+  <string name="error_cannot_start_activity">Fehler beim Öffnen des Links mit der ausgewählten App. Versuchen Sie es später erneut.</string>
   <string name="add_to_homescreen">Zum Startbildschirm hinzufügen</string>
   <string name="add">Hinzufügen</string>
   <string name="cancel">Abbrechen</string>
-  <string name="dialog_hint_add_to_home_screen">Shortcut title</string>
+  <string name="dialog_hint_add_to_home_screen">Verknüpfungsname</string>
 </resources>
