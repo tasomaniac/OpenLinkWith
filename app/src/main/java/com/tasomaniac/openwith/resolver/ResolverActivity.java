@@ -38,6 +38,7 @@ import com.tasomaniac.openwith.ComponentActivity;
 import com.tasomaniac.openwith.HeaderAdapter;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.homescreen.AddToHomeScreenDialogFragment;
+import com.tasomaniac.openwith.util.Intents;
 
 import javax.inject.Inject;
 
@@ -201,7 +202,7 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     @Override
     public void displayAddToHomeScreenDialog(DisplayResolveInfo dri, Intent intent) {
         AddToHomeScreenDialogFragment
-                .newInstance(dri, intent)
+                .newInstance(dri, Intents.fixIntents(this, intent))
                 .show(getSupportFragmentManager());
     }
 

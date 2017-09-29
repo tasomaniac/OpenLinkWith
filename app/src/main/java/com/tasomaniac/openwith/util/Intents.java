@@ -19,11 +19,11 @@ public class Intents {
             new AmazonFixer(),
     };
 
-    public static void launchHomeScreen(Activity activity) {
+    public static Intent homeScreenIntent() {
         Intent homeIntent = new Intent(Intent.ACTION_MAIN);
         homeIntent.addCategory(Intent.CATEGORY_HOME);
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-        activity.startActivity(homeIntent);
+        return homeIntent;
     }
 
     @SuppressLint("InlinedApi")
@@ -33,9 +33,8 @@ public class Intents {
             return true;
         } catch (Exception e) {
             Timber.e(e, "Usage Access Open");
+            return false;
         }
-
-        return false;
     }
 
     public static boolean isHttp(Intent intent) {
