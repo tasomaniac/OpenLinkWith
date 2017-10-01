@@ -60,4 +60,5 @@ Donnez moi l\'accès au <strong>HABITUDES D\'UTILISATIONS</strong> et je fonctio
   <string name="add">Ajouter</string>
   <string name="cancel">Annuler</string>
   <string name="add_to_home_screen_dialog_hint">Nom du raccourci</string>
+  <string name="add_to_home_screen_error">Device does not support shortcuts!</string>
 </resources>

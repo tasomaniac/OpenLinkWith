@@ -58,4 +58,5 @@ Ge tillgång till <strong>Användningsåtkomst</strong> så fungerar jag bättre
   <string name="add">Lägg till</string>
   <string name="cancel">Avbryt</string>
   <string name="add_to_home_screen_dialog_hint">Genvägstitel</string>
+  <string name="add_to_home_screen_error">Device does not support shortcuts!</string>
 </resources>

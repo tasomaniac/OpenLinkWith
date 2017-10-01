@@ -59,4 +59,5 @@ Favori linklerinize kolay ulaşmak için <strong>Ana Ekrana ekle</strong> özell
   <string name="add">Ekle</string>
   <string name="cancel">İptal</string>
   <string name="add_to_home_screen_dialog_hint">Kısayol adı</string>
+  <string name="add_to_home_screen_error">Cihaz kısayolları desteklemiyor!</string>
 </resources>

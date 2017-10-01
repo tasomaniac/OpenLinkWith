@@ -61,4 +61,5 @@
   <string name="add">Tambah</string>
   <string name="cancel">Batal</string>
   <string name="add_to_home_screen_dialog_hint">Judul pintasan</string>
+  <string name="add_to_home_screen_error">Device does not support shortcuts!</string>
 </resources>

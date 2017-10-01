@@ -58,4 +58,5 @@
   <string name="add">הוסף</string>
   <string name="cancel">בטל</string>
   <string name="add_to_home_screen_dialog_hint">כותרת קיצור הדרך</string>
+  <string name="add_to_home_screen_error">Device does not support shortcuts!</string>
 </resources>

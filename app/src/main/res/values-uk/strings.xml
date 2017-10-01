@@ -58,4 +58,5 @@
   <string name="add">Додати</string>
   <string name="cancel">Завершити</string>
   <string name="add_to_home_screen_dialog_hint">Ім\'я ярлика</string>
+  <string name="add_to_home_screen_error">Device does not support shortcuts!</string>
 </resources>

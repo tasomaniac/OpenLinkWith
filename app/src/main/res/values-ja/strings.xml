@@ -58,4 +58,5 @@
   <string name="add">追加</string>
   <string name="cancel">キヤンセル</string>
   <string name="add_to_home_screen_dialog_hint">ショートカットのタイトル</string>
+  <string name="add_to_home_screen_error">Device does not support shortcuts!</string>
 </resources>

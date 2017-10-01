@@ -57,4 +57,5 @@ Aby aplikacja działała poprawnie, potrzebuje <strong>DOSTĘPU DO UŻYCIA</stro
   <string name="add">Dodaj</string>
   <string name="cancel">Anuluj</string>
   <string name="add_to_home_screen_dialog_hint">Tytuł skrótu</string>
+  <string name="add_to_home_screen_error">Device does not support shortcuts!</string>
 </resources>

@@ -57,4 +57,5 @@ Dar acceso a <strong>ACCESO DE USO</strong> y funcionaré mejor. Detectaré el n
   <string name="add">Añadir</string>
   <string name="cancel">Cancelar</string>
   <string name="add_to_home_screen_dialog_hint">Título del acceso directo</string>
+  <string name="add_to_home_screen_error">Device does not support shortcuts!</string>
 </resources>

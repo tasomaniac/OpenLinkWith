@@ -59,4 +59,5 @@ Dê permissão ao <strong>ACESSO DE USO</strong> e eu vou funcionar melhor. Vou 
   <string name="add">Adicionar</string>
   <string name="cancel">Cancelar</string>
   <string name="add_to_home_screen_dialog_hint">Nome do atalho</string>
+  <string name="add_to_home_screen_error">Device does not support shortcuts!</string>
 </resources>
