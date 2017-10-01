@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import javax.inject.Inject
 import kotlin.properties.Delegates
 
-class ResolveListAdapter @Inject
-constructor(private val iconLoader: IconLoader) : RecyclerView.Adapter<ApplicationViewHolder>() {
+class ResolveListAdapter @Inject constructor(
+    private val iconLoader: IconLoader
+) : RecyclerView.Adapter<ApplicationViewHolder>() {
 
   var applications by Delegates.observable(emptyList<DisplayResolveInfo>(), { _, _, _ ->
     notifyDataSetChanged()
@@ -21,8 +22,6 @@ constructor(private val iconLoader: IconLoader) : RecyclerView.Adapter<Applicati
   var itemLongClickListener: ItemLongClickListener? = null
 
   override fun getItemCount() = applications.size
-
-  override fun getItemId(position: Int) = position.toLong()
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
       ApplicationViewHolder.create(parent, iconLoader, displayExtendedInfo)

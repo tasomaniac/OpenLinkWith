@@ -1,17 +1,10 @@
 package com.tasomaniac.openwith;
 
 import android.support.annotation.LayoutRes;
-import android.support.annotation.StringRes;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class HeaderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -27,14 +20,14 @@ public class HeaderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         innerAdapter.registerAdapterDataObserver(new ForwardingDataObserver());
     }
 
-    protected void onBindHeaderViewHolder(HeaderViewHolder holder) {
+    protected void onBindHeaderViewHolder(SimpleTextViewHolder holder) {
         // no-op
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_HEADER) {
-            return HeaderViewHolder.create(parent, headerLayoutRes);
+            return SimpleTextViewHolder.Companion.create(parent, headerLayoutRes);
         }
         return innerAdapter.onCreateViewHolder(parent, viewType);
     }
@@ -47,7 +40,7 @@ public class HeaderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position, List<Object> payloads) {
         if (position < HEADER_COUNT) {
-            onBindHeaderViewHolder((HeaderViewHolder) holder);
+            onBindHeaderViewHolder((SimpleTextViewHolder) holder);
         } else {
             //noinspection unchecked
             innerAdapter.onBindViewHolder(holder, position - HEADER_COUNT, payloads);
@@ -65,24 +58,6 @@ public class HeaderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             return TYPE_HEADER;
         }
         return super.getItemViewType(position - HEADER_COUNT);
-    }
-
-    protected static class HeaderViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.text1) TextView text;
-
-        public static RecyclerView.ViewHolder create(ViewGroup parent, @LayoutRes int layoutRes) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(layoutRes, parent, false);
-            return new HeaderViewHolder(view);
-        }
-
-        private HeaderViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
-        }
-
-        public void setText(@StringRes int text) {
-            this.text.setText(text);
-        }
     }
 
     private class ForwardingDataObserver extends RecyclerView.AdapterDataObserver {

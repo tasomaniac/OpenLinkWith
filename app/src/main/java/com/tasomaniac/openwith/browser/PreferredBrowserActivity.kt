@@ -8,14 +8,12 @@ import butterknife.ButterKnife
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.data.Analytics
 import com.tasomaniac.openwith.resolver.DisplayResolveInfo
-import com.tasomaniac.openwith.resolver.ItemClickListener
 import com.tasomaniac.openwith.resolver.ResolveListAdapter
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.functions.Consumer
 import javax.inject.Inject
 
-class PreferredBrowserActivity : DaggerAppCompatActivity(), ItemClickListener {
+class PreferredBrowserActivity : DaggerAppCompatActivity(), BrowsersAdapter.Listener {
 
   @Inject lateinit var analytics: Analytics
   @Inject lateinit var adapter: ResolveListAdapter
@@ -32,15 +30,26 @@ class PreferredBrowserActivity : DaggerAppCompatActivity(), ItemClickListener {
 
     analytics.sendScreenView("Browser Apps")
 
+    setupToolbar()
+    setupList()
+
+    disposable.add(
+        browserResolver.resolve()
+            .subscribe { list ->
+              adapter.applications = list
+              recyclerView.adapter.notifyDataSetChanged()
+            }
+    )
+  }
+
+  private fun setupToolbar() {
     setSupportActionBar(findViewById(R.id.toolbar))
     supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+  }
 
+  private fun setupList() {
     recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-    adapter.itemClickListener = this
-    recyclerView.adapter = BrowsersAdapter(adapter)
-
-    disposable.add(browserResolver.resolve()
-        .subscribe(Consumer { adapter.applications = it }))
+    recyclerView.adapter = BrowsersAdapter(adapter, this)
   }
 
   override fun onDestroy() {
@@ -49,7 +58,15 @@ class PreferredBrowserActivity : DaggerAppCompatActivity(), ItemClickListener {
     super.onDestroy()
   }
 
-  override fun onItemClick(dri: DisplayResolveInfo) {
-    TODO("not implemented")
+  override fun onBrowserClick(displayResolveInfo: DisplayResolveInfo) {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
+  override fun onNoneClick() {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
+
+  override fun onAlwaysAskClick() {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }
 }

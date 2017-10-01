@@ -31,7 +31,10 @@
   <string name="pref_title_preferred" translatable="false">@string/title_preferred_apps</string>
   <string name="pref_summary_preferred">Change preferred app settings.</string>
 
-  <string name="title_browser">Browsers</string>
+  <string name="browser_title">Browsers</string>
+  <string name="browser_description">Select your preferred browser below. Your choice will be used after the native applications.</string>
+  <string name="browser_none">Hide browsers</string>
+  <string name="browser_always_ask">Always ask</string>
   <string name="pref_key_browser" translatable="false">pref_browser</string>
   <string name="pref_title_browser" translatable="false">@string/title_browser</string>
   <string name="pref_summary_browser">Change preferred browser.</string>
@@ -74,7 +77,7 @@
 
   <string name="pref_key_version" translatable="false">pref_version</string>
   <string name="pref_title_version">Version</string>
-  
+
   <string name="skip">Skip</string>
   <string name="cd_image_tutorial">Tutorial Image</string>
 
