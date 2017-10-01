@@ -58,5 +58,5 @@ Dammi l\'accesso a <strong>ACCESSO A DATI DI UTILIZZO</strong> e lavorerò megli
   <string name="add_to_homescreen">Aggiungi alla home</string>
   <string name="add">Aggiungi</string>
   <string name="cancel">Annulla</string>
-  <string name="dialog_hint_add_to_home_screen">Titolo della scorciatoia</string>
+  <string name="add_to_home_screen_dialog_hint">Titolo della scorciatoia</string>
 </resources>

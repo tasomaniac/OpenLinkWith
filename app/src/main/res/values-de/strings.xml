@@ -55,5 +55,5 @@ Zugriff auf <strong>Nutzer Zugriff</strong> gewähren und ich werde besser arbei
   <string name="add_to_homescreen">Zum Startbildschirm hinzufügen</string>
   <string name="add">Hinzufügen</string>
   <string name="cancel">Abbrechen</string>
-  <string name="dialog_hint_add_to_home_screen">Verknüpfungsname</string>
+  <string name="add_to_home_screen_dialog_hint">Verknüpfungsname</string>
 </resources>

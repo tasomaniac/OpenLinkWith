@@ -23,6 +23,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.tasomaniac.android.widget.DelayedProgressBar;
 import com.tasomaniac.openwith.R;
@@ -143,13 +144,13 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        createShortcut();
+        createShortcutAndHandleError();
     }
 
     @OnEditorAction(R.id.add_to_home_screen_title)
     boolean onKeyboardDoneClicked(int actionId) {
         if (EditorInfo.IME_ACTION_GO == actionId) {
-            createShortcut();
+            createShortcutAndHandleError();
             return true;
         }
         return false;
@@ -165,25 +166,32 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
         return dialog.getButton(DialogInterface.BUTTON_POSITIVE);
     }
 
-    private void createShortcut() {
-        String id = dri.resolveInfo().activityInfo.packageName;
-        String label = titleView.getText().toString();
-        try {
-            createShortcutWith(id, label, shortcutIconCreator.createIconFor(dri.displayIcon()));
-        } catch (Exception e) {
-            // This method started to fire android.os.TransactionTooLargeException
-            Timber.e(e, "Exception while adding shortcut");
-            createShortcutWith(id, label, createSimpleIcon());
+    private void createShortcutAndHandleError() {
+        boolean success = createShortcut();
+        if (!success) {
+            Toast.makeText(getContext(), R.string.add_to_home_screen_error, Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void createShortcutWith(String id, String label, IconCompat icon) {
+    private boolean createShortcut() {
+        String id = intent.getDataString() + dri.resolveInfo().activityInfo.packageName;
+        String label = titleView.getText().toString();
+        try {
+            return createShortcutWith(id, label, shortcutIconCreator.createIconFor(dri.displayIcon()));
+        } catch (Exception e) {
+            // This method started to fire android.os.TransactionTooLargeException
+            Timber.e(e, "Exception while adding shortcut");
+            return createShortcutWith(id, label, createSimpleIcon());
+        }
+    }
+
+    private boolean createShortcutWith(String id, String label, IconCompat icon) {
         ShortcutInfoCompat shortcut = new ShortcutInfoCompat.Builder(getContext(), id)
                 .setIntent(intent)
                 .setShortLabel(label)
                 .setIcon(icon)
                 .build();
-        ShortcutManagerCompat.requestPinShortcut(getContext(), shortcut, startHomeScreen());
+        return ShortcutManagerCompat.requestPinShortcut(getContext(), shortcut, startHomeScreen());
     }
 
     private IconCompat createSimpleIcon() {

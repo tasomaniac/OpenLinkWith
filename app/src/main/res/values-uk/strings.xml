@@ -57,5 +57,5 @@
   <string name="add_to_homescreen">Додати на Домашній екран</string>
   <string name="add">Додати</string>
   <string name="cancel">Завершити</string>
-  <string name="dialog_hint_add_to_home_screen">Ім\'я ярлика</string>
+  <string name="add_to_home_screen_dialog_hint">Ім\'я ярлика</string>
 </resources>

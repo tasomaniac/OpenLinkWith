@@ -58,5 +58,5 @@
   <string name="add_to_homescreen">إضافة إلى الشاشة الرئيسية</string>
   <string name="add">أضف</string>
   <string name="cancel">إلغاء</string>
-  <string name="dialog_hint_add_to_home_screen">عنوان الإختصار</string>
+  <string name="add_to_home_screen_dialog_hint">عنوان الإختصار</string>
 </resources>

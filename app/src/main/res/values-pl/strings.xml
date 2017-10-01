@@ -56,5 +56,5 @@ Aby aplikacja działała poprawnie, potrzebuje <strong>DOSTĘPU DO UŻYCIA</stro
   <string name="add_to_homescreen">Dodaj do ekranu głównego</string>
   <string name="add">Dodaj</string>
   <string name="cancel">Anuluj</string>
-  <string name="dialog_hint_add_to_home_screen">Tytuł skrótu</string>
+  <string name="add_to_home_screen_dialog_hint">Tytuł skrótu</string>
 </resources>

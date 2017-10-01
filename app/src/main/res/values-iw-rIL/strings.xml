@@ -57,5 +57,5 @@
   <string name="add_to_homescreen">הוספה למסך הבית</string>
   <string name="add">הוסף</string>
   <string name="cancel">בטל</string>
-  <string name="dialog_hint_add_to_home_screen">כותרת קיצור הדרך</string>
+  <string name="add_to_home_screen_dialog_hint">כותרת קיצור הדרך</string>
 </resources>

@@ -56,5 +56,5 @@ Dê acesso a <strong>Acesso de utilização</strong> e irei trabalhar melhor. Vo
   <string name="add_to_homescreen">Adicionar ao ecrã principal</string>
   <string name="add">Adicionar</string>
   <string name="cancel">Cancelar</string>
-  <string name="dialog_hint_add_to_home_screen">Título do atalho</string>
+  <string name="add_to_home_screen_dialog_hint">Título do atalho</string>
 </resources>

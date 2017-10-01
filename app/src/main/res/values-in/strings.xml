@@ -60,5 +60,5 @@
   <string name="add_to_homescreen">Tambahkan ke Beranda</string>
   <string name="add">Tambah</string>
   <string name="cancel">Batal</string>
-  <string name="dialog_hint_add_to_home_screen">Judul pintasan</string>
+  <string name="add_to_home_screen_dialog_hint">Judul pintasan</string>
 </resources>

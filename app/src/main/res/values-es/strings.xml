@@ -56,5 +56,5 @@ Dar acceso a <strong>ACCESO DE USO</strong> y funcionaré mejor. Detectaré el n
   <string name="error_cannot_start_activity">Failed to open the link with selected app. Try again later.</string>
   <string name="add">Añadir</string>
   <string name="cancel">Cancelar</string>
-  <string name="dialog_hint_add_to_home_screen">Título del acceso directo</string>
+  <string name="add_to_home_screen_dialog_hint">Título del acceso directo</string>
 </resources>

@@ -58,5 +58,5 @@ Dê permissão ao <strong>ACESSO DE USO</strong> e eu vou funcionar melhor. Vou 
   <string name="add_to_homescreen">Adicionar à Tela Inicial</string>
   <string name="add">Adicionar</string>
   <string name="cancel">Cancelar</string>
-  <string name="dialog_hint_add_to_home_screen">Nome do atalho</string>
+  <string name="add_to_home_screen_dialog_hint">Nome do atalho</string>
 </resources>

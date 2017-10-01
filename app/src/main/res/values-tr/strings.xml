@@ -58,5 +58,5 @@ Favori linklerinize kolay ulaşmak için <strong>Ana Ekrana ekle</strong> özell
   <string name="add_to_homescreen">Ana Ekrana Ekle</string>
   <string name="add">Ekle</string>
   <string name="cancel">İptal</string>
-  <string name="dialog_hint_add_to_home_screen">Kısayol adı</string>
+  <string name="add_to_home_screen_dialog_hint">Kısayol adı</string>
 </resources>
