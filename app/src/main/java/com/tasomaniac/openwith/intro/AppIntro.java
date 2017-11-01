@@ -13,8 +13,8 @@ import android.widget.TextView;
 
 import com.tasomaniac.openwith.R;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 import dagger.android.support.DaggerAppCompatActivity;
 
@@ -22,7 +22,7 @@ public abstract class AppIntro extends DaggerAppCompatActivity {
 
     private PagerAdapter mPagerAdapter;
     private AppIntroViewPager pager;
-    private List<Fragment> fragments = new Vector<>();
+    private List<Fragment> fragments = new ArrayList<>();
     private int slidesNumber;
     private CircularIndicatorView mController;
     private boolean skipButtonEnabled = true;
@@ -36,7 +36,6 @@ public abstract class AppIntro extends DaggerAppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.intro_layout);
