@@ -16,7 +16,6 @@ def gitSha = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId 'com.tasomaniac.openwith'
