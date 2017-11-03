@@ -7,126 +7,131 @@ apply plugin: 'net.ltgt.errorprone'
 
 def signingFile = file('props/release.signing')
 buildProperties {
-    signing.file signingFile.exists() ? signingFile : file('props/debug.signing')
-    secrets.file file('props/secrets.properties')
+  signing.file signingFile.exists() ? signingFile : file('props/debug.signing')
+  secrets.file file('props/secrets.properties')
 }
 
 def secrets = buildProperties.secrets
 def gitSha = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+  compileSdkVersion versions.compileSdk
 
-    defaultConfig {
-        applicationId 'com.tasomaniac.openwith'
-        minSdkVersion 19
-        targetSdkVersion rootProject.ext.compileSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
-        buildConfigField 'String', 'GIT_SHA', "\"${gitSha}\""
+  defaultConfig {
+    applicationId 'com.tasomaniac.openwith'
+    minSdkVersion versions.minSdk
+    targetSdkVersion versions.compileSdk
+    versionCode versions.versionCode
+    versionName versions.versionName
+    buildConfigField 'String', 'GIT_SHA', "\"${gitSha}\""
 
-        resConfigs 'ar', 'de', 'en', 'es', 'fr', 'in', 'it', 'ja', 'pl', 'pt-rBR', 'pt-rPT', 'ru', 'sv', 'tr', 'uk', 'zh-rCN'
+    resConfigs 'ar', 'de', 'en', 'es', 'fr', 'in', 'it', 'ja', 'pl', 'pt-rBR', 'pt-rPT', 'ru', 'sv', 'tr', 'uk', 'zh-rCN'
 
-        javaCompileOptions.annotationProcessorOptions {
-            arguments['butterknife.minSdk'] = minSdkVersion.apiString
-        }
+    javaCompileOptions.annotationProcessorOptions {
+      arguments['butterknife.minSdk'] = minSdkVersion.apiString
+      arguments['butterknife.debuggable'] = 'false'
+    }
+  }
+
+  signingConfigs {
+    debug.storeFile file('props/debug.keystore')
+    release.signingConfigProperties buildProperties.signing
+  }
+
+  buildTypes {
+    debug {
+      ext.enableCrashlytics = false
+      applicationIdSuffix '.debug'
+      versionNameSuffix '-debug'
+      signingConfig signingConfigs.debug
     }
 
-    signingConfigs {
-        debug.storeFile file('props/debug.keystore')
-        release.signingConfigProperties buildProperties.signing
+    release {
+      minifyEnabled true
+      shrinkResources true
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+      signingConfig signingConfigs.release
     }
+  }
 
-    buildTypes {
-        debug {
-            ext.enableCrashlytics = false
-            applicationIdSuffix '.debug'
-            signingConfig signingConfigs.debug
-            versionNameSuffix '-debug'
-        }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
 
-        release {
-            minifyEnabled true
-            shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
-
-            javaCompileOptions.annotationProcessorOptions {
-                arguments['butterknife.debuggable'] = 'false'
-            }
-        }
+  flavorDimensions 'store'
+  productFlavors {
+    floss {
+      applicationIdSuffix '.floss'
+      versionNameSuffix '-floss'
     }
+    play {}
+  }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+  lintOptions {
+    textReport true
+    textOutput 'stdout'
 
-    flavorDimensions 'store'
-    productFlavors {
-        floss {
-            applicationIdSuffix '.floss'
-            versionNameSuffix '-floss'
-        }
-        play {}
-    }
-
-    lintOptions {
-        textReport true
-        textOutput 'stdout'
-
-        lintConfig file('props/lint.xml')
-        // We run a full lint analysis as build part in CI, so skip vital checks for assemble tasks.
-        checkReleaseBuilds false
-    }
+    lintConfig file('props/lint.xml')
+    // We run a full lint analysis as build part in CI, so skip vital checks for assemble tasks.
+    checkReleaseBuilds false
+  }
 }
 
 play {
-    serviceAccountEmail = secrets['play_service_account'].or('').string
-    pk12File = file(secrets['play_key_file'].or('no_file.p12').string)
-    track = 'beta'
+  serviceAccountEmail = secrets['play_service_account'].or('').string
+  pk12File = file(secrets['play_key_file'].or('no_file.p12').string)
+  track = 'beta'
 }
 
 configurations {
-    implementation.exclude module: 'support-v4'
-    compile.exclude module: 'support-v4'
+  implementation.exclude module: 'support-v4'
+  compile.exclude module: 'support-v4'
 }
 
 dependencies {
-    def supportLibVersion = '27.0.0'
-    def schematicVersion = '0.7.0'
-    def butterKnifeVersion = '8.8.1'
-    def daggerVersion = '2.12'
-    def okHttpVersion = '3.9.0'
 
-    implementation "com.android.support:support-fragment:$supportLibVersion"
-    implementation "com.android.support:appcompat-v7:$supportLibVersion"
-    implementation "com.android.support:recyclerview-v7:$supportLibVersion"
-    implementation "com.android.support:design:$supportLibVersion"
-    implementation "com.android.support:preference-v14:$supportLibVersion"
-    implementation 'com.duolingo.open:rtl-viewpager:1.0.2'
+  implementation "com.android.support:support-fragment:$versions.supportLib"
+  implementation "com.android.support:appcompat-v7:$versions.supportLib"
+  implementation "com.android.support:recyclerview-v7:$versions.supportLib"
+  implementation "com.android.support:design:$versions.supportLib"
+  implementation "com.android.support:preference-v14:$versions.supportLib"
+  implementation 'com.duolingo.open:rtl-viewpager:1.0.2'
 
-    implementation 'com.tasomaniac:delayed-progress:0.4'
+  implementation 'com.tasomaniac:delayed-progress:0.4'
 
-    implementation "net.simonvt.schematic:schematic:$schematicVersion"
-    annotationProcessor "net.simonvt.schematic:schematic-compiler:$schematicVersion"
+  implementation "net.simonvt.schematic:schematic:$versions.schematic"
+  annotationProcessor "net.simonvt.schematic:schematic-compiler:$versions.schematic"
 
-    implementation "com.google.dagger:dagger:$daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
-    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
+  implementation "com.google.dagger:dagger:$versions.dagger"
+  annotationProcessor "com.google.dagger:dagger-compiler:$versions.dagger"
+  implementation "com.google.dagger:dagger-android-support:$versions.dagger"
+  annotationProcessor "com.google.dagger:dagger-android-processor:$versions.dagger"
 
-    implementation "com.jakewharton:butterknife:$butterKnifeVersion"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
-    implementation 'com.jakewharton.timber:timber:4.6.0'
+  implementation "com.jakewharton:butterknife:$versions.butterKnife"
+  annotationProcessor "com.jakewharton:butterknife-compiler:$versions.butterKnife"
+  implementation 'com.jakewharton.timber:timber:4.6.0'
 
-    implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.6'
+  implementation "com.squareup.okhttp3:okhttp:$versions.okHttp"
+  implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+  implementation 'io.reactivex.rxjava2:rxjava:2.1.6'
 
-    playImplementation 'com.crashlytics.sdk.android:crashlytics:2.7.1'
+  playImplementation 'com.crashlytics.sdk.android:crashlytics:2.7.1'
 
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:2.11.0'
-    testImplementation "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
+  testImplementation 'junit:junit:4.12'
+  testImplementation 'org.mockito:mockito-core:2.11.0'
+  testImplementation "com.squareup.okhttp3:mockwebserver:$versions.okHttp"
+}
+
+project.tasks.withType(JavaCompile) {
+  options.compilerArgs += [
+      '-Xep:UnnecessaryDefaultInEnumSwitch:ERROR',
+      '-Xep:TypeParameterUnusedInFormals:ERROR',
+      '-Xep:MissingOverride:ERROR',
+      '-Xep:ClassCanBeStatic:ERROR',
+      '-Xep:OperatorPrecedence:ERROR',
+      '-Xep:ReferenceEquality:ERROR',
+      '-Xep:FloatingPointLiteralPrecision:ERROR',
+      '-Xep:SimpleDateFormatConstant:ERROR',
+  ]
 }
