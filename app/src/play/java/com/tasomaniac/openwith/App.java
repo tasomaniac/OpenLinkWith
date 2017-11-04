@@ -5,7 +5,6 @@ import android.util.Log;
 import com.crashlytics.android.Crashlytics;
 
 import dagger.android.support.DaggerApplication;
-import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
 
 public class App extends DaggerApplication {
@@ -17,12 +16,11 @@ public class App extends DaggerApplication {
         super.onCreate();
 
         if (!BuildConfig.DEBUG) {
-            Fabric.with(this, new Crashlytics());
             Timber.plant(new CrashReportingTree());
         } else {
             Timber.plant(new Timber.DebugTree());
         }
-    }
+    }                     
 
     @Override
     protected AppComponent applicationInjector() {
