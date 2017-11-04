@@ -103,9 +103,8 @@ dependencies {
   implementation "net.simonvt.schematic:schematic:$versions.schematic"
   annotationProcessor "net.simonvt.schematic:schematic-compiler:$versions.schematic"
 
-  implementation "com.google.dagger:dagger:$versions.dagger"
-  annotationProcessor "com.google.dagger:dagger-compiler:$versions.dagger"
   implementation "com.google.dagger:dagger-android-support:$versions.dagger"
+  annotationProcessor "com.google.dagger:dagger-compiler:$versions.dagger"
   annotationProcessor "com.google.dagger:dagger-android-processor:$versions.dagger"
 
   implementation "com.jakewharton:butterknife:$versions.butterKnife"
