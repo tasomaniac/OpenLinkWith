@@ -3,11 +3,6 @@ sudo: required
 
 language: android
 
-android:
-  components:
-    - tools
-    - platform-tools
-
 jdk:
   - openjdk8
 
