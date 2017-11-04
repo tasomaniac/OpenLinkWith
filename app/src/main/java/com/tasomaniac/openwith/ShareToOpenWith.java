@@ -30,7 +30,7 @@ public class ShareToOpenWith extends Activity {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
 
-        analytics.sendScreenView("ShareToOpenWith");
+        analytics.sendScreenView(this, "ShareToOpenWith");
         if (isFromDirectShare(getIntent())) {
             analytics.sendEvent(
                     "Direct Share",

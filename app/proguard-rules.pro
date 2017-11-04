@@ -1,6 +1,5 @@
 #-dontobfuscate
 
-# Crashlytics 1.+
 -keepattributes SourceFile,LineNumberTable
 
 # OkHttp3

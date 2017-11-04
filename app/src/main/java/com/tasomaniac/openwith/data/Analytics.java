@@ -1,17 +1,19 @@
 package com.tasomaniac.openwith.data;
 
+import android.app.Activity;
+
 import timber.log.Timber;
 
 public interface Analytics {
 
-    void sendScreenView(String screenName);
+    void sendScreenView(Activity activity, String screenName);
 
     void sendEvent(String category, String action, String label);
 
     class DebugAnalytics implements Analytics {
 
         @Override
-        public void sendScreenView(String screenName) {
+        public void sendScreenView(Activity activity, String screenName) {
             Timber.tag("Analytics").d("Screen: %s", screenName);
         }
 
