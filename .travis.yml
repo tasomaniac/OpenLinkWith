@@ -15,10 +15,10 @@ before_install:
   # Install SDK license so Android Gradle plugin can install deps.
   - mkdir "$ANDROID_HOME/licenses" || true
   - echo "8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
+  - echo "d56f5187479451eabf01fb78af6dfcb131a6481e" >> "$ANDROID_HOME/licenses/android-sdk-license"
 
 before_script:
-  - echo "" > $HOME/.gradle/gradle.properties
-  - echo "org.gradle.configureondemand=true" >> $HOME/.gradle/gradle.properties
+  - echo "org.gradle.configureondemand=true" > $HOME/.gradle/gradle.properties
   - echo "org.gradle.jvmargs=-Xmx1536M" >> $HOME/.gradle/gradle.properties
   - echo "org.gradle.caching=true" >> $HOME/.gradle/gradle.properties
   - echo "org.gradle.parallel=true" >> $HOME/.gradle/gradle.properties
