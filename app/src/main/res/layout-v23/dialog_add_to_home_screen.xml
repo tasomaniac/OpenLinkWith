@@ -14,7 +14,8 @@
     android:hint="@string/add_to_home_screen_dialog_hint"
     android:singleLine="true"
     android:imeOptions="actionGo"
-    android:imeActionLabel="@string/add"/>
+    android:imeActionLabel="@string/add"
+    android:inputType="textCapSentences"/>
 
   <com.tasomaniac.android.widget.DelayedProgressBar
     android:id="@+id/add_to_home_screen_progress"
