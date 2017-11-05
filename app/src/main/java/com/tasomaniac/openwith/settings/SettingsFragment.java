@@ -1,6 +1,7 @@
 package com.tasomaniac.openwith.settings;
 
 import android.app.backup.BackupManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -38,14 +39,12 @@ public class SettingsFragment extends PreferenceFragmentCompat
         Preference.OnPreferenceClickListener {
 
     @Inject Analytics analytics;
+    @Inject SharedPreferences sharedPreferences;
     @Inject
     @UsageAccess
     BooleanPreference usageAccessPref;
 
     private PreferenceCategory usageStatsPreferenceCategory;
-
-    public SettingsFragment() {
-    }
 
     public static SettingsFragment newInstance() {
         SettingsFragment fragment = new SettingsFragment();
@@ -55,14 +54,15 @@ public class SettingsFragment extends PreferenceFragmentCompat
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onAttach(Context context) {
         AndroidSupportInjection.inject(this);
+        super.onAttach(context);
     }
 
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
         addPreferencesFromResource(R.xml.pref_general);
+        addPreferencesFromResource(R.xml.pref_display);
         addPreferencesFromResource(R.xml.pref_others);
 
         findPreference(R.string.pref_key_about).setOnPreferenceClickListener(this);
@@ -78,8 +78,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
     @Override
     public void onResume() {
         super.onResume();
-        getPreferenceManager().getSharedPreferences()
-                .registerOnSharedPreferenceChangeListener(this);
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
 
         if (SDK_INT >= LOLLIPOP) {
             setupUsagePreference();
@@ -90,8 +89,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
     @Override
     public void onPause() {
         super.onPause();
-        getPreferenceManager().getSharedPreferences()
-                .unregisterOnSharedPreferenceChangeListener(this);
+        sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -155,11 +153,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
             startContactEmailChooser();
         }
 
-        analytics.sendEvent(
-                "Preference",
-                "Item Click",
-                preference.getKey()
-        );
+        analytics.sendEvent( "Preference", "Item Click", preference.getKey());
         return true;
     }
 
@@ -167,7 +161,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
         boolean settingsOpened = Intents.maybeStartUsageAccessSettings(getActivity());
 
         if (!settingsOpened) {
-            new AlertDialog.Builder(getActivity())
+            new AlertDialog.Builder(getContext())
                     .setTitle(R.string.error)
                     .setMessage(R.string.error_usage_access_not_found)
                     .setPositiveButton(android.R.string.ok, null)

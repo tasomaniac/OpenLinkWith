@@ -38,6 +38,12 @@
   <string name="pref_title_usage_stats">Usage Stats</string>
   <string name="pref_summary_usage_stats">Improve the application sorting by giving access to Usage Stats.</string>
 
+  <string name="pref_title_category_display">Display</string>
+
+  <string name="pref_key_night_mode" translatable="false">pref_night_mode</string>
+  <string name="pref_title_night_mode">Night Mode</string>
+  <!--<string name="pref_summary_night_mode">Improve the application sorting by giving access to Usage Stats.</string>-->
+
   <string name="pref_title_category_others">Others</string>
 
   <string name="pref_key_open_source" translatable="false">pref_open_source</string>
