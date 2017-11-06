@@ -25,6 +25,11 @@
   <string name="pref_title_category_usage">גישה לנתוני שימוש</string>
   <string name="pref_title_usage_stats">גישה לסטטיסטיקות</string>
   <string name="pref_summary_usage_stats">שפר את מיון היישומים על ידי נתינת גישה לנתוני סטטיסטיקות השימוש.</string>
+  <string name="pref_title_category_display">Display</string>
+  <string name="pref_title_night_mode">Night Mode</string>
+  <string name="pref_entry_night_mode_off">Off</string>
+  <string name="pref_entry_night_mode_on">On</string>
+  <string name="pref_entry_night_mode_auto">Automatic at sunset</string>
   <string name="pref_title_category_others">אחרים</string>
   <string name="pref_title_open_source">רישיונות קוד פתוח</string>
   <string name="pref_summary_open_source">ראה רישיונות של ספריות קוד פתוח.</string>

@@ -18,15 +18,20 @@ Ne plus ouvrir les liens de <strong>%2$s</strong> avec <strong>%1$s</strong> ? <
   <string name="warning_open_link_with_name">Ouverture du lien avec %s.</string>
   <string name="done">Terminé</string>
   <string name="pref_title_general">Paramètres Généraux</string>
-  <string name="pref_title_about">À Propos</string>
+  <string name="pref_title_about">À propos</string>
   <string name="pref_summary_about">Revoir le tutoriel.</string>
   <string name="pref_summary_preferred">Changer les paramètres d\'applications préférées.</string>
-  <string name="pref_title_category_usage">Habitudes d\'Utilisations</string>
-  <string name="pref_title_usage_stats">Statistiques d\'Utilisations</string>
-  <string name="pref_summary_usage_stats">Améliorez le tri de l\'application en lui donnant accès aux Statistiques d\'Utilisations.</string>
+  <string name="pref_title_category_usage">Habitudes d\'utilisation</string>
+  <string name="pref_title_usage_stats">Statistiques d\'utilisation</string>
+  <string name="pref_summary_usage_stats">Améliorez le tri de l\'application en lui donnant accès aux statistiques d\'utilisation.</string>
+  <string name="pref_title_category_display">Affichage</string>
+  <string name="pref_title_night_mode">Mode Nuit</string>
+  <string name="pref_entry_night_mode_off">Désactivé</string>
+  <string name="pref_entry_night_mode_on">Activé</string>
+  <string name="pref_entry_night_mode_auto">Automatic at sunset</string>
   <string name="pref_title_category_others">Autres</string>
-  <string name="pref_title_open_source">Licences Open Source</string>
-  <string name="pref_summary_open_source">Voir les licences des librairies Open Source.</string>
+  <string name="pref_title_open_source">Licences open source</string>
+  <string name="pref_summary_open_source">Voir les licences des bibliothèques open source.</string>
   <string name="pref_title_contact">Contactez moi</string>
   <string name="pref_summary_contact">Envoyez-moi un email avant de mettre 1 étoile.</string>
   <string name="pref_title_market">Plus d\'applications par Said Tahsin Dane</string>
@@ -37,10 +42,10 @@ Ne plus ouvrir les liens de <strong>%2$s</strong> avec <strong>%1$s</strong> ? <
   <string name="title_tutorial_0">Bienvenue sur Open Link With</string>
   <string name="title_tutorial_1">Ça vous est déjà arrivé ?</string>
   <string name="title_tutorial_2">Partagez le !</string>
-  <string name="title_tutorial_3">Applications Préférées</string>
+  <string name="title_tutorial_3">Applications préférées</string>
   <string name="title_tutorial_5">Habitudes d\'Utilisations</string>
-  <string name="description_tutorial_0">Je viens à votre rescousse lorsque vous êtes bloqué dans un navigateur.</string>
-  <string name="description_tutorial_1">Vous cliquez sur un lien et d\'une quelconque manière vous finissez bloqué sur une page internet plutôt que de directement voir la vidéo.</string>
+  <string name="description_tutorial_0">Je viens à votre secours lorsque vous êtes bloqué dans un navigateur.</string>
+  <string name="description_tutorial_1">Vous cliquez sur un lien et d\'une quelconque manière vous finissez bloqué sur une page web plutôt que de directement voir la vidéo.</string>
   <string name="description_tutorial_2">Partagez le simplement avec moi et je changerai d\'applications pour vous.</string>
   <string name="description_tutorial_3"><![CDATA[
     Sélectionner <strong>TOUJOURS</strong> pour me dire de toujours ouvrir ce lien avec une application spécifique.
@@ -49,16 +54,16 @@ Ne plus ouvrir les liens de <strong>%2$s</strong> avec <strong>%1$s</strong> ? <
     <strong>Ajouter à l\'écran d\'accueil</strong>pour rapidement avoir accès à vos liens préférés avec vos applications préférées.
   ]]></string>
   <string name="description_tutorial_5"><![CDATA[
-Donnez moi l\'accès au <strong>HABITUDES D\'UTILISATIONS</strong> et je fonctionnerai mieux. Je détecterai avec quel navigateur vous partagez pour agir en conséquence.
+Donnez moi l\'accès au <strong>HABITUDES D\'UTILISATION</strong> et je fonctionnerai mieux. Je détecterai avec quel navigateur vous partagez pour agir en conséquence.
   ]]></string>
   <string name="usage_access_give_access">Donnez l\'accès</string>
   <string name="error">Erreur</string>
   <string name="next">Continuer</string>
-  <string name="error_usage_access_not_found">Les Paramètres des Habitudes d\'Usages ne peuvent pas être ouvert.\n\nVous pouvez y accéder en allant dans Paramètres -&gt; Sécurité</string>
-  <string name="error_cannot_start_activity">Failed to open the link with selected app. Try again later.</string>
+  <string name="error_usage_access_not_found">Les paramètres des habitudes d\'utilisation ne peuvent pas être ouverts.\n\nVous pouvez y accéder en allant dans Paramètres -&gt; Sécurité</string>
+  <string name="error_cannot_start_activity">Échec de l\'ouverture du lien avec l\'application sélectionnée. Réessayez plus tard.</string>
   <string name="add_to_homescreen">Ajouter à l\'écran d\'accueil</string>
   <string name="add">Ajouter</string>
   <string name="cancel">Annuler</string>
   <string name="add_to_home_screen_dialog_hint">Nom du raccourci</string>
-  <string name="add_to_home_screen_error">Device does not support shortcuts!</string>
+  <string name="add_to_home_screen_error">Cet appareil ne supporte pas les raccourcis !</string>
 </resources>

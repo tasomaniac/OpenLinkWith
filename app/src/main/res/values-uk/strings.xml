@@ -25,6 +25,11 @@
   <string name="pref_title_category_usage">Використати доступ</string>
   <string name="pref_title_usage_stats">Статистика використання</string>
   <string name="pref_summary_usage_stats">Сортування за популярністю.</string>
+  <string name="pref_title_category_display">Display</string>
+  <string name="pref_title_night_mode">Night Mode</string>
+  <string name="pref_entry_night_mode_off">Off</string>
+  <string name="pref_entry_night_mode_on">On</string>
+  <string name="pref_entry_night_mode_auto">Automatic at sunset</string>
   <string name="pref_title_category_others">Інші</string>
   <string name="pref_title_open_source">Ліцензії Open Source</string>
   <string name="pref_summary_open_source">Переглянути ліцензії відкритих бібліотек.</string>

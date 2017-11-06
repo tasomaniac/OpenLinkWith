@@ -24,6 +24,11 @@ Ta bort <strong>%1$s</strong> som föredragen app att öppna länkar från <stro
   <string name="pref_title_category_usage">Användningsåtkomst</string>
   <string name="pref_title_usage_stats">Användningsstatistik</string>
   <string name="pref_summary_usage_stats">Förbättra appen genom att ge tillgång till användarstatistik.</string>
+  <string name="pref_title_category_display">Display</string>
+  <string name="pref_title_night_mode">Night Mode</string>
+  <string name="pref_entry_night_mode_off">Off</string>
+  <string name="pref_entry_night_mode_on">On</string>
+  <string name="pref_entry_night_mode_auto">Automatic at sunset</string>
   <string name="pref_title_category_others">Andra</string>
   <string name="pref_title_open_source">Licenser för öppen källkod</string>
   <string name="pref_summary_open_source">Se licenser för open source-bibliotek.</string>
@@ -58,5 +63,5 @@ Ge tillgång till <strong>Användningsåtkomst</strong> så fungerar jag bättre
   <string name="add">Lägg till</string>
   <string name="cancel">Avbryt</string>
   <string name="add_to_home_screen_dialog_hint">Genvägstitel</string>
-  <string name="add_to_home_screen_error">Device does not support shortcuts!</string>
+  <string name="add_to_home_screen_error">Enheten har inte stöd för genvägar!</string>
 </resources>
