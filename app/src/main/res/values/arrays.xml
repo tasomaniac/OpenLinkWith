@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string-array name="pref_night_mode_entries" translatable="false">
+    <item>@string/pref_night_mode_off</item>
+    <item>@string/pref_night_mode_on</item>
+    <item>@string/pref_night_mode_auto</item>
+  </string-array>
+
+  <string-array name="pref_night_mode_values" translatable="false">
+    <item>@string/pref_value_night_mode_off</item>
+    <item>@string/pref_value_night_mode_on</item>
+    <item>@string/pref_value_night_mode_auto</item>
+  </string-array>
+
+</resources>

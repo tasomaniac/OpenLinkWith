@@ -41,8 +41,13 @@
   <string name="pref_title_category_display">Display</string>
 
   <string name="pref_key_night_mode" translatable="false">pref_night_mode</string>
+  <string name="pref_value_night_mode_off" translatable="false">off</string>
+  <string name="pref_value_night_mode_on" translatable="false">on</string>
+  <string name="pref_value_night_mode_auto" translatable="false">auto</string>
   <string name="pref_title_night_mode">Night Mode</string>
-  <!--<string name="pref_summary_night_mode">Improve the application sorting by giving access to Usage Stats.</string>-->
+  <string name="pref_night_mode_off">Off</string>
+  <string name="pref_night_mode_on">On</string>
+  <string name="pref_night_mode_auto">Automatic at sunset</string>
 
   <string name="pref_title_category_others">Others</string>
 

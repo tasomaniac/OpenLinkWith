@@ -43,6 +43,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
     @Inject
     @UsageAccess
     BooleanPreference usageAccessPref;
+    @Inject NightModePreferences nightModePreferences;
 
     private PreferenceCategory usageStatsPreferenceCategory;
 
@@ -141,20 +142,28 @@ public class SettingsFragment extends PreferenceFragmentCompat
     @Override
     public boolean onPreferenceClick(Preference preference) {
 
-        if (getString(R.string.pref_key_about).equals(preference.getKey())) {
+        if (isKeyEquals(preference, R.string.pref_key_about)) {
             startActivity(new Intent(getActivity(), IntroActivity.class));
-        } else if (getString(R.string.pref_key_preferred).equals(preference.getKey())) {
+        } else if (isKeyEquals(preference, R.string.pref_key_preferred)) {
             startActivity(new Intent(getActivity(), PreferredAppsActivity.class));
-        } else if (getString(R.string.pref_key_usage_stats).equals(preference.getKey())) {
+        } else if (isKeyEquals(preference, R.string.pref_key_usage_stats)) {
             onUsageAccessClick(preference);
-        } else if (getString(R.string.pref_key_open_source).equals(preference.getKey())) {
+        } else if (isKeyEquals(preference, R.string.pref_key_open_source)) {
             displayLicensesDialogFragment();
-        } else if (getString(R.string.pref_key_contact).equals(preference.getKey())) {
+        } else if (isKeyEquals(preference, R.string.pref_key_contact)) {
             startContactEmailChooser();
         }
 
         analytics.sendEvent( "Preference", "Item Click", preference.getKey());
         return true;
+    }
+
+    private boolean isKeyEquals(Preference preference, @StringRes int keyRes) {
+        return isKeyEquals(preference.getKey(), keyRes);
+    }
+
+    private boolean isKeyEquals(String key, @StringRes int keyRes) {
+        return getString(keyRes).equals(key);
     }
 
     private void onUsageAccessClick(Preference preference) {
@@ -184,8 +193,13 @@ public class SettingsFragment extends PreferenceFragmentCompat
     }
 
     @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         new BackupManager(getActivity()).dataChanged();
+
+        if (isKeyEquals(key, R.string.pref_key_night_mode)) {
+            nightModePreferences.updateDefaultNightMode();
+            getActivity().recreate();
+        }
     }
 
     private Preference findPreference(@StringRes int keyResource) {

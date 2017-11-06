@@ -4,11 +4,12 @@
     android:order="3"
     android:title="@string/pref_title_category_display">
 
-    <Preference
+    <ListPreference
       android:key="@string/pref_key_night_mode"
-      android:title="@string/pref_title_night_mode"/>
-    <!--
-      android:summary="@string/pref_summary_night_mode"-->
+      android:title="@string/pref_title_night_mode"
+      android:defaultValue="off"
+      android:entryValues="@array/pref_night_mode_values"
+      android:entries="@array/pref_night_mode_entries"/>
 
   </PreferenceCategory>
 
