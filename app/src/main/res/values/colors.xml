@@ -4,7 +4,7 @@
   <color name="theme_primary">#3F51B5</color>
   <color name="theme_accent">#009688</color>
 
-  <color name="white">#fff</color>
+  <color name="window_background">@color/material_grey_50</color>
 
   <color name="error_color">#FFDD2C00</color>
 </resources>

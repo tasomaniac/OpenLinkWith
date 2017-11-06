@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/main"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:orientation="vertical">
+  android:orientation="vertical"
+  tools:context=".intro.IntroActivity">
 
   <TextView
     android:id="@+id/title"
@@ -16,9 +16,8 @@
     android:gravity="center"
     android:paddingLeft="@dimen/keyline_1"
     android:paddingRight="@dimen/keyline_1"
-    android:textColor="@android:color/white"
+    android:textAppearance="@style/TextAppearance.AppCompat.Title"
     android:textSize="28sp"
-    android:textStyle="bold"
     tools:text="@string/title_tutorial_5"/>
 
   <LinearLayout
@@ -48,7 +47,6 @@
     android:gravity="center"
     android:paddingRight="@dimen/keyline_1"
     android:paddingLeft="@dimen/keyline_1"
-    android:textColor="@android:color/white"
     android:textSize="16sp"
     tools:text="@string/description_tutorial_5"/>
 </LinearLayout>
