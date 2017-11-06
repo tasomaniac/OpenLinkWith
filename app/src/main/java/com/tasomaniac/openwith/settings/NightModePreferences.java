@@ -28,21 +28,28 @@ public class NightModePreferences {
         AppCompatDelegate.setDefaultNightMode(getMode().delegate);
     }
 
+    @StringRes
+    public int getSelectedEntry() {
+        return getMode().entry;
+    }
+
     private Mode getMode() {
         String value = sharedPreferences.getString(key, defaultValue);
         return Mode.fromValue(resources, value);
     }
 
     private enum Mode {
-        OFF(R.string.pref_value_night_mode_off, AppCompatDelegate.MODE_NIGHT_NO),
-        ON(R.string.pref_value_night_mode_on, AppCompatDelegate.MODE_NIGHT_YES),
-        AUTO(R.string.pref_value_night_mode_auto, AppCompatDelegate.MODE_NIGHT_AUTO);
+        OFF(R.string.pref_value_night_mode_off, R.string.pref_entry_night_mode_off, AppCompatDelegate.MODE_NIGHT_NO),
+        ON(R.string.pref_value_night_mode_on, R.string.pref_entry_night_mode_on, AppCompatDelegate.MODE_NIGHT_YES),
+        AUTO(R.string.pref_value_night_mode_auto, R.string.pref_entry_night_mode_auto, AppCompatDelegate.MODE_NIGHT_AUTO);
 
         @StringRes private final int value;
+        private final int entry;
         private final int delegate;
 
-        Mode(@StringRes int value, int delegate) {
+        Mode(@StringRes int value, @StringRes int entry, int delegate) {
             this.value = value;
+            this.entry = entry;
             this.delegate = delegate;
         }
 

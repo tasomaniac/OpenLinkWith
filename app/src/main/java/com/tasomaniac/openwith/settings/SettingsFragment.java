@@ -85,6 +85,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
             setupUsagePreference();
         }
         setupVersionPreference();
+        setupNightModePreference();
     }
 
     @Override
@@ -137,6 +138,11 @@ public class SettingsFragment extends PreferenceFragmentCompat
         }
         Preference preference = findPreference(R.string.pref_key_version);
         preference.setSummary(version);
+    }
+
+    private void setupNightModePreference() {
+        int selectedEntry = nightModePreferences.getSelectedEntry();
+        findPreference(R.string.pref_key_night_mode).setSummary(selectedEntry);
     }
 
     @Override
