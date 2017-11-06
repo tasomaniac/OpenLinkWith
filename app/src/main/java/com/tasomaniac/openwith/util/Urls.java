@@ -5,18 +5,24 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ShareCompat;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static java.util.Arrays.asList;
+import static java.util.Collections.unmodifiableSet;
+
 public final class Urls {
 
-    private static final Fixer[] URL_FIXERS = new Fixer[]{
+    private static final Set<Fixer> URL_FIXERS = unmodifiableSet(new HashSet<>(asList(
             new FacebookFixer(),
             new TwitterFixer(),
             new EbayFixer(),
             new AmazonFixer(),
             new DailyMailFixer(),
-    };
+            new VkFixer()
+    )));
 
     public static String fixUrls(String url) {
         for (Fixer urlFixer : URL_FIXERS) {
@@ -174,6 +180,13 @@ public final class Urls {
             } catch (Exception ignored) {
             }
             return null;
+        }
+    }
+
+    private static class VkFixer implements Fixer {
+        @Override
+        public String fix(String url) {
+            return url.replace("//m.vk.com", "//vk.com");
         }
     }
 

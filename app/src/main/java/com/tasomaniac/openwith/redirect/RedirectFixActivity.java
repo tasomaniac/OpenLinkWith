@@ -14,7 +14,6 @@ import com.tasomaniac.openwith.rx.SchedulingStrategy;
 
 import javax.inject.Inject;
 
-import butterknife.ButterKnife;
 import dagger.android.support.DaggerAppCompatActivity;
 import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
@@ -39,7 +38,7 @@ public class RedirectFixActivity extends DaggerAppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resolver_activity);
 
-        DelayedProgressBar progress = ButterKnife.findById(this, R.id.resolver_progress);
+        DelayedProgressBar progress = findViewById(R.id.resolver_progress);
         progress.show(true);
 
         Intent source = getIntent().setComponent(null);
