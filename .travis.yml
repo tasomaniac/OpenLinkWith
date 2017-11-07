@@ -20,7 +20,7 @@ before_script:
 
 
 script:
-  - ./gradlew assembleFlossDebug lintFlossDebug testFlossDebugUnitTest -s
+  - ./gradlew build -s
 
 branches:
   except:

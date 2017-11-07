@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.novoda.android-command'
 apply plugin: 'com.novoda.build-properties'
 apply plugin: 'com.github.triplet.play'
-if (isPlay) apply plugin: 'io.fabric'
+apply plugin: 'io.fabric'
 apply plugin: 'net.ltgt.errorprone'
 
 def signingFile = file('props/release.signing')
