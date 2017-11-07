@@ -44,6 +44,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * This activity is displayed when the system attempts to start an Intent for
@@ -195,8 +196,14 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
         listener.onItemClick(dri);
     }
 
-    public void onButtonClick(View v) {
-        listener.onActionButtonClick(v.getId() == R.id.button_always);
+    @OnClick(R.id.button_always)
+    public void onAlwaysButtonClick() {
+        listener.onActionButtonClick(true);
+    }
+
+    @OnClick(R.id.button_once)
+    public void onOnceButtonClick() {
+        listener.onActionButtonClick(false);
     }
 
     @Override

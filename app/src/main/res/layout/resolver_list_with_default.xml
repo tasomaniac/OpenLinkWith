@@ -83,7 +83,6 @@
         android:layout_gravity="start"
         android:maxLines="2"
         android:minHeight="@dimen/alert_dialog_button_bar_height"
-        android:onClick="onButtonClick"
         android:text="@string/activity_resolver_use_once" />
 
       <Button
@@ -94,7 +93,6 @@
         android:layout_gravity="end"
         android:maxLines="2"
         android:minHeight="@dimen/alert_dialog_button_bar_height"
-        android:onClick="onButtonClick"
         android:text="@string/activity_resolver_use_always" />
     </LinearLayout>
 
