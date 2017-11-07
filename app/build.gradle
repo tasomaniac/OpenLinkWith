@@ -115,14 +115,11 @@ dependencies {
   implementation 'io.reactivex.rxjava2:rxjava:2.1.6'
 
   playImplementation 'com.crashlytics.sdk.android:crashlytics:2.7.1'
-  playImplementation "com.google.firebase:firebase-core:$versions.gms"
 
   testImplementation 'junit:junit:4.12'
   testImplementation 'org.mockito:mockito-core:2.11.0'
   testImplementation "com.squareup.okhttp3:mockwebserver:$versions.okHttp"
 }
-
-if (isPlay) apply plugin: 'com.google.gms.google-services'
 
 project.tasks.withType(JavaCompile) {
   options.compilerArgs += [
