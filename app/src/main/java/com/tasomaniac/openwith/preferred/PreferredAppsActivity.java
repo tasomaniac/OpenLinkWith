@@ -52,7 +52,7 @@ public class PreferredAppsActivity extends DaggerAppCompatActivity implements
         setContentView(R.layout.activity_preferred_apps);
         ButterKnife.bind(this);
 
-        analytics.sendScreenView(this, "Preferred Apps");
+        analytics.sendScreenView("Preferred Apps");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

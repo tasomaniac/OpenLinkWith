@@ -1,8 +1,8 @@
 package com.tasomaniac.openwith;
 
-import android.app.Activity;
-import android.os.Bundle;
-
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.ContentViewEvent;
+import com.crashlytics.android.answers.CustomEvent;
 import com.tasomaniac.openwith.data.Analytics;
 
 import javax.inject.Singleton;
@@ -11,39 +11,29 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-final class AnalyticsModule {
+class AnalyticsModule {
 
     @Provides
     @Singleton
-    static Analytics provideAnalytics(App app) {
+    static Analytics provideAnalytics() {
         if (BuildConfig.DEBUG) {
             return new Analytics.DebugAnalytics();
         }
-        return new FirebaseAnalytics(com.google.firebase.analytics.FirebaseAnalytics.getInstance(app));
+        return new AnswersAnalytics();
     }
 
-    private static class FirebaseAnalytics implements Analytics {
-
-        private final com.google.firebase.analytics.FirebaseAnalytics analytics;
-
-        FirebaseAnalytics(com.google.firebase.analytics.FirebaseAnalytics analytics) {
-            this.analytics = analytics;
-        }
+    private static class AnswersAnalytics implements Analytics {
+        private final Answers answers = Answers.getInstance();
 
         @Override
-        public void sendScreenView(Activity activity, String screenName) {
-            analytics.setCurrentScreen(activity, screenName, null);
+        public void sendScreenView(String screenName) {
+            answers.logContentView(new ContentViewEvent().putContentName(screenName));
         }
 
         @Override
         public void sendEvent(String category, String action, String label) {
-            Bundle bundle = new Bundle();
-            bundle.putString(action, label);
-            analytics.logEvent(category, bundle);
+            answers.logCustom(new CustomEvent(category)
+                    .putCustomAttribute(action, label));
         }
-    }
-
-    private AnalyticsModule() {
-        //no instance
     }
 }

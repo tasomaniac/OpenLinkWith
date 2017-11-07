@@ -22,7 +22,7 @@ public class AddToHomeScreen extends DaggerAppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        analytics.sendScreenView(this, "AddToHomeScreen");
+        analytics.sendScreenView("AddToHomeScreen");
 
         final ShareCompat.IntentReader reader = ShareCompat.IntentReader.from(this);
         String foundUrl = Urls.extractUrlFrom(getIntent(), reader);
