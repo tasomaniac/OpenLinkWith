@@ -16,7 +16,6 @@ import com.tasomaniac.openwith.data.Analytics;
 import com.tasomaniac.openwith.data.prefs.BooleanPreference;
 import com.tasomaniac.openwith.data.prefs.UsageAccess;
 import com.tasomaniac.openwith.util.Intents;
-import com.tasomaniac.openwith.util.Utils;
 
 import javax.inject.Inject;
 
@@ -40,7 +39,7 @@ class UsageAccessSettings {
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     void setup() {
-        boolean usageAccessGiven = Utils.isUsageStatsEnabled(getContext());
+        boolean usageAccessGiven = UsageStats.isEnabled(getContext());
 
         if (usageAccessGiven && isUsageAccessRequestAdded()) {
             remove();

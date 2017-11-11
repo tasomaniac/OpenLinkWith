@@ -10,8 +10,8 @@ import android.support.annotation.RequiresApi;
 
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.Analytics;
+import com.tasomaniac.openwith.settings.UsageStats;
 import com.tasomaniac.openwith.util.Intents;
-import com.tasomaniac.openwith.util.Utils;
 
 import javax.inject.Inject;
 
@@ -62,7 +62,7 @@ public class IntroActivity extends AppIntro {
                              .drawable(R.drawable.tutorial_4).build());
         }
 
-        if (SDK_INT >= LOLLIPOP && !Utils.isUsageStatsEnabled(this)) {
+        if (SDK_INT >= LOLLIPOP && !UsageStats.isEnabled(this)) {
             addUsageStatsSlide();
         }
     }
@@ -90,7 +90,7 @@ public class IntroActivity extends AppIntro {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onDonePressed() {
-        if (usageStatsSlideAdded && !Utils.isUsageStatsEnabled(this)) {
+        if (usageStatsSlideAdded && !UsageStats.isEnabled(this)) {
             boolean success = Intents.maybeStartUsageAccessSettings(this);
             if (!success) {
                 finish();
@@ -105,7 +105,7 @@ public class IntroActivity extends AppIntro {
     protected void onResume() {
         super.onResume();
 
-        if (usageStatsSlideAdded && Utils.isUsageStatsEnabled(this)) {
+        if (usageStatsSlideAdded && UsageStats.isEnabled(this)) {
             setDoneText(getString(R.string.done));
         }
     }
@@ -118,7 +118,7 @@ public class IntroActivity extends AppIntro {
             analytics.sendEvent(
                     "Usage Access",
                     "Given in first intro",
-                    Boolean.toString(Utils.isUsageStatsEnabled(this))
+                    Boolean.toString(UsageStats.isEnabled(this))
             );
         }
     }
