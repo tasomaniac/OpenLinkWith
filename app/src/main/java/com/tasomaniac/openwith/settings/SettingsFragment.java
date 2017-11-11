@@ -4,28 +4,17 @@ import android.app.backup.BackupManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
 import android.support.v4.app.ShareCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceFragmentCompat;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
 
 import com.tasomaniac.openwith.BuildConfig;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.Analytics;
-import com.tasomaniac.openwith.data.prefs.BooleanPreference;
-import com.tasomaniac.openwith.data.prefs.UsageAccess;
 import com.tasomaniac.openwith.intro.IntroActivity;
 import com.tasomaniac.openwith.preferred.PreferredAppsActivity;
-import com.tasomaniac.openwith.util.Intents;
-import com.tasomaniac.openwith.util.Utils;
 
 import javax.inject.Inject;
 
@@ -40,12 +29,8 @@ public class SettingsFragment extends PreferenceFragmentCompat
 
     @Inject Analytics analytics;
     @Inject SharedPreferences sharedPreferences;
-    @Inject
-    @UsageAccess
-    BooleanPreference usageAccessPref;
     @Inject NightModePreferences nightModePreferences;
-
-    private PreferenceCategory usageStatsPreferenceCategory;
+    @Inject UsageAccessSettings usageAccessSettings;
 
     public static SettingsFragment newInstance() {
         SettingsFragment fragment = new SettingsFragment();
@@ -82,7 +67,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
 
         if (SDK_INT >= LOLLIPOP) {
-            setupUsagePreference();
+            usageAccessSettings.setup();
         }
         setupVersionPreference();
         setupNightModePreference();
@@ -92,41 +77,6 @@ public class SettingsFragment extends PreferenceFragmentCompat
     public void onPause() {
         super.onPause();
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
-    }
-
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    private void setupUsagePreference() {
-        boolean usageAccessGiven = Utils.isUsageStatsEnabled(getActivity());
-
-        if (usageAccessGiven) {
-            if (usageStatsPreferenceCategory != null) {
-                getPreferenceScreen().removePreference(usageStatsPreferenceCategory);
-                usageStatsPreferenceCategory = null;
-            }
-        } else {
-            if (usageStatsPreferenceCategory == null) {
-                addPreferencesFromResource(R.xml.pref_usage);
-                usageStatsPreferenceCategory = (PreferenceCategory) findPreference(R.string.pref_key_category_usage);
-
-                Preference usageStatsPreference = findPreference(R.string.pref_key_usage_stats);
-                usageStatsPreference.setOnPreferenceClickListener(this);
-
-                //Set title and summary in red font.
-                usageStatsPreference.setTitle(coloredErrorString(R.string.pref_title_usage_stats));
-                usageStatsPreference.setSummary(coloredErrorString(R.string.pref_summary_usage_stats));
-                usageStatsPreference.setWidgetLayoutResource(R.layout.preference_widget_error);
-            }
-        }
-
-        if (usageAccessPref.get() != usageAccessGiven) {
-            usageAccessPref.set(usageAccessGiven);
-
-            analytics.sendEvent(
-                    "Usage Access",
-                    "Access Given",
-                    Boolean.toString(usageAccessGiven)
-            );
-        }
     }
 
     private void setupVersionPreference() {
@@ -152,8 +102,6 @@ public class SettingsFragment extends PreferenceFragmentCompat
             startActivity(new Intent(getActivity(), IntroActivity.class));
         } else if (isKeyEquals(preference, R.string.pref_key_preferred)) {
             startActivity(new Intent(getActivity(), PreferredAppsActivity.class));
-        } else if (isKeyEquals(preference, R.string.pref_key_usage_stats)) {
-            onUsageAccessClick(preference);
         } else if (isKeyEquals(preference, R.string.pref_key_open_source)) {
             displayLicensesDialogFragment();
         } else if (isKeyEquals(preference, R.string.pref_key_contact)) {
@@ -170,20 +118,6 @@ public class SettingsFragment extends PreferenceFragmentCompat
 
     private boolean isKeyEquals(String key, @StringRes int keyRes) {
         return getString(keyRes).equals(key);
-    }
-
-    private void onUsageAccessClick(Preference preference) {
-        boolean settingsOpened = Intents.maybeStartUsageAccessSettings(getActivity());
-
-        if (!settingsOpened) {
-            new AlertDialog.Builder(getContext())
-                    .setTitle(R.string.error)
-                    .setMessage(R.string.error_usage_access_not_found)
-                    .setPositiveButton(android.R.string.ok, null)
-                    .show();
-
-            preference.setSummary(R.string.error_usage_access_not_found);
-        }
     }
 
     private void displayLicensesDialogFragment() {
@@ -208,15 +142,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
         }
     }
 
-    private Preference findPreference(@StringRes int keyResource) {
+    Preference findPreference(@StringRes int keyResource) {
         return findPreference(getString(keyResource));
-    }
-
-    private CharSequence coloredErrorString(@StringRes int stringRes) {
-        SpannableString errorSpan = new SpannableString(getString(stringRes));
-        ForegroundColorSpan colorSpan = new ForegroundColorSpan(
-                ContextCompat.getColor(getContext(), R.color.error_color));
-        errorSpan.setSpan(colorSpan, 0, errorSpan.length(), 0);
-        return errorSpan;
     }
 }
