@@ -31,8 +31,11 @@ public class Utils {
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    public static boolean isUsageStatsEnabled(final Context context) {
+    public static boolean isUsageStatsEnabled(Context context) {
         AppOpsManager appOps = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+        if (appOps == null) {
+            return false;
+        }
         int mode = appOps.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,
                 android.os.Process.myUid(), context.getPackageName());
         return mode == AppOpsManager.MODE_ALLOWED;

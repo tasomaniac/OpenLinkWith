@@ -97,7 +97,6 @@ public class SettingsFragment extends PreferenceFragmentCompat
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-
         if (isKeyEquals(preference, R.string.pref_key_about)) {
             startActivity(new Intent(getActivity(), IntroActivity.class));
         } else if (isKeyEquals(preference, R.string.pref_key_preferred)) {
