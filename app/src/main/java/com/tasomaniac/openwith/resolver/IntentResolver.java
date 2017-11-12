@@ -68,7 +68,7 @@ class IntentResolver {
 
     void resolve() {
         disposable = Observable.fromCallable(this::doResolve)
-                .compose(schedulingStrategy.apply())
+                .compose(schedulingStrategy.forObservable())
                 .subscribe(data -> {
                     this.data = data;
                     listener.onIntentResolved(data);

@@ -57,7 +57,7 @@ class RedirectFixer {
                 .doOnError(throwable -> cancel())
                 .onErrorReturn(throwable -> lastUrl)
                 .doOnDispose(this::cancel)
-                .compose(scheduling.applyToSingle());
+                .compose(scheduling.forSingle());
     }
 
     private HttpUrl doFollowRedirects(HttpUrl url) throws IOException {

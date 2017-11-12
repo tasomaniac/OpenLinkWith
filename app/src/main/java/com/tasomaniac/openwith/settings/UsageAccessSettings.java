@@ -1,6 +1,7 @@
 package com.tasomaniac.openwith.settings;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
@@ -15,15 +16,23 @@ import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.Analytics;
 import com.tasomaniac.openwith.data.prefs.BooleanPreference;
 import com.tasomaniac.openwith.data.prefs.UsageAccess;
+import com.tasomaniac.openwith.rx.SchedulingStrategy;
 import com.tasomaniac.openwith.util.Intents;
 
 import javax.inject.Inject;
+import java.util.concurrent.TimeUnit;
 
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+
+@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 class UsageAccessSettings {
 
     private final SettingsFragment fragment;
     private final BooleanPreference usageAccessPref;
     private final Analytics analytics;
+    private final SchedulingStrategy schedulingStrategy;
+    private final CompositeDisposable disposables = new CompositeDisposable();
 
     private PreferenceCategory usageStatsPreferenceCategory;
 
@@ -31,13 +40,14 @@ class UsageAccessSettings {
     UsageAccessSettings(
             SettingsFragment fragment,
             @UsageAccess BooleanPreference usageAccessPref,
-            Analytics analytics) {
+            Analytics analytics,
+            SchedulingStrategy schedulingStrategy) {
         this.fragment = fragment;
         this.usageAccessPref = usageAccessPref;
         this.analytics = analytics;
+        this.schedulingStrategy = schedulingStrategy;
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     void setup() {
         boolean usageAccessGiven = UsageStats.isEnabled(getContext());
 
@@ -60,6 +70,10 @@ class UsageAccessSettings {
         }
     }
 
+    void release() {
+        disposables.clear();
+    }
+
     private void addUsageAccessRequest() {
         fragment.addPreferencesFromResource(R.xml.pref_usage);
         usageStatsPreferenceCategory = (PreferenceCategory) fragment.findPreference(R.string.pref_key_category_usage);
@@ -76,18 +90,41 @@ class UsageAccessSettings {
     private boolean onUsageAccessClick(Preference preference) {
         boolean settingsOpened = Intents.maybeStartUsageAccessSettings(fragment.getActivity());
 
-        if (!settingsOpened) {
-            new AlertDialog.Builder(getContext())
-                    .setTitle(R.string.error)
-                    .setMessage(R.string.error_usage_access_not_found)
-                    .setPositiveButton(android.R.string.ok, null)
-                    .show();
-
+        if (settingsOpened) {
+            observeUsageStats();
+        } else {
+            displayAlert();
             preference.setSummary(R.string.error_usage_access_not_found);
         }
 
         analytics.sendEvent("Preference", "Item Click", preference.getKey());
         return true;
+    }
+
+    private void observeUsageStats() {
+        Disposable disposable = UsageStats.observe(getContext())
+                .onErrorReturnItem(false)
+                .filter(accessGiven -> accessGiven)
+                .firstElement()
+                .ignoreElement()
+                .timeout(1, TimeUnit.MINUTES)
+                .compose(schedulingStrategy.forCompletable())
+                .subscribe(this::restart);
+        disposables.add(disposable);
+    }
+
+    private void restart() {
+        Intent intent = new Intent(getContext(), SettingsActivity.class)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        getContext().startActivity(intent);
+    }
+
+    private void displayAlert() {
+        new AlertDialog.Builder(getContext())
+                .setTitle(R.string.error)
+                .setMessage(R.string.error_usage_access_not_found)
+                .setPositiveButton(android.R.string.ok, null)
+                .show();
     }
 
     private Context getContext() {

@@ -79,6 +79,14 @@ public class SettingsFragment extends PreferenceFragmentCompat
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
     }
 
+    @Override
+    public void onDestroy() {
+        if (SDK_INT >= LOLLIPOP) {
+            usageAccessSettings.release();
+        }
+        super.onDestroy();
+    }
+
     private void setupVersionPreference() {
         StringBuilder version = new StringBuilder(BuildConfig.VERSION_NAME);
         if (BuildConfig.DEBUG) {

@@ -18,31 +18,31 @@ public class SchedulingStrategy {
         this.notifier = notifier;
     }
 
-    public <T> ObservableTransformer<T, T> apply() {
+    public <T> ObservableTransformer<T, T> forObservable() {
         return observable -> observable
                 .subscribeOn(executor)
                 .observeOn(notifier);
     }
 
-    public <T> FlowableTransformer<T, T> applyToFlowable() {
+    public <T> FlowableTransformer<T, T> forFlowable() {
         return flowable -> flowable
                 .subscribeOn(executor)
                 .observeOn(notifier);
     }
 
-    public <T> MaybeTransformer<T, T> applyToMaybe() {
+    public <T> MaybeTransformer<T, T> forMaybe() {
         return maybe -> maybe
                 .subscribeOn(executor)
                 .observeOn(notifier);
     }
 
-    public CompletableTransformer applyToCompletable() {
+    public CompletableTransformer forCompletable() {
         return completable -> completable
                 .subscribeOn(executor)
                 .observeOn(notifier);
     }
 
-    public <T> SingleTransformer<T, T> applyToSingle() {
+    public <T> SingleTransformer<T, T> forSingle() {
         return single -> single
                 .subscribeOn(executor)
                 .observeOn(notifier);

@@ -46,7 +46,7 @@ public class RedirectFixActivity extends DaggerAppCompatActivity {
                 .filter(browserIntentChecker::hasOnlyBrowsers)
                 .flatMap(intent -> redirectFixer.followRedirects(intent).toMaybe())
                 .defaultIfEmpty(source)
-                .compose(schedulingStrategy.applyToMaybe())
+                .compose(schedulingStrategy.forMaybe())
                 .subscribe(intent -> {
                     startActivity(intent.setComponent(new ComponentName(this, ResolverActivity.class)));
                     finish();
