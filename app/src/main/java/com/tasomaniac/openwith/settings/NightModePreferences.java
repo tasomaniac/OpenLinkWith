@@ -33,12 +33,12 @@ public class NightModePreferences {
         return getMode().entry;
     }
 
-    private Mode getMode() {
+    public Mode getMode() {
         String value = sharedPreferences.getString(key, defaultValue);
         return Mode.fromValue(resources, value);
     }
 
-    private enum Mode {
+    public enum Mode {
         OFF(R.string.pref_value_night_mode_off, R.string.pref_entry_night_mode_off, AppCompatDelegate.MODE_NIGHT_NO),
         ON(R.string.pref_value_night_mode_on, R.string.pref_entry_night_mode_on, AppCompatDelegate.MODE_NIGHT_YES),
         AUTO(R.string.pref_value_night_mode_auto, R.string.pref_entry_night_mode_auto, AppCompatDelegate.MODE_NIGHT_AUTO);
@@ -53,7 +53,7 @@ public class NightModePreferences {
             this.delegate = delegate;
         }
 
-        private String stringVale(Resources resources) {
+        public String stringVale(Resources resources) {
             return resources.getString(value);
         }
 

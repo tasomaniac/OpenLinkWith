@@ -115,7 +115,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
             startContactEmailChooser();
         }
 
-        analytics.sendEvent( "Preference", "Item Click", preference.getKey());
+        analytics.sendEvent("Preference", "Item Click", preference.getKey());
         return true;
     }
 
@@ -146,6 +146,9 @@ public class SettingsFragment extends PreferenceFragmentCompat
         if (isKeyEquals(key, R.string.pref_key_night_mode)) {
             nightModePreferences.updateDefaultNightMode();
             getActivity().recreate();
+
+            String selectedValue = nightModePreferences.getMode().stringVale(getResources());
+            analytics.sendEvent("Preference", "Night Mode", selectedValue);
         }
     }
 
