@@ -35,8 +35,6 @@ public class SettingsActivity extends DaggerAppCompatActivity {
         setContentView(R.layout.activity_settings);
         ButterKnife.bind(this);
 
-        analytics.sendScreenView("Settings");
-
         toolbar.setNavigationIcon(R.drawable.ic_action_done);
         toolbar.setNavigationContentDescription(R.string.done);
         setSupportActionBar(toolbar);
@@ -47,6 +45,8 @@ public class SettingsActivity extends DaggerAppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment_container, SettingsFragment.newInstance())
                     .commit();
+
+            analytics.sendScreenView("Settings");
         }
     }
 

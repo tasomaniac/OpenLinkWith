@@ -39,7 +39,9 @@ public class IntroActivity extends AppIntro {
 
     @Override
     public void init(@Nullable Bundle savedInstanceState) {
-        analytics.sendScreenView("App Intro");
+        if (savedInstanceState == null) {
+            analytics.sendScreenView("App Intro");
+        }
 
         addSlide(new AppIntroFragment.Builder()
                          .title(R.string.title_tutorial_0)
