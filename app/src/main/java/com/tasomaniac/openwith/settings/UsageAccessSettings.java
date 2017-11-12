@@ -1,7 +1,6 @@
 package com.tasomaniac.openwith.settings;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
@@ -20,7 +19,6 @@ import com.tasomaniac.openwith.rx.SchedulingStrategy;
 import com.tasomaniac.openwith.util.Intents;
 
 import javax.inject.Inject;
-import java.util.concurrent.TimeUnit;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -88,7 +86,7 @@ class UsageAccessSettings {
     }
 
     private boolean onUsageAccessClick(Preference preference) {
-        boolean settingsOpened = Intents.maybeStartUsageAccessSettings(fragment.getActivity());
+        boolean settingsOpened = UsageStats.maybeStartUsageAccessSettings(fragment.getActivity());
 
         if (settingsOpened) {
             observeUsageStats();
@@ -102,21 +100,10 @@ class UsageAccessSettings {
     }
 
     private void observeUsageStats() {
-        Disposable disposable = UsageStats.observe(getContext())
-                .onErrorReturnItem(false)
-                .filter(accessGiven -> accessGiven)
-                .firstElement()
-                .ignoreElement()
-                .timeout(1, TimeUnit.MINUTES)
+        Disposable disposable = UsageStats.observeAccessGiven(getContext())
                 .compose(schedulingStrategy.forCompletable())
-                .subscribe(this::restart);
+                .subscribe(() -> Intents.restartSettings(getContext()));
         disposables.add(disposable);
-    }
-
-    private void restart() {
-        Intent intent = new Intent(getContext(), SettingsActivity.class)
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        getContext().startActivity(intent);
     }
 
     private void displayAlert() {

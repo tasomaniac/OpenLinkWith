@@ -3,17 +3,20 @@ package com.tasomaniac.openwith.intro;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.Analytics;
+import com.tasomaniac.openwith.rx.SchedulingStrategy;
 import com.tasomaniac.openwith.settings.UsageStats;
 import com.tasomaniac.openwith.util.Intents;
 
 import javax.inject.Inject;
+
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.LOLLIPOP;
@@ -22,9 +25,12 @@ public class IntroActivity extends AppIntro {
 
     private static final String EXTRA_FIRST_START = "first_start";
 
-    private boolean usageStatsSlideAdded;
-
     @Inject Analytics analytics;
+    @Inject SchedulingStrategy schedulingStrategy;
+
+    private final CompositeDisposable disposables = new CompositeDisposable();
+
+    private boolean usageStatsSlideAdded;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, IntroActivity.class)
@@ -67,7 +73,7 @@ public class IntroActivity extends AppIntro {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(LOLLIPOP)
     private void addUsageStatsSlide() {
         usageStatsSlideAdded = true;
         addSlide(new AppIntroFragment.Builder()
@@ -87,12 +93,14 @@ public class IntroActivity extends AppIntro {
     public void onNextPressed() {
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @TargetApi(LOLLIPOP)
     @Override
     public void onDonePressed() {
         if (usageStatsSlideAdded && !UsageStats.isEnabled(this)) {
-            boolean success = Intents.maybeStartUsageAccessSettings(this);
-            if (!success) {
+            boolean success = UsageStats.maybeStartUsageAccessSettings(this);
+            if (success) {
+                observeUsageStats();
+            } else {
                 finish();
             }
         } else {
@@ -100,7 +108,15 @@ public class IntroActivity extends AppIntro {
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(LOLLIPOP)
+    private void observeUsageStats() {
+        Disposable disposable = UsageStats.observeAccessGiven(this)
+                .compose(schedulingStrategy.forCompletable())
+                .subscribe(() -> Intents.restartSettings(this));
+        disposables.add(disposable);
+    }
+
+    @TargetApi(LOLLIPOP)
     @Override
     protected void onResume() {
         super.onResume();
@@ -121,6 +137,7 @@ public class IntroActivity extends AppIntro {
                     Boolean.toString(UsageStats.isEnabled(this))
             );
         }
+        disposables.clear();
     }
 
     private boolean shouldTrackUsageAccess() {

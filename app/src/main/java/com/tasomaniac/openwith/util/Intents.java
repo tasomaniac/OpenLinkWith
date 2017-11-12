@@ -1,17 +1,14 @@
 package com.tasomaniac.openwith.util;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.provider.Settings;
+
+import com.tasomaniac.openwith.settings.SettingsActivity;
 
 import java.util.List;
-
-import timber.log.Timber;
 
 public class Intents {
 
@@ -19,22 +16,17 @@ public class Intents {
             new AmazonFixer(),
     };
 
+    public static void restartSettings(Context context) {
+        Intent intent = new Intent(context, SettingsActivity.class)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        context.startActivity(intent);
+    }
+
     public static Intent homeScreenIntent() {
         Intent homeIntent = new Intent(Intent.ACTION_MAIN);
         homeIntent.addCategory(Intent.CATEGORY_HOME);
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
         return homeIntent;
-    }
-
-    @SuppressLint("InlinedApi")
-    public static boolean maybeStartUsageAccessSettings(final Activity activity) {
-        try {
-            activity.startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
-            return true;
-        } catch (Exception e) {
-            Timber.e(e, "Usage Access Open");
-            return false;
-        }
     }
 
     public static boolean isHttp(Intent intent) {
