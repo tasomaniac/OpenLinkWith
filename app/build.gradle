@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'com.novoda.android-command'
 apply plugin: 'com.novoda.build-properties'
 apply plugin: 'com.github.triplet.play'
@@ -90,7 +92,8 @@ configurations {
 }
 
 dependencies {
-
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$versions.kotlin"
+  
   implementation "com.android.support:support-fragment:$versions.supportLib"
   implementation "com.android.support:appcompat-v7:$versions.supportLib"
   implementation "com.android.support:recyclerview-v7:$versions.supportLib"
@@ -101,14 +104,14 @@ dependencies {
   implementation 'com.tasomaniac:delayed-progress:0.4'
 
   implementation "net.simonvt.schematic:schematic:$versions.schematic"
-  annotationProcessor "net.simonvt.schematic:schematic-compiler:$versions.schematic"
+  kapt "net.simonvt.schematic:schematic-compiler:$versions.schematic"
 
   implementation "com.google.dagger:dagger-android-support:$versions.dagger"
-  annotationProcessor "com.google.dagger:dagger-compiler:$versions.dagger"
-  annotationProcessor "com.google.dagger:dagger-android-processor:$versions.dagger"
+  kapt "com.google.dagger:dagger-compiler:$versions.dagger"
+  kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
 
   implementation "com.jakewharton:butterknife:$versions.butterKnife"
-  annotationProcessor "com.jakewharton:butterknife-compiler:$versions.butterKnife"
+  kapt "com.jakewharton:butterknife-compiler:$versions.butterKnife"
   implementation 'com.jakewharton.timber:timber:4.6.0'
 
   implementation "com.squareup.okhttp3:okhttp:$versions.okHttp"
