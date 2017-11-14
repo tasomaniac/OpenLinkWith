@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!-- http://tools.android.com/tips/lint-checks -->
 <lint>
-  <issue id="UnusedResources" severity="error" />
+  <!-- Ignored until kotlin usages are recognized by lint -->
+  <!--<issue id="UnusedResources" severity="error" />-->
   <issue id="ParcelClassLoader" severity="error" />
   <issue id="HardcodedText" severity="error" />
   <issue id="HardwareIds" severity="error" />
