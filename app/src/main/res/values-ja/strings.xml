@@ -24,11 +24,11 @@
   <string name="pref_title_category_usage">使用状況へのアクセス</string>
   <string name="pref_title_usage_stats">使用統計情報</string>
   <string name="pref_summary_usage_stats">アプリの表示順を向上させるために、使用統計情報へのアクセスを許可してください</string>
-  <string name="pref_title_category_display">Display</string>
-  <string name="pref_title_night_mode">Night Mode</string>
-  <string name="pref_entry_night_mode_off">Off</string>
-  <string name="pref_entry_night_mode_on">On</string>
-  <string name="pref_entry_night_mode_auto">Automatic at sunset</string>
+  <string name="pref_title_category_display">ディスプレイ</string>
+  <string name="pref_title_night_mode">夜間モード</string>
+  <string name="pref_entry_night_mode_off">オフ</string>
+  <string name="pref_entry_night_mode_on">オン</string>
+  <string name="pref_entry_night_mode_auto">日没時、自動</string>
   <string name="pref_title_category_others">その他</string>
   <string name="pref_title_open_source">オープンソースライセンス</string>
   <string name="pref_summary_open_source">オープンソースライブラリのライセンスを見る</string>
