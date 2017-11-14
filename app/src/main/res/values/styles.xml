@@ -51,10 +51,15 @@
   <style name="PreferenceThemeOverlay.OpenWith" parent="PreferenceThemeOverlay.v14.Material">
     <item name="preferenceFragmentCompatStyle">@style/PreferenceFragment.OpenWith</item>
     <item name="preferenceFragmentStyle">@style/PreferenceFragment.OpenWith</item>
+    <item name="preferenceStyle">@style/Preference.OpenWith</item>
   </style>
 
   <style name="PreferenceFragment.OpenWith" parent="PreferenceFragment.Material">
     <item name="android:divider">@null</item>
+  </style>
+
+  <style name="Preference.OpenWith" parent="Preference.Material">
+    <item name="android:layout">@layout/preference_open_with</item>
   </style>
 
   <style name="ThemeOverlay.Progress" parent="">

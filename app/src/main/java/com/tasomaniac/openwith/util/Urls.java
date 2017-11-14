@@ -45,7 +45,7 @@ public final class Urls {
     }
 
     @Nullable
-    private static String findFirstUrl(@Nullable CharSequence text) {
+    public static String findFirstUrl(@Nullable CharSequence text) {
         if (text == null) {
             return null;
         }

@@ -1,0 +1,14 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <PreferenceCategory
+    android:order="1"
+    android:key="@string/pref_key_category_clipboard"
+    android:title="@string/pref_title_category_clipboard">
+
+    <Preference
+      android:key="@string/pref_key_clipboard"
+      android:title="@string/pref_title_clipboard"/>
+
+  </PreferenceCategory>
+
+</PreferenceScreen>

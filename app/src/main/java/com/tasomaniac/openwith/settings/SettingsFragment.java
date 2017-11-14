@@ -31,6 +31,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
     @Inject SharedPreferences sharedPreferences;
     @Inject NightModePreferences nightModePreferences;
     @Inject UsageAccessSettings usageAccessSettings;
+    @Inject ClipboardSettings clipboardSettings;
 
     public static SettingsFragment newInstance() {
         SettingsFragment fragment = new SettingsFragment();
@@ -69,6 +70,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
         if (SDK_INT >= LOLLIPOP) {
             usageAccessSettings.setup();
         }
+        clipboardSettings.setup();
         setupVersionPreference();
         setupNightModePreference();
     }
@@ -84,6 +86,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
         if (SDK_INT >= LOLLIPOP) {
             usageAccessSettings.release();
         }
+        clipboardSettings.release();
         super.onDestroy();
     }
 
