@@ -30,6 +30,8 @@
   <string name="pref_entry_night_mode_off">כבוי</string>
   <string name="pref_entry_night_mode_on">פעיל</string>
   <string name="pref_entry_night_mode_auto">Automatic at sunset</string>
+  <string name="pref_title_category_clipboard">Link you copied</string>
+  <string name="pref_title_clipboard">Click to open with&#8230;</string>
   <string name="pref_title_category_others">אחרים</string>
   <string name="pref_title_open_source">רישיונות קוד פתוח</string>
   <string name="pref_summary_open_source">ראה רישיונות של ספריות קוד פתוח.</string>

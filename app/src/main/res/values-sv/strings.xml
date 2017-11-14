@@ -29,6 +29,8 @@ Ta bort <strong>%1$s</strong> som föredragen app att öppna länkar från <stro
   <string name="pref_entry_night_mode_off">Off</string>
   <string name="pref_entry_night_mode_on">On</string>
   <string name="pref_entry_night_mode_auto">Automatic at sunset</string>
+  <string name="pref_title_category_clipboard">Link you copied</string>
+  <string name="pref_title_clipboard">Click to open with&#8230;</string>
   <string name="pref_title_category_others">Andra</string>
   <string name="pref_title_open_source">Licenser för öppen källkod</string>
   <string name="pref_summary_open_source">Se licenser för open source-bibliotek.</string>

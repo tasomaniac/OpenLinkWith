@@ -28,6 +28,8 @@
   <string name="pref_entry_night_mode_off">Kapalı</string>
   <string name="pref_entry_night_mode_on">Açık</string>
   <string name="pref_entry_night_mode_auto">Gün batımında otomatik</string>
+  <string name="pref_title_category_clipboard">Kopyalanan link</string>
+  <string name="pref_title_clipboard">Açmak için tıklayın&#8230;</string>
   <string name="pref_title_category_others">Diğer</string>
   <string name="pref_title_open_source">Open Source Lisanslar</string>
   <string name="pref_summary_open_source">Açık kaynak kütüphane lisanslarını gör.</string>

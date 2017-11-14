@@ -28,6 +28,8 @@
   <string name="pref_entry_night_mode_off">Wył.</string>
   <string name="pref_entry_night_mode_on">Wł.</string>
   <string name="pref_entry_night_mode_auto">Automatycznie o zachodzie słońca</string>
+  <string name="pref_title_category_clipboard">Link you copied</string>
+  <string name="pref_title_clipboard">Click to open with&#8230;</string>
   <string name="pref_title_category_others">Inne</string>
   <string name="pref_title_open_source">Licencje Open Source</string>
   <string name="pref_summary_open_source">Zobacz licencje bibliotek open source.</string>

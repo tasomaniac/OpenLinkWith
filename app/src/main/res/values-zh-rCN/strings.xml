@@ -29,6 +29,8 @@
   <string name="pref_entry_night_mode_off">关闭</string>
   <string name="pref_entry_night_mode_on">打开</string>
   <string name="pref_entry_night_mode_auto">Automatic at sunset</string>
+  <string name="pref_title_category_clipboard">Link you copied</string>
+  <string name="pref_title_clipboard">Click to open with&#8230;</string>
   <string name="pref_title_category_others">其它</string>
   <string name="pref_title_open_source">开源许可</string>
   <string name="pref_summary_open_source">查看开源库的许可协议。</string>

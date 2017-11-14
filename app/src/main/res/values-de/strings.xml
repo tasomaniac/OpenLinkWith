@@ -28,6 +28,8 @@
   <string name="pref_entry_night_mode_off">Aus</string>
   <string name="pref_entry_night_mode_on">An</string>
   <string name="pref_entry_night_mode_auto">Automatisch bei Sonnenuntergang</string>
+  <string name="pref_title_category_clipboard">Link you copied</string>
+  <string name="pref_title_clipboard">Click to open with&#8230;</string>
   <string name="pref_title_category_others">Andere</string>
   <string name="pref_title_open_source">Open Source Lizenzen</string>
   <string name="pref_summary_open_source">Lizenzen für die open-Source-Bibliotheken anzeigen.</string>

@@ -30,6 +30,8 @@ Remover <strong>%1$s</strong> como aplicativo preferencial para abrir links de <
   <string name="pref_entry_night_mode_off">Off</string>
   <string name="pref_entry_night_mode_on">On</string>
   <string name="pref_entry_night_mode_auto">Automatic at sunset</string>
+  <string name="pref_title_category_clipboard">Link you copied</string>
+  <string name="pref_title_clipboard">Click to open with&#8230;</string>
   <string name="pref_title_category_others">Outros</string>
   <string name="pref_title_open_source">Licenças de Código Aberto</string>
   <string name="pref_summary_open_source">Ver licenças de bibliotecas de código aberto.</string>
