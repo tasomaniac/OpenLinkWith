@@ -13,21 +13,23 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License
   -->
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:background="?attr/selectableItemBackground"
+  android:background="?selectableItemBackground"
+  android:baselineAligned="false"
   android:clipToPadding="false"
   android:focusable="true"
   android:gravity="center_vertical"
   android:minHeight="?listPreferredItemHeightSmall"
   android:paddingEnd="?listPreferredItemPaddingRight"
-  android:paddingStart="?listPreferredItemPaddingLeft">
+  android:paddingStart="?listPreferredItemPaddingLeft"
+  tools:ignore="Overdraw">
 
   <LinearLayout
-    android:id="@id/icon_frame"
+    android:id="@+id/icon_frame"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="-4dp"
@@ -36,7 +38,8 @@
     android:orientation="horizontal"
     android:paddingBottom="4dp"
     android:paddingEnd="12dp"
-    android:paddingTop="4dp">
+    android:paddingTop="4dp"
+    tools:ignore="RtlSymmetry">
 
     <android.support.v7.internal.widget.PreferenceImageView
       android:id="@android:id/icon"
@@ -81,6 +84,7 @@
     android:layout_height="match_parent"
     android:gravity="end|center_vertical"
     android:orientation="vertical"
-    android:paddingStart="16dp" />
+    android:paddingStart="16dp"
+    tools:ignore="RtlSymmetry" />
 
 </LinearLayout>
