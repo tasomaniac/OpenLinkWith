@@ -11,94 +11,123 @@ import okhttp3.mockwebserver.RecordedRequest
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.junit.MockitoJUnit
+import org.mockito.junit.MockitoRule
 
 class RedirectFixerTest {
 
   @Rule @JvmField val server = MockWebServer()
-  @Rule @JvmField val mockito = MockitoJUnit.rule()
+  @Rule @JvmField val mockito: MockitoRule = MockitoJUnit.rule()
 
   private val redirectFixer: RedirectFixer =
       RedirectFixer(OkHttpClient(), ImmediateScheduling(), 1)
 
   @Test
   fun givenNoRedirectShouldReturnOriginalUrl() {
-    server.enqueue(noRedirect())
-
-    test().assertValue(server.url("original"))
+    given {
+      enqueue(noRedirect())
+    }.then {
+      assertUrlWithPath("original")
+    }
   }
 
   @Test
   fun givenRedirectShouldFollowRedirect() {
-    server.enqueue(redirectTo(server.url("redirect")))
-    server.enqueue(noRedirect())
-
-    test().assertValue(server.url("redirect"))
+    given {
+      enqueue(redirectTo("redirect"))
+      enqueue(noRedirect())
+    }.then {
+      assertUrlWithPath("redirect")
+    }
   }
 
   @Test
   fun givenTwoRedirectsShouldReturnTheLastRedirect() {
-    server.enqueue(redirectTo(server.url("redirect")))
-    server.enqueue(redirectTo(server.url("redirect/2")))
-    server.enqueue(noRedirect())
-
-    test().assertValue(server.url("redirect/2"))
+    given {
+      enqueue(redirectTo("redirect"))
+      enqueue(redirectTo("redirect/2"))
+      enqueue(noRedirect())
+    }.then {
+      assertUrlWithPath("redirect/2")
+    }
   }
 
   @Test
   fun givenNetworkErrorReturnOriginal() {
-    server.enqueue(redirectTo(server.url("redirect")))
-    server.shutdown()
-    server.enqueue(noRedirect())
-
-    test().assertValue(server.url("original"))
-        .assertNoErrors()
+    given {
+      enqueue(redirectTo("redirect"))
+      shutdown()
+      enqueue(noRedirect())
+    }.then {
+      assertUrlWithPath("original")
+          .assertNoErrors()
+    }
   }
 
   @Test
   fun givenNetworkTimeoutReturnOriginal() {
-    server.setDispatcher(object : Dispatcher() {
-      override fun dispatch(request: RecordedRequest): MockResponse {
-        Thread.sleep(1500)
-        return redirectTo(server.url("redirect"))
-      }
-    })
-
-    test().assertValue(server.url("original"))
-        .assertNoErrors()
+    given {
+      setDispatcher(object : Dispatcher() {
+        override fun dispatch(request: RecordedRequest): MockResponse {
+          Thread.sleep(1500)
+          return redirectTo("redirect")
+        }
+      })
+    }.then {
+      assertUrlWithPath("original")
+          .assertNoErrors()
+    }
   }
 
   @Test
   fun givenWithinNetworkTimeoutLimitReturnRedirect() {
-    server.setDispatcher(object : Dispatcher() {
-      override fun dispatch(request: RecordedRequest): MockResponse {
-        Thread.sleep(500)
-        return redirectTo(server.url("redirect"))
-      }
-    })
-
-    test().assertValue(server.url("redirect"))
-        .assertNoErrors()
+    given {
+      setDispatcher(object : Dispatcher() {
+        override fun dispatch(request: RecordedRequest): MockResponse {
+          Thread.sleep(500)
+          return redirectTo("redirect")
+        }
+      })
+    }.then {
+      assertUrlWithPath("redirect")
+          .assertNoErrors()
+    }
   }
 
   @Test
   fun givenNetworkIsInterruptedReturnOriginal() {
-    server.setDispatcher(object : Dispatcher() {
-      override fun dispatch(request: RecordedRequest): MockResponse {
-        throw InterruptedException()
-      }
-    })
-
-    test().assertValue(server.url("original"))
-        .assertNoErrors()
+    given {
+      setDispatcher(object : Dispatcher() {
+        override fun dispatch(request: RecordedRequest): MockResponse {
+          throw InterruptedException()
+        }
+      })
+    }.then {
+      assertUrlWithPath("original")
+          .assertNoErrors()
+    }
   }
 
-  private fun test(): TestObserver<HttpUrl> {
-    return redirectFixer
-        .followRedirects(server.url("original"))
-        .test()
-  }
+  private fun TestObserver<HttpUrl>.assertUrlWithPath(path: String) = apply { assertValue(server.url(path)) }
 
   private fun noRedirect() = MockResponse()
 
-  private fun redirectTo(redirect: HttpUrl) = MockResponse().addHeader("Location", redirect)
+  private fun redirectTo(path: String) = MockResponse().addHeader("Location", server.url(path))
+
+  private infix fun given(given: MockWebServer.() -> Unit): Then {
+    server.given()
+    return Then()
+  }
+
+  inner class Then {
+
+    infix fun then(assert: TestObserver<HttpUrl>.() -> Unit) {
+      test().assert()
+    }
+
+    private fun test(): TestObserver<HttpUrl> {
+      return redirectFixer
+          .followRedirects(server.url("original"))
+          .test()
+    }
+  }
 }
