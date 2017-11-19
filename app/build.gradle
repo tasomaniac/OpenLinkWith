@@ -27,7 +27,7 @@ android {
     versionName versions.versionName
     buildConfigField 'String', 'GIT_SHA', "\"${gitSha}\""
 
-    resConfigs 'ar', 'de', 'en', 'es', 'fr', 'in', 'it', 'ja', 'pl', 'pt-rBR', 'pt-rPT', 'ru', 'sv', 'tr', 'uk', 'vi', 'zh-rCN'
+    resConfigs 'ar', 'de', 'en', 'es', 'fr', 'in', 'it', 'iw-rIL', 'ja', 'pl', 'pt-rBR', 'pt-rPT', 'ru', 'sv', 'tr', 'uk', 'vi', 'zh-rCN'
 
     javaCompileOptions.annotationProcessorOptions {
       arguments['butterknife.minSdk'] = minSdkVersion.apiString
@@ -93,7 +93,7 @@ configurations {
 
 dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$versions.kotlin"
-  
+
   implementation "com.android.support:support-fragment:$versions.supportLib"
   implementation "com.android.support:appcompat-v7:$versions.supportLib"
   implementation "com.android.support:recyclerview-v7:$versions.supportLib"

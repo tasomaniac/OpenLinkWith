@@ -2,7 +2,7 @@ buildscript {
   ext.ci = 'true' == System.getenv('CI')
 
   def versionMajor = 1
-  def versionMinor = 7
+  def versionMinor = 8
   def versionBuild = 1
 
   ext.versions = [
