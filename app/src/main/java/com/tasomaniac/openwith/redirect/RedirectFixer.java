@@ -75,11 +75,8 @@ class RedirectFixer {
     @Nullable
     private String fetchLocationHeader(HttpUrl url) throws IOException {
         call = client.newCall(request(url));
-        Response response = call.execute();
-        try {
+        try (Response response = call.execute()) {
             return response.header("Location");
-        } finally {
-            response.close();
         }
     }
 
