@@ -118,7 +118,9 @@ dependencies {
   implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
   implementation 'io.reactivex.rxjava2:rxjava:2.1.6'
 
-  playImplementation 'com.crashlytics.sdk.android:crashlytics:2.7.1'
+  playImplementation('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
+    transitive true
+  }
 
   testImplementation 'junit:junit:4.12'
   testImplementation 'org.mockito:mockito-core:2.12.0'
