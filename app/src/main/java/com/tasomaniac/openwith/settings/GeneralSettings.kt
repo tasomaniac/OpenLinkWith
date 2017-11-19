@@ -3,6 +3,7 @@ package com.tasomaniac.openwith.settings
 import android.content.Intent
 import android.support.v7.preference.Preference
 import com.tasomaniac.openwith.R
+import com.tasomaniac.openwith.browser.PreferredBrowserActivity
 import com.tasomaniac.openwith.data.Analytics
 import com.tasomaniac.openwith.intro.IntroActivity
 import com.tasomaniac.openwith.preferred.PreferredAppsActivity
@@ -18,6 +19,7 @@ class GeneralSettings @Inject constructor(
 
     findPreference(R.string.pref_key_about).onPreferenceClickListener = onPreferenceClickListener
     findPreference(R.string.pref_key_preferred).onPreferenceClickListener = onPreferenceClickListener
+    findPreference(R.string.pref_key_browser).onPreferenceClickListener = onPreferenceClickListener
   }
 
   private val onPreferenceClickListener = Preference.OnPreferenceClickListener {
@@ -27,6 +29,9 @@ class GeneralSettings @Inject constructor(
       }
       it.isKeyEquals(R.string.pref_key_preferred) -> {
         startActivity(Intent(activity, PreferredAppsActivity::class.java))
+      }
+      it.isKeyEquals(R.string.pref_key_browser) -> {
+        startActivity(Intent(activity, PreferredBrowserActivity::class.java))
       }
     }
 
