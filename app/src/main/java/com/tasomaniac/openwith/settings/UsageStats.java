@@ -20,14 +20,14 @@ public class UsageStats {
 
     public static Completable observeAccessGiven(Context context) {
         return observe(context)
-                .onErrorReturnItem(false)
                 .filter(accessGiven -> accessGiven)
                 .firstElement()
-                .ignoreElement()
-                .timeout(1, TimeUnit.MINUTES);
+                .timeout(1, TimeUnit.MINUTES)
+                .onErrorReturnItem(false)
+                .ignoreElement();
     }
 
-    public static Observable<Boolean> observe(Context context) {
+    private static Observable<Boolean> observe(Context context) {
         return Observable.interval(1, TimeUnit.SECONDS)
                 .map(ignored -> isEnabled(context));
     }
