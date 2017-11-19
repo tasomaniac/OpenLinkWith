@@ -9,24 +9,22 @@ import com.tasomaniac.openwith.util.Urls
 import javax.inject.Inject
 
 class ClipboardSettings @Inject constructor(
-    private val fragment: SettingsFragment,
+    fragment: SettingsFragment,
     private val clipboardManager: ClipboardManager,
     private val analytics: Analytics
-) {
-
-  private val context get() = fragment.context
+) : Settings(fragment) {
 
   private lateinit var clipChangedListener: ClipboardManager.OnPrimaryClipChangedListener
   private var preferenceCategory: PreferenceCategory? = null
 
-  fun setup() {
+  override fun setup() {
     updateClipboard()
 
     clipChangedListener = ClipboardManager.OnPrimaryClipChangedListener { updateClipboard() }
     clipboardManager.addPrimaryClipChangedListener(clipChangedListener)
   }
 
-  fun release() {
+  override fun release() {
     clipboardManager.removePrimaryClipChangedListener(clipChangedListener)
   }
 
@@ -48,7 +46,7 @@ class ClipboardSettings @Inject constructor(
   }
 
   private fun updateClipUrl(clipUrl: String) {
-    fragment.findPreference(R.string.pref_key_clipboard).apply {
+    findPreference(R.string.pref_key_clipboard).apply {
       setOnPreferenceClickListener {
         context.startActivity(RedirectFixActivity.createIntent(context, clipUrl))
         analytics.sendEvent("Clipboard", "Clicked", "Clicked")
@@ -67,12 +65,12 @@ class ClipboardSettings @Inject constructor(
   }
 
   private fun addClipboardPreference() {
-    fragment.addPreferencesFromResource(R.xml.pref_clipboard)
-    preferenceCategory = fragment.findPreference(R.string.pref_key_category_clipboard) as PreferenceCategory
+    addPreferencesFromResource(R.xml.pref_clipboard)
+    preferenceCategory = findPreference(R.string.pref_key_category_clipboard) as PreferenceCategory
   }
 
   private fun remove() {
-    fragment.preferenceScreen.removePreference(preferenceCategory)
+    removePreference(preferenceCategory!!)
     preferenceCategory = null
   }
 

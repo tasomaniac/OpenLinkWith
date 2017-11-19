@@ -24,7 +24,7 @@ public class LicensesDialogFragment extends AppCompatDialogFragment {
         @SuppressLint("InflateParams")
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_licenses, null);
 
-        WebView licenses = (WebView) view.findViewById(R.id.licenses);
+        WebView licenses = view.findViewById(R.id.licenses);
         licenses.loadUrl("file:///android_asset/open_source_licenses.html");
 
         return new AlertDialog.Builder(getActivity())

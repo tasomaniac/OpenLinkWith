@@ -8,27 +8,22 @@ import com.tasomaniac.openwith.data.Analytics
 import javax.inject.Inject
 
 class OtherSettings @Inject constructor(
-    private val fragment: SettingsFragment,
+    fragment: SettingsFragment,
     private val analytics: Analytics
-) {
+) : Settings(fragment) {
 
-  fun setup() {
-    fragment.run {
-      addPreferencesFromResource(R.xml.pref_others)
+  override fun setup() {
+    addPreferencesFromResource(R.xml.pref_others)
 
-      findPreference(R.string.pref_key_open_source).onPreferenceClickListener = onPreferenceClickListener
-      findPreference(R.string.pref_key_contact).onPreferenceClickListener = onPreferenceClickListener
-    }
+    findPreference(R.string.pref_key_open_source).onPreferenceClickListener = onPreferenceClickListener
+    findPreference(R.string.pref_key_contact).onPreferenceClickListener = onPreferenceClickListener
     setupVersionPreference()
   }
 
   private val onPreferenceClickListener = Preference.OnPreferenceClickListener {
-    fragment.run {
-      if (isKeyEquals(it, R.string.pref_key_open_source)) {
-        displayLicensesDialogFragment()
-      } else if (isKeyEquals(it, R.string.pref_key_contact)) {
-        startContactEmailChooser()
-      }
+    when {
+      it.isKeyEquals(R.string.pref_key_open_source) -> displayLicensesDialogFragment()
+      it.isKeyEquals(R.string.pref_key_contact) -> startContactEmailChooser()
     }
 
     analytics.sendEvent("Preference", "Item Click", it.key)
@@ -42,18 +37,18 @@ class OtherSettings @Inject constructor(
           .append(BuildConfig.VERSION_CODE)
           .append(")")
     }
-    val preference = fragment.findPreference(R.string.pref_key_version)
+    val preference = findPreference(R.string.pref_key_version)
     preference.summary = version
   }
 
   private fun displayLicensesDialogFragment() {
-    LicensesDialogFragment.newInstance().show(fragment.fragmentManager, "LicensesDialog")
+    LicensesDialogFragment.newInstance().show(activity.supportFragmentManager, "LicensesDialog")
   }
 
   private fun startContactEmailChooser() {
-    ShareCompat.IntentBuilder.from(fragment.activity!!)
+    ShareCompat.IntentBuilder.from(activity)
         .addEmailTo("Said Tahsin Dane <tasomaniac+openlinkwith@gmail.com>")
-        .setSubject(fragment.getString(R.string.app_name))
+        .setSubject(context.getString(R.string.app_name))
         .setType("message/rfc822")
         .startChooser()
   }
