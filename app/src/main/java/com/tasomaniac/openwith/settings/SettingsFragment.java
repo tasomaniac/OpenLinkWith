@@ -60,6 +60,9 @@ public class SettingsFragment extends PreferenceFragmentCompat
         if (BuildConfig.DEBUG) {
             new DebugPreferences(this).setup();
         }
+        clipboardSettings.setup();
+        setupVersionPreference();
+        setupNightModePreference();
     }
 
     @Override
@@ -70,15 +73,12 @@ public class SettingsFragment extends PreferenceFragmentCompat
         if (SDK_INT >= LOLLIPOP) {
             usageAccessSettings.setup();
         }
-        clipboardSettings.setup();
-        setupVersionPreference();
-        setupNightModePreference();
     }
 
     @Override
     public void onPause() {
-        super.onPause();
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
+        super.onPause();
     }
 
     @Override
