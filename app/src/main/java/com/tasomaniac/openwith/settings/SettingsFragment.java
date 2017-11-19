@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
-import android.support.v4.app.ShareCompat;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 
@@ -32,6 +31,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
     @Inject ClipboardSettings clipboardSettings;
     @Inject UsageAccessSettings usageAccessSettings;
     @Inject DisplaySettings displaySettings;
+    @Inject OtherSettings otherSettings;
 
     public static SettingsFragment newInstance() {
         SettingsFragment fragment = new SettingsFragment();
@@ -49,19 +49,19 @@ public class SettingsFragment extends PreferenceFragmentCompat
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
         addPreferencesFromResource(R.xml.pref_general);
-        addPreferencesFromResource(R.xml.pref_others);
 
         findPreference(R.string.pref_key_about).setOnPreferenceClickListener(this);
         findPreference(R.string.pref_key_preferred).setOnPreferenceClickListener(this);
-        findPreference(R.string.pref_key_open_source).setOnPreferenceClickListener(this);
-        findPreference(R.string.pref_key_contact).setOnPreferenceClickListener(this);
 
         if (BuildConfig.DEBUG) {
             new DebugPreferences(this).setup();
         }
         clipboardSettings.setup();
-        setupVersionPreference();
         displaySettings.setup();
+        otherSettings.setup();
+        if (SDK_INT >= LOLLIPOP) {
+            usageAccessSettings.setup();
+        }
     }
 
     @Override
@@ -70,7 +70,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
 
         if (SDK_INT >= LOLLIPOP) {
-            usageAccessSettings.setup();
+            usageAccessSettings.update();
         }
     }
 
@@ -90,43 +90,16 @@ public class SettingsFragment extends PreferenceFragmentCompat
         super.onDestroy();
     }
 
-    private void setupVersionPreference() {
-        StringBuilder version = new StringBuilder(BuildConfig.VERSION_NAME);
-        if (BuildConfig.DEBUG) {
-            version.append(" (")
-                    .append(BuildConfig.VERSION_CODE)
-                    .append(")");
-        }
-        Preference preference = findPreference(R.string.pref_key_version);
-        preference.setSummary(version);
-    }
-
     @Override
     public boolean onPreferenceClick(Preference preference) {
         if (isKeyEquals(preference, R.string.pref_key_about)) {
             startActivity(new Intent(getActivity(), IntroActivity.class));
         } else if (isKeyEquals(preference, R.string.pref_key_preferred)) {
             startActivity(new Intent(getActivity(), PreferredAppsActivity.class));
-        } else if (isKeyEquals(preference, R.string.pref_key_open_source)) {
-            displayLicensesDialogFragment();
-        } else if (isKeyEquals(preference, R.string.pref_key_contact)) {
-            startContactEmailChooser();
         }
 
         analytics.sendEvent("Preference", "Item Click", preference.getKey());
         return true;
-    }
-
-    private void displayLicensesDialogFragment() {
-        LicensesDialogFragment.newInstance().show(getFragmentManager(), "LicensesDialog");
-    }
-
-    private void startContactEmailChooser() {
-        ShareCompat.IntentBuilder.from(getActivity())
-                .addEmailTo("Said Tahsin Dane <tasomaniac+openlinkwith@gmail.com>")
-                .setSubject(getString(R.string.app_name))
-                .setType("message/rfc822")
-                .startChooser();
     }
 
     @Override

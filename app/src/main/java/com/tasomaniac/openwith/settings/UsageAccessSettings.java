@@ -47,6 +47,10 @@ class UsageAccessSettings {
     }
 
     void setup() {
+        update();
+    }
+
+    void update() {
         boolean usageAccessGiven = UsageStats.isEnabled(getContext());
 
         if (usageAccessGiven && isUsageAccessRequestAdded()) {
