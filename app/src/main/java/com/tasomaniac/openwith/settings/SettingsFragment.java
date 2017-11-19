@@ -29,9 +29,9 @@ public class SettingsFragment extends PreferenceFragmentCompat
 
     @Inject Analytics analytics;
     @Inject SharedPreferences sharedPreferences;
-    @Inject NightModePreferences nightModePreferences;
-    @Inject UsageAccessSettings usageAccessSettings;
     @Inject ClipboardSettings clipboardSettings;
+    @Inject UsageAccessSettings usageAccessSettings;
+    @Inject DisplaySettings displaySettings;
 
     public static SettingsFragment newInstance() {
         SettingsFragment fragment = new SettingsFragment();
@@ -49,7 +49,6 @@ public class SettingsFragment extends PreferenceFragmentCompat
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
         addPreferencesFromResource(R.xml.pref_general);
-        addPreferencesFromResource(R.xml.pref_display);
         addPreferencesFromResource(R.xml.pref_others);
 
         findPreference(R.string.pref_key_about).setOnPreferenceClickListener(this);
@@ -62,7 +61,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
         }
         clipboardSettings.setup();
         setupVersionPreference();
-        setupNightModePreference();
+        displaySettings.setup();
     }
 
     @Override
@@ -87,6 +86,7 @@ public class SettingsFragment extends PreferenceFragmentCompat
             usageAccessSettings.release();
         }
         clipboardSettings.release();
+        displaySettings.release();
         super.onDestroy();
     }
 
@@ -99,11 +99,6 @@ public class SettingsFragment extends PreferenceFragmentCompat
         }
         Preference preference = findPreference(R.string.pref_key_version);
         preference.setSummary(version);
-    }
-
-    private void setupNightModePreference() {
-        int selectedEntry = nightModePreferences.getSelectedEntry();
-        findPreference(R.string.pref_key_night_mode).setSummary(selectedEntry);
     }
 
     @Override
@@ -122,14 +117,6 @@ public class SettingsFragment extends PreferenceFragmentCompat
         return true;
     }
 
-    private boolean isKeyEquals(Preference preference, @StringRes int keyRes) {
-        return isKeyEquals(preference.getKey(), keyRes);
-    }
-
-    private boolean isKeyEquals(String key, @StringRes int keyRes) {
-        return getString(keyRes).equals(key);
-    }
-
     private void displayLicensesDialogFragment() {
         LicensesDialogFragment.newInstance().show(getFragmentManager(), "LicensesDialog");
     }
@@ -145,17 +132,17 @@ public class SettingsFragment extends PreferenceFragmentCompat
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         new BackupManager(getActivity()).dataChanged();
-
-        if (isKeyEquals(key, R.string.pref_key_night_mode)) {
-            nightModePreferences.updateDefaultNightMode();
-            getActivity().recreate();
-
-            String selectedValue = nightModePreferences.getMode().stringVale(getResources());
-            analytics.sendEvent("Preference", "Night Mode", selectedValue);
-        }
     }
 
     Preference findPreference(@StringRes int keyResource) {
         return findPreference(getString(keyResource));
+    }
+
+    boolean isKeyEquals(Preference preference, @StringRes int keyRes) {
+        return isKeyEquals(preference.getKey(), keyRes);
+    }
+
+    boolean isKeyEquals(String key, @StringRes int keyRes) {
+        return getString(keyRes).equals(key);
     }
 }
