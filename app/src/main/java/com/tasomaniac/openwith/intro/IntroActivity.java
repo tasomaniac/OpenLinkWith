@@ -11,6 +11,7 @@ import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.Analytics;
 import com.tasomaniac.openwith.rx.SchedulingStrategy;
 import com.tasomaniac.openwith.settings.UsageStats;
+import com.tasomaniac.openwith.settings.UsageStatsKt;
 import com.tasomaniac.openwith.util.Intents;
 
 import javax.inject.Inject;
@@ -99,7 +100,7 @@ public class IntroActivity extends AppIntro {
     @Override
     public void onDonePressed() {
         if (usageStatsSlideAdded && !UsageStats.isEnabled(this)) {
-            boolean success = UsageStats.maybeStartUsageAccessSettings(this);
+            boolean success = UsageStatsKt.maybeStartUsageAccessSettings(this);
             if (success) {
                 observeUsageStats();
             } else {

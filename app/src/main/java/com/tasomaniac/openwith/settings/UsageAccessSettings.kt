@@ -73,7 +73,7 @@ class UsageAccessSettings @Inject constructor(
   }
 
   private fun onUsageAccessClick(preference: Preference): Boolean {
-    val settingsOpened = UsageStats.maybeStartUsageAccessSettings(activity)
+    val settingsOpened = activity.maybeStartUsageAccessSettings()
 
     if (settingsOpened) {
       observeUsageStats()
