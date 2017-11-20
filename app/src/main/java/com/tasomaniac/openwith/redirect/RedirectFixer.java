@@ -1,7 +1,5 @@
 package com.tasomaniac.openwith.redirect;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.Nullable;
 
 import com.tasomaniac.openwith.rx.SchedulingStrategy;
@@ -18,7 +16,7 @@ import okhttp3.Response;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
-class RedirectFixer {
+public class RedirectFixer {
 
     private final OkHttpClient client;
     private final SchedulingStrategy scheduling;
@@ -44,12 +42,7 @@ class RedirectFixer {
         this.timeoutInSec = timeoutInSec;
     }
 
-    Single<Intent> followRedirects(Intent intent) {
-        return followRedirects(HttpUrl.parse(intent.getDataString()))
-                .map(httpUrl -> intent.setData(Uri.parse(httpUrl.toString())));
-    }
-
-    Single<HttpUrl> followRedirects(final HttpUrl url) {
+    Single<HttpUrl> followRedirects(HttpUrl url) {
         this.lastUrl = url;
         return Single
                 .fromCallable(() -> doFollowRedirects(url))
@@ -60,7 +53,7 @@ class RedirectFixer {
                 .compose(scheduling.forSingle());
     }
 
-    private HttpUrl doFollowRedirects(HttpUrl url) throws IOException {
+    private HttpUrl doFollowRedirects(HttpUrl url) {
         String locationHeader = fetchLocationHeader(url);
 
         HttpUrl redirectUrl = locationHeader == null ? null : HttpUrl.parse(locationHeader);
@@ -73,10 +66,12 @@ class RedirectFixer {
     }
 
     @Nullable
-    private String fetchLocationHeader(HttpUrl url) throws IOException {
+    private String fetchLocationHeader(HttpUrl url) {
         call = client.newCall(request(url));
         try (Response response = call.execute()) {
             return response.header("Location");
+        } catch (IOException e) {
+            return url.toString();
         }
     }
 

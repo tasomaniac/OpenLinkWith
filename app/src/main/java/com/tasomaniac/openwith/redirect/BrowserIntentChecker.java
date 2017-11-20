@@ -17,7 +17,7 @@ import java.util.Set;
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.M;
 
-class BrowserIntentChecker {
+public class BrowserIntentChecker {
 
     private final PackageManager packageManager;
 
