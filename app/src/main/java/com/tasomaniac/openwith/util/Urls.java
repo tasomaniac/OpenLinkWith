@@ -23,6 +23,7 @@ public final class Urls {
             new DailyMailFixer(),
             new VkFixer()
     )));
+    private static final Pattern URL_PATTERN = Pattern.compile("\\b((?:[a-z][\\w-]+:(?:/{1,3}|[a-z0-9%])|www\\d{0,3}[.]|[a-z0-9.\\-]+[.][a-z]{2,4}/)(?:[^\\s()<>]+|\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\))+(?:\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\)|[^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]))", Pattern.CASE_INSENSITIVE);
 
     public static String fixUrls(String url) {
         for (Fixer urlFixer : URL_FIXERS) {
@@ -31,6 +32,7 @@ public final class Urls {
         return url;
     }
 
+    @Nullable
     public static String extractUrlFrom(Intent intent, ShareCompat.IntentReader reader) {
         CharSequence text = reader.getText();
         if (text == null) {
@@ -49,12 +51,15 @@ public final class Urls {
         if (text == null) {
             return null;
         }
-        final Matcher matcher = Pattern.compile("\\b((?:[a-z][\\w-]+:(?:/{1,3}|[a-z0-9%])|www\\d{0,3}[.]|[a-z0-9.\\-]+[.][a-z]{2,4}/)(?:[^\\s()<>]+|\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\))+(?:\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\)|[^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]))", Pattern.CASE_INSENSITIVE)
-                .matcher(text);
-        if (matcher.find()) {
-            return matcher.group();
+        Matcher matcher = URL_PATTERN.matcher(text);
+        if (!matcher.find()) {
+            return null;
         }
-        return null;
+        String url = matcher.group();
+        if (url.startsWith("content://") || url.startsWith("file://")) {
+            return null;
+        }
+        return url;
     }
 
     private static class FacebookFixer implements Fixer {
