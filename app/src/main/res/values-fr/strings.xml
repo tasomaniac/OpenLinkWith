@@ -28,7 +28,6 @@ Ne plus ouvrir les liens de <strong>%2$s</strong> avec <strong>%1$s</strong> ? <
   <string name="pref_title_night_mode">Mode Nuit</string>
   <string name="pref_entry_night_mode_off">Désactivé</string>
   <string name="pref_entry_night_mode_on">Activé</string>
-  <string name="pref_entry_night_mode_auto">Automatic at sunset</string>
   <string name="pref_title_category_clipboard">Link you copied</string>
   <string name="pref_title_clipboard">Click to open with&#8230;</string>
   <string name="pref_title_category_others">Autres</string>

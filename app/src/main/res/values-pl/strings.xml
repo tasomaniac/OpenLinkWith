@@ -27,7 +27,6 @@
   <string name="pref_title_night_mode">Tryb Nocny</string>
   <string name="pref_entry_night_mode_off">Wył.</string>
   <string name="pref_entry_night_mode_on">Wł.</string>
-  <string name="pref_entry_night_mode_auto">Automatycznie o zachodzie słońca</string>
   <string name="pref_title_category_clipboard">Link you copied</string>
   <string name="pref_title_clipboard">Click to open with&#8230;</string>
   <string name="pref_title_category_others">Inne</string>

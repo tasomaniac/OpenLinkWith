@@ -27,7 +27,6 @@
   <string name="pref_title_night_mode">Nacht-Modus</string>
   <string name="pref_entry_night_mode_off">Aus</string>
   <string name="pref_entry_night_mode_on">An</string>
-  <string name="pref_entry_night_mode_auto">Automatisch bei Sonnenuntergang</string>
   <string name="pref_title_category_clipboard">Link kopiert</string>
   <string name="pref_title_clipboard">Click to open with&#8230;</string>
   <string name="pref_title_category_others">Andere</string>

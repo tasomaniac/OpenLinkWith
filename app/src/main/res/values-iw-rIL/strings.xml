@@ -29,7 +29,6 @@
   <string name="pref_title_night_mode">מצב לילה</string>
   <string name="pref_entry_night_mode_off">כבוי</string>
   <string name="pref_entry_night_mode_on">פעיל</string>
-  <string name="pref_entry_night_mode_auto">Automatic at sunset</string>
   <string name="pref_title_category_clipboard">Link you copied</string>
   <string name="pref_title_clipboard">Click to open with&#8230;</string>
   <string name="pref_title_category_others">אחרים</string>

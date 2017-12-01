@@ -28,7 +28,6 @@
   <string name="pref_title_night_mode">夜間モード</string>
   <string name="pref_entry_night_mode_off">オフ</string>
   <string name="pref_entry_night_mode_on">オン</string>
-  <string name="pref_entry_night_mode_auto">日没時、自動</string>
   <string name="pref_title_category_clipboard">リンクがコピーされました</string>
   <string name="pref_title_clipboard">クリックして開く&#8230;</string>
   <string name="pref_title_category_others">その他</string>

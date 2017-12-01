@@ -28,7 +28,6 @@ Không dùng <strong>%1$s</strong> làm ứng dụng ưu tiên để mở đư�
   <string name="pref_title_night_mode">Chế độ ban đêm</string>
   <string name="pref_entry_night_mode_off">Tắt</string>
   <string name="pref_entry_night_mode_on">Bật</string>
-  <string name="pref_entry_night_mode_auto">Kích hoạt tự động lúc hoàng hôn</string>
   <string name="pref_title_category_clipboard">Link you copied</string>
   <string name="pref_title_clipboard">Click to open with&#8230;</string>
   <string name="pref_title_category_others">Khác</string>

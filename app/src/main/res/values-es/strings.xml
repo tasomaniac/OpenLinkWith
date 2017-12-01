@@ -28,7 +28,6 @@ Eliminar <strong>%1$s</strong> como app preferida para cargar los enlaces de <st
   <string name="pref_title_night_mode">Modo Noche</string>
   <string name="pref_entry_night_mode_off">Desactivado</string>
   <string name="pref_entry_night_mode_on">Encendido</string>
-  <string name="pref_entry_night_mode_auto">Automático al anochecer</string>
   <string name="pref_title_category_clipboard">Link you copied</string>
   <string name="pref_title_clipboard">Click to open with&#8230;</string>
   <string name="pref_title_category_others">Otros</string>
