@@ -22,8 +22,9 @@ class SettingsModule {
         clipboard: ClipboardSettings,
         general: GeneralSettings,
         display: DisplaySettings,
+        advanced: AdvancedSettings,
         other: OtherSettings
-    ): Set<Settings> = setOf(clipboard, general, display, other)
+    ): Set<Settings> = setOf(clipboard, general, display, advanced, other)
 
     @Provides
     @ElementsIntoSet

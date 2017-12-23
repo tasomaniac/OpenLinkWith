@@ -2,14 +2,14 @@ package com.tasomaniac.openwith.settings
 
 import android.content.Context
 import android.os.Bundle
+import androidx.core.os.bundleOf
 import androidx.preference.PreferenceFragmentCompat
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
-    @JvmSuppressWildcards
-    @Inject lateinit var settings: Set<Settings>
+    @Inject lateinit var settings: @JvmSuppressWildcards Set<Settings>
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -37,10 +37,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     companion object {
 
-        @JvmStatic
-        fun newInstance() = SettingsFragment().apply {
-            val args = Bundle()
-            arguments = args
+        fun newInstance(key: String? = null) = SettingsFragment().apply {
+            arguments = bundleOf(PreferenceFragmentCompat.ARG_PREFERENCE_ROOT to key)
         }
     }
 }

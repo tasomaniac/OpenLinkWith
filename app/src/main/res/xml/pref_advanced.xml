@@ -1,0 +1,20 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <PreferenceCategory
+    android:order="99"
+    android:title="@string/pref_title_category_advanced">
+
+    <PreferenceScreen
+      android:key="@string/pref_key_features"
+      android:summary="@string/pref_summary_features"
+      android:title="@string/pref_title_features">
+
+      <PreferenceScreen
+        android:key="@string/pref_key_feature_add_to_homescreen"
+        android:title="@string/pref_title_feature_add_to_homescreen" />
+
+    </PreferenceScreen>
+
+  </PreferenceCategory>
+
+</PreferenceScreen>

@@ -4,6 +4,8 @@ import android.app.backup.BackupManager
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.transaction
+import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.PreferenceScreen
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.data.Analytics
 import com.tasomaniac.openwith.data.prefs.BooleanPreference
@@ -14,7 +16,10 @@ import kotlinx.android.synthetic.main.activity_settings.collapsing_toolbar
 import kotlinx.android.synthetic.main.activity_settings.toolbar
 import javax.inject.Inject
 
-class SettingsActivity : DaggerAppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
+class SettingsActivity
+    : DaggerAppCompatActivity(),
+    SharedPreferences.OnSharedPreferenceChangeListener,
+    PreferenceFragmentCompat.OnPreferenceStartScreenCallback {
 
     @Inject @field:TutorialShown lateinit var tutorialShown: BooleanPreference
     @Inject lateinit var analytics: Analytics
@@ -29,8 +34,6 @@ class SettingsActivity : DaggerAppCompatActivity(), SharedPreferences.OnSharedPr
 
         setContentView(R.layout.activity_settings)
 
-        toolbar.setNavigationIcon(R.drawable.ic_action_done)
-        toolbar.setNavigationContentDescription(R.string.done)
         setSupportActionBar(toolbar)
         collapsing_toolbar.title = title
 
@@ -55,6 +58,15 @@ class SettingsActivity : DaggerAppCompatActivity(), SharedPreferences.OnSharedPr
 
     override fun onSupportNavigateUp(): Boolean {
         finish()
+        return true
+    }
+
+    override fun onPreferenceStartScreen(caller: PreferenceFragmentCompat, pref: PreferenceScreen): Boolean {
+        supportFragmentManager.transaction {
+            val fragment = SettingsFragment.newInstance(pref.key)
+            replace(R.id.fragment_container, fragment)
+            addToBackStack(null)
+        }
         return true
     }
 

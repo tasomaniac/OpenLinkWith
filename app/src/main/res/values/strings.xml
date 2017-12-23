@@ -63,6 +63,14 @@
   <string name="pref_key_clipboard" translatable="false">pref_clipboard</string>
   <string name="pref_title_clipboard">Click to open with…</string>
 
+  <string name="pref_title_category_advanced">Advanced</string>
+  <string name="pref_key_features" translatable="false">pref_features</string>
+  <string name="pref_title_features">App Features</string>
+  <string name="pref_summary_features">Enable/Disable some features</string>
+
+  <string name="pref_key_feature_add_to_homescreen" translatable="false">pref_feature_add_to_homescreen</string>
+  <string name="pref_title_feature_add_to_homescreen" translatable="false">@string/add_to_homescreen</string>
+
   <string name="pref_title_category_others">Others</string>
 
   <string name="pref_key_open_source" translatable="false">pref_open_source</string>
