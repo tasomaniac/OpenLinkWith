@@ -74,9 +74,9 @@ class HomeScreenResolverPresenter implements ResolverPresenter {
         }
 
         @Override
-        public void onItemClick(DisplayResolveInfo dri) {
-            Intent intent = dri.intentFrom(intentResolver.getSourceIntent());
-            view.displayAddToHomeScreenDialog(dri, intent);
+        public void onItemClick(DisplayActivityInfo activityInfo) {
+            Intent intent = activityInfo.intentFrom(intentResolver.getSourceIntent());
+            view.displayAddToHomeScreenDialog(activityInfo, intent);
         }
 
         @Override

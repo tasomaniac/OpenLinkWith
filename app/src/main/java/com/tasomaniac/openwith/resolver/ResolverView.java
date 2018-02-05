@@ -6,7 +6,7 @@ import android.support.annotation.StringRes;
 
 interface ResolverView {
 
-    void displayAddToHomeScreenDialog(DisplayResolveInfo dri, Intent intent);
+    void displayAddToHomeScreenDialog(DisplayActivityInfo activityInfo, Intent intent);
 
     void displayData(IntentResolver.Data data);
 
@@ -31,7 +31,7 @@ interface ResolverView {
     interface Listener {
         void onActionButtonClick(boolean always);
 
-        void onItemClick(DisplayResolveInfo dri);
+        void onItemClick(DisplayActivityInfo activityInfo);
 
         void onPackagesChanged();
 
@@ -43,7 +43,7 @@ interface ResolverView {
             }
 
             @Override
-            public void onItemClick(DisplayResolveInfo dri) {
+            public void onItemClick(DisplayActivityInfo activityInfo) {
                 // no-op
             }
 

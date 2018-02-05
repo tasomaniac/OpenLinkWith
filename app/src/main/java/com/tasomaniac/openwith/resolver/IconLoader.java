@@ -1,7 +1,7 @@
 package com.tasomaniac.openwith.resolver;
 
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 
@@ -17,19 +17,20 @@ public class IconLoader {
         this.iconDpi = iconDpi;
     }
 
-    Drawable loadFor(ResolveInfo ri) {
+    Drawable loadFor(ActivityInfo activity) {
         try {
-            if (ri.resolvePackageName != null && ri.icon != 0) {
-                return getIcon(ri.resolvePackageName, ri.icon);
+            String packageName = activity.packageName;
+            if (packageName != null && activity.icon != 0) {
+                return getIcon(packageName, activity.icon);
             }
-            final int iconRes = ri.getIconResource();
+            final int iconRes = activity.getIconResource();
             if (iconRes != 0) {
-                return getIcon(ri.activityInfo.packageName, iconRes);
+                return getIcon(packageName, iconRes);
             }
         } catch (PackageManager.NameNotFoundException | Resources.NotFoundException e) {
             Timber.e(e, "Couldn't find resources for package");
         }
-        return ri.loadIcon(packageManager);
+        return activity.loadIcon(packageManager);
     }
 
     private Drawable getIcon(String packageName, int resId) throws PackageManager.NameNotFoundException {

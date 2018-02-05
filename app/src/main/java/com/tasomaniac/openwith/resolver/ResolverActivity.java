@@ -16,7 +16,6 @@
 package com.tasomaniac.openwith.resolver;
 
 import android.content.Intent;
-import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -24,7 +23,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,7 +99,6 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
 
     private void setupList(IntentResolver.Data data, boolean shouldDisplayExtendedInfo) {
         RecyclerView recyclerView = findViewById(R.id.resolver_list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         adapter.setApplications(data.resolved);
         adapter.setItemClickListener(this);
@@ -115,7 +112,7 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
         }
     }
 
-    private void setupFilteredItem(@Nullable DisplayResolveInfo filteredItem) {
+    private void setupFilteredItem(@Nullable DisplayActivityInfo filteredItem) {
         boolean hasFilteredItem = filteredItem != null;
         ImageView iconView = findViewById(R.id.icon);
         if (iconView != null && hasFilteredItem) {
@@ -193,8 +190,8 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     }
 
     @Override
-    public void onItemClick(DisplayResolveInfo dri) {
-        listener.onItemClick(dri);
+    public void onItemClick(DisplayActivityInfo activityInfo) {
+        listener.onItemClick(activityInfo);
     }
 
     @OnClick(R.id.button_always)
@@ -208,21 +205,21 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     }
 
     @Override
-    public void displayAddToHomeScreenDialog(DisplayResolveInfo dri, Intent intent) {
+    public void displayAddToHomeScreenDialog(DisplayActivityInfo activityInfo, Intent intent) {
         AddToHomeScreenDialogFragment
-                .newInstance(dri, Intents.fixIntents(this, intent))
+                .newInstance(activityInfo, Intents.fixIntents(this, intent))
                 .show(getSupportFragmentManager());
     }
 
     @Override
-    public boolean onItemLongClick(DisplayResolveInfo info) {
-        navigateToAppDetails(info.resolveInfo());
+    public boolean onItemLongClick(DisplayActivityInfo info) {
+        navigateToAppDetails(info.packageName());
         return true;
     }
 
-    private void navigateToAppDetails(ResolveInfo ri) {
+    private void navigateToAppDetails(String packageName) {
         Intent in = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                .setData(Uri.fromParts("package", ri.activityInfo.packageName, null))
+                .setData(Uri.fromParts("package", packageName, null))
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         startActivity(in);
     }
@@ -270,7 +267,7 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
         return intent;
     }
 
-    private static class LoadIconIntoViewTask extends AsyncTask<DisplayResolveInfo, Void, Drawable> {
+    private static class LoadIconIntoViewTask extends AsyncTask<DisplayActivityInfo, Void, Drawable> {
         private final ImageView target;
         private final IconLoader iconLoader;
 
@@ -280,10 +277,10 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
         }
 
         @Override
-        protected Drawable doInBackground(DisplayResolveInfo... params) {
-            final DisplayResolveInfo info = params[0];
+        protected Drawable doInBackground(DisplayActivityInfo... params) {
+            final DisplayActivityInfo info = params[0];
             if (info.displayIcon() == null) {
-                info.displayIcon(iconLoader.loadFor(info.resolveInfo()));
+                info.displayIcon(iconLoader.loadFor(info.getActivityInfo()));
             }
             return info.displayIcon();
         }

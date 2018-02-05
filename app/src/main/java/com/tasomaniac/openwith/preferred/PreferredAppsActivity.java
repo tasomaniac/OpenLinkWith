@@ -16,7 +16,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.Analytics;
-import com.tasomaniac.openwith.resolver.DisplayResolveInfo;
+import com.tasomaniac.openwith.resolver.DisplayActivityInfo;
 import com.tasomaniac.openwith.resolver.ItemClickListener;
 import com.tasomaniac.openwith.resolver.ResolveListAdapter;
 
@@ -76,8 +76,8 @@ public class PreferredAppsActivity extends DaggerAppCompatActivity implements
     }
 
     @Override
-    public void onItemClick(DisplayResolveInfo info) {
-        AppRemoveDialogFragment.newInstance(info)
+    public void onItemClick(DisplayActivityInfo activityInfo) {
+        AppRemoveDialogFragment.newInstance(activityInfo)
                 .show(getSupportFragmentManager(), AppRemoveDialogFragment.class.getSimpleName());
     }
 
@@ -90,7 +90,7 @@ public class PreferredAppsActivity extends DaggerAppCompatActivity implements
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         PackageManager mPm = getPackageManager();
 
-        List<DisplayResolveInfo> apps = new ArrayList<>(data.getCount());
+        List<DisplayActivityInfo> apps = new ArrayList<>(data.getCount());
         while (data.moveToNext()) {
             final String host = Cursors.getString(data, HOST);
             final String componentString = Cursors.getString(data, COMPONENT);
@@ -102,7 +102,7 @@ public class PreferredAppsActivity extends DaggerAppCompatActivity implements
 
             if (resolveInfo != null) {
                 CharSequence roLabel = resolveInfo.loadLabel(mPm);
-                final DisplayResolveInfo info = new DisplayResolveInfo(resolveInfo, roLabel, host);
+                final DisplayActivityInfo info = new DisplayActivityInfo(resolveInfo.activityInfo, roLabel, host);
                 apps.add(info);
             }
         }
@@ -115,7 +115,7 @@ public class PreferredAppsActivity extends DaggerAppCompatActivity implements
     }
 
     @Override
-    public void onAppRemoved(DisplayResolveInfo info) {
+    public void onAppRemoved(DisplayActivityInfo info) {
         getContentResolver().delete(withHost(info.extendedInfo().toString()), null, null);
 
         notifyItemRemoval(info);
@@ -127,7 +127,7 @@ public class PreferredAppsActivity extends DaggerAppCompatActivity implements
         );
     }
 
-    private void notifyItemRemoval(DisplayResolveInfo info) {
+    private void notifyItemRemoval(DisplayActivityInfo info) {
         recyclerView.postDelayed(() -> {
             adapter.remove(info);
 

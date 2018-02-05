@@ -35,7 +35,7 @@ public class HomeScreenResolverPresenterTest {
     private HomeScreenResolverPresenter presenter;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         presenter = new HomeScreenResolverPresenter(resources, intentResolver);
         given(intentResolver.getSourceIntent()).willReturn(sourceIntent);
 
@@ -54,7 +54,7 @@ public class HomeScreenResolverPresenterTest {
     public void shouldHaveNoInteractionWithFilteredItem() {
         IntentResolver.Listener listener = captureIntentResolverListener();
 
-        DisplayResolveInfo filteredItem = mock(DisplayResolveInfo.class);
+        DisplayActivityInfo filteredItem = mock(DisplayActivityInfo.class);
         listener.onIntentResolved(new IntentResolver.Data(Collections.emptyList(), filteredItem, false));
 
         then(filteredItem).shouldHaveZeroInteractions();
@@ -76,7 +76,7 @@ public class HomeScreenResolverPresenterTest {
     public void givenResolveListShouldSetupUI() {
         IntentResolver.Listener listener = captureIntentResolverListener();
 
-        DisplayResolveInfo item = mock(DisplayResolveInfo.class);
+        DisplayActivityInfo item = mock(DisplayActivityInfo.class);
         IntentResolver.Data data = dataWithItem(item);
         listener.onIntentResolved(data);
 
@@ -88,7 +88,7 @@ public class HomeScreenResolverPresenterTest {
         IntentResolver.Listener listener = captureIntentResolverListener();
         given(resources.getString(R.string.add_to_homescreen)).willReturn(TITLE);
 
-        DisplayResolveInfo item = mock(DisplayResolveInfo.class);
+        DisplayActivityInfo item = mock(DisplayActivityInfo.class);
         listener.onIntentResolved(dataWithItem(item));
 
         then(view).should().setTitle(TITLE);
@@ -123,7 +123,7 @@ public class HomeScreenResolverPresenterTest {
         return argumentCaptor.getValue();
     }
 
-    private static IntentResolver.Data dataWithItem(DisplayResolveInfo item) {
+    private static IntentResolver.Data dataWithItem(DisplayActivityInfo item) {
         return new IntentResolver.Data(Collections.singletonList(item), null, false);
     }
 }

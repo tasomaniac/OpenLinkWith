@@ -1,6 +1,7 @@
 package com.tasomaniac.openwith.resolver;
 
 import android.content.ComponentName;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.support.annotation.Nullable;
@@ -20,7 +21,7 @@ class ResolveListGrouper {
     @Nullable private final ComponentName lastChosenComponent;
 
     boolean showExtended;
-    @Nullable DisplayResolveInfo filteredItem;
+    @Nullable DisplayActivityInfo filteredItem;
 
     @Inject
     ResolveListGrouper(PackageManager packageManager,
@@ -34,11 +35,11 @@ class ResolveListGrouper {
     /**
      * Taken from AOSP, don't try to understand what's going on.
      */
-    List<DisplayResolveInfo> groupResolveList(List<ResolveInfo> current) {
+    List<DisplayActivityInfo> groupResolveList(List<ResolveInfo> current) {
         Collections.sort(current, resolverComparator.get());
         filteredItem = null;
         showExtended = false;
-        List<DisplayResolveInfo> grouped = new ArrayList<>();
+        List<DisplayActivityInfo> grouped = new ArrayList<>();
 
         // Check for applications with same name and use application name or
         // package name if necessary
@@ -71,7 +72,7 @@ class ResolveListGrouper {
     /**
      * Taken from AOSP, don't try to understand what's going on.
      */
-    private void processGroup(List<DisplayResolveInfo> grouped,
+    private void processGroup(List<DisplayActivityInfo> grouped,
                               List<ResolveInfo> current,
                               int start,
                               int end,
@@ -81,11 +82,11 @@ class ResolveListGrouper {
         int num = end - start + 1;
         if (num == 1) {
             // No duplicate labels. Use label for entry at start
-            DisplayResolveInfo dri = new DisplayResolveInfo(ro, displayLabel, null);
-            if (isLastChosenPosition(ro)) {
-                filteredItem = dri;
+            DisplayActivityInfo activityInfo = new DisplayActivityInfo(ro.activityInfo, displayLabel, null);
+            if (isLastChosenPosition(ro.activityInfo)) {
+                filteredItem = activityInfo;
             } else {
-                grouped.add(dri);
+                grouped.add(activityInfo);
             }
         } else {
             showExtended = true;
@@ -112,32 +113,32 @@ class ResolveListGrouper {
                 duplicates.clear();
             }
             for (int k = start; k <= end; k++) {
-                ResolveInfo add = current.get(k);
-                DisplayResolveInfo dri = displayResolveInfoToAdd(usePkg, add, displayLabel);
+                ActivityInfo add = current.get(k).activityInfo;
+                DisplayActivityInfo activityInfo = displayResolveInfoToAdd(usePkg, add, displayLabel);
                 if (isLastChosenPosition(add)) {
-                    filteredItem = dri;
+                    filteredItem = activityInfo;
                 } else {
-                    grouped.add(dri);
+                    grouped.add(activityInfo);
                 }
             }
         }
     }
 
-    private DisplayResolveInfo displayResolveInfoToAdd(boolean usePackageName, ResolveInfo add, CharSequence displayLabel) {
+    private DisplayActivityInfo displayResolveInfoToAdd(boolean usePackageName, ActivityInfo activityInfo, CharSequence displayLabel) {
         if (usePackageName) {
             // Use package name for all entries from start to end-1
-            return new DisplayResolveInfo(add, displayLabel, add.activityInfo.packageName);
+            return new DisplayActivityInfo(activityInfo, displayLabel, activityInfo.packageName);
         } else {
             // Use application name for all entries from start to end-1
-            CharSequence extendedLabel = add.activityInfo.applicationInfo.loadLabel(packageManager);
-            return new DisplayResolveInfo(add, displayLabel, extendedLabel);
+            CharSequence extendedLabel = activityInfo.applicationInfo.loadLabel(packageManager);
+            return new DisplayActivityInfo(activityInfo, displayLabel, extendedLabel);
         }
     }
 
-    private boolean isLastChosenPosition(ResolveInfo info) {
+    private boolean isLastChosenPosition(ActivityInfo activityInfo) {
         return lastChosenComponent != null
-                && lastChosenComponent.getPackageName().equals(info.activityInfo.packageName)
-                && lastChosenComponent.getClassName().equals(info.activityInfo.name);
+                && lastChosenComponent.getPackageName().equals(activityInfo.packageName)
+                && lastChosenComponent.getClassName().equals(activityInfo.name);
     }
 
 }

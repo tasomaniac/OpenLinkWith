@@ -22,7 +22,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
 
     private final IconLoader iconLoader;
 
-    private List<DisplayResolveInfo> mList = Collections.emptyList();
+    private List<DisplayActivityInfo> mList = Collections.emptyList();
     private boolean displayExtendedInfo = false;
     private boolean selectionEnabled = false;
     private int checkedItemPosition = RecyclerView.NO_POSITION;
@@ -64,7 +64,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        final DisplayResolveInfo info = mList.get(position);
+        final DisplayActivityInfo info = mList.get(position);
 
         holder.text.setText(info.displayLabel());
         if (holder.text2 != null) {
@@ -119,12 +119,12 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         checkedItemPosition = position;
     }
 
-    public void setApplications(List<DisplayResolveInfo> list) {
+    public void setApplications(List<DisplayActivityInfo> list) {
         this.mList = list;
         notifyDataSetChanged();
     }
 
-    public void remove(DisplayResolveInfo item) {
+    public void remove(DisplayActivityInfo item) {
         int position = mList.indexOf(item);
         mList.remove(item);
         notifyItemRemoved(position);
@@ -151,18 +151,18 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         }
     }
 
-    private class LoadIconTask extends AsyncTask<DisplayResolveInfo, Void, DisplayResolveInfo> {
+    private class LoadIconTask extends AsyncTask<DisplayActivityInfo, Void, DisplayActivityInfo> {
         @Override
-        protected DisplayResolveInfo doInBackground(DisplayResolveInfo... params) {
-            final DisplayResolveInfo info = params[0];
+        protected DisplayActivityInfo doInBackground(DisplayActivityInfo... params) {
+            final DisplayActivityInfo info = params[0];
             if (info.displayIcon() == null) {
-                info.displayIcon(iconLoader.loadFor(info.resolveInfo()));
+                info.displayIcon(iconLoader.loadFor(info.getActivityInfo()));
             }
             return info;
         }
 
         @Override
-        protected void onPostExecute(DisplayResolveInfo info) {
+        protected void onPostExecute(DisplayActivityInfo info) {
             notifyDataSetChanged();
         }
     }

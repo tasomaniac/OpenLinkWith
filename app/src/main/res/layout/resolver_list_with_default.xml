@@ -110,6 +110,8 @@
     android:clipToPadding="false"
     android:divider="@null"
     android:elevation="8dp"
-    android:scrollbarStyle="outsideOverlay" />
+    android:scrollbarStyle="outsideOverlay"
+    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+    android:orientation="vertical" />
 
 </com.tasomaniac.openwith.resolver.ResolverDrawerLayout>

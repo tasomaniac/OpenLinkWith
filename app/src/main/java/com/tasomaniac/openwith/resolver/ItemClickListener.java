@@ -1,8 +1,8 @@
 package com.tasomaniac.openwith.resolver;
 
 public interface ItemClickListener {
-    void onItemClick(DisplayResolveInfo dri);
+    void onItemClick(DisplayActivityInfo activityInfo);
 
-    ItemClickListener EMPTY = dri -> {
+    ItemClickListener EMPTY = activityInfo -> {
     };
 }

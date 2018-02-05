@@ -41,9 +41,9 @@
   <string name="pref_title_category_display">Display</string>
 
   <string name="pref_key_night_mode" translatable="false">pref_night_mode</string>
+  <string name="pref_title_night_mode">Night Mode</string>
   <string name="pref_value_night_mode_off" translatable="false">off</string>
   <string name="pref_value_night_mode_on" translatable="false">on</string>
-  <string name="pref_title_night_mode">Night Mode</string>
   <string name="pref_entry_night_mode_off">Off</string>
   <string name="pref_entry_night_mode_on">On</string>
 
@@ -69,6 +69,7 @@
 
   <string name="pref_key_version" translatable="false">pref_version</string>
   <string name="pref_title_version">Version</string>
+  
   <string name="skip">Skip</string>
   <string name="cd_image_tutorial">Tutorial Image</string>
 

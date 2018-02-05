@@ -70,9 +70,9 @@ class DefaultResolverPresenter implements ResolverPresenter {
                 return;
             }
             if (data.totalCount() == 1) {
-                DisplayResolveInfo dri = data.filteredItem != null ? data.filteredItem : data.resolved.get(0);
+                DisplayActivityInfo activityInfo = data.filteredItem != null ? data.filteredItem : data.resolved.get(0);
                 try {
-                    navigation.startPreferred(dri.intentFrom(intentResolver.getSourceIntent()), dri.displayLabel());
+                    navigation.startPreferred(activityInfo.intentFrom(intentResolver.getSourceIntent()), activityInfo.displayLabel());
                     navigation.dismiss();
                     return;
                 } catch (Exception e) {
@@ -85,7 +85,7 @@ class DefaultResolverPresenter implements ResolverPresenter {
             view.setupActionButtons();
         }
 
-        private String titleForAction(DisplayResolveInfo filteredItem) {
+        private String titleForAction(DisplayActivityInfo filteredItem) {
             return filteredItem != null ?
                     resources.getString(R.string.which_view_application_named, filteredItem.displayLabel()) :
                     resources.getString(R.string.which_view_application);
@@ -133,17 +133,17 @@ class DefaultResolverPresenter implements ResolverPresenter {
         }
 
         @Override
-        public void onItemClick(DisplayResolveInfo dri) {
-            if (viewState.shouldUseAlwaysOption() && !dri.equals(viewState.lastSelected)) {
+        public void onItemClick(DisplayActivityInfo activityInfo) {
+            if (viewState.shouldUseAlwaysOption() && !activityInfo.equals(viewState.lastSelected)) {
                 view.enableActionButtons();
-                viewState.lastSelected = dri;
+                viewState.lastSelected = activityInfo;
             } else {
-                startAndPersist(dri, false);
+                startAndPersist(activityInfo, false);
             }
         }
 
-        private void startAndPersist(DisplayResolveInfo dri, boolean alwaysCheck) {
-            Intent intent = dri.intentFrom(intentResolver.getSourceIntent());
+        private void startAndPersist(DisplayActivityInfo activityInfo, boolean alwaysCheck) {
+            Intent intent = activityInfo.intentFrom(intentResolver.getSourceIntent());
             navigation.startSelected(intent);
             persistSelectedIntent(intent, alwaysCheck);
         }

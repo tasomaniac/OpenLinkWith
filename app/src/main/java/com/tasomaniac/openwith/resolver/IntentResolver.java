@@ -1,6 +1,7 @@
 package com.tasomaniac.openwith.resolver;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
@@ -8,8 +9,8 @@ import android.support.annotation.Nullable;
 
 import com.tasomaniac.openwith.PerActivity;
 import com.tasomaniac.openwith.rx.SchedulingStrategy;
+import com.tasomaniac.openwith.util.ActivityInfoExtensionsKt;
 import com.tasomaniac.openwith.util.Intents;
-import com.tasomaniac.openwith.util.ResolverInfos;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -88,11 +89,11 @@ class IntentResolver {
 
         callerPackage.removeFrom(currentResolveList);
 
-        List<DisplayResolveInfo> resolved = groupResolveList(currentResolveList);
+        List<DisplayActivityInfo> resolved = groupResolveList(currentResolveList);
         return new Data(resolved, resolveListGrouper.filteredItem, resolveListGrouper.showExtended);
     }
 
-    private List<DisplayResolveInfo> groupResolveList(List<ResolveInfo> currentResolveList) {
+    private List<DisplayActivityInfo> groupResolveList(List<ResolveInfo> currentResolveList) {
         if (currentResolveList.size() <= 0) {
             return Collections.emptyList();
         }
@@ -106,9 +107,9 @@ class IntentResolver {
             boolean browserFound = false;
 
             for (int i = 0; i < initialSize; i++) {
-                ResolveInfo info = list.get(i);
+                ActivityInfo info = list.get(i).activityInfo;
 
-                if (ResolverInfos.equals(info, browser)) {
+                if (ActivityInfoExtensionsKt.isEqualTo(info, browser.activityInfo)) {
                     browserFound = true;
                     break;
                 }
@@ -129,11 +130,11 @@ class IntentResolver {
     }
 
     static class Data {
-        final List<DisplayResolveInfo> resolved;
-        @Nullable final DisplayResolveInfo filteredItem;
+        final List<DisplayActivityInfo> resolved;
+        @Nullable final DisplayActivityInfo filteredItem;
         final boolean showExtended;
 
-        Data(List<DisplayResolveInfo> resolved, @Nullable DisplayResolveInfo filteredItem, boolean showExtended) {
+        Data(List<DisplayActivityInfo> resolved, @Nullable DisplayActivityInfo filteredItem, boolean showExtended) {
             this.resolved = resolved;
             this.filteredItem = filteredItem;
             this.showExtended = showExtended;

@@ -49,7 +49,7 @@ class UsageAccessSettings @Inject constructor(
       analytics.sendEvent(
           "Usage Access",
           "Access Given",
-          java.lang.Boolean.toString(usageAccessGiven)
+          usageAccessGiven.toString()
       )
     }
   }

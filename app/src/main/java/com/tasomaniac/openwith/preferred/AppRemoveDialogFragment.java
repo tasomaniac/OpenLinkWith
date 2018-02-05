@@ -10,13 +10,13 @@ import android.support.v7.app.AppCompatDialogFragment;
 import android.text.Html;
 
 import com.tasomaniac.openwith.R;
-import com.tasomaniac.openwith.resolver.DisplayResolveInfo;
+import com.tasomaniac.openwith.resolver.DisplayActivityInfo;
 
 public class AppRemoveDialogFragment extends AppCompatDialogFragment {
 
     private static final String EXTRA_INFO = "EXTRA_INFO";
 
-    static AppRemoveDialogFragment newInstance(DisplayResolveInfo info) {
+    static AppRemoveDialogFragment newInstance(DisplayActivityInfo info) {
         AppRemoveDialogFragment fragment = new AppRemoveDialogFragment();
         Bundle args = new Bundle();
         args.putParcelable(EXTRA_INFO, info);
@@ -41,7 +41,7 @@ public class AppRemoveDialogFragment extends AppCompatDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        DisplayResolveInfo info = getInfo();
+        DisplayActivityInfo info = getInfo();
         CharSequence message = appRemoveDialogContentFrom(getResources(), info);
 
         return new AlertDialog.Builder(getActivity())
@@ -52,15 +52,15 @@ public class AppRemoveDialogFragment extends AppCompatDialogFragment {
                 .show();
     }
 
-    private DisplayResolveInfo getInfo() {
-        final DisplayResolveInfo info = getArguments().getParcelable(EXTRA_INFO);
+    private DisplayActivityInfo getInfo() {
+        final DisplayActivityInfo info = getArguments().getParcelable(EXTRA_INFO);
         if (info == null) {
             throw new IllegalArgumentException("Use newInstance method to create the Dialog");
         }
         return info;
     }
 
-    private static CharSequence appRemoveDialogContentFrom(Resources resources, DisplayResolveInfo info) {
+    private static CharSequence appRemoveDialogContentFrom(Resources resources, DisplayActivityInfo info) {
         String content = resources.getString(
                 R.string.message_remove_preferred,
                 info.displayLabel(),
@@ -72,6 +72,6 @@ public class AppRemoveDialogFragment extends AppCompatDialogFragment {
     }
 
     interface Callbacks {
-        void onAppRemoved(DisplayResolveInfo info);
+        void onAppRemoved(DisplayActivityInfo info);
     }
 }

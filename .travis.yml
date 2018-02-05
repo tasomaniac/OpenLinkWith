@@ -14,10 +14,6 @@ before_install:
 script:
   - ./gradlew build -s
 
-branches:
-  except:
-    - gh-pages
-
 cache:
   directories:
     - $HOME/.gradle

@@ -27,7 +27,7 @@ import android.widget.Toast;
 
 import com.tasomaniac.android.widget.DelayedProgressBar;
 import com.tasomaniac.openwith.R;
-import com.tasomaniac.openwith.resolver.DisplayResolveInfo;
+import com.tasomaniac.openwith.resolver.DisplayActivityInfo;
 import com.tasomaniac.openwith.util.Intents;
 
 import javax.inject.Inject;
@@ -46,7 +46,7 @@ import static android.os.Build.VERSION_CODES.M;
 public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
         implements DialogInterface.OnClickListener {
 
-    private static final String KEY_DRI = "dri";
+    private static final String KEY_ACTIVITY_TO_ADD = "activity_to_add";
     private static final String KEY_INTENT = "intent";
 
     @Inject TitleFetcher titleFetcher;
@@ -55,14 +55,14 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
     @BindView(R.id.add_to_home_screen_progress) DelayedProgressBar progressBar;
     @BindBitmap(R.drawable.ic_bookmark) Bitmap shortcutMark;
 
-    private DisplayResolveInfo dri;
+    private DisplayActivityInfo activityToAdd;
     private ShortcutIconCreator shortcutIconCreator;
     private Intent intent;
 
-    public static AddToHomeScreenDialogFragment newInstance(DisplayResolveInfo dri, Intent intent) {
+    public static AddToHomeScreenDialogFragment newInstance(DisplayActivityInfo activity, Intent intent) {
         AddToHomeScreenDialogFragment fragment = new AddToHomeScreenDialogFragment();
         Bundle args = new Bundle();
-        args.putParcelable(KEY_DRI, dri);
+        args.putParcelable(KEY_ACTIVITY_TO_ADD, activity);
         args.putParcelable(KEY_INTENT, intent);
         fragment.setArguments(args);
         return fragment;
@@ -72,7 +72,7 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AndroidSupportInjection.inject(this);
-        dri = getArguments().getParcelable(KEY_DRI);
+        activityToAdd = getArguments().getParcelable(KEY_ACTIVITY_TO_ADD);
         intent = getArguments().getParcelable(KEY_INTENT);
         titleFetcher.setListener(new TitleFetcher.Listener() {
             @Override
@@ -174,10 +174,10 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
     }
 
     private boolean createShortcut() {
-        String id = intent.getDataString() + dri.resolveInfo().activityInfo.packageName;
+        String id = intent.getDataString() + activityToAdd.packageName();
         String label = titleView.getText().toString();
         try {
-            return createShortcutWith(id, label, shortcutIconCreator.createIconFor(dri.displayIcon()));
+            return createShortcutWith(id, label, shortcutIconCreator.createIconFor(activityToAdd.displayIcon()));
         } catch (Exception e) {
             // This method started to fire android.os.TransactionTooLargeException
             Timber.e(e, "Exception while adding shortcut");

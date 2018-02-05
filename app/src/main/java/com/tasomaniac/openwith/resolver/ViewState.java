@@ -9,10 +9,10 @@ import javax.inject.Inject;
 @PerActivity
 class ViewState {
 
-    @Nullable DisplayResolveInfo lastSelected;
-    @Nullable DisplayResolveInfo filteredItem;
+    @Nullable DisplayActivityInfo lastSelected;
+    @Nullable DisplayActivityInfo filteredItem;
 
-    DisplayResolveInfo checkedItem() {
+    DisplayActivityInfo checkedItem() {
         if (filteredItem != null) {
             return filteredItem;
         }

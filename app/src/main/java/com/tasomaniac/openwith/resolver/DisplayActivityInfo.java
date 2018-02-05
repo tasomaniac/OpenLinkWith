@@ -1,35 +1,40 @@
 package com.tasomaniac.openwith.resolver;
 
+import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.ResolveInfo;
+import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
-import com.tasomaniac.openwith.util.ResolverInfos;
+import com.tasomaniac.openwith.util.ActivityInfoExtensionsKt;
 
-public final class DisplayResolveInfo implements Parcelable {
-    private final ResolveInfo ri;
+public final class DisplayActivityInfo implements Parcelable {
+    private final ActivityInfo activityInfo;
     private final CharSequence displayLabel;
     private final CharSequence extendedInfo;
     private Drawable displayIcon;
 
-    public DisplayResolveInfo(ResolveInfo ri, CharSequence displayLabel, CharSequence extendedInfo) {
-        this.ri = ri;
+    public DisplayActivityInfo(ActivityInfo activityInfo, CharSequence displayLabel, CharSequence extendedInfo) {
+        this.activityInfo = activityInfo;
         this.displayLabel = displayLabel;
         this.extendedInfo = extendedInfo;
     }
 
-    private DisplayResolveInfo(Parcel in) {
-        ri = in.readParcelable(ResolveInfo.class.getClassLoader());
+    private DisplayActivityInfo(Parcel in) {
+        activityInfo = in.readParcelable(ActivityInfo.class.getClassLoader());
         displayLabel = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in);
         extendedInfo = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in);
     }
 
+    public String packageName() {
+        return activityInfo.packageName;
+    }
+
     Intent intentFrom(Intent sourceIntent) {
         return new Intent(sourceIntent)
-                .setComponent(ResolverInfos.componentName(ri))
+                .setComponent(componentName())
                 .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
                                   | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
     }
@@ -42,18 +47,22 @@ public final class DisplayResolveInfo implements Parcelable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        DisplayResolveInfo that = (DisplayResolveInfo) o;
-        return ResolverInfos.equals(ri, that.ri);
+        DisplayActivityInfo that = (DisplayActivityInfo) o;
+        return componentName().equals(that.componentName());
     }
 
     @Override
     public int hashCode() {
-        return ResolverInfos.componentName(ri).hashCode();
+        return componentName().hashCode();
+    }
+
+    private ComponentName componentName() {
+        return ActivityInfoExtensionsKt.componentName(activityInfo);
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(ri, flags);
+        dest.writeParcelable(activityInfo, flags);
         TextUtils.writeToParcel(displayLabel, dest, flags);
         TextUtils.writeToParcel(extendedInfo, dest, flags);
     }
@@ -63,20 +72,20 @@ public final class DisplayResolveInfo implements Parcelable {
         return 0;
     }
 
-    public static final Creator<DisplayResolveInfo> CREATOR = new Creator<DisplayResolveInfo>() {
+    public static final Creator<DisplayActivityInfo> CREATOR = new Creator<DisplayActivityInfo>() {
         @Override
-        public DisplayResolveInfo createFromParcel(Parcel in) {
-            return new DisplayResolveInfo(in);
+        public DisplayActivityInfo createFromParcel(Parcel in) {
+            return new DisplayActivityInfo(in);
         }
 
         @Override
-        public DisplayResolveInfo[] newArray(int size) {
-            return new DisplayResolveInfo[size];
+        public DisplayActivityInfo[] newArray(int size) {
+            return new DisplayActivityInfo[size];
         }
     };
 
-    public ResolveInfo resolveInfo() {
-        return ri;
+    public ActivityInfo getActivityInfo() {
+        return activityInfo;
     }
 
     public CharSequence displayLabel() {
