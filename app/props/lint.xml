@@ -5,7 +5,7 @@
   <issue id="HardcodedText" severity="error" />
   <issue id="HardwareIds" severity="error" />
   <issue id="DefaultLocale" severity="error" />
-  <!--<issue id="CheckResult" severity="error" />-->
+  <issue id="CheckResult" severity="error" />
   <issue id="ObsoleteSdkInt" severity="error" />
   <issue id="VisibleForTests" severity="error" />
   <issue id="IconDipSize" severity="error" />
