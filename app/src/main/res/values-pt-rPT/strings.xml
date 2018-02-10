@@ -9,7 +9,7 @@
   <string name="which_view_application_named">Abrir com %1$s</string>
   <string name="title_preferred_apps">Aplicações pré-definidas</string>
   <string name="desc_preferred">Aplicações pré-definidas para serem usadas diretamente quando as ligações são partilhadas com esta aplicação.\n\nToque para remover uma aplicação predefinida em baixo.</string>
-  <string name="desc_preferred_empty">Aplicações pré-definidas para serem usadas diretamente quando as ligações são partilhadas com esta aplicação.\n\nPode definir aplicações pré-definidas se partilhar as ligações com esta aplicação e escolher \"Sempre\"</string>
+  <string name="desc_preferred_empty">Aplicações pré-definidas para serem usadas diretamente quando as ligações são partilhadas com esta aplicação.\n\nPode definir aplicações pré-definidas se partilhar as ligações com esta aplicação e escolher \“Sempre\”</string>
   <string name="title_remove_preferred">Remover predefinição?</string>
   <string name="message_remove_preferred"><![CDATA[
 Remover <strong>%1$s</strong> como a aplicação predefinida para abrir ligações de <strong>%2$s</strong>? <br><br><strong>Nota:</strong> pode definir uma nova aplicação predefinida para usar na próxima vez que partilhar o link <strong>%3$s</strong>.    ]]></string>

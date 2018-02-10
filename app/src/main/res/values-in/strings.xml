@@ -9,7 +9,7 @@
   <string name="which_view_application_named">Buka dengan %1$s</string>
   <string name="title_preferred_apps">Aplikasi pilihan</string>
   <string name="desc_preferred">Aplikasi pilihan akan langsung digunakan saat tautan dibagikan menggunakan apl ini.\n\nSentuh untuk menghapus aplikasi pilihan.</string>
-  <string name="desc_preferred_empty">Aplikasi preferensi akan digunakan langsung saat tautan dibagikan menggunakan apl ini.\n\nAnda dapat mengatur aplikasi preferensi dengan berbagi tautan menggunakan apl ini dan kemudian memilih \"Selalu\"</string>
+  <string name="desc_preferred_empty">Aplikasi preferensi akan digunakan langsung saat tautan dibagikan menggunakan apl ini.\n\nAnda dapat mengatur aplikasi preferensi dengan berbagi tautan menggunakan apl ini dan kemudian memilih \“Selalu\”</string>
   <string name="title_remove_preferred">Menghapus preferensi?</string>
   <string name="message_remove_preferred"><![CDATA[
     Hapus <strong>%1$s</strong> sebagai apl preferensi untuk membuka tautan dari <strong>%2$s</strong>?<br><br><strong>Ingat:</strong> Anda dapat mengatur apl pilihan baru untuk digunakan saat membagikan tautan dari <strong>%3$s</strong>.

@@ -9,7 +9,7 @@
   <string name="which_view_application_named">Abrir con %1$s</string>
   <string name="title_preferred_apps">Apps Preferidas</string>
   <string name="desc_preferred">Aplicaciones preferidas para ser usadas directamente cuando los enlaces siguientes son compartidos con esta app.\n\n Toca para quitar una app preferida.</string>
-  <string name="desc_preferred_empty">Aplicaciones preferidas para ser usadas directamente cuando los siguientes enlaces son compartidos con esta app.\n\nuedes seleccionar las apps preferidas compartiendo enlaces con esta app y luego eligiendo \"Siempre\"</string>
+  <string name="desc_preferred_empty">Aplicaciones preferidas para ser usadas directamente cuando los siguientes enlaces son compartidos con esta app.\n\nuedes seleccionar las apps preferidas compartiendo enlaces con esta app y luego eligiendo \“Siempre\”</string>
   <string name="title_remove_preferred">¿Borrar preferida?</string>
   <string name="message_remove_preferred"><![CDATA[
 Eliminar <strong>%1$s</strong> como app preferida para cargar los enlaces de <strong>%2$s</strong>?<br><br><strong>Nota:</strong> Puedes seleccionar una nueva app preferida para usar la próxima vez que compartas el enlace <strong>%3$s</strong>.    ]]></string>

@@ -9,7 +9,7 @@
   <string name="which_view_application_named">Open with %1$s</string>
   <string name="title_preferred_apps">優先アプリ</string>
   <string name="desc_preferred">以下のリンクをこのアプリで共有したときに直接使われる優先アプリです。\n\n優先アプリを解除するにはタップしてください。</string>
-  <string name="desc_preferred_empty">以下のリンクをこのアプリで共有したときに直接使われる優先アプリです。\n\nリンクをこのアプリで共有し、\"常時\" を選択することによって優先アプリを設定できます。</string>
+  <string name="desc_preferred_empty">以下のリンクをこのアプリで共有したときに直接使われる優先アプリです。\n\nリンクをこのアプリで共有し、\“常時\” を選択することによって優先アプリを設定できます。</string>
   <string name="title_remove_preferred">優先設定を解除しますか？</string>
   <string name="message_remove_preferred"><![CDATA[    <strong>%1$s</strong> を <strong>%2$s</strong> のリンクを読み込むときの優先アプリから解除しますか？<br><br><strong>注:</strong> 次回、<strong>%3$s</strong> のリンクを共有するときに、新しい優先アプリを設定できるようになります。
     ]]></string>

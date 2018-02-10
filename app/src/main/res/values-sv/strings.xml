@@ -9,7 +9,7 @@
   <string name="which_view_application_named">Öppna med %1$s</string>
   <string name="title_preferred_apps">Föredragna Appar</string>
   <string name="desc_preferred">Föredragna applikationer att använda direkt när du delar länken nedan med denna app.\n\nTryck för att ta bort föredragen app.</string>
-  <string name="desc_preferred_empty">Föredragna applikationer att använda direkt när du delar länken nedan med denna app.\n\nDu kan sätta föredragna appar genom att dela länkar med denna app och sedan välja \"Alltid\"</string>
+  <string name="desc_preferred_empty">Föredragna applikationer att använda direkt när du delar länken nedan med denna app.\n\nDu kan sätta föredragna appar genom att dela länkar med denna app och sedan välja \“Alltid\”</string>
   <string name="title_remove_preferred">Ta bort preferens?</string>
   <string name="message_remove_preferred"><![CDATA[
 Ta bort <strong>%1$s</strong> som föredragen app att öppna länkar från <strong>%2$s</strong>?<br><br><strong>Obs:</strong> Du kan sätta en ny preferens nästa gång du delar en länk från <strong>%3$s</strong>.    ]]></string>

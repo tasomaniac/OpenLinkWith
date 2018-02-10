@@ -9,7 +9,7 @@
   <string name="which_view_application_named">Otwórz za pomocą %1$s</string>
   <string name="title_preferred_apps">Preferowane aplikacje</string>
   <string name="desc_preferred">Domyślnie przypisane aplikacje, które bezpośrednio zostaną użyte w momencie gdy udostępnisz poniższe linki.\n\nNaciśnij aby usunąć domyślną aplikację.</string>
-  <string name="desc_preferred_empty">Domyślne aplikacje, zostaną bezpośrednio użyte, w momencie gdy udostępnisz poniższe linki tej apce.\n\nMożesz ustawić preferowane aplikacje udostępniając linki z tej apki i później naciskając przycisk \"Zawsze\"</string>
+  <string name="desc_preferred_empty">Domyślne aplikacje, zostaną bezpośrednio użyte, w momencie gdy udostępnisz poniższe linki tej apce.\n\nMożesz ustawić preferowane aplikacje udostępniając linki z tej apki i później naciskając przycisk \“Zawsze\”</string>
   <string name="title_remove_preferred">Usunąć preferowany?</string>
   <string name="message_remove_preferred"><![CDATA[Czy chcesz usunąć aplikację <strong>%1$s</strong> domyślnie przypisaną do łącza <strong>%2$s</strong>?<br><br><strong>Info:</strong> pamiętaj, że zawsze możesz ustawić nową domyślną aplikację, która następnym razem będzie otwierać <strong>%3$s</strong>.    ]]></string>
   <string name="error_invalid_url">Współdzielona treść nie posiada poprawnych adresów URL.</string>

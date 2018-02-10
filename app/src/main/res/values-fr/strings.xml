@@ -9,7 +9,7 @@
   <string name="which_view_application_named">Ouvrir avec %1$s</string>
   <string name="title_preferred_apps">Applications Préférées</string>
   <string name="desc_preferred">Applications préférées à utiliser lorsque les liens ci-dessous sont partagés avec cette application.\n\nAppuyer pour retirer une application préférée.</string>
-  <string name="desc_preferred_empty">Applications préférées à utiliser lorsque les liens ci-dessous sont partagés avec cette application.\n\nVous pouvez définir des applications préférées en partageant des liens avec cette application et en choisissant \"Toujours\"</string>
+  <string name="desc_preferred_empty">Applications préférées à utiliser lorsque les liens ci-dessous sont partagés avec cette application.\n\nVous pouvez définir des applications préférées en partageant des liens avec cette application et en choisissant \“Toujours\”</string>
   <string name="title_remove_preferred">Supprimer l\'application préférée?</string>
   <string name="message_remove_preferred"><![CDATA[
 Ne plus ouvrir les liens de <strong>%2$s</strong> avec <strong>%1$s</strong> ? <br><br><strong>Note:</strong>Vous pouvez définir une nouvelle application préférée à utiliser pour les prochains lien de <strong>%3$s</strong>.    ]]></string>
