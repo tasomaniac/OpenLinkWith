@@ -28,8 +28,8 @@ Không dùng <strong>%1$s</strong> làm ứng dụng ưu tiên để mở đư�
   <string name="pref_title_night_mode">Chế độ ban đêm</string>
   <string name="pref_entry_night_mode_off">Tắt</string>
   <string name="pref_entry_night_mode_on">Bật</string>
-  <string name="pref_title_category_clipboard">Link you copied</string>
-  <string name="pref_title_clipboard">Click to open with&#8230;</string>
+  <string name="pref_title_category_clipboard">Đã sao chép liên kết</string>
+  <string name="pref_title_clipboard">Bấm để mở với&#8230;</string>
   <string name="pref_title_category_others">Khác</string>
   <string name="pref_title_open_source">Giấy phép mã nguồn mở</string>
   <string name="pref_summary_open_source">Xem giấy phép của các thư viện mã nguồn mở.</string>
@@ -45,8 +45,8 @@ Không dùng <strong>%1$s</strong> làm ứng dụng ưu tiên để mở đư�
   <string name="title_tutorial_2">Chia sẻ nó!</string>
   <string name="title_tutorial_3">Ứng dụng ưu tiên</string>
   <string name="title_tutorial_5">Quyền truy cập sử dụng</string>
-  <string name="description_tutorial_0">Tôi đến để giúp bạn bất cứ khi nào bạn bị mắc kẹt trong các trình duyệt.</string>
-  <string name="description_tutorial_1">Bạn nhấp vào liên kết rút gọn và bạn phải xem nó trong trình duyệt thay vì trong một ứng dụng hỗ trợ.</string>
+  <string name="description_tutorial_0">Tôi được tạo ra để giúp bạn mỗi khi bạn bị mắc kẹt vì các liên kết luôn mở trong trình duyệt.</string>
+  <string name="description_tutorial_1">Bạn nhấp vào liên kết rút gọn và bạn phải xem nó trong trình duyệt thay vì trong một ứng dụng hỗ trợ mà bạn có.</string>
   <string name="description_tutorial_2">Chỉ cần chia sẻ liên kết với tôi và tôi sẽ mở nó bằng ứng dụng bạn cần.</string>
   <string name="description_tutorial_3"><![CDATA[
 Chọn <strong>LUÔN LUÔN</strong> để cho tôi biết bạn sẽ luôn luôn mở liên kết đó với một ứng dụng cụ thể.  ]]></string>
