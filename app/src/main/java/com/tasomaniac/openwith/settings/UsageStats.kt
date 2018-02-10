@@ -40,6 +40,7 @@ object UsageStats {
   }
 }
 
+@Suppress("TooGenericExceptionCaught")
 @SuppressLint("InlinedApi")
 fun Context.maybeStartUsageAccessSettings() = try {
   startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))

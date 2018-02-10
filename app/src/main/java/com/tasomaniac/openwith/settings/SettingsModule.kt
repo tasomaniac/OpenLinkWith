@@ -23,16 +23,16 @@ class SettingsModule {
       general: GeneralSettings,
       display: DisplaySettings,
       other: OtherSettings
-  ) = setOf(clipboard, general, display, other)
+  ): Set<Settings> = setOf(clipboard, general, display, other)
 
   @Provides
   @ElementsIntoSet
-  fun usageAccessSettings(settings: UsageAccessSettings) = setOf(settings, condition = SDK_INT >= LOLLIPOP)
+  fun usageAccessSettings(settings: UsageAccessSettings): Set<Settings> =
+      if (SDK_INT >= LOLLIPOP) setOf(settings) else setOf()
 
   @Provides
   @ElementsIntoSet
-  fun debugSettings(settings: DebugSettings) = setOf(settings, condition = BuildConfig.DEBUG)
-
-  private fun setOf(vararg settings: Settings, condition: Boolean) = if (condition) setOf(*settings) else setOf()
+  fun debugSettings(settings: DebugSettings): Set<Settings> =
+      if (BuildConfig.DEBUG) setOf(settings) else setOf()
 
 }

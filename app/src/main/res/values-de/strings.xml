@@ -9,7 +9,7 @@
   <string name="which_view_application_named">Öffnen mit %1$s</string>
   <string name="title_preferred_apps">Bevorzugte Apps</string>
   <string name="desc_preferred">Bevorzugte Apps, welche für die unten stehenden Links direkt verwendet werden.\n\nDrücken, um eine bevorzugte App zu entfernen.</string>
-  <string name="desc_preferred_empty">Bevorzugte Apps, welche direkt verwendet werden, wenn die untenstehenden Links mit dieser App geteilt werden.\n\n Sie können bevorzugte Apps auswählen, indem Sie Links mit dieser App teilen und dann auf \"Immer\" klicken.</string>
+  <string name="desc_preferred_empty">Bevorzugte Apps, welche direkt verwendet werden, wenn die untenstehenden Links mit dieser App geteilt werden.\n\n Sie können bevorzugte Apps auswählen, indem Sie Links mit dieser App teilen und dann auf “Immer” klicken.</string>
   <string name="title_remove_preferred">Bevorzugte entfernen?</string>
   <string name="message_remove_preferred"><![CDATA[     Entfernen <strong>%1$s</strong> als die bevorzugte app, <strong>%2$s</strong> Links zu laden? <br><br><strong>Hinweis:</strong>  Sie eine neue bevorzugte app das nächste Mal verwenden wenn sie einen <strong>%3$s</strong> Link teilen.     ]]></string>
   <string name="error_invalid_url">Der ausgewählte Inhalt beinhaltet keine gültigen URLs.</string>

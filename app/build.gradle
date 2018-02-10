@@ -1,11 +1,17 @@
+plugins {
+  id "io.gitlab.arturbosch.detekt" version "1.0.0.RC6-3"
+}
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.novoda.android-command'
 apply plugin: 'com.novoda.build-properties'
-apply plugin: 'com.github.triplet.play'
-apply plugin: 'io.fabric'
+apply plugin: 'com.novoda.static-analysis'
 apply plugin: 'net.ltgt.errorprone'
+if (isPlay) {
+  apply plugin: 'com.github.triplet.play'
+  apply plugin: 'io.fabric'
+}
 
 def signingFile = file('props/release.signing')
 buildProperties {
@@ -69,21 +75,38 @@ android {
     }
     play {}
   }
+}
+
+staticAnalysis {
+  penalty {
+    maxWarnings = 10
+    maxErrors = 0
+  }
+
+  detekt {
+    profile('main') {
+      config = 'props/detekt.yml'
+      output = 'build/reports'
+    }
+  }
 
   lintOptions {
     textReport true
     textOutput 'stdout'
 
-    lintConfig file('props/lint.xml')
-    // We run a full lint analysis as build part in CI, so skip vital checks for assemble tasks.
+    checkAllWarnings true
     checkReleaseBuilds false
+
+    lintConfig file('props/lint.xml')
   }
 }
 
-play {
-  serviceAccountEmail = secrets['play_service_account'].or('').string
-  pk12File = file(secrets['play_key_file'].or('no_file.p12').string)
-  track = 'alpha'
+if (isPlay) {
+  play {
+    serviceAccountEmail = secrets['play_service_account'].or('').string
+    pk12File = file(secrets['play_key_file'].or('no_file.p12').string)
+    track = 'alpha'
+  }
 }
 
 configurations {
@@ -121,7 +144,7 @@ dependencies {
   playImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.0'
 
   testImplementation 'junit:junit:4.12'
-  testImplementation 'org.mockito:mockito-core:2.13.0'
+  testImplementation 'org.mockito:mockito-core:2.15.0'
   testImplementation "com.squareup.okhttp3:mockwebserver:$versions.okHttp"
 }
 

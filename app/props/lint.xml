@@ -22,4 +22,17 @@
   <issue id="ThrowableNotAtBeginning" severity="error" />
   <issue id="BinaryOperationInTimber" severity="error" />
   <issue id="WifiManagerPotentialLeak" severity="error" />
+
+  <issue id="MissingRegistered">
+    <ignore regexp="DelayedProgressBar"/>
+  </issue>
+  <issue id="ObsoleteLintCustomCheck">
+    <ignore regexp="timber.lint.IssueRegistry"/>
+    <ignore regexp="butterknife.lint.LintRegistry"/>
+  </issue>
+
+  <issue id="UnusedIds" severity="ignore"/>
+  <issue id="GoogleAppIndexingApiWarning" severity="ignore"/>
+  <issue id="NegativeMargin" severity="ignore"/>
+  <issue id="SelectableText" severity="ignore"/>
 </lint>

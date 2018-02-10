@@ -9,7 +9,7 @@
   <string name="which_view_application_named">פתוח באמצעות %1$s</string>
   <string name="title_preferred_apps">יישומים מעודפים</string>
   <string name="desc_preferred">יישומים מעודפים לפתיחה מידית של קישורים למטה שהם משותפים עם היישום.\n\nלהסרת יישום מועדף, לחץ עליו.</string>
-  <string name="desc_preferred_empty">יישומים מעודפים לפתיחה מידית של קישורים למטה שהם משותפים עם היישום.\n\nתוכל להגדיר יישומים מועדפים על ידי שיתוף קישור עם יישום זה ובחירה ב\"תמיד\"</string>
+  <string name="desc_preferred_empty">יישומים מעודפים לפתיחה מידית של קישורים למטה שהם משותפים עם היישום.\n\nתוכל להגדיר יישומים מועדפים על ידי שיתוף קישור עם יישום זה ובחירה ב\“תמיד\”</string>
   <string name="title_remove_preferred">להסיר מועדף?</string>
   <string name="message_remove_preferred"><![CDATA[
 להסיר את <strong>%1$s</strong> כיישום מועדף לטעינת קישורים מ־<strong>%2$s</strong>?<br><br><strong>שים לב:</strong> אתה יכול להגדיר יישום מועדף חדש בפעם הבאה על ידי שיתוף קישור <strong>%3$s</strong>.

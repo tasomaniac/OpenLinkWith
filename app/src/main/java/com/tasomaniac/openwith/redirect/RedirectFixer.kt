@@ -28,7 +28,7 @@ class RedirectFixer(
   @Volatile private var lastUrl: HttpUrl? = null
 
   @Inject
-  constructor(client: OkHttpClient, scheduling: SchedulingStrategy) : this(client, scheduling, 5)
+  constructor(client: OkHttpClient, scheduling: SchedulingStrategy) : this(client, scheduling, DEFAULT_TIMEOUT_IN_SEC)
 
   fun followRedirects(url: HttpUrl): Single<HttpUrl> {
     this.lastUrl = url
@@ -61,4 +61,7 @@ class RedirectFixer(
 
   private fun request(httpUrl: HttpUrl) = Request.Builder().url(httpUrl).build()
 
+  companion object {
+    private const val DEFAULT_TIMEOUT_IN_SEC = 5
+  }
 }

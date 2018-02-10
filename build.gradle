@@ -1,5 +1,6 @@
 buildscript {
   ext.ci = 'true' == System.getenv('CI')
+  ext.isPlay = project.hasProperty('play')
 
   def versionMajor = 1
   def versionMinor = 8
@@ -23,17 +24,22 @@ buildscript {
     gradlePluginPortal()
     google()
     jcenter()
-    maven { url 'https://maven.fabric.io/public' }
+    if (isPlay) {
+      maven { url 'https://maven.fabric.io/public' }
+    }
   }
   dependencies {
     classpath 'com.android.tools.build:gradle:3.2.0-alpha02'
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
     classpath 'com.github.ben-manes:gradle-versions-plugin:0.17.0'
     classpath 'com.github.triplet.gradle:play-publisher:1.2.0'
-    classpath 'io.fabric.tools:gradle:1.25.1'
     classpath 'com.novoda:gradle-android-command-plugin:2.0'
     classpath 'com.novoda:build-properties-plugin:1.2.1'
+    classpath 'com.novoda:gradle-static-analysis-plugin:0.5.1'
     classpath 'net.ltgt.gradle:gradle-errorprone-plugin:0.0.13'
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+    if (isPlay) {
+      classpath 'io.fabric.tools:gradle:1.25.1'
+    }
   }
 }
 
