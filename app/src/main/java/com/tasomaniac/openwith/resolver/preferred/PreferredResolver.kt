@@ -35,10 +35,9 @@ internal class PreferredResolver @Inject constructor(
         val ri = packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY)
         return ri?.let {
             DisplayActivityInfo(
-                it.activityInfo,
-                it.loadLabel(packageManager),
-                null,
-                iconLoader.loadFor(it.activityInfo)
+                activityInfo = it.activityInfo,
+                displayLabel = it.loadLabel(packageManager),
+                displayIcon = iconLoader.loadFor(it.activityInfo)
             )
         }
     }

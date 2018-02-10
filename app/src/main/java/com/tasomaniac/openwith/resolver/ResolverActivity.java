@@ -107,7 +107,7 @@ public class ResolverActivity extends DaggerAppCompatActivity implements
         boolean hasFilteredItem = filteredItem != null;
         ImageView iconView = findViewById(R.id.icon);
         if (iconView != null && hasFilteredItem) {
-            iconView.setImageDrawable(filteredItem.displayIcon());
+            iconView.setImageDrawable(filteredItem.getDisplayIcon());
         }
         adapter.setSelectionEnabled(!hasFilteredItem);
     }

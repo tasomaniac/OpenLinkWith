@@ -100,7 +100,7 @@ class PreferredAppsActivity : DaggerAppCompatActivity(), ItemClickListener, AppR
 
     override fun onAppRemoved(info: DisplayActivityInfo) {
         Completable
-            .fromAction { appDao.deleteHost(info.extendedInfo().toString()) }
+            .fromAction { appDao.deleteHost(info.extendedInfo.toString()) }
             .compose(scheduling.forCompletable())
             .subscribe {
                 notifyHeaderChanged()
@@ -108,7 +108,7 @@ class PreferredAppsActivity : DaggerAppCompatActivity(), ItemClickListener, AppR
                 analytics.sendEvent(
                     category = "Preferred",
                     action = "Removed",
-                    label = info.displayLabel().toString()
+                    label = info.displayLabel.toString()
                 )
             }
             .addTo(disposables)

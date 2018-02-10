@@ -23,10 +23,10 @@ class ApplicationViewHolder private constructor(
         itemClickListener: ItemClickListener? = null,
         itemLongClickListener: ItemLongClickListener? = null
     ) {
-        text1.text = info.displayLabel()
+        text1.text = info.displayLabel
         text2.isVisible = displaySubtext
-        text2.text = info.extendedInfo()
-        icon.setImageDrawable(info.displayIcon())
+        text2.text = info.extendedInfo
+        icon.setImageDrawable(info.displayIcon)
 
         itemView.setOnClickListener {
             itemClickListener?.onItemClick(info)

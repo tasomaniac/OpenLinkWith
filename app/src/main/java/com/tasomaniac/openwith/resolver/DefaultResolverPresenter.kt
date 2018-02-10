@@ -46,7 +46,7 @@ internal class DefaultResolverPresenter @Inject constructor(
             try {
                 val preferredIntent = Intent(Intent.ACTION_VIEW, uri)
                     .setComponent(preferredApp.componentName)
-                navigation.startPreferred(preferredIntent, displayActivityInfo.displayLabel())
+                navigation.startPreferred(preferredIntent, displayActivityInfo.displayLabel)
                 view.dismiss()
             } catch (e: Exception) {
                 Timber.e(e, "Security Exception for the url: %s", uri)
@@ -70,7 +70,7 @@ internal class DefaultResolverPresenter @Inject constructor(
                 try {
                     navigation.startPreferred(
                         activityInfo.intentFrom(sourceIntent),
-                        activityInfo.displayLabel()
+                        activityInfo.displayLabel
                     )
                     navigation.dismiss()
                     return
@@ -87,7 +87,7 @@ internal class DefaultResolverPresenter @Inject constructor(
 
         private fun titleForAction(filteredItem: DisplayActivityInfo?): String {
             return if (filteredItem != null) {
-                resources.getString(R.string.which_view_application_named, filteredItem.displayLabel())
+                resources.getString(R.string.which_view_application_named, filteredItem.displayLabel)
             } else {
                 resources.getString(R.string.which_view_application)
             }

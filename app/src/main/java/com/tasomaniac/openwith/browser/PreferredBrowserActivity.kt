@@ -58,7 +58,7 @@ class PreferredBrowserActivity : DaggerAppCompatActivity(), BrowsersAdapter.List
 
     override fun onBrowserClick(displayResolveInfo: DisplayActivityInfo) {
         val browserMode = BrowserPreferences.Mode.Browser(
-            displayResolveInfo.displayLabel().toString(),
+            displayResolveInfo.displayLabel.toString(),
             displayResolveInfo.activityInfo.componentName()
         )
         browserPreferences.mode = browserMode

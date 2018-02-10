@@ -21,13 +21,9 @@ class BrowserViewHolder private constructor(
 ) : RecyclerView.ViewHolder(containerView),
     LayoutContainer {
 
-    fun bind(
-        info: DisplayActivityInfo,
-        selectedBrowser: ComponentName?,
-        onItemClicked: (DisplayActivityInfo) -> Unit
-    ) {
-        browserTitle.text = info.displayLabel()
-        browserIcon.setImageDrawable(info.displayIcon())
+    fun bind(info: DisplayActivityInfo, selectedBrowser: ComponentName?, onItemClicked: (DisplayActivityInfo) -> Unit) {
+        browserTitle.text = info.displayLabel
+        browserIcon.setImageDrawable(info.displayIcon)
         browserSelected.isChecked = info.activityInfo.componentName() == selectedBrowser
         browserInfo.isGone = true
 

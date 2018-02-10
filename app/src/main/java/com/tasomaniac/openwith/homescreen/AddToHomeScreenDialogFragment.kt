@@ -125,22 +125,25 @@ class AddToHomeScreenDialogFragment : DaggerAppCompatDialogFragment() {
     private fun createShortcut(): Boolean {
         val id = intent.dataString!! + activityToAdd.packageName()
         val label = titleView.text.toString()
+
+        fun createShortcutWith(icon: IconCompat): Boolean {
+            val shortcut = ShortcutInfoCompat.Builder(requireContext(), id)
+                .setIntent(intent)
+                .setShortLabel(label)
+                .setIcon(icon)
+                .build()
+            return ShortcutManagerCompat.requestPinShortcut(requireContext(), shortcut, startHomeScreen())
+        }
+
         return try {
-            createShortcutWith(id, label, shortcutIconCreator.createIconFor(activityToAdd.displayIcon()))
+            activityToAdd.displayIcon?.let {
+                createShortcutWith(shortcutIconCreator.createIconFor(it))
+            } ?: createShortcutWith(createSimpleIcon())
         } catch (e: Exception) {
             // This method started to fire android.os.TransactionTooLargeException
             Timber.e(e, "Exception while adding shortcut")
-            createShortcutWith(id, label, createSimpleIcon())
+            createShortcutWith(createSimpleIcon())
         }
-    }
-
-    private fun createShortcutWith(id: String, label: String, icon: IconCompat): Boolean {
-        val shortcut = ShortcutInfoCompat.Builder(requireContext(), id)
-            .setIntent(intent)
-            .setShortLabel(label)
-            .setIcon(icon)
-            .build()
-        return ShortcutManagerCompat.requestPinShortcut(requireContext(), shortcut, startHomeScreen())
     }
 
     private fun createSimpleIcon(): IconCompat =

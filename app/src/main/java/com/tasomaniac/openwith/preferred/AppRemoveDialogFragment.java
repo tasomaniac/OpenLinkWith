@@ -65,9 +65,9 @@ public class AppRemoveDialogFragment extends AppCompatDialogFragment {
     private static CharSequence appRemoveDialogContentFrom(Resources resources, DisplayActivityInfo info) {
         String content = resources.getString(
                 R.string.message_remove_preferred,
-                info.displayLabel(),
-                info.extendedInfo(),
-                info.extendedInfo()
+                info.getDisplayLabel(),
+                info.getExtendedInfo(),
+                info.getExtendedInfo()
         );
         //noinspection deprecation
         return Html.fromHtml(content);
