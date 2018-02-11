@@ -131,6 +131,13 @@ dependencies {
 
   implementation 'com.tasomaniac:delayed-progress:0.4'
 
+  implementation "android.arch.lifecycle:extensions:$versions.arch"
+  kapt "android.arch.lifecycle:compiler:$versions.arch"
+
+  implementation "android.arch.persistence.room:runtime:$versions.room"
+  implementation "android.arch.persistence.room:rxjava2:$versions.room"
+  kapt "android.arch.persistence.room:compiler:$versions.room"
+  
   implementation "net.simonvt.schematic:schematic:$versions.schematic"
   kapt "net.simonvt.schematic:schematic-compiler:$versions.schematic"
 
