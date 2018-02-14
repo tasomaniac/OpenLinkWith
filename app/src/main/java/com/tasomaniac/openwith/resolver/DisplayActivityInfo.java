@@ -6,17 +6,17 @@ import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
-
 import com.tasomaniac.openwith.util.ActivityInfoExtensionsKt;
 
 public final class DisplayActivityInfo implements Parcelable {
     private final ActivityInfo activityInfo;
     private final CharSequence displayLabel;
-    private final CharSequence extendedInfo;
+    @Nullable private final CharSequence extendedInfo;
     private Drawable displayIcon;
 
-    public DisplayActivityInfo(ActivityInfo activityInfo, CharSequence displayLabel, CharSequence extendedInfo) {
+    public DisplayActivityInfo(ActivityInfo activityInfo, CharSequence displayLabel, @Nullable CharSequence extendedInfo) {
         this.activityInfo = activityInfo;
         this.displayLabel = displayLabel;
         this.extendedInfo = extendedInfo;
@@ -92,7 +92,7 @@ public final class DisplayActivityInfo implements Parcelable {
         return displayLabel;
     }
 
-    public CharSequence extendedInfo() {
+    @Nullable public CharSequence extendedInfo() {
         return extendedInfo;
     }
 

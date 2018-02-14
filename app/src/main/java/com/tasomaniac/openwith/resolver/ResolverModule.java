@@ -6,15 +6,14 @@ import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-
 import com.tasomaniac.openwith.PerActivity;
+import com.tasomaniac.openwith.data.PreferredAppDao;
+import dagger.Module;
+import dagger.Provides;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
-import dagger.Module;
-import dagger.Provides;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.LOLLIPOP_MR1;
@@ -33,17 +32,17 @@ public abstract class ResolverModule {
 
     @Provides
     static ResolverPresenter resolverPresenter(
-            Application app,
             Resources resources,
             Intent sourceIntent,
             ChooserHistory history,
             IntentResolver intentResolver,
-            ViewState viewState) {
+            ViewState viewState,
+            PreferredAppDao dao) {
         boolean isAddToHomeScreen = sourceIntent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
         if (isAddToHomeScreen) {
             return new HomeScreenResolverPresenter(resources, intentResolver);
         }
-        return new DefaultResolverPresenter(resources, history, app.getContentResolver(), intentResolver, viewState);
+        return new DefaultResolverPresenter(resources, history, intentResolver, viewState, dao);
     }
 
     @Provides

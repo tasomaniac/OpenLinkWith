@@ -6,6 +6,7 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
+
 import java.util.List;
 
 @Dao
@@ -18,8 +19,11 @@ public interface PreferredAppDao {
   Maybe<PreferredApp> preferredAppById(long id);
 
   @Query("SELECT * FROM openwith WHERE host = :host")
-  Flowable<List<PreferredApp>> preferredAppsByHost(String host);
+  Maybe<PreferredApp> preferredAppByHost(String host);
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   void insert(PreferredApp preferredApp);
+
+  @Query("DELETE FROM openwith WHERE host = :host")
+  void deleteHost(String host);
 }

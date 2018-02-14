@@ -17,7 +17,6 @@ buildscript {
       dagger     : '2.15',
       kotlin     : '1.2.31',
       okHttp     : '3.10.0',
-      schematic  : '0.7.0',
       room       : '1.1.0-alpha1',
       supportLib : '27.1.0',
   ]

@@ -15,4 +15,7 @@ object DataModule {
     fun room(app: Application): Database =
         Room.databaseBuilder(app, Database::class.java, "openWithDatabase.db").build()
 
+    @Provides
+    @JvmStatic
+    fun preferredAppDao(database: Database) = database.preferredAppDao()
 }

@@ -30,19 +30,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.tasomaniac.openwith.App;
 import com.tasomaniac.openwith.ComponentActivity;
 import com.tasomaniac.openwith.HeaderAdapter;
 import com.tasomaniac.openwith.R;
+import com.tasomaniac.openwith.data.PreferredAppDao;
 import com.tasomaniac.openwith.homescreen.AddToHomeScreenDialogFragment;
+import com.tasomaniac.openwith.rx.SchedulingStrategy;
 import com.tasomaniac.openwith.util.Intents;
 
 import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * This activity is displayed when the system attempts to start an Intent for
@@ -60,6 +60,8 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     @Inject IconLoader iconLoader;
     @Inject ResolverPresenter presenter;
     @Inject ResolveListAdapter adapter;
+    @Inject PreferredAppDao appDao;
+    @Inject SchedulingStrategy scheduling;
 
     @BindView(R.id.button_always) Button alwaysButton;
     @BindView(R.id.button_once) Button onceButton;
@@ -238,7 +240,7 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     protected ResolverComponent createComponent() {
         Intent sourceIntent = configureIntent();
         boolean isAddToHomeScreen = sourceIntent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
-        PreferredResolver preferredResolver = PreferredResolver.createFrom(this);
+        PreferredResolver preferredResolver = PreferredResolver.createFrom(this, appDao, scheduling);
         if (!isAddToHomeScreen) {
             preferredResolver.resolve(sourceIntent.getData());
             if (preferredResolver.startPreferred(this)) {
