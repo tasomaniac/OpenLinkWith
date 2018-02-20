@@ -18,6 +18,8 @@ interface ResolverView {
 
     void toast(@StringRes int titleRes);
 
+    void dismiss();
+
     void setListener(@Nullable Listener listener);
 
     interface Navigation {

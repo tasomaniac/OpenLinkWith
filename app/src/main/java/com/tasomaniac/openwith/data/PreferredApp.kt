@@ -2,8 +2,10 @@ package com.tasomaniac.openwith.data
 
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
+import android.arch.persistence.room.Ignore
 import android.arch.persistence.room.Index
 import android.arch.persistence.room.PrimaryKey
+import android.content.ComponentName
 
 @Entity(
     tableName = "openwith",
@@ -15,4 +17,9 @@ data class PreferredApp(
     val component: String,
     val preferred: Boolean,
     val last_chosen: Boolean
-)
+) {
+
+    val componentName: ComponentName
+        @Ignore get() = ComponentName.unflattenFromString(component)
+
+}

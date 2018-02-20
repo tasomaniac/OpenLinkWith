@@ -1,5 +1,6 @@
 package com.tasomaniac.openwith.resolver;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -12,10 +13,11 @@ import com.tasomaniac.openwith.rx.SchedulingStrategy;
 import com.tasomaniac.openwith.util.ActivityInfoExtensionsKt;
 import com.tasomaniac.openwith.util.Intents;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
@@ -32,6 +34,7 @@ class IntentResolver {
     private final Intent sourceIntent;
     private final CallerPackage callerPackage;
 
+    @Nullable public ComponentName lastChosenComponent;
     @Nullable private Data data;
     private Listener listener = Listener.NO_OP;
     private Disposable disposable;
@@ -77,7 +80,9 @@ class IntentResolver {
     }
 
     void release() {
-        disposable.dispose();
+        if (disposable != null) {
+            disposable.dispose();
+        }
     }
 
     private Data doResolve() {
@@ -97,7 +102,7 @@ class IntentResolver {
         if (currentResolveList.size() <= 0) {
             return Collections.emptyList();
         }
-        return resolveListGrouper.groupResolveList(currentResolveList);
+        return resolveListGrouper.groupResolveList(currentResolveList, lastChosenComponent);
     }
 
     private void addBrowsersToList(List<ResolveInfo> list) {
