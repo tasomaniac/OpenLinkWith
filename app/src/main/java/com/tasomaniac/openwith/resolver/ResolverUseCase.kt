@@ -7,6 +7,7 @@ import com.tasomaniac.openwith.data.PreferredAppDao
 import com.tasomaniac.openwith.resolver.preferred.PreferredDisplayActivityInfo
 import com.tasomaniac.openwith.rx.SchedulingStrategy
 import io.reactivex.Completable
+import io.reactivex.disposables.Disposable
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -20,12 +21,13 @@ internal class ResolverUseCase @Inject constructor(
     private val scheduling: SchedulingStrategy
 ) {
 
+    private var disposable: Disposable? = null
     private var listener: Listener? = null
 
     fun bind(listener: Listener) {
         this.listener = listener
         val uri = sourceIntent.data
-        preferredResolver.resolve(uri)
+        disposable = preferredResolver.resolve(uri)
             .compose(scheduling.forMaybe())
             .subscribe(
                 {
@@ -45,6 +47,7 @@ internal class ResolverUseCase @Inject constructor(
 
     fun release() {
         intentResolver.release()
+        disposable?.dispose()
     }
 
     fun resolve() {
@@ -56,17 +59,14 @@ internal class ResolverUseCase @Inject constructor(
             return
         }
 
+        val preferredApp = PreferredApp(
+            host = intent.data.host,
+            component = intent.component.flattenToString(),
+            preferred = alwaysCheck,
+            last_chosen = true
+        )
         Completable
-            .fromAction {
-                dao.insert(
-                    PreferredApp(
-                        host = intent.data.host,
-                        component = intent.component.flattenToString(),
-                        preferred = alwaysCheck,
-                        last_chosen = true
-                    )
-                )
-            }
+            .fromAction { dao.insert(preferredApp) }
             .compose(scheduling.forCompletable())
             .subscribe()
 
