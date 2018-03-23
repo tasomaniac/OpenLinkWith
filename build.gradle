@@ -4,7 +4,7 @@ buildscript {
 
   def versionMajor = 1
   def versionMinor = 8
-  def versionBuild = 3
+  def versionBuild = 4
 
   ext.versions = [
       compileSdk : 27,
