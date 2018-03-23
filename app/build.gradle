@@ -13,10 +13,9 @@ if (isPlay) {
   apply plugin: 'io.fabric'
 }
 
-def signingFile = file('props/release.signing')
 buildProperties {
-  signing.file signingFile.exists() ? signingFile : file('props/debug.signing')
-  secrets.file file('props/secrets.properties')
+  signing.using(file('props/release.signing')) | file('props/debug.signing')
+  secrets.using(file('props/secrets.properties'))
 }
 
 def secrets = buildProperties.secrets
@@ -43,7 +42,13 @@ android {
 
   signingConfigs {
     debug.storeFile file('props/debug.keystore')
-    release.signingConfigProperties buildProperties.signing
+    release {
+      def signing = buildProperties.signing
+      storeFile file("props/${signing['storeFile'].string}")
+      storePassword signing['storePassword'].string
+      keyAlias signing['keyAlias'].string
+      keyPassword signing['keyPassword'].string
+    }
   }
 
   buildTypes {
@@ -122,7 +127,7 @@ dependencies {
   implementation "com.android.support:recyclerview-v7:$versions.supportLib"
   implementation "com.android.support:design:$versions.supportLib"
   implementation "com.android.support:preference-v14:$versions.supportLib"
-  implementation 'com.duolingo.open:rtl-viewpager:1.0.2'
+  implementation 'com.duolingo.open:rtl-viewpager:1.0.3'
 
   implementation 'com.tasomaniac:delayed-progress:0.4'
 
@@ -135,16 +140,16 @@ dependencies {
 
   implementation "com.jakewharton:butterknife:$versions.butterKnife"
   kapt "com.jakewharton:butterknife-compiler:$versions.butterKnife"
-  implementation 'com.jakewharton.timber:timber:4.6.0'
+  implementation 'com.jakewharton.timber:timber:4.6.1'
 
   implementation "com.squareup.okhttp3:okhttp:$versions.okHttp"
-  implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
-  implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
+  implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+  implementation 'io.reactivex.rxjava2:rxjava:2.1.12'
 
-  playImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.0'
+  playImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.1'
 
   testImplementation 'junit:junit:4.12'
-  testImplementation 'org.mockito:mockito-core:2.15.0'
+  testImplementation 'org.mockito:mockito-core:2.16.0'
   testImplementation "com.squareup.okhttp3:mockwebserver:$versions.okHttp"
 }
 
