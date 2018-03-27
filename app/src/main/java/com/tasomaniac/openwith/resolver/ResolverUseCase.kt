@@ -62,8 +62,7 @@ internal class ResolverUseCase @Inject constructor(
         val preferredApp = PreferredApp(
             host = intent.data.host,
             component = intent.component.flattenToString(),
-            preferred = alwaysCheck,
-            last_chosen = true
+            preferred = alwaysCheck
         )
         Completable
             .fromAction { dao.insert(preferredApp) }
