@@ -3,7 +3,6 @@ package com.tasomaniac.openwith.resolver.preferred
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.text.TextUtils
 import com.tasomaniac.openwith.data.PreferredApp
 import com.tasomaniac.openwith.data.PreferredAppDao
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
@@ -17,7 +16,7 @@ internal class PreferredResolver @Inject constructor(
 
     fun resolve(uri: Uri): Maybe<PreferredDisplayActivityInfo> {
         val host = uri.host
-        if (TextUtils.isEmpty(host)) return Maybe.empty()
+        if (host.isEmpty()) return Maybe.empty()
 
         return appDao.preferredAppByHost(host)
             .flatMap { app ->
