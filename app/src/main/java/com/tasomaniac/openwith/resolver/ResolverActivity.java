@@ -30,26 +30,23 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.tasomaniac.openwith.App;
-import com.tasomaniac.openwith.ComponentActivity;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.tasomaniac.openwith.HeaderAdapter;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.homescreen.AddToHomeScreenDialogFragment;
 import com.tasomaniac.openwith.util.Intents;
+import dagger.android.support.DaggerAppCompatActivity;
 
 import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * This activity is displayed when the system attempts to start an Intent for
  * which there is more than one matching activity, allowing the user to decide
- * which to go to.  It is not normally used directly by application developers.
+ * which to go to. It is not normally used directly by application developers.
  */
-public class ResolverActivity extends ComponentActivity<ResolverComponent> implements
+public class ResolverActivity extends DaggerAppCompatActivity implements
         ItemClickListener,
         ItemLongClickListener,
         ResolverView {
@@ -77,7 +74,6 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getComponent().injectMembers(this);
         registerPackageMonitor();
     }
 
@@ -88,24 +84,24 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     }
 
     @Override
-    public void displayData(IntentResolver.Data data) {
-        setContentView(data.filteredItem != null ? R.layout.resolver_list_with_default : R.layout.resolver_list);
+    public void displayData(IntentResolverResult result) {
+        setContentView(result.getFilteredItem() != null ? R.layout.resolver_list_with_default : R.layout.resolver_list);
         ButterKnife.bind(this);
-        setupList(data, data.showExtended);
-        setupFilteredItem(data.filteredItem);
+        setupList(result, result.getShowExtended());
+        setupFilteredItem(result.getFilteredItem());
         ResolverDrawerLayout rdl = findViewById(R.id.contentPanel);
         rdl.setOnDismissedListener(this::finish);
     }
 
-    private void setupList(IntentResolver.Data data, boolean shouldDisplayExtendedInfo) {
+    private void setupList(IntentResolverResult data, boolean shouldDisplayExtendedInfo) {
         RecyclerView recyclerView = findViewById(R.id.resolver_list);
 
-        adapter.setApplications(data.resolved);
+        adapter.setApplications(data.getResolved());
         adapter.setItemClickListener(this);
         adapter.setItemLongClickListener(this);
         adapter.setDisplayExtendedInfo(shouldDisplayExtendedInfo);
 
-        if (data.filteredItem != null) {
+        if (data.getFilteredItem() != null) {
             recyclerView.setAdapter(new HeaderAdapter(adapter, R.layout.resolver_different_item_header));
         } else {
             recyclerView.setAdapter(adapter);
@@ -235,36 +231,10 @@ public class ResolverActivity extends ComponentActivity<ResolverComponent> imple
     }
 
     @Override
-    protected ResolverComponent createComponent() {
-        Intent sourceIntent = configureIntent();
-        boolean isAddToHomeScreen = sourceIntent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
-        PreferredResolver preferredResolver = PreferredResolver.createFrom(this);
-        if (!isAddToHomeScreen) {
-            preferredResolver.resolve(sourceIntent.getData());
-            if (preferredResolver.startPreferred(this)) {
-                dismiss();
-            }
-        }
-        App app = (App) getApplicationContext();
-        return app.component()
-                .resolverComponentBuilder()
-                .callerPackage(CallerPackage.from(this))
-                .sourceIntent(sourceIntent)
-                .lastChosenComponent(preferredResolver.lastChosenComponent())
-                .build();
-    }
-
-    private void dismiss() {
+    public void dismiss() {
         if (!isFinishing()) {
             finish();
         }
-    }
-
-    private Intent configureIntent() {
-        Intent intent = new Intent(getIntent())
-                .setComponent(null);
-        intent.setFlags(intent.getFlags() & ~Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-        return intent;
     }
 
     private static class LoadIconIntoViewTask extends AsyncTask<DisplayActivityInfo, Void, Drawable> {

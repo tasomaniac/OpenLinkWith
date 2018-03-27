@@ -131,8 +131,12 @@ dependencies {
 
   implementation 'com.tasomaniac:delayed-progress:0.4'
 
-  implementation "net.simonvt.schematic:schematic:$versions.schematic"
-  kapt "net.simonvt.schematic:schematic-compiler:$versions.schematic"
+  implementation "android.arch.lifecycle:extensions:$versions.arch"
+  kapt "android.arch.lifecycle:compiler:$versions.arch"
+
+  implementation "android.arch.persistence.room:runtime:$versions.room"
+  implementation "android.arch.persistence.room:rxjava2:$versions.room"
+  kapt "android.arch.persistence.room:compiler:$versions.room"
 
   implementation "com.google.dagger:dagger-android-support:$versions.dagger"
   kapt "com.google.dagger:dagger-compiler:$versions.dagger"
@@ -150,6 +154,7 @@ dependencies {
 
   testImplementation 'junit:junit:4.12'
   testImplementation 'org.mockito:mockito-core:2.16.0'
+  testImplementation 'com.nhaarman:mockito-kotlin:1.5.0'
   testImplementation "com.squareup.okhttp3:mockwebserver:$versions.okHttp"
 }
 

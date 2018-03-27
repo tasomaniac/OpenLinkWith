@@ -21,6 +21,11 @@ public class CallerPackage {
         this.callerPackage = callerPackage;
     }
 
+    @Nullable
+    public String getCallerPackage() {
+        return callerPackage;
+    }
+
     void removeFrom(List<ResolveInfo> currentResolveList) {
         if (!TextUtils.isEmpty(callerPackage)) {
             removePackageFromList(callerPackage, currentResolveList);

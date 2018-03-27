@@ -130,11 +130,6 @@
       android:theme="@style/BottomSheet.Light"
       tools:targetApi="lollipop" />
 
-    <provider
-      android:name=".provider.OpenWithProvider"
-      android:authorities="${applicationId}"
-      android:exported="false" />
-
     <service
       android:name=".resolver.ResolverChooserTargetService"
       android:label="@string/app_name"

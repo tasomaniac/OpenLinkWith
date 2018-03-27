@@ -7,13 +7,16 @@ import android.widget.Toast;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.util.Intents;
 
+import javax.inject.Inject;
+
 import timber.log.Timber;
 
 class ResolverNavigation implements ResolverView.Navigation {
 
     private final Activity activity;
 
-    ResolverNavigation(Activity activity) {
+    @Inject
+    ResolverNavigation(ResolverActivity activity) {
         this.activity = activity;
     }
 

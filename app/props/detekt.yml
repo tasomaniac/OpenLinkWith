@@ -146,7 +146,7 @@ exceptions:
   NotImplementedDeclaration:
     active: false
   PrintStackTrace:
-    active: false
+    active: true
   RethrowCaughtException:
     active: false
   ReturnFromFinally:
@@ -158,21 +158,9 @@ exceptions:
   ThrowingExceptionInMain:
     active: false
   ThrowingExceptionsWithoutMessageOrCause:
-    active: false
-    exceptions: 'IllegalArgumentException,IllegalStateException,IOException'
+    active: true
   ThrowingNewInstanceOfSameException:
     active: false
-  TooGenericExceptionCaught:
-    active: true
-    exceptions:
-     - ArrayIndexOutOfBoundsException
-     - Error
-     - Exception
-     - IllegalMonitorStateException
-     - NullPointerException
-     - IndexOutOfBoundsException
-     - RuntimeException
-     - Throwable
   TooGenericExceptionThrown:
     active: true
     exceptions:

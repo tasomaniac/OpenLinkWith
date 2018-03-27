@@ -2,11 +2,7 @@ package com.tasomaniac.openwith.resolver;
 
 import android.content.Intent;
 import android.content.res.Resources;
-
 import com.tasomaniac.openwith.R;
-
-import java.util.Collections;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -15,6 +11,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+import java.util.Collections;
+
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.*;
@@ -22,7 +20,7 @@ import static org.mockito.Mockito.*;
 public class HomeScreenResolverPresenterTest {
 
     private static final String TITLE = "title";
-    private static final IntentResolver.Data EMPTY_DATA = new IntentResolver.Data(Collections.emptyList(), null, false);
+    private static final IntentResolverResult EMPTY_RESULT = new IntentResolverResult(Collections.emptyList(), null, false);
 
     @Rule public MockitoRule rule = MockitoJUnit.rule();
 
@@ -55,7 +53,7 @@ public class HomeScreenResolverPresenterTest {
         IntentResolver.Listener listener = captureIntentResolverListener();
 
         DisplayActivityInfo filteredItem = mock(DisplayActivityInfo.class);
-        listener.onIntentResolved(new IntentResolver.Data(Collections.emptyList(), filteredItem, false));
+        listener.onIntentResolved(new IntentResolverResult(Collections.emptyList(), filteredItem, false));
 
         then(filteredItem).shouldHaveZeroInteractions();
     }
@@ -65,7 +63,7 @@ public class HomeScreenResolverPresenterTest {
         IntentResolver.Listener listener = captureIntentResolverListener();
         reset(view);
 
-        listener.onIntentResolved(EMPTY_DATA);
+        listener.onIntentResolved(EMPTY_RESULT);
 
         then(view).should().toast(R.string.empty_resolver_activity);
         then(navigation).should().dismiss();
@@ -77,10 +75,10 @@ public class HomeScreenResolverPresenterTest {
         IntentResolver.Listener listener = captureIntentResolverListener();
 
         DisplayActivityInfo item = mock(DisplayActivityInfo.class);
-        IntentResolver.Data data = dataWithItem(item);
-        listener.onIntentResolved(data);
+        IntentResolverResult result = resultWithItem(item);
+        listener.onIntentResolved(result);
 
-        then(view).should().displayData(data);
+        then(view).should().displayData(result);
     }
 
     @Test
@@ -89,7 +87,7 @@ public class HomeScreenResolverPresenterTest {
         given(resources.getString(R.string.add_to_homescreen)).willReturn(TITLE);
 
         DisplayActivityInfo item = mock(DisplayActivityInfo.class);
-        listener.onIntentResolved(dataWithItem(item));
+        listener.onIntentResolved(resultWithItem(item));
 
         then(view).should().setTitle(TITLE);
     }
@@ -123,7 +121,7 @@ public class HomeScreenResolverPresenterTest {
         return argumentCaptor.getValue();
     }
 
-    private static IntentResolver.Data dataWithItem(DisplayActivityInfo item) {
-        return new IntentResolver.Data(Collections.singletonList(item), null, false);
+    private static IntentResolverResult resultWithItem(DisplayActivityInfo item) {
+        return new IntentResolverResult(Collections.singletonList(item), null, false);
     }
 }
