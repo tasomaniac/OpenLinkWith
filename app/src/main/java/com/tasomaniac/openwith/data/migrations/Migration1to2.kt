@@ -6,10 +6,10 @@ import android.arch.persistence.room.migration.Migration
 object Migration1to2 : Migration(1, 2) {
     override fun migrate(database: SupportSQLiteDatabase) {
         database.execSQL(
-            "CREATE TABLE `openwith_backup` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `host` TEXT NOT NULL, `component` TEXT NOT NULL, `preferred` INTEGER NOT NULL DEFAULT 0)"
+            "CREATE TABLE `openwith_backup` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `host` TEXT NOT NULL, `component` TEXT NOT NULL, `preferred` INTEGER NOT NULL)"
         )
         database.execSQL(
-            "INSERT INTO openwith_backup SELECT (_id, host, component, preferred) FROM openwith"
+            "INSERT INTO openwith_backup SELECT _id, host, component, preferred FROM openwith WHERE preferred = 1"
         )
         database.execSQL("DROP TABLE openwith")
         database.execSQL("ALTER TABLE openwith_backup RENAME TO openwith")
