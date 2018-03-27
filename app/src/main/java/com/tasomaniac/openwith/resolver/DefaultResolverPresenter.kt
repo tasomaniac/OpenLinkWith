@@ -1,11 +1,10 @@
 package com.tasomaniac.openwith.resolver
 
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.content.res.Resources
 import android.net.Uri
 import com.tasomaniac.openwith.R
-import com.tasomaniac.openwith.resolver.preferred.PreferredDisplayActivityInfo
+import com.tasomaniac.openwith.data.PreferredApp
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -36,24 +35,26 @@ internal class DefaultResolverPresenter @Inject constructor(
         private val navigation: ResolverView.Navigation
     ) : ResolverUseCase.Listener {
 
-        override fun onPreferredResolved(uri: Uri, preferred: PreferredDisplayActivityInfo) {
-            val (app, activityInfo) = preferred
-            val shouldStart = app.preferred && !isCallerPackagePreferred(activityInfo.activityInfo)
-            if (shouldStart) {
-                try {
-                    val preferredIntent = Intent(Intent.ACTION_VIEW, uri)
-                        .setComponent(app.componentName)
-                    navigation.startPreferred(preferredIntent, activityInfo.displayLabel())
-                    view.dismiss()
-                } catch (e: Exception) {
-                    Timber.e(e, "Security Exception for the url: %s", uri)
-                    useCase.deleteFailedHost(uri)
-                }
+        override fun onPreferredResolved(
+            uri: Uri,
+            preferredApp: PreferredApp,
+            displayActivityInfo: DisplayActivityInfo
+        ) {
+            if (preferredApp.preferred.not()) return
+            if (displayActivityInfo.packageName().isCaller()) return
+
+            try {
+                val preferredIntent = Intent(Intent.ACTION_VIEW, uri)
+                    .setComponent(preferredApp.componentName)
+                navigation.startPreferred(preferredIntent, displayActivityInfo.displayLabel())
+                view.dismiss()
+            } catch (e: Exception) {
+                Timber.e(e, "Security Exception for the url: %s", uri)
+                useCase.deleteFailedHost(uri)
             }
         }
 
-        private fun isCallerPackagePreferred(activityInfo: ActivityInfo) =
-            activityInfo.packageName == callerPackage.callerPackage
+        private fun String.isCaller() = this == callerPackage.callerPackage
 
         override fun onIntentResolved(data: IntentResolver.Data) {
             viewState.filteredItem = data.filteredItem

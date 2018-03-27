@@ -8,7 +8,6 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 
-import com.tasomaniac.openwith.PerActivity;
 import com.tasomaniac.openwith.rx.SchedulingStrategy;
 import com.tasomaniac.openwith.util.ActivityInfoExtensionsKt;
 import com.tasomaniac.openwith.util.Intents;
@@ -25,7 +24,6 @@ import io.reactivex.disposables.Disposable;
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.M;
 
-@PerActivity
 class IntentResolver {
 
     private final PackageManager packageManager;

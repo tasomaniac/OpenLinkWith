@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import com.tasomaniac.openwith.data.PreferredApp
 import com.tasomaniac.openwith.data.PreferredAppDao
-import com.tasomaniac.openwith.resolver.preferred.PreferredDisplayActivityInfo
 import com.tasomaniac.openwith.resolver.preferred.PreferredResolver
 import com.tasomaniac.openwith.rx.SchedulingStrategy
 import io.reactivex.Completable
@@ -31,9 +30,9 @@ internal class ResolverUseCase @Inject constructor(
         disposable = preferredResolver.resolve(uri)
             .compose(scheduling.forMaybe())
             .subscribe(
-                {
-                    intentResolver.lastChosenComponent = it.app.componentName
-                    listener.onPreferredResolved(uri, it)
+                { (app, info) ->
+                    intentResolver.lastChosenComponent = app.componentName
+                    listener.onPreferredResolved(uri, app, info)
                     intentResolver.bind(listener)
                 },
                 Timber::e,
@@ -80,7 +79,11 @@ internal class ResolverUseCase @Inject constructor(
     }
 
     interface Listener : IntentResolver.Listener {
-        fun onPreferredResolved(uri: Uri, preferred: PreferredDisplayActivityInfo)
+        fun onPreferredResolved(
+            uri: Uri,
+            preferredApp: PreferredApp,
+            displayActivityInfo: DisplayActivityInfo
+        )
     }
 
 }
