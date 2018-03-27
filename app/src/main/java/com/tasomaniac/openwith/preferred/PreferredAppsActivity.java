@@ -21,6 +21,7 @@ import com.tasomaniac.openwith.resolver.ResolveListAdapter;
 import com.tasomaniac.openwith.rx.SchedulingStrategy;
 import dagger.android.support.DaggerAppCompatActivity;
 import io.reactivex.Completable;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 import javax.inject.Inject;
@@ -38,6 +39,8 @@ public class PreferredAppsActivity extends DaggerAppCompatActivity implements
     @Inject PackageManager packageManager;
 
     @BindView(R.id.recycler_view) RecyclerView recyclerView;
+
+    private final CompositeDisposable disposables = new CompositeDisposable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,7 @@ public class PreferredAppsActivity extends DaggerAppCompatActivity implements
                 .map(this::onLoadFinished)
                 .compose(scheduling.forFlowable())
                 .subscribe(adapter::setApplications);
+        disposables.add(disposable);
 
         if (savedInstanceState == null) {
             analytics.sendScreenView("Preferred Apps");
@@ -67,8 +71,9 @@ public class PreferredAppsActivity extends DaggerAppCompatActivity implements
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         adapter.setItemClickListener(null);
+        disposables.clear();
+        super.onDestroy();
     }
 
     @Override
@@ -95,9 +100,10 @@ public class PreferredAppsActivity extends DaggerAppCompatActivity implements
 
     @Override
     public void onAppRemoved(DisplayActivityInfo info) {
-        Completable.fromAction(() -> appDao.deleteHost(info.extendedInfo().toString()))
+        Disposable disposable = Completable.fromAction(() -> appDao.deleteHost(info.extendedInfo().toString()))
                 .compose(scheduling.forCompletable())
                 .subscribe();
+        disposables.add(disposable);
 
         notifyItemRemoval(info);
 

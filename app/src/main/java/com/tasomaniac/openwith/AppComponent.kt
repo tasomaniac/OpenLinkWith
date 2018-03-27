@@ -8,20 +8,22 @@ import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [
-  AndroidSupportInjectionModule::class,
-  AppModule::class,
-  AnalyticsModule::class,
-  DataModule::class,
-  BindingModule::class
-])
+@Component(
+    modules = [
+        AndroidSupportInjectionModule::class,
+        AppModule::class,
+        AnalyticsModule::class,
+        DataModule::class,
+        BindingModule::class
+    ]
+)
 interface AppComponent : AndroidInjector<App> {
 
-  fun analytics(): Analytics
+    fun analytics(): Analytics
 
-  @Component.Builder
-  abstract class Builder : AndroidInjector.Builder<App>() {
+    @Component.Builder
+    abstract class Builder : AndroidInjector.Builder<App>() {
 
-    abstract override fun build(): AppComponent
-  }
+        abstract override fun build(): AppComponent
+    }
 }

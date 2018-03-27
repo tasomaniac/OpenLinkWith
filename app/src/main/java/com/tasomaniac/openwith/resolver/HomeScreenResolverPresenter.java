@@ -2,12 +2,10 @@ package com.tasomaniac.openwith.resolver;
 
 import android.content.Intent;
 import android.content.res.Resources;
-
 import com.tasomaniac.openwith.R;
+import timber.log.Timber;
 
 import javax.inject.Inject;
-
-import timber.log.Timber;
 
 class HomeScreenResolverPresenter implements ResolverPresenter {
 
@@ -48,14 +46,14 @@ class HomeScreenResolverPresenter implements ResolverPresenter {
         }
 
         @Override
-        public void onIntentResolved(IntentResolver.Data data) {
-            if (data.isEmpty()) {
+        public void onIntentResolved(IntentResolverResult result) {
+            if (result.isEmpty()) {
                 Timber.e("No app is found to handle url: %s", intentResolver.getSourceIntent().getDataString());
                 view.toast(R.string.empty_resolver_activity);
                 navigation.dismiss();
                 return;
             }
-            view.displayData(data);
+            view.displayData(result);
             view.setTitle(resources.getString(R.string.add_to_homescreen));
         }
 

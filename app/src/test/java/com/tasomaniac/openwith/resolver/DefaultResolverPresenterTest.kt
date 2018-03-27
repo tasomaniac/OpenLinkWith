@@ -274,8 +274,8 @@ class DefaultResolverPresenterTest {
         private fun dataWith(item: DisplayActivityInfo, filteredItem: DisplayActivityInfo? = null) =
             dataWith(listOf(item), filteredItem)
 
-        private fun dataWith(resolved: List<DisplayActivityInfo>, filteredItem: DisplayActivityInfo?): IntentResolver.Data {
-            return IntentResolver.Data(resolved, filteredItem, false)
+        private fun dataWith(resolved: List<DisplayActivityInfo>, filteredItem: DisplayActivityInfo?): IntentResolverResult {
+            return IntentResolverResult(resolved, filteredItem, false)
         }
 
         private fun givenDisplayResolveInfoWithIntentAndLabel(intent: Intent?, label: String) =

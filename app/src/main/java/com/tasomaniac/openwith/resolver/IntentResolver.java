@@ -7,19 +7,16 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.support.annotation.Nullable;
-
 import com.tasomaniac.openwith.rx.SchedulingStrategy;
 import com.tasomaniac.openwith.util.ActivityInfoExtensionsKt;
 import com.tasomaniac.openwith.util.Intents;
+import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import javax.inject.Inject;
-
-import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.M;
@@ -32,8 +29,8 @@ class IntentResolver {
     private final Intent sourceIntent;
     private final CallerPackage callerPackage;
 
-    @Nullable public ComponentName lastChosenComponent;
-    @Nullable private Data data;
+    @Nullable private ComponentName lastChosenComponent;
+    @Nullable private IntentResolverResult result;
     private Listener listener = Listener.NO_OP;
     private Disposable disposable;
 
@@ -53,10 +50,10 @@ class IntentResolver {
     void bind(Listener listener) {
         this.listener = listener;
 
-        if (data == null) {
+        if (result == null) {
             resolve();
         } else {
-            listener.onIntentResolved(data);
+            listener.onIntentResolved(result);
         }
     }
 
@@ -72,7 +69,7 @@ class IntentResolver {
         disposable = Observable.fromCallable(this::doResolve)
                 .compose(schedulingStrategy.forObservable())
                 .subscribe(data -> {
-                    this.data = data;
+                    this.result = data;
                     listener.onIntentResolved(data);
                 });
     }
@@ -83,7 +80,7 @@ class IntentResolver {
         }
     }
 
-    private Data doResolve() {
+    private IntentResolverResult doResolve() {
         int flag = SDK_INT >= M ? PackageManager.MATCH_ALL : PackageManager.MATCH_DEFAULT_ONLY;
         List<ResolveInfo> currentResolveList = new ArrayList<>(packageManager.queryIntentActivities(sourceIntent, flag));
         if (Intents.isHttp(sourceIntent) && SDK_INT >= M) {
@@ -93,7 +90,7 @@ class IntentResolver {
         callerPackage.removeFrom(currentResolveList);
 
         List<DisplayActivityInfo> resolved = groupResolveList(currentResolveList);
-        return new Data(resolved, resolveListGrouper.filteredItem, resolveListGrouper.showExtended);
+        return new IntentResolverResult(resolved, resolveListGrouper.filteredItem, resolveListGrouper.showExtended);
     }
 
     private List<DisplayActivityInfo> groupResolveList(List<ResolveInfo> currentResolveList) {
@@ -132,31 +129,15 @@ class IntentResolver {
         return packageManager.queryIntentActivities(browserIntent, 0);
     }
 
-    static class Data {
-        final List<DisplayActivityInfo> resolved;
-        @Nullable final DisplayActivityInfo filteredItem;
-        final boolean showExtended;
-
-        Data(List<DisplayActivityInfo> resolved, @Nullable DisplayActivityInfo filteredItem, boolean showExtended) {
-            this.resolved = resolved;
-            this.filteredItem = filteredItem;
-            this.showExtended = showExtended;
-        }
-
-        boolean isEmpty() {
-            return totalCount() == 0;
-        }
-
-        int totalCount() {
-            return resolved.size() + (filteredItem != null ? 1 : 0);
-        }
+    public void setLastChosenComponent(@Nullable ComponentName lastChosenComponent) {
+        this.lastChosenComponent = lastChosenComponent;
     }
 
     interface Listener {
 
-        void onIntentResolved(Data data);
+        void onIntentResolved(IntentResolverResult result);
 
-        Listener NO_OP = data -> {
+        Listener NO_OP = result -> {
             // no-op
         };
 

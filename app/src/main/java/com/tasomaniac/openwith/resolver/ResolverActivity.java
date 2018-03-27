@@ -30,20 +30,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.tasomaniac.openwith.HeaderAdapter;
-import com.tasomaniac.openwith.R;
-import com.tasomaniac.openwith.data.PreferredAppDao;
-import com.tasomaniac.openwith.homescreen.AddToHomeScreenDialogFragment;
-import com.tasomaniac.openwith.rx.SchedulingStrategy;
-import com.tasomaniac.openwith.util.Intents;
-
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.tasomaniac.openwith.HeaderAdapter;
+import com.tasomaniac.openwith.R;
+import com.tasomaniac.openwith.homescreen.AddToHomeScreenDialogFragment;
+import com.tasomaniac.openwith.util.Intents;
 import dagger.android.support.DaggerAppCompatActivity;
+
+import javax.inject.Inject;
 
 /**
  * This activity is displayed when the system attempts to start an Intent for
@@ -61,8 +57,6 @@ public class ResolverActivity extends DaggerAppCompatActivity implements
     @Inject IconLoader iconLoader;
     @Inject ResolverPresenter presenter;
     @Inject ResolveListAdapter adapter;
-    @Inject PreferredAppDao appDao;
-    @Inject SchedulingStrategy scheduling;
 
     @BindView(R.id.button_always) Button alwaysButton;
     @BindView(R.id.button_once) Button onceButton;
@@ -90,24 +84,24 @@ public class ResolverActivity extends DaggerAppCompatActivity implements
     }
 
     @Override
-    public void displayData(IntentResolver.Data data) {
-        setContentView(data.filteredItem != null ? R.layout.resolver_list_with_default : R.layout.resolver_list);
+    public void displayData(IntentResolverResult result) {
+        setContentView(result.getFilteredItem() != null ? R.layout.resolver_list_with_default : R.layout.resolver_list);
         ButterKnife.bind(this);
-        setupList(data, data.showExtended);
-        setupFilteredItem(data.filteredItem);
+        setupList(result, result.getShowExtended());
+        setupFilteredItem(result.getFilteredItem());
         ResolverDrawerLayout rdl = findViewById(R.id.contentPanel);
         rdl.setOnDismissedListener(this::finish);
     }
 
-    private void setupList(IntentResolver.Data data, boolean shouldDisplayExtendedInfo) {
+    private void setupList(IntentResolverResult data, boolean shouldDisplayExtendedInfo) {
         RecyclerView recyclerView = findViewById(R.id.resolver_list);
 
-        adapter.setApplications(data.resolved);
+        adapter.setApplications(data.getResolved());
         adapter.setItemClickListener(this);
         adapter.setItemLongClickListener(this);
         adapter.setDisplayExtendedInfo(shouldDisplayExtendedInfo);
 
-        if (data.filteredItem != null) {
+        if (data.getFilteredItem() != null) {
             recyclerView.setAdapter(new HeaderAdapter(adapter, R.layout.resolver_different_item_header));
         } else {
             recyclerView.setAdapter(adapter);

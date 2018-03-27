@@ -8,7 +8,7 @@ interface ResolverView {
 
     void displayAddToHomeScreenDialog(DisplayActivityInfo activityInfo, Intent intent);
 
-    void displayData(IntentResolver.Data data);
+    void displayData(IntentResolverResult result);
 
     void setTitle(String title);
 

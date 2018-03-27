@@ -56,17 +56,17 @@ internal class DefaultResolverPresenter @Inject constructor(
 
         private fun String.isCaller() = this == callerPackage.callerPackage
 
-        override fun onIntentResolved(data: IntentResolver.Data) {
-            viewState.filteredItem = data.filteredItem
+        override fun onIntentResolved(result: IntentResolverResult) {
+            viewState.filteredItem = result.filteredItem
 
-            if (data.isEmpty) {
+            if (result.isEmpty) {
                 Timber.e("No app is found to handle url: %s", sourceIntent.dataString)
                 view.toast(R.string.empty_resolver_activity)
                 navigation.dismiss()
                 return
             }
-            if (data.totalCount() == 1) {
-                val activityInfo = data.filteredItem ?: data.resolved[0]!!
+            if (result.totalCount() == 1) {
+                val activityInfo = result.filteredItem ?: result.resolved[0]
                 try {
                     navigation.startPreferred(
                         activityInfo.intentFrom(sourceIntent),
@@ -80,19 +80,17 @@ internal class DefaultResolverPresenter @Inject constructor(
 
             }
 
-            view.displayData(data)
-            view.setTitle(titleForAction(data.filteredItem))
+            view.displayData(result)
+            view.setTitle(titleForAction(result.filteredItem))
             view.setupActionButtons()
         }
 
         private fun titleForAction(filteredItem: DisplayActivityInfo?): String {
-            return if (filteredItem != null)
-                resources.getString(
-                    R.string.which_view_application_named,
-                    filteredItem.displayLabel()
-                )
-            else
+            return if (filteredItem != null) {
+                resources.getString(R.string.which_view_application_named, filteredItem.displayLabel())
+            } else {
                 resources.getString(R.string.which_view_application)
+            }
         }
     }
 
