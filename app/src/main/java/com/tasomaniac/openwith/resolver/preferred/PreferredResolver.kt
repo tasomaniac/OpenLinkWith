@@ -1,4 +1,4 @@
-package com.tasomaniac.openwith.resolver
+package com.tasomaniac.openwith.resolver.preferred
 
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -6,7 +6,7 @@ import android.net.Uri
 import android.text.TextUtils
 import com.tasomaniac.openwith.data.PreferredApp
 import com.tasomaniac.openwith.data.PreferredAppDao
-import com.tasomaniac.openwith.resolver.preferred.PreferredDisplayActivityInfo
+import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import io.reactivex.Maybe
 import javax.inject.Inject
 

@@ -5,6 +5,7 @@ import android.net.Uri
 import com.tasomaniac.openwith.data.PreferredApp
 import com.tasomaniac.openwith.data.PreferredAppDao
 import com.tasomaniac.openwith.resolver.preferred.PreferredDisplayActivityInfo
+import com.tasomaniac.openwith.resolver.preferred.PreferredResolver
 import com.tasomaniac.openwith.rx.SchedulingStrategy
 import io.reactivex.Completable
 import io.reactivex.disposables.Disposable
