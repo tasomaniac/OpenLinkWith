@@ -33,11 +33,10 @@ internal class ResolverUseCase @Inject constructor(
                 {
                     intentResolver.lastChosenComponent = it.app.componentName
                     listener.onPreferredResolved(uri, it)
+                    intentResolver.bind(listener)
                 },
                 Timber::e,
-                {
-                    intentResolver.bind(listener)
-                }
+                { intentResolver.bind(listener) }
             )
     }
 
@@ -51,7 +50,7 @@ internal class ResolverUseCase @Inject constructor(
     }
 
     fun resolve() {
-        intentResolver.release()
+        intentResolver.resolve()
     }
 
     fun persistSelectedIntent(intent: Intent, alwaysCheck: Boolean) {
