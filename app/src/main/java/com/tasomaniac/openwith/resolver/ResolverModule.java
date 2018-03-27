@@ -5,13 +5,14 @@ import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 
 import com.tasomaniac.openwith.PerActivity;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
+import javax.inject.Provider;
 
 import dagger.Module;
 import dagger.Provides;
@@ -33,17 +34,14 @@ public abstract class ResolverModule {
 
     @Provides
     static ResolverPresenter resolverPresenter(
-            Resources resources,
-            ResolverUseCase useCase,
             Intent sourceIntent,
-            CallerPackage callerPackage,
-            IntentResolver intentResolver,
-            ViewState viewState) {
+            Provider<HomeScreenResolverPresenter> homeScreenResolverPresenterProvider,
+            Provider<DefaultResolverPresenter> defaultResolverPresenterProvider) {
         boolean isAddToHomeScreen = sourceIntent.getBooleanExtra(EXTRA_ADD_TO_HOME_SCREEN, false);
         if (isAddToHomeScreen) {
-            return new HomeScreenResolverPresenter(resources, intentResolver);
+            return homeScreenResolverPresenterProvider.get();
         }
-        return new DefaultResolverPresenter(resources, sourceIntent, callerPackage, useCase, viewState);
+        return defaultResolverPresenterProvider.get();
     }
 
     @Provides

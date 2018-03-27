@@ -5,6 +5,8 @@ import android.content.res.Resources;
 
 import com.tasomaniac.openwith.R;
 
+import javax.inject.Inject;
+
 import timber.log.Timber;
 
 class HomeScreenResolverPresenter implements ResolverPresenter {
@@ -12,6 +14,7 @@ class HomeScreenResolverPresenter implements ResolverPresenter {
     private final Resources resources;
     private final IntentResolver intentResolver;
 
+    @Inject
     HomeScreenResolverPresenter(Resources resources, IntentResolver intentResolver) {
         this.resources = resources;
         this.intentResolver = intentResolver;

@@ -48,7 +48,7 @@ import dagger.android.support.DaggerAppCompatActivity;
 /**
  * This activity is displayed when the system attempts to start an Intent for
  * which there is more than one matching activity, allowing the user to decide
- * which to go to.  It is not normally used directly by application developers.
+ * which to go to. It is not normally used directly by application developers.
  */
 public class ResolverActivity extends DaggerAppCompatActivity implements
         ItemClickListener,

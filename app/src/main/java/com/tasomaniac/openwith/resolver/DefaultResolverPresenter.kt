@@ -7,8 +7,9 @@ import android.net.Uri
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.resolver.preferred.PreferredDisplayActivityInfo
 import timber.log.Timber
+import javax.inject.Inject
 
-internal class DefaultResolverPresenter(
+internal class DefaultResolverPresenter @Inject constructor(
     private val resources: Resources,
     private val sourceIntent: Intent,
     private val callerPackage: CallerPackage,
