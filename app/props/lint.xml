@@ -27,7 +27,6 @@
     <ignore regexp="DelayedProgressBar"/>
   </issue>
   <issue id="ObsoleteLintCustomCheck">
-    <ignore regexp="timber.lint.IssueRegistry"/>
     <ignore regexp="butterknife.lint.LintRegistry"/>
   </issue>
 

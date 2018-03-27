@@ -26,7 +26,7 @@ buildscript {
     google()
     jcenter()
     if (isPlay) {
-      maven { url 'https://maven.fabric.io/public' }
+      maven { url 'https://maven.fabric.io/public' }    
     }
   }
   dependencies {

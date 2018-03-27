@@ -144,7 +144,7 @@ dependencies {
 
   implementation "com.jakewharton:butterknife:$versions.butterKnife"
   kapt "com.jakewharton:butterknife-compiler:$versions.butterKnife"
-  implementation 'com.jakewharton.timber:timber:4.6.1'
+  implementation 'com.jakewharton.timber:timber:4.7.0'
 
   implementation "com.squareup.okhttp3:okhttp:$versions.okHttp"
   implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
@@ -153,7 +153,7 @@ dependencies {
   playImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.1'
 
   testImplementation 'junit:junit:4.12'
-  testImplementation 'org.mockito:mockito-core:2.16.0'
+  testImplementation 'org.mockito:mockito-core:2.17.0'
   testImplementation 'com.nhaarman:mockito-kotlin:1.5.0'
   testImplementation "com.squareup.okhttp3:mockwebserver:$versions.okHttp"
 }
