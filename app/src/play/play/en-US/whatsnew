@@ -1,7 +1,4 @@
-Help translate the app into your language:
-https://crowdin.com/project/open-link-with
+Just a maintenance update. 
 
-v1.6
-- Support Android Oreo
-- Translation are updated
-- Swedish translation is added. (Thanks to Erik Nygren)
+Bugs are fixed. 
+Started using more modern tools like Kotlin and Room database.

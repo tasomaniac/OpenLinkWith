@@ -4,10 +4,8 @@ Please send bugs and problems using <strong>Contact Me</strong> option in the ap
 Help translate the app into your language:
 https://crowdin.com/project/open-link-with
 
-v1.8
+v1.9
 
-- Clipboard support. When you copy a link, Open Link With main screen will suggest you to open the link with.
-
-v1.7
-
-- Dark Mode theme support
+Translations updated. 
+New language (Croatian) added. Thanks @dugi991
+Some bugs are fixed.
