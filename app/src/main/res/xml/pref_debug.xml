@@ -1,37 +1,41 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <PreferenceCategory
-    android:order="1000"
-    android:title="@string/pref_title_category_debug">
+    <PreferenceCategory
+        android:order="1000"
+        android:title="@string/pref_title_category_debug">
 
-    <Preference
-      android:key="@string/pref_key_debug_amazon"
-      android:title="@string/pref_title_debug_amazon" />
+        <Preference
+            android:key="@string/pref_key_debug_amazon"
+            android:title="@string/pref_title_debug_amazon" />
 
-    <Preference
-      android:key="@string/pref_key_debug_maps"
-      android:title="@string/pref_title_debug_maps" />
+        <Preference
+            android:key="@string/pref_key_debug_maps"
+            android:title="@string/pref_title_debug_maps" />
 
-    <Preference
-      android:key="@string/pref_key_debug_instagram"
-      android:title="@string/pref_title_debug_instagram" />
+        <Preference
+            android:key="@string/pref_key_debug_instagram"
+            android:title="@string/pref_title_debug_instagram" />
 
-    <Preference
-      android:key="@string/pref_key_debug_hangouts"
-      android:title="@string/pref_title_debug_hangouts" />
+        <Preference
+            android:key="@string/pref_key_debug_hangouts"
+            android:title="@string/pref_title_debug_hangouts" />
 
-    <Preference
-      android:key="@string/pref_key_debug_play"
-      android:title="@string/pref_title_debug_play" />
+        <Preference
+            android:key="@string/pref_key_debug_play"
+            android:title="@string/pref_title_debug_play" />
 
-    <Preference
-      android:key="@string/pref_key_debug_redirect"
-      android:title="@string/pref_title_debug_redirect" />
+        <Preference
+            android:key="@string/pref_key_debug_redirect"
+            android:title="@string/pref_title_debug_redirect" />
 
-    <Preference
-      android:key="@string/pref_key_debug_non_http"
-      android:title="@string/pref_title_debug_non_http" />
+        <Preference
+            android:key="@string/pref_key_debug_non_http"
+            android:title="@string/pref_title_debug_non_http" />
 
-  </PreferenceCategory>
+        <Preference
+            android:key="@string/pref_key_debug_missing_http"
+            android:title="@string/pref_title_debug_missing_http" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>

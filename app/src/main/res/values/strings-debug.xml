@@ -21,5 +21,8 @@
   <string name="pref_title_debug_redirect" translatable="false">Url with redirect</string>
 
   <string name="pref_key_debug_non_http" translatable="false">pref_debug_non_http</string>
-  <string name="pref_title_debug_non_http" translatable="false">Non-http url</string>
+  <string name="pref_title_debug_non_http" translatable="false">Non-Http url</string>
+
+  <string name="pref_key_debug_missing_http" translatable="false">pref_debug_missing_http</string>
+  <string name="pref_title_debug_missing_http" translatable="false">Missing-Http Intent</string>
 </resources>

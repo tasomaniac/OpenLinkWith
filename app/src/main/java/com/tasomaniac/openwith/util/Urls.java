@@ -38,7 +38,8 @@ public final class Urls {
         if (text == null) {
             text = getExtraSelectedText(intent);
         }
-        return findFirstUrl(text);
+        String firstUrl = findFirstUrl(text);
+        return fixHttpPrefix(firstUrl);
     }
 
     @SuppressLint("InlinedApi")
@@ -60,6 +61,17 @@ public final class Urls {
             return null;
         }
         return url;
+    }
+
+    @Nullable
+    private static String fixHttpPrefix(@Nullable String url) {
+        if (url == null) {
+            return null;
+        }
+        if (url.startsWith("http")) {
+            return url;
+        }
+        return "https://" + url;
     }
 
     private static class FacebookFixer implements Fixer {

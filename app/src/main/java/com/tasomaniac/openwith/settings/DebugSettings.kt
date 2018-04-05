@@ -33,6 +33,9 @@ class DebugSettings @Inject constructor(
     findPreference(R.string.pref_key_debug_non_http).setupDebugPreference(
         "is24://retargetShowSearchForm"
     )
+    findPreference(R.string.pref_key_debug_missing_http).setupDebugPreference(
+        "www.google.com"
+    )
   }
 
   private fun Preference.setupDebugPreference(debugPrefUrl: String) {
