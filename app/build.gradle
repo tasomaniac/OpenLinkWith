@@ -32,7 +32,7 @@ android {
     versionName versions.versionName
     buildConfigField 'String', 'GIT_SHA', "\"${gitSha}\""
 
-    resConfigs 'ar', 'de', 'en', 'es', 'fr', 'in', 'it', 'iw-rIL', 'ja', 'pl', 'pt-rBR', 'pt-rPT', 'ru', 'sv', 'tr', 'uk', 'vi', 'zh-rCN'
+    resConfigs 'ar', 'de', 'en', 'es', 'fr', 'hr', 'in', 'it', 'iw-rIL', 'ja', 'pl', 'pt-rBR', 'pt-rPT', 'ru', 'sv', 'tr', 'uk', 'vi', 'zh-rCN'
 
     javaCompileOptions.annotationProcessorOptions {
       arguments['butterknife.minSdk'] = minSdkVersion.apiString

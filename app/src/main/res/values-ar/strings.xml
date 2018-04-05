@@ -25,10 +25,10 @@
   <string name="pref_title_category_usage">بيانات الإستخدام</string>
   <string name="pref_title_usage_stats">إحصائيات الاستخدام</string>
   <string name="pref_summary_usage_stats">قم بإعطاء التطبيق صلاحية الوصول إلى بيانات الإستخدام ليظهر في بداية قائمة المشاركة.</string>
-  <string name="pref_title_category_display">Display</string>
-  <string name="pref_title_night_mode">Night Mode</string>
-  <string name="pref_entry_night_mode_off">Off</string>
-  <string name="pref_entry_night_mode_on">On</string>
+  <string name="pref_title_category_display">عرض</string>
+  <string name="pref_title_night_mode">وضع الليلي</string>
+  <string name="pref_entry_night_mode_off">مغلق</string>
+  <string name="pref_entry_night_mode_on">تشغيل</string>
   <string name="pref_title_category_clipboard">Link you copied</string>
   <string name="pref_title_clipboard">Click to open with&#8230;</string>
   <string name="pref_title_category_others">أخرى</string>
@@ -43,7 +43,7 @@
   <string name="cd_image_tutorial">صورة العرض التوضيحي</string>
   <string name="title_tutorial_0">مرحباً بك في تطبيق فتح بواسطة</string>
   <string name="title_tutorial_1">هل حدث لك هذا من قبل؟</string>
-  <string name="title_tutorial_2">قم بنشره!</string>
+  <string name="title_tutorial_2">مشاركة...</string>
   <string name="title_tutorial_3">التطبيقات المفضلة</string>
   <string name="title_tutorial_5">بيانات الإستخدام</string>
   <string name="description_tutorial_0">وهنا يأتي دوري لإنقاذك عندما تكون عالقاً في المتصفحات.</string>

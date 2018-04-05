@@ -28,8 +28,8 @@
   <string name="pref_title_night_mode">夜间模式</string>
   <string name="pref_entry_night_mode_off">关闭</string>
   <string name="pref_entry_night_mode_on">打开</string>
-  <string name="pref_title_category_clipboard">Link you copied</string>
-  <string name="pref_title_clipboard">Click to open with&#8230;</string>
+  <string name="pref_title_category_clipboard">您复制的链接</string>
+  <string name="pref_title_clipboard">选择打开该链接的应用</string>
   <string name="pref_title_category_others">其它</string>
   <string name="pref_title_open_source">开源许可</string>
   <string name="pref_summary_open_source">查看开源库的许可协议。</string>
@@ -59,12 +59,12 @@
   ]]></string>
   <string name="usage_access_give_access">授权</string>
   <string name="error">错误</string>
-  <string name="next">Next</string>
+  <string name="next">下一个</string>
   <string name="error_usage_access_not_found">不能打开查看使用情况设置。\n\n你可以通过进入 设置 -&gt; 安全 访问它</string>
-  <string name="error_cannot_start_activity">Failed to open the link with selected app. Try again later.</string>
+  <string name="error_cannot_start_activity">无法使用所选择的应用打开该链接，请重试。</string>
   <string name="add_to_homescreen">添加到主屏幕</string>
   <string name="add">新增</string>
   <string name="cancel">取消</string>
   <string name="add_to_home_screen_dialog_hint">快捷方式标题</string>
-  <string name="add_to_home_screen_error">Device does not support shortcuts!</string>
+  <string name="add_to_home_screen_error">该设备不支持快捷方式！</string>
 </resources>
