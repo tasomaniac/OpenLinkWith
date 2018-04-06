@@ -22,10 +22,10 @@
     android:allowBackup="true"
     android:fullBackupContent="true"
     android:icon="@mipmap/ic_launcher_main"
+    android:roundIcon="@mipmap/ic_launcher_main"
     android:label="@string/app_name"
     android:supportsRtl="true"
-    android:theme="@style/Theme.OpenWith"
-    tools:ignore="GoogleAppIndexingWarning">
+    android:theme="@style/Theme.OpenWith">
 
     <activity
       android:name=".settings.SettingsActivity"

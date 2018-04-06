@@ -32,6 +32,7 @@
 
   <issue id="UnusedIds" severity="ignore"/>
   <issue id="GoogleAppIndexingApiWarning" severity="ignore"/>
+  <issue id="GoogleAppIndexingWarning" severity="ignore"/>
   <issue id="NegativeMargin" severity="ignore"/>
   <issue id="SelectableText" severity="ignore"/>
 </lint>
