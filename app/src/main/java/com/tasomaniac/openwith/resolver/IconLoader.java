@@ -4,7 +4,6 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-
 import timber.log.Timber;
 
 public class IconLoader {
@@ -17,7 +16,7 @@ public class IconLoader {
         this.iconDpi = iconDpi;
     }
 
-    Drawable loadFor(ActivityInfo activity) {
+    public Drawable loadFor(ActivityInfo activity) {
         try {
             String packageName = activity.packageName;
             if (packageName != null && activity.icon != 0) {

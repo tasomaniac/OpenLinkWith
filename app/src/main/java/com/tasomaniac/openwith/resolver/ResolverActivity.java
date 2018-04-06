@@ -16,9 +16,7 @@
 package com.tasomaniac.openwith.resolver;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
@@ -54,13 +52,12 @@ public class ResolverActivity extends DaggerAppCompatActivity implements
     public static final String EXTRA_ADD_TO_HOME_SCREEN = "EXTRA_ADD_TO_HOME_SCREEN";
     private static final String KEY_CHECKED_POS = "KEY_CHECKED_POS";
 
-    @Inject IconLoader iconLoader;
     @Inject ResolverPresenter presenter;
-    @Inject ResolveListAdapter adapter;
 
     @BindView(R.id.button_always) Button alwaysButton;
     @BindView(R.id.button_once) Button onceButton;
 
+    private ResolveListAdapter adapter;
     private boolean packageMonitorRegistered;
     private final PackageMonitor packageMonitor = new PackageMonitor() {
         @Override
@@ -96,6 +93,7 @@ public class ResolverActivity extends DaggerAppCompatActivity implements
     private void setupList(IntentResolverResult data, boolean shouldDisplayExtendedInfo) {
         RecyclerView recyclerView = findViewById(R.id.resolver_list);
 
+        adapter = new ResolveListAdapter();
         adapter.setApplications(data.getResolved());
         adapter.setItemClickListener(this);
         adapter.setItemLongClickListener(this);
@@ -112,7 +110,7 @@ public class ResolverActivity extends DaggerAppCompatActivity implements
         boolean hasFilteredItem = filteredItem != null;
         ImageView iconView = findViewById(R.id.icon);
         if (iconView != null && hasFilteredItem) {
-            new LoadIconIntoViewTask(iconLoader, iconView).execute(filteredItem);
+            iconView.setImageDrawable(filteredItem.displayIcon());
         }
         adapter.setSelectionEnabled(!hasFilteredItem);
     }
@@ -237,27 +235,4 @@ public class ResolverActivity extends DaggerAppCompatActivity implements
         }
     }
 
-    private static class LoadIconIntoViewTask extends AsyncTask<DisplayActivityInfo, Void, Drawable> {
-        private final ImageView target;
-        private final IconLoader iconLoader;
-
-        LoadIconIntoViewTask(IconLoader iconLoader, ImageView target) {
-            this.iconLoader = iconLoader;
-            this.target = target;
-        }
-
-        @Override
-        protected Drawable doInBackground(DisplayActivityInfo... params) {
-            final DisplayActivityInfo info = params[0];
-            if (info.displayIcon() == null) {
-                info.displayIcon(iconLoader.loadFor(info.getActivityInfo()));
-            }
-            return info.displayIcon();
-        }
-
-        @Override
-        protected void onPostExecute(Drawable drawable) {
-            target.setImageDrawable(drawable);
-        }
-    }
 }

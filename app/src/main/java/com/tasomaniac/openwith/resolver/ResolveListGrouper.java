@@ -4,31 +4,33 @@ import android.content.ComponentName;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
+import dagger.Lazy;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
-import javax.inject.Inject;
-
-import dagger.Lazy;
-
 class ResolveListGrouper {
 
     private final PackageManager packageManager;
+    private final IconLoader iconLoader;
     private final Lazy<ResolverComparator> resolverComparator;
 
     @Nullable private ComponentName lastChosenComponent;
-    
+
     boolean showExtended;
     @Nullable DisplayActivityInfo filteredItem;
 
-    @Inject
-    ResolveListGrouper(PackageManager packageManager,
-                       Lazy<ResolverComparator> resolverComparator) {
+    @Inject ResolveListGrouper(
+            PackageManager packageManager,
+            IconLoader iconLoader,
+            Lazy<ResolverComparator> resolverComparator) {
         this.packageManager = packageManager;
+        this.iconLoader = iconLoader;
         this.resolverComparator = resolverComparator;
     }
 
@@ -86,7 +88,8 @@ class ResolveListGrouper {
         int num = end - start + 1;
         if (num == 1) {
             // No duplicate labels. Use label for entry at start
-            DisplayActivityInfo activityInfo = new DisplayActivityInfo(ro.activityInfo, displayLabel, null);
+            Drawable icon = iconLoader.loadFor(ro.activityInfo);
+            DisplayActivityInfo activityInfo = new DisplayActivityInfo(ro.activityInfo, displayLabel, null, icon);
             if (isLastChosenPosition(ro.activityInfo)) {
                 filteredItem = activityInfo;
             } else {
@@ -129,13 +132,14 @@ class ResolveListGrouper {
     }
 
     private DisplayActivityInfo displayResolveInfoToAdd(boolean usePackageName, ActivityInfo activityInfo, CharSequence displayLabel) {
+        Drawable icon = iconLoader.loadFor(activityInfo);
         if (usePackageName) {
             // Use package name for all entries from start to end-1
-            return new DisplayActivityInfo(activityInfo, displayLabel, activityInfo.packageName);
+            return new DisplayActivityInfo(activityInfo, displayLabel, activityInfo.packageName, icon);
         } else {
             // Use application name for all entries from start to end-1
             CharSequence extendedLabel = activityInfo.applicationInfo.loadLabel(packageManager);
-            return new DisplayActivityInfo(activityInfo, displayLabel, extendedLabel);
+            return new DisplayActivityInfo(activityInfo, displayLabel, extendedLabel, icon);
         }
     }
 

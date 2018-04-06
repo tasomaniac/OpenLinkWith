@@ -1,6 +1,6 @@
 package com.tasomaniac.openwith.resolver;
 
-import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,19 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.tasomaniac.openwith.R;
 
-import javax.inject.Inject;
 import java.util.Collections;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.ViewHolder> {
-
-    private final IconLoader iconLoader;
 
     private List<DisplayActivityInfo> mList = Collections.emptyList();
     private boolean displayExtendedInfo = false;
@@ -29,11 +24,6 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
 
     private ItemClickListener itemClickListener;
     private ItemLongClickListener itemLongClickListener;
-
-    @Inject
-    public ResolveListAdapter(IconLoader iconLoader) {
-        this.iconLoader = iconLoader;
-    }
 
     @Override
     public int getItemCount() {
@@ -49,13 +39,13 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         this.displayExtendedInfo = displayExtendedInfo;
     }
 
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @NonNull @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return ViewHolder.create(parent);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position, List<Object> payloads) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull List<Object> payloads) {
         super.onBindViewHolder(holder, position, payloads);
 
         boolean checked = position == checkedItemPosition;
@@ -63,7 +53,7 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         final DisplayActivityInfo info = mList.get(position);
 
         holder.text.setText(info.displayLabel());
@@ -76,9 +66,6 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
             }
         }
         if (holder.icon != null) {
-            if (info.displayIcon() == null) {
-                new LoadIconTask().execute(info);
-            }
             holder.icon.setImageDrawable(info.displayIcon());
         }
 
@@ -151,19 +138,4 @@ public class ResolveListAdapter extends RecyclerView.Adapter<ResolveListAdapter.
         }
     }
 
-    private class LoadIconTask extends AsyncTask<DisplayActivityInfo, Void, DisplayActivityInfo> {
-        @Override
-        protected DisplayActivityInfo doInBackground(DisplayActivityInfo... params) {
-            final DisplayActivityInfo info = params[0];
-            if (info.displayIcon() == null) {
-                info.displayIcon(iconLoader.loadFor(info.getActivityInfo()));
-            }
-            return info;
-        }
-
-        @Override
-        protected void onPostExecute(DisplayActivityInfo info) {
-            notifyDataSetChanged();
-        }
-    }
 }

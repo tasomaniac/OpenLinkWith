@@ -26,10 +26,9 @@
   <issue id="MissingRegistered">
     <ignore regexp="DelayedProgressBar"/>
   </issue>
-  <issue id="ObsoleteLintCustomCheck">
-    <ignore regexp="butterknife.lint.LintRegistry"/>
-  </issue>
 
+  <issue id="ObsoleteLintCustomCheck"
+      severity="ignore" /> <!-- Project doesn't have custom lint checks and cannot fix 3rd party libraries-->
   <issue id="UnusedIds" severity="ignore"/>
   <issue id="GoogleAppIndexingApiWarning" severity="ignore"/>
   <issue id="GoogleAppIndexingWarning" severity="ignore"/>

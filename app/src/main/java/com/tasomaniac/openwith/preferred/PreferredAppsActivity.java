@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import com.tasomaniac.openwith.data.Analytics;
 import com.tasomaniac.openwith.data.PreferredApp;
 import com.tasomaniac.openwith.data.PreferredAppDao;
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo;
+import com.tasomaniac.openwith.resolver.IconLoader;
 import com.tasomaniac.openwith.resolver.ItemClickListener;
 import com.tasomaniac.openwith.resolver.ResolveListAdapter;
 import com.tasomaniac.openwith.rx.SchedulingStrategy;
@@ -33,14 +35,15 @@ public class PreferredAppsActivity extends DaggerAppCompatActivity implements
         AppRemoveDialogFragment.Callbacks {
 
     @Inject Analytics analytics;
-    @Inject ResolveListAdapter adapter;
     @Inject PreferredAppDao appDao;
     @Inject SchedulingStrategy scheduling;
     @Inject PackageManager packageManager;
+    @Inject IconLoader iconLoader;
 
     @BindView(R.id.recycler_view) RecyclerView recyclerView;
 
     private final CompositeDisposable disposables = new CompositeDisposable();
+    private ResolveListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,7 @@ public class PreferredAppsActivity extends DaggerAppCompatActivity implements
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        adapter = new ResolveListAdapter();
         adapter.setItemClickListener(this);
         recyclerView.setAdapter(new PreferredAppsAdapter(adapter));
 
@@ -91,7 +95,8 @@ public class PreferredAppsActivity extends DaggerAppCompatActivity implements
 
             if (resolveInfo != null) {
                 CharSequence roLabel = resolveInfo.loadLabel(packageManager);
-                final DisplayActivityInfo info = new DisplayActivityInfo(resolveInfo.activityInfo, roLabel, app.getHost());
+                Drawable icon = iconLoader.loadFor(resolveInfo.activityInfo);
+                final DisplayActivityInfo info = new DisplayActivityInfo(resolveInfo.activityInfo, roLabel, app.getHost(), icon);
                 apps.add(info);
             }
         }

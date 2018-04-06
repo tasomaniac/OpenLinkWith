@@ -18,7 +18,7 @@ buildscript {
       kotlin     : '1.2.31',
       okHttp     : '3.10.0',
       room       : '1.1.0-beta2',
-      supportLib : '27.1.0',
+      supportLib : '27.1.1',
   ]
 
   repositories {

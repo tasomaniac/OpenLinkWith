@@ -24,21 +24,16 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import butterknife.*;
 import com.tasomaniac.android.widget.DelayedProgressBar;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo;
+import com.tasomaniac.openwith.resolver.IconLoader;
 import com.tasomaniac.openwith.util.Intents;
-
-import javax.inject.Inject;
-
-import butterknife.BindBitmap;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnEditorAction;
-import butterknife.OnTextChanged;
 import dagger.android.support.AndroidSupportInjection;
 import timber.log.Timber;
+
+import javax.inject.Inject;
 
 import static android.os.Build.VERSION_CODES.M;
 
@@ -50,6 +45,7 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
     private static final String KEY_INTENT = "intent";
 
     @Inject TitleFetcher titleFetcher;
+    @Inject IconLoader iconLoader;
 
     @BindView(R.id.add_to_home_screen_title) EditText titleView;
     @BindView(R.id.add_to_home_screen_progress) DelayedProgressBar progressBar;
@@ -124,11 +120,11 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         @SuppressLint("InflateParams")
-        View view = getActivity().getLayoutInflater()
+        View view = requireActivity().getLayoutInflater()
                 .inflate(R.layout.dialog_add_to_home_screen, null);
         ButterKnife.bind(this, view);
 
-        AlertDialog dialog = new AlertDialog.Builder(getContext())
+        AlertDialog dialog = new AlertDialog.Builder(requireContext())
                 .setPositiveButton(R.string.add, this)
                 .setNegativeButton(R.string.cancel, null)
                 .setView(view)
@@ -186,20 +182,20 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
     }
 
     private boolean createShortcutWith(String id, String label, IconCompat icon) {
-        ShortcutInfoCompat shortcut = new ShortcutInfoCompat.Builder(getContext(), id)
+        ShortcutInfoCompat shortcut = new ShortcutInfoCompat.Builder(requireContext(), id)
                 .setIntent(intent)
                 .setShortLabel(label)
                 .setIcon(icon)
                 .build();
-        return ShortcutManagerCompat.requestPinShortcut(getContext(), shortcut, startHomeScreen());
+        return ShortcutManagerCompat.requestPinShortcut(requireContext(), shortcut, startHomeScreen());
     }
 
     private IconCompat createSimpleIcon() {
-        return IconCompat.createWithResource(getContext(), R.mipmap.ic_launcher_bookmark);
+        return IconCompat.createWithResource(requireContext(), R.mipmap.ic_launcher_bookmark);
     }
 
     private IntentSender startHomeScreen() {
-        return PendingIntent.getActivity(getContext(), 0, Intents.homeScreenIntent(), 0).getIntentSender();
+        return PendingIntent.getActivity(requireContext(), 0, Intents.homeScreenIntent(), 0).getIntentSender();
     }
 
     public void show(FragmentManager fragmentManager) {

@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import com.tasomaniac.openwith.util.ActivityInfoExtensionsKt;
@@ -14,18 +15,20 @@ public final class DisplayActivityInfo implements Parcelable {
     private final ActivityInfo activityInfo;
     private final CharSequence displayLabel;
     @Nullable private final CharSequence extendedInfo;
-    private Drawable displayIcon;
+    @Nullable private final Drawable displayIcon;
 
-    public DisplayActivityInfo(ActivityInfo activityInfo, CharSequence displayLabel, @Nullable CharSequence extendedInfo) {
+    public DisplayActivityInfo(ActivityInfo activityInfo, CharSequence displayLabel, @Nullable CharSequence extendedInfo, @NonNull Drawable displayIcon) {
         this.activityInfo = activityInfo;
         this.displayLabel = displayLabel;
         this.extendedInfo = extendedInfo;
+        this.displayIcon = displayIcon;
     }
 
     private DisplayActivityInfo(Parcel in) {
         activityInfo = in.readParcelable(ActivityInfo.class.getClassLoader());
         displayLabel = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in);
         extendedInfo = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in);
+        displayIcon = null;
     }
 
     public String packageName() {
@@ -36,7 +39,7 @@ public final class DisplayActivityInfo implements Parcelable {
         return new Intent(sourceIntent)
                 .setComponent(componentName())
                 .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT
-                                  | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
+                        | Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
     }
 
     @Override
@@ -96,11 +99,8 @@ public final class DisplayActivityInfo implements Parcelable {
         return extendedInfo;
     }
 
-    public Drawable displayIcon() {
+    @Nullable public Drawable displayIcon() {
         return displayIcon;
     }
 
-    void displayIcon(Drawable displayIcon) {
-        this.displayIcon = displayIcon;
-    }
 }

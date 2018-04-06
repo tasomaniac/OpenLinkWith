@@ -6,11 +6,13 @@ import android.net.Uri
 import com.tasomaniac.openwith.data.PreferredApp
 import com.tasomaniac.openwith.data.PreferredAppDao
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
+import com.tasomaniac.openwith.resolver.IconLoader
 import io.reactivex.Maybe
 import javax.inject.Inject
 
 internal class PreferredResolver @Inject constructor(
     private val packageManager: PackageManager,
+    private val iconLoader: IconLoader,
     private val appDao: PreferredAppDao
 ) {
 
@@ -35,7 +37,8 @@ internal class PreferredResolver @Inject constructor(
             DisplayActivityInfo(
                 it.activityInfo,
                 it.loadLabel(packageManager),
-                null
+                null,
+                iconLoader.loadFor(it.activityInfo)
             )
         }
     }
