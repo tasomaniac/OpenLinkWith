@@ -103,6 +103,8 @@ staticAnalysis {
     checkReleaseBuilds false
 
     lintConfig file('props/lint.xml')
+
+    includeVariants { it.name == 'flossDebug' }
   }
 }
 
