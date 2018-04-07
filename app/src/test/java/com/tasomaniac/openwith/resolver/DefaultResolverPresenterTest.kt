@@ -39,20 +39,19 @@ class DefaultResolverPresenterTest {
     private val intentResolver = mock<IntentResolver> {
         on { sourceIntent } doReturn sourceIntent
     }
-
-    private val viewState = ViewState()
-    private val useCase = ResolverUseCase(
-        sourceIntent, PreferredResolver(mock(), dao),
-        intentResolver, mock(), dao, ImmediateScheduling()
-    )
     private val callerPackage = CallerPackage.from(mock {
         on { callingPackage } doReturn "callerPackage"
     })
 
-    private val presenter = DefaultResolverPresenter(
-        resources, sourceIntent, callerPackage,
-        useCase, viewState
-    )
+    private val viewState = ViewState()
+    private val useCase: ResolverUseCase
+    private val presenter: DefaultResolverPresenter
+
+    init {
+        val preferredResolver = PreferredResolver(mock(), mock(), dao)
+        useCase = ResolverUseCase(sourceIntent, preferredResolver, intentResolver, mock(), dao, ImmediateScheduling())
+        presenter = DefaultResolverPresenter(resources, sourceIntent, callerPackage, useCase, viewState)
+    }
 
     @Before
     fun setUp() {
@@ -274,7 +273,10 @@ class DefaultResolverPresenterTest {
         private fun dataWith(item: DisplayActivityInfo, filteredItem: DisplayActivityInfo? = null) =
             dataWith(listOf(item), filteredItem)
 
-        private fun dataWith(resolved: List<DisplayActivityInfo>, filteredItem: DisplayActivityInfo?): IntentResolverResult {
+        private fun dataWith(
+            resolved: List<DisplayActivityInfo>,
+            filteredItem: DisplayActivityInfo?
+        ): IntentResolverResult {
             return IntentResolverResult(resolved, filteredItem, false)
         }
 
