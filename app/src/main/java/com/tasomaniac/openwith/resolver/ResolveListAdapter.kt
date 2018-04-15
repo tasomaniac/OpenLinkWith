@@ -5,11 +5,9 @@ import android.view.ViewGroup
 import javax.inject.Inject
 import kotlin.properties.Delegates
 
-class ResolveListAdapter @Inject constructor(
-    private val iconLoader: IconLoader
-) : RecyclerView.Adapter<ApplicationViewHolder>() {
+class ResolveListAdapter @Inject constructor() : RecyclerView.Adapter<ApplicationViewHolder>() {
 
-  var applications by Delegates.observable(emptyList<DisplayResolveInfo>(), { _, _, _ ->
+  var applications by Delegates.observable(emptyList<DisplayActivityInfo>(), { _, _, _ ->
     notifyDataSetChanged()
   })
   var checkedItemPosition by Delegates.observable(RecyclerView.NO_POSITION, { _, oldValue, newValue ->
@@ -24,7 +22,7 @@ class ResolveListAdapter @Inject constructor(
   override fun getItemCount() = applications.size
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-      ApplicationViewHolder.create(parent, iconLoader, displayExtendedInfo)
+    ApplicationViewHolder.create(parent, displayExtendedInfo)
 
   override fun onBindViewHolder(holder: ApplicationViewHolder, position: Int, payloads: List<Any>) {
     super.onBindViewHolder(holder, position, payloads)
@@ -41,11 +39,7 @@ class ResolveListAdapter @Inject constructor(
     holder.bind(applications[position], itemClickListener, itemLongClickListener)
   }
 
-  override fun onViewRecycled(holder: ApplicationViewHolder) {
-    holder.unbind()
-  }
-
-  fun remove(item: DisplayResolveInfo) {
+  fun remove(item: DisplayActivityInfo) {
     val position = applications.indexOf(item)
     applications -= item
     notifyItemRemoved(position)

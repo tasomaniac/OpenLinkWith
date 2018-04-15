@@ -18,9 +18,9 @@ class PreferredAppsAdapter(private val innerAdapter: ResolveListAdapter)
 
   override fun onBindHeaderViewHolder(holder: SimpleTextViewHolder) {
     if (innerAdapter.itemCount == 0) {
-      holder.setText(R.string.preferred_empty_description)
+        holder.setText(R.string.desc_preferred_empty)
     } else {
-      holder.setText(R.string.preferred_description)
+        holder.setText(R.string.desc_preferred)
     }
   }
 

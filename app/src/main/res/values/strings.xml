@@ -36,7 +36,7 @@
   <string name="browser_none">Hide browsers</string>
   <string name="browser_always_ask">Always ask</string>
   <string name="pref_key_browser" translatable="false">pref_browser</string>
-  <string name="pref_title_browser" translatable="false">@string/title_browser</string>
+  <string name="pref_title_browser" translatable="false">@string/browser_title</string>
   <string name="pref_summary_browser">Change preferred browser.</string>
 
   <string name="pref_key_category_usage" translatable="false">pref_category_usage</string>

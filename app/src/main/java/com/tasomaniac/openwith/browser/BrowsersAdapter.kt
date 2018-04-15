@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.SimpleTextViewHolder
 import com.tasomaniac.openwith.resolver.ApplicationViewHolder
-import com.tasomaniac.openwith.resolver.DisplayResolveInfo
+import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.resolver.ItemClickListener
 import com.tasomaniac.openwith.resolver.ResolveListAdapter
 import com.tasomaniac.openwith.util.Utils
@@ -69,7 +69,7 @@ class BrowsersAdapter(
   }
 
   interface Listener {
-    fun onBrowserClick(displayResolveInfo: DisplayResolveInfo)
+      fun onBrowserClick(displayResolveInfo: DisplayActivityInfo)
     fun onNoneClick()
     fun onAlwaysAskClick()
   }

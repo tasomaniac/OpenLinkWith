@@ -7,7 +7,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.data.Analytics
-import com.tasomaniac.openwith.resolver.DisplayResolveInfo
+import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.resolver.ResolveListAdapter
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.disposables.CompositeDisposable
@@ -58,7 +58,7 @@ class PreferredBrowserActivity : DaggerAppCompatActivity(), BrowsersAdapter.List
     super.onDestroy()
   }
 
-  override fun onBrowserClick(displayResolveInfo: DisplayResolveInfo) {
+  override fun onBrowserClick(displayResolveInfo: DisplayActivityInfo) {
     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }
 

@@ -21,7 +21,7 @@ import static android.os.Build.VERSION_CODES.LOLLIPOP_MR1;
 import static com.tasomaniac.openwith.resolver.ResolverActivity.EXTRA_ADD_TO_HOME_SCREEN;
 
 @Module
-abstract class ResolverModule {
+public abstract class ResolverModule {
 
     private static final long USAGE_STATS_PERIOD = TimeUnit.DAYS.toMillis(14);
 
