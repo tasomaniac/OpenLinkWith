@@ -35,10 +35,7 @@ class PreferredBrowserActivity : DaggerAppCompatActivity(), BrowsersAdapter.List
 
         disposable.add(
             browserResolver.resolve()
-                .subscribe { list ->
-                    adapter.applications = list
-                    recyclerView.adapter.notifyDataSetChanged()
-                }
+                .subscribe(adapter::submitList)
         )
     }
 
@@ -49,6 +46,9 @@ class PreferredBrowserActivity : DaggerAppCompatActivity(), BrowsersAdapter.List
 
     private fun setupList() {
         recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+//        recyclerView.adapter = HeaderAdapter(BrowsersAdapter(adapter, this), R.layout.preferred_header) {
+//            setText(R.string.browser_description)
+//        }
         recyclerView.adapter = BrowsersAdapter(adapter, this)
     }
 

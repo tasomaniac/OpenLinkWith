@@ -32,6 +32,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.tasomaniac.openwith.HeaderAdapter;
 import com.tasomaniac.openwith.R;
+import com.tasomaniac.openwith.SimpleTextViewHolder;
 import com.tasomaniac.openwith.homescreen.AddToHomeScreenDialogFragment;
 import com.tasomaniac.openwith.util.Intents;
 import dagger.android.support.DaggerAppCompatActivity;
@@ -53,11 +54,11 @@ public class ResolverActivity extends DaggerAppCompatActivity implements
     private static final String KEY_CHECKED_POS = "KEY_CHECKED_POS";
 
     @Inject ResolverPresenter presenter;
+    @Inject ResolveListAdapter adapter;
 
     @BindView(R.id.button_always) Button alwaysButton;
     @BindView(R.id.button_once) Button onceButton;
 
-    private ResolveListAdapter adapter;
     private boolean packageMonitorRegistered;
     private final PackageMonitor packageMonitor = new PackageMonitor() {
         @Override
@@ -93,14 +94,16 @@ public class ResolverActivity extends DaggerAppCompatActivity implements
     private void setupList(IntentResolverResult data, boolean shouldDisplayExtendedInfo) {
         RecyclerView recyclerView = findViewById(R.id.resolver_list);
 
-        adapter = new ResolveListAdapter();
-        adapter.setApplications(data.getResolved());
+        adapter.submitList(data.getResolved());
         adapter.setItemClickListener(this);
         adapter.setItemLongClickListener(this);
         adapter.setDisplayExtendedInfo(shouldDisplayExtendedInfo);
 
         if (data.getFilteredItem() != null) {
-            recyclerView.setAdapter(new HeaderAdapter(adapter, R.layout.resolver_different_item_header));
+            recyclerView.setAdapter(new HeaderAdapter<>(
+                    adapter,
+                    parent -> SimpleTextViewHolder.create(parent, R.layout.resolver_different_item_header)
+            ));
         } else {
             recyclerView.setAdapter(adapter);
         }

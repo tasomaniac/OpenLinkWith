@@ -1,35 +1,25 @@
 package com.tasomaniac.openwith.preferred
 
-import android.support.v7.widget.RecyclerView
+import android.support.v7.recyclerview.extensions.ListAdapter
 import android.view.ViewGroup
+import com.tasomaniac.openwith.extensions.withMinHeight
+import com.tasomaniac.openwith.resolver.ApplicationViewHolder
+import com.tasomaniac.openwith.resolver.DiffUtilsCallback
+import com.tasomaniac.openwith.resolver.DisplayActivityInfo
+import com.tasomaniac.openwith.resolver.ItemClickListener
+import javax.inject.Inject
 
-import com.tasomaniac.openwith.HeaderAdapter
-import com.tasomaniac.openwith.R
-import com.tasomaniac.openwith.SimpleTextViewHolder
-import com.tasomaniac.openwith.resolver.ResolveListAdapter
-import com.tasomaniac.openwith.util.Utils
+class PreferredAppsAdapter @Inject constructor(
+    private val viewHolderFactory: ApplicationViewHolder.Factory
+) : ListAdapter<DisplayActivityInfo, ApplicationViewHolder>(DiffUtilsCallback) {
 
-class PreferredAppsAdapter(
-    private val innerAdapter: ResolveListAdapter
-) : HeaderAdapter(innerAdapter, R.layout.preferred_header) {
-
-    init {
-        innerAdapter.displayExtendedInfo = true
-    }
-
-    override fun onBindHeaderViewHolder(holder: SimpleTextViewHolder) {
-        if (innerAdapter.itemCount == 0) {
-            holder.setText(R.string.desc_preferred_empty)
-        } else {
-            holder.setText(R.string.desc_preferred)
-        }
-    }
+    var itemClickListener: ItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        super.onCreateViewHolder(parent, viewType).withMinHeight()
+        viewHolderFactory.createWith(parent, displaySubtext = true).withMinHeight()
 
-    private fun RecyclerView.ViewHolder.withMinHeight() = this.apply {
-        itemView.minimumHeight = Utils.dpToPx(itemView.resources, 72)
+    override fun onBindViewHolder(holder: ApplicationViewHolder, position: Int) {
+        holder.bind(getItem(position), itemClickListener)
     }
 
 }

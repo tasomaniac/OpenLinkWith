@@ -1,55 +1,48 @@
 package com.tasomaniac.openwith.resolver
 
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
+import androidx.core.view.isVisible
 import com.tasomaniac.openwith.R
+import com.tasomaniac.openwith.extensions.inflate
+import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.resolve_list_item.icon
+import kotlinx.android.synthetic.main.resolve_list_item.text1
+import kotlinx.android.synthetic.main.resolve_list_item.text2
+import javax.inject.Inject
 
 class ApplicationViewHolder private constructor(
-    view: View,
+    override val containerView: View,
     private val displaySubtext: Boolean
-) : RecyclerView.ViewHolder(view) {
-
-    @BindView(R.id.text1) lateinit var text: TextView
-    @BindView(R.id.text2) lateinit var text2: TextView
-    @BindView(R.id.icon) lateinit var icon: ImageView
-
-    init {
-        ButterKnife.bind(this, view)
-    }
+) : RecyclerView.ViewHolder(containerView),
+    LayoutContainer {
 
     fun bind(
         info: DisplayActivityInfo,
-        itemClickListener: ItemClickListener,
-        itemLongClickListener: ItemLongClickListener?
+        itemClickListener: ItemClickListener? = null,
+        itemLongClickListener: ItemLongClickListener? = null
     ) {
-        text.text = info.displayLabel()
-        if (displaySubtext) {
-            text2.visibility = View.VISIBLE
-            text2.text = info.extendedInfo()
-        } else {
-            text2.visibility = View.GONE
-        }
+        text1.text = info.displayLabel()
+        text2.isVisible = displaySubtext
+        text2.text = info.extendedInfo()
         icon.setImageDrawable(info.displayIcon())
 
         itemView.setOnClickListener {
-            itemClickListener.onItemClick(info)
+            itemClickListener?.onItemClick(info)
         }
         itemView.setOnLongClickListener {
             itemLongClickListener?.onItemLongClick(info) ?: false
         }
     }
 
-    companion object {
+    class Factory @Inject constructor() {
 
-        fun create(parent: ViewGroup, displaySubtext: Boolean): ApplicationViewHolder {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.resolve_list_item, parent, false)
-            return ApplicationViewHolder(view, displaySubtext)
+        private val creator = { view: View, displaySubtext: Boolean ->
+            ApplicationViewHolder(view, displaySubtext)
         }
+
+        fun createWith(parent: ViewGroup, displaySubtext: Boolean) =
+            creator(parent.inflate(R.layout.resolve_list_item), displaySubtext)
     }
 }

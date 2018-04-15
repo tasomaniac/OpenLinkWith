@@ -3,6 +3,7 @@ plugins {
 }
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.novoda.android-command'
 apply plugin: 'com.novoda.build-properties'
@@ -105,6 +106,10 @@ staticAnalysis {
 
     includeVariants { it.name == 'flossDebug' }
   }
+}
+
+androidExtensions {
+  experimental true
 }
 
 if (isPlay) {

@@ -12,19 +12,21 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.tasomaniac.openwith.HeaderAdapter;
 import com.tasomaniac.openwith.R;
+import com.tasomaniac.openwith.SimpleTextViewHolder;
 import com.tasomaniac.openwith.data.Analytics;
 import com.tasomaniac.openwith.data.PreferredApp;
 import com.tasomaniac.openwith.data.PreferredAppDao;
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo;
 import com.tasomaniac.openwith.resolver.IconLoader;
 import com.tasomaniac.openwith.resolver.ItemClickListener;
-import com.tasomaniac.openwith.resolver.ResolveListAdapter;
 import com.tasomaniac.openwith.rx.SchedulingStrategy;
 import dagger.android.support.DaggerAppCompatActivity;
 import io.reactivex.Completable;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import kotlin.Unit;
 
 import javax.annotation.Nullable;
 import javax.inject.Inject;
@@ -40,11 +42,11 @@ public class PreferredAppsActivity extends DaggerAppCompatActivity implements
     @Inject SchedulingStrategy scheduling;
     @Inject PackageManager packageManager;
     @Inject IconLoader iconLoader;
+    @Inject PreferredAppsAdapter adapter;
 
     @BindView(R.id.recycler_view) RecyclerView recyclerView;
 
     private final CompositeDisposable disposables = new CompositeDisposable();
-    private ResolveListAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,19 +61,33 @@ public class PreferredAppsActivity extends DaggerAppCompatActivity implements
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        adapter = new ResolveListAdapter();
         adapter.setItemClickListener(this);
-        recyclerView.setAdapter(new PreferredAppsAdapter(adapter));
+        recyclerView.setAdapter(wrapWithHeader(adapter));
 
         Disposable disposable = appDao.allPreferredApps()
                 .map(this::onLoadFinished)
                 .compose(scheduling.forFlowable())
-                .subscribe(adapter::setApplications);
+                .subscribe(adapter::submitList);
         disposables.add(disposable);
 
         if (savedInstanceState == null) {
             analytics.sendScreenView("Preferred Apps");
         }
+    }
+
+    private RecyclerView.Adapter<RecyclerView.ViewHolder> wrapWithHeader(PreferredAppsAdapter adapter) {
+        return new HeaderAdapter<>(
+                adapter,
+                viewGroup -> SimpleTextViewHolder.create(viewGroup, R.layout.preferred_header),
+                headerViewHolder -> {
+                    if (adapter.getItemCount() == 0) {
+                        headerViewHolder.setText(R.string.desc_preferred_empty);
+                    } else {
+                        headerViewHolder.setText(R.string.desc_preferred);
+                    }
+                    return Unit.INSTANCE;
+                }
+        );
     }
 
     @Override
@@ -108,28 +124,21 @@ public class PreferredAppsActivity extends DaggerAppCompatActivity implements
     public void onAppRemoved(DisplayActivityInfo info) {
         Disposable disposable = Completable.fromAction(() -> appDao.deleteHost(info.extendedInfo().toString()))
                 .compose(scheduling.forCompletable())
-                .subscribe();
+                .subscribe(() -> {
+                    notifyHeaderChanged();
+
+                    analytics.sendEvent(
+                            "Preferred",
+                            "Removed",
+                            info.displayLabel().toString()
+                    );
+                });
         disposables.add(disposable);
 
-        notifyItemRemoval(info);
-
-        analytics.sendEvent(
-                "Preferred",
-                "Removed",
-                info.displayLabel().toString()
-        );
-    }
-
-    private void notifyItemRemoval(DisplayActivityInfo info) {
-        recyclerView.postDelayed(() -> {
-            adapter.remove(info);
-
-            notifyHeaderChanged();
-        }, 300);
     }
 
     private void notifyHeaderChanged() {
-        recyclerView.postDelayed(() -> recyclerView.getAdapter().notifyItemChanged(0), 200);
+        recyclerView.postDelayed(() -> recyclerView.getAdapter().notifyItemChanged(0), 300);
     }
 
 }
