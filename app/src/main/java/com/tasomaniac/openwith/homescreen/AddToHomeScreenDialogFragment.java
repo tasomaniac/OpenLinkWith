@@ -28,7 +28,6 @@ import butterknife.*;
 import com.tasomaniac.android.widget.DelayedProgressBar;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo;
-import com.tasomaniac.openwith.resolver.IconLoader;
 import com.tasomaniac.openwith.util.Intents;
 import dagger.android.support.AndroidSupportInjection;
 import timber.log.Timber;
@@ -45,7 +44,6 @@ public class AddToHomeScreenDialogFragment extends AppCompatDialogFragment
     private static final String KEY_INTENT = "intent";
 
     @Inject TitleFetcher titleFetcher;
-    @Inject IconLoader iconLoader;
 
     @BindView(R.id.add_to_home_screen_title) EditText titleView;
     @BindView(R.id.add_to_home_screen_progress) DelayedProgressBar progressBar;
