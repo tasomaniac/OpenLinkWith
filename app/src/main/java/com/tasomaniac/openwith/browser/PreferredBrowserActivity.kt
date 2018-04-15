@@ -15,58 +15,58 @@ import javax.inject.Inject
 
 class PreferredBrowserActivity : DaggerAppCompatActivity(), BrowsersAdapter.Listener {
 
-  @Inject lateinit var analytics: Analytics
-  @Inject lateinit var adapter: ResolveListAdapter
-  @Inject lateinit var browserResolver: BrowserResolver
+    @Inject lateinit var analytics: Analytics
+    @Inject lateinit var adapter: ResolveListAdapter
+    @Inject lateinit var browserResolver: BrowserResolver
 
-  @BindView(R.id.recycler_view) lateinit var recyclerView: RecyclerView
+    @BindView(R.id.recycler_view) lateinit var recyclerView: RecyclerView
 
-  private val disposable = CompositeDisposable()
+    private val disposable = CompositeDisposable()
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_preferred_apps)
-    ButterKnife.bind(this)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_preferred_apps)
+        ButterKnife.bind(this)
 
-    analytics.sendScreenView("Browser Apps")
+        analytics.sendScreenView("Browser Apps")
 
-    setupToolbar()
-    setupList()
+        setupToolbar()
+        setupList()
 
-    disposable.add(
-        browserResolver.resolve()
-            .subscribe { list ->
-              adapter.applications = list
-              recyclerView.adapter.notifyDataSetChanged()
-            }
-    )
-  }
+        disposable.add(
+            browserResolver.resolve()
+                .subscribe { list ->
+                    adapter.applications = list
+                    recyclerView.adapter.notifyDataSetChanged()
+                }
+        )
+    }
 
-  private fun setupToolbar() {
-    setSupportActionBar(findViewById(R.id.toolbar))
-    supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-  }
+    private fun setupToolbar() {
+        setSupportActionBar(findViewById(R.id.toolbar))
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+    }
 
-  private fun setupList() {
-    recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-    recyclerView.adapter = BrowsersAdapter(adapter, this)
-  }
+    private fun setupList() {
+        recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        recyclerView.adapter = BrowsersAdapter(adapter, this)
+    }
 
-  override fun onDestroy() {
-    disposable.dispose()
-    adapter.itemClickListener = null
-    super.onDestroy()
-  }
+    override fun onDestroy() {
+        disposable.dispose()
+        adapter.itemClickListener = null
+        super.onDestroy()
+    }
 
-  override fun onBrowserClick(displayResolveInfo: DisplayActivityInfo) {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-  }
+    override fun onBrowserClick(displayResolveInfo: DisplayActivityInfo) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
-  override fun onNoneClick() {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-  }
+    override fun onNoneClick() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
-  override fun onAlwaysAskClick() {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-  }
+    override fun onAlwaysAskClick() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }
