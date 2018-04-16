@@ -22,26 +22,19 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.support.v4.view.NestedScrollingParent;
 import android.support.v4.view.NestedScrollingParentHelper;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
-import android.view.VelocityTracker;
-import android.view.View;
-import android.view.ViewConfiguration;
-import android.view.ViewGroup;
-import android.view.ViewParent;
-import android.view.ViewTreeObserver;
+import android.view.*;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
 import android.widget.OverScroller;
-
 import com.tasomaniac.openwith.R;
-
 import timber.log.Timber;
 
 public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingParent {
@@ -437,7 +430,7 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
         return findChildUnder(this, x, y);
     }
 
-    private static View findChildUnder(ViewGroup parent, float x, float y) {
+    @Nullable private static View findChildUnder(ViewGroup parent, float x, float y) {
         final int childCount = parent.getChildCount();
         for (int i = childCount - 1; i >= 0; i--) {
             final View child = parent.getChildAt(i);
@@ -448,7 +441,7 @@ public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingPa
         return null;
     }
 
-    private View findListChildUnder(float x, float y) {
+    @Nullable private View findListChildUnder(float x, float y) {
         View v = findChildUnder(x, y);
         while (v != null) {
             x -= v.getX();

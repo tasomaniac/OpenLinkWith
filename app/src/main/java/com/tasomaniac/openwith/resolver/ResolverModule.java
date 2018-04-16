@@ -5,17 +5,15 @@ import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
-
+import android.support.annotation.Nullable;
 import com.tasomaniac.openwith.PerActivity;
+import dagger.Module;
+import dagger.Provides;
 
+import javax.inject.Provider;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
-import javax.inject.Provider;
-
-import dagger.Module;
-import dagger.Provides;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.LOLLIPOP_MR1;
@@ -55,15 +53,16 @@ public abstract class ResolverModule {
         );
     }
 
-    private static Map<String, UsageStats> usageStatsFrom(Context context) {
+    @Nullable private static Map<String, UsageStats> usageStatsFrom(Context context) {
         if (SDK_INT >= LOLLIPOP_MR1) {
             UsageStatsManager usageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
 
             final long sinceTime = System.currentTimeMillis() - USAGE_STATS_PERIOD;
-            return usageStatsManager.queryAndAggregateUsageStats(sinceTime, System.currentTimeMillis());
-        } else {
-            return null;
+            if (usageStatsManager != null) {
+                return usageStatsManager.queryAndAggregateUsageStats(sinceTime, System.currentTimeMillis());
+            }
         }
+        return null;
     }
 
     private static Map<String, Integer> priorityItems() {

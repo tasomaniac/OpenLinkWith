@@ -9,8 +9,9 @@ import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView;
-
 import com.tasomaniac.openwith.R;
+
+import javax.annotation.Nullable;
 
 public class LicensesDialogFragment extends AppCompatDialogFragment {
 
@@ -20,14 +21,14 @@ public class LicensesDialogFragment extends AppCompatDialogFragment {
 
     @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         @SuppressLint("InflateParams")
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_licenses, null);
 
         WebView licenses = view.findViewById(R.id.licenses);
         licenses.loadUrl("file:///android_asset/open_source_licenses.html");
 
-        return new AlertDialog.Builder(getActivity())
+        return new AlertDialog.Builder(requireContext())
                 .setTitle(R.string.pref_title_open_source)
                 .setView(view)
                 .setPositiveButton(android.R.string.ok, null)

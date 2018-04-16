@@ -8,9 +8,9 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import com.tasomaniac.openwith.R;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,15 +29,15 @@ public class CircularIndicatorView extends LinearLayout {
         this(context, null);
     }
 
-    public CircularIndicatorView(Context context, AttributeSet attrs) {
+    public CircularIndicatorView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public CircularIndicatorView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CircularIndicatorView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public CircularIndicatorView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CircularIndicatorView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr);
 
         setGravity(Gravity.CENTER);

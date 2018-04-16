@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.tasomaniac.openwith.R;
 
 public class AppIntroFragment extends Fragment {
@@ -61,7 +60,7 @@ public class AppIntroFragment extends Fragment {
             d.setTextColor(descColor);
         }
         if (drawable != 0) {
-            i.setImageDrawable(ContextCompat.getDrawable(getActivity(), drawable));
+            i.setImageDrawable(ContextCompat.getDrawable(requireActivity(), drawable));
         }
         if (backgroundColor != 0) {
             m.setBackgroundColor(backgroundColor);

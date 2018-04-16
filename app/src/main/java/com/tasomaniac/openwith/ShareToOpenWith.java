@@ -5,15 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ShareCompat;
 import android.widget.Toast;
-
 import com.tasomaniac.openwith.data.Analytics;
 import com.tasomaniac.openwith.redirect.RedirectFixActivity;
 import com.tasomaniac.openwith.util.CallerPackageExtractor;
 import com.tasomaniac.openwith.util.Urls;
-
-import javax.inject.Inject;
-
 import dagger.android.AndroidInjection;
+
+import javax.annotation.Nullable;
+import javax.inject.Inject;
 
 public class ShareToOpenWith extends Activity {
 
@@ -26,7 +25,7 @@ public class ShareToOpenWith extends Activity {
     @Inject Analytics analytics;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
 

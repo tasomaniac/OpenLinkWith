@@ -7,9 +7,9 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Build;
-
 import com.tasomaniac.openwith.util.Intents;
 
+import javax.annotation.Nullable;
 import java.text.Collator;
 import java.util.Comparator;
 import java.util.Locale;
@@ -19,14 +19,14 @@ class ResolverComparator implements Comparator<ResolveInfo> {
 
     private final PackageManager packageManager;
     private final ChooserHistory history;
-    private final Map<String, UsageStats> usageStatsMap;
+    @Nullable private final Map<String, UsageStats> usageStatsMap;
     private final Map<String, Integer> priorityPackages;
     private final Collator collator;
     private final boolean isHttp;
 
     ResolverComparator(PackageManager packageManager,
                        ChooserHistory history,
-                       Map<String, UsageStats> usageStatsMap,
+                       @Nullable Map<String, UsageStats> usageStatsMap,
                        Map<String, Integer> priorityPackages,
                        Intent sourceIntent) {
         this.packageManager = packageManager;

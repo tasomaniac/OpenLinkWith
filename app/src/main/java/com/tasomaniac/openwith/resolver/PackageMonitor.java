@@ -22,6 +22,7 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.Nullable;
 
 import java.util.HashSet;
 
@@ -44,9 +45,9 @@ public abstract class PackageMonitor extends BroadcastReceiver {
         sExternalFilt.addAction(Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE);
         sExternalFilt.addAction(Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE);
     }
-    
+
     final HashSet<String> mUpdatingPackages = new HashSet<>();
-    
+
     Context mRegisteredContext;
     Handler mRegisteredHandler;
     String[] mDisappearingPackages;
@@ -82,14 +83,14 @@ public abstract class PackageMonitor extends BroadcastReceiver {
         mRegisteredContext.unregisterReceiver(this);
         mRegisteredContext = null;
     }
-    
+
     //not yet implemented
     boolean isPackageUpdating(String packageName) {
         synchronized (mUpdatingPackages) {
             return mUpdatingPackages.contains(packageName);
         }
     }
-    
+
     public void onBeginPackageChanges() {
     }
 
@@ -118,16 +119,17 @@ public abstract class PackageMonitor extends BroadcastReceiver {
      * and/or of the overall package.
      *
      * @param packageName The name of the package that is changing.
-     * @param components Any components in the package that are changing.  If
-     * the overall package is changing, this will contain an entry of the
-     * package name itself.
+     * @param components  Any components in the package that are changing.  If
+     *                    the overall package is changing, this will contain an entry of the
+     *                    package name itself.
      * @return Return true to indicate you care about this change, which will
      * result in {@link #onSomePackagesChanged()} being called later.  If you
      * return false, no further callbacks will happen about this change.  The
      * default implementation returns true if this is a change to the entire
      * package.
      */
-    public boolean onPackageChanged(String packageName, String[] components) {
+    public boolean onPackageChanged(String packageName, @Nullable String[] components) {
+        //noinspection ConstantConditions
         if (components != null) {
             for (String name : components) {
                 if (packageName.equals(name)) {
@@ -137,17 +139,17 @@ public abstract class PackageMonitor extends BroadcastReceiver {
         }
         return false;
     }
-    
+
     public boolean onHandleForceStop(Intent intent, String[] packages, int uid, boolean doit) {
         return false;
     }
-    
+
     public void onPackagesAvailable(String[] packages) {
     }
-    
+
     public void onPackagesUnavailable(String[] packages) {
     }
-    
+
     public static final int PACKAGE_UNCHANGED = 0;
     public static final int PACKAGE_UPDATING = 1;
     public static final int PACKAGE_TEMPORARY_CHANGE = 2;
@@ -170,14 +172,14 @@ public abstract class PackageMonitor extends BroadcastReceiver {
      */
     public void onPackageModified(String packageName) {
     }
-    
+
     public boolean didSomePackagesChange() {
         return mSomePackagesChanged;
     }
-    
+
     public int isPackageAppearing(String packageName) {
         if (mAppearingPackages != null) {
-            for (int i=mAppearingPackages.length-1; i>=0; i--) {
+            for (int i = mAppearingPackages.length - 1; i >= 0; i--) {
                 if (packageName.equals(mAppearingPackages[i])) {
                     return mChangeType;
                 }
@@ -185,14 +187,14 @@ public abstract class PackageMonitor extends BroadcastReceiver {
         }
         return PACKAGE_UNCHANGED;
     }
-    
+
     public boolean anyPackagesAppearing() {
         return mAppearingPackages != null;
     }
-    
+
     public int isPackageDisappearing(String packageName) {
         if (mDisappearingPackages != null) {
-            for (int i=mDisappearingPackages.length-1; i>=0; i--) {
+            for (int i = mDisappearingPackages.length - 1; i >= 0; i--) {
                 if (packageName.equals(mDisappearingPackages[i])) {
                     return mChangeType;
                 }
@@ -200,7 +202,7 @@ public abstract class PackageMonitor extends BroadcastReceiver {
         }
         return PACKAGE_UNCHANGED;
     }
-    
+
     public boolean anyPackagesDisappearing() {
         return mDisappearingPackages != null;
     }
@@ -211,7 +213,7 @@ public abstract class PackageMonitor extends BroadcastReceiver {
 
     public boolean isPackageModified(String packageName) {
         if (mModifiedPackages != null) {
-            for (int i=mModifiedPackages.length-1; i>=0; i--) {
+            for (int i = mModifiedPackages.length - 1; i >= 0; i--) {
                 if (packageName.equals(mModifiedPackages[i])) {
                     return true;
                 }
@@ -219,25 +221,26 @@ public abstract class PackageMonitor extends BroadcastReceiver {
         }
         return false;
     }
-    
+
     public void onSomePackagesChanged() {
     }
-    
+
     public void onFinishPackageChanges() {
     }
 
+    @Nullable
     String getPackageName(Intent intent) {
         Uri uri = intent.getData();
         return uri != null ? uri.getSchemeSpecificPart() : null;
     }
-    
+
     @Override
     public void onReceive(Context context, Intent intent) {
         onBeginPackageChanges();
-        
+
         mDisappearingPackages = mAppearingPackages = null;
         mSomePackagesChanged = false;
-        
+
         String action = intent.getAction();
         if (Intent.ACTION_PACKAGE_ADDED.equals(action)) {
             String pkg = getPackageName(intent);
@@ -302,7 +305,7 @@ public abstract class PackageMonitor extends BroadcastReceiver {
                 onPackageModified(pkg);
             }
         } else if (Intent.ACTION_PACKAGE_RESTARTED.equals(action)) {
-            mDisappearingPackages = new String[] {getPackageName(intent)};
+            mDisappearingPackages = new String[]{getPackageName(intent)};
             mChangeType = PACKAGE_TEMPORARY_CHANGE;
             onHandleForceStop(intent, mDisappearingPackages,
                     intent.getIntExtra(Intent.EXTRA_UID, 0), true);
@@ -331,11 +334,11 @@ public abstract class PackageMonitor extends BroadcastReceiver {
                 }
             }
         }
-        
+
         if (mSomePackagesChanged) {
             onSomePackagesChanged();
         }
-        
+
         onFinishPackageChanges();
     }
 }

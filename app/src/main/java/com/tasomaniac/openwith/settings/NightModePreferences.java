@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatDelegate;
-
 import com.tasomaniac.openwith.R;
 
 import javax.inject.Inject;
@@ -57,7 +56,7 @@ public class NightModePreferences {
         }
 
         @Nullable
-        static Mode fromValue(Resources resources, String value) {
+        static Mode fromValue(Resources resources, @Nullable String value) {
             for (Mode mode : Mode.values()) {
                 if (mode.stringVale(resources).equals(value)) {
                     return mode;

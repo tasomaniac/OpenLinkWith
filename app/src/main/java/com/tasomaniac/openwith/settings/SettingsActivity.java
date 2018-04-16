@@ -5,18 +5,17 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.Analytics;
 import com.tasomaniac.openwith.data.prefs.BooleanPreference;
 import com.tasomaniac.openwith.data.prefs.TutorialShown;
 import com.tasomaniac.openwith.intro.IntroActivity;
-
-import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import dagger.android.support.DaggerAppCompatActivity;
+
+import javax.annotation.Nullable;
+import javax.inject.Inject;
 
 public class SettingsActivity extends DaggerAppCompatActivity
         implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -29,7 +28,7 @@ public class SettingsActivity extends DaggerAppCompatActivity
     @Inject SharedPreferences sharedPreferences;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (!tutorialShown.get()) {
             startActivity(IntroActivity.newIntent(this));

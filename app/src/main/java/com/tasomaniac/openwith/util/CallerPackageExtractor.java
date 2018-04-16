@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ShareCompat;
 import android.text.format.DateUtils;
-
 import com.tasomaniac.openwith.BuildConfig;
 
 import java.util.List;
@@ -43,9 +42,10 @@ public abstract class CallerPackageExtractor {
 
     private static class SimpleExtractor extends CallerPackageExtractor {
 
+        @Nullable
         private final String callerPackage;
 
-        SimpleExtractor(String callerPackage) {
+        SimpleExtractor(@Nullable String callerPackage) {
             this.callerPackage = callerPackage;
         }
 

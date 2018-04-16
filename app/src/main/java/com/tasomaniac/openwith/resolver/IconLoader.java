@@ -19,7 +19,7 @@ public class IconLoader {
     public Drawable loadFor(ActivityInfo activity) {
         try {
             String packageName = activity.packageName;
-            if (packageName != null && activity.icon != 0) {
+            if (activity.icon != 0) {
                 return getIcon(packageName, activity.icon);
             }
             final int iconRes = activity.getIconResource();

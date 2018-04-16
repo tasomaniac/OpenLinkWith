@@ -8,9 +8,10 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.text.Html;
-
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo;
+
+import javax.annotation.Nullable;
 
 public class AppRemoveDialogFragment extends AppCompatDialogFragment {
 
@@ -40,11 +41,11 @@ public class AppRemoveDialogFragment extends AppCompatDialogFragment {
 
     @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         DisplayActivityInfo info = getInfo();
         CharSequence message = appRemoveDialogContentFrom(getResources(), info);
 
-        return new AlertDialog.Builder(getActivity())
+        return new AlertDialog.Builder(requireActivity())
                 .setTitle(R.string.title_remove_preferred)
                 .setMessage(message)
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> callbacks.onAppRemoved(info))
@@ -52,6 +53,7 @@ public class AppRemoveDialogFragment extends AppCompatDialogFragment {
                 .show();
     }
 
+    @SuppressWarnings("ConstantConditions")
     private DisplayActivityInfo getInfo() {
         final DisplayActivityInfo info = getArguments().getParcelable(EXTRA_INFO);
         if (info == null) {

@@ -10,13 +10,11 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
-
 import com.tasomaniac.openwith.R;
+import dagger.android.support.DaggerAppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import dagger.android.support.DaggerAppCompatActivity;
 
 public abstract class AppIntro extends DaggerAppCompatActivity {
 
@@ -34,7 +32,7 @@ public abstract class AppIntro extends DaggerAppCompatActivity {
     private int savedCurrentItem;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
 

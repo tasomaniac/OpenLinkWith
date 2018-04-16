@@ -19,7 +19,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -37,6 +36,7 @@ import com.tasomaniac.openwith.homescreen.AddToHomeScreenDialogFragment;
 import com.tasomaniac.openwith.util.Intents;
 import dagger.android.support.DaggerAppCompatActivity;
 
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 
 /**
@@ -69,7 +69,7 @@ public class ResolverActivity extends DaggerAppCompatActivity implements
     private Listener listener = Listener.EMPTY;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         registerPackageMonitor();
     }

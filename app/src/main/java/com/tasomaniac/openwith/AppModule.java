@@ -40,6 +40,7 @@ abstract class AppModule {
         return PreferenceManager.getDefaultSharedPreferences(app);
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Provides
     static ActivityManager provideActivityManager(Application app) {
         return (ActivityManager) app.getSystemService(Context.ACTIVITY_SERVICE);
@@ -49,7 +50,7 @@ abstract class AppModule {
     static Resources resources(Application app) {
         return app.getResources();
     }
-    
+
     @Provides
     static SchedulingStrategy schedulingStrategy() {
         return new SchedulingStrategy(Schedulers.io(), AndroidSchedulers.mainThread());
