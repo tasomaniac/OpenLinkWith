@@ -17,7 +17,7 @@ class BrowsersAdapter(
         val viewHolder: RecyclerView.ViewHolder = when (viewType) {
             TYPE_NONE -> NoneViewHolder.create(parent)
             TYPE_ALWAYS_ASK -> AlwaysViewHolder.create(parent)
-            else -> viewHolderFactory.createWith(parent, displaySubtext = true)
+            else -> viewHolderFactory.createWith(parent, displaySubtext = false)
         }
         return viewHolder.withMinHeight()
     }

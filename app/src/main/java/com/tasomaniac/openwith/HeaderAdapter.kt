@@ -37,7 +37,7 @@ open class HeaderAdapter<in T : RecyclerView.ViewHolder, H : RecyclerView.ViewHo
         if (position < HEADER_COUNT) {
             TYPE_HEADER
         } else {
-            super.getItemViewType(position - HEADER_COUNT)
+            innerAdapter.getItemViewType(position - HEADER_COUNT)
         }
 
     private inner class ForwardingDataObserver : RecyclerView.AdapterDataObserver() {

@@ -2,10 +2,13 @@ package com.tasomaniac.openwith.browser
 
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
+import com.tasomaniac.openwith.HeaderAdapter
 import com.tasomaniac.openwith.R
+import com.tasomaniac.openwith.SimpleTextViewHolder
 import com.tasomaniac.openwith.data.Analytics
 import com.tasomaniac.openwith.resolver.ApplicationViewHolder
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
+import com.tasomaniac.openwith.util.componentName
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -15,8 +18,9 @@ import javax.inject.Inject
 class PreferredBrowserActivity : DaggerAppCompatActivity(), BrowsersAdapter.Listener {
 
     @Inject lateinit var analytics: Analytics
-    @Inject lateinit var browserResolver: BrowserResolver
     @Inject lateinit var viewHolderFactory: ApplicationViewHolder.Factory
+    @Inject lateinit var browserResolver: BrowserResolver
+    @Inject lateinit var browserPreferences: BrowserPreferences
 
     private val disposable = CompositeDisposable()
 
@@ -39,10 +43,12 @@ class PreferredBrowserActivity : DaggerAppCompatActivity(), BrowsersAdapter.List
 
     private fun setupList(browsers: List<DisplayActivityInfo>) {
         recycler_view.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-//        recyclerView.adapter = HeaderAdapter(BrowsersAdapter(adapter, this), R.layout.preferred_header) {
-//            setText(R.string.browser_description)
-//        }
-        recycler_view.adapter = BrowsersAdapter(browsers, viewHolderFactory, listener = this)
+
+        val browsersAdapter = BrowsersAdapter(browsers, viewHolderFactory, listener = this)
+        recycler_view.adapter = HeaderAdapter(browsersAdapter,
+            { viewGroup -> SimpleTextViewHolder.create(viewGroup, R.layout.preferred_header) },
+            { setText(R.string.browser_description) }
+        )
     }
 
     override fun onDestroy() {
@@ -51,14 +57,17 @@ class PreferredBrowserActivity : DaggerAppCompatActivity(), BrowsersAdapter.List
     }
 
     override fun onBrowserClick(displayResolveInfo: DisplayActivityInfo) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        browserPreferences.mode = BrowserPreferences.Mode.Browser(displayResolveInfo.activityInfo.componentName())
+        finish()
     }
 
     override fun onNoneClick() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        browserPreferences.mode = BrowserPreferences.Mode.None
+        finish()
     }
 
     override fun onAlwaysAskClick() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        browserPreferences.mode = BrowserPreferences.Mode.AlwaysAsk
+        finish()
     }
 }

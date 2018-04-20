@@ -34,7 +34,9 @@
   <string name="browser_title">Browsers</string>
   <string name="browser_description">Select your preferred browser below. Your choice will be used after the native applications.</string>
   <string name="browser_none">Hide browsers</string>
+    <string name="browser_none_description">Never offer browsers. Only native apps</string>
   <string name="browser_always_ask">Always ask</string>
+    <string name="browser_always_ask_description">Include all browsers into suggested apps list</string>
   <string name="pref_key_browser" translatable="false">pref_browser</string>
   <string name="pref_title_browser" translatable="false">@string/browser_title</string>
   <string name="pref_summary_browser">Change preferred browser.</string>

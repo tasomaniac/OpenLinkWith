@@ -1,6 +1,5 @@
 package com.tasomaniac.openwith.preferred;
 
-import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -107,7 +106,7 @@ public class PreferredAppsActivity extends DaggerAppCompatActivity implements
         List<DisplayActivityInfo> apps = new ArrayList<>(preferredApps.size());
         for (PreferredApp app : preferredApps) {
             Intent intent = new Intent();
-            intent.setComponent(ComponentName.unflattenFromString(app.getComponent()));
+            intent.setComponent(app.getComponentName());
             final ResolveInfo resolveInfo = packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
 
             if (resolveInfo != null) {
