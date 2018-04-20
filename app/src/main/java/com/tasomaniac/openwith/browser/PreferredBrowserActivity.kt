@@ -2,41 +2,34 @@ package com.tasomaniac.openwith.browser
 
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.RecyclerView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.data.Analytics
+import com.tasomaniac.openwith.resolver.ApplicationViewHolder
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
-import com.tasomaniac.openwith.resolver.ResolveListAdapter
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
+import kotlinx.android.synthetic.main.activity_preferred_apps.recycler_view
 import javax.inject.Inject
 
 class PreferredBrowserActivity : DaggerAppCompatActivity(), BrowsersAdapter.Listener {
 
     @Inject lateinit var analytics: Analytics
-    @Inject lateinit var adapter: ResolveListAdapter
     @Inject lateinit var browserResolver: BrowserResolver
-
-    @BindView(R.id.recycler_view) lateinit var recyclerView: RecyclerView
+    @Inject lateinit var viewHolderFactory: ApplicationViewHolder.Factory
 
     private val disposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_preferred_apps)
-        ButterKnife.bind(this)
 
         analytics.sendScreenView("Browser Apps")
-
         setupToolbar()
-        setupList()
 
-        disposable.add(
-            browserResolver.resolve()
-                .subscribe(adapter::submitList)
-        )
+        browserResolver.resolve()
+            .subscribe(::setupList)
+            .addTo(disposable)
     }
 
     private fun setupToolbar() {
@@ -44,17 +37,16 @@ class PreferredBrowserActivity : DaggerAppCompatActivity(), BrowsersAdapter.List
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
-    private fun setupList() {
-        recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+    private fun setupList(browsers: List<DisplayActivityInfo>) {
+        recycler_view.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 //        recyclerView.adapter = HeaderAdapter(BrowsersAdapter(adapter, this), R.layout.preferred_header) {
 //            setText(R.string.browser_description)
 //        }
-        recyclerView.adapter = BrowsersAdapter(adapter, this)
+        recycler_view.adapter = BrowsersAdapter(browsers, viewHolderFactory, listener = this)
     }
 
     override fun onDestroy() {
         disposable.dispose()
-        adapter.itemClickListener = null
         super.onDestroy()
     }
 
