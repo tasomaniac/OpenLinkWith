@@ -3,13 +3,11 @@ package com.tasomaniac.openwith.browser
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.tasomaniac.openwith.extensions.withMinHeight
-import com.tasomaniac.openwith.resolver.ApplicationViewHolder
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
-import com.tasomaniac.openwith.resolver.ItemClickListener
 
 class BrowsersAdapter(
     private val browsers: List<DisplayActivityInfo>,
-    private val viewHolderFactory: ApplicationViewHolder.Factory,
+    private val viewHolderFactory: BrowserViewHolder.Factory,
     private val listener: Listener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -17,20 +15,18 @@ class BrowsersAdapter(
         val viewHolder: RecyclerView.ViewHolder = when (viewType) {
             TYPE_NONE -> NoneViewHolder.create(parent)
             TYPE_ALWAYS_ASK -> AlwaysViewHolder.create(parent)
-            else -> viewHolderFactory.createWith(parent, displaySubtext = false)
+            else -> viewHolderFactory.createWith(parent)
         }
         return viewHolder.withMinHeight()
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
         when (holder) {
-            is NoneViewHolder -> holder.bind(listener::onNoneClick)
-            is AlwaysViewHolder -> holder.bind(listener::onAlwaysAskClick)
-            is ApplicationViewHolder -> {
+            is NoneViewHolder -> holder.bind(true, listener::onNoneClick)
+            is AlwaysViewHolder -> holder.bind(true, listener::onAlwaysAskClick)
+            is BrowserViewHolder -> {
                 val info = browsers[position - EXTRA_ITEM_COUNT]
-                holder.bind(info, ItemClickListener {
-                    listener.onBrowserClick(it)
-                })
+                holder.bind(info, true, listener::onBrowserClick)
             }
             else -> throw IllegalStateException("Unknown holder at position: $position")
         }

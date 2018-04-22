@@ -6,7 +6,6 @@ import com.tasomaniac.openwith.HeaderAdapter
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.SimpleTextViewHolder
 import com.tasomaniac.openwith.data.Analytics
-import com.tasomaniac.openwith.resolver.ApplicationViewHolder
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.util.componentName
 import dagger.android.support.DaggerAppCompatActivity
@@ -18,7 +17,7 @@ import javax.inject.Inject
 class PreferredBrowserActivity : DaggerAppCompatActivity(), BrowsersAdapter.Listener {
 
     @Inject lateinit var analytics: Analytics
-    @Inject lateinit var viewHolderFactory: ApplicationViewHolder.Factory
+    @Inject lateinit var viewHolderFactory: BrowserViewHolder.Factory
     @Inject lateinit var browserResolver: BrowserResolver
     @Inject lateinit var browserPreferences: BrowserPreferences
 
