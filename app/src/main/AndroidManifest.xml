@@ -117,7 +117,6 @@
       android:documentLaunchMode="never"
       android:excludeFromRecents="true"
       android:finishOnCloseSystemDialogs="true"
-      android:process=":resolver"
       android:relinquishTaskIdentity="true"
       android:theme="@style/BottomSheet.Light"
       tools:targetApi="lollipop" />
@@ -127,7 +126,6 @@
       android:documentLaunchMode="never"
       android:excludeFromRecents="true"
       android:finishOnCloseSystemDialogs="true"
-      android:process=":resolver"
       android:relinquishTaskIdentity="true"
       android:theme="@style/BottomSheet.Light"
       tools:targetApi="lollipop" />
