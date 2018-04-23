@@ -7,6 +7,7 @@ import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 
 class BrowsersAdapter(
     private val browsers: List<DisplayActivityInfo>,
+    private val preference: BrowserPreferences.Mode,
     private val viewHolderFactory: BrowserViewHolder.Factory,
     private val listener: Listener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -22,11 +23,15 @@ class BrowsersAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
         when (holder) {
-            is NoneViewHolder -> holder.bind(true, listener::onNoneClick)
-            is AlwaysViewHolder -> holder.bind(true, listener::onAlwaysAskClick)
+            is NoneViewHolder -> holder.bind(preference === BrowserPreferences.Mode.None, listener::onNoneClick)
+            is AlwaysViewHolder -> holder.bind(
+                preference === BrowserPreferences.Mode.AlwaysAsk,
+                listener::onAlwaysAskClick
+            )
             is BrowserViewHolder -> {
                 val info = browsers[position - EXTRA_ITEM_COUNT]
-                holder.bind(info, true, listener::onBrowserClick)
+                val selectedBrowser = (preference as? BrowserPreferences.Mode.Browser)?.componentName
+                holder.bind(info, selectedBrowser, listener::onBrowserClick)
             }
             else -> throw IllegalStateException("Unknown holder at position: $position")
         }
