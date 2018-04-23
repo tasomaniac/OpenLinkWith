@@ -12,8 +12,7 @@
 
     <Preference
       android:key="@string/pref_key_browser"
-      android:title="@string/pref_title_browser"
-      android:summary="@string/pref_summary_browser" />
+        android:title="@string/pref_title_browser" />
 
     <Preference
       android:key="@string/pref_key_about"

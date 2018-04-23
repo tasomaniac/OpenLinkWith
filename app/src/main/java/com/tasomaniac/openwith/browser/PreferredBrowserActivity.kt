@@ -56,17 +56,25 @@ class PreferredBrowserActivity : DaggerAppCompatActivity(), BrowsersAdapter.List
     }
 
     override fun onBrowserClick(displayResolveInfo: DisplayActivityInfo) {
-        browserPreferences.mode = BrowserPreferences.Mode.Browser(displayResolveInfo.activityInfo.componentName())
+        val browserMode = BrowserPreferences.Mode.Browser(
+            displayResolveInfo.displayLabel().toString(),
+            displayResolveInfo.activityInfo.componentName()
+        )
+        browserPreferences.mode = browserMode
+        analytics.sendEvent("Preference", "Browser Mode", browserMode.value)
+        analytics.sendEvent("Preference", "Selected Browser", browserMode.componentName.packageName)
         finish()
     }
 
     override fun onNoneClick() {
         browserPreferences.mode = BrowserPreferences.Mode.None
+        analytics.sendEvent("Preference", "Browser Mode", BrowserPreferences.Mode.None.value)
         finish()
     }
 
     override fun onAlwaysAskClick() {
         browserPreferences.mode = BrowserPreferences.Mode.AlwaysAsk
+        analytics.sendEvent("Preference", "Browser Mode", BrowserPreferences.Mode.AlwaysAsk.value)
         finish()
     }
 }
