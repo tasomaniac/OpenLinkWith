@@ -7,7 +7,6 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'com.novoda.android-command'
 apply plugin: 'com.novoda.build-properties'
 apply plugin: 'com.novoda.static-analysis'
-apply plugin: 'net.ltgt.errorprone'
 if (isPlay) {
   apply plugin: 'com.github.triplet.play'
   apply plugin: 'io.fabric'
@@ -124,7 +123,7 @@ configurations {
 dependencies {
   implementation 'com.google.code.findbugs:jsr305:3.0.2'
   implementation 'androidx.core:core-ktx:0.3'
-  implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$versions.kotlin"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
 
   implementation "com.android.support:support-fragment:$versions.supportLib"
   implementation "com.android.support:appcompat-v7:$versions.supportLib"
@@ -157,19 +156,7 @@ dependencies {
   playImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.1'
 
   testImplementation 'junit:junit:4.12'
-  testImplementation 'org.mockito:mockito-core:2.18.0'
+  testImplementation 'org.mockito:mockito-core:2.18.3'
   testImplementation 'com.nhaarman:mockito-kotlin:1.5.0'
   testImplementation "com.squareup.okhttp3:mockwebserver:$versions.okHttp"
-}
-
-project.tasks.withType(JavaCompile) {
-  options.compilerArgs += [
-      '-Xep:UnnecessaryDefaultInEnumSwitch:ERROR',
-      '-Xep:TypeParameterUnusedInFormals:ERROR',
-      '-Xep:ClassCanBeStatic:ERROR',
-      '-Xep:OperatorPrecedence:ERROR',
-      '-Xep:ReferenceEquality:ERROR',
-      '-Xep:FloatingPointLiteralPrecision:ERROR',
-      '-XepDisableWarningsInGeneratedCode'
-  ]
 }
