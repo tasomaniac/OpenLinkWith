@@ -22,12 +22,12 @@ Không dùng <strong>%1$s</strong> làm ứng dụng ưu tiên để mở đư�
   <string name="pref_summary_about">Xem lại hướng dẫn sử dụng.</string>
   <string name="pref_summary_preferred">Thay đổi cài đặt ứng dụng ưu tiên.</string>
   <string name="browser_title">Browsers</string>
-  <string name="browser_description">When a link shared with Open Link With, browsers are also suggested in addition to the native apps. Select below to modify this behavior.</string>
+    <string name="browser_description">When a link shared with Open Link With, browsers are suggested in addition to the native apps.\n\nSelect below to modify this behavior.</string>
   <string name="browser_none">Hide browsers</string>
-  <string name="browser_none_description">Never offer browsers. Only native apps</string>
+    <string name="browser_none_description">Never suggest browsers. Only native apps</string>
   <string name="browser_always_ask">Always ask</string>
   <string name="browser_always_ask_description">Include all browsers into suggested apps list</string>
-  <string name="pref_summary_selected_browser">%s will be used</string>
+    <string name="pref_summary_selected_browser">Only %s will be suggested</string>
   <string name="pref_title_category_usage">Quyền truy cập sử dụng</string>
   <string name="pref_title_usage_stats">Thống kê sử dụng</string>
   <string name="pref_summary_usage_stats">Cải thiện việc phân loại ứng dụng bằng cách cho phép truy cập vào Thống kê sử dụng.</string>

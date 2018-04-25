@@ -20,14 +20,15 @@
             android:id="@+id/browserSelected"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="?attr/listPreferredItemPaddingLeft" />
+            android:clickable="false"
+            android:layout_marginStart="@dimen/keyline_1" />
 
         <ImageView
             android:id="@+id/browserIcon"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginBottom="12dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="@dimen/keyline_1"
             android:layout_marginTop="12dp"
             android:contentDescription="@null"
             android:scaleType="fitCenter"
@@ -37,8 +38,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingStart="?attr/listPreferredItemPaddingLeft"
-            android:paddingEnd="?attr/listPreferredItemPaddingRight">
+            android:paddingStart="@dimen/keyline_1"
+            android:paddingEnd="@dimen/keyline_1">
             <!-- Activity name -->
             <TextView
                 android:id="@+id/browserTitle"
