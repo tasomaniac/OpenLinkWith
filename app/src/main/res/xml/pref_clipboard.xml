@@ -7,7 +7,7 @@
 
     <Preference
       android:key="@string/pref_key_clipboard"
-      android:title="@string/pref_title_clipboard"/>
+      android:title="@string/pref_title_clipboard" />
 
   </PreferenceCategory>
 

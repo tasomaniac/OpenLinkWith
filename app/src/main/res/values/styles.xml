@@ -46,7 +46,7 @@
     <item name="colorControlActivated">?attr/colorControlHighlight</item>
   </style>
 
-  <style name="BottomSheet.Light" parent="Base.BottomSheet.Light"/>
+  <style name="BottomSheet.Light" parent="Base.BottomSheet.Light" />
 
   <style name="PreferenceThemeOverlay.OpenWith" parent="PreferenceThemeOverlay.v14.Material">
     <item name="preferenceFragmentCompatStyle">@style/PreferenceFragment.OpenWith</item>
