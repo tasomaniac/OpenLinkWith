@@ -50,4 +50,17 @@ allprojects {
     google()
     jcenter()
   }
+
+  configurations.all {
+    resolutionStrategy {
+      eachDependency {
+        if (requested.group == 'com.android.support') {
+          useVersion versions.supportLib
+        }
+        if (requested.group == 'org.jetbrains.kotlin') {
+          useVersion versions.kotlin
+        }
+      }
+    }
+  }
 }

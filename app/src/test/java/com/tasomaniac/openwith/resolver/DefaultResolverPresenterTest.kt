@@ -113,7 +113,7 @@ class DefaultResolverPresenterTest {
         givenResourcesFiltered()
         val listener = captureIntentResolverListener()
 
-        val filteredItem = givenDisplayResolveInfoWithIntentAndLabel(null, "filtered")
+        val filteredItem = givenDisplayResolveInfoWithIntentAndLabel(mock(), "filtered")
         listener.onIntentResolved(dataWith(NON_EMPTY_LIST, filteredItem))
 
         then(view).should().setTitle("filtered")
@@ -280,7 +280,7 @@ class DefaultResolverPresenterTest {
             return IntentResolverResult(resolved, filteredItem, false)
         }
 
-        private fun givenDisplayResolveInfoWithIntentAndLabel(intent: Intent?, label: String) =
+        private fun givenDisplayResolveInfoWithIntentAndLabel(intent: Intent, label: String) =
             mock<DisplayActivityInfo> {
                 on { intentFrom(any()) } doReturn intent
                 on { displayLabel() } doReturn label
