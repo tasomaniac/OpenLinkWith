@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?selectableItemBackground"
+    android:minHeight="?attr/listPreferredItemHeightSmall"
+    android:paddingBottom="4dp"
+    android:paddingTop="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <RadioButton
+            android:id="@+id/browserSelected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:layout_marginStart="@dimen/keyline_1" />
+
+        <ImageView
+            android:id="@+id/browserIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginStart="@dimen/keyline_1"
+            android:layout_marginTop="12dp"
+            android:contentDescription="@null"
+            android:scaleType="fitCenter"
+            tools:src="@mipmap/ic_launcher_main" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/keyline_1"
+            android:paddingEnd="@dimen/keyline_1">
+            <!-- Activity name -->
+            <TextView
+                android:id="@+id/browserTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?android:attr/textColorPrimary"
+                tools:text="Open Link With" />
+            <!-- Extended activity info to distinguish between duplicate activity names -->
+            <TextView
+                android:id="@+id/browserInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                tools:text="com.tasomaniac.openwith" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

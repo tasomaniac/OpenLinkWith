@@ -11,7 +11,8 @@ import dagger.Module;
 import dagger.Provides;
 
 import javax.inject.Provider;
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -48,7 +49,7 @@ public abstract class ResolverModule {
                 app.getPackageManager(),
                 history,
                 usageStatsFrom(app),
-                priorityItems(),
+                new HashSet<>(Arrays.asList(PRIORITY_PACKAGES)),
                 sourceIntent
         );
     }
@@ -63,17 +64,6 @@ public abstract class ResolverModule {
             }
         }
         return null;
-    }
-
-    private static Map<String, Integer> priorityItems() {
-        int size = PRIORITY_PACKAGES.length;
-        Map<String, Integer> priorityPackages = new HashMap<>(size);
-        for (int i = 0; i < size; i++) {
-            // position 0 should have highest priority,
-            // starting with 1 for lowest priority.
-            priorityPackages.put(PRIORITY_PACKAGES[i], size - i + 1);
-        }
-        return priorityPackages;
     }
 
     private static final String[] PRIORITY_PACKAGES = new String[]{

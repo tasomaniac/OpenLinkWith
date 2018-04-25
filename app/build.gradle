@@ -3,6 +3,7 @@ plugins {
 }
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.novoda.android-command'
 apply plugin: 'com.novoda.build-properties'
@@ -107,6 +108,10 @@ staticAnalysis {
   }
 }
 
+androidExtensions {
+  experimental true
+}
+
 if (isPlay) {
   play {
     serviceAccountEmail = secrets['play_service_account'].or('').string
@@ -152,6 +157,7 @@ dependencies {
   implementation "com.squareup.okhttp3:okhttp:$versions.okHttp"
   implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
   implementation 'io.reactivex.rxjava2:rxjava:2.1.12'
+  implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
 
   playImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.1'
 

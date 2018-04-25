@@ -13,14 +13,15 @@ secrets.properties
 *.iml
 *.ipr
 *.iws
-/.idea/*
+.idea/*
 
 # IDEA/Android Studio Ignore exceptions
-!/.idea/vcs.xml
-!/.idea/fileTemplates/
-!/.idea/inspectionProfiles/
-!/.idea/scopes/
-!/.idea/codeStyleSettings.xml
-!/.idea/encodings.xml
-!/.idea/copyright/
-!/.idea/compiler.xml
+!.idea/vcs.xml
+!.idea/fileTemplates/
+!.idea/inspectionProfiles/
+!.idea/scopes/
+!.idea/codeStyles
+!.idea/encodings.xml
+!.idea/copyright/
+!.idea/dictionaries
+!.idea/compiler.xml

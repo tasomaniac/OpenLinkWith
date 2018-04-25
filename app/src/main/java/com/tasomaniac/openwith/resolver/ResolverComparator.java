@@ -14,20 +14,21 @@ import java.text.Collator;
 import java.util.Comparator;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 class ResolverComparator implements Comparator<ResolveInfo> {
 
     private final PackageManager packageManager;
     private final ChooserHistory history;
     @Nullable private final Map<String, UsageStats> usageStatsMap;
-    private final Map<String, Integer> priorityPackages;
+    private final Set<String> priorityPackages;
     private final Collator collator;
     private final boolean isHttp;
 
     ResolverComparator(PackageManager packageManager,
                        ChooserHistory history,
                        @Nullable Map<String, UsageStats> usageStatsMap,
-                       Map<String, Integer> priorityPackages,
+                       Set<String> priorityPackages,
                        Intent sourceIntent) {
         this.packageManager = packageManager;
         this.history = history;
@@ -55,15 +56,15 @@ class ResolverComparator implements Comparator<ResolveInfo> {
             int leftCount = history.get(lhs.activityInfo.packageName);
             int rightCount = history.get(rhs.activityInfo.packageName);
             if (leftCount != rightCount) {
-                return rightCount - leftCount;
+                return Integer.compare(rightCount, leftCount);
             }
         }
 
         if (priorityPackages != null) {
-            int leftPriority = getPriority(lhs);
-            int rightPriority = getPriority(rhs);
+            boolean leftPriority = isPriority(lhs);
+            boolean rightPriority = isPriority(rhs);
             if (leftPriority != rightPriority) {
-                return rightPriority - leftPriority;
+                return Boolean.compare(rightPriority, leftPriority);
             }
         }
 
@@ -101,9 +102,8 @@ class ResolverComparator implements Comparator<ResolveInfo> {
         return 0;
     }
 
-    private int getPriority(ResolveInfo lhs) {
-        final Integer integer = priorityPackages.get(lhs.activityInfo.packageName);
-        return integer != null ? integer : 0;
+    private boolean isPriority(ResolveInfo lhs) {
+        return priorityPackages.contains(lhs.activityInfo.packageName);
     }
 
     private static boolean isSpecificUriMatch(int match) {

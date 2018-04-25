@@ -8,7 +8,7 @@
     <Preference
       android:key="@string/pref_key_usage_stats"
       android:title="@string/pref_title_usage_stats"
-      android:summary="@string/pref_summary_usage_stats"/>
+      android:summary="@string/pref_summary_usage_stats" />
 
   </PreferenceCategory>
 

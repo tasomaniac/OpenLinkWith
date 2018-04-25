@@ -9,7 +9,7 @@
       android:title="@string/pref_title_night_mode"
       android:defaultValue="@string/pref_value_night_mode_off"
       android:entryValues="@array/pref_night_mode_values"
-      android:entries="@array/pref_night_mode_entries"/>
+      android:entries="@array/pref_night_mode_entries" />
 
   </PreferenceCategory>
 
