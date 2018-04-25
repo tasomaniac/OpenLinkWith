@@ -99,7 +99,7 @@ public final class DisplayActivityInfo implements Parcelable {
         return extendedInfo;
     }
 
-    @Nullable public Drawable displayIcon() {
+    public Drawable displayIcon() {
         return displayIcon;
     }
 

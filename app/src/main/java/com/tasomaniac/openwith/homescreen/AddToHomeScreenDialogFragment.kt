@@ -8,7 +8,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.IntentSender
 import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.os.Build.VERSION_CODES.M
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
@@ -130,16 +129,13 @@ class AddToHomeScreenDialogFragment : DaggerAppCompatDialogFragment() {
         val id = intent.dataString!! + activityToAdd.packageName()
         val label = titleView.text.toString()
         return try {
-            val icon = shortcutIconCreator.createIconFor(someMethod())
-            createShortcutWith(id, label, icon)
+            createShortcutWith(id, label, shortcutIconCreator.createIconFor(activityToAdd.displayIcon()))
         } catch (e: Exception) {
             // This method started to fire android.os.TransactionTooLargeException
             Timber.e(e, "Exception while adding shortcut")
             createShortcutWith(id, label, createSimpleIcon())
         }
     }
-
-    private fun someMethod(): Drawable? = null
 
     private fun createShortcutWith(id: String, label: String, icon: IconCompat): Boolean {
         val shortcut = ShortcutInfoCompat.Builder(requireContext(), id)
