@@ -4,8 +4,12 @@ Please send bugs and problems using <strong>Contact Me</strong> option in the ap
 Help translate the app into your language:
 https://crowdin.com/project/open-link-with
 
-v1.9
+v2.0
 
-Translations updated. 
-New language (Croatian) added. Thanks @dugi991
-Some bugs are fixed.
+NEW! Browser selection:
+
+When a link shared with Open Link With, browsers are suggested in addition to the native apps. This behavior can now be modified.
+
+- None will never suggest browsers
+- Always ask will include all browsers (previous behavior)
+- Single browser will suggest only that selection
