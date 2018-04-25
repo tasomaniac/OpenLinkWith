@@ -23,4 +23,5 @@ secrets.properties
 !.idea/codeStyles
 !.idea/encodings.xml
 !.idea/copyright/
+!.idea/dictionaries
 !.idea/compiler.xml
