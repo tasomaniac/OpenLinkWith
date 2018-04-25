@@ -25,8 +25,8 @@
     android:roundIcon="@mipmap/ic_launcher_main"
     android:label="@string/app_name"
     android:supportsRtl="true"
-      android:theme="@style/Theme.OpenWith"
-      tools:ignore="GoogleAppIndexingWarning">
+    android:theme="@style/Theme.OpenWith"
+    tools:ignore="GoogleAppIndexingWarning">
 
     <activity
       android:name=".settings.SettingsActivity"
@@ -46,7 +46,7 @@
 
     <activity
       android:name=".browser.PreferredBrowserActivity"
-        android:label="@string/browser_title"
+      android:label="@string/browser_title"
       android:parentActivityName=".settings.SettingsActivity" />
 
     <activity
