@@ -2,8 +2,8 @@ package com.tasomaniac.openwith.homescreen;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.ShareCompat;
 import android.widget.Toast;
+import androidx.core.app.ShareCompat;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.Analytics;
 import com.tasomaniac.openwith.redirect.RedirectFixActivity;

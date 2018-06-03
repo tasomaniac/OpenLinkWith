@@ -3,11 +3,11 @@ package com.tasomaniac.openwith.preferred
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.postDelayed
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.tasomaniac.openwith.HeaderAdapter
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.SimpleTextViewHolder
@@ -23,8 +23,8 @@ import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.Completable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
-import kotlinx.android.synthetic.main.activity_preferred_apps.recycler_view
 import javax.inject.Inject
+import kotlinx.android.synthetic.main.activity_preferred_apps.recycler_view as recyclerView
 
 class PreferredAppsActivity : DaggerAppCompatActivity(), ItemClickListener, AppRemoveDialogFragment.Callbacks {
 
@@ -44,10 +44,15 @@ class PreferredAppsActivity : DaggerAppCompatActivity(), ItemClickListener, AppR
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        recycler_view.layoutManager = LinearLayoutManager(this)
-        recycler_view.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                this,
+                DividerItemDecoration.VERTICAL
+            )
+        )
         adapter.itemClickListener = this
-        recycler_view.adapter = wrapWithHeader(adapter)
+        recyclerView.adapter = wrapWithHeader(adapter)
 
         appDao.allPreferredApps()
             .map(::onLoadFinished)
@@ -110,8 +115,8 @@ class PreferredAppsActivity : DaggerAppCompatActivity(), ItemClickListener, AppR
     }
 
     private fun notifyHeaderChanged() {
-        recycler_view.postDelayed(300) {
-            recycler_view.adapter.notifyItemChanged(0)
+        recyclerView.postDelayed(300) {
+            recyclerView.adapter!!.notifyItemChanged(0)
         }
     }
 }

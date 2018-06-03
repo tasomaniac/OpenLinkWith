@@ -1,7 +1,7 @@
 package com.tasomaniac.openwith
 
-import com.tasomaniac.devwidget.data.DataModule
 import com.tasomaniac.openwith.data.Analytics
+import com.tasomaniac.openwith.data.DataModule
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule

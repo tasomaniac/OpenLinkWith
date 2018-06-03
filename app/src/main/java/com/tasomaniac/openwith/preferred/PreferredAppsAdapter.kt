@@ -1,7 +1,7 @@
 package com.tasomaniac.openwith.preferred
 
-import android.support.v7.recyclerview.extensions.ListAdapter
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import com.tasomaniac.openwith.extensions.withMinHeight
 import com.tasomaniac.openwith.resolver.ApplicationViewHolder
 import com.tasomaniac.openwith.resolver.DiffUtilsCallback

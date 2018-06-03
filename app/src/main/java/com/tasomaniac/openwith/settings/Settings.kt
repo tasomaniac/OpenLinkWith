@@ -1,9 +1,9 @@
 package com.tasomaniac.openwith.settings
 
 import android.content.Intent
-import android.support.annotation.StringRes
-import android.support.annotation.XmlRes
-import android.support.v7.preference.Preference
+import androidx.annotation.StringRes
+import androidx.annotation.XmlRes
+import androidx.preference.Preference
 
 abstract class Settings(
     private val fragment: SettingsFragment

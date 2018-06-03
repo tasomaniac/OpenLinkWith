@@ -3,7 +3,7 @@ package com.tasomaniac.openwith.settings
 import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
-import android.support.v7.preference.Preference
+import androidx.preference.Preference
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.browser.BrowserPreferences
 import com.tasomaniac.openwith.browser.PreferredBrowserActivity

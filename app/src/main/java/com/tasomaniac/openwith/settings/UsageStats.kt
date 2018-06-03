@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build.VERSION_CODES.LOLLIPOP
 import android.provider.Settings
-import android.support.annotation.RequiresApi
+import androidx.annotation.RequiresApi
 import io.reactivex.Completable
 import io.reactivex.Observable
 import timber.log.Timber

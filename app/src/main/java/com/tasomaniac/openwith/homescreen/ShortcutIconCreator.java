@@ -1,13 +1,9 @@
 package com.tasomaniac.openwith.homescreen;
 
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
+import android.graphics.*;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v4.graphics.drawable.IconCompat;
+import androidx.core.graphics.drawable.IconCompat;
 
 import static android.graphics.Bitmap.Config.ARGB_8888;
 

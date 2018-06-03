@@ -1,7 +1,7 @@
 package com.tasomaniac.openwith.settings
 
-import android.support.v4.app.ShareCompat
-import android.support.v7.preference.Preference
+import androidx.core.app.ShareCompat
+import androidx.preference.Preference
 import com.tasomaniac.openwith.BuildConfig
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.data.Analytics

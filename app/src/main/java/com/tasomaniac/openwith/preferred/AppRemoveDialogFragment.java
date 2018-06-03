@@ -4,10 +4,10 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatDialogFragment;
 import android.text.Html;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDialogFragment;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo;
 

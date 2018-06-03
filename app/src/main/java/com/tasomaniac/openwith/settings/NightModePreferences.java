@@ -2,9 +2,9 @@ package com.tasomaniac.openwith.settings;
 
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
-import android.support.v7.app.AppCompatDelegate;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatDelegate;
 import com.tasomaniac.openwith.R;
 
 import javax.inject.Inject;

@@ -1,8 +1,7 @@
-package com.tasomaniac.devwidget.data
+package com.tasomaniac.openwith.data
 
 import android.app.Application
-import android.arch.persistence.room.Room
-import com.tasomaniac.openwith.data.Database
+import androidx.room.Room
 import com.tasomaniac.openwith.data.migrations.Migration1to2
 import dagger.Module
 import dagger.Provides

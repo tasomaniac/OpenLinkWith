@@ -1,12 +1,6 @@
 package com.tasomaniac.openwith.intro;
 
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import com.tasomaniac.openwith.R;
 
 public class AppIntroFragment extends Fragment {

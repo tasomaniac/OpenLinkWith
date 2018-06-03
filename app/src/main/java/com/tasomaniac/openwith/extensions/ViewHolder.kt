@@ -1,6 +1,6 @@
 package com.tasomaniac.openwith.extensions
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import com.tasomaniac.openwith.util.Utils
 
 @Suppress("MagicNumber")

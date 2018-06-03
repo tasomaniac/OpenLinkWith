@@ -1,8 +1,8 @@
 package com.tasomaniac.openwith.util;
 
 import android.content.res.Resources;
-import android.support.annotation.NonNull;
 import android.util.TypedValue;
+import androidx.annotation.NonNull;
 
 public class Utils {
 
