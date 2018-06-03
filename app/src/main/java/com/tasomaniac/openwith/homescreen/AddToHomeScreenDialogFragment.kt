@@ -7,7 +7,7 @@ import android.app.PendingIntent
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.IntentSender
-import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Build.VERSION_CODES.M
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
@@ -15,34 +15,27 @@ import android.support.v4.content.pm.ShortcutInfoCompat
 import android.support.v4.content.pm.ShortcutManagerCompat
 import android.support.v4.graphics.drawable.IconCompat
 import android.support.v7.app.AlertDialog
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
-import android.widget.EditText
 import androidx.core.os.bundleOf
 import androidx.core.widget.toast
-import butterknife.BindBitmap
-import butterknife.BindView
-import butterknife.ButterKnife
-import butterknife.OnEditorAction
-import butterknife.OnTextChanged
-import com.tasomaniac.android.widget.DelayedProgressBar
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.util.Intents
 import dagger.android.support.DaggerAppCompatDialogFragment
 import timber.log.Timber
 import javax.inject.Inject
+import kotlinx.android.synthetic.main.dialog_add_to_home_screen.add_to_home_screen_progress as progressBar
+import kotlinx.android.synthetic.main.dialog_add_to_home_screen.add_to_home_screen_title as titleView
 
 @TargetApi(M)
 class AddToHomeScreenDialogFragment : DaggerAppCompatDialogFragment() {
 
     @Inject lateinit var titleFetcher: TitleFetcher
-
-    @BindView(R.id.add_to_home_screen_title) lateinit var titleView: EditText
-    @BindView(R.id.add_to_home_screen_progress) lateinit var progressBar: DelayedProgressBar
-    @BindBitmap(R.drawable.ic_bookmark) lateinit var shortcutMark: Bitmap
 
     private lateinit var shortcutIconCreator: ShortcutIconCreator
 
@@ -58,7 +51,7 @@ class AddToHomeScreenDialogFragment : DaggerAppCompatDialogFragment() {
     override fun onStart() {
         super.onStart()
         onTitleChanged(titleView.text)
-        shortcutIconCreator = ShortcutIconCreator(shortcutMark)
+        shortcutIconCreator = ShortcutIconCreator(BitmapFactory.decodeResource(resources, R.drawable.ic_bookmark))
 
         if (titleView.text.isEmpty()) {
             showProgressBar()
@@ -75,6 +68,22 @@ class AddToHomeScreenDialogFragment : DaggerAppCompatDialogFragment() {
                 ::hideProgressBar
             )
         }
+
+        titleView.setOnEditorActionListener { _, actionId, _ ->
+            when (actionId) {
+                EditorInfo.IME_ACTION_GO -> {
+                    createShortcutAndHandleError()
+                    true
+                }
+                else -> false
+            }
+        }
+
+        titleView.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(text: Editable) = onTitleChanged(text)
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) = Unit
+        })
     }
 
     override fun onDestroy() {
@@ -93,7 +102,6 @@ class AddToHomeScreenDialogFragment : DaggerAppCompatDialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         @SuppressLint("InflateParams")
         val view = requireActivity().layoutInflater.inflate(R.layout.dialog_add_to_home_screen, null)
-        ButterKnife.bind(this, view)
 
         return AlertDialog.Builder(requireContext())
             .setPositiveButton(R.string.add) { _, _ -> createShortcutAndHandleError() }
@@ -104,16 +112,6 @@ class AddToHomeScreenDialogFragment : DaggerAppCompatDialogFragment() {
             .also { forceKeyboardVisible(it.window!!) }
     }
 
-    @OnEditorAction(R.id.add_to_home_screen_title)
-    fun onKeyboardDoneClicked(actionId: Int) = when (actionId) {
-        EditorInfo.IME_ACTION_GO -> {
-            createShortcutAndHandleError()
-            true
-        }
-        else -> false
-    }
-
-    @OnTextChanged(R.id.add_to_home_screen_title)
     fun onTitleChanged(title: CharSequence) {
         positiveButton.isEnabled = title.isNotEmpty()
     }

@@ -33,11 +33,6 @@ android {
     buildConfigField 'String', 'GIT_SHA', "\"${gitSha}\""
 
     resConfigs 'ar', 'de', 'en', 'es', 'fr', 'hr', 'in', 'it', 'iw-rIL', 'ja', 'pl', 'pt-rBR', 'pt-rPT', 'ru', 'sv', 'tr', 'uk', 'vi', 'zh-rCN'
-
-    javaCompileOptions.annotationProcessorOptions {
-      arguments['butterknife.minSdk'] = minSdkVersion.apiString
-      arguments['butterknife.debuggable'] = 'false'
-    }
   }
 
   signingConfigs {
@@ -150,16 +145,14 @@ dependencies {
   kapt "com.google.dagger:dagger-compiler:$versions.dagger"
   kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
 
-  implementation "com.jakewharton:butterknife:$versions.butterKnife"
-  kapt "com.jakewharton:butterknife-compiler:$versions.butterKnife"
   implementation 'com.jakewharton.timber:timber:4.7.0'
 
   implementation "com.squareup.okhttp3:okhttp:$versions.okHttp"
   implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
-  implementation 'io.reactivex.rxjava2:rxjava:2.1.12'
+  implementation 'io.reactivex.rxjava2:rxjava:2.1.14'
   implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
 
-  playImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.1'
+  playImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.3'
 
   testImplementation 'junit:junit:4.12'
   testImplementation 'org.mockito:mockito-core:2.18.3'

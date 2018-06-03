@@ -23,13 +23,9 @@ import android.support.annotation.StringRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import com.tasomaniac.openwith.HeaderAdapter;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.SimpleTextViewHolder;
@@ -56,9 +52,6 @@ public class ResolverActivity extends DaggerAppCompatActivity implements
     @Inject ResolverPresenter presenter;
     @Inject ResolveListAdapter adapter;
 
-    @BindView(R.id.button_always) Button alwaysButton;
-    @BindView(R.id.button_once) Button onceButton;
-
     private boolean packageMonitorRegistered;
     private final PackageMonitor packageMonitor = new PackageMonitor() {
         @Override
@@ -84,11 +77,12 @@ public class ResolverActivity extends DaggerAppCompatActivity implements
     @Override
     public void displayData(IntentResolverResult result) {
         setContentView(result.getFilteredItem() != null ? R.layout.resolver_list_with_default : R.layout.resolver_list);
-        ButterKnife.bind(this);
         setupList(result, result.getShowExtended());
         setupFilteredItem(result.getFilteredItem());
         ResolverDrawerLayout rdl = findViewById(R.id.contentPanel);
         rdl.setOnDismissedListener(this::finish);
+        findViewById(R.id.button_always).setOnClickListener(v -> listener.onActionButtonClick(true));
+        findViewById(R.id.button_once).setOnClickListener(v -> listener.onActionButtonClick(false));
     }
 
     private void setupList(IntentResolverResult data, boolean shouldDisplayExtendedInfo) {
@@ -132,8 +126,8 @@ public class ResolverActivity extends DaggerAppCompatActivity implements
 
     @Override
     public void enableActionButtons() {
-        alwaysButton.setEnabled(true);
-        onceButton.setEnabled(true);
+        findViewById(R.id.button_always).setEnabled(true);
+        findViewById(R.id.button_once).setEnabled(true);
     }
 
     @Override
@@ -179,9 +173,7 @@ public class ResolverActivity extends DaggerAppCompatActivity implements
 
         int checkedPos = savedInstanceState.getInt(KEY_CHECKED_POS);
         if (checkedPos != RecyclerView.NO_POSITION) {
-            if (alwaysButton != null && onceButton != null) {
-                enableActionButtons();
-            }
+            enableActionButtons();
             adapter.setCheckedItemPosition(checkedPos);
         }
     }
@@ -189,16 +181,6 @@ public class ResolverActivity extends DaggerAppCompatActivity implements
     @Override
     public void onItemClick(DisplayActivityInfo activityInfo) {
         listener.onItemClick(activityInfo);
-    }
-
-    @OnClick(R.id.button_always)
-    public void onAlwaysButtonClick() {
-        listener.onActionButtonClick(true);
-    }
-
-    @OnClick(R.id.button_once)
-    public void onOnceButtonClick() {
-        listener.onActionButtonClick(false);
     }
 
     @Override
