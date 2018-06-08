@@ -22,7 +22,7 @@ def secrets = buildProperties.secrets
 def gitSha = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
 
 android {
-  compileSdkVersion 'android-P'
+  compileSdkVersion versions.compileSdk
 
   defaultConfig {
     applicationId 'com.tasomaniac.openwith'
@@ -122,15 +122,15 @@ configurations {
 
 dependencies {
   implementation 'com.google.code.findbugs:jsr305:3.0.2'
-  implementation 'androidx.core:core-ktx:1.0.0-alpha1'
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
 
-  implementation 'androidx.core:core:1.0.0-alpha2'
-  implementation 'androidx.fragment:fragment:1.0.0-alpha1'
-  implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
-  implementation 'androidx.recyclerview:recyclerview:1.0.0-alpha1'
-  implementation 'com.google.android.material:material:1.0.0-alpha1'
-  implementation 'androidx.legacy:legacy-preference-v14:1.0.0-alpha1'
+  implementation 'androidx.core:core-ktx:1.0.0-alpha3'
+  implementation 'androidx.fragment:fragment-ktx:1.0.0-alpha3'
+  implementation 'androidx.preference:preference-ktx:1.0.0-alpha3'
+  implementation 'androidx.appcompat:appcompat:1.0.0-alpha3'
+  implementation 'androidx.recyclerview:recyclerview:1.0.0-alpha3'
+  implementation 'com.google.android.material:material:1.0.0-alpha3'
+  implementation 'androidx.viewpager:viewpager:1.0.0-alpha3'
   implementation 'com.duolingo.open:rtl-viewpager:1.0.3'
 
   implementation 'com.tasomaniac:delayed-progress:0.4'

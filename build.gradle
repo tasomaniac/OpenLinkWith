@@ -1,65 +1,59 @@
 buildscript {
-  ext.ci = 'true' == System.getenv('CI')
-  ext.isPlay = project.hasProperty('play')
+    ext.ci = 'true' == System.getenv('CI')
+    ext.isPlay = project.hasProperty('play')
 
-  def versionMajor = 2
-  def versionMinor = 0
-  def versionBuild = 0
+    def versionMajor = 2
+    def versionMinor = 0
+    def versionBuild = 0
 
-  ext.versions = [
-      compileSdk : 27,
-      minSdk     : 19,
-      versionCode: versionMajor * 10000 + versionMinor * 100 + versionBuild,
-      versionName: "${versionMajor}.${versionMinor}",
+    ext.versions = [
+            compileSdk : 28,
+            minSdk     : 21,
+            versionCode: versionMajor * 10000 + versionMinor * 100 + versionBuild,
+            versionName: "${versionMajor}.${versionMinor}",
 
-      arch       : '1.1.1',
-      dagger     : '2.16',
-      kotlin     : '1.2.41',
-      okHttp     : '3.10.0',
-      room       : '1.1.0',
-      supportLib : '27.1.1',
-  ]
+            arch       : '1.1.1',
+            dagger     : '2.16',
+            kotlin     : '1.2.41',
+            okHttp     : '3.10.0',
+            room       : '1.1.0',
+    ]
 
-  repositories {
-    gradlePluginPortal()
-    google()
-    jcenter()
-    if (isPlay) {
-      maven { url 'https://maven.fabric.io/public' }
+    repositories {
+        gradlePluginPortal()
+        google()
+        jcenter()
+        if (isPlay) {
+            maven { url 'https://maven.fabric.io/public' }
+        }
     }
-  }
-  dependencies {
-    classpath 'com.android.tools.build:gradle:3.2.0-alpha16'
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
-    classpath 'com.github.ben-manes:gradle-versions-plugin:0.17.0'
-    classpath 'com.github.triplet.gradle:play-publisher:1.2.2'
-    classpath 'com.novoda:gradle-android-command-plugin:2.0.1'
-    classpath 'com.novoda:gradle-build-properties-plugin:0.4.1'
-    classpath 'com.novoda:gradle-static-analysis-plugin:0.5.2'
-    if (isPlay) {
-      classpath 'io.fabric.tools:gradle:1.25.3'
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.0-alpha17'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.17.0'
+        classpath 'com.github.triplet.gradle:play-publisher:1.2.2'
+        classpath 'com.novoda:gradle-android-command-plugin:2.0.1'
+        classpath 'com.novoda:gradle-build-properties-plugin:0.4.1'
+        classpath 'com.novoda:gradle-static-analysis-plugin:0.5.2'
+        if (isPlay) {
+            classpath 'io.fabric.tools:gradle:1.25.3'
+        }
     }
-  }
 }
 
 apply plugin: 'com.github.ben-manes.versions'
 
 allprojects {
-  repositories {
-    google()
-    jcenter()
-  }
-
-  configurations.all {
-    resolutionStrategy {
-      eachDependency {
-        if (requested.group == 'com.android.support') {
-          useVersion versions.supportLib
-        }
-        if (requested.group == 'org.jetbrains.kotlin') {
-          useVersion versions.kotlin
-        }
-      }
+    repositories {
+        google()
+        jcenter()
     }
-  }
+
+    configurations.all {
+        resolutionStrategy.eachDependency {
+            if (requested.group == 'org.jetbrains.kotlin') {
+                useVersion versions.kotlin
+            }
+        }
+    }
 }
