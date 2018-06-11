@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.net.Uri;
 import com.tasomaniac.openwith.browser.BrowserPreferences;
+import com.tasomaniac.openwith.browser.BrowserResolver;
 import com.tasomaniac.openwith.rx.SchedulingStrategy;
 import com.tasomaniac.openwith.util.ActivityInfoExtensionsKt;
 import com.tasomaniac.openwith.util.Intents;
@@ -30,6 +30,7 @@ class IntentResolver {
     private final CallerPackage callerPackage;
     private final ResolveListGrouper resolveListGrouper;
     private final BrowserPreferences browserPreferences;
+    private final BrowserResolver browserResolver;
 
     @Nullable private ComponentName lastChosenComponent;
     @Nullable private IntentResolverResult result;
@@ -41,13 +42,14 @@ class IntentResolver {
                            Intent sourceIntent,
                            CallerPackage callerPackage,
                            ResolveListGrouper resolveListGrouper,
-                           BrowserPreferences browserPreferences) {
+                           BrowserPreferences browserPreferences, BrowserResolver browserResolver) {
         this.packageManager = packageManager;
         this.schedulingStrategy = schedulingStrategy;
         this.sourceIntent = sourceIntent;
         this.callerPackage = callerPackage;
         this.resolveListGrouper = resolveListGrouper;
         this.browserPreferences = browserPreferences;
+        this.browserResolver = browserResolver;
     }
 
     void bind(Listener listener) {
@@ -89,7 +91,7 @@ class IntentResolver {
 
 
         BrowserPreferences.Mode mode = browserPreferences.getMode();
-        List<ResolveInfo> browsers = queryBrowsers();
+        List<ResolveInfo> browsers = browserResolver.queryBrowsers();
         if (Intents.isHttp(sourceIntent) && SDK_INT >= M) {
             addBrowsersToList(currentResolveList, browsers);
         }
@@ -156,14 +158,6 @@ class IntentResolver {
         } else {
             return null;
         }
-    }
-
-    private List<ResolveInfo> queryBrowsers() {
-        Intent browserIntent = new Intent()
-                .setAction(Intent.ACTION_VIEW)
-                .addCategory(Intent.CATEGORY_BROWSABLE)
-                .setData(Uri.parse("http:"));
-        return packageManager.queryIntentActivities(browserIntent, 0);
     }
 
     public void setLastChosenComponent(@Nullable ComponentName lastChosenComponent) {
