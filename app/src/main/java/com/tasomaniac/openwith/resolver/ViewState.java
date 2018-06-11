@@ -25,7 +25,6 @@ class ViewState {
         return filteredItem == null;
     }
 
-    @Inject
-    ViewState() {
+    @Inject ViewState() {
     }
 }

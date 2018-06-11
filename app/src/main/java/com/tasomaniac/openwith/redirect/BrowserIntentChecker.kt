@@ -13,29 +13,29 @@ import javax.inject.Inject
 
 class BrowserIntentChecker @Inject constructor(private val packageManager: PackageManager) {
 
-  fun hasOnlyBrowsers(sourceIntent: Intent): Boolean {
-    if (!Intents.isHttp(sourceIntent)) {
-      return false
+    fun hasOnlyBrowsers(sourceIntent: Intent): Boolean {
+        if (!Intents.isHttp(sourceIntent)) {
+            return false
+        }
+        val flag = if (SDK_INT >= M) PackageManager.MATCH_ALL else PackageManager.MATCH_DEFAULT_ONLY
+        val resolved = toComponents(packageManager.queryIntentActivities(sourceIntent, flag)).toMutableSet()
+        val browsers = toComponents(queryBrowsers())
+
+        resolved.removeAll(browsers)
+        return resolved.isEmpty()
     }
-    val flag = if (SDK_INT >= M) PackageManager.MATCH_ALL else PackageManager.MATCH_DEFAULT_ONLY
-    val resolved = toComponents(packageManager.queryIntentActivities(sourceIntent, flag)).toMutableSet()
-    val browsers = toComponents(queryBrowsers())
 
-    resolved.removeAll(browsers)
-    return resolved.isEmpty()
-  }
+    private fun toComponents(list: List<ResolveInfo>): List<ComponentName> {
+        return list
+            .map(ResolveInfo::activityInfo)
+            .map { it.componentName() }
+    }
 
-  private fun toComponents(list: List<ResolveInfo>): List<ComponentName> {
-    return list
-        .map(ResolveInfo::activityInfo)
-        .map { it.componentName() }
-  }
-
-  private fun queryBrowsers(): List<ResolveInfo> {
-    val browserIntent = Intent()
-        .setAction(Intent.ACTION_VIEW)
-        .addCategory(Intent.CATEGORY_BROWSABLE)
-        .setData(Uri.parse("http:"))
-    return packageManager.queryIntentActivities(browserIntent, 0)
-  }
+    private fun queryBrowsers(): List<ResolveInfo> {
+        val browserIntent = Intent()
+            .setAction(Intent.ACTION_VIEW)
+            .addCategory(Intent.CATEGORY_BROWSABLE)
+            .setData(Uri.parse("http:"))
+        return packageManager.queryIntentActivities(browserIntent, 0)
+    }
 }

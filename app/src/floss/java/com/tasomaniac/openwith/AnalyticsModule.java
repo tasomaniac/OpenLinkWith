@@ -1,11 +1,10 @@
 package com.tasomaniac.openwith;
 
 import com.tasomaniac.openwith.data.Analytics;
-
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
+
+import javax.inject.Singleton;
 
 @Module
 class AnalyticsModule {

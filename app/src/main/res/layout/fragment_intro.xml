@@ -18,7 +18,7 @@
     android:paddingRight="@dimen/keyline_1"
     android:textAppearance="@style/TextAppearance.AppCompat.Title"
     android:textSize="28sp"
-    tools:text="@string/title_tutorial_5"/>
+    tools:text="@string/title_tutorial_5" />
 
   <LinearLayout
     android:layout_width="match_parent"
@@ -35,7 +35,7 @@
       android:layout_gravity="center"
       android:contentDescription="@string/cd_image_tutorial"
       android:scaleType="centerInside"
-      tools:src="@drawable/tutorial_1"/>
+      tools:src="@drawable/tutorial_1" />
   </LinearLayout>
 
   <TextView
@@ -48,5 +48,5 @@
     android:paddingRight="@dimen/keyline_1"
     android:paddingLeft="@dimen/keyline_1"
     android:textSize="16sp"
-    tools:text="@string/description_tutorial_5"/>
+    tools:text="@string/description_tutorial_5" />
 </LinearLayout>

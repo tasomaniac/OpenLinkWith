@@ -13,26 +13,26 @@ import dagger.multibindings.ElementsIntoSet
 @Module
 class SettingsModule {
 
-  @Provides
-  fun clipboardManager(app: Application) = app.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    @Provides
+    fun clipboardManager(app: Application) = app.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 
-  @Provides
-  @ElementsIntoSet
-  fun settings(
-      clipboard: ClipboardSettings,
-      general: GeneralSettings,
-      display: DisplaySettings,
-      other: OtherSettings
-  ): Set<Settings> = setOf(clipboard, general, display, other)
+    @Provides
+    @ElementsIntoSet
+    fun settings(
+        clipboard: ClipboardSettings,
+        general: GeneralSettings,
+        display: DisplaySettings,
+        other: OtherSettings
+    ): Set<Settings> = setOf(clipboard, general, display, other)
 
-  @Provides
-  @ElementsIntoSet
-  fun usageAccessSettings(settings: UsageAccessSettings): Set<Settings> =
-      if (SDK_INT >= LOLLIPOP) setOf(settings) else setOf()
+    @Provides
+    @ElementsIntoSet
+    fun usageAccessSettings(settings: UsageAccessSettings): Set<Settings> =
+        if (SDK_INT >= LOLLIPOP) setOf(settings) else setOf()
 
-  @Provides
-  @ElementsIntoSet
-  fun debugSettings(settings: DebugSettings): Set<Settings> =
-      if (BuildConfig.DEBUG) setOf(settings) else setOf()
+    @Provides
+    @ElementsIntoSet
+    fun debugSettings(settings: DebugSettings): Set<Settings> =
+        if (BuildConfig.DEBUG) setOf(settings) else setOf()
 
 }

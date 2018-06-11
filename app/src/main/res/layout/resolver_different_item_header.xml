@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 /*
  * Copyright 2014, The Android Open Source Project
  *
@@ -16,19 +15,17 @@
  * limitations under the License.
  */
 -->
-<TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@id/text1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_alwaysShow="true"
-    android:text="@string/use_a_different_app"
-    android:minHeight="56dp"
-    android:textAppearance="?android:attr/textAppearanceMedium"
-    android:gravity="start|center_vertical"
-    android:paddingLeft="?attr/listPreferredItemPaddingLeft"
-    android:paddingRight="?attr/listPreferredItemPaddingLeft"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp"
-    />
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@id/text1"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  app:layout_alwaysShow="true"
+  android:text="@string/use_a_different_app"
+  android:minHeight="56dp"
+  android:textAppearance="?android:attr/textAppearanceMedium"
+  android:gravity="start|center_vertical"
+  android:paddingLeft="?attr/listPreferredItemPaddingLeft"
+  android:paddingRight="?attr/listPreferredItemPaddingLeft"
+  android:paddingTop="8dp"
+  android:paddingBottom="8dp" />

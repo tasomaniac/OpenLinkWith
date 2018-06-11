@@ -1,7 +1,6 @@
 package com.tasomaniac.openwith.resolver;
 
 import android.content.SharedPreferences;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;

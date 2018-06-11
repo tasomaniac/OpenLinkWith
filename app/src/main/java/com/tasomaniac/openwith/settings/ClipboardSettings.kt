@@ -14,66 +14,66 @@ class ClipboardSettings @Inject constructor(
     private val analytics: Analytics
 ) : Settings(fragment) {
 
-  private lateinit var clipChangedListener: ClipboardManager.OnPrimaryClipChangedListener
-  private var preferenceCategory: PreferenceCategory? = null
+    private lateinit var clipChangedListener: ClipboardManager.OnPrimaryClipChangedListener
+    private var preferenceCategory: PreferenceCategory? = null
 
-  override fun setup() {
-    updateClipboard()
+    override fun setup() {
+        updateClipboard()
 
-    clipChangedListener = ClipboardManager.OnPrimaryClipChangedListener { updateClipboard() }
-    clipboardManager.addPrimaryClipChangedListener(clipChangedListener)
-  }
-
-  override fun release() {
-    clipboardManager.removePrimaryClipChangedListener(clipChangedListener)
-  }
-
-  private fun updateClipboard() {
-    val clipUrl = clipUrl()
-
-    if (clipUrl == null && isAdded()) {
-      remove()
+        clipChangedListener = ClipboardManager.OnPrimaryClipChangedListener { updateClipboard() }
+        clipboardManager.addPrimaryClipChangedListener(clipChangedListener)
     }
 
-    if (clipUrl != null) {
-      if (!isAdded()) {
-        addClipboardPreference()
-        analytics.sendEvent("Clipboard", "Added", "New")
-      }
-
-      updateClipUrl(clipUrl)
+    override fun release() {
+        clipboardManager.removePrimaryClipChangedListener(clipChangedListener)
     }
-  }
 
-  private fun updateClipUrl(clipUrl: String) {
-    findPreference(R.string.pref_key_clipboard).apply {
-      setOnPreferenceClickListener {
-        context.startActivity(RedirectFixActivity.createIntent(context, clipUrl))
-        analytics.sendEvent("Clipboard", "Clicked", "Clicked")
-        true
-      }
-      summary = clipUrl
+    private fun updateClipboard() {
+        val clipUrl = clipUrl()
+
+        if (clipUrl == null && isAdded()) {
+            remove()
+        }
+
+        if (clipUrl != null) {
+            if (!isAdded()) {
+                addClipboardPreference()
+                analytics.sendEvent("Clipboard", "Added", "New")
+            }
+
+            updateClipUrl(clipUrl)
+        }
     }
-  }
 
-  private fun clipUrl(): String? {
-    if (clipboardManager.hasPrimaryClip()) {
-      val primaryClip = clipboardManager.primaryClip.getItemAt(0).coerceToText(context)
-      return Urls.findFirstUrl(primaryClip.toString())
+    private fun updateClipUrl(clipUrl: String) {
+        findPreference(R.string.pref_key_clipboard).apply {
+            setOnPreferenceClickListener {
+                context.startActivity(RedirectFixActivity.createIntent(context, clipUrl))
+                analytics.sendEvent("Clipboard", "Clicked", "Clicked")
+                true
+            }
+            summary = clipUrl
+        }
     }
-    return null
-  }
 
-  private fun addClipboardPreference() {
-    addPreferencesFromResource(R.xml.pref_clipboard)
-    preferenceCategory = findPreference(R.string.pref_key_category_clipboard) as PreferenceCategory
-  }
+    private fun clipUrl(): String? {
+        if (clipboardManager.hasPrimaryClip()) {
+            val primaryClip = clipboardManager.primaryClip.getItemAt(0).coerceToText(context)
+            return Urls.findFirstUrl(primaryClip.toString())
+        }
+        return null
+    }
 
-  private fun remove() {
-    removePreference(preferenceCategory!!)
-    preferenceCategory = null
-  }
+    private fun addClipboardPreference() {
+        addPreferencesFromResource(R.xml.pref_clipboard)
+        preferenceCategory = findPreference(R.string.pref_key_category_clipboard) as PreferenceCategory
+    }
 
-  private fun isAdded() = preferenceCategory != null
+    private fun remove() {
+        removePreference(preferenceCategory!!)
+        preferenceCategory = null
+    }
+
+    private fun isAdded() = preferenceCategory != null
 
 }

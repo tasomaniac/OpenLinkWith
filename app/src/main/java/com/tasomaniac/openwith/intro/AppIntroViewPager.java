@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-
 import com.duolingo.open.rtlviewpager.RtlViewPager;
 
 public class AppIntroViewPager extends RtlViewPager {

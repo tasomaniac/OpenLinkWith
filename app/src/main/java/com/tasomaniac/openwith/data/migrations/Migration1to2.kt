@@ -1,4 +1,5 @@
 @file:Suppress("MaxLineLength")
+
 package com.tasomaniac.openwith.data.migrations
 
 import androidx.room.migration.Migration

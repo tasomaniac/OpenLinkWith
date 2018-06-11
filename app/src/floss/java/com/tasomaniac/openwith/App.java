@@ -1,11 +1,10 @@
 package com.tasomaniac.openwith;
 
 import com.tasomaniac.openwith.settings.NightModePreferences;
-
-import javax.inject.Inject;
-
 import dagger.android.support.DaggerApplication;
 import timber.log.Timber;
+
+import javax.inject.Inject;
 
 public class App extends DaggerApplication {
 

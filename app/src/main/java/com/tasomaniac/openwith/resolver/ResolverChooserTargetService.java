@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.service.chooser.ChooserTarget;
 import android.service.chooser.ChooserTargetService;
-
 import com.tasomaniac.openwith.App;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.ShareToOpenWith;
@@ -25,7 +24,7 @@ public class ResolverChooserTargetService extends ChooserTargetService {
                                                    IntentFilter matchedFilter) {
         sendAnalyticsEvent();
 
-        ComponentName componentName = new ComponentName( this, ShareToOpenWith.class);
+        ComponentName componentName = new ComponentName(this, ShareToOpenWith.class);
 
         return Collections.singletonList(new ChooserTarget(
                 getString(R.string.open_with),

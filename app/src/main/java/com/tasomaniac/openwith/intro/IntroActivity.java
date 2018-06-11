@@ -43,30 +43,30 @@ public class IntroActivity extends AppIntro {
         }
 
         addSlide(new AppIntroFragment.Builder()
-                         .title(R.string.title_tutorial_0)
-                         .description(R.string.description_tutorial_0)
-                         .drawable(R.drawable.tutorial_0).build());
+                .title(R.string.title_tutorial_0)
+                .description(R.string.description_tutorial_0)
+                .drawable(R.drawable.tutorial_0).build());
 
         addSlide(new AppIntroFragment.Builder()
-                         .title(R.string.title_tutorial_1)
-                         .description(R.string.description_tutorial_1)
-                         .drawable(R.drawable.tutorial_1).build());
+                .title(R.string.title_tutorial_1)
+                .description(R.string.description_tutorial_1)
+                .drawable(R.drawable.tutorial_1).build());
 
         addSlide(new AppIntroFragment.Builder()
-                         .title(R.string.title_tutorial_2)
-                         .description(R.string.description_tutorial_2)
-                         .drawable(R.drawable.tutorial_2).build());
+                .title(R.string.title_tutorial_2)
+                .description(R.string.description_tutorial_2)
+                .drawable(R.drawable.tutorial_2).build());
 
         addSlide(new AppIntroFragment.Builder()
-                         .title(R.string.title_tutorial_3)
-                         .description(R.string.description_tutorial_3)
-                         .drawable(R.drawable.tutorial_3).build());
+                .title(R.string.title_tutorial_3)
+                .description(R.string.description_tutorial_3)
+                .drawable(R.drawable.tutorial_3).build());
 
         if (getResources().getBoolean(R.bool.add_to_home_screen_enabled)) {
             addSlide(new AppIntroFragment.Builder()
-                             .title(R.string.title_tutorial_4)
-                             .description(R.string.description_tutorial_4)
-                             .drawable(R.drawable.tutorial_4).build());
+                    .title(R.string.title_tutorial_4)
+                    .description(R.string.description_tutorial_4)
+                    .drawable(R.drawable.tutorial_4).build());
         }
 
         if (SDK_INT >= LOLLIPOP && !UsageStats.isEnabled(this)) {
@@ -78,9 +78,9 @@ public class IntroActivity extends AppIntro {
     private void addUsageStatsSlide() {
         usageStatsSlideAdded = true;
         addSlide(new AppIntroFragment.Builder()
-                         .title(R.string.title_tutorial_5)
-                         .description(R.string.description_tutorial_5)
-                         .drawable(R.drawable.tutorial_5).build());
+                .title(R.string.title_tutorial_5)
+                .description(R.string.description_tutorial_5)
+                .drawable(R.drawable.tutorial_5).build());
 
         setDoneText(getString(R.string.usage_access_give_access));
     }

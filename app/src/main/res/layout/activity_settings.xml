@@ -1,5 +1,4 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-  android:id="@+id/main_content"
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:id="@+id/main_content"
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
@@ -25,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:layout_collapseMode="pin"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
     </com.google.android.material.appbar.CollapsingToolbarLayout>
   </com.google.android.material.appbar.AppBarLayout>
 

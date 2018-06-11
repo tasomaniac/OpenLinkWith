@@ -1,15 +1,13 @@
 package com.tasomaniac.openwith;
 
 import android.util.Log;
-
 import com.crashlytics.android.Crashlytics;
 import com.tasomaniac.openwith.settings.NightModePreferences;
-
-import javax.inject.Inject;
-
 import dagger.android.support.DaggerApplication;
 import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
+
+import javax.inject.Inject;
 
 public class App extends DaggerApplication {
 

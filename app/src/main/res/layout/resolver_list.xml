@@ -57,7 +57,7 @@
     android:elevation="8dp"
     android:scrollbarStyle="outsideOverlay"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-    android:orientation="vertical"/>
+    android:orientation="vertical" />
 
   <LinearLayout
     android:id="@+id/button_bar"

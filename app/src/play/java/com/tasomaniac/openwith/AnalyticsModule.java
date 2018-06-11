@@ -4,11 +4,10 @@ import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.ContentViewEvent;
 import com.crashlytics.android.answers.CustomEvent;
 import com.tasomaniac.openwith.data.Analytics;
-
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
+
+import javax.inject.Singleton;
 
 @Module
 class AnalyticsModule {
