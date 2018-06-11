@@ -1,4 +1,16 @@
-Just a maintenance update. 
+Help translate the app into your language:
+https://crowdin.com/project/open-link-with
 
-Bugs are fixed. 
-Started using more modern tools like Kotlin and Room database.
+v2.1
+
+Fixes with Browser selection.
+
+v2.0
+
+NEW! Browser selection:
+
+When a link shared with Open Link With, browsers are suggested in addition to the native apps. This behavior can now be modified.
+
+- None will never suggest browsers
+- Always ask will include all browsers (previous behavior)
+- Single browser will suggest only that selection
