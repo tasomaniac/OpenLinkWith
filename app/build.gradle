@@ -154,10 +154,10 @@ dependencies {
   implementation 'io.reactivex.rxjava2:rxjava:2.1.14'
   implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
 
-  playImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.3'
+  playImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.4'
 
   testImplementation 'junit:junit:4.12'
-  testImplementation 'org.mockito:mockito-core:2.18.3'
+  testImplementation 'org.mockito:mockito-core:2.19.0'
   testImplementation 'com.nhaarman:mockito-kotlin:1.5.0'
   testImplementation "com.squareup.okhttp3:mockwebserver:$versions.okHttp"
 }

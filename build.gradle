@@ -14,7 +14,7 @@ buildscript {
 
             dagger     : '2.16',
             lifecycle  : '2.0.0-alpha1',
-            kotlin     : '1.2.41',
+            kotlin     : '1.2.50',
             okHttp     : '3.10.0',
             room       : '2.0.0-alpha1',
     ]
@@ -30,7 +30,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.0-alpha18'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.17.0'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.19.0'
         classpath 'com.github.triplet.gradle:play-publisher:1.2.2'
         classpath 'com.novoda:gradle-android-command-plugin:2.0.1'
         classpath 'com.novoda:gradle-build-properties-plugin:0.4.1'
