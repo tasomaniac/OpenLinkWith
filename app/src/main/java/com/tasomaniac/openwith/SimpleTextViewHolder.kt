@@ -1,11 +1,11 @@
 package com.tasomaniac.openwith
 
-import android.support.annotation.LayoutRes
-import android.support.annotation.StringRes
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.LayoutRes
+import androidx.annotation.StringRes
+import androidx.recyclerview.widget.RecyclerView
 import com.tasomaniac.openwith.extensions.inflate
 
 class SimpleTextViewHolder private constructor(view: View) : RecyclerView.ViewHolder(view) {

@@ -1,7 +1,7 @@
 package com.tasomaniac.openwith
 
-import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 
 open class HeaderAdapter<in T : RecyclerView.ViewHolder, H : RecyclerView.ViewHolder> @JvmOverloads constructor(
     private val innerAdapter: RecyclerView.Adapter<T>,

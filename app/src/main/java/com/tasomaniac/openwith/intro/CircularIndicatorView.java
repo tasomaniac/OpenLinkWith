@@ -3,11 +3,11 @@ package com.tasomaniac.openwith.intro;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import androidx.core.content.ContextCompat;
 import com.tasomaniac.openwith.R;
 
 import javax.annotation.Nullable;

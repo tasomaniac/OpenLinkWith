@@ -2,9 +2,9 @@ package com.tasomaniac.openwith.resolver;
 
 import android.app.Activity;
 import android.content.pm.ResolveInfo;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ShareCompat;
 import android.text.TextUtils;
+import androidx.annotation.Nullable;
+import androidx.core.app.ShareCompat;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,6 @@
 package com.tasomaniac.openwith.resolver;
 
-import android.support.annotation.Nullable;
-
+import androidx.annotation.Nullable;
 import com.tasomaniac.openwith.PerActivity;
 
 import javax.inject.Inject;

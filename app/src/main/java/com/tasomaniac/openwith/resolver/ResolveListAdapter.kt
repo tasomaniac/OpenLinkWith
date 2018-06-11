@@ -1,8 +1,8 @@
 package com.tasomaniac.openwith.resolver
 
-import android.support.v7.recyclerview.extensions.ListAdapter
-import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import javax.inject.Inject
 import kotlin.properties.Delegates.observable
 

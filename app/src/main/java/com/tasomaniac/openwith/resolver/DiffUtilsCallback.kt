@@ -1,6 +1,6 @@
 package com.tasomaniac.openwith.resolver
 
-import android.support.v7.util.DiffUtil
+import androidx.recyclerview.widget.DiffUtil
 
 object DiffUtilsCallback : DiffUtil.ItemCallback<DisplayActivityInfo>() {
     override fun areItemsTheSame(oldItem: DisplayActivityInfo, newItem: DisplayActivityInfo) = oldItem == newItem

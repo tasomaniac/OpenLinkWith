@@ -1,14 +1,14 @@
 package com.tasomaniac.openwith.settings
 
 import android.os.Build
-import android.support.annotation.RequiresApi
-import android.support.annotation.StringRes
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AlertDialog
-import android.support.v7.preference.Preference
-import android.support.v7.preference.PreferenceCategory
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import androidx.annotation.RequiresApi
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
+import androidx.preference.Preference
+import androidx.preference.PreferenceCategory
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.data.Analytics
 import com.tasomaniac.openwith.data.prefs.BooleanPreference

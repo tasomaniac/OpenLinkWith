@@ -2,8 +2,8 @@ package com.tasomaniac.openwith.util;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ShareCompat;
+import androidx.annotation.Nullable;
+import androidx.core.app.ShareCompat;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -10,19 +10,19 @@ import android.content.IntentSender
 import android.graphics.BitmapFactory
 import android.os.Build.VERSION_CODES.M
 import android.os.Bundle
-import android.support.v4.app.FragmentManager
-import android.support.v4.content.pm.ShortcutInfoCompat
-import android.support.v4.content.pm.ShortcutManagerCompat
-import android.support.v4.graphics.drawable.IconCompat
-import android.support.v7.app.AlertDialog
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.pm.ShortcutInfoCompat
+import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.graphics.drawable.IconCompat
 import androidx.core.os.bundleOf
 import androidx.core.widget.toast
+import androidx.fragment.app.FragmentManager
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.util.Intents
@@ -46,7 +46,6 @@ class AddToHomeScreenDialogFragment : DaggerAppCompatDialogFragment() {
 
     private val positiveButton: Button
         get() = (dialog as AlertDialog).getButton(DialogInterface.BUTTON_POSITIVE)
-
 
     override fun onStart() {
         super.onStart()

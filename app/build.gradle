@@ -122,24 +122,26 @@ configurations {
 
 dependencies {
   implementation 'com.google.code.findbugs:jsr305:3.0.2'
-  implementation 'androidx.core:core-ktx:0.3'
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
 
-  implementation "com.android.support:support-fragment:$versions.supportLib"
-  implementation "com.android.support:appcompat-v7:$versions.supportLib"
-  implementation "com.android.support:recyclerview-v7:$versions.supportLib"
-  implementation "com.android.support:design:$versions.supportLib"
-  implementation "com.android.support:preference-v14:$versions.supportLib"
+  implementation 'androidx.core:core-ktx:1.0.0-alpha3'
+  implementation 'androidx.fragment:fragment-ktx:1.0.0-alpha3'
+  implementation 'androidx.preference:preference-ktx:1.0.0-alpha3'
+  implementation 'androidx.appcompat:appcompat:1.0.0-alpha3'
+  implementation 'androidx.recyclerview:recyclerview:1.0.0-alpha3'
+  implementation 'com.google.android.material:material:1.0.0-alpha3'
+  implementation 'androidx.viewpager:viewpager:1.0.0-alpha3'
   implementation 'com.duolingo.open:rtl-viewpager:1.0.3'
 
   implementation 'com.tasomaniac:delayed-progress:0.4'
 
-  implementation "android.arch.lifecycle:extensions:$versions.arch"
-  kapt "android.arch.lifecycle:compiler:$versions.arch"
+  implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
+  implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
+  kapt "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle"
 
-  implementation "android.arch.persistence.room:runtime:$versions.room"
-  implementation "android.arch.persistence.room:rxjava2:$versions.room"
-  kapt "android.arch.persistence.room:compiler:$versions.room"
+  implementation "androidx.room:room-runtime:$versions.room"
+  implementation "androidx.room:room-rxjava2:$versions.room"
+  kapt "androidx.room:room-compiler:$versions.room"
 
   implementation "com.google.dagger:dagger-android-support:$versions.dagger"
   kapt "com.google.dagger:dagger-compiler:$versions.dagger"

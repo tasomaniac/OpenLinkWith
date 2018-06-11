@@ -1,10 +1,10 @@
 package com.tasomaniac.openwith.browser
 
 import android.content.ComponentName
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isGone
+import androidx.recyclerview.widget.RecyclerView
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.extensions.inflate
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo

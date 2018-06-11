@@ -1,7 +1,7 @@
 package com.tasomaniac.openwith.settings
 
 import android.content.ClipboardManager
-import android.support.v7.preference.PreferenceCategory
+import androidx.preference.PreferenceCategory
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.data.Analytics
 import com.tasomaniac.openwith.redirect.RedirectFixActivity

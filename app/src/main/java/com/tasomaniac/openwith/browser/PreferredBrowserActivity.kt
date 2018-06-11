@@ -1,7 +1,7 @@
 package com.tasomaniac.openwith.browser
 
 import android.os.Bundle
-import android.support.v7.widget.DividerItemDecoration
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.tasomaniac.openwith.HeaderAdapter
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.SimpleTextViewHolder
@@ -11,8 +11,8 @@ import com.tasomaniac.openwith.util.componentName
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
-import kotlinx.android.synthetic.main.activity_preferred_apps.recycler_view
 import javax.inject.Inject
+import kotlinx.android.synthetic.main.activity_preferred_apps.recycler_view as recyclerView
 
 class PreferredBrowserActivity : DaggerAppCompatActivity(), BrowsersAdapter.Listener {
 
@@ -41,10 +41,11 @@ class PreferredBrowserActivity : DaggerAppCompatActivity(), BrowsersAdapter.List
     }
 
     private fun setupList(browsers: List<DisplayActivityInfo>) {
-        recycler_view.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
         val browsersAdapter = BrowsersAdapter(browsers, browserPreferences.mode, viewHolderFactory, listener = this)
-        recycler_view.adapter = HeaderAdapter(browsersAdapter,
+        recyclerView.adapter = HeaderAdapter(
+            browsersAdapter,
             { viewGroup -> SimpleTextViewHolder.create(viewGroup, R.layout.preferred_header) },
             { setText(R.string.browser_description) }
         )

@@ -5,7 +5,7 @@ import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import com.tasomaniac.openwith.PerActivity;
 import dagger.Module;
 import dagger.Provides;

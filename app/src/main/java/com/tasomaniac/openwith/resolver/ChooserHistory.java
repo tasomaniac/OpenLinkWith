@@ -2,7 +2,7 @@ package com.tasomaniac.openwith.resolver;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.VisibleForTesting;
 
 import java.util.HashMap;
 import java.util.Map;

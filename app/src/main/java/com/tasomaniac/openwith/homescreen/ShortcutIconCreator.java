@@ -7,7 +7,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v4.graphics.drawable.IconCompat;
+import androidx.core.graphics.drawable.IconCompat;
 
 import static android.graphics.Bitmap.Config.ARGB_8888;
 
@@ -37,7 +37,7 @@ class ShortcutIconCreator {
 
         Bitmap bmOverlay = Bitmap.createBitmap(width, height, ARGB_8888);
         Canvas canvas = new Canvas(bmOverlay);
-        
+
         background.draw(canvas);
         return bmOverlay;
     }

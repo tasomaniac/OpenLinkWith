@@ -6,10 +6,10 @@ import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.ComponentName;
 import android.content.Context;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.ShareCompat;
 import android.text.format.DateUtils;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ShareCompat;
 import com.tasomaniac.openwith.BuildConfig;
 
 import java.util.List;
