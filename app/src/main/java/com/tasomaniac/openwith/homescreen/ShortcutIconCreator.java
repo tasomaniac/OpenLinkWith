@@ -1,6 +1,10 @@
 package com.tasomaniac.openwith.homescreen;
 
-import android.graphics.*;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import androidx.core.graphics.drawable.IconCompat;
@@ -33,7 +37,7 @@ class ShortcutIconCreator {
 
         Bitmap bmOverlay = Bitmap.createBitmap(width, height, ARGB_8888);
         Canvas canvas = new Canvas(bmOverlay);
-        
+
         background.draw(canvas);
         return bmOverlay;
     }

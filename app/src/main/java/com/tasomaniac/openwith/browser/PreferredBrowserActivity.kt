@@ -41,12 +41,7 @@ class PreferredBrowserActivity : DaggerAppCompatActivity(), BrowsersAdapter.List
     }
 
     private fun setupList(browsers: List<DisplayActivityInfo>) {
-        recyclerView.addItemDecoration(
-            DividerItemDecoration(
-                this,
-                DividerItemDecoration.VERTICAL
-            )
-        )
+        recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
         val browsersAdapter = BrowsersAdapter(browsers, browserPreferences.mode, viewHolderFactory, listener = this)
         recyclerView.adapter = HeaderAdapter(

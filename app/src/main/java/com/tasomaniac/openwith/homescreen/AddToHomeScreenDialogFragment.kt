@@ -47,7 +47,6 @@ class AddToHomeScreenDialogFragment : DaggerAppCompatDialogFragment() {
     private val positiveButton: Button
         get() = (dialog as AlertDialog).getButton(DialogInterface.BUTTON_POSITIVE)
 
-
     override fun onStart() {
         super.onStart()
         onTitleChanged(titleView.text)

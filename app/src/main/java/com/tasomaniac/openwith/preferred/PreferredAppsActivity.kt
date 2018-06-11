@@ -115,7 +115,7 @@ class PreferredAppsActivity : DaggerAppCompatActivity(), ItemClickListener, AppR
     }
 
     private fun notifyHeaderChanged() {
-        recyclerView.postDelayed(300) {
+        recyclerView.postDelayed(delayInMillis = 300) {
             recyclerView.adapter!!.notifyItemChanged(0)
         }
     }

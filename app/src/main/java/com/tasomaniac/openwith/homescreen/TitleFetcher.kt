@@ -52,9 +52,7 @@ class TitleFetcher @Inject constructor(private val client: OkHttpClient) {
 
     private fun ResponseBody.extractTitle(): String? {
         val source = source()
-
-        val pattern =
-            Pattern.compile("<title(?:\\s.*)?>(.+)</title>|<meta\\s*property=\"og:title\"\\s*content=\"(.*)\".*>|<meta\\s*content=\"(.*)\"\\s*property=\"og:title\".*>")
+        val pattern = Pattern.compile(TITLE_PATTERN)
 
         var line = source.readUtf8Line()
         while (line != null) {
@@ -72,6 +70,12 @@ class TitleFetcher @Inject constructor(private val client: OkHttpClient) {
             line = source.readUtf8Line()
         }
         return null
+    }
+
+    companion object {
+        @Suppress("MaxLineLength")
+        private const val TITLE_PATTERN =
+            "<title(?:\\s.*)?>(.+)</title>|<meta\\s*property=\"og:title\"\\s*content=\"(.*)\".*>|<meta\\s*content=\"(.*)\"\\s*property=\"og:title\".*>"
     }
 
 }

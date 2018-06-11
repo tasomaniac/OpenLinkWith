@@ -8,7 +8,7 @@ buildscript {
 
     ext.versions = [
             compileSdk : 28,
-            minSdk     : 21,
+            minSdk     : 19,
             versionCode: versionMajor * 10000 + versionMinor * 100 + versionBuild,
             versionName: "${versionMajor}.${versionMinor}",
 
@@ -28,7 +28,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0-alpha17'
+        classpath 'com.android.tools.build:gradle:3.2.0-alpha18'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.17.0'
         classpath 'com.github.triplet.gradle:play-publisher:1.2.2'
