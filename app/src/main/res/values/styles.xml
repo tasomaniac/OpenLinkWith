@@ -52,6 +52,7 @@
     <item name="preferenceFragmentCompatStyle">@style/PreferenceFragment.OpenWith</item>
     <item name="preferenceFragmentStyle">@style/PreferenceFragment.OpenWith</item>
     <item name="preferenceStyle">@style/Preference.OpenWith</item>
+    <item name="preferenceCategoryStyle">@style/Preference.Category.OpenWith</item>
   </style>
 
   <style name="PreferenceFragment.OpenWith" parent="PreferenceFragment.Material">
@@ -60,6 +61,10 @@
 
   <style name="Preference.OpenWith" parent="Preference.Material">
     <item name="android:layout">@layout/preference_open_with</item>
+  </style>
+
+  <style name="Preference.Category.OpenWith" parent="Preference.Category.Material">
+    <item name="android:layout">@layout/preference_category_open_with</item>
   </style>
 
   <style name="ThemeOverlay.Progress" parent="">
