@@ -78,11 +78,10 @@ internal class IntentResolver @Inject constructor(
     }
 
     private fun handleBrowsers(currentResolveList: MutableList<ResolveInfo>) {
-        fun removeBrowsers(browsers: List<ResolveInfo>, except: ComponentName? = null) {
+        fun removeBrowsers(browsers: List<ResolveInfo>) {
             val toRemove = currentResolveList.filter { resolve ->
                 browsers.find { browser ->
-                    resolve.activityInfo.isEqualTo(browser.activityInfo) &&
-                            browser.activityInfo.componentName() != except
+                    resolve.activityInfo.isEqualTo(browser.activityInfo)
                 } != null
             }
             currentResolveList.removeAll(toRemove)
@@ -106,10 +105,18 @@ internal class IntentResolver @Inject constructor(
             addAllBrowsers(browsers)
         }
 
-        when (browserPreferences.mode) {
+        val mode = browserPreferences.mode
+        when (mode) {
             is Mode.None -> removeBrowsers(browsers)
-            is Mode.AlwaysAsk -> Unit
-            is Mode.Browser -> removeBrowsers(browsers, except = selectedBrowser())
+            is Mode.Browser -> {
+                removeBrowsers(browsers)
+                val found = browsers.find { it.activityInfo.componentName() == mode.componentName }
+                if (found != null) {
+                    currentResolveList.add(found)
+                } else {
+                    browserPreferences.mode = Mode.AlwaysAsk
+                }
+            }
         }
     }
 
@@ -120,8 +127,6 @@ internal class IntentResolver @Inject constructor(
             resolveListGrouper.groupResolveList(currentResolveList, lastChosenComponent)
         }
     }
-
-    private fun selectedBrowser() = (browserPreferences.mode as? Mode.Browser)?.componentName
 
     interface Listener {
 
