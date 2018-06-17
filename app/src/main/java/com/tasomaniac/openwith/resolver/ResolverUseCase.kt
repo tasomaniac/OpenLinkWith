@@ -31,7 +31,7 @@ internal class ResolverUseCase @Inject constructor(
             .compose(scheduling.forMaybe())
             .subscribe(
                 { (app, info) ->
-                    intentResolver.setLastChosenComponent(app.componentName)
+                    intentResolver.lastChosenComponent = app.componentName
                     listener.onPreferredResolved(uri, app, info)
                     intentResolver.bind(listener)
                 },
