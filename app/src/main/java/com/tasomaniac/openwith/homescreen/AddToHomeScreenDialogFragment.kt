@@ -108,7 +108,7 @@ class AddToHomeScreenDialogFragment : DaggerAppCompatDialogFragment() {
 
         return AlertDialog.Builder(requireContext())
             .setPositiveButton(R.string.add) { _, _ -> createShortcutAndHandleError() }
-            .setNegativeButton(R.string.cancel, null)
+            .setNegativeButton(R.string.cancel) { _, _ -> requireActivity().finish() }
             .setView(view)
             .setTitle(R.string.add_to_homescreen)
             .create()
