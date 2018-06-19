@@ -4,7 +4,7 @@ buildscript {
 
     def versionMajor = 2
     def versionMinor = 1
-    def versionBuild = 2
+    def versionBuild = 3
 
     ext.versions = [
             compileSdk : 28,
@@ -30,7 +30,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.0-alpha18'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.19.0'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.20.0'
         classpath 'com.github.triplet.gradle:play-publisher:1.2.2'
         classpath 'com.novoda:gradle-android-command-plugin:2.0.1'
         classpath 'com.novoda:gradle-build-properties-plugin:0.4.1'
