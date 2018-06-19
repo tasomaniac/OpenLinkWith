@@ -16,6 +16,7 @@ import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
@@ -23,14 +24,13 @@ import androidx.core.graphics.drawable.IconCompat
 import androidx.core.os.bundleOf
 import androidx.core.widget.toast
 import androidx.fragment.app.FragmentManager
+import com.tasomaniac.android.widget.DelayedProgressBar
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.util.Intents
 import dagger.android.support.DaggerAppCompatDialogFragment
 import timber.log.Timber
 import javax.inject.Inject
-import kotlinx.android.synthetic.main.dialog_add_to_home_screen.add_to_home_screen_progress as progressBar
-import kotlinx.android.synthetic.main.dialog_add_to_home_screen.add_to_home_screen_title as titleView
 
 @TargetApi(M)
 class AddToHomeScreenDialogFragment : DaggerAppCompatDialogFragment() {
@@ -38,6 +38,8 @@ class AddToHomeScreenDialogFragment : DaggerAppCompatDialogFragment() {
     @Inject lateinit var titleFetcher: TitleFetcher
 
     private lateinit var shortcutIconCreator: ShortcutIconCreator
+    private lateinit var titleView: EditText
+    private lateinit var progressBar: DelayedProgressBar
 
     private val activityToAdd: DisplayActivityInfo
         get() = arguments!!.getParcelable(KEY_ACTIVITY_TO_ADD)
@@ -101,6 +103,8 @@ class AddToHomeScreenDialogFragment : DaggerAppCompatDialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         @SuppressLint("InflateParams")
         val view = requireActivity().layoutInflater.inflate(R.layout.dialog_add_to_home_screen, null)
+        titleView = view.findViewById(R.id.add_to_home_screen_title)
+        progressBar = view.findViewById(R.id.add_to_home_screen_progress)
 
         return AlertDialog.Builder(requireContext())
             .setPositiveButton(R.string.add) { _, _ -> createShortcutAndHandleError() }
