@@ -36,9 +36,10 @@ internal class PreferredResolver @Inject constructor(
         return ri?.let {
             DisplayActivityInfo(
                 activityInfo = it.activityInfo,
-                displayLabel = it.loadLabel(packageManager),
+                displayLabel = it.loadLabel(packageManager)
+            ).apply {
                 displayIcon = iconLoader.loadFor(it.activityInfo)
-            )
+            }
         }
     }
 }

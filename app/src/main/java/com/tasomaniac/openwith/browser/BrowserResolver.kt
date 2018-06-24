@@ -21,9 +21,10 @@ class BrowserResolver @Inject constructor(
             DisplayActivityInfo(
                 it.activityInfo,
                 it.loadLabel(packageManager),
-                null,
-                iconLoader.loadFor(it.activityInfo)
-            )
+                null
+            ).apply {
+                displayIcon = iconLoader.loadFor(it.activityInfo)
+            }
         }
     }
 

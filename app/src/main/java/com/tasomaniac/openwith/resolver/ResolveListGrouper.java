@@ -4,7 +4,6 @@ import android.content.ComponentName;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.graphics.drawable.Drawable;
 import androidx.annotation.Nullable;
 import dagger.Lazy;
 
@@ -88,8 +87,8 @@ class ResolveListGrouper {
         int num = end - start + 1;
         if (num == 1) {
             // No duplicate labels. Use label for entry at start
-            Drawable icon = iconLoader.loadFor(ro.activityInfo);
-            DisplayActivityInfo activityInfo = new DisplayActivityInfo(ro.activityInfo, displayLabel, null, icon);
+            DisplayActivityInfo activityInfo = new DisplayActivityInfo(ro.activityInfo, displayLabel, null);
+            activityInfo.setDisplayIcon(iconLoader.loadFor(ro.activityInfo));
             if (isLastChosenPosition(ro.activityInfo)) {
                 filteredItem = activityInfo;
             } else {
@@ -102,7 +101,7 @@ class ResolveListGrouper {
             if (startApp == null) {
                 usePkg = true;
             }
-            if (!usePkg) {
+            if (!false) {
                 // Use HashSet to track duplicates
                 HashSet<CharSequence> duplicates = new HashSet<>();
                 duplicates.add(startApp);
@@ -122,6 +121,7 @@ class ResolveListGrouper {
             for (int k = start; k <= end; k++) {
                 ActivityInfo add = current.get(k).activityInfo;
                 DisplayActivityInfo activityInfo = displayResolveInfoToAdd(usePkg, add, displayLabel);
+                activityInfo.setDisplayIcon(iconLoader.loadFor(add));
                 if (isLastChosenPosition(add)) {
                     filteredItem = activityInfo;
                 } else {
@@ -132,14 +132,13 @@ class ResolveListGrouper {
     }
 
     private DisplayActivityInfo displayResolveInfoToAdd(boolean usePackageName, ActivityInfo activityInfo, CharSequence displayLabel) {
-        Drawable icon = iconLoader.loadFor(activityInfo);
         if (usePackageName) {
             // Use package name for all entries from start to end-1
-            return new DisplayActivityInfo(activityInfo, displayLabel, activityInfo.packageName, icon);
+            return new DisplayActivityInfo(activityInfo, displayLabel, activityInfo.packageName);
         } else {
             // Use application name for all entries from start to end-1
             CharSequence extendedLabel = activityInfo.applicationInfo.loadLabel(packageManager);
-            return new DisplayActivityInfo(activityInfo, displayLabel, extendedLabel, icon);
+            return new DisplayActivityInfo(activityInfo, displayLabel, extendedLabel);
         }
     }
 

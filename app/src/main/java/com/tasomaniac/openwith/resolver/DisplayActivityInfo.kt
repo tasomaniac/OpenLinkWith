@@ -7,15 +7,15 @@ import android.os.Parcelable
 import com.tasomaniac.openwith.util.componentName
 import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
-import kotlinx.android.parcel.RawValue
 
 @Parcelize
 data class DisplayActivityInfo(
     val activityInfo: ActivityInfo,
     val displayLabel: CharSequence,
-    val extendedInfo: CharSequence? = null,
-    @IgnoredOnParcel val displayIcon: @RawValue Drawable? = null
+    val extendedInfo: CharSequence? = null
 ) : Parcelable {
+
+    @IgnoredOnParcel var displayIcon: Drawable? = null
 
     fun packageName(): String = activityInfo.packageName
 

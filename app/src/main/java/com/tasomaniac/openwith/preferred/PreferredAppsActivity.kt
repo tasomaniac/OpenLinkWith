@@ -91,9 +91,10 @@ class PreferredAppsActivity : DaggerAppCompatActivity(), ItemClickListener, AppR
                 DisplayActivityInfo(
                     it.activityInfo,
                     it.loadLabel(packageManager),
-                    app.host,
-                    iconLoader.loadFor(it.activityInfo)
-                )
+                    app.host
+                ).apply {
+                    displayIcon = iconLoader.loadFor(it.activityInfo)
+                }
             }
         }
     }

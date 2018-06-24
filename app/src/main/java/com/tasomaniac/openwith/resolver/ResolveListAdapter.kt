@@ -10,10 +10,10 @@ class ResolveListAdapter @Inject constructor(
     private val viewHolderFactory: ApplicationViewHolder.Factory
 ) : ListAdapter<DisplayActivityInfo, ApplicationViewHolder>(DiffUtilsCallback) {
 
-    var checkedItemPosition by observable(RecyclerView.NO_POSITION, { _, oldValue, newValue ->
+    var checkedItemPosition by observable(RecyclerView.NO_POSITION) { _, oldValue, newValue ->
         notifyItemChanged(newValue, true)
         notifyItemChanged(oldValue, false)
-    })
+    }
     var displayExtendedInfo = false
     var selectionEnabled = false
     var itemClickListener: ItemClickListener? = null
