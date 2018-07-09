@@ -2,11 +2,11 @@ package com.tasomaniac.openwith;
 
 import android.app.ActivityManager;
 import android.app.Application;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.preference.PreferenceManager;
+import androidx.core.content.ContextCompat;
 import com.tasomaniac.openwith.data.prefs.BooleanPreference;
 import com.tasomaniac.openwith.data.prefs.TutorialShown;
 import com.tasomaniac.openwith.data.prefs.UsageAccess;
@@ -43,7 +43,7 @@ abstract class AppModule {
     @SuppressWarnings("ConstantConditions")
     @Provides
     static ActivityManager provideActivityManager(Application app) {
-        return (ActivityManager) app.getSystemService(Context.ACTIVITY_SERVICE);
+        return ContextCompat.getSystemService(app, ActivityManager.class);
     }
 
     @Provides

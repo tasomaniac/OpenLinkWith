@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Build.VERSION_CODES.LOLLIPOP
 import android.provider.Settings
 import androidx.annotation.RequiresApi
+import androidx.core.content.getSystemService
 import io.reactivex.Completable
 import io.reactivex.Observable
 import timber.log.Timber
@@ -31,7 +32,7 @@ object UsageStats {
 
     @JvmStatic
     fun isEnabled(context: Context): Boolean {
-        val appOps = context.getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager? ?: return false
+        val appOps = context.getSystemService<AppOpsManager>() ?: return false
         val mode = appOps.checkOpNoThrow(
             AppOpsManager.OPSTR_GET_USAGE_STATS,
             android.os.Process.myUid(),

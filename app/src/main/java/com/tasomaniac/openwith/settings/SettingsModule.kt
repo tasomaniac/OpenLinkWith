@@ -2,9 +2,9 @@ package com.tasomaniac.openwith.settings
 
 import android.app.Application
 import android.content.ClipboardManager
-import android.content.Context
 import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.LOLLIPOP
+import androidx.core.content.getSystemService
 import com.tasomaniac.openwith.BuildConfig
 import dagger.Module
 import dagger.Provides
@@ -14,7 +14,7 @@ import dagger.multibindings.ElementsIntoSet
 class SettingsModule {
 
     @Provides
-    fun clipboardManager(app: Application) = app.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    fun clipboardManager(app: Application): ClipboardManager = app.getSystemService()!!
 
     @Provides
     @ElementsIntoSet

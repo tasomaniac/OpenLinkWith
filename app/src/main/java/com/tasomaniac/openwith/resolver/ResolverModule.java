@@ -6,6 +6,7 @@ import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import com.tasomaniac.openwith.PerActivity;
 import dagger.Module;
 import dagger.Provides;
@@ -56,7 +57,7 @@ public abstract class ResolverModule {
 
     @Nullable private static Map<String, UsageStats> usageStatsFrom(Context context) {
         if (SDK_INT >= LOLLIPOP_MR1) {
-            UsageStatsManager usageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
+            UsageStatsManager usageStatsManager = ContextCompat.getSystemService(context, UsageStatsManager.class);
 
             final long sinceTime = System.currentTimeMillis() - USAGE_STATS_PERIOD;
             if (usageStatsManager != null) {
