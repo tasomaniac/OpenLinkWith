@@ -17,12 +17,12 @@ import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import androidx.core.os.bundleOf
-import androidx.core.widget.toast
 import androidx.fragment.app.FragmentManager
 import com.tasomaniac.android.widget.DelayedProgressBar
 import com.tasomaniac.openwith.R
@@ -122,7 +122,7 @@ class AddToHomeScreenDialogFragment : DaggerAppCompatDialogFragment() {
     private fun createShortcutAndHandleError() {
         val success = createShortcut()
         if (!success) {
-            requireContext().toast(R.string.add_to_home_screen_error)
+            Toast.makeText(context, R.string.add_to_home_screen_error, Toast.LENGTH_SHORT).show()
         }
     }
 

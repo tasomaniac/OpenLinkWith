@@ -283,7 +283,7 @@ class DefaultResolverPresenterTest {
         private fun givenDisplayResolveInfoWithIntentAndLabel(intent: Intent, label: String) =
             mock<DisplayActivityInfo> {
                 on { intentFrom(any()) } doReturn intent
-                on { displayLabel() } doReturn label
+                on { displayLabel } doReturn label
             }
     }
 }
