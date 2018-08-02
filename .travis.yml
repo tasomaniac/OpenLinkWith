@@ -2,9 +2,7 @@ dist: trusty
 sudo: required
 
 language: android
-
-jdk:
-  - openjdk8
+jdk: openjdk8
 
 before_install:
   - mkdir "$ANDROID_HOME/licenses" || true
