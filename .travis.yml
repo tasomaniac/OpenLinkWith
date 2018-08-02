@@ -13,5 +13,5 @@ script:
 
 cache:
   directories:
-    - $HOME/.gradle
+    - $HOME/.gradle/caches
     - $HOME/.android
