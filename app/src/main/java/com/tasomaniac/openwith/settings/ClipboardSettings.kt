@@ -58,7 +58,7 @@ class ClipboardSettings @Inject constructor(
 
     private fun clipUrl(): String? {
         if (clipboardManager.hasPrimaryClip()) {
-            val primaryClip = clipboardManager.primaryClip.getItemAt(0).coerceToText(context)
+            val primaryClip = clipboardManager.primaryClip!!.getItemAt(0).coerceToText(context)
             return Urls.findFirstUrl(primaryClip.toString())
         }
         return null

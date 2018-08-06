@@ -35,8 +35,8 @@ class BrowserPreferences @Inject constructor(private val sharedPreferences: Shar
 
     private val componentName: ComponentName
         get() {
-            val browserComponent = sharedPreferences.getString(KEY_BROWSER_COMPONENT, null)
-            return ComponentName.unflattenFromString(browserComponent)
+            val browserComponent = sharedPreferences.getString(KEY_BROWSER_COMPONENT, null)!!
+            return ComponentName.unflattenFromString(browserComponent)!!
         }
 
     sealed class Mode(val value: String) {

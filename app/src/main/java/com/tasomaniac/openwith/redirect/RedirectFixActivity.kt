@@ -73,7 +73,7 @@ class RedirectFixActivity : DaggerAppCompatActivity() {
 
         private fun Intent.withUrl(url: HttpUrl) = setData(Uri.parse(url.toString()))
 
-        private fun Intent.toHttpUrl() = HttpUrl.parse(dataString)
+        private fun Intent.toHttpUrl() = HttpUrl.parse(dataString!!)
 
     }
 }

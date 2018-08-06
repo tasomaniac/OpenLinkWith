@@ -19,6 +19,6 @@ data class PreferredApp(
 ) {
 
     val componentName: ComponentName
-        @Ignore get() = ComponentName.unflattenFromString(component)
+        @Ignore get() = ComponentName.unflattenFromString(component)!!
 
 }

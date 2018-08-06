@@ -42,9 +42,9 @@ class AddToHomeScreenDialogFragment : DaggerAppCompatDialogFragment() {
     private lateinit var progressBar: DelayedProgressBar
 
     private val activityToAdd: DisplayActivityInfo
-        get() = arguments!!.getParcelable(KEY_ACTIVITY_TO_ADD)
+        get() = arguments!!.getParcelable(KEY_ACTIVITY_TO_ADD)!!
     private val intent: Intent
-        get() = arguments!!.getParcelable(KEY_INTENT)
+        get() = arguments!!.getParcelable(KEY_INTENT)!!
 
     private val positiveButton: Button
         get() = (dialog as AlertDialog).getButton(DialogInterface.BUTTON_POSITIVE)
@@ -57,7 +57,7 @@ class AddToHomeScreenDialogFragment : DaggerAppCompatDialogFragment() {
         if (titleView.text.isEmpty()) {
             showProgressBar()
             titleFetcher.fetch(
-                intent.dataString,
+                intent.dataString!!,
                 { title ->
                     hideProgressBar()
                     if (title != null && titleView.text.isEmpty()) {

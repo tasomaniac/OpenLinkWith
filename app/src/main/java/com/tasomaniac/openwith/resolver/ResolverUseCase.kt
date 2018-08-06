@@ -26,7 +26,7 @@ internal class ResolverUseCase @Inject constructor(
 
     fun bind(listener: Listener) {
         this.listener = listener
-        val uri = sourceIntent.data
+        val uri = sourceIntent.data!!
         disposable = preferredResolver.resolve(uri)
             .compose(scheduling.forMaybe())
             .subscribe(
@@ -54,13 +54,11 @@ internal class ResolverUseCase @Inject constructor(
     }
 
     fun persistSelectedIntent(intent: Intent, alwaysCheck: Boolean) {
-        if (intent.component == null) {
-            return
-        }
+        val component = intent.component ?: return
 
         val preferredApp = PreferredApp(
-            host = intent.data.host,
-            component = intent.component.flattenToString(),
+            host = intent.data!!.host!!,
+            component = component.flattenToString(),
             preferred = alwaysCheck
         )
         Completable
@@ -68,12 +66,12 @@ internal class ResolverUseCase @Inject constructor(
             .compose(scheduling.forCompletable())
             .subscribe()
 
-        history.add(intent.component.packageName)
+        history.add(component.packageName)
         history.save()
     }
 
     fun deleteFailedHost(uri: Uri) {
-        Completable.fromAction { dao.deleteHost(uri.host) }
+        Completable.fromAction { dao.deleteHost(uri.host!!) }
             .compose(scheduling.forCompletable())
             .subscribe()
     }
