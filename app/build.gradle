@@ -97,6 +97,8 @@ staticAnalysis {
     checkAllWarnings true
     checkReleaseBuilds false
 
+    if (System.env.TRAVIS_BRANCH != 'master') ignore 'MissingTranslation'
+
     lintConfig file('props/lint.xml')
 
     includeVariants { it.name == 'flossDebug' }
