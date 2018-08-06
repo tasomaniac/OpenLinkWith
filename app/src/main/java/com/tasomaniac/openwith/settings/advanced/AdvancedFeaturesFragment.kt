@@ -1,0 +1,47 @@
+package com.tasomaniac.openwith.settings.advanced
+
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import androidx.preference.Preference
+import androidx.preference.PreferenceFragmentCompat
+import dagger.android.support.AndroidSupportInjection
+import javax.inject.Inject
+
+class AdvancedFeaturesFragment : PreferenceFragmentCompat(),
+    PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
+
+    @Inject lateinit var settings: AdvancedFeaturesSettings
+
+    override fun onAttach(context: Context) {
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
+    }
+
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+        settings.setup()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        settings.resume()
+    }
+
+    override fun onPause() {
+        settings.pause()
+        super.onPause()
+    }
+
+    override fun onDestroy() {
+        settings.release()
+        super.onDestroy()
+    }
+
+    override fun getCallbackFragment() = this
+
+    override fun onPreferenceStartFragment(caller: PreferenceFragmentCompat?, pref: Preference?): Boolean {
+        startActivity(Intent(context, ToggleFeatureActivity::class.java))
+        return true
+    }
+
+}

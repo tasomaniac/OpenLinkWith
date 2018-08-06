@@ -3,9 +3,10 @@ package com.tasomaniac.openwith.settings
 import android.app.backup.BackupManager
 import android.content.SharedPreferences
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.transaction
+import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceScreen
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.data.Analytics
 import com.tasomaniac.openwith.data.prefs.BooleanPreference
@@ -19,7 +20,7 @@ import javax.inject.Inject
 class SettingsActivity
     : DaggerAppCompatActivity(),
     SharedPreferences.OnSharedPreferenceChangeListener,
-    PreferenceFragmentCompat.OnPreferenceStartScreenCallback {
+    PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
     @Inject @field:TutorialShown lateinit var tutorialShown: BooleanPreference
     @Inject lateinit var analytics: Analytics
@@ -61,9 +62,9 @@ class SettingsActivity
         return true
     }
 
-    override fun onPreferenceStartScreen(caller: PreferenceFragmentCompat, pref: PreferenceScreen): Boolean {
+    override fun onPreferenceStartFragment(caller: PreferenceFragmentCompat, pref: Preference): Boolean {
         supportFragmentManager.transaction {
-            val fragment = SettingsFragment.newInstance(pref.key)
+            val fragment = Fragment.instantiate(this@SettingsActivity, pref.fragment)
             replace(R.id.fragment_container, fragment)
             addToBackStack(null)
         }

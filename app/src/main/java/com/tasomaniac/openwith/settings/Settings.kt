@@ -4,9 +4,10 @@ import android.content.Intent
 import androidx.annotation.StringRes
 import androidx.annotation.XmlRes
 import androidx.preference.Preference
+import androidx.preference.PreferenceFragmentCompat
 
 abstract class Settings(
-    private val fragment: SettingsFragment
+    private val fragment: PreferenceFragmentCompat
 ) : SettingsView {
 
     val context get() = fragment.context!!

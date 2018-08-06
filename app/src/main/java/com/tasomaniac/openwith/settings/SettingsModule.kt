@@ -6,6 +6,8 @@ import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.LOLLIPOP
 import androidx.core.content.getSystemService
 import com.tasomaniac.openwith.BuildConfig
+import com.tasomaniac.openwith.settings.advanced.AdvancedSettings
+import com.tasomaniac.openwith.settings.other.OtherSettings
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.ElementsIntoSet

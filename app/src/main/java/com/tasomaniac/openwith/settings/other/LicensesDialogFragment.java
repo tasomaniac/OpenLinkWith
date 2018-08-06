@@ -1,4 +1,4 @@
-package com.tasomaniac.openwith.settings;
+package com.tasomaniac.openwith.settings.other;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;

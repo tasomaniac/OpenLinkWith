@@ -70,6 +70,13 @@
 
   <string name="pref_key_feature_add_to_homescreen" translatable="false">pref_feature_add_to_homescreen</string>
   <string name="pref_title_feature_add_to_homescreen" translatable="false">@string/add_to_homescreen</string>
+  <string name="pref_key_feature_text_selection" translatable="false">pref_feature_text_selection</string>
+  <string name="pref_title_feature_text_selection">Text Selection</string>
+  <string name="pref_key_feature_direct_share" translatable="false">pref_feature_direct_share</string>
+  <string name="pref_title_feature_direct_share">Direct Share</string>
+
+  <string name="pref_state_feature_enabled">Enabled</string>
+  <string name="pref_state_feature_disabled">Disabled</string>
 
   <string name="pref_title_category_others">Others</string>
 
