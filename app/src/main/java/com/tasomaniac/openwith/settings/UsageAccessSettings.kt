@@ -8,7 +8,6 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.preference.Preference
-import androidx.preference.PreferenceCategory
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.data.Analytics
 import com.tasomaniac.openwith.data.prefs.BooleanPreference
@@ -28,7 +27,7 @@ class UsageAccessSettings @Inject constructor(
 
     private val disposables = CompositeDisposable()
 
-    private var preferenceCategory: PreferenceCategory? = null
+    private var preferenceCategory: Preference? = null
 
     private val isUsageAccessRequestAdded get() = preferenceCategory != null
 
@@ -60,10 +59,9 @@ class UsageAccessSettings @Inject constructor(
 
     private fun addUsageAccessRequest() {
         addPreferencesFromResource(R.xml.pref_usage)
-        preferenceCategory = findPreference(R.string.pref_key_category_usage) as PreferenceCategory
 
-        findPreference(R.string.pref_key_usage_stats).apply {
-            setOnPreferenceClickListener({ onUsageAccessClick(it) })
+        preferenceCategory = findPreference(R.string.pref_key_usage_stats).apply {
+            setOnPreferenceClickListener { onUsageAccessClick(it) }
 
             //Set title and summary in red font.
             title = coloredErrorString(R.string.pref_title_usage_stats)

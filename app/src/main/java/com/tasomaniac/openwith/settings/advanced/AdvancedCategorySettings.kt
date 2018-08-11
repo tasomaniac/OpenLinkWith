@@ -5,9 +5,9 @@ import com.tasomaniac.openwith.settings.Settings
 import com.tasomaniac.openwith.settings.SettingsFragment
 import javax.inject.Inject
 
-class AdvancedSettings @Inject constructor(fragment: SettingsFragment) : Settings(fragment) {
+class AdvancedCategorySettings @Inject constructor(fragment: SettingsFragment) : Settings(fragment) {
 
-  override fun setup() {
-    addPreferencesFromResource(R.xml.pref_advanced)
-  }
+    override fun setup() {
+        addPreferencesFromResource(R.xml.pref_advanced_category)
+    }
 }

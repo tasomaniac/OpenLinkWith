@@ -6,7 +6,8 @@ import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.LOLLIPOP
 import androidx.core.content.getSystemService
 import com.tasomaniac.openwith.BuildConfig
-import com.tasomaniac.openwith.settings.advanced.AdvancedSettings
+import com.tasomaniac.openwith.settings.advanced.AdvancedCategorySettings
+import com.tasomaniac.openwith.settings.advanced.DisableFeaturesSettings
 import com.tasomaniac.openwith.settings.other.OtherSettings
 import dagger.Module
 import dagger.Provides
@@ -24,9 +25,10 @@ class SettingsModule {
         clipboard: ClipboardSettings,
         general: GeneralSettings,
         display: DisplaySettings,
-        advanced: AdvancedSettings,
+        advancedCategory: AdvancedCategorySettings,
+        disableFeatures: DisableFeaturesSettings,
         other: OtherSettings
-    ): Set<Settings> = setOf(clipboard, general, display, advanced, other)
+    ): Set<Settings> = setOf(clipboard, general, display, advancedCategory, disableFeatures, other)
 
     @Provides
     @ElementsIntoSet

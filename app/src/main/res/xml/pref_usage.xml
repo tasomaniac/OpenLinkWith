@@ -1,15 +1,9 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <PreferenceCategory
-    android:order="3"
-    android:key="@string/pref_key_category_usage"
-    android:title="@string/pref_title_category_usage">
-
-    <Preference
-      android:key="@string/pref_key_usage_stats"
-      android:title="@string/pref_title_usage_stats"
-      android:summary="@string/pref_summary_usage_stats" />
-
-  </PreferenceCategory>
+  <Preference
+    android:order="41"
+    android:key="@string/pref_key_usage_stats"
+    android:title="@string/pref_title_usage_stats"
+    android:summary="@string/pref_summary_usage_stats" />
 
 </PreferenceScreen>

@@ -1,0 +1,7 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <PreferenceCategory
+    android:order="40"
+    android:title="@string/pref_title_category_advanced" />
+
+</PreferenceScreen>
