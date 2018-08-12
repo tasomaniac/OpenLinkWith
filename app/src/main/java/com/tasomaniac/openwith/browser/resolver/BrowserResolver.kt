@@ -1,4 +1,4 @@
-package com.tasomaniac.openwith.browser
+package com.tasomaniac.openwith.browser.resolver
 
 import android.content.Intent
 import android.content.pm.PackageManager

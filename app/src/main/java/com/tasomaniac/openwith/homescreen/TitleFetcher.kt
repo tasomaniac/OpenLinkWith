@@ -50,6 +50,7 @@ class TitleFetcher @Inject constructor(private val client: OkHttpClient) {
             .header("User-Agent", "Mozilla/5.0 (Android; Mobile; rv:13.0) Gecko/13.0 Firefox/13.0")
             .build()
 
+    @Suppress("NestedBlockDepth")
     private fun ResponseBody.extractTitle(): String? {
         val source = source()
         val pattern = Pattern.compile(TITLE_PATTERN)
@@ -63,9 +64,7 @@ class TitleFetcher @Inject constructor(private val client: OkHttpClient) {
 
             for (i in 1..matcher.groupCount()) {
                 val match = matcher.group(i)
-                if (match != null) {
-                    return match
-                }
+                if (match != null) return match
             }
             line = source.readUtf8Line()
         }

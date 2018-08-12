@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.tasomaniac.openwith.HeaderAdapter
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.SimpleTextViewHolder
+import com.tasomaniac.openwith.browser.resolver.BrowserResolver
 import com.tasomaniac.openwith.data.Analytics
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.util.componentName

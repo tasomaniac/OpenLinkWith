@@ -60,15 +60,12 @@ private class LollipopExtractor(context: Context) : CallerPackageExtractor() {
 
     override fun extract() = usageStatsManager?.recentUsageStats()?.mostRecentPackage()
 
-    /**
-     * Returns recently used apps for the last 10 seconds
-     */
     private fun UsageStatsManager.recentUsageStats(): List<UsageStats>? {
         return try {
             val time = System.currentTimeMillis()
             queryUsageStats(
                 UsageStatsManager.INTERVAL_DAILY,
-                time - 10 * DateUtils.SECOND_IN_MILLIS,
+                time - TEN_SECONDS,
                 time
             )
         } catch (ignored: Exception) {
@@ -82,4 +79,8 @@ private class LollipopExtractor(context: Context) : CallerPackageExtractor() {
         }.maxBy {
             it.lastTimeUsed
         }?.packageName
+
+    companion object {
+        private const val TEN_SECONDS = 10 * DateUtils.SECOND_IN_MILLIS
+    }
 }

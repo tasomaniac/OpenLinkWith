@@ -6,13 +6,9 @@ import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.M
-import com.tasomaniac.openwith.browser.BrowserPreferences
-import com.tasomaniac.openwith.browser.BrowserPreferences.Mode
-import com.tasomaniac.openwith.browser.BrowserResolver
+import com.tasomaniac.openwith.browser.resolver.BrowserHandler
 import com.tasomaniac.openwith.rx.SchedulingStrategy
 import com.tasomaniac.openwith.util.Intents
-import com.tasomaniac.openwith.util.componentName
-import com.tasomaniac.openwith.util.isEqualTo
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import io.reactivex.disposables.Disposables
@@ -24,8 +20,7 @@ internal class IntentResolver @Inject constructor(
     private val schedulingStrategy: SchedulingStrategy,
     private val callerPackage: CallerPackage,
     private val resolveListGrouper: ResolveListGrouper,
-    private val browserPreferences: BrowserPreferences,
-    private val browserResolver: BrowserResolver,
+    private val browserHandlerFactory: BrowserHandler.Factory,
     val sourceIntent: Intent
 ) {
 
@@ -68,56 +63,13 @@ internal class IntentResolver @Inject constructor(
         val currentResolveList = ArrayList(packageManager.queryIntentActivities(sourceIntent, flag))
 
         if (Intents.isHttp(sourceIntent)) {
-            handleBrowsers(currentResolveList)
+            browserHandlerFactory.create(currentResolveList).handleBrowsers()
         }
 
         callerPackage.removeFrom(currentResolveList)
 
         val resolved = groupResolveList(currentResolveList)
         return IntentResolverResult(resolved, resolveListGrouper.filteredItem, resolveListGrouper.showExtended)
-    }
-
-    private fun handleBrowsers(currentResolveList: MutableList<ResolveInfo>) {
-        fun removeBrowsers(browsers: List<ResolveInfo>) {
-            val toRemove = currentResolveList.filter { resolve ->
-                browsers.find { browser ->
-                    resolve.activityInfo.isEqualTo(browser.activityInfo)
-                } != null
-            }
-            currentResolveList.removeAll(toRemove)
-        }
-
-        fun addAllBrowsers(browsers: List<ResolveInfo>) {
-            val initialList = ArrayList(currentResolveList)
-
-            browsers.forEach { browser ->
-                val notFound = initialList.find {
-                    it.activityInfo.isEqualTo(browser.activityInfo)
-                } == null
-                if (notFound) {
-                    currentResolveList.add(browser)
-                }
-            }
-        }
-
-        val browsers = browserResolver.queryBrowsers()
-        if (SDK_INT >= M) {
-            addAllBrowsers(browsers)
-        }
-
-        val mode = browserPreferences.mode
-        when (mode) {
-            is Mode.None -> removeBrowsers(browsers)
-            is Mode.Browser -> {
-                removeBrowsers(browsers)
-                val found = browsers.find { it.activityInfo.componentName() == mode.componentName }
-                if (found != null) {
-                    currentResolveList.add(found)
-                } else {
-                    browserPreferences.mode = Mode.AlwaysAsk
-                }
-            }
-        }
     }
 
     private fun groupResolveList(currentResolveList: List<ResolveInfo>): List<DisplayActivityInfo> {

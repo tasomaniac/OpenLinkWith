@@ -38,11 +38,7 @@ class ApplicationViewHolder private constructor(
 
     class Factory @Inject constructor() {
 
-        private val creator = { view: View, displaySubtext: Boolean ->
-            ApplicationViewHolder(view, displaySubtext)
-        }
-
         fun createWith(parent: ViewGroup, displaySubtext: Boolean) =
-            creator(parent.inflate(R.layout.resolve_list_item), displaySubtext)
+            ApplicationViewHolder(parent.inflate(R.layout.resolve_list_item), displaySubtext)
     }
 }

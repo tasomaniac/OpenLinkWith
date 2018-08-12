@@ -5,7 +5,7 @@ import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.M
-import com.tasomaniac.openwith.browser.BrowserResolver
+import com.tasomaniac.openwith.browser.resolver.BrowserResolver
 import com.tasomaniac.openwith.util.Intents
 import com.tasomaniac.openwith.util.componentName
 import javax.inject.Inject

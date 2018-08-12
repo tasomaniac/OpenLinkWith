@@ -50,7 +50,6 @@ Ne plus ouvrir les liens de <strong>%2$s</strong> avec <strong>%1$s</strong> ? <
   <string name="title_tutorial_0">Bienvenue sur Open Link With</string>
   <string name="title_tutorial_1">Ça vous est déjà arrivé ?</string>
   <string name="title_tutorial_2">Partagez le !</string>
-  <string name="title_tutorial_3">Applications préférées</string>
   <string name="title_tutorial_5">Habitudes d\'Utilisations</string>
   <string name="description_tutorial_0">Je viens à votre secours lorsque vous êtes bloqué dans un navigateur.</string>
   <string name="description_tutorial_1">Vous cliquez sur un lien et d\'une quelconque manière vous finissez bloqué sur une page web plutôt que de directement voir la vidéo.</string>
