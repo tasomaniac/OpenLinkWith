@@ -24,7 +24,7 @@
   <string name="pref_summary_preferred">שנה הגדרות יישום מועדף.</string>
   <string name="browser_title">Browsers</string>
   <string name="browser_description">When a link shared with Open Link With, browsers are suggested in addition to the native apps.\n\nSelect below to modify this behavior.</string>
-  <string name="browser_none">Hide browsers</string>
+  <string name="browser_none">הסתר דפדפן</string>
   <string name="browser_none_description">Never suggest browsers. Only native apps</string>
   <string name="browser_always_ask">Always ask</string>
   <string name="browser_always_ask_description">Include all browsers into suggested apps list</string>
