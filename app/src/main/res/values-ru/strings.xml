@@ -31,7 +31,6 @@
   <string name="browser_always_ask">Спрашивать всегда</string>
   <string name="browser_always_ask_description">Включить все браузеры в список предлагаемых приложений</string>
   <string name="pref_summary_selected_browser">Только %s будет предложено</string>
-  <string name="pref_title_category_usage">Использование доступа</string>
   <string name="pref_title_usage_stats">Статистика использования</string>
   <string name="pref_summary_usage_stats">Улучшите сортировку приложений, предоставив доступ к статистике использования.</string>
   <string name="pref_title_category_display">Экран</string>

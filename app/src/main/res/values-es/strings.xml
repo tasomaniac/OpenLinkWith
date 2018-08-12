@@ -28,7 +28,6 @@ Eliminar <strong>%1$s</strong> como app preferida para cargar los enlaces de <st
   <string name="browser_always_ask">Always ask</string>
   <string name="browser_always_ask_description">Include all browsers into suggested apps list</string>
   <string name="pref_summary_selected_browser">Only %s will be suggested</string>
-  <string name="pref_title_category_usage">Acceso de uso</string>
   <string name="pref_title_usage_stats">Estadísticas de uso</string>
   <string name="pref_summary_usage_stats">Mejorar la precisión de la aplicación dando acceso a las Estadísticas de Uso.</string>
   <string name="pref_title_category_display">Pantalla</string>

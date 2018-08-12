@@ -27,7 +27,6 @@
   <string name="browser_always_ask">Her zaman sor</string>
   <string name="browser_always_ask_description">Önerilen uygulamalar listesine tüm tarayıcıları dahil et</string>
   <string name="pref_summary_selected_browser">Sadece %s önerilecek</string>
-  <string name="pref_title_category_usage">Kullanım Erişimi</string>
   <string name="pref_title_usage_stats">Kullanım İstatistikleri</string>
   <string name="pref_summary_usage_stats">Uygulama dizilimini iyileştirmek için izin ver.</string>
   <string name="pref_title_category_display">Görünüm</string>

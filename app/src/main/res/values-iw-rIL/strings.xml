@@ -29,7 +29,6 @@
   <string name="browser_always_ask">Always ask</string>
   <string name="browser_always_ask_description">Include all browsers into suggested apps list</string>
   <string name="pref_summary_selected_browser">Only %s will be suggested</string>
-  <string name="pref_title_category_usage">גישה לנתוני שימוש</string>
   <string name="pref_title_usage_stats">גישה לסטטיסטיקות</string>
   <string name="pref_summary_usage_stats">שפר את מיון היישומים על ידי נתינת גישה לנתוני סטטיסטיקות השימוש.</string>
   <string name="pref_title_category_display">תצוגה</string>

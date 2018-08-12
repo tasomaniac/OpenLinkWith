@@ -28,7 +28,6 @@
   <string name="browser_always_ask">总是询问</string>
   <string name="browser_always_ask_description">将所有浏览器纳入建议列表</string>
   <string name="pref_summary_selected_browser">只有 %s 将会被建议</string>
-  <string name="pref_title_category_usage">查看使用情况</string>
   <string name="pref_title_usage_stats">使用信息统计</string>
   <string name="pref_summary_usage_stats">通过授权访问使用信息统计以提高应用排序。</string>
   <string name="pref_title_category_display">显示</string>

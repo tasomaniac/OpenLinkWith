@@ -29,7 +29,6 @@
   <string name="browser_always_ask">Selalu tanya</string>
   <string name="browser_always_ask_description">Masukan semua peramban dalam daftar apl saran</string>
   <string name="pref_summary_selected_browser">Hanya %s akan disarankan</string>
-  <string name="pref_title_category_usage">Akses Penggunaan</string>
   <string name="pref_title_usage_stats">Status Penggunaan</string>
   <string name="pref_summary_usage_stats">Tingkatkan urutan aplikasi dengan memberikan akses ke statistik penggunaan.</string>
   <string name="pref_title_category_display">Tampilan</string>

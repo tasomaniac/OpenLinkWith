@@ -28,7 +28,6 @@ Ta bort <strong>%1$s</strong> som föredragen app att öppna länkar från <stro
   <string name="browser_always_ask">Always ask</string>
   <string name="browser_always_ask_description">Include all browsers into suggested apps list</string>
   <string name="pref_summary_selected_browser">Only %s will be suggested</string>
-  <string name="pref_title_category_usage">Användningsåtkomst</string>
   <string name="pref_title_usage_stats">Användningsstatistik</string>
   <string name="pref_summary_usage_stats">Förbättra appen genom att ge tillgång till användarstatistik.</string>
   <string name="pref_title_category_display">Display</string>

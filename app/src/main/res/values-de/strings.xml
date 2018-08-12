@@ -27,7 +27,6 @@
   <string name="browser_always_ask">Jedes Mal nachfragen</string>
   <string name="browser_always_ask_description">Include all browsers into suggested apps list</string>
   <string name="pref_summary_selected_browser">Only %s will be suggested</string>
-  <string name="pref_title_category_usage">Nutzer zugriff</string>
   <string name="pref_title_usage_stats">Benutzer statistik</string>
   <string name="pref_summary_usage_stats">Verbessern Sie die Anwendung, in dem sie der App Nutzer zugriff zulassen.</string>
   <string name="pref_title_category_display">Anzeige</string>

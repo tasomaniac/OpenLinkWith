@@ -28,7 +28,6 @@ Ne plus ouvrir les liens de <strong>%2$s</strong> avec <strong>%1$s</strong> ? <
   <string name="browser_always_ask">Always ask</string>
   <string name="browser_always_ask_description">Include all browsers into suggested apps list</string>
   <string name="pref_summary_selected_browser">Only %s will be suggested</string>
-  <string name="pref_title_category_usage">Habitudes d\'utilisation</string>
   <string name="pref_title_usage_stats">Statistiques d\'utilisation</string>
   <string name="pref_summary_usage_stats">Améliorez le tri de l\'application en lui donnant accès aux statistiques d\'utilisation.</string>
   <string name="pref_title_category_display">Affichage</string>

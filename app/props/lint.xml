@@ -24,13 +24,14 @@
   <issue id="WifiManagerPotentialLeak" severity="error" />
 
   <issue id="ObsoleteLintCustomCheck"
-      severity="ignore" /> <!-- Project doesn't have custom lint checks and cannot fix 3rd party libraries-->
-    <issue id="UnknownNullness" severity="ignore" />  <!-- https://issuetracker.google.com/issues/78011047 -->
-    <issue id="SyntheticAccessor" severity="ignore" />
-  <issue id="UnusedIds" severity="ignore"/>
-  <issue id="GoogleAppIndexingApiWarning" severity="ignore"/>
-  <issue id="GoogleAppIndexingWarning" severity="ignore"/>
-  <issue id="NegativeMargin" severity="ignore"/>
-  <issue id="SelectableText" severity="ignore"/>
-  <issue id="MissingRegistered" severity="ignore"/>
+    severity="ignore" /> <!-- Project doesn't have custom lint checks and cannot fix 3rd party libraries-->
+  <issue id="UnknownNullness" severity="ignore" />  <!-- https://issuetracker.google.com/issues/78011047 -->
+  <issue id="SyntheticAccessor" severity="ignore" />
+  <issue id="UnusedIds" severity="ignore" />
+  <issue id="GoogleAppIndexingApiWarning" severity="ignore" />
+  <issue id="GoogleAppIndexingWarning" severity="ignore" />
+  <issue id="NegativeMargin" severity="ignore" />
+  <issue id="SelectableText" severity="ignore" />
+  <issue id="MissingRegistered" severity="ignore" />
+
 </lint>

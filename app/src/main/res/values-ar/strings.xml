@@ -29,7 +29,6 @@
   <string name="browser_always_ask">Always ask</string>
   <string name="browser_always_ask_description">Include all browsers into suggested apps list</string>
   <string name="pref_summary_selected_browser">Only %s will be suggested</string>
-  <string name="pref_title_category_usage">بيانات الإستخدام</string>
   <string name="pref_title_usage_stats">إحصائيات الاستخدام</string>
   <string name="pref_summary_usage_stats">قم بإعطاء التطبيق صلاحية الوصول إلى بيانات الإستخدام ليظهر في بداية قائمة المشاركة.</string>
   <string name="pref_title_category_display">عرض</string>

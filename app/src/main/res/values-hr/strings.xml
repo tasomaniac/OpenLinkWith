@@ -28,7 +28,6 @@ Uklonite <strong>%1$s</strong> kao preferiranu aplikaciju za učitavanje <strong
   <string name="browser_always_ask">Uvijek pitaj</string>
   <string name="browser_always_ask_description">Uključi sve preglednike na popis predloženi aplikacija</string>
   <string name="pref_summary_selected_browser">Samo %s će biti predloženo</string>
-  <string name="pref_title_category_usage">Pristup podacima o korištenju</string>
   <string name="pref_title_usage_stats">Statistika upotrebe</string>
   <string name="pref_summary_usage_stats">Poboljšajte sortiranje aplikacije dajući pristup statistici upotrebe.</string>
   <string name="pref_title_category_display">Prikaz</string>
