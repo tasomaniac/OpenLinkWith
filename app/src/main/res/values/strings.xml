@@ -66,7 +66,7 @@
   <string name="pref_summary_features">Enable/Disable some features</string>
 
   <string name="pref_key_feature_add_to_homescreen" translatable="false">pref_feature_add_to_homescreen</string>
-  <string name="pref_title_feature_add_to_homescreen" translatable="false">@string/add_to_homescreen</string>
+  <string name="pref_title_feature_add_to_homescreen" translatable="false" tools:ignore="DuplicateStrings">@string/add_to_homescreen</string>
   <string name="pref_key_feature_text_selection" translatable="false">pref_feature_text_selection</string>
   <string name="pref_title_feature_text_selection">Text Selection</string>
   <string name="pref_key_feature_direct_share" translatable="false">pref_feature_direct_share</string>
