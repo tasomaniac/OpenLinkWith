@@ -47,6 +47,11 @@ class SettingsActivity
         }
     }
 
+    override fun setTitle(titleId: Int) {
+        super.setTitle(titleId)
+        collapsing_toolbar.title = getString(titleId)
+    }
+
     override fun onResume() {
         super.onResume()
         sharedPreferences.registerOnSharedPreferenceChangeListener(this)

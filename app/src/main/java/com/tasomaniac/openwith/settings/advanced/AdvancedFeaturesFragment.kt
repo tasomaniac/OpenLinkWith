@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import com.tasomaniac.openwith.R
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -23,6 +24,7 @@ class AdvancedFeaturesFragment : PreferenceFragmentCompat(),
 
     override fun onResume() {
         super.onResume()
+        activity!!.setTitle(R.string.pref_title_features)
         settings.resume()
     }
 

@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.preference.PreferenceFragmentCompat
+import com.tasomaniac.openwith.R
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -22,6 +23,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     override fun onResume() {
         super.onResume()
+        activity!!.setTitle(R.string.app_name)
         settings.forEach { it.resume() }
     }
 
