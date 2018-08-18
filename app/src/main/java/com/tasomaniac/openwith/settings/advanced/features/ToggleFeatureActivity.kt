@@ -7,6 +7,7 @@ import androidx.annotation.StringRes
 import androidx.core.text.parseAsHtml
 import androidx.preference.Preference
 import com.tasomaniac.openwith.R
+import com.tasomaniac.openwith.data.Analytics
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.toggle_feature_activity.featureDetails
 import kotlinx.android.synthetic.main.toggle_feature_activity.featureImage
@@ -18,6 +19,7 @@ class ToggleFeatureActivity : DaggerAppCompatActivity() {
 
     @Inject lateinit var featurePreferences: FeaturePreferences
     @Inject lateinit var featureToggler: FeatureToggler
+    @Inject lateinit var analytics: Analytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +31,8 @@ class ToggleFeatureActivity : DaggerAppCompatActivity() {
             featurePreferences.setEnabled(feature, enabled)
             featureToggle.setText(enabled.toSummary())
             featureToggler.toggleFeature(feature, enabled)
+
+            trackFeatureToggled(feature, enabled)
         }
 
         val enabled = featurePreferences.isEnabled(feature)
@@ -41,6 +45,14 @@ class ToggleFeatureActivity : DaggerAppCompatActivity() {
 
         featureDetails.text = getString(feature.detailsRes).parseAsHtml()
         featureImage.setImageResource(feature.imageRes)
+
+        if (savedInstanceState == null) {
+            analytics.sendEvent("FeatureToggle", "Feature", feature.prefKey)
+        }
+    }
+
+    private fun trackFeatureToggled(feature: Feature, enabled: Boolean) {
+        analytics.sendEvent("${feature.prefKey} toggled", "enabled", enabled.toString())
     }
 
     @StringRes

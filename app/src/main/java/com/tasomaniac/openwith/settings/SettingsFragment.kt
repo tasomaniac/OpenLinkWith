@@ -2,7 +2,6 @@ package com.tasomaniac.openwith.settings
 
 import android.content.Context
 import android.os.Bundle
-import androidx.core.os.bundleOf
 import androidx.preference.PreferenceFragmentCompat
 import com.tasomaniac.openwith.R
 import dagger.android.support.AndroidSupportInjection
@@ -37,10 +36,4 @@ class SettingsFragment : PreferenceFragmentCompat() {
         super.onDestroy()
     }
 
-    companion object {
-
-        fun newInstance(key: String? = null) = SettingsFragment().apply {
-            arguments = bundleOf(PreferenceFragmentCompat.ARG_PREFERENCE_ROOT to key)
-        }
-    }
 }

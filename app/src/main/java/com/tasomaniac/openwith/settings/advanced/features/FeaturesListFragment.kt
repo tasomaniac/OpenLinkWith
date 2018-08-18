@@ -8,6 +8,7 @@ import androidx.annotation.RequiresApi
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.tasomaniac.openwith.R
+import com.tasomaniac.openwith.data.Analytics
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -17,6 +18,7 @@ class FeaturesListFragment : PreferenceFragmentCompat(),
     PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
     @Inject lateinit var settings: FeaturesListSettings
+    @Inject lateinit var analytics: Analytics
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -25,6 +27,9 @@ class FeaturesListFragment : PreferenceFragmentCompat(),
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         settings.setup()
+        if (savedInstanceState == null) {
+            analytics.sendScreenView("FeaturesList")
+        }
     }
 
     override fun onResume() {

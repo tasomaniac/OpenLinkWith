@@ -38,7 +38,7 @@ class SettingsActivity
 
         if (savedInstanceState == null) {
             supportFragmentManager.transaction {
-                add(R.id.fragment_container, SettingsFragment.newInstance())
+                add(R.id.fragment_container, SettingsFragment())
             }
 
             analytics.sendScreenView("Settings")

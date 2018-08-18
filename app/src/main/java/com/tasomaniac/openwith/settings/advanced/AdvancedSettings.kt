@@ -8,7 +8,7 @@ import com.tasomaniac.openwith.settings.Settings
 import com.tasomaniac.openwith.settings.SettingsFragment
 import javax.inject.Inject
 
-class AdvancedCategorySettings @Inject constructor(
+class AdvancedSettings @Inject constructor(
     private val analytics: Analytics,
     fragment: SettingsFragment
 ) : Settings(fragment) {
