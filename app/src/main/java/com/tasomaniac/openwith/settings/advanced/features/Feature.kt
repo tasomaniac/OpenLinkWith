@@ -25,7 +25,7 @@ enum class Feature(
     TEXT_SELECTION(
         R.string.pref_title_feature_text_selection,
         R.string.pref_details_feature_text_selection,
-        R.drawable.tutorial_4, // TODO add text selection image
+        R.drawable.feature_text_selection,
         TextSelectionActivity::class.java,
         "pref_feature_text_selection"
     ),

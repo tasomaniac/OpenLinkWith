@@ -89,6 +89,7 @@
       android:relinquishTaskIdentity="true"
       android:theme="@style/Theme.Transparent.NoAnimation"
       android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+      android:label="@string/open_with"
       tools:targetApi="lollipop">
 
       <intent-filter>
