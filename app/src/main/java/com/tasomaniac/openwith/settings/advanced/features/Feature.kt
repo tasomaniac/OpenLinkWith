@@ -32,7 +32,7 @@ enum class Feature(
     DIRECT_SHARE(
         R.string.pref_title_feature_direct_share,
         R.string.pref_details_feature_direct_share,
-        R.drawable.tutorial_4, // TODO add direct share image
+        R.drawable.feature_direct_share,
         ResolverChooserTargetService::class.java,
         "pref_feature_direct_share"
     )
