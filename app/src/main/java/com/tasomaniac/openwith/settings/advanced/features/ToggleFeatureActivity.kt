@@ -9,6 +9,7 @@ import androidx.preference.Preference
 import com.tasomaniac.openwith.R
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.toggle_feature_activity.featureDetails
+import kotlinx.android.synthetic.main.toggle_feature_activity.featureImage
 import kotlinx.android.synthetic.main.toggle_feature_activity.featureToggle
 import kotlinx.android.synthetic.main.toggle_feature_activity.featureToggleText
 import kotlinx.android.synthetic.main.toggle_feature_activity.toolbar
@@ -39,6 +40,7 @@ class ToggleFeatureActivity : DaggerAppCompatActivity() {
         setTitle(feature.titleRes)
 
         featureDetails.text = getString(feature.detailsRes).parseAsHtml()
+        featureImage.setImageResource(feature.imageRes)
     }
 
     @StringRes

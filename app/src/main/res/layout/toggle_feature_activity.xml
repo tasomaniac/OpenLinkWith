@@ -73,7 +73,7 @@
         android:gravity="center">
 
         <ImageView
-          android:id="@+id/image"
+          android:id="@+id/featureImage"
           android:layout_width="@dimen/size_image_tutorial"
           android:layout_height="@dimen/size_image_tutorial"
           android:layout_gravity="center"
