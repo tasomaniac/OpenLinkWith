@@ -17,29 +17,25 @@
 
   </com.google.android.material.appbar.AppBarLayout>
 
-  <LinearLayout
+  <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="?actionBarSize"
-    android:orientation="horizontal"
-    android:paddingLeft="@dimen/keyline_1"
-    android:paddingRight="@dimen/keyline_1"
-    android:background="#EEE"
-    android:gravity="center_vertical">
+    android:foreground="?selectableItemBackground"
+    android:addStatesFromChildren="true">
 
-    <TextView
-      android:id="@+id/featureToggleText"
-      android:layout_width="0dp"
-      android:layout_weight="1"
+    <View
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:textColor="?android:textColorPrimary"
-      android:text="@string/pref_state_feature_enabled" />
+      android:background="@color/feature_switch_background" />
 
     <Switch
       android:id="@+id/featureToggle"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content" />
-
-  </LinearLayout>
+      android:paddingLeft="@dimen/keyline_1"
+      android:paddingRight="@dimen/keyline_1"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      tools:text="Enabled" />
+  </FrameLayout>
 
   <ScrollView
     android:layout_width="match_parent"
