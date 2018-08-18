@@ -27,16 +27,14 @@ class SettingsModule {
         clipboard: ClipboardSettings,
         general: GeneralSettings,
         display: DisplaySettings,
+        advancedCategory: AdvancedCategorySettings,
         other: OtherSettings
-    ): Set<Settings> = setOf(clipboard, general, display, other)
+    ): Set<Settings> = setOf(clipboard, general, display, advancedCategory, other)
 
     @Provides
     @ElementsIntoSet
-    fun usageAccessSettings(
-        advancedCategory: AdvancedCategorySettings,
-        usageAccess: UsageAccessSettings
-    ): Set<Settings> =
-        if (SDK_INT >= LOLLIPOP) setOf(advancedCategory, usageAccess) else setOf()
+    fun usageAccessSettings(settings: UsageAccessSettings): Set<Settings> =
+        if (SDK_INT >= LOLLIPOP) setOf(settings) else setOf()
 
     @Provides
     @ElementsIntoSet

@@ -20,7 +20,5 @@ abstract class Settings(
         findPreference(getString(keyResource))
     }
 
-    fun Preference.isKeyEquals(@StringRes keyRes: Int) = key.isKeyEquals(keyRes)
-
     fun String.isKeyEquals(@StringRes keyRes: Int) = fragment.getString(keyRes) == this
 }
