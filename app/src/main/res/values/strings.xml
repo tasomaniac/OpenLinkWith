@@ -61,6 +61,7 @@
   <string name="pref_title_clipboard">Click to open with…</string>
 
   <string name="pref_title_category_advanced">Advanced</string>
+  <string name="pref_key_category_advanced">pref_advanced</string>
   <string name="pref_key_features" translatable="false">pref_features</string>
   <string name="pref_title_features">App Features</string>
   <string name="pref_summary_features">Enable/Disable some feature</string>

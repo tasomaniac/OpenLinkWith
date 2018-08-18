@@ -6,7 +6,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 
 abstract class Settings(
-    private val fragment: PreferenceFragmentCompat
+    val fragment: PreferenceFragmentCompat
 ) : SettingsView {
 
     val context get() = fragment.context!!

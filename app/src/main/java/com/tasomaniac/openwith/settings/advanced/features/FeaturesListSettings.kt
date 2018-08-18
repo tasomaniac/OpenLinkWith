@@ -10,7 +10,7 @@ import javax.inject.Inject
 @RequiresApi(M)
 class FeaturesListSettings @Inject constructor(
     private val featurePreferences: FeaturePreferences,
-    private val fragment: FeaturesListFragment
+    fragment: FeaturesListFragment
 ) : Settings(fragment) {
 
     override fun setup() {

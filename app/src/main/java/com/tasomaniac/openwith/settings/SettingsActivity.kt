@@ -34,9 +34,7 @@ class SettingsActivity
         }
 
         setContentView(R.layout.activity_settings)
-
         setSupportActionBar(toolbar)
-        collapsing_toolbar.title = title
 
         if (savedInstanceState == null) {
             supportFragmentManager.transaction {

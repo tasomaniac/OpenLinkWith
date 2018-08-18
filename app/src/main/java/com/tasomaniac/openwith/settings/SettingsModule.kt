@@ -9,6 +9,7 @@ import androidx.core.content.getSystemService
 import com.tasomaniac.openwith.BuildConfig
 import com.tasomaniac.openwith.settings.advanced.AdvancedCategorySettings
 import com.tasomaniac.openwith.settings.advanced.DisableFeaturesSettings
+import com.tasomaniac.openwith.settings.advanced.usage.UsageAccessSettings
 import com.tasomaniac.openwith.settings.other.OtherSettings
 import dagger.Module
 import dagger.Provides
@@ -26,14 +27,16 @@ class SettingsModule {
         clipboard: ClipboardSettings,
         general: GeneralSettings,
         display: DisplaySettings,
-        advancedCategory: AdvancedCategorySettings,
         other: OtherSettings
-    ): Set<Settings> = setOf(clipboard, general, display, advancedCategory, other)
+    ): Set<Settings> = setOf(clipboard, general, display, other)
 
     @Provides
     @ElementsIntoSet
-    fun usageAccessSettings(settings: UsageAccessSettings): Set<Settings> =
-        if (SDK_INT >= LOLLIPOP) setOf(settings) else setOf()
+    fun usageAccessSettings(
+        advancedCategory: AdvancedCategorySettings,
+        usageAccess: UsageAccessSettings
+    ): Set<Settings> =
+        if (SDK_INT >= LOLLIPOP) setOf(advancedCategory, usageAccess) else setOf()
 
     @Provides
     @ElementsIntoSet
