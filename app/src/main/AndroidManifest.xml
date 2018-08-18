@@ -75,6 +75,22 @@
         <data android:mimeType="text/plain" />
       </intent-filter>
 
+      <meta-data
+        android:name="android.service.chooser.chooser_target_service"
+        android:value=".resolver.ResolverChooserTargetService" />
+    </activity>
+
+    <activity
+      android:name=".TextSelectionActivity"
+      android:configChanges="keyboardHidden|orientation|screenLayout"
+      android:documentLaunchMode="never"
+      android:excludeFromRecents="true"
+      android:finishOnCloseSystemDialogs="true"
+      android:relinquishTaskIdentity="true"
+      android:theme="@style/Theme.Transparent.NoAnimation"
+      android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+      tools:targetApi="lollipop">
+
       <intent-filter>
         <action android:name="android.intent.action.PROCESS_TEXT" />
 
@@ -83,10 +99,6 @@
         <data android:mimeType="text/plain" />
 
       </intent-filter>
-
-      <meta-data
-        android:name="android.service.chooser.chooser_target_service"
-        android:value=".resolver.ResolverChooserTargetService" />
     </activity>
 
     <activity

@@ -18,7 +18,7 @@ import javax.inject.Inject
 class ToggleFeatureActivity : DaggerAppCompatActivity() {
 
     @Inject lateinit var featurePreferences: FeaturePreferences
-
+    @Inject lateinit var featureToggler: FeatureToggler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +29,7 @@ class ToggleFeatureActivity : DaggerAppCompatActivity() {
         featureToggle.setOnCheckedChangeListener { _, enabled ->
             featurePreferences.setEnabled(feature, enabled)
             featureToggleText.setText(enabled.toSummary())
+            featureToggler.toggleFeature(feature, enabled)
         }
 
         val enabled = featurePreferences.isEnabled(feature)
