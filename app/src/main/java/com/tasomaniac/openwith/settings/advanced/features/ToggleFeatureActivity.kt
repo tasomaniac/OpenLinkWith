@@ -4,9 +4,11 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.annotation.StringRes
+import androidx.core.text.parseAsHtml
 import androidx.preference.Preference
 import com.tasomaniac.openwith.R
 import dagger.android.support.DaggerAppCompatActivity
+import kotlinx.android.synthetic.main.toggle_feature_activity.featureDetails
 import kotlinx.android.synthetic.main.toggle_feature_activity.featureToggle
 import kotlinx.android.synthetic.main.toggle_feature_activity.featureToggleText
 import kotlinx.android.synthetic.main.toggle_feature_activity.toolbar
@@ -16,11 +18,12 @@ class ToggleFeatureActivity : DaggerAppCompatActivity() {
 
     @Inject lateinit var featurePreferences: FeaturePreferences
 
-    private val feature get() = intent.featureKey.toFeature()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.toggle_feature_activity)
+
+        val feature = intent.featureKey.toFeature()
 
         featureToggle.setOnCheckedChangeListener { _, enabled ->
             featurePreferences.setEnabled(feature, enabled)
@@ -34,6 +37,8 @@ class ToggleFeatureActivity : DaggerAppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         setTitle(feature.titleRes)
+
+        featureDetails.text = getString(feature.detailsRes).parseAsHtml()
     }
 
     @StringRes
