@@ -3,7 +3,6 @@ package com.tasomaniac.openwith.preferred
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.postDelayed
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +22,7 @@ import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.Completable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
+import kotlinx.android.synthetic.main.activity_preferred_apps.toolbar
 import javax.inject.Inject
 import kotlinx.android.synthetic.main.activity_preferred_apps.recycler_view as recyclerView
 
@@ -40,17 +40,11 @@ class PreferredAppsActivity : DaggerAppCompatActivity(), ItemClickListener, AppR
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_preferred_apps)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.addItemDecoration(
-            DividerItemDecoration(
-                this,
-                DividerItemDecoration.VERTICAL
-            )
-        )
+        recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         adapter.itemClickListener = this
         recyclerView.adapter = wrapWithHeader(adapter)
 

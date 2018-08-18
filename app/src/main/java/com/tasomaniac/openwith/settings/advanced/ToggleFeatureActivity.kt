@@ -31,13 +31,20 @@ class ToggleFeatureActivity : DaggerAppCompatActivity() {
         featureToggle.isChecked = enabled
         featureToggleText.setText(enabled.toSummary())
 
-        toolbar.setTitle(feature.titleRes)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        setTitle(feature.titleRes)
     }
 
     @StringRes
     private fun Boolean.toSummary() =
         if (this) R.string.pref_state_feature_enabled else R.string.pref_state_feature_disabled
 
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
+    }
+    
     companion object {
 
         private const val FEATURE = "FEATURE"
