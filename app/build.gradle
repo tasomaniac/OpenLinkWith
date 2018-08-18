@@ -156,7 +156,7 @@ dependencies {
   implementation 'com.jakewharton.timber:timber:4.7.1'
 
   implementation "com.squareup.okhttp3:okhttp:$versions.okHttp"
-  implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+  implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
   implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
   implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
 

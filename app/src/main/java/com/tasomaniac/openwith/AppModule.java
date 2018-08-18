@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import androidx.core.content.ContextCompat;
 import com.tasomaniac.openwith.data.prefs.BooleanPreference;
@@ -53,7 +54,7 @@ abstract class AppModule {
 
     @Provides
     static SchedulingStrategy schedulingStrategy() {
-        return new SchedulingStrategy(Schedulers.io(), AndroidSchedulers.mainThread());
+        return new SchedulingStrategy(Schedulers.io(), AndroidSchedulers.from(Looper.getMainLooper(), true));
     }
 
     @Provides
