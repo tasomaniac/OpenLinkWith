@@ -61,6 +61,6 @@ class GeneralSettings @Inject constructor(
     }
 
     private inline fun <reified T : Activity> startActivity() {
-        startActivity(Intent(this.activity, T::class.java))
+        activity.startActivity(Intent(this.activity, T::class.java))
     }
 }

@@ -1,7 +1,6 @@
 package com.tasomaniac.openwith.settings.advanced
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -39,8 +38,8 @@ class AdvancedFeaturesFragment : PreferenceFragmentCompat(),
 
     override fun getCallbackFragment() = this
 
-    override fun onPreferenceStartFragment(caller: PreferenceFragmentCompat?, pref: Preference?): Boolean {
-        startActivity(Intent(context, ToggleFeatureActivity::class.java))
+    override fun onPreferenceStartFragment(caller: PreferenceFragmentCompat, pref: Preference): Boolean {
+        ToggleFeatureActivity.startWith(activity!!, pref)
         return true
     }
 

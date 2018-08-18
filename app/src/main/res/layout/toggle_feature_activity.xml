@@ -22,7 +22,7 @@
     android:orientation="horizontal"
     android:paddingLeft="@dimen/keyline_1"
     android:paddingRight="@dimen/keyline_1"
-    android:background="@android:color/darker_gray"
+    android:background="#EEE"
     android:gravity="center_vertical">
 
     <TextView

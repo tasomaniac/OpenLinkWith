@@ -63,7 +63,7 @@
   <string name="pref_title_category_advanced">Advanced</string>
   <string name="pref_key_features" translatable="false">pref_features</string>
   <string name="pref_title_features">App Features</string>
-  <string name="pref_summary_features">Enable/Disable some features</string>
+  <string name="pref_summary_features">Enable/Disable some feature</string>
 
   <string name="pref_key_feature_add_to_homescreen" translatable="false">pref_feature_add_to_homescreen</string>
   <string name="pref_title_feature_add_to_homescreen" translatable="false" tools:ignore="DuplicateStrings">@string/add_to_homescreen</string>

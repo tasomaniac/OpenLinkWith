@@ -1,6 +1,5 @@
 package com.tasomaniac.openwith.settings
 
-import android.content.Intent
 import androidx.annotation.StringRes
 import androidx.annotation.XmlRes
 import androidx.preference.Preference
@@ -16,8 +15,6 @@ abstract class Settings(
     fun addPreferencesFromResource(@XmlRes resId: Int) = fragment.addPreferencesFromResource(resId)
 
     fun removePreference(preference: Preference) = fragment.preferenceScreen.removePreference(preference)
-
-    fun startActivity(intent: Intent) = fragment.startActivity(intent)
 
     fun findPreference(@StringRes keyResource: Int): Preference = fragment.run {
         findPreference(getString(keyResource))
