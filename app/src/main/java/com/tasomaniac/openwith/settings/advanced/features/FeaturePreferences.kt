@@ -1,4 +1,4 @@
-package com.tasomaniac.openwith.settings.advanced
+package com.tasomaniac.openwith.settings.advanced.features
 
 import android.content.SharedPreferences
 import androidx.core.content.edit

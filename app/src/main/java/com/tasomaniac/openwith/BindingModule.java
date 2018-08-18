@@ -12,8 +12,8 @@ import com.tasomaniac.openwith.resolver.ResolverModule;
 import com.tasomaniac.openwith.settings.SettingsActivity;
 import com.tasomaniac.openwith.settings.SettingsFragment;
 import com.tasomaniac.openwith.settings.SettingsModule;
-import com.tasomaniac.openwith.settings.advanced.AdvancedFeaturesFragment;
-import com.tasomaniac.openwith.settings.advanced.ToggleFeatureActivity;
+import com.tasomaniac.openwith.settings.advanced.features.FeaturesListFragment;
+import com.tasomaniac.openwith.settings.advanced.features.ToggleFeatureActivity;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
@@ -39,7 +39,7 @@ interface BindingModule {
     @ContributesAndroidInjector(modules = SettingsModule.class)
     SettingsFragment settingsFragment();
 
-    @ContributesAndroidInjector AdvancedFeaturesFragment advancedFeaturesFragment();
+    @ContributesAndroidInjector FeaturesListFragment advancedFeaturesFragment();
 
     @ContributesAndroidInjector ToggleFeatureActivity toggleFeatureActivity();
 

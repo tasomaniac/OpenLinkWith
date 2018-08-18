@@ -5,6 +5,6 @@
     android:key="@string/pref_key_features"
     android:summary="@string/pref_summary_features"
     android:title="@string/pref_title_features"
-    android:fragment="com.tasomaniac.openwith.settings.advanced.AdvancedFeaturesFragment" />
+    android:fragment="com.tasomaniac.openwith.settings.advanced.features.FeaturesListFragment" />
 
 </PreferenceScreen>

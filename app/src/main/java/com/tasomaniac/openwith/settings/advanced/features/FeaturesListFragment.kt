@@ -1,4 +1,4 @@
-package com.tasomaniac.openwith.settings.advanced
+package com.tasomaniac.openwith.settings.advanced.features
 
 import android.content.Context
 import android.os.Bundle
@@ -8,10 +8,10 @@ import com.tasomaniac.openwith.R
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
-class AdvancedFeaturesFragment : PreferenceFragmentCompat(),
+class FeaturesListFragment : PreferenceFragmentCompat(),
     PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
-    @Inject lateinit var settings: AdvancedFeaturesSettings
+    @Inject lateinit var settings: FeaturesListSettings
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)

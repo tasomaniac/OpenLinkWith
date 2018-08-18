@@ -1,13 +1,13 @@
-package com.tasomaniac.openwith.settings.advanced
+package com.tasomaniac.openwith.settings.advanced.features
 
 import androidx.annotation.StringRes
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.settings.Settings
 import javax.inject.Inject
 
-class AdvancedFeaturesSettings @Inject constructor(
+class FeaturesListSettings @Inject constructor(
     private val featurePreferences: FeaturePreferences,
-    private val fragment: AdvancedFeaturesFragment
+    private val fragment: FeaturesListFragment
 ) : Settings(fragment) {
 
     override fun setup() {

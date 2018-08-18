@@ -1,4 +1,4 @@
-package com.tasomaniac.openwith.settings.advanced
+package com.tasomaniac.openwith.settings.advanced.features
 
 import android.app.Activity
 import android.content.Intent

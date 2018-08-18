@@ -1,4 +1,4 @@
-package com.tasomaniac.openwith.settings.advanced
+package com.tasomaniac.openwith.settings.advanced.features
 
 import androidx.annotation.StringRes
 import com.tasomaniac.openwith.R

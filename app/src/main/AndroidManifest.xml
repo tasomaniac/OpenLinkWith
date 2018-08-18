@@ -49,7 +49,7 @@
       android:label="@string/browser_title"
       android:parentActivityName=".settings.SettingsActivity" />
 
-    <activity android:name=".settings.advanced.ToggleFeatureActivity" />
+    <activity android:name=".settings.advanced.features.ToggleFeatureActivity" />
 
     <activity
       android:name=".intro.IntroActivity"
