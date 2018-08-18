@@ -1,13 +1,16 @@
 package com.tasomaniac.openwith.settings.advanced.features
 
 import android.content.Context
+import android.os.Build.VERSION_CODES.M
 import android.os.Bundle
+import androidx.annotation.RequiresApi
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.tasomaniac.openwith.R
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
+@RequiresApi(M)
 class FeaturesListFragment : PreferenceFragmentCompat(),
     PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 

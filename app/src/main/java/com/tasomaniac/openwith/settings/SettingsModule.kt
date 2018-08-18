@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.ClipboardManager
 import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.LOLLIPOP
+import android.os.Build.VERSION_CODES.M
 import androidx.core.content.getSystemService
 import com.tasomaniac.openwith.BuildConfig
 import com.tasomaniac.openwith.settings.advanced.AdvancedCategorySettings
@@ -26,14 +27,18 @@ class SettingsModule {
         general: GeneralSettings,
         display: DisplaySettings,
         advancedCategory: AdvancedCategorySettings,
-        disableFeatures: DisableFeaturesSettings,
         other: OtherSettings
-    ): Set<Settings> = setOf(clipboard, general, display, advancedCategory, disableFeatures, other)
+    ): Set<Settings> = setOf(clipboard, general, display, advancedCategory, other)
 
     @Provides
     @ElementsIntoSet
     fun usageAccessSettings(settings: UsageAccessSettings): Set<Settings> =
         if (SDK_INT >= LOLLIPOP) setOf(settings) else setOf()
+
+    @Provides
+    @ElementsIntoSet
+    fun disableFeaturesSettings(settings: DisableFeaturesSettings): Set<Settings> =
+        if (SDK_INT >= M) setOf(settings) else setOf()
 
     @Provides
     @ElementsIntoSet
