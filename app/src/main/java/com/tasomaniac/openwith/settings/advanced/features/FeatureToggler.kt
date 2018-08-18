@@ -2,9 +2,12 @@ package com.tasomaniac.openwith.settings.advanced.features
 
 import android.content.ComponentName
 import android.content.pm.PackageManager
+import android.os.Build.VERSION_CODES.M
+import androidx.annotation.RequiresApi
 import com.tasomaniac.openwith.App
 import javax.inject.Inject
 
+@RequiresApi(M)
 class FeatureToggler @Inject constructor(
     private val app: App,
     private val packageManager: PackageManager
@@ -12,7 +15,7 @@ class FeatureToggler @Inject constructor(
 
     fun toggleFeature(feature: Feature, enabled: Boolean) {
         packageManager.setComponentEnabledSetting(
-            ComponentName(app, feature.clazz),
+            ComponentName(app, feature.className),
             enabled.toState(),
             PackageManager.DONT_KILL_APP
         )

@@ -80,17 +80,12 @@
         android:value=".resolver.ResolverChooserTargetService" />
     </activity>
 
-    <activity
+
+    <activity-alias
       android:name=".TextSelectionActivity"
-      android:configChanges="keyboardHidden|orientation|screenLayout"
-      android:documentLaunchMode="never"
-      android:excludeFromRecents="true"
-      android:finishOnCloseSystemDialogs="true"
-      android:relinquishTaskIdentity="true"
-      android:theme="@style/Theme.Transparent.NoAnimation"
-      android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
-      android:label="@string/open_with"
-      tools:targetApi="lollipop">
+      android:enabled="true"
+      android:targetActivity=".ShareToOpenWith"
+      android:label="@string/open_with">
 
       <intent-filter>
         <action android:name="android.intent.action.PROCESS_TEXT" />
@@ -100,7 +95,8 @@
         <data android:mimeType="text/plain" />
 
       </intent-filter>
-    </activity>
+    </activity-alias>
+
 
     <activity
       android:name=".homescreen.AddToHomeScreen"

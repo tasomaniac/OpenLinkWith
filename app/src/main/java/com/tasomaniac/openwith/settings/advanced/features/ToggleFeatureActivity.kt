@@ -1,7 +1,9 @@
 package com.tasomaniac.openwith.settings.advanced.features
 
+import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Intent
+import android.os.Build.VERSION_CODES.M
 import android.os.Bundle
 import androidx.annotation.StringRes
 import androidx.core.text.parseAsHtml
@@ -15,6 +17,7 @@ import kotlinx.android.synthetic.main.toggle_feature_activity.featureToggle
 import kotlinx.android.synthetic.main.toggle_feature_activity.toolbar
 import javax.inject.Inject
 
+@TargetApi(M)
 class ToggleFeatureActivity : DaggerAppCompatActivity() {
 
     @Inject lateinit var featurePreferences: FeaturePreferences
