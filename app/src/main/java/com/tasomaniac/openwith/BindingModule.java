@@ -12,6 +12,8 @@ import com.tasomaniac.openwith.resolver.ResolverModule;
 import com.tasomaniac.openwith.settings.SettingsActivity;
 import com.tasomaniac.openwith.settings.SettingsFragment;
 import com.tasomaniac.openwith.settings.SettingsModule;
+import com.tasomaniac.openwith.settings.advanced.features.FeaturesListFragment;
+import com.tasomaniac.openwith.settings.advanced.features.ToggleFeatureActivity;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
@@ -26,28 +28,25 @@ interface BindingModule {
     @ContributesAndroidInjector
     AddToHomeScreenDialogFragment addToHomeScreenDialogFragment();
 
-    @ContributesAndroidInjector
-    AddToHomeScreen addToHomeScreen();
+    @ContributesAndroidInjector AddToHomeScreen addToHomeScreen();
 
-    @ContributesAndroidInjector
-    PreferredAppsActivity preferredAppsActivity();
+    @ContributesAndroidInjector PreferredAppsActivity preferredAppsActivity();
 
-    @ContributesAndroidInjector
-    PreferredBrowserActivity preferredBrowserActivity();
+    @ContributesAndroidInjector PreferredBrowserActivity preferredBrowserActivity();
 
-    @ContributesAndroidInjector
-    SettingsActivity settingsActivity();
+    @ContributesAndroidInjector SettingsActivity settingsActivity();
 
     @ContributesAndroidInjector(modules = SettingsModule.class)
     SettingsFragment settingsFragment();
 
-    @ContributesAndroidInjector
-    IntroActivity introActivity();
+    @ContributesAndroidInjector FeaturesListFragment advancedFeaturesFragment();
 
-    @ContributesAndroidInjector
-    RedirectFixActivity redirectFixActivity();
+    @ContributesAndroidInjector ToggleFeatureActivity toggleFeatureActivity();
 
-    @ContributesAndroidInjector
-    ShareToOpenWith shareToOpenWith();
+    @ContributesAndroidInjector IntroActivity introActivity();
+
+    @ContributesAndroidInjector RedirectFixActivity redirectFixActivity();
+
+    @ContributesAndroidInjector ShareToOpenWith shareToOpenWith();
 
 }

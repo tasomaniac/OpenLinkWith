@@ -49,6 +49,8 @@
       android:label="@string/browser_title"
       android:parentActivityName=".settings.SettingsActivity" />
 
+    <activity android:name=".settings.advanced.features.ToggleFeatureActivity" />
+
     <activity
       android:name=".intro.IntroActivity"
       android:theme="@style/Theme.OpenWith.Intro" />
@@ -73,6 +75,18 @@
         <data android:mimeType="text/plain" />
       </intent-filter>
 
+      <meta-data
+        android:name="android.service.chooser.chooser_target_service"
+        android:value=".resolver.ResolverChooserTargetService" />
+    </activity>
+
+
+    <activity-alias
+      android:name=".TextSelectionActivity"
+      android:enabled="true"
+      android:targetActivity=".ShareToOpenWith"
+      android:label="@string/open_with">
+
       <intent-filter>
         <action android:name="android.intent.action.PROCESS_TEXT" />
 
@@ -81,11 +95,8 @@
         <data android:mimeType="text/plain" />
 
       </intent-filter>
+    </activity-alias>
 
-      <meta-data
-        android:name="android.service.chooser.chooser_target_service"
-        android:value=".resolver.ResolverChooserTargetService" />
-    </activity>
 
     <activity
       android:name=".homescreen.AddToHomeScreen"

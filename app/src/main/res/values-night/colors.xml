@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
   <color name="window_background">@color/material_grey_850</color>
+
+  <color name="feature_switch_background">#141414</color>
 </resources>

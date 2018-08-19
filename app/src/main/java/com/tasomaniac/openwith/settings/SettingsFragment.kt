@@ -3,13 +3,13 @@ package com.tasomaniac.openwith.settings
 import android.content.Context
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
+import com.tasomaniac.openwith.R
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
-    @JvmSuppressWildcards
-    @Inject lateinit var settings: Set<Settings>
+    @Inject lateinit var settings: @JvmSuppressWildcards Set<Settings>
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -22,6 +22,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     override fun onResume() {
         super.onResume()
+        activity!!.setTitle(R.string.app_name)
         settings.forEach { it.resume() }
     }
 
@@ -35,12 +36,4 @@ class SettingsFragment : PreferenceFragmentCompat() {
         super.onDestroy()
     }
 
-    companion object {
-
-        @JvmStatic
-        fun newInstance() = SettingsFragment().apply {
-            val args = Bundle()
-            arguments = args
-        }
-    }
 }

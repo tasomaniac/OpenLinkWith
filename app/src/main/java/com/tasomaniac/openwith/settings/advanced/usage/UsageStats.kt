@@ -1,4 +1,4 @@
-package com.tasomaniac.openwith.settings
+package com.tasomaniac.openwith.settings.advanced.usage
 
 import android.annotation.SuppressLint
 import android.app.AppOpsManager

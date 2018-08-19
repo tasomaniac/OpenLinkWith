@@ -37,6 +37,30 @@
   <string name="pref_entry_night_mode_on">Aktif</string>
   <string name="pref_title_category_clipboard">Link telah disalin</string>
   <string name="pref_title_clipboard">Klik untuk buka dengan&#8230;</string>
+  <string name="pref_title_category_advanced">Advanced</string>
+  <string name="pref_title_features">App Features</string>
+  <string name="pref_summary_features">Enable/Disable some feature</string>
+  <string name="pref_details_feature_add_to_homescreen"><![CDATA[
+    Use <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.<br>
+    <br>
+    When enabled, this feature adds <strong>Add to Home screen</strong> to your system <strong>Share</strong> menu.<br>
+    When selected you will have an option to add the shared link into your home screen.
+  ]]></string>
+  <string name="pref_title_feature_text_selection">Text Selection</string>
+  <string name="pref_details_feature_text_selection"><![CDATA[
+    When enabled, this feature adds <strong>Open With</strong> option into system level text selection pop-up.<br>
+    <br>
+    This feature can be useful in situations where sharing link is not feasible. When link is already visible in a text field, long click to select the text with the link and click <strong>Open With</strong>.
+  ]]></string>
+  <string name="pref_title_feature_direct_share">Direct Share</string>
+  <string name="pref_details_feature_direct_share"><![CDATA[
+    <strong>Direct Share</strong> is an Android feature where more relevant share targets are presented separately in the share menu.<br>
+    <br>
+    When enabled, <strong>Open Link With</strong> will be presented at top in the system share menu.<br>
+    Also note that priority is set to low. If Android finds more relevant targets from other apps, Open Link With may not be offered.
+  ]]></string>
+  <string name="pref_state_feature_enabled">Enabled</string>
+  <string name="pref_state_feature_disabled">Disabled</string>
   <string name="pref_title_category_others">Lainnya</string>
   <string name="pref_title_open_source">Lisensi sumber terbuka</string>
   <string name="pref_summary_open_source">Lihat lisensi dari perpustakaan open source.</string>

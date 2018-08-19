@@ -1,12 +1,12 @@
 package com.tasomaniac.openwith.settings
 
-import android.content.Intent
 import androidx.annotation.StringRes
 import androidx.annotation.XmlRes
 import androidx.preference.Preference
+import androidx.preference.PreferenceFragmentCompat
 
 abstract class Settings(
-    private val fragment: SettingsFragment
+    val fragment: PreferenceFragmentCompat
 ) : SettingsView {
 
     val context get() = fragment.context!!
@@ -16,13 +16,9 @@ abstract class Settings(
 
     fun removePreference(preference: Preference) = fragment.preferenceScreen.removePreference(preference)
 
-    fun startActivity(intent: Intent) = fragment.startActivity(intent)
-
     fun findPreference(@StringRes keyResource: Int): Preference = fragment.run {
         findPreference(getString(keyResource))
     }
-
-    fun Preference.isKeyEquals(@StringRes keyRes: Int) = key.isKeyEquals(keyRes)
 
     fun String.isKeyEquals(@StringRes keyRes: Int) = fragment.getString(keyRes) == this
 }

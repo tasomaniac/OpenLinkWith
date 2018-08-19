@@ -20,13 +20,12 @@
     android:textSize="28sp"
     tools:text="@string/title_tutorial_5" />
 
-  <LinearLayout
+  <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingRight="24dp"
     android:paddingLeft="24dp"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:gravity="center">
 
     <ImageView
       android:id="@+id/image"
@@ -36,7 +35,7 @@
       android:contentDescription="@string/cd_image_tutorial"
       android:scaleType="centerInside"
       tools:src="@drawable/tutorial_1" />
-  </LinearLayout>
+  </FrameLayout>
 
   <TextView
     android:id="@+id/description"
