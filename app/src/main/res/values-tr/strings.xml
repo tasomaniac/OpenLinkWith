@@ -35,6 +35,27 @@
   <string name="pref_entry_night_mode_on">Açık</string>
   <string name="pref_title_category_clipboard">Kopyalanan link</string>
   <string name="pref_title_clipboard">Açmak için tıklayın&#8230;</string>
+  <string name="pref_title_category_advanced">Gelişmiş</string>
+  <string name="pref_title_features">Uygulama Özellikleri</string>
+  <string name="pref_summary_features">Bazı özellikleri aç/kapa</string>
+  <string name="pref_details_feature_add_to_homescreen"><![CDATA[
+<strong>Ana Ekrana ekle</strong> özelliğini kullanarak favori linklerinize kolayca ulaşın<br>
+    <br>
+    Aktifleştirildiğinde, bu özellik sistem <strong>Paylaşma</strong> menüsüne <strong>Ana Ekrana ekle</strong> tuşunu ekler.<br>
+    Seçildiğinde, paylaşılan bağlantıyı telefonunuzun ana ekranına eklemek için seçeneğiniz olacaktır.
+  ]]></string>
+  <string name="pref_title_feature_text_selection">Metin Seçimi</string>
+  <string name="pref_details_feature_text_selection"><![CDATA[
+   Aktifleştirildiğinde bu özellik, sistem geneli metin seçimi açılır menüsüne <strong>Birlikte Aç</strong> seçeneğini ekler.<br><br>
+    Bu özellik, link paylaşımının kolay olmadığı durumlarda işinize yarar. Link zaten bir metinde görünür olduğunda, üzerine uzun basarak metin seçimini açın ve <strong>Birlikte Aç</strong> tıklayın.  ]]></string>
+  <string name="pref_title_feature_direct_share">Doğrudan Paylaşım</string>
+  <string name="pref_details_feature_direct_share"><![CDATA[
+    <strong>Doğrudan Paylaşım</strong> bir Android özelliğidir. Size daha uygun paylaşım seçeneklerinizi paylaşım menüsünde ayrı bir yerde sunar.<br>
+    <br>
+    Aktifleştirildiğinde, sistem paylaşım menüsünde <strong>Birlikte Aç</strong> opsiyonu en üstte sunulacaktır.<br>
+    Bu özelliğin öncelik ayarı düşük seviyededir. Android daha uygun paylaşım seçenekleri bulduğu durumlarda Birlikte Aç sunulmayabilir.  ]]></string>
+  <string name="pref_state_feature_enabled">Aktif</string>
+  <string name="pref_state_feature_disabled">Devre dışı</string>
   <string name="pref_title_category_others">Diğer</string>
   <string name="pref_title_open_source">Open Source Lisanslar</string>
   <string name="pref_summary_open_source">Açık kaynak kütüphane lisanslarını gör.</string>
