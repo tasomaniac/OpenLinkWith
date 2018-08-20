@@ -1,16 +1,10 @@
 Help translate the app into your language:
 https://crowdin.com/project/open-link-with
 
-v2.1
+v2.2
 
-Fixes with Browser selection.
+NEW! Advanced Settings
+For the longest time, users have requested to disable some advanced features of the app. Now you can!
 
-v2.0
-
-NEW! Browser selection:
-
-When a link shared with Open Link With, browsers are suggested in addition to the native apps. This behavior can now be modified.
-
-- None will never suggest browsers
-- Always ask will include all browsers (previous behavior)
-- Single browser will suggest only that selection
+Before:
+Browser selection settings
