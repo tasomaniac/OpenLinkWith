@@ -5,4 +5,4 @@ import android.content.pm.ActivityInfo
 
 fun ActivityInfo.componentName() = ComponentName(applicationInfo.packageName, name)
 
-fun ActivityInfo.isEqualTo(other: ActivityInfo) = componentName() == other.componentName()
+infix fun ActivityInfo.isEqualTo(other: ActivityInfo) = componentName() == other.componentName()

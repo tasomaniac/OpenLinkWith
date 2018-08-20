@@ -21,6 +21,7 @@ internal class IntentResolver @Inject constructor(
     private val callerPackage: CallerPackage,
     private val resolveListGrouper: ResolveListGrouper,
     private val browserHandlerFactory: BrowserHandler.Factory,
+    private val resolveListDuplicateRemover: ResolveListDuplicateRemover,
     val sourceIntent: Intent
 ) {
 
@@ -66,6 +67,7 @@ internal class IntentResolver @Inject constructor(
             browserHandlerFactory.create(currentResolveList).handleBrowsers()
         }
 
+        resolveListDuplicateRemover.process(currentResolveList)
         callerPackage.removeFrom(currentResolveList)
 
         val resolved = groupResolveList(currentResolveList)
