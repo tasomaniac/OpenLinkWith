@@ -77,7 +77,6 @@ internal class DefaultResolverPresenter @Inject constructor(
                 } catch (e: Exception) {
                     Timber.e(e)
                 }
-
             }
 
             view.displayData(result)

@@ -24,7 +24,11 @@ open class HeaderAdapter<in T : RecyclerView.ViewHolder, H : RecyclerView.ViewHo
         throw UnsupportedOperationException()
 
     @Suppress("UNCHECKED_CAST")
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int, payloads: List<Any>) {
+    override fun onBindViewHolder(
+        holder: RecyclerView.ViewHolder,
+        position: Int,
+        payloads: List<Any>
+    ) {
         when (getItemViewType(position)) {
             TYPE_HEADER -> (holder as H).bindHeader()
             else -> innerAdapter.onBindViewHolder(holder as T, position - HEADER_COUNT, payloads)

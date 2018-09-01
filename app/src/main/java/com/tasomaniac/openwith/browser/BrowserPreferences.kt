@@ -44,7 +44,6 @@ class BrowserPreferences @Inject constructor(private val sharedPreferences: Shar
         object None : Mode("none")
         object AlwaysAsk : Mode("always_ask")
         data class Browser(val displayLabel: String, val componentName: ComponentName) : Mode("browser")
-
     }
 
     companion object {
@@ -52,5 +51,4 @@ class BrowserPreferences @Inject constructor(private val sharedPreferences: Shar
         private const val KEY_BROWSER_NAME = "pref_browser_name"
         private const val KEY_BROWSER_COMPONENT = "pref_browser_component"
     }
-
 }

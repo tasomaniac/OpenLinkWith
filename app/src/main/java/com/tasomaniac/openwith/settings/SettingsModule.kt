@@ -45,5 +45,4 @@ class SettingsModule {
     @ElementsIntoSet
     fun debugSettings(settings: DebugSettings): Set<Settings> =
         if (BuildConfig.DEBUG) setOf(settings) else setOf()
-
 }

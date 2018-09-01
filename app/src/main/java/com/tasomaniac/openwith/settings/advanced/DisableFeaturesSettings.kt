@@ -10,7 +10,7 @@ import javax.inject.Inject
 @RequiresApi(M)
 class DisableFeaturesSettings @Inject constructor(fragment: SettingsFragment) : Settings(fragment) {
 
-  override fun setup() {
-    addPreferencesFromResource(R.xml.pref_disable_features)
-  }
+    override fun setup() {
+        addPreferencesFromResource(R.xml.pref_disable_features)
+    }
 }

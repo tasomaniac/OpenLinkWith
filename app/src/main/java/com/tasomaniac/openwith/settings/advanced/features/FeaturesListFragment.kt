@@ -54,5 +54,4 @@ class FeaturesListFragment : PreferenceFragmentCompat(),
         ToggleFeatureActivity.startWith(activity!!, pref)
         return true
     }
-
 }

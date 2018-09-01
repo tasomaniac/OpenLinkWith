@@ -35,5 +35,4 @@ class SettingsFragment : PreferenceFragmentCompat() {
         settings.forEach { it.release() }
         super.onDestroy()
     }
-
 }

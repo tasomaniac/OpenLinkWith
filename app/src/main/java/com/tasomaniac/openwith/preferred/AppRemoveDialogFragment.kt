@@ -53,6 +53,5 @@ class AppRemoveDialogFragment : AppCompatDialogFragment() {
             AppRemoveDialogFragment().apply {
                 arguments = bundleOf(EXTRA_INFO to info)
             }
-
     }
 }

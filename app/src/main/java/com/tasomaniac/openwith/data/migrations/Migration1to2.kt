@@ -13,5 +13,4 @@ object Migration1to2 : Migration(1, 2) {
         execSQL("ALTER TABLE openwith_backup RENAME TO openwith")
         execSQL("CREATE UNIQUE INDEX `index_openwith_host` ON `openwith` (`host`)")
     }
-
 }

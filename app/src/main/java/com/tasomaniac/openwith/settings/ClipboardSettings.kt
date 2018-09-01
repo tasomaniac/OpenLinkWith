@@ -75,5 +75,4 @@ class ClipboardSettings @Inject constructor(
     }
 
     private fun isAdded() = preferenceCategory != null
-
 }

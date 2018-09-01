@@ -76,5 +76,4 @@ class TitleFetcher @Inject constructor(private val client: OkHttpClient) {
         private const val TITLE_PATTERN =
             "<title(?:\\s.*)?>(.+)</title>|<meta\\s*property=\"og:title\"\\s*content=\"(.*)\".*>|<meta\\s*content=\"(.*)\"\\s*property=\"og:title\".*>"
     }
-
 }

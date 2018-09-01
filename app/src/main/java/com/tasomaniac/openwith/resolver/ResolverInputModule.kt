@@ -19,5 +19,4 @@ class ResolverInputModule {
             flags = flags and Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS.inv()
         }
     }
-
 }

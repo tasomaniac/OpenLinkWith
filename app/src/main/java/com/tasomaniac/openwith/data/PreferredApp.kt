@@ -20,5 +20,4 @@ data class PreferredApp(
 
     val componentName: ComponentName
         @Ignore get() = ComponentName.unflattenFromString(component)!!
-
 }

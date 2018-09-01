@@ -27,5 +27,4 @@ class BrowserIntentChecker @Inject constructor(
     }
 
     private fun List<ResolveInfo>.toComponents() = map { it.activityInfo.componentName() }
-
 }

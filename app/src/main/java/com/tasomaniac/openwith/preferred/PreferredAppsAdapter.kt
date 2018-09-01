@@ -21,5 +21,4 @@ class PreferredAppsAdapter @Inject constructor(
     override fun onBindViewHolder(holder: ApplicationViewHolder, position: Int) {
         holder.bind(getItem(position), itemClickListener)
     }
-
 }

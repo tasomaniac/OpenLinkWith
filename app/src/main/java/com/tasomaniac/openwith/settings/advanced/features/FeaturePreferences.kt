@@ -13,5 +13,4 @@ class FeaturePreferences @Inject constructor(
     fun setEnabled(feature: Feature, enabled: Boolean) = sharedPreferences.edit {
         putBoolean(feature.prefKey, enabled)
     }
-
 }

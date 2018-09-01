@@ -38,5 +38,4 @@ class BrowserResolver @Inject constructor(
             it.activityInfo.packageName
         }
     }
-
 }

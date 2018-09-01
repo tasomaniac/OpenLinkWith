@@ -83,5 +83,4 @@ internal class ResolverUseCase @Inject constructor(
             displayActivityInfo: DisplayActivityInfo
         )
     }
-
 }

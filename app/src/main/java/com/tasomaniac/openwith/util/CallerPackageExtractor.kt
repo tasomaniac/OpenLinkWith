@@ -30,7 +30,6 @@ sealed class CallerPackageExtractor {
                 SDK_INT >= LOLLIPOP_MR1 -> LollipopExtractor(activity)
                 else -> SimpleExtractor(null)
             }
-
         }
     }
 }

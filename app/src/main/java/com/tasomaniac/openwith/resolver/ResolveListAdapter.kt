@@ -36,5 +36,4 @@ class ResolveListAdapter @Inject constructor(
         }
         holder.bind(getItem(position), itemClickListener, itemLongClickListener)
     }
-
 }

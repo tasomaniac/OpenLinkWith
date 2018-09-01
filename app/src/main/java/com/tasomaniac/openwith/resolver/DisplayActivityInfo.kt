@@ -38,5 +38,4 @@ data class DisplayActivityInfo(
     }
 
     override fun hashCode(): Int = componentName().hashCode()
-
 }

@@ -92,6 +92,5 @@ internal class IntentResolver @Inject constructor(
                 override fun onIntentResolved(result: IntentResolverResult) = Unit
             }
         }
-
     }
 }

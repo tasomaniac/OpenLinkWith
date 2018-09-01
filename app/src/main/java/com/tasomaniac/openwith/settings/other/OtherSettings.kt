@@ -56,5 +56,4 @@ class OtherSettings @Inject constructor(
             .setType("message/rfc822")
             .startChooser()
     }
-
 }

@@ -8,8 +8,6 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.preference.Preference
-import androidx.preference.PreferenceCategory
-import androidx.preference.isNotEmpty
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.data.Analytics
 import com.tasomaniac.openwith.data.prefs.BooleanPreference
@@ -68,7 +66,7 @@ class UsageAccessSettings @Inject constructor(
         preference = findPreference(R.string.pref_key_usage_stats).apply {
             setOnPreferenceClickListener { onUsageAccessClick(it) }
 
-            //Set title and summary in red font.
+            // Set title and summary in red font.
             title = coloredErrorString(R.string.pref_title_usage_stats)
             summary = coloredErrorString(R.string.pref_summary_usage_stats)
             widgetLayoutResource = R.layout.preference_widget_error

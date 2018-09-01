@@ -33,8 +33,6 @@ enum class Feature(
         "com.tasomaniac.openwith.resolver.ResolverChooserTargetService",
         "pref_feature_direct_share"
     )
-
 }
 
 fun String.toFeature() = Feature.values().find { it.prefKey == this }!!
-

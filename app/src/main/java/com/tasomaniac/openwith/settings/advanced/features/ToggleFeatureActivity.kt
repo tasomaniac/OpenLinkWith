@@ -66,7 +66,7 @@ class ToggleFeatureActivity : DaggerAppCompatActivity() {
         finish()
         return true
     }
-    
+
     companion object {
 
         private const val FEATURE = "FEATURE"
