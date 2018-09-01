@@ -30,7 +30,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.0-alpha06'
+        classpath 'com.android.tools.build:gradle:3.3.0-alpha08'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.20.0'
         classpath 'com.github.triplet.gradle:play-publisher:1.2.2'
