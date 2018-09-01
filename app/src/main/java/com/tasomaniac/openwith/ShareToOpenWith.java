@@ -1,6 +1,5 @@
 package com.tasomaniac.openwith;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -9,12 +8,12 @@ import com.tasomaniac.openwith.data.Analytics;
 import com.tasomaniac.openwith.redirect.RedirectFixActivity;
 import com.tasomaniac.openwith.util.CallerPackageExtractor;
 import com.tasomaniac.openwith.util.Urls;
-import dagger.android.AndroidInjection;
+import dagger.android.DaggerActivity;
 
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 
-public class ShareToOpenWith extends Activity {
+public class ShareToOpenWith extends DaggerActivity {
 
     public static final String EXTRA_FROM_DIRECT_SHARE = "EXTRA_FROM_DIRECT_SHARE";
 
@@ -26,7 +25,6 @@ public class ShareToOpenWith extends Activity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
 
         analytics.sendScreenView("ShareToOpenWith");
