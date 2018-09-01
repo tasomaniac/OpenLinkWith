@@ -80,7 +80,6 @@
         android:value=".resolver.ResolverChooserTargetService" />
     </activity>
 
-
     <activity-alias
       android:name=".TextSelectionActivity"
       android:enabled="true"
@@ -97,6 +96,22 @@
       </intent-filter>
     </activity-alias>
 
+    <activity-alias
+      android:name=".BrowserActivity"
+      android:enabled="false"
+      android:targetActivity=".ShareToOpenWith"
+      android:label="@string/open_with">
+
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+
+        <data android:scheme="https" />
+        <data android:scheme="http" />
+
+      </intent-filter>
+    </activity-alias>
 
     <activity
       android:name=".homescreen.AddToHomeScreen"

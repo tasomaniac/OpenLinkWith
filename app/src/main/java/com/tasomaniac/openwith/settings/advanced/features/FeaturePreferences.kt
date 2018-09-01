@@ -8,7 +8,7 @@ class FeaturePreferences @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) {
 
-    fun isEnabled(feature: Feature) = sharedPreferences.getBoolean(feature.prefKey, true)
+    fun isEnabled(feature: Feature) = sharedPreferences.getBoolean(feature.prefKey, feature.defaultValue)
 
     fun setEnabled(feature: Feature, enabled: Boolean) = sharedPreferences.edit {
         putBoolean(feature.prefKey, enabled)

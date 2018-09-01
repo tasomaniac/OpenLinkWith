@@ -9,7 +9,8 @@ enum class Feature(
     @StringRes val detailsRes: Int,
     @DrawableRes val imageRes: Int,
     val className: String,
-    val prefKey: String
+    val prefKey: String,
+    val defaultValue: Boolean = true
 ) {
 
     ADD_TO_HOMESCREEN(
@@ -32,6 +33,14 @@ enum class Feature(
         R.drawable.feature_direct_share,
         "com.tasomaniac.openwith.resolver.ResolverChooserTargetService",
         "pref_feature_direct_share"
+    ),
+    BROWSER(
+        R.string.pref_title_feature_browser,
+        R.string.pref_details_feature_browser,
+        R.drawable.feature_direct_share,
+        "com.tasomaniac.openwith.BrowserActivity",
+        "pref_feature_browser",
+        false
     )
 }
 
