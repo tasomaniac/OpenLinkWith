@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.M
+import com.tasomaniac.openwith.BuildConfig
 import com.tasomaniac.openwith.browser.resolver.BrowserHandler
 import com.tasomaniac.openwith.rx.SchedulingStrategy
 import com.tasomaniac.openwith.util.Intents
@@ -62,7 +63,9 @@ internal class IntentResolver @Inject constructor(
     private fun doResolve(): IntentResolverResult {
         val flag = if (SDK_INT >= M) PackageManager.MATCH_ALL else PackageManager.MATCH_DEFAULT_ONLY
         val currentResolveList = ArrayList(packageManager.queryIntentActivities(sourceIntent, flag))
-
+        currentResolveList.removeAll {
+            it.activityInfo.packageName == BuildConfig.APPLICATION_ID
+        }
         if (Intents.isHttp(sourceIntent)) {
             browserHandlerFactory.create(currentResolveList).handleBrowsers()
         }

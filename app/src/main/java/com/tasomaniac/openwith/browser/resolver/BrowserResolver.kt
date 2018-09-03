@@ -6,6 +6,7 @@ import android.content.pm.ResolveInfo
 import android.net.Uri
 import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.M
+import com.tasomaniac.openwith.BuildConfig
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.resolver.IconLoader
 import io.reactivex.Single
@@ -34,7 +35,12 @@ class BrowserResolver @Inject constructor(
             .setAction(Intent.ACTION_VIEW)
             .addCategory(Intent.CATEGORY_BROWSABLE)
             .setData(Uri.parse("http:"))
-        return packageManager.queryIntentActivities(browserIntent, flag).distinctBy {
+
+        val resolvedBrowsers = packageManager.queryIntentActivities(browserIntent, flag)
+        resolvedBrowsers.removeAll {
+            it.activityInfo.packageName == BuildConfig.APPLICATION_ID
+        }
+        return resolvedBrowsers.distinctBy {
             it.activityInfo.packageName
         }
     }
