@@ -85,6 +85,8 @@ staticAnalysis {
   }
 
   detekt {
+    version '1.0.0.RC8'
+
     profile('main') {
       config = 'props/detekt.yml'
       output = 'build/reports'

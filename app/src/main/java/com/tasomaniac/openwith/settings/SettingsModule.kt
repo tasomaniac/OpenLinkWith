@@ -23,6 +23,7 @@ class SettingsModule {
 
     @Provides
     @ElementsIntoSet
+    @Suppress("LongParameterList")
     fun settings(
         clipboard: ClipboardSettings,
         general: GeneralSettings,
