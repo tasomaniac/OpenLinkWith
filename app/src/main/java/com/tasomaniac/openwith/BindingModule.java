@@ -21,7 +21,10 @@ import dagger.android.ContributesAndroidInjector;
 interface BindingModule {
 
     @PerActivity
-    @ContributesAndroidInjector(modules = {ResolverModule.class, ResolverInputModule.class})
+    @ContributesAndroidInjector(modules = {
+            ResolverModule.class,
+            ResolverInputModule.class
+    })
     ResolverActivity resolverActivity();
 
     @PerActivity

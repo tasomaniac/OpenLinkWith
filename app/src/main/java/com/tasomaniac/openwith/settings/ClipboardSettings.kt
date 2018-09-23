@@ -48,7 +48,7 @@ class ClipboardSettings @Inject constructor(
     private fun updateClipUrl(clipUrl: String) {
         findPreference(R.string.pref_key_clipboard).apply {
             setOnPreferenceClickListener {
-                context.startActivity(RedirectFixActivity.createIntent(context, clipUrl))
+                context.startActivity(RedirectFixActivity.createIntent(activity, clipUrl))
                 analytics.sendEvent("Clipboard", "Clicked", "Clicked")
                 true
             }
