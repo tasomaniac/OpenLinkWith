@@ -23,6 +23,7 @@ class ToggleFeatureActivity : DaggerAppCompatActivity() {
     @Inject lateinit var featurePreferences: FeaturePreferences
     @Inject lateinit var featureToggler: FeatureToggler
     @Inject lateinit var analytics: Analytics
+    @Inject lateinit var sideEffects: Set<@JvmSuppressWildcards FeatureToggleSideEffect>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +36,7 @@ class ToggleFeatureActivity : DaggerAppCompatActivity() {
             featureToggle.setText(enabled.toSummary())
             featureToggler.toggleFeature(feature, enabled)
 
-            trackFeatureToggled(feature, enabled)
+            sideEffects.forEach { it.featureToggled(feature, enabled) }
         }
 
         val enabled = featurePreferences.isEnabled(feature)
@@ -52,10 +53,6 @@ class ToggleFeatureActivity : DaggerAppCompatActivity() {
         if (savedInstanceState == null) {
             analytics.sendEvent("FeatureToggle", "Feature", feature.prefKey)
         }
-    }
-
-    private fun trackFeatureToggled(feature: Feature, enabled: Boolean) {
-        analytics.sendEvent("${feature.prefKey} toggled", "enabled", enabled.toString())
     }
 
     @StringRes

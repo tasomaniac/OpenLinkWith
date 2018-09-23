@@ -40,7 +40,7 @@ enum class Feature(
         R.drawable.feature_direct_share,
         "com.tasomaniac.openwith.BrowserActivity",
         "pref_feature_browser",
-        false
+        defaultValue = false
     )
 }
 
