@@ -92,7 +92,7 @@ staticAnalysis {
   }
 
   ktlint {
-    version '0.27.0'
+    version '0.28.0'
 
     includeVariants { it.name == 'flossDebug' }
   }
@@ -137,13 +137,13 @@ dependencies {
   implementation 'com.google.code.findbugs:jsr305:3.0.2'
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
 
-  implementation 'androidx.core:core-ktx:1.0.0-rc02'
-  implementation 'androidx.fragment:fragment-ktx:1.0.0-rc02'
-  implementation 'androidx.preference:preference-ktx:1.0.0-rc02'
-  implementation 'androidx.appcompat:appcompat:1.0.0-rc02'
-  implementation 'androidx.recyclerview:recyclerview:1.0.0-rc02'
-  implementation 'androidx.viewpager:viewpager:1.0.0-rc02'
-  implementation 'com.google.android.material:material:1.0.0-rc01'
+  implementation 'androidx.core:core-ktx:1.0.0'
+  implementation 'androidx.fragment:fragment-ktx:1.0.0'
+  implementation 'androidx.preference:preference-ktx:1.0.0'
+  implementation 'androidx.appcompat:appcompat:1.0.0'
+  implementation 'androidx.recyclerview:recyclerview:1.0.0'
+  implementation 'androidx.viewpager:viewpager:1.0.0'
+  implementation 'com.google.android.material:material:1.0.0'
   implementation 'com.duolingo.open:rtl-viewpager:1.0.3'
 
   implementation 'com.tasomaniac:delayed-progress:0.4'
@@ -171,6 +171,6 @@ dependencies {
 
   testImplementation 'junit:junit:4.12'
   testImplementation 'org.mockito:mockito-core:2.22.0'
-  testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0-RC1'
+  testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0-RC2'
   testImplementation "com.squareup.okhttp3:mockwebserver:$versions.okHttp"
 }
