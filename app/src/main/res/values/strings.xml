@@ -92,13 +92,18 @@
   <string name="pref_key_feature_browser" translatable="false">pref_feature_browser</string>
   <string name="pref_title_feature_browser">Set as browser</string>
   <string name="pref_details_feature_browser"><![CDATA[
-    <strong>Warning:</strong> Experimental feature!
-
-    Makes Android recognize <strong>Open Link With</strong> as a <strong>Browser</strong>. Please select
-    <strong>Open Link With</strong> as choose <strong>Always</strong> on the next screen.
+    <strong>Warning:</strong> Experimental feature!<br>
     <br>
-    When enabled, using share will not be necessary, just clicking links will trigger Open Link With and it will
-    un-shorten any shortened links and open the link in the native app.
+    Makes Android recognize <strong>Open Link With</strong> as a <strong>Browser</strong>.<br>
+    <br>
+    When enabled, using share will not be necessary, just clicking links will trigger Open Link With and open the link
+     in the native app. It will also un-shorten any shortened link.<br>
+    <br>
+    Be careful! Since Chrome (or your favorite browser) will not be default anymore, you may notice some behavior
+    changes. As a benefit, your phone will start opening links in native apps earlier.
+  ]]></string>
+  <string name="feature_default_browser_message"><![CDATA[
+    In the next window, please select <strong>Open Link With</strong>, and then select <strong>Always</strong>.
   ]]></string>
 
   <string name="pref_state_feature_enabled">Enabled</string>

@@ -30,6 +30,7 @@ class ToggleFeatureActivity : DaggerAppCompatActivity() {
         setContentView(R.layout.toggle_feature_activity)
 
         val feature = intent.featureKey.toFeature()
+        setupInitialState(feature)
 
         featureToggle.setOnCheckedChangeListener { _, enabled ->
             featurePreferences.setEnabled(feature, enabled)
@@ -38,10 +39,6 @@ class ToggleFeatureActivity : DaggerAppCompatActivity() {
 
             sideEffects.forEach { it.featureToggled(feature, enabled) }
         }
-
-        val enabled = featurePreferences.isEnabled(feature)
-        featureToggle.isChecked = enabled
-        featureToggle.setText(enabled.toSummary())
 
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -53,6 +50,12 @@ class ToggleFeatureActivity : DaggerAppCompatActivity() {
         if (savedInstanceState == null) {
             analytics.sendEvent("FeatureToggle", "Feature", feature.prefKey)
         }
+    }
+
+    private fun setupInitialState(feature: Feature) {
+        val enabled = featurePreferences.isEnabled(feature)
+        featureToggle.isChecked = enabled
+        featureToggle.setText(enabled.toSummary())
     }
 
     @StringRes

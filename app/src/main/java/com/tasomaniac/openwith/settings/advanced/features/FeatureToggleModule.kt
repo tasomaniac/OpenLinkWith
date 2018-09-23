@@ -10,4 +10,8 @@ interface FeatureToggleModule {
     @Binds
     @IntoSet
     fun featureToggleTracker(featureToggleTracker: FeatureToggleTracker): FeatureToggleSideEffect
+
+    @Binds
+    @IntoSet
+    fun setDefaultBrowser(setDefaultBrowser: SetDefaultBrowser): FeatureToggleSideEffect
 }
