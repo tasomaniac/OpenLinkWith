@@ -52,6 +52,4 @@ class SetDefaultBrowser @Inject constructor(
             }
         }
     }
-
-    class Activity : android.app.Activity()
 }

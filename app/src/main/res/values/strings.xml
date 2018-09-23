@@ -99,8 +99,8 @@
     When enabled, using share will not be necessary, just clicking links will trigger Open Link With and open the link
      in the native app. It will also un-shorten any shortened link.<br>
     <br>
-    Be careful! Since Chrome (or your favorite browser) will not be default anymore, you may notice some behavior
-    changes. As a benefit, your phone will start opening links in native apps earlier.
+    <strong>Be careful!</strong> Since Chrome (or your favorite browser) will not be default anymore, you may notice
+     some behavior changes. As a benefit, your phone will be better with opening links in native apps.
   ]]></string>
   <string name="feature_default_browser_message"><![CDATA[
     In the next window, please select <strong>Open Link With</strong>, and then select <strong>Always</strong>.

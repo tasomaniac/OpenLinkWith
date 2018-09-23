@@ -26,6 +26,11 @@ public class ShareToOpenWith extends DaggerActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Ignore special case for setting OLW as default browser.
+        if ("https://".equals(getIntent().getDataString())) {
+            finish();
+            return;
+        }
 
         analytics.sendScreenView("ShareToOpenWith");
         if (isFromDirectShare(getIntent())) {
