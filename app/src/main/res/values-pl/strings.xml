@@ -57,6 +57,21 @@
     When enabled, <strong>Open Link With</strong> will be presented at top in the system share menu.<br>
     Also note that priority is set to low. If Android finds more relevant targets from other apps, Open Link With may not be offered.
   ]]></string>
+  <string name="pref_title_feature_browser">Set as browser</string>
+  <string name="pref_details_feature_browser"><![CDATA[
+    <strong>Warning:</strong> Experimental feature!<br>
+    <br>
+    Makes Android recognize <strong>Open Link With</strong> as a <strong>Browser</strong>.<br>
+    <br>
+    When enabled, using share will not be necessary, just clicking links will trigger Open Link With and open the link
+     in the native app. It will also un-shorten any shortened link.<br>
+    <br>
+    <strong>Be careful!</strong> Since Chrome (or your favorite browser) will not be default anymore, you may notice
+     some behavior changes. As a benefit, your phone will be better with opening links in native apps.
+  ]]></string>
+  <string name="feature_default_browser_message"><![CDATA[
+    In the next window, please select <strong>Open Link With</strong>, and then select <strong>Always</strong>.
+  ]]></string>
   <string name="pref_state_feature_enabled">Enabled</string>
   <string name="pref_state_feature_disabled">Disabled</string>
   <string name="pref_title_category_others">Inne</string>

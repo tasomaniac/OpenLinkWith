@@ -48,6 +48,21 @@ Kada je omogućena, ta značajka dodaje opciju <strong>Open with</strong> na sko
   <string name="pref_title_feature_direct_share">Izravno Dijeljenje</string>
   <string name="pref_details_feature_direct_share"><![CDATA[
 <strong>Izravno Dijeljenje</strong> je Android značajka u kojoj se relevantni ciljevi za dijeljenje prikazuju zasebno u izborniku Dijeljenje.<br>    <br>    Kada je omogućeno, <strong>Open Link With</strong> će biti predstavljen na vrhu izbornika dijeljenja sustava.<br>     Također imajte na umu da je prioritet postavljen na nisku razinu. Ako Android pronađe relevantnije ciljeve iz drugih aplikacija, možda se ne ponudi otvaranje pomoću Open Link With.  ]]></string>
+  <string name="pref_title_feature_browser">Set as browser</string>
+  <string name="pref_details_feature_browser"><![CDATA[
+    <strong>Warning:</strong> Experimental feature!<br>
+    <br>
+    Makes Android recognize <strong>Open Link With</strong> as a <strong>Browser</strong>.<br>
+    <br>
+    When enabled, using share will not be necessary, just clicking links will trigger Open Link With and open the link
+     in the native app. It will also un-shorten any shortened link.<br>
+    <br>
+    <strong>Be careful!</strong> Since Chrome (or your favorite browser) will not be default anymore, you may notice
+     some behavior changes. As a benefit, your phone will be better with opening links in native apps.
+  ]]></string>
+  <string name="feature_default_browser_message"><![CDATA[
+    In the next window, please select <strong>Open Link With</strong>, and then select <strong>Always</strong>.
+  ]]></string>
   <string name="pref_state_feature_enabled">Omogućeno</string>
   <string name="pref_state_feature_disabled">Onemogućeno</string>
   <string name="pref_title_category_others">Ostalo</string>
