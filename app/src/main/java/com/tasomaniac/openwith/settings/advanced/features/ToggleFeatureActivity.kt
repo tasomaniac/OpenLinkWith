@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Build.VERSION_CODES.M
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.StringRes
 import androidx.core.text.parseAsHtml
 import androidx.preference.Preference
@@ -45,7 +46,11 @@ class ToggleFeatureActivity : DaggerAppCompatActivity() {
         setTitle(feature.titleRes)
 
         featureDetails.text = getString(feature.detailsRes).parseAsHtml()
-        featureImage.setImageResource(feature.imageRes)
+        if (feature.imageRes != null) {
+            featureImage.setImageResource(feature.imageRes)
+        } else {
+            featureImage.visibility = View.GONE
+        }
 
         if (savedInstanceState == null) {
             analytics.sendEvent("FeatureToggle", "Feature", feature.prefKey)

@@ -10,5 +10,4 @@ class FeatureToggleTracker @Inject constructor(
     override fun featureToggled(feature: Feature, enabled: Boolean) {
         analytics.sendEvent("${feature.prefKey} toggled", "enabled", enabled.toString())
     }
-
 }

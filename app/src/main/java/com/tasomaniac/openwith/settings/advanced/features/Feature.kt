@@ -7,7 +7,7 @@ import com.tasomaniac.openwith.R
 enum class Feature(
     @StringRes val titleRes: Int,
     @StringRes val detailsRes: Int,
-    @DrawableRes val imageRes: Int,
+    @DrawableRes val imageRes: Int? = null,
     val className: String,
     val prefKey: String,
     val defaultValue: Boolean = true
@@ -37,9 +37,8 @@ enum class Feature(
     BROWSER(
         R.string.pref_title_feature_browser,
         R.string.pref_details_feature_browser,
-        R.drawable.feature_direct_share,
-        "com.tasomaniac.openwith.BrowserActivity",
-        "pref_feature_browser",
+        className = "com.tasomaniac.openwith.BrowserActivity",
+        prefKey = "pref_feature_browser",
         defaultValue = false
     )
 }
