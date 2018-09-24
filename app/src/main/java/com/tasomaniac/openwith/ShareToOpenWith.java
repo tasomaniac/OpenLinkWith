@@ -17,10 +17,6 @@ public class ShareToOpenWith extends DaggerActivity {
 
     public static final String EXTRA_FROM_DIRECT_SHARE = "EXTRA_FROM_DIRECT_SHARE";
 
-    private static boolean isFromDirectShare(Intent intent) {
-        return intent.getBooleanExtra(EXTRA_FROM_DIRECT_SHARE, false);
-    }
-
     @Inject Analytics analytics;
 
     @Override
@@ -33,18 +29,14 @@ public class ShareToOpenWith extends DaggerActivity {
         }
 
         analytics.sendScreenView("ShareToOpenWith");
-        if (isFromDirectShare(getIntent())) {
-            analytics.sendEvent(
-                    "Direct Share",
-                    "Clicked",
-                    "true"
-            );
-        }
+        trackDirectShare();
 
         final ShareCompat.IntentReader reader = ShareCompat.IntentReader.from(this);
         String foundUrl = Urls.extractUrlFrom(getIntent(), reader);
 
         if (foundUrl != null) {
+            trackLinkOpen();
+
             String callerPackage = CallerPackageExtractor.from(this).extract();
             Intent intent = RedirectFixActivity.createIntent(this, foundUrl)
                     .putExtra(ShareCompat.EXTRA_CALLING_PACKAGE, callerPackage);
@@ -53,6 +45,32 @@ public class ShareToOpenWith extends DaggerActivity {
             Toast.makeText(this, R.string.error_invalid_url, Toast.LENGTH_SHORT).show();
         }
         finish();
+    }
+
+    private void trackDirectShare() {
+        if (isFromDirectShare(getIntent())) {
+            analytics.sendEvent(
+                    "Direct Share",
+                    "Clicked",
+                    "true"
+            );
+        }
+    }
+
+    private void trackLinkOpen() {
+        analytics.sendEvent(
+                "Open Link",
+                "Set as browser",
+                Boolean.toString(isSetAsBrowser(getIntent()))
+        );
+    }
+
+    private static boolean isFromDirectShare(Intent intent) {
+        return intent.getBooleanExtra(EXTRA_FROM_DIRECT_SHARE, false);
+    }
+
+    private static boolean isSetAsBrowser(Intent intent) {
+        return intent.getData() != null;
     }
 
 }
