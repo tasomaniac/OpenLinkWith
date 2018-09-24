@@ -12,7 +12,6 @@ import com.tasomaniac.openwith.R
 import timber.log.Timber
 import javax.inject.Inject
 
-
 class SetDefaultBrowser @Inject constructor(
     private val activity: ToggleFeatureActivity,
     private val packageManager: PackageManager
@@ -28,6 +27,10 @@ class SetDefaultBrowser @Inject constructor(
             return
         }
 
+        displayWarningToSetDefaultBrowser(intent)
+    }
+
+    private fun displayWarningToSetDefaultBrowser(intent: Intent) {
         AlertDialog.Builder(activity)
             .setTitle(R.string.pref_title_feature_browser)
             .setMessage(activity.getString(R.string.feature_default_browser_message).parseAsHtml())
