@@ -3,31 +3,31 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="id">
   <string name="open_with">Buka Dengan&#8230;</string>
   <string name="use_a_different_app">Gunakan aplikasi lain</string>
-  <string name="activity_resolver_use_once">Sekali Saja</string>
+  <string name="activity_resolver_use_once">Sekali Sahaja</string>
   <string name="activity_resolver_use_always">Selalu</string>
   <string name="which_view_application">Buka dengan</string>
   <string name="which_view_application_named">Buka dengan %1$s</string>
   <string name="title_preferred_apps">Pilihan aplikasi</string>
-  <string name="desc_preferred">Aplikasi pilihan akan langsung digunakan saat tautan dibagikan menggunakan apl ini.\n\nSentuh untuk menghapus aplikasi pilihan.</string>
-  <string name="desc_preferred_empty">Aplikasi pilihan akan digunakan langsung saat tautan dibagikan menggunakan apl ini.\n\nAnda dapat mengatur aplikasi preferensi dengan berbagi tautan menggunakan apl ini dan kemudian memilih \“Selalu\”</string>
-  <string name="title_remove_preferred">Hapus preferensi?</string>
+  <string name="desc_preferred">Aplikasi pilihan akan digunakan semasa tautan bawah dikongsikan oleh aplikasi ini.\n\nSentuh untuk menghapuskan aplikasi pilihan.</string>
+  <string name="desc_preferred_empty">Aplikasi pilihan akan terus digunakan semasa tautan dikongsikan menggunakan aplikasi ini.\n\nAnda boleh mengatur aplikasi preferensi dengan kongsian tautan menggunakan aplikasi ini dan kemudian memilih \“Selalu\”</string>
+  <string name="title_remove_preferred">Hapuskan preferensi?</string>
   <string name="message_remove_preferred"><![CDATA[
     Hapus <strong>%1$s</strong> sebagai apl preferensi untuk membuka tautan dari <strong>%2$s</strong>?<br><br><strong>Ingat:</strong> Anda dapat mengatur apl preferensi baru untuk digunakan saat membagikan tautan dari <strong>%3$s</strong>.
     ]]></string>
-  <string name="error_invalid_url">Konten dibagikan tidak memiliki URL apapun yang berlaku.</string>
-  <string name="empty_resolver_activity">Tidak ada apl lain yang ditemukan untuk menangani URL.</string>
+  <string name="error_invalid_url">Konten kongsian tidak memiliki URL yang sah.</string>
+  <string name="empty_resolver_activity">Tiada apl lain yang ditemui boleh menangani URL tersebut.</string>
   <string name="warning_open_link_with_name">Membuka tautan dengan %s.</string>
   <string name="done">Selesai</string>
   <string name="pref_title_general">Umum</string>
   <string name="pref_title_about">Tentang</string>
-  <string name="pref_summary_about">Lihat tutorial lagi.</string>
-  <string name="pref_summary_preferred">Ganti pengaturan apl preferensi.</string>
+  <string name="pref_summary_about">Lihat tutorial sekali lagi.</string>
+  <string name="pref_summary_preferred">Tukar pengaturan apl preferensi.</string>
   <string name="browser_title">Peramban</string>
   <string name="browser_description">Bila tautan dibagikan dengan Open Link With, Peramban yang disarankan selain aplikasi bawaan.\n\nPilih di bawah ini untuk mengubah perilaku ini.</string>
   <string name="browser_none">Sembunyikan peramban</string>
   <string name="browser_none_description">Jangan sarankan peramban. Hanya apl bawaan</string>
   <string name="browser_always_ask">Selalu tanya</string>
-  <string name="browser_always_ask_description">Masukan semua peramban dalam daftar apl saran</string>
+  <string name="browser_always_ask_description">Sertakan semua peramban dalam senarai apl saranan</string>
   <string name="pref_summary_selected_browser">Hanya %s akan disarankan</string>
   <string name="pref_title_usage_stats">Status Penggunaan</string>
   <string name="pref_summary_usage_stats">Tingkatkan urutan aplikasi dengan memberikan akses ke statistik penggunaan.</string>
@@ -37,30 +37,30 @@
   <string name="pref_entry_night_mode_on">Aktif</string>
   <string name="pref_title_category_clipboard">Link telah disalin</string>
   <string name="pref_title_clipboard">Klik untuk buka dengan&#8230;</string>
-  <string name="pref_title_category_advanced">Advanced</string>
-  <string name="pref_title_features">App Features</string>
-  <string name="pref_summary_features">Enable/Disable some feature</string>
+  <string name="pref_title_category_advanced">Maju</string>
+  <string name="pref_title_features">Ciri-ciri aplikasi</string>
+  <string name="pref_summary_features">Memboleh/Mematikan komponent</string>
   <string name="pref_details_feature_add_to_homescreen"><![CDATA[
     Use <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.<br>
     <br>
     When enabled, this feature adds <strong>Add to Home screen</strong> to your system <strong>Share</strong> menu.<br>
     When selected you will have an option to add the shared link into your home screen.
   ]]></string>
-  <string name="pref_title_feature_text_selection">Text Selection</string>
+  <string name="pref_title_feature_text_selection">Pemilihan Teks</string>
   <string name="pref_details_feature_text_selection"><![CDATA[
     When enabled, this feature adds <strong>Open With</strong> option into system level text selection pop-up.<br>
     <br>
     This feature can be useful in situations where sharing link is not feasible. When link is already visible in a text field, long click to select the text with the link and click <strong>Open With</strong>.
   ]]></string>
-  <string name="pref_title_feature_direct_share">Direct Share</string>
+  <string name="pref_title_feature_direct_share">Perkongsian terus</string>
   <string name="pref_details_feature_direct_share"><![CDATA[
     <strong>Direct Share</strong> is an Android feature where more relevant share targets are presented separately in the share menu.<br>
     <br>
     When enabled, <strong>Open Link With</strong> will be presented at top in the system share menu.<br>
     Also note that priority is set to low. If Android finds more relevant targets from other apps, Open Link With may not be offered.
   ]]></string>
-  <string name="pref_state_feature_enabled">Enabled</string>
-  <string name="pref_state_feature_disabled">Disabled</string>
+  <string name="pref_state_feature_enabled">Aktifkan</string>
+  <string name="pref_state_feature_disabled">Mematikan</string>
   <string name="pref_title_category_others">Lainnya</string>
   <string name="pref_title_open_source">Lisensi sumber terbuka</string>
   <string name="pref_summary_open_source">Lihat lisensi dari perpustakaan open source.</string>

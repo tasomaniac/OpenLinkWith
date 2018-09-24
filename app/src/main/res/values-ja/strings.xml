@@ -36,30 +36,30 @@
   <string name="pref_entry_night_mode_on">オン</string>
   <string name="pref_title_category_clipboard">リンクがコピーされました</string>
   <string name="pref_title_clipboard">クリックして開く&#8230;</string>
-  <string name="pref_title_category_advanced">Advanced</string>
-  <string name="pref_title_features">App Features</string>
-  <string name="pref_summary_features">Enable/Disable some feature</string>
+  <string name="pref_title_category_advanced">詳細</string>
+  <string name="pref_title_features">アプリ機能</string>
+  <string name="pref_summary_features">いくつかの機能を有効/無効にします</string>
   <string name="pref_details_feature_add_to_homescreen"><![CDATA[
-    Use <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.<br>
+<strong>ホーム画面に追加</strong> を使用すると、お気に入りのアプリでお気に入りのリンクにすばやくアクセスできます。<br>
     <br>
-    When enabled, this feature adds <strong>Add to Home screen</strong> to your system <strong>Share</strong> menu.<br>
-    When selected you will have an option to add the shared link into your home screen.
+    有効にすると、この機能によりお使いのシステムの <strong>共有</strong> メニューに <strong>ホーム画面に追加</strong> を追加します。<br>
+    選択すると、ホーム画面に共有のリンクを追加するオプションが表示されます。
   ]]></string>
-  <string name="pref_title_feature_text_selection">Text Selection</string>
+  <string name="pref_title_feature_text_selection">テキストの選択</string>
   <string name="pref_details_feature_text_selection"><![CDATA[
-    When enabled, this feature adds <strong>Open With</strong> option into system level text selection pop-up.<br>
+    有効にすると、この機能がシステム レベルのテキスト選択ポップアップに <strong>開く...</strong> オプションを追加します。<br>
     <br>
-    This feature can be useful in situations where sharing link is not feasible. When link is already visible in a text field, long click to select the text with the link and click <strong>Open With</strong>.
+    この機能はリンクの共有ができない状況で役に立ちます。テキストフィールドでリンクが表示されているとき、リンクを長押ししてテキストを選択し <strong>開く...</strong> をクリックします。
   ]]></string>
-  <string name="pref_title_feature_direct_share">Direct Share</string>
+  <string name="pref_title_feature_direct_share">直接共有</string>
   <string name="pref_details_feature_direct_share"><![CDATA[
-    <strong>Direct Share</strong> is an Android feature where more relevant share targets are presented separately in the share menu.<br>
+    <strong>直接共有</strong> は Android の機能で、より関連性の高い共有対象が共有メニューに分かれて表示されますす。<br>
     <br>
-    When enabled, <strong>Open Link With</strong> will be presented at top in the system share menu.<br>
-    Also note that priority is set to low. If Android finds more relevant targets from other apps, Open Link With may not be offered.
+    有効にすると、 <strong>リンクを開く...</strong> をシステム共有メニューの上部に表示します。<br>
+    また、優先順位が低く設定されていることにも注意してください。Android が、他のアプリから関連性の高いターゲットが検出されると、リンクを開くが提供されない可能性があります。
   ]]></string>
-  <string name="pref_state_feature_enabled">Enabled</string>
-  <string name="pref_state_feature_disabled">Disabled</string>
+  <string name="pref_state_feature_enabled">有効</string>
+  <string name="pref_state_feature_disabled">無効</string>
   <string name="pref_title_category_others">その他</string>
   <string name="pref_title_open_source">オープンソースライセンス</string>
   <string name="pref_summary_open_source">オープンソースライブラリのライセンスを見る</string>

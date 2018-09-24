@@ -28,7 +28,7 @@
   <string name="pref_summary_about">See the tutorial again.</string>
 
   <string name="pref_key_preferred" translatable="false">pref_preferred</string>
-  <string name="pref_title_preferred" translatable="false" tools:ignore="DuplicateStrings">@string/title_preferred_apps</string>
+  <string name="pref_title_preferred" translatable="false">@string/title_preferred_apps</string>
   <string name="pref_summary_preferred">Change preferred app settings.</string>
 
   <string name="browser_title">Browsers</string>
@@ -49,10 +49,10 @@
 
   <string name="pref_key_night_mode" translatable="false">pref_night_mode</string>
   <string name="pref_title_night_mode">Night Mode</string>
-  <string name="pref_value_night_mode_off" translatable="false" tools:ignore="DuplicateStrings">off</string>
-  <string name="pref_value_night_mode_on" translatable="false" tools:ignore="DuplicateStrings">on</string>
-  <string name="pref_entry_night_mode_off" tools:ignore="DuplicateStrings">Off</string>
-  <string name="pref_entry_night_mode_on" tools:ignore="DuplicateStrings">On</string>
+  <string name="pref_value_night_mode_off" translatable="false">off</string>
+  <string name="pref_value_night_mode_on" translatable="false">on</string>
+  <string name="pref_entry_night_mode_off">Off</string>
+  <string name="pref_entry_night_mode_on">On</string>
 
   <string name="pref_key_category_clipboard" translatable="false">pref_category_clipboard</string>
   <string name="pref_title_category_clipboard">Link you copied</string>
@@ -67,7 +67,7 @@
   <string name="pref_summary_features">Enable/Disable some feature</string>
 
   <string name="pref_key_feature_add_to_homescreen" translatable="false">pref_feature_add_to_homescreen</string>
-  <string name="pref_title_feature_add_to_homescreen" translatable="false" tools:ignore="DuplicateStrings">@string/add_to_homescreen</string>
+  <string name="pref_title_feature_add_to_homescreen" translatable="false">@string/add_to_homescreen</string>
   <string name="pref_details_feature_add_to_homescreen"><![CDATA[
     Use <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.<br>
     <br>
@@ -116,9 +116,9 @@
   <string name="title_tutorial_0">Welcome to Open Link With</string>
   <string name="title_tutorial_1">Did it ever happen to you?</string>
   <string name="title_tutorial_2">Share it!</string>
-  <string name="title_tutorial_3" translatable="false" tools:ignore="DuplicateStrings">@string/title_preferred_apps</string>
-  <string name="title_tutorial_4" translatable="false" tools:ignore="DuplicateStrings">@string/add_to_homescreen</string>
-  <string name="title_tutorial_5" tools:ignore="DuplicateStrings">Usage Access</string>
+  <string name="title_tutorial_3" translatable="false">@string/title_preferred_apps</string>
+  <string name="title_tutorial_4" translatable="false">@string/add_to_homescreen</string>
+  <string name="title_tutorial_5">Usage Access</string>
   <string name="description_tutorial_0">I come to rescue you whenever you get stuck in browsers.</string>
   <string name="description_tutorial_1">You click a short-link and somehow you end up being stuck in web page instead of watching the video directly.</string>
   <string name="description_tutorial_2">Just share it with me and I will switch apps for you.</string>
