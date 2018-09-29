@@ -1,7 +1,7 @@
 package com.tasomaniac.openwith.redirect
 
+import android.app.Activity
 import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -32,8 +32,9 @@ class RedirectFixActivity : DaggerAppCompatActivity() {
         val progress = findViewById<DelayedProgressBar>(R.id.resolver_progress)
         progress.show(true)
 
-        val source = intent
-        source.component = null
+        val source = Intent(intent).apply {
+            component = null
+        }
         disposable = Single.just(source)
             .filter { browserIntentChecker.hasOnlyBrowsers(it) }
             .compose(redirectTransformer)
@@ -65,8 +66,9 @@ class RedirectFixActivity : DaggerAppCompatActivity() {
     companion object {
 
         @JvmStatic
-        fun createIntent(context: Context, foundUrl: String): Intent {
-            return Intent(context, RedirectFixActivity::class.java)
+        fun createIntent(activity: Activity, foundUrl: String): Intent {
+            return Intent(activity, RedirectFixActivity::class.java)
+                .putExtras(activity.intent)
                 .setAction(Intent.ACTION_VIEW)
                 .setData(Uri.parse(fixUrls(foundUrl)))
         }

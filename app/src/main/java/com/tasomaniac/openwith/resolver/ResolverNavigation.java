@@ -3,6 +3,7 @@ package com.tasomaniac.openwith.resolver;
 import android.app.Activity;
 import android.content.Intent;
 import android.widget.Toast;
+import com.tasomaniac.openwith.BuildConfig;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.util.Intents;
 import timber.log.Timber;
@@ -33,9 +34,17 @@ class ResolverNavigation implements ResolverView.Navigation {
 
     @Override
     public void startPreferred(Intent intent, CharSequence appLabel) {
-        String message = activity.getString(R.string.warning_open_link_with_name, appLabel);
-        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+        displayWarning(intent, appLabel);
         Intents.startActivityFixingIntent(activity, intent);
+    }
+
+    private void displayWarning(Intent intent, CharSequence appLabel) {
+        String message = activity.getString(R.string.warning_open_link_with_name, appLabel);
+        if (BuildConfig.DEBUG) {
+            message += "\nUrl: " + intent.getDataString();
+        }
+        int length = BuildConfig.DEBUG ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT;
+        Toast.makeText(activity, message, length).show();
     }
 
     @Override

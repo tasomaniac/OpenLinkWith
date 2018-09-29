@@ -34,7 +34,10 @@ public final class Urls {
 
     @Nullable
     public static String extractUrlFrom(Intent intent, ShareCompat.IntentReader reader) {
-        CharSequence text = reader.getText();
+        CharSequence text = intent.getDataString();
+        if (text == null) {
+            text = reader.getText();
+        }
         if (text == null) {
             text = getExtraSelectedText(intent);
         }

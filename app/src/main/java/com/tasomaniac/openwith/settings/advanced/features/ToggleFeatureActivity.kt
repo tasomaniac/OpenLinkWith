@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Build.VERSION_CODES.M
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.StringRes
 import androidx.core.text.parseAsHtml
 import androidx.preference.Preference
@@ -23,39 +24,43 @@ class ToggleFeatureActivity : DaggerAppCompatActivity() {
     @Inject lateinit var featurePreferences: FeaturePreferences
     @Inject lateinit var featureToggler: FeatureToggler
     @Inject lateinit var analytics: Analytics
+    @Inject lateinit var sideEffects: Set<@JvmSuppressWildcards FeatureToggleSideEffect>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.toggle_feature_activity)
 
         val feature = intent.featureKey.toFeature()
+        setupInitialState(feature)
 
         featureToggle.setOnCheckedChangeListener { _, enabled ->
             featurePreferences.setEnabled(feature, enabled)
             featureToggle.setText(enabled.toSummary())
             featureToggler.toggleFeature(feature, enabled)
 
-            trackFeatureToggled(feature, enabled)
+            sideEffects.forEach { it.featureToggled(feature, enabled) }
         }
-
-        val enabled = featurePreferences.isEnabled(feature)
-        featureToggle.isChecked = enabled
-        featureToggle.setText(enabled.toSummary())
 
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         setTitle(feature.titleRes)
 
         featureDetails.text = getString(feature.detailsRes).parseAsHtml()
-        featureImage.setImageResource(feature.imageRes)
+        if (feature.imageRes != null) {
+            featureImage.setImageResource(feature.imageRes)
+        } else {
+            featureImage.visibility = View.GONE
+        }
 
         if (savedInstanceState == null) {
             analytics.sendEvent("FeatureToggle", "Feature", feature.prefKey)
         }
     }
 
-    private fun trackFeatureToggled(feature: Feature, enabled: Boolean) {
-        analytics.sendEvent("${feature.prefKey} toggled", "enabled", enabled.toString())
+    private fun setupInitialState(feature: Feature) {
+        val enabled = featurePreferences.isEnabled(feature)
+        featureToggle.isChecked = enabled
+        featureToggle.setText(enabled.toSummary())
     }
 
     @StringRes

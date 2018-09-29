@@ -35,15 +35,15 @@ class SettingsModule {
     @Provides
     @ElementsIntoSet
     fun usageAccessSettings(settings: UsageAccessSettings): Set<Settings> =
-        if (SDK_INT >= LOLLIPOP) setOf(settings) else setOf()
+        if (SDK_INT >= LOLLIPOP) setOf(settings) else emptySet()
 
     @Provides
     @ElementsIntoSet
     fun disableFeaturesSettings(settings: DisableFeaturesSettings): Set<Settings> =
-        if (SDK_INT >= M) setOf(settings) else setOf()
+        if (SDK_INT >= M) setOf(settings) else emptySet()
 
     @Provides
     @ElementsIntoSet
     fun debugSettings(settings: DebugSettings): Set<Settings> =
-        if (BuildConfig.DEBUG) setOf(settings) else setOf()
+        if (BuildConfig.DEBUG) setOf(settings) else emptySet()
 }

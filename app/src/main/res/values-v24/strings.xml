@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="feature_default_browser_message"><![CDATA[
+    In the next screen, please select <strong>Browser app</strong>, and then select <strong>Open Link With</strong> as the default browser.
+  ]]></string>
+
+</resources>

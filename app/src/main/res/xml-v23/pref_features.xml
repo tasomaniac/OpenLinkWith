@@ -16,4 +16,9 @@
     android:title="@string/pref_title_feature_direct_share"
     android:fragment="com.tasomaniac.openwith.settings.advanced.features.ToggleFeatureActivity"/>
 
+  <Preference
+    android:key="@string/pref_key_feature_browser"
+    android:title="@string/pref_title_feature_browser"
+    android:fragment="com.tasomaniac.openwith.settings.advanced.features.ToggleFeatureActivity"/>
+
 </PreferenceScreen>
