@@ -31,7 +31,7 @@ android {
     targetSdkVersion versions.compileSdk
     versionCode versions.versionCode
     versionName versions.versionName
-    buildConfigField 'String', 'GIT_SHA', "\"${gitSha}\""
+    buildConfigString 'GIT_SHA', gitSha
 
     resConfigs 'ar', 'de', 'en', 'es', 'fr', 'hr', 'in', 'it', 'iw-rIL', 'ja', 'pl', 'pt-rBR', 'pt-rPT', 'ru', 'sv', 'tr', 'uk', 'vi', 'zh-rCN'
   }
