@@ -54,20 +54,21 @@
     <br>
     Aktifleştirildiğinde, sistem paylaşım menüsünde <strong>Birlikte Aç</strong> opsiyonu en üstte sunulacaktır.<br>
     Bu özelliğin öncelik ayarı düşük seviyededir. Android daha uygun paylaşım seçenekleri bulduğu durumlarda Birlikte Aç sunulmayabilir.  ]]></string>
-  <string name="pref_title_feature_browser">Set as browser</string>
+  <string name="pref_title_feature_browser">Tarayıcı olarak ayarla</string>
   <string name="pref_details_feature_browser"><![CDATA[
-    <strong>Warning:</strong> Experimental feature!<br>
+    <strong>Uyarı:</strong> Deneysel özellik!<br>
     <br>
-    Makes Android recognize <strong>Open Link With</strong> as a <strong>Browser</strong>.<br>
+    <strong>Open Link With</strong> uygulamasının <strong>Tarayıcı</strong> olarak gözükmesini sağlar.<br>
     <br>
-    When enabled, using share will not be necessary, just clicking links will trigger Open Link With and open the link
-     in the native app. It will also un-shorten any shortened link.<br>
+    Atif edildiğinde, paylaşma özelliğini kullanmak gerekmeyecek. Telefonunuzda sadece linkleri tıklamak uygulamada
+     açılması için yeterli olacak. Ayrıca otomatik olarak kısa linkleri düzeltecek.<br>
     <br>
-    <strong>Be careful!</strong> Since Chrome (or your favorite browser) will not be default anymore, you may notice
-     some behavior changes. As a benefit, your phone will be better with opening links in native apps.
+    <strong>Dikkatli ol!</strong> Chrome (yada kullandığınız tarayıcı) artık varsayılan olmayacak. Bu yüzden değişiklikler
+     olabilir. Diğer yandan bunun sayesinde, telefonunuz linkleri uygulamalarda açma konusunda daha iyi olacak.
+ 
   ]]></string>
   <string name="feature_default_browser_message"><![CDATA[
-    In the next window, please select <strong>Open Link With</strong>, and then select <strong>Always</strong>.
+Bir sonraki pencerede, lütfen önce <strong>Open Link With</strong> seçin, ve ardından <strong>Her zaman</strong> seçin.
   ]]></string>
   <string name="pref_state_feature_enabled">Aktif</string>
   <string name="pref_state_feature_disabled">Devre dışı</string>

@@ -41,41 +41,39 @@ Remover <strong>%1$s</strong> como aplicativo preferencial para abrir links de <
   <string name="pref_title_features">Características do App</string>
   <string name="pref_summary_features">Ativar/desativar um recurso</string>
   <string name="pref_details_feature_add_to_homescreen"><![CDATA[
-    Use <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.<br>
+    Use <strong>Adicionar à tela inicial</strong> para acessar rapidamente seus links nos seus apps favoritos.<br>
     <br>
-    When enabled, this feature adds <strong>Add to Home screen</strong> to your system <strong>Share</strong> menu.<br>
-    When selected you will have an option to add the shared link into your home screen.
+    Quando ativada, esta função adiciona <strong>Adicionar à tela inicial</strong> ao menu <strong>Compartilhar</strong> do seu sistema.<br>
+    Ao selecionar a opção, você poderá adicionar o link à sua tela inicial.
   ]]></string>
   <string name="pref_title_feature_text_selection">Seleção de Texto</string>
   <string name="pref_details_feature_text_selection"><![CDATA[
-    When enabled, this feature adds <strong>Open With</strong> option into system level text selection pop-up.<br>
+    Quando ativada, esta função adiciona a opção <strong>Abrir Com</strong> ao pop-up de seleção de texto do seu sistema.<br>
     <br>
-    This feature can be useful in situations where sharing link is not feasible. When link is already visible in a text field, long click to select the text with the link and click <strong>Open With</strong>.
+    Esta função pode ser útil em situações onde não é possível compartilhar o link. Quando o link for visívelem um campo de texto, pressione sobre ele para selecionar o texto com o link e clique em <strong>Abrir Com</strong>.
   ]]></string>
   <string name="pref_title_feature_direct_share">Compartilhamento Direto</string>
   <string name="pref_details_feature_direct_share"><![CDATA[
-    <strong>Direct Share</strong> is an Android feature where more relevant share targets are presented separately in the share menu.<br>
+    <strong>Direct Share</strong> é uma função do Android onde os compartilhamentos mais recentes ou relevantes aparecem em um menu separado na opção de compartilhar.<br>
     <br>
-    When enabled, <strong>Open Link With</strong> will be presented at top in the system share menu.<br>
-    Also note that priority is set to low. If Android finds more relevant targets from other apps, Open Link With may not be offered.
+    Quando ativado, o <strong>Open Link With</strong> será mostrado nesse menu.<br>
+    Note que a prioridade será baixa. Se o sistema Android encontrar outras opções mais relevantes, o Open Link With pode nem ser oferecido.
   ]]></string>
-  <string name="pref_title_feature_browser">Set as browser</string>
+  <string name="pref_title_feature_browser">Definir como navegador</string>
   <string name="pref_details_feature_browser"><![CDATA[
-    <strong>Warning:</strong> Experimental feature!<br>
+    <strong>Aviso:</strong> Função experimental!<br>
     <br>
-    Makes Android recognize <strong>Open Link With</strong> as a <strong>Browser</strong>.<br>
+    Faz o Android reconhecer o <strong>Open Link With</strong> como um <strong>Navegador</strong>.<br>
     <br>
-    When enabled, using share will not be necessary, just clicking links will trigger Open Link With and open the link
-     in the native app. It will also un-shorten any shortened link.<br>
+    Quando ativada, não será preciso usar compartilhamento, bastando clicar nos links para abrir o Open Link With no app nativo. ele também vai expandir links encurtados automaticamente.<br>
     <br>
-    <strong>Be careful!</strong> Since Chrome (or your favorite browser) will not be default anymore, you may notice
-     some behavior changes. As a benefit, your phone will be better with opening links in native apps.
+    <strong>Tenha cuidado!</strong> Já que o Chrome (ou seu navegador favorito) não será mais o padrão, você pode notar comportamentos estranhos. Como benefício, seu aparelho será melhor ao abrir links em seus apps nativos.
   ]]></string>
   <string name="feature_default_browser_message"><![CDATA[
-    In the next window, please select <strong>Open Link With</strong>, and then select <strong>Always</strong>.
+    Na próxima janela, por favor selecione <strong>Open Link With</strong>, e então selecione <strong>Sempre</strong>.
   ]]></string>
-  <string name="pref_state_feature_enabled">Enabled</string>
-  <string name="pref_state_feature_disabled">Disabled</string>
+  <string name="pref_state_feature_enabled">Ativado</string>
+  <string name="pref_state_feature_disabled">Desativado</string>
   <string name="pref_title_category_others">Outros</string>
   <string name="pref_title_open_source">Licenças de Código Aberto</string>
   <string name="pref_summary_open_source">Ver licenças de bibliotecas de código aberto.</string>

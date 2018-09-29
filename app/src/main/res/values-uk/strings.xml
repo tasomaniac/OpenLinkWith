@@ -37,16 +37,16 @@
   <string name="pref_entry_night_mode_on">Увімкнено</string>
   <string name="pref_title_category_clipboard">Скопійоване посилання</string>
   <string name="pref_title_clipboard">Натисніть аби відкрити за допомогою&#8230;</string>
-  <string name="pref_title_category_advanced">Advanced</string>
-  <string name="pref_title_features">App Features</string>
-  <string name="pref_summary_features">Enable/Disable some feature</string>
+  <string name="pref_title_category_advanced">Додатково</string>
+  <string name="pref_title_features">Можливості додатку</string>
+  <string name="pref_summary_features">Увімкнути деякі можливості</string>
   <string name="pref_details_feature_add_to_homescreen"><![CDATA[
     Use <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.<br>
     <br>
     When enabled, this feature adds <strong>Add to Home screen</strong> to your system <strong>Share</strong> menu.<br>
     When selected you will have an option to add the shared link into your home screen.
   ]]></string>
-  <string name="pref_title_feature_text_selection">Text Selection</string>
+  <string name="pref_title_feature_text_selection">Вибір тексту</string>
   <string name="pref_details_feature_text_selection"><![CDATA[
     When enabled, this feature adds <strong>Open With</strong> option into system level text selection pop-up.<br>
     <br>
@@ -74,8 +74,8 @@
   <string name="feature_default_browser_message"><![CDATA[
     In the next window, please select <strong>Open Link With</strong>, and then select <strong>Always</strong>.
   ]]></string>
-  <string name="pref_state_feature_enabled">Enabled</string>
-  <string name="pref_state_feature_disabled">Disabled</string>
+  <string name="pref_state_feature_enabled">Увімкнено</string>
+  <string name="pref_state_feature_disabled">Вимкнено</string>
   <string name="pref_title_category_others">Інші</string>
   <string name="pref_title_open_source">Ліцензії Open Source</string>
   <string name="pref_summary_open_source">Переглянути ліцензії відкритих бібліотек.</string>
