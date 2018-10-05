@@ -11,6 +11,7 @@ import com.tasomaniac.openwith.resolver.ResolverActivity
 import com.tasomaniac.openwith.rx.SchedulingStrategy
 import com.tasomaniac.openwith.util.Urls.fixUrls
 import dagger.android.support.DaggerAppCompatActivity
+import io.reactivex.Maybe
 import io.reactivex.MaybeTransformer
 import io.reactivex.Single
 import io.reactivex.disposables.Disposable
@@ -37,6 +38,9 @@ class RedirectFixActivity : DaggerAppCompatActivity() {
         }
         disposable = Single.just(source)
             .filter { browserIntentChecker.hasOnlyBrowsers(it) }
+            .flatMap {
+                Maybe.fromCallable<HttpUrl> { it.toHttpUrl() }
+            }
             .compose(redirectTransformer)
             .map { source.withUrl(it) }
             .defaultIfEmpty(source)
@@ -48,14 +52,12 @@ class RedirectFixActivity : DaggerAppCompatActivity() {
             }
     }
 
-    private val redirectTransformer = MaybeTransformer<Intent, HttpUrl> { source ->
-        source
-            .map { it.toHttpUrl() }
-            .flatMap { httpUrl ->
-                redirectFixer
-                    .followRedirects(httpUrl)
-                    .toMaybe()
-            }
+    private val redirectTransformer = MaybeTransformer<HttpUrl, HttpUrl> { source ->
+        source.flatMap { httpUrl ->
+            redirectFixer
+                .followRedirects(httpUrl)
+                .toMaybe()
+        }
     }
 
     override fun onDestroy() {
@@ -73,7 +75,7 @@ class RedirectFixActivity : DaggerAppCompatActivity() {
                 .setData(Uri.parse(fixUrls(foundUrl)))
         }
 
-        private fun Intent.withUrl(url: HttpUrl) = setData(Uri.parse(url.toString()))
+        private fun Intent.withUrl(url: HttpUrl): Intent = setData(Uri.parse(url.toString()))
 
         private fun Intent.toHttpUrl() = HttpUrl.parse(dataString!!)
     }

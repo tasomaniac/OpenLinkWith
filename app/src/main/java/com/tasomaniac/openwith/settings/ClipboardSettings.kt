@@ -57,11 +57,12 @@ class ClipboardSettings @Inject constructor(
     }
 
     private fun clipUrl(): String? {
-        if (clipboardManager.hasPrimaryClip()) {
-            val primaryClip = clipboardManager.primaryClip!!.getItemAt(0).coerceToText(context)
-            return Urls.findFirstUrl(primaryClip.toString())
+        return try {
+            val primaryClip = clipboardManager.primaryClip?.getItemAt(0)?.coerceToText(context)?.toString()
+            Urls.findFirstUrl(primaryClip)
+        } catch (e: Exception) {
+            return null
         }
-        return null
     }
 
     private fun addClipboardPreference() {

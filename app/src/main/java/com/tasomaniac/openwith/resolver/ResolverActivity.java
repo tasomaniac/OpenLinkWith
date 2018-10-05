@@ -126,8 +126,10 @@ public class ResolverActivity extends DaggerAppCompatActivity implements
 
     @Override
     public void enableActionButtons() {
-        findViewById(R.id.button_always).setEnabled(true);
-        findViewById(R.id.button_once).setEnabled(true);
+        View alwaysButton = findViewById(R.id.button_always);
+        if (alwaysButton != null) alwaysButton.setEnabled(true);
+        View onceButton = findViewById(R.id.button_once);
+        if (onceButton != null) onceButton.setEnabled(true);
     }
 
     @Override

@@ -164,13 +164,18 @@ class AddToHomeScreenDialogFragment : DaggerAppCompatDialogFragment() {
         private const val KEY_INTENT = "intent"
 
         @JvmStatic
-        fun newInstance(activityInfo: DisplayActivityInfo, intent: Intent) =
-            AddToHomeScreenDialogFragment().apply {
+        fun newInstance(activityInfo: DisplayActivityInfo, intent: Intent): AddToHomeScreenDialogFragment {
+            val homeScreenIntent = Intent(Intent.ACTION_VIEW).apply {
+                data = intent.data
+                component = intent.component
+            }
+            return AddToHomeScreenDialogFragment().apply {
                 arguments = bundleOf(
                     KEY_ACTIVITY_TO_ADD to activityInfo,
-                    KEY_INTENT to intent
+                    KEY_INTENT to homeScreenIntent
                 )
             }
+        }
 
         private fun forceKeyboardVisible(window: Window) {
             window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
