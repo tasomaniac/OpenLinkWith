@@ -8,14 +8,15 @@ Subsequently, it is fitting to read up the policies of third-party applications 
 
 ## Access and Permission
 **Open Link With** programming requires a few authorizations to work viably and effectively. Without a portion of these authorizations, you may not be able to access some features. Open Link With requires the enablement of your device **Usage Access** only. This usage access is to help **Open Link With** track your other apps activities for easy switching of apps. 
+**Note: This is however optional**.
 
 
 ## Information Collection and Use
-The developer doesn't have access or gather any form of data from users of the application. However, to work as primarily proposed, Device usage access must be enabled. It is a simple application, developed to help rescue users from being stuck in browsers. Be that as it may, Open Link With uses some third party. These third-party apps don’t collect any data from users devices.
+The developer doesn't have access or gather any form of data from users of the application. It is a simple application, to work as primarily proposed, Device usage access must be enabled. It is a simple application, developed to help rescue users from being stuck in browsers. **However, the developer may decide to collect crash or usage data**. Be that as it may, Open Link With uses some third party. These third-party apps don’t collect any data from users devices.
 
 
 ## Personal Data
-The developer doesn't collect personally identifiable data while the software is being utilized.
+The developer doesn't collect personally identifiable data while the software is being utilized. 
 
 
 ## Security Of Data 
