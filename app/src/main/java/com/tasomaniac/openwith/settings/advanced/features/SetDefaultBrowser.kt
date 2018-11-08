@@ -18,11 +18,9 @@ class SetDefaultBrowser @Inject constructor(
 ) : FeatureToggleSideEffect {
 
     override fun featureToggled(feature: Feature, enabled: Boolean) {
-        if (feature != Feature.BROWSER) return
-        if (!enabled) return
+        if (feature != Feature.BROWSER || !enabled) return
 
         val intent = intentToSetDefaultBrowser()
-
         if (packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY).isEmpty()) {
             return
         }
