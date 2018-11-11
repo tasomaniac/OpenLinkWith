@@ -35,8 +35,8 @@
   <string name="pref_entry_night_mode_on">An</string>
   <string name="pref_title_category_clipboard">Link kopiert</string>
   <string name="pref_title_clipboard">Click to open with&#8230;</string>
-  <string name="pref_title_category_advanced">Advanced</string>
-  <string name="pref_title_features">App Features</string>
+  <string name="pref_title_category_advanced">Erweitert</string>
+  <string name="pref_title_features">App-Funktionen</string>
   <string name="pref_summary_features">Enable/Disable some feature</string>
   <string name="pref_details_feature_add_to_homescreen"><![CDATA[
     Use <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.<br>
@@ -44,9 +44,9 @@
     When enabled, this feature adds <strong>Add to Home screen</strong> to your system <strong>Share</strong> menu.<br>
     When selected you will have an option to add the shared link into your home screen.
   ]]></string>
-  <string name="pref_title_feature_text_selection">Text Selection</string>
   <string name="pref_details_feature_text_selection"><![CDATA[
     When enabled, this feature adds <strong>Open With</strong> option into system level text selection pop-up.<br>
+  <string name="pref_title_feature_text_selection">Textauswahl</string>
     <br>
     This feature can be useful in situations where sharing link is not feasible. When link is already visible in a text field, long click to select the text with the link and click <strong>Open With</strong>.
   ]]></string>
