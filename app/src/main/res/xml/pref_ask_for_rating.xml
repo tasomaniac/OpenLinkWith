@@ -1,0 +1,16 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <PreferenceCategory
+    android:order="2"
+    android:key="@string/pref_key_category_ask_for_rating"
+    android:title="@string/pref_title_category_ask_for_rating">
+
+    <com.tasomaniac.openwith.settings.rating.AskForRatingPreference
+      android:key="@string/pref_key_ask_for_rating"
+      android:title="@string/pref_title_ask_for_rating"
+      android:selectable="false"
+      android:layout="@layout/ask_for_rating_preference"/>
+
+  </PreferenceCategory>
+
+</PreferenceScreen>

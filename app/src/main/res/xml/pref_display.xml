@@ -1,7 +1,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
   <PreferenceCategory
-    android:order="4"
+    android:order="11"
     android:title="@string/pref_title_category_display">
 
     <ListPreference
