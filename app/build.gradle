@@ -112,6 +112,12 @@ staticAnalysis {
 
 kapt {
   useBuildCache true
+
+  arguments {
+    arg('dagger.gradle.incremental')
+    arg('dagger.formatGeneratedSource', 'disabled')
+//    arg('dagger.fastInit', 'enabled')
+  }
 }
 
 androidExtensions {
