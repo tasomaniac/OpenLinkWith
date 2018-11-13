@@ -8,7 +8,9 @@ import androidx.preference.PreferenceViewHolder
 import com.tasomaniac.openwith.R
 
 class AskForRatingPreference @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : Preference(context, attrs, defStyleAttr) {
 
     var onRatingChange: (rating: Float) -> Unit = {}

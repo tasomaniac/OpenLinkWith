@@ -37,7 +37,6 @@ class AskForRatingSettings @Inject constructor(
                 addAskForRatingPreference()
                 analytics.sendEvent("AskForRating", "Added", "New")
             }
-
         }
     }
 
