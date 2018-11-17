@@ -13,6 +13,7 @@ import javax.inject.Inject
 
 class AskForRatingSettings @Inject constructor(
     fragment: SettingsFragment,
+    private val condition: AskForRatingCondition,
     private val analytics: Analytics
 ) : Settings(fragment) {
 
@@ -26,7 +27,7 @@ class AskForRatingSettings @Inject constructor(
     }
 
     private fun updateButton() {
-        val shouldDisplay = shouldDisplay()
+        val shouldDisplay = condition.shouldDisplay()
 
         if (shouldDisplay.not() && isAdded()) {
             remove()
@@ -40,7 +41,6 @@ class AskForRatingSettings @Inject constructor(
         }
     }
 
-    private fun shouldDisplay() = true
 
     private fun addAskForRatingPreference() {
         addPreferencesFromResource(R.xml.pref_ask_for_rating)
@@ -56,12 +56,16 @@ class AskForRatingSettings @Inject constructor(
     private fun handleRatingChange(rating: Float) {
         if (rating >= GOOD_RATING) {
             context.startActivity(STORE_INTENT)
+            condition.alreadyShown = true
             remove()
         } else {
             AlertDialog.Builder(context)
                 .setTitle(R.string.ask_for_rating_feedback)
                 .setMessage(R.string.ask_for_rating_feedback_message)
                 .setNegativeButton(R.string.cancel, null)
+                .setNeutralButton("Never") { _, _ ->
+                    condition.alreadyShown = true
+                }
                 .setPositiveButton(android.R.string.ok) { _, _ ->
                     startContactEmailChooser()
                 }

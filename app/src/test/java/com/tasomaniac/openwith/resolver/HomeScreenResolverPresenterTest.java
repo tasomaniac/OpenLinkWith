@@ -35,8 +35,6 @@ public class HomeScreenResolverPresenterTest {
     @Before
     public void setUp() {
         presenter = new HomeScreenResolverPresenter(resources, intentResolver);
-        given(intentResolver.getSourceIntent()).willReturn(sourceIntent);
-
         presenter.bind(view, navigation);
     }
 
@@ -60,6 +58,7 @@ public class HomeScreenResolverPresenterTest {
 
     @Test
     public void givenEmptyResolveListShouldDisplayWarningAndDismiss() {
+        given(intentResolver.getSourceIntent()).willReturn(sourceIntent);
         IntentResolver.Listener listener = captureIntentResolverListener();
         reset(view);
 
