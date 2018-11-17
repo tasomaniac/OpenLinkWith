@@ -55,27 +55,44 @@ class AskForRatingSettings @Inject constructor(
 
     private fun handleRatingChange(rating: Float) {
         if (rating >= GOOD_RATING) {
-            context.startActivity(STORE_INTENT)
-            condition.alreadyShown = true
-            remove()
+            displayPositiveRatingDialog()
         } else {
-            AlertDialog.Builder(context)
-                .setTitle(R.string.ask_for_rating_feedback)
-                .setMessage(R.string.ask_for_rating_feedback_message)
-                .setNegativeButton(R.string.cancel, null)
-                .setNeutralButton("Never") { _, _ ->
-                    condition.alreadyShown = true
-                }
-                .setPositiveButton(android.R.string.ok) { _, _ ->
-                    startContactEmailChooser()
-                }
-                .setOnDismissListener {
-                    remove()
-                }
-                .show()
+            displayNegativeRatingDialog()
         }
-
         analytics.sendEvent("AskForRating", "Rating Clicked", rating.toString())
+    }
+
+    private fun displayPositiveRatingDialog() {
+        AlertDialog.Builder(context)
+            .setTitle(R.string.pref_title_category_ask_for_rating)
+            .setMessage(R.string.ask_for_rating_rating_message)
+            .setPositiveButton(R.string.ask_for_rating_rating_positive_button) { _, _ ->
+                context.startActivity(STORE_INTENT)
+                condition.alreadyShown = true
+                remove()
+                analytics.sendEvent("AskForRating", "Dialog", "Play Store")
+            }
+            .show()
+    }
+
+    private fun displayNegativeRatingDialog() {
+        AlertDialog.Builder(context)
+            .setTitle(R.string.ask_for_rating_feedback)
+            .setMessage(R.string.ask_for_rating_feedback_message)
+            .setNegativeButton(R.string.cancel, null)
+            .setNeutralButton("Never") { _, _ ->
+                condition.alreadyShown = true
+                analytics.sendEvent("AskForRating", "Dialog", "Never")
+            }
+            .setPositiveButton(android.R.string.ok) { _, _ ->
+                condition.alreadyShown = true
+                startContactEmailChooser()
+                analytics.sendEvent("AskForRating", "Dialog", "Send Email")
+            }
+            .setOnDismissListener {
+                remove()
+            }
+            .show()
     }
 
     private fun startContactEmailChooser() {
