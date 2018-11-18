@@ -41,7 +41,6 @@ class AskForRatingSettings @Inject constructor(
         }
     }
 
-
     private fun addAskForRatingPreference() {
         addPreferencesFromResource(R.xml.pref_ask_for_rating)
         preferenceCategory = findPreference(R.string.pref_key_category_ask_for_rating) as PreferenceCategory

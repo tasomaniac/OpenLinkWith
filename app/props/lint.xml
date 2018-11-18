@@ -34,4 +34,8 @@
   <issue id="SelectableText" severity="ignore" />
   <issue id="MissingRegistered" severity="ignore" />
 
+  <issue id="UnusedAttribute">
+    <ignore regexp="android:foreground"/>
+  </issue>
 </lint>
+                          
