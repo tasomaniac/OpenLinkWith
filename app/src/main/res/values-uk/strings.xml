@@ -37,6 +37,13 @@
   <string name="pref_entry_night_mode_on">Увімкнено</string>
   <string name="pref_title_category_clipboard">Скопійоване посилання</string>
   <string name="pref_title_clipboard">Натисніть аби відкрити за допомогою&#8230;</string>
+  <string name="pref_title_category_ask_for_rating">Like the app?</string>
+  <string name="pref_title_ask_for_rating">If you enjoy Open Link With, would you mind taking a minute to rate it? Thanks for the support!</string>
+  <string name="ask_for_rating_feedback">Feedback?</string>
+  <string name="ask_for_rating_feedback_message">Would you like to give me more details?</string>
+  <string name="ask_for_rating_feedback_email_subject">Feedback for Open Link With</string>
+  <string name="ask_for_rating_rating_positive_button">Rate</string>
+  <string name="ask_for_rating_rating_message">Please find “Rate this app” section in Play Store to give a rating.\n\nThanks for the support! 🎉</string>
   <string name="pref_title_category_advanced">Додатково</string>
   <string name="pref_title_features">Можливості додатку</string>
   <string name="pref_summary_features">Увімкнути деякі можливості</string>

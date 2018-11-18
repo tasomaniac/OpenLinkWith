@@ -36,6 +36,13 @@
   <string name="pref_entry_night_mode_on">打开</string>
   <string name="pref_title_category_clipboard">您复制的链接</string>
   <string name="pref_title_clipboard">选择打开该链接的应用</string>
+  <string name="pref_title_category_ask_for_rating">Like the app?</string>
+  <string name="pref_title_ask_for_rating">If you enjoy Open Link With, would you mind taking a minute to rate it? Thanks for the support!</string>
+  <string name="ask_for_rating_feedback">Feedback?</string>
+  <string name="ask_for_rating_feedback_message">Would you like to give me more details?</string>
+  <string name="ask_for_rating_feedback_email_subject">Feedback for Open Link With</string>
+  <string name="ask_for_rating_rating_positive_button">Rate</string>
+  <string name="ask_for_rating_rating_message">Please find “Rate this app” section in Play Store to give a rating.\n\nThanks for the support! 🎉</string>
   <string name="pref_title_category_advanced">Advanced</string>
   <string name="pref_title_features">App Features</string>
   <string name="pref_summary_features">Enable/Disable some feature</string>
@@ -99,7 +106,7 @@
     <strong>添加到主屏幕</strong> 以通过你喜欢的应用快速访问你喜欢的链接。
   ]]></string>
   <string name="description_tutorial_5"><![CDATA[
-    授权 <strong>查看使用情况</strong>，我能工作得更好。我会检测你的分享的源头浏览器，并采取相应的行动。  
+    授权 <strong>查看使用情况</strong>，我能工作得更好。我会检测你的分享的源头浏览器，并采取相应的行动。
   ]]></string>
   <string name="usage_access_give_access">授权</string>
   <string name="error">错误</string>

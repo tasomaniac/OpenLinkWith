@@ -36,11 +36,18 @@ Uklonite <strong>%1$s</strong> kao preferiranu aplikaciju za učitavanje <strong
   <string name="pref_entry_night_mode_on">Uključeno</string>
   <string name="pref_title_category_clipboard">Veza koju ste kopirali</string>
   <string name="pref_title_clipboard">Kliknite da biste se otvorili s&#8230;</string>
+  <string name="pref_title_category_ask_for_rating">Like the app?</string>
+  <string name="pref_title_ask_for_rating">If you enjoy Open Link With, would you mind taking a minute to rate it? Thanks for the support!</string>
+  <string name="ask_for_rating_feedback">Feedback?</string>
+  <string name="ask_for_rating_feedback_message">Would you like to give me more details?</string>
+  <string name="ask_for_rating_feedback_email_subject">Feedback for Open Link With</string>
+  <string name="ask_for_rating_rating_positive_button">Rate</string>
+  <string name="ask_for_rating_rating_message">Please find “Rate this app” section in Play Store to give a rating.\n\nThanks for the support! 🎉</string>
   <string name="pref_title_category_advanced">Napredno</string>
   <string name="pref_title_features">Značajke aplikacije</string>
   <string name="pref_summary_features">Omogući/onemogući neku značajku</string>
   <string name="pref_details_feature_add_to_homescreen"><![CDATA[
-    Upotrijebite <strong>Dodaj na početni zaslon</strong> kako biste brzo pristupili svojim omiljenim vezama sa svojim omiljenim aplikacijama.<br>    <br>   
+    Upotrijebite <strong>Dodaj na početni zaslon</strong> kako biste brzo pristupili svojim omiljenim vezama sa svojim omiljenim aplikacijama.<br>    <br>
     Kada je omogućeno, ova značajka dodaje <strong>Dodaj na početni zaslon</strong> na izbornik <strong>Dijeljenje</strong>.<br> Kada je odabrano, imat ćete opciju dodavanja dijeljene veze na svoj početni zaslon.  ]]></string>
   <string name="pref_title_feature_text_selection">Odabir teksta</string>
   <string name="pref_details_feature_text_selection"><![CDATA[
