@@ -17,10 +17,10 @@ internal class PreferredResolver @Inject constructor(
 ) {
 
     fun resolve(uri: Uri): Maybe<PreferredDisplayActivityInfo> {
-        val host: String? = uri.host
+        val host = uri.host
         if (host.isNullOrEmpty()) return Maybe.empty()
 
-        return appDao.preferredAppByHost(host!!)
+        return appDao.preferredAppByHost(host)
             .flatMap { app ->
                 Maybe.fromCallable {
                     app.resolve()?.let {
