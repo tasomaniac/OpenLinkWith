@@ -4,20 +4,20 @@ failFast: false
 test-pattern: # Configure exclusions for test sources
   active: true
   patterns: # Test file regexes
-  - '.*/test/.*'
-  - '.*Test.kt'
-  - '.*Spec.kt'
+    - '.*/test/.*'
+    - '.*Test.kt'
+    - '.*Spec.kt'
   exclude-rule-sets:
-  - 'comments'
+  -  'comments'
   exclude-rules:
-  - 'NamingRules'
-  - 'WildcardImport'
-  - 'MagicNumber'
-  - 'MaxLineLength'
-  - 'LateinitUsage'
-  - 'StringLiteralDuplication'
-  - 'SpreadOperator'
-  - 'TooManyFunctions'
+    - 'NamingRules'
+    - 'WildcardImport'
+    - 'MagicNumber'
+    - 'MaxLineLength'
+    - 'LateinitUsage'
+    - 'StringLiteralDuplication'
+    - 'SpreadOperator'
+    - 'TooManyFunctions'
 
 processors:
   active: true
@@ -164,11 +164,11 @@ exceptions:
   TooGenericExceptionThrown:
     active: true
     exceptions:
-    - Error
-    - Exception
-    - NullPointerException
-    - Throwable
-    - RuntimeException
+      - Error
+      - Exception
+      - NullPointerException
+      - Throwable
+      - RuntimeException
 
 naming:
   active: true

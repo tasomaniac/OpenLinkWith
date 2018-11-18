@@ -26,14 +26,13 @@ class TestSharedPreferences : SharedPreferences {
 
     override fun edit() = Editor()
 
-    override fun registerOnSharedPreferenceChangeListener(listener: SharedPreferences.OnSharedPreferenceChangeListener?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun registerOnSharedPreferenceChangeListener(
+        listener: SharedPreferences.OnSharedPreferenceChangeListener?
+    ) = Unit
 
-    override fun unregisterOnSharedPreferenceChangeListener(listener: SharedPreferences.OnSharedPreferenceChangeListener?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
+    override fun unregisterOnSharedPreferenceChangeListener(
+        listener: SharedPreferences.OnSharedPreferenceChangeListener?
+    ) = Unit
 
     inner class Editor : SharedPreferences.Editor {
         override fun clear() = apply { map.clear() }

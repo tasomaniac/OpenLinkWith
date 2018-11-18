@@ -20,24 +20,9 @@ class AskForRatingSettings @Inject constructor(
     private var preferenceCategory: PreferenceCategory? = null
 
     override fun setup() {
-        updateButton()
-    }
-
-    override fun release() {
-    }
-
-    private fun updateButton() {
-        val shouldDisplay = condition.shouldDisplay()
-
-        if (shouldDisplay.not() && isAdded()) {
-            remove()
-        }
-
-        if (shouldDisplay) {
-            if (!isAdded()) {
-                addAskForRatingPreference()
-                analytics.sendEvent("AskForRating", "Added", "New")
-            }
+        if (isNotDisplayed() && condition.shouldDisplay()) {
+            addAskForRatingPreference()
+            analytics.sendEvent("AskForRating", "Added", "New")
         }
     }
 
@@ -109,7 +94,7 @@ class AskForRatingSettings @Inject constructor(
         preferenceCategory = null
     }
 
-    private fun isAdded() = preferenceCategory != null
+    private fun isNotDisplayed() = preferenceCategory == null
 
     companion object {
         private val STORE_INTENT = Intent(
