@@ -3,6 +3,7 @@ package com.tasomaniac.openwith;
 import android.util.Log;
 import com.crashlytics.android.Crashlytics;
 import com.tasomaniac.openwith.settings.NightModePreferences;
+import com.tasomaniac.openwith.settings.rating.AskForRatingCondition;
 import dagger.android.support.DaggerApplication;
 import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
@@ -14,6 +15,7 @@ public class App extends DaggerApplication {
     private AppComponent component;
 
     @Inject NightModePreferences nightModePreferences;
+    @Inject AskForRatingCondition askForRatingCondition;
 
     @Override
     public void onCreate() {
@@ -26,6 +28,8 @@ public class App extends DaggerApplication {
         } else {
             Timber.plant(new Timber.DebugTree());
         }
+        
+        askForRatingCondition.notifyAppLaunch();
     }
 
     @Override

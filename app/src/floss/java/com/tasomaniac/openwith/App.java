@@ -1,6 +1,7 @@
 package com.tasomaniac.openwith;
 
 import com.tasomaniac.openwith.settings.NightModePreferences;
+import com.tasomaniac.openwith.settings.rating.AskForRatingCondition;
 import dagger.android.support.DaggerApplication;
 import timber.log.Timber;
 
@@ -11,6 +12,7 @@ public class App extends DaggerApplication {
     private AppComponent component;
 
     @Inject NightModePreferences nightModePreferences;
+    @Inject AskForRatingCondition askForRatingCondition;
 
     @Override
     public void onCreate() {
@@ -20,6 +22,8 @@ public class App extends DaggerApplication {
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
+
+        askForRatingCondition.notifyAppLaunch();
     }
 
     @Override

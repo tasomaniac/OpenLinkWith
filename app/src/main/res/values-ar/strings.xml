@@ -37,6 +37,13 @@
   <string name="pref_entry_night_mode_on">تشغيل</string>
   <string name="pref_title_category_clipboard">Link you copied</string>
   <string name="pref_title_clipboard">Click to open with&#8230;</string>
+  <string name="pref_title_category_ask_for_rating">Like the app?</string>
+  <string name="pref_title_ask_for_rating">If you enjoy Open Link With, would you mind taking a minute to rate it? Thanks for the support!</string>
+  <string name="ask_for_rating_feedback">Feedback?</string>
+  <string name="ask_for_rating_feedback_message">Would you like to give me more details?</string>
+  <string name="ask_for_rating_feedback_email_subject">Feedback for Open Link With</string>
+  <string name="ask_for_rating_rating_positive_button">Rate</string>
+  <string name="ask_for_rating_rating_message">Please find “Rate this app” section in Play Store to give a rating.\n\nThanks for the support! 🎉</string>
   <string name="pref_title_category_advanced">Advanced</string>
   <string name="pref_title_features">App Features</string>
   <string name="pref_summary_features">Enable/Disable some feature</string>
@@ -94,7 +101,7 @@
   <string name="description_tutorial_1">فأحياناً تضغط على رابط وبطريقة ما تجد نفسك في نهاية المطاف عالق في موقع إلكتروني بدلاً من مشاهدة المحتوى مباشرة في التطبيق الخاص به.</string>
   <string name="description_tutorial_2">فقط قم بمشاركة الرابط معي وسأقوم انا بفتح التطبيق المناسب من أجلك.</string>
   <string name="description_tutorial_3"><![CDATA[
-    اضغط <strong>دائماً</strong> لأقوم بفتح هذا الرابط دائماً بواسطة التطبيق المحدد. 
+    اضغط <strong>دائماً</strong> لأقوم بفتح هذا الرابط دائماً بواسطة التطبيق المحدد.
   ]]></string>
   <string name="description_tutorial_4"><![CDATA[
     <strong>أضف للشاشة الرئيسية</strong> كي تتمكن من الوصول السريع لروابطك المفضلة من خلال تطبيقاتك المفضلة.  ]]></string>

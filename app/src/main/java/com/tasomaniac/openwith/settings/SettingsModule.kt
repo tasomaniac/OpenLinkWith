@@ -11,6 +11,7 @@ import com.tasomaniac.openwith.settings.advanced.AdvancedSettings
 import com.tasomaniac.openwith.settings.advanced.DisableFeaturesSettings
 import com.tasomaniac.openwith.settings.advanced.usage.UsageAccessSettings
 import com.tasomaniac.openwith.settings.other.OtherSettings
+import com.tasomaniac.openwith.settings.rating.AskForRatingSettings
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.ElementsIntoSet
@@ -26,11 +27,12 @@ class SettingsModule {
     @Suppress("LongParameterList")
     fun settings(
         clipboard: ClipboardSettings,
+        askForRating: AskForRatingSettings,
         general: GeneralSettings,
         display: DisplaySettings,
         advanced: AdvancedSettings,
         other: OtherSettings
-    ): Set<Settings> = setOf(clipboard, general, display, advanced, other)
+    ): Set<Settings> = setOf(clipboard, askForRating, general, display, advanced, other)
 
     @Provides
     @ElementsIntoSet
