@@ -1,7 +1,7 @@
 .gradle
 /local.properties
 .DS_Store
-/build
+build
 /captures
 
 my-release-key.keystore
@@ -21,6 +21,7 @@ secrets.properties
 !.idea/inspectionProfiles/
 !.idea/scopes/
 !.idea/codeStyles
+!.idea/runConfigurations
 !.idea/encodings.xml
 !.idea/copyright/
 !.idea/dictionaries
