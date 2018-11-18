@@ -67,10 +67,12 @@ class AskForRatingSettings @Inject constructor(
             .setTitle(R.string.pref_title_category_ask_for_rating)
             .setMessage(R.string.ask_for_rating_rating_message)
             .setPositiveButton(R.string.ask_for_rating_rating_positive_button) { _, _ ->
+                analytics.sendEvent("AskForRating", "Dialog", "Play Store")
+            }
+            .setOnDismissListener {
                 context.startActivity(STORE_INTENT)
                 condition.alreadyShown = true
                 remove()
-                analytics.sendEvent("AskForRating", "Dialog", "Play Store")
             }
             .show()
     }
