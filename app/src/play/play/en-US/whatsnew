@@ -1,16 +1,14 @@
 Help translate the app into your language:
 https://crowdin.com/project/open-link-with
 
-v2.1
+v2.5
 
-Fixes with Browser selection.
+Chinese Traditional translations are added. Thanks Goldie Lin!
 
-v2.0
+Various bug fixes.
 
-NEW! Browser selection:
+v2.3 - New advanced feature:
 
-When a link shared with Open Link With, browsers are suggested in addition to the native apps. This behavior can now be modified.
+Setting OLW as a browser. With this feature, you don't need to share links. All link clicks will go through OLW, links will be un-shortened and will be open with the corresponding native apps.
 
-- None will never suggest browsers
-- Always ask will include all browsers (previous behavior)
-- Single browser will suggest only that selection
+This feature is disabled by default. Please go to Advanced section and enable.
