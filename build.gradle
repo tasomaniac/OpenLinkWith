@@ -4,7 +4,7 @@ buildscript {
 
     def versionMajor = 2
     def versionMinor = 5
-    def versionBuild = 2
+    def versionBuild = 3
 
     ext.versions = [
             compileSdk : 28,
@@ -14,7 +14,7 @@ buildscript {
 
             dagger     : '2.19',
             lifecycle  : '2.0.0',
-            kotlin     : '1.3.0',
+            kotlin     : '1.3.10',
             okHttp     : '3.11.0',
             room       : '2.0.0',
     ]
@@ -24,7 +24,6 @@ buildscript {
         google()
         mavenCentral()
         jcenter()
-        maven { url 'https://novoda.bintray.com/snapshots' }
         if (isPlay) {
             maven { url 'https://maven.fabric.io/public' }
         }
