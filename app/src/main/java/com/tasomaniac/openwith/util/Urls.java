@@ -21,7 +21,8 @@ public final class Urls {
             new EbayFixer(),
             new AmazonFixer(),
             new DailyMailFixer(),
-            new VkFixer()
+            new VkFixer(),
+            new WashingtonPostFixer()
     )));
     private static final Pattern URL_PATTERN = Pattern.compile("\\b((?:[a-z][\\w-]+:(?:/{1,3}|[a-z0-9%])|www\\d{0,3}[.]|[a-z0-9.\\-]+[.][a-z]{2,4}/)(?:[^\\s()<>]+|\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\))+(?:\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\)|[^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]))", Pattern.CASE_INSENSITIVE);
 
@@ -201,6 +202,14 @@ public final class Urls {
         @Override
         public String fix(String url) {
             return url.replace("//m.vk.com", "//vk.com");
+        }
+    }
+
+    private static class WashingtonPostFixer implements Fixer {
+        @Override public String fix(String url) {
+            return url
+                    .replace("http://www.washingtonpost.com", "wp-android://www.washingtonpost.com")
+                    .replace("https://www.washingtonpost.com", "wp-android://www.washingtonpost.com");
         }
     }
 
