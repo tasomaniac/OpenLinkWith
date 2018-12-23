@@ -42,6 +42,7 @@ class RedirectFixActivity : DaggerAppCompatActivity() {
                 Maybe.fromCallable<HttpUrl> { it.toHttpUrl() }
             }
             .compose(redirectTransformer)
+            .map { fixUrls(it.toString()) }
             .map { source.withUrl(it) }
             .defaultIfEmpty(source)
             .compose(schedulingStrategy.forMaybe())
@@ -75,7 +76,7 @@ class RedirectFixActivity : DaggerAppCompatActivity() {
                 .setData(Uri.parse(fixUrls(foundUrl)))
         }
 
-        private fun Intent.withUrl(url: HttpUrl): Intent = setData(Uri.parse(url.toString()))
+        private fun Intent.withUrl(url: String): Intent = setData(Uri.parse(url))
 
         private fun Intent.toHttpUrl() = HttpUrl.parse(dataString!!)
     }
