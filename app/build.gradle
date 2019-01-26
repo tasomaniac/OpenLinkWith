@@ -7,17 +7,12 @@ apply plugin: 'com.novoda.build-properties'
 apply plugin: 'com.novoda.static-analysis'
 apply plugin: 'io.gitlab.arturbosch.detekt'
 apply plugin: 'org.jlleitschuh.gradle.ktlint'
-if (isPlay) {
-  apply plugin: 'com.github.triplet.play'
-  apply plugin: 'io.fabric'
-}
 
 buildProperties {
-  signing.using(file('props/release.signing')) | file('props/debug.signing')
-  secrets.using(file('props/secrets.properties'))
+  signing.using(configFile('release.signing')) | configFile('debug.signing')
+  secrets.using(configFile('secrets.properties'))
 }
 
-def secrets = buildProperties.secrets
 def gitSha = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
 
 android {
@@ -35,10 +30,10 @@ android {
   }
 
   signingConfigs {
-    debug.storeFile file('props/debug.keystore')
+    debug.storeFile configFile('debug.keystore')
     release {
       def signing = buildProperties.signing
-      storeFile file("props/${signing['storeFile'].string}")
+      storeFile configFile(signing['storeFile'].string)
       storePassword signing['storePassword'].string
       keyAlias signing['keyAlias'].string
       keyPassword signing['keyPassword'].string
@@ -83,7 +78,7 @@ staticAnalysis {
   }
 
   detekt {
-    config = files('props/detekt.yml')
+    config = files(configFile('detekt.yml'))
   }
 
   ktlint {
@@ -102,7 +97,7 @@ staticAnalysis {
 
     if (System.env.TRAVIS_BRANCH != 'master') ignore 'MissingTranslation'
 
-    lintConfig file('props/lint.xml')
+    lintConfig configFile('lint.xml')
 
     includeVariants { it.name == 'flossDebug' }
   }
@@ -123,11 +118,8 @@ androidExtensions {
 }
 
 if (isPlay) {
-  play {
-    serviceAccountEmail = secrets['play_service_account'].or('').string
-    pk12File = file(secrets['play_key_file'].or('no_file.p12').string)
-    track = 'internal'
-  }
+  apply from: configFile('fabric.gradle')
+  apply from: configFile('play-publish.gradle')
 }
 
 configurations {
@@ -168,8 +160,6 @@ dependencies {
   implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
   implementation 'io.reactivex.rxjava2:rxjava:2.2.4'
   implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
-
-  playImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.8'
 
   testImplementation 'junit:junit:4.12'
   testImplementation 'org.assertj:assertj-core:3.11.1'

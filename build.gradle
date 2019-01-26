@@ -1,10 +1,14 @@
 buildscript {
     ext.ci = 'true' == System.getenv('CI')
     ext.isPlay = project.hasProperty('play')
+    ext.configFile = { fileName ->
+        rootProject.file("gradle/$fileName")
+    }
 
     def versionMajor = 2
     def versionMinor = 5
     def versionBuild = 5
+    ext.playPublishTrack = 'internal'
 
     ext.versions = [
             compileSdk : 28,
@@ -33,10 +37,10 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.0-alpha09'
+        classpath 'com.android.tools.build:gradle:3.5.0-alpha02'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.20.0'
-        classpath 'com.github.triplet.gradle:play-publisher:1.2.2'
+        classpath 'com.github.triplet.gradle:play-publisher:2.0.0'
         classpath 'com.novoda:gradle-android-command-plugin:2.0.1'
         classpath 'com.novoda:gradle-build-properties-plugin:0.4.1'
         classpath 'io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.0.0-RC12'

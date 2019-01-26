@@ -1,0 +1,10 @@
+Help translate the app into your language:
+https://crowdin.com/project/open-link-with
+
+v2.5
+Added a fix for The Washington Post links.
+
+Various bug fixes.
+Chinese Traditional translations are added. Thanks Goldie Lin!
+
+<strong>Tip:</strong> Did you know that you can set OLW as a browser. With this feature, you don't need to share links. All link clicks will go through OLW, links will be un-shortened and will be open with the corresponding native apps. Go to Advanced to enable.

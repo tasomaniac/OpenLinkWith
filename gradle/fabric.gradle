@@ -1,0 +1,11 @@
+apply plugin: 'io.fabric'
+
+android.buildTypes {
+    debug {
+        ext.enableCrashlytics = false
+    }
+}
+
+dependencies {
+    playImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.8'
+}
