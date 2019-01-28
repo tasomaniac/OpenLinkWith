@@ -12,8 +12,8 @@
   <string name="desc_preferred_empty">Перевага додатків, які будуть використовуватися першочергово, коли зазначене посилання сумісне з цією програмою.\n\nВи можете обрати бажаний додаток, поширивши посилання у цей додаток, а потім оберіть \“Завжди\”</string>
   <string name="title_remove_preferred">Видалити обраними?</string>
   <string name="message_remove_preferred"><![CDATA[    
-Видалити <strong>%1$s</strong> додаток з обробраних та завантажити <strong>%2$s</strong> посилання з? <br><br><strong>Примітка:</strong> ви можете обрати новий додато для використання наступного разу, коли ви поширите <strong>%3$s</strong> посилання.
-]]></string>
+    Видалити <strong>%1$s</strong> додаток з обробраних та завантажити <strong>%2$s</strong> посилання з? <br><br><strong>Примітка:</strong> ви можете обрати новий додато для використання наступного разу, коли ви поширите <strong>%3$s</strong> посилання.
+  ]]></string>
   <string name="error_invalid_url">Посилання не містить дійсного посилання.</string>
   <string name="empty_resolver_activity">Не знайдено інших програм для даного посилання.</string>
   <string name="warning_open_link_with_name">Відкриття посилання з %s.</string>
@@ -100,12 +100,15 @@
   <string name="description_tutorial_0">Я допомагатиму Вам в тому випадку,  коли Ваші браузери зависатимуть.</string>
   <string name="description_tutorial_1">Використання коротких посилань спричиняє зависання замість перегляду відео.</string>
   <string name="description_tutorial_2">Використавши Поширити через мене,  дозволить Вам обирати яку програму використати для відкривання.</string>
-  <string name="description_tutorial_3"><![CDATA[Виберіть ЗАВЖДИ показувати мені відкрити посилання через спеціальні програми.   ]]></string>
+  <string name="description_tutorial_3"><![CDATA[
+    Виберіть ЗАВЖДИ показувати мені відкрити посилання через спеціальні програми.
+  ]]></string>
   <string name="description_tutorial_4"><![CDATA[
-Додати на Головний екран швидкий доступ улюблених посилань через мої програми.  ]]></string>
+    Додати на Головний екран швидкий доступ улюблених посилань через мої програми.
+  ]]></string>
   <string name="description_tutorial_5"><![CDATA[
-Надати доступ до <strong>Використання доступу</strong> і я буду працювати краще. Я обов\'язково виявлю браузер який Ви зазвичай використовуєте.
-]]></string>
+    Надати доступ до <strong>Використання доступу</strong> і я буду працювати краще. Я обов\'язково виявлю браузер який Ви зазвичай використовуєте.
+  ]]></string>
   <string name="usage_access_give_access">Надати доступ</string>
   <string name="error">Помилка</string>
   <string name="next">Далі</string>

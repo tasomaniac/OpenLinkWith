@@ -99,12 +99,14 @@
   <string name="description_tutorial_1">Kliknąłeś link i dziwnym trafem znalazłeś się na jakiejś stronie zamiast bezpośrednio obejrzeć film.</string>
   <string name="description_tutorial_2">Podziel się tym ze mną, a ja dla Ciebie przełączę aplikację.</string>
   <string name="description_tutorial_3"><![CDATA[
-Naciśnij przycisk <strong>ZAWSZE</strong>, a ja zapamiętam Twój wybór i zawszę będę otwierał ten link we wskazanej przez Ciebie aplikacji.
+    Naciśnij przycisk <strong>ZAWSZE</strong>, a ja zapamiętam Twój wybór i zawszę będę otwierał ten link we wskazanej przez Ciebie aplikacji.
   ]]></string>
   <string name="description_tutorial_4"><![CDATA[
-<strong>Dodaj do ekranu głównego</strong>, aby szybko przechodzić do ulubionych linków z ulubionych aplikacji.  ]]></string>
+    <strong>Dodaj do ekranu głównego</strong>, aby szybko przechodzić do ulubionych linków z ulubionych aplikacji.
+  ]]></string>
   <string name="description_tutorial_5"><![CDATA[
-Aby aplikacja działała poprawnie, potrzebuje <strong>DOSTĘPU DO UŻYCIA</strong>. Automatycznie wykryję z jakiej korzystasz przeglądarki i ustawię odpowiednie funkcje.  ]]></string>
+    Aby aplikacja działała poprawnie, potrzebuje <strong>DOSTĘPU DO UŻYCIA</strong>. Automatycznie wykryję z jakiej korzystasz przeglądarki i ustawię odpowiednie funkcje.
+  ]]></string>
   <string name="usage_access_give_access">Zapewnić Dostęp</string>
   <string name="error">Błąd</string>
   <string name="next">Dalej</string>

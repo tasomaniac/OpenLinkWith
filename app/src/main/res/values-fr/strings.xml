@@ -12,7 +12,8 @@
   <string name="desc_preferred_empty">Applications préférées à utiliser lorsque les liens ci-dessous sont partagés avec cette application.\n\nVous pouvez définir des applications préférées en partageant des liens avec cette application et en choisissant \“Toujours\”</string>
   <string name="title_remove_preferred">Supprimer l\'application préférée?</string>
   <string name="message_remove_preferred"><![CDATA[
-Ne plus ouvrir les liens de <strong>%2$s</strong> avec <strong>%1$s</strong> ? <br><br><strong>Note:</strong>Vous pouvez définir une nouvelle application préférée à utiliser pour les prochains lien de <strong>%3$s</strong>.    ]]></string>
+    Ne plus ouvrir les liens de <strong>%2$s</strong> avec <strong>%1$s</strong> ? <br><br><strong>Note:</strong>Vous pouvez définir une nouvelle application préférée à utiliser pour les prochains lien de <strong>%3$s</strong>.
+  ]]></string>
   <string name="error_invalid_url">Le contenu partagé n\'avait aucune URL valide.</string>
   <string name="empty_resolver_activity">Aucune autre application n\'a été trouvé pour gérer l\'URL.</string>
   <string name="warning_open_link_with_name">Ouverture du lien avec %s.</string>
@@ -106,7 +107,7 @@ Ne plus ouvrir les liens de <strong>%2$s</strong> avec <strong>%1$s</strong> ? <
     <strong>Ajouter à l\'écran d\'accueil</strong>pour rapidement avoir accès à vos liens préférés avec vos applications préférées.
   ]]></string>
   <string name="description_tutorial_5"><![CDATA[
-Donnez moi l\'accès au <strong>HABITUDES D\'UTILISATION</strong> et je fonctionnerai mieux. Je détecterai avec quel navigateur vous partagez pour agir en conséquence.
+    Donnez moi l\'accès au <strong>HABITUDES D\'UTILISATION</strong> et je fonctionnerai mieux. Je détecterai avec quel navigateur vous partagez pour agir en conséquence.
   ]]></string>
   <string name="usage_access_give_access">Donnez l\'accès</string>
   <string name="error">Erreur</string>

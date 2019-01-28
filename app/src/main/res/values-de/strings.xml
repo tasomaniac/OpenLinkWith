@@ -51,9 +51,9 @@
     When enabled, this feature adds <strong>Add to Home screen</strong> to your system <strong>Share</strong> menu.<br>
     When selected you will have an option to add the shared link into your home screen.
   ]]></string>
+  <string name="pref_title_feature_text_selection">Textauswahl</string>
   <string name="pref_details_feature_text_selection"><![CDATA[
     When enabled, this feature adds <strong>Open With</strong> option into system level text selection pop-up.<br>
-  <string name="pref_title_feature_text_selection">Textauswahl</string>
     <br>
     This feature can be useful in situations where sharing link is not feasible. When link is already visible in a text field, long click to select the text with the link and click <strong>Open With</strong>.
   ]]></string>
@@ -99,11 +99,14 @@
   <string name="description_tutorial_1">Du clickst ein short-link an und landest irrgendwie auf einer Seite statt du das Video direkt dir anschaust.</string>
   <string name="description_tutorial_2">Teil es einfach mit mir, und ich werde für dich die Apps wechseln.</string>
   <string name="description_tutorial_3"><![CDATA[
-     Wählen Sie <strong>immer öffnen</strong> um einen Link immer mit der spezifischen App zu öffnen.   ]]></string>
+    Wählen Sie <strong>immer öffnen</strong> um einen Link immer mit der spezifischen App zu öffnen.
+  ]]></string>
   <string name="description_tutorial_4"><![CDATA[
- <strong>Zum Startbildschirm hinzufügen</strong>, um deine Lieblingslinks direkt mit der passenden App vom Startbildschirm aus zu starten.  ]]></string>
+    <strong>Zum Startbildschirm hinzufügen</strong>, um deine Lieblingslinks direkt mit der passenden App vom Startbildschirm aus zu starten.
+  ]]></string>
   <string name="description_tutorial_5"><![CDATA[
-Zugriff auf <strong>Nutzer Zugriff</strong> gewähren und ich werde besser arbeiten. Ich erkenne den Browser, den sie benutzen um entsprend zu funktionieren.  ]]></string>
+    Zugriff auf <strong>Nutzer Zugriff</strong> gewähren und ich werde besser arbeiten. Ich erkenne den Browser, den sie benutzen um entsprend zu funktionieren.
+  ]]></string>
   <string name="usage_access_give_access">Zugriff erlauben</string>
   <string name="error">Fehler</string>
   <string name="next">Weiter</string>

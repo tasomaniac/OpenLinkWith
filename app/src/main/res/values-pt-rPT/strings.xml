@@ -12,7 +12,8 @@
   <string name="desc_preferred_empty">Aplicações pré-definidas para serem usadas diretamente quando as ligações são partilhadas com esta aplicação.\n\nPode definir aplicações pré-definidas se partilhar as ligações com esta aplicação e escolher \“Sempre\”</string>
   <string name="title_remove_preferred">Remover predefinição?</string>
   <string name="message_remove_preferred"><![CDATA[
-Remover <strong>%1$s</strong> como a aplicação predefinida para abrir ligações de <strong>%2$s</strong>? <br><br><strong>Nota:</strong> pode definir uma nova aplicação predefinida para usar na próxima vez que partilhar o link <strong>%3$s</strong>.    ]]></string>
+    Remover <strong>%1$s</strong> como a aplicação predefinida para abrir ligações de <strong>%2$s</strong>? <br><br><strong>Nota:</strong> pode definir uma nova aplicação predefinida para usar na próxima vez que partilhar o link <strong>%3$s</strong>.
+  ]]></string>
   <string name="error_invalid_url">O conteúdo partilhado não tinha quaisquer URLs válidos.</string>
   <string name="empty_resolver_activity">Nenhuma outra aplicação encontrada para lidar com a URL.</string>
   <string name="warning_open_link_with_name">Abrir ligação com %s.</string>
@@ -100,11 +101,14 @@ Remover <strong>%1$s</strong> como a aplicação predefinida para abrir ligaçõ
   <string name="description_tutorial_1">Você clica numa ligação e de alguma forma acaba por ficar preso na página web ao invés de assistir ao vídeo diretamente.</string>
   <string name="description_tutorial_2">Basta partilhar comigo e irei mudar de aplicação.</string>
   <string name="description_tutorial_3"><![CDATA[
-Selecione <strong>sempre</strong> para abrir essa ligação com um aplicação específica.  ]]></string>
+    Selecione <strong>sempre</strong> para abrir essa ligação com um aplicação específica.
+  ]]></string>
   <string name="description_tutorial_4"><![CDATA[
-<strong>Adicionar ao ecrã principal</strong> para aceder rapidamente aos seus links favoritos com as suas aplicações favoritas.  ]]></string>
+    <strong>Adicionar ao ecrã principal</strong> para aceder rapidamente aos seus links favoritos com as suas aplicações favoritas.
+  ]]></string>
   <string name="description_tutorial_5"><![CDATA[
-Dê acesso a <strong>Acesso de utilização</strong> e irei trabalhar melhor. Vou detectar o navegador que está a usar para agir em conformidade.  ]]></string>
+    Dê acesso a <strong>Acesso de utilização</strong> e irei trabalhar melhor. Vou detectar o navegador que está a usar para agir em conformidade.
+  ]]></string>
   <string name="usage_access_give_access">Conceder acesso</string>
   <string name="error">Erro</string>
   <string name="next">Seguinte</string>

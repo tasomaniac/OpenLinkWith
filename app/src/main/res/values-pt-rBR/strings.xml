@@ -12,8 +12,8 @@
   <string name="desc_preferred_empty">Aplicativos para serem usados diretamente quando os links abaixo forem compartilhados com este app.\n\nVocê pode definir os apps preferidos compartilhando links com este app e escolhendo a opção \“Sempre\”</string>
   <string name="title_remove_preferred">Remover preferido?</string>
   <string name="message_remove_preferred"><![CDATA[
-Remover <strong>%1$s</strong> como aplicativo preferencial para abrir links de <strong>%2$s</strong>?<br><br><strong>Nota:</strong> Você pode definir um novo app preferido na próxima vez em que compartilhar um link de <strong>%3$s</strong>.
-    ]]></string>
+    Remover <strong>%1$s</strong> como aplicativo preferencial para abrir links de <strong>%2$s</strong>?<br><br><strong>Nota:</strong> Você pode definir um novo app preferido na próxima vez em que compartilhar um link de <strong>%3$s</strong>.
+  ]]></string>
   <string name="error_invalid_url">O conteúdo compartilhado não tinha nenhuma URL válida.</string>
   <string name="empty_resolver_activity">Nenhum outro aplicativo encontrado para manusear a URL.</string>
   <string name="warning_open_link_with_name">Abrindo link com %s.</string>
@@ -102,9 +102,11 @@ Remover <strong>%1$s</strong> como aplicativo preferencial para abrir links de <
     Escolha <strong>SEMPRE</strong> para me dizer que o link deve ser sempre aberto com um aplicativo específico.
   ]]></string>
   <string name="description_tutorial_4"><![CDATA[
-<strong>Adicione à tela inicial</strong> para acessar rapidamente os seus links favoritos com seus apps favoritos.  ]]></string>
+    <strong>Adicione à tela inicial</strong> para acessar rapidamente os seus links favoritos com seus apps favoritos.
+  ]]></string>
   <string name="description_tutorial_5"><![CDATA[
-Dê permissão ao <strong>ACESSO DE USO</strong> e eu vou funcionar melhor. Vou detectar de qual navegador você está compartilhando para executar a ação certa.  ]]></string>
+    Dê permissão ao <strong>ACESSO DE USO</strong> e eu vou funcionar melhor. Vou detectar de qual navegador você está compartilhando para executar a ação certa.
+  ]]></string>
   <string name="usage_access_give_access">Permitir Acesso</string>
   <string name="error">Erro</string>
   <string name="next">Seguinte</string>

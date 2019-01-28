@@ -12,7 +12,8 @@
   <string name="desc_preferred_empty">Các ứng dụng được ưu tiên sẽ được sử dụng để mở ngay khi bạn chia sẻ liên kết từ trang web bạn đã chọn.\n\nĐặt ứng dụng ưu tiên bằng cách chia sẻ liên kết với ứng dụng này và sau đó chọn \“Luôn luôn\”</string>
   <string name="title_remove_preferred">Gỡ khỏi danh sách ưu tiên?</string>
   <string name="message_remove_preferred"><![CDATA[
-Không dùng <strong>%1$s</strong> làm ứng dụng ưu tiên để mở đường dẫn <strong>%2$s</strong>?<br><br><strong>Lưu ý:</strong>Bạn có thể thiệt lập một ứng dụng ưu tiên mới để mở <strong>%3$s</strong> trong lần tiếp theo bạn chia sẻ nó.    ]]></string>
+    Không dùng <strong>%1$s</strong> làm ứng dụng ưu tiên để mở đường dẫn <strong>%2$s</strong>?<br><br><strong>Lưu ý:</strong>Bạn có thể thiệt lập một ứng dụng ưu tiên mới để mở <strong>%3$s</strong> trong lần tiếp theo bạn chia sẻ nó.
+  ]]></string>
   <string name="error_invalid_url">Nội dung được chia sẻ không phải là một đường dẫn hợp lệ.</string>
   <string name="empty_resolver_activity">Không tìm thấy ứng dụng nào có thể mở đường dẫn bạn chọn.</string>
   <string name="warning_open_link_with_name">Mở liên kết với %s.</string>
@@ -100,11 +101,14 @@ Không dùng <strong>%1$s</strong> làm ứng dụng ưu tiên để mở đư�
   <string name="description_tutorial_1">Bạn nhấp vào liên kết rút gọn và bạn phải xem nó trong trình duyệt thay vì trong một ứng dụng hỗ trợ mà bạn có.</string>
   <string name="description_tutorial_2">Chỉ cần chia sẻ liên kết với tôi và tôi sẽ mở nó bằng ứng dụng bạn cần.</string>
   <string name="description_tutorial_3"><![CDATA[
-Chọn <strong>LUÔN LUÔN</strong> để cho tôi biết bạn sẽ luôn luôn mở liên kết đó với một ứng dụng cụ thể.  ]]></string>
+    Chọn <strong>LUÔN LUÔN</strong> để cho tôi biết bạn sẽ luôn luôn mở liên kết đó với một ứng dụng cụ thể.
+  ]]></string>
   <string name="description_tutorial_4"><![CDATA[
-<strong>Thêm vào Màn hình chính</strong> để nhanh chóng truy cập các liên kết ưa thích của bạn với các ứng dụng mà bạn ưa thích.  ]]></string>
+    <strong>Thêm vào Màn hình chính</strong> để nhanh chóng truy cập các liên kết ưa thích của bạn với các ứng dụng mà bạn ưa thích.
+  ]]></string>
   <string name="description_tutorial_5"><![CDATA[
-Cấp quyền <strong>Truy cập sử dụng</strong> và tôi sẽ làm việc tốt hơn. Tôi sẽ phát hiện được trình duyệt bạn đang chia sẻ để có hành động phù hợp.  ]]></string>
+    Cấp quyền <strong>Truy cập sử dụng</strong> và tôi sẽ làm việc tốt hơn. Tôi sẽ phát hiện được trình duyệt bạn đang chia sẻ để có hành động phù hợp.
+  ]]></string>
   <string name="usage_access_give_access">Cấp quyền</string>
   <string name="error">Lỗi</string>
   <string name="next">Tiếp theo</string>

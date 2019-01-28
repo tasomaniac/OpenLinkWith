@@ -36,18 +36,18 @@
   <string name="pref_entry_night_mode_on">オン</string>
   <string name="pref_title_category_clipboard">リンクがコピーされました</string>
   <string name="pref_title_clipboard">クリックして開く&#8230;</string>
-  <string name="pref_title_category_ask_for_rating">Like the app?</string>
-  <string name="pref_title_ask_for_rating">If you enjoy Open Link With, would you mind taking a minute to rate it? Thanks for the support!</string>
-  <string name="ask_for_rating_feedback">Feedback?</string>
-  <string name="ask_for_rating_feedback_message">Would you like to give me more details?</string>
-  <string name="ask_for_rating_feedback_email_subject">Feedback for Open Link With</string>
-  <string name="ask_for_rating_rating_positive_button">Rate</string>
-  <string name="ask_for_rating_rating_message">Please find “Rate this app” section in Play Store to give a rating.\n\nThanks for the support! 🎉</string>
+  <string name="pref_title_category_ask_for_rating">気にいっていただけましたか?</string>
+  <string name="pref_title_ask_for_rating">Open Link を気に入っていただけたら、評価していただけませんか? サポートをありがとうございます!</string>
+  <string name="ask_for_rating_feedback">フィードバックしますか?</string>
+  <string name="ask_for_rating_feedback_message">詳しく教えていただけますか?</string>
+  <string name="ask_for_rating_feedback_email_subject">Open Link With のフィードバック</string>
+  <string name="ask_for_rating_rating_positive_button">評価</string>
+  <string name="ask_for_rating_rating_message">Play ストアで “このアプリを評価” の項目を探して評価してください。\n\nサポートいただきありがとうございます! 🎉</string>
   <string name="pref_title_category_advanced">詳細</string>
   <string name="pref_title_features">アプリ機能</string>
   <string name="pref_summary_features">いくつかの機能を有効/無効にします</string>
   <string name="pref_details_feature_add_to_homescreen"><![CDATA[
-<strong>ホーム画面に追加</strong> を使用すると、お気に入りのアプリでお気に入りのリンクにすばやくアクセスできます。<br>
+    <strong>ホーム画面に追加</strong> を使用すると、お気に入りのアプリでお気に入りのリンクにすばやくアクセスできます。<br>
     <br>
     有効にすると、この機能によりお使いのシステムの <strong>共有</strong> メニューに <strong>ホーム画面に追加</strong> を追加します。<br>
     選択すると、ホーム画面に共有のリンクを追加するオプションが表示されます。

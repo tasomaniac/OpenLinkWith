@@ -13,7 +13,8 @@
   <string name="title_remove_preferred">Удалить предпочтение?</string>
   <string name="message_remove_preferred"><![CDATA[
     Удалить <strong>%1$s</strong> как предпочитаемое приложение для загрузки <strong>%2$s</strong> ссылок? <br><br>
-<strong>Примечание:</strong>Вы можете выбрать новое предпочитаемое приложение, поделившись ссылкой <strong>%3$s</strong> в следующий раз.    ]]></string>
+    <strong>Примечание:</strong>Вы можете выбрать новое предпочитаемое приложение, поделившись ссылкой <strong>%3$s</strong> в следующий раз.
+  ]]></string>
   <string name="error_invalid_url">Контент, которым вы поделились, не содержит действительных ссылок.</string>
   <string name="empty_resolver_activity">Не найдены другие приложения для работы с этой ссылкой.</string>
   <string name="warning_open_link_with_name">Открыть ссылку с помощью %s.</string>
@@ -103,13 +104,14 @@
   <string name="description_tutorial_1">Вы нажимаете на короткую ссылку и застреваете в браузере вместо того, чтобы использовать для этого приложение.</string>
   <string name="description_tutorial_2">Просто поделитесь этим со мной и я переключу приложение для вас.</string>
   <string name="description_tutorial_3"><![CDATA[
-Выберите <strong>ВСЕГДА</strong>, чтобы сообщите мне какие ссылки всегда нужно открывать в этом приложении.
+    Выберите <strong>ВСЕГДА</strong>, чтобы сообщите мне какие ссылки всегда нужно открывать в этом приложении.
   ]]></string>
   <string name="description_tutorial_4"><![CDATA[
     <strong>Добавить на рабочий стол</strong> для быстрого доступа к вашим любимым ссылкам с помощью любимых приложений.
   ]]></string>
   <string name="description_tutorial_5"><![CDATA[
-Дайте доступ к <strong>СТАТИСТИКЕ ИСПОЛЬЗОВАНИЯ</strong> и я смогу работать лучше. Я буду обнаруживать браузер из которого вы делитесь для соответствия.  ]]></string>
+    Дайте доступ к <strong>СТАТИСТИКЕ ИСПОЛЬЗОВАНИЯ</strong> и я смогу работать лучше. Я буду обнаруживать браузер из которого вы делитесь для соответствия.
+  ]]></string>
   <string name="usage_access_give_access">Предоставить доступ</string>
   <string name="error">Ошибка</string>
   <string name="next">Далее</string>

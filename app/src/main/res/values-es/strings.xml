@@ -9,25 +9,26 @@
   <string name="which_view_application_named">Abrir con %1$s</string>
   <string name="title_preferred_apps">Apps Preferidas</string>
   <string name="desc_preferred">Aplicaciones preferidas para ser usadas directamente cuando los enlaces siguientes son compartidos con esta app.\n\n Toca para quitar una app preferida.</string>
-  <string name="desc_preferred_empty">Aplicaciones preferidas para ser usadas directamente cuando los siguientes enlaces son compartidos con esta app.\n\nuedes seleccionar las apps preferidas compartiendo enlaces con esta app y luego eligiendo \“Siempre\”</string>
+  <string name="desc_preferred_empty">Aplicaciones preferidas para ser usadas directamente cuando los siguientes enlaces son compartidos con esta aplicación.\n\nPuedes seleccionar las aplicaciones preferidas compartiendo enlaces con esta aplicación y luego eligiendo \“Siempre\”</string>
   <string name="title_remove_preferred">¿Borrar preferida?</string>
   <string name="message_remove_preferred"><![CDATA[
-Eliminar <strong>%1$s</strong> como app preferida para cargar los enlaces de <strong>%2$s</strong>?<br><br><strong>Nota:</strong> Puedes seleccionar una nueva app preferida para usar la próxima vez que compartas el enlace <strong>%3$s</strong>.    ]]></string>
+    Eliminar <strong>%1$s</strong> como aplicación preferida para cargar los enlaces de <strong>%2$s</strong>?<br><br><strong>Nota:</strong> Puedes seleccionar una nueva aplicación preferida para usar la próxima vez que compartas el enlace <strong>%3$s</strong>.
+  ]]></string>
   <string name="error_invalid_url">El contenido compartido no tenía ninguna URL válida.</string>
   <string name="empty_resolver_activity">Ninguna otra aplicación encontrada para manejar esta URL.</string>
-  <string name="warning_open_link_with_name">Abrir link con %s.</string>
+  <string name="warning_open_link_with_name">Abrir enlace con %s.</string>
   <string name="done">Hecho</string>
   <string name="pref_title_general">General</string>
   <string name="pref_title_about">Acerca de</string>
   <string name="pref_summary_about">Ver el tutorial de nuevo.</string>
   <string name="pref_summary_preferred">Cambiar ajustes de app preferida.</string>
-  <string name="browser_title">Browsers</string>
-  <string name="browser_description">When a link shared with Open Link With, browsers are suggested in addition to the native apps.\n\nSelect below to modify this behavior.</string>
-  <string name="browser_none">Hide browsers</string>
-  <string name="browser_none_description">Never suggest browsers. Only native apps</string>
-  <string name="browser_always_ask">Always ask</string>
-  <string name="browser_always_ask_description">Include all browsers into suggested apps list</string>
-  <string name="pref_summary_selected_browser">Only %s will be suggested</string>
+  <string name="browser_title">Navegadores</string>
+  <string name="browser_description">Cuando un enlace compartido con Open Link With, los navegadores se sugieren además de la aplicación nativa.\n\nSelect a continuación para modificar este comportamiento.</string>
+  <string name="browser_none">Ocultar los navegadores</string>
+  <string name="browser_none_description">Nunca sugerir los navegadores. Sólo las aplicaciones nativas</string>
+  <string name="browser_always_ask">Preguntar siempre</string>
+  <string name="browser_always_ask_description">Incluir todos los navegadores en la lista de aplicaciones sugeridas</string>
+  <string name="pref_summary_selected_browser">Se sugerirán solamente %s</string>
   <string name="pref_title_usage_stats">Estadísticas de uso</string>
   <string name="pref_summary_usage_stats">Mejorar la precisión de la aplicación dando acceso a las Estadísticas de Uso.</string>
   <string name="pref_title_category_display">Pantalla</string>
@@ -36,52 +37,51 @@ Eliminar <strong>%1$s</strong> como app preferida para cargar los enlaces de <st
   <string name="pref_entry_night_mode_on">Encendido</string>
   <string name="pref_title_category_clipboard">Enlace que copiaste</string>
   <string name="pref_title_clipboard">Clic para abrir con&#8230;</string>
-  <string name="pref_title_category_ask_for_rating">Like the app?</string>
-  <string name="pref_title_ask_for_rating">If you enjoy Open Link With, would you mind taking a minute to rate it? Thanks for the support!</string>
-  <string name="ask_for_rating_feedback">Feedback?</string>
-  <string name="ask_for_rating_feedback_message">Would you like to give me more details?</string>
-  <string name="ask_for_rating_feedback_email_subject">Feedback for Open Link With</string>
-  <string name="ask_for_rating_rating_positive_button">Rate</string>
-  <string name="ask_for_rating_rating_message">Please find “Rate this app” section in Play Store to give a rating.\n\nThanks for the support! 🎉</string>
-  <string name="pref_title_category_advanced">Advanced</string>
-  <string name="pref_title_features">App Features</string>
-  <string name="pref_summary_features">Enable/Disable some feature</string>
+  <string name="pref_title_category_ask_for_rating">¿Te gusta la aplicación?</string>
+  <string name="pref_title_ask_for_rating">Si te gusta Open Link With, ¿Te importaría tomar un minuto para votar? ¡Gracias por el apoyo!</string>
+  <string name="ask_for_rating_feedback">¿Comentarios?</string>
+  <string name="ask_for_rating_feedback_message">¿Quieres darme más detalles?</string>
+  <string name="ask_for_rating_feedback_email_subject">Retroalimentación para Open Link With</string>
+  <string name="ask_for_rating_rating_positive_button">Valorar</string>
+  <string name="ask_for_rating_rating_message">Busca la sección \"Calificar esta aplicación\" en la Play Store para dar un rating.\n\nGracias por el apoyo! 🎉</string>
+  <string name="pref_title_category_advanced">Avanzado</string>
+  <string name="pref_title_features">Características de la aplicación</string>
+  <string name="pref_summary_features">Activar o desactivar alguna característica</string>
   <string name="pref_details_feature_add_to_homescreen"><![CDATA[
-    Use <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.<br>
+    Usar <strong>Añadir a pantalla de inicio</strong> para acceder rápidamente a tus enlaces  favoritos con tus aplicaciones favoritas.<br>
     <br>
-    When enabled, this feature adds <strong>Add to Home screen</strong> to your system <strong>Share</strong> menu.<br>
-    When selected you will have an option to add the shared link into your home screen.
+    Cuando está activada, esta función agrega <strong>Añadir a pantalla de inicio</strong> a su menú de sistema <strong>Compartir</strong>.<br>
+    Cuando está seleccionada tendrá una opción para añadir el enlace compartido en su pantalla principal.
   ]]></string>
-  <string name="pref_title_feature_text_selection">Text Selection</string>
+  <string name="pref_title_feature_text_selection">Selección de texto</string>
   <string name="pref_details_feature_text_selection"><![CDATA[
-    When enabled, this feature adds <strong>Open With</strong> option into system level text selection pop-up.<br>
+    Cuando está activada, esta función agrega la opción <strong>Abrir con</strong> en el nivel de sistema de selección de texto emergente.<br>
     <br>
-    This feature can be useful in situations where sharing link is not feasible. When link is already visible in a text field, long click to select the text with the link and click <strong>Open With</strong>.
+    Esta función puede ser útil en situaciones donde no es factible compartir el enlace. Cuando el enlace ya es visible en un campo de texto, haga clic largo para seleccionar el texto con el vínculo y haga clic en <strong>Abrir con</strong>.
   ]]></string>
-  <string name="pref_title_feature_direct_share">Direct Share</string>
+  <string name="pref_title_feature_direct_share">Compartir directo</string>
   <string name="pref_details_feature_direct_share"><![CDATA[
-    <strong>Direct Share</strong> is an Android feature where more relevant share targets are presented separately in the share menu.<br>
+    <strong>Compartir directo</strong> es una característica de Android donde los destinos de compartir más relevantes se presentan por separado en el menú compartir.<br>
     <br>
-    When enabled, <strong>Open Link With</strong> will be presented at top in the system share menu.<br>
-    Also note that priority is set to low. If Android finds more relevant targets from other apps, Open Link With may not be offered.
+    Cuando está activado, <strong>Abrir enlace con</strong> estará presente en la parte superior del menú compartir del sistema.<br>
+    También tenga en cuenta que la prioridad se establece a la baja. Si Android encuentra objetivos más relevantes de otras aplicaciones, Open Link With posiblemente no se ofrezca.
   ]]></string>
-  <string name="pref_title_feature_browser">Set as browser</string>
+  <string name="pref_title_feature_browser">Establecer como navegador</string>
   <string name="pref_details_feature_browser"><![CDATA[
-    <strong>Warning:</strong> Experimental feature!<br>
+    <strong>Advertencia:</strong> Característica Experimental!<br>
     <br>
-    Makes Android recognize <strong>Open Link With</strong> as a <strong>Browser</strong>.<br>
+    Hace que Android reconozca <strong>Open Link With</strong> como un <strong>Navegador</strong>.<br>
     <br>
-    When enabled, using share will not be necessary, just clicking links will trigger Open Link With and open the link
-     in the native app. It will also un-shorten any shortened link.<br>
+    Cuando está activado, usar compartir no será necesario, solo hacer clic en enlaces activará Open Link With  y abrirá el enlace 
+     en la aplicación nativa. También desacortará cualquier enlace acortado.<br>
     <br>
-    <strong>Be careful!</strong> Since Chrome (or your favorite browser) will not be default anymore, you may notice
-     some behavior changes. As a benefit, your phone will be better with opening links in native apps.
+    <strong>¡Cuidado!</strong> Como Chrome (o tu navegador favorito) no será por ya el predeterminado, puede notar algunos cambios de comportamiento. Como un beneficio, el teléfono será mejor con la apertura de enlaces en aplicaciones nativas.
   ]]></string>
   <string name="feature_default_browser_message"><![CDATA[
-    In the next window, please select <strong>Open Link With</strong>, and then select <strong>Always</strong>.
+    En la siguiente ventana, seleccione <strong>Open Link With</strong>, y luego seleccione <strong>Siempre</strong>.
   ]]></string>
-  <string name="pref_state_feature_enabled">Enabled</string>
-  <string name="pref_state_feature_disabled">Disabled</string>
+  <string name="pref_state_feature_enabled">Activado</string>
+  <string name="pref_state_feature_disabled">Desactivado</string>
   <string name="pref_title_category_others">Otros</string>
   <string name="pref_title_open_source">Licencias Open Source</string>
   <string name="pref_summary_open_source">Ver licencias de librerías Open Source.</string>
@@ -100,11 +100,14 @@ Eliminar <strong>%1$s</strong> como app preferida para cargar los enlaces de <st
   <string name="description_tutorial_1">Tu clicas un enlace corto y de alguna manera terminas encallado en una web, en lugar de ver el vídeo directamente.</string>
   <string name="description_tutorial_2">Solo compártelo conmigo y cambiaré las apps por ti.</string>
   <string name="description_tutorial_3"><![CDATA[
-Selecciona <strong>SIEMPRE</strong> para decirme que abra este enlace siempre con una aplicación específica.  ]]></string>
+    Selecciona <strong>SIEMPRE</strong> para decirme que abra este enlace siempre con una aplicación específica.
+  ]]></string>
   <string name="description_tutorial_4"><![CDATA[
-<strong>Añadir a pantalla de inicio</strong> para acceder rápidamente a tus enlaces favoritos con tus aplicaciones favoritas.  ]]></string>
+    <strong>Añadir a pantalla de inicio</strong> para acceder rápidamente a tus enlaces favoritos con tus aplicaciones favoritas.
+  ]]></string>
   <string name="description_tutorial_5"><![CDATA[
-Dar acceso a <strong>ACCESO DE USO</strong> y funcionaré mejor. Detectaré el navegador desde el cual estas compartiendo y actuaré en consecuencia.  ]]></string>
+    Dar acceso a <strong>ACCESO DE USO</strong> y funcionaré mejor. Detectaré el navegador desde el cual estas compartiendo y actuaré en consecuencia.
+  ]]></string>
   <string name="usage_access_give_access">Dar acceso</string>
   <string name="error">Error</string>
   <string name="next">Siguiente</string>

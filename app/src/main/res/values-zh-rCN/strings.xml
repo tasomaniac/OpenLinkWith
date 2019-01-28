@@ -10,11 +10,12 @@
   <string name="title_preferred_apps">默认应用</string>
   <string name="desc_preferred">当下面的链接分享到此应用的时候，会直接打开默认应用。\n\n点击以删除默认应用。</string>
   <string name="desc_preferred_empty">当下面的链接分享到此应用的时候，会直接打开默认应用。\n\n分享链接到此应用，然后选择“始终”以设定默认应用。</string>
-  <string name="title_remove_preferred">删除默认？</string>
+  <string name="title_remove_preferred">删除默认应用？</string>
   <string name="message_remove_preferred"><![CDATA[
-删除 <strong>%1$s</strong> 作为加载 <strong>%2$s</strong> 链接的默认应用吗？<br><br><strong>注︰</strong> 你可以在下次分享 <strong>%3$s</strong> 链接的时候设置新的默认应用。    ]]></string>
-  <string name="error_invalid_url">共享的内容没有任何有效的链接。</string>
-  <string name="empty_resolver_activity">没有找到其他应用来处理链接。</string>
+    删除 <strong>%1$s</strong> 作为加载 <strong>%2$s</strong> 链接的默认应用吗？<br><br><strong>注︰</strong> 你可以在下次分享 <strong>%3$s</strong> 链接的时候设置新的默认应用。
+  ]]></string>
+  <string name="error_invalid_url">分享到此应用的内容没有任何有效的链接。</string>
+  <string name="empty_resolver_activity">没有找到相关应用来处理该链接。</string>
   <string name="warning_open_link_with_name">正在用 %s 打开链接。</string>
   <string name="done">完成</string>
   <string name="pref_title_general">常规​​​​​</string>
@@ -29,59 +30,59 @@
   <string name="browser_always_ask_description">将所有浏览器纳入建议列表</string>
   <string name="pref_summary_selected_browser">只有 %s 将会被建议</string>
   <string name="pref_title_usage_stats">使用信息统计</string>
-  <string name="pref_summary_usage_stats">通过授权访问使用信息统计以提高应用排序。</string>
+  <string name="pref_summary_usage_stats">通过授权此应用访问使用信息统计使用权以优化应用排序。</string>
   <string name="pref_title_category_display">显示</string>
   <string name="pref_title_night_mode">夜间模式</string>
   <string name="pref_entry_night_mode_off">关闭</string>
   <string name="pref_entry_night_mode_on">打开</string>
   <string name="pref_title_category_clipboard">您复制的链接</string>
   <string name="pref_title_clipboard">选择打开该链接的应用</string>
-  <string name="pref_title_category_ask_for_rating">Like the app?</string>
-  <string name="pref_title_ask_for_rating">If you enjoy Open Link With, would you mind taking a minute to rate it? Thanks for the support!</string>
-  <string name="ask_for_rating_feedback">Feedback?</string>
-  <string name="ask_for_rating_feedback_message">Would you like to give me more details?</string>
-  <string name="ask_for_rating_feedback_email_subject">Feedback for Open Link With</string>
-  <string name="ask_for_rating_rating_positive_button">Rate</string>
-  <string name="ask_for_rating_rating_message">Please find “Rate this app” section in Play Store to give a rating.\n\nThanks for the support! 🎉</string>
-  <string name="pref_title_category_advanced">Advanced</string>
-  <string name="pref_title_features">App Features</string>
-  <string name="pref_summary_features">Enable/Disable some feature</string>
+  <string name="pref_title_category_ask_for_rating">喜欢这个应用吗？</string>
+  <string name="pref_title_ask_for_rating">如果您觉得Open Link With好用，您能花费一些时间给我们评分吗？谢谢您的支持！</string>
+  <string name="ask_for_rating_feedback">反馈？</string>
+  <string name="ask_for_rating_feedback_message">想让我知道更多细节吗？</string>
+  <string name="ask_for_rating_feedback_email_subject">反馈Open Link With</string>
+  <string name="ask_for_rating_rating_positive_button">评分</string>
+  <string name="ask_for_rating_rating_message">请在Google Play Store中找到“为此应用评分”，给我们评分。\n\n谢谢您的支持！🎉</string>
+  <string name="pref_title_category_advanced">高级选项</string>
+  <string name="pref_title_features">应用功能</string>
+  <string name="pref_summary_features">启用/禁用一些功能</string>
   <string name="pref_details_feature_add_to_homescreen"><![CDATA[
-    Use <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.<br>
+    使用<strong>添加到主屏幕</strong>可以使用您喜爱的应用快速访问您的收藏链接。<br>
     <br>
-    When enabled, this feature adds <strong>Add to Home screen</strong> to your system <strong>Share</strong> menu.<br>
-    When selected you will have an option to add the shared link into your home screen.
+    启用后，此功能会将<strong>添加到主屏幕</strong>添加到您的系统的<strong>分享</strong>菜单。<br>
+    选择后，您可以选择将共享链接添加到主屏幕。
   ]]></string>
-  <string name="pref_title_feature_text_selection">Text Selection</string>
+  <string name="pref_title_feature_text_selection">选择文本</string>
   <string name="pref_details_feature_text_selection"><![CDATA[
-    When enabled, this feature adds <strong>Open With</strong> option into system level text selection pop-up.<br>
+    启用后，此功能会将<strong>打开方式</strong>选项添加到系统级文本选择弹出窗口中。<br>
     <br>
-    This feature can be useful in situations where sharing link is not feasible. When link is already visible in a text field, long click to select the text with the link and click <strong>Open With</strong>.
+    在共享链接无法使用的情况下，此功能非常有用。如果链接已在文本字段中显示，请长按以选择包含该链接的文本，然后单击<strong>打开方式</strong>。
   ]]></string>
-  <string name="pref_title_feature_direct_share">Direct Share</string>
+  <string name="pref_title_feature_direct_share">直接分享</string>
   <string name="pref_details_feature_direct_share"><![CDATA[
-    <strong>Direct Share</strong> is an Android feature where more relevant share targets are presented separately in the share menu.<br>
+    <strong>直接分享</strong>是一项Android功能，其中更多相关的共享目标在共享菜单中单独显示。<br>
     <br>
-    When enabled, <strong>Open Link With</strong> will be presented at top in the system share menu.<br>
-    Also note that priority is set to low. If Android finds more relevant targets from other apps, Open Link With may not be offered.
+    启用后，<strong>Open Link With</strong>将显示在系统共享菜单的顶部。<br>
+    另请注意，优先级设置为低。如果Android从其他应用中找到更多相关目标，则Open Link With可能无法运作。
   ]]></string>
-  <string name="pref_title_feature_browser">Set as browser</string>
+  <string name="pref_title_feature_browser">设置为浏览器</string>
   <string name="pref_details_feature_browser"><![CDATA[
-    <strong>Warning:</strong> Experimental feature!<br>
+    <strong>警告</strong>：实验性功能！<br>
     <br>
-    Makes Android recognize <strong>Open Link With</strong> as a <strong>Browser</strong>.<br>
+    使Android识别<strong>Open Link With</strong>作为<strong>浏览器</strong>。<br>
     <br>
-    When enabled, using share will not be necessary, just clicking links will trigger Open Link With and open the link
-     in the native app. It will also un-shorten any shortened link.<br>
+    启用后，不需要分享，只需单击链接就能触发Open Link With并在本机应用程序中打开相关链接。
+    它也会还原任何已缩短的链接。<br>
     <br>
-    <strong>Be careful!</strong> Since Chrome (or your favorite browser) will not be default anymore, you may notice
-     some behavior changes. As a benefit, your phone will be better with opening links in native apps.
+    <strong>注意！</strong>由于Chrome（或您最喜欢的浏览器）不再是默认值，您可能会注意到一些行为改变。
+    这作为一项优势，您可以通过在原生应用中打开相关链接来更方便地使用手机。
   ]]></string>
   <string name="feature_default_browser_message"><![CDATA[
-    In the next window, please select <strong>Open Link With</strong>, and then select <strong>Always</strong>.
+    在下一个窗口中，请选择<strong>Open Link With</strong>，然后选择<strong>始终</strong>。
   ]]></string>
-  <string name="pref_state_feature_enabled">Enabled</string>
-  <string name="pref_state_feature_disabled">Disabled</string>
+  <string name="pref_state_feature_enabled">已启用</string>
+  <string name="pref_state_feature_disabled">已禁用</string>
   <string name="pref_title_category_others">其它</string>
   <string name="pref_title_open_source">开源许可</string>
   <string name="pref_summary_open_source">查看开源库的许可协议。</string>

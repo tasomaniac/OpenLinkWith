@@ -13,7 +13,7 @@
   <string name="title_remove_preferred">Hapuskan preferensi?</string>
   <string name="message_remove_preferred"><![CDATA[
     Hapus <strong>%1$s</strong> sebagai apl preferensi untuk membuka tautan dari <strong>%2$s</strong>?<br><br><strong>Ingat:</strong> Anda dapat mengatur apl preferensi baru untuk digunakan saat membagikan tautan dari <strong>%3$s</strong>.
-    ]]></string>
+  ]]></string>
   <string name="error_invalid_url">Konten kongsian tidak memiliki URL yang sah.</string>
   <string name="empty_resolver_activity">Tiada apl lain yang ditemui boleh menangani URL tersebut.</string>
   <string name="warning_open_link_with_name">Membuka tautan dengan %s.</string>
@@ -37,13 +37,13 @@
   <string name="pref_entry_night_mode_on">Aktif</string>
   <string name="pref_title_category_clipboard">Link telah disalin</string>
   <string name="pref_title_clipboard">Klik untuk buka dengan&#8230;</string>
-  <string name="pref_title_category_ask_for_rating">Like the app?</string>
-  <string name="pref_title_ask_for_rating">If you enjoy Open Link With, would you mind taking a minute to rate it? Thanks for the support!</string>
-  <string name="ask_for_rating_feedback">Feedback?</string>
-  <string name="ask_for_rating_feedback_message">Would you like to give me more details?</string>
-  <string name="ask_for_rating_feedback_email_subject">Feedback for Open Link With</string>
-  <string name="ask_for_rating_rating_positive_button">Rate</string>
-  <string name="ask_for_rating_rating_message">Please find “Rate this app” section in Play Store to give a rating.\n\nThanks for the support! 🎉</string>
+  <string name="pref_title_category_ask_for_rating">Suka aplikasi ini?</string>
+  <string name="pref_title_ask_for_rating">Jika Anda suka Open Link With, Apakah Anda mau meluangkan satu menit untuk memberi rating? Terima kasih atas dukungannya!</string>
+  <string name="ask_for_rating_feedback">Kritik dan Saran?</string>
+  <string name="ask_for_rating_feedback_message">Apakah Anda ingin memberi tau saya lebih detail?</string>
+  <string name="ask_for_rating_feedback_email_subject">Saran untuk Open Link With</string>
+  <string name="ask_for_rating_rating_positive_button">Nilai</string>
+  <string name="ask_for_rating_rating_message">Silakan cari bagian \"Nilai aplikasi ini\" di Play Store untuk memberikan rating.\n\nTerima kasih untuk dukungannya! 🎉</string>
   <string name="pref_title_category_advanced">Maju</string>
   <string name="pref_title_features">Ciri-ciri aplikasi</string>
   <string name="pref_summary_features">Memboleh/Mematikan komponent</string>
@@ -79,7 +79,7 @@
      some behavior changes. As a benefit, your phone will be better with opening links in native apps.
   ]]></string>
   <string name="feature_default_browser_message"><![CDATA[
-    In the next window, please select <strong>Open Link With</strong>, and then select <strong>Always</strong>.
+    Di menu berikutnya, Silakan pilih <strong>Open Link With</strong>, dan kemudian pilih <strong>Selalu</strong>.
   ]]></string>
   <string name="pref_state_feature_enabled">Aktifkan</string>
   <string name="pref_state_feature_disabled">Mematikan</string>
