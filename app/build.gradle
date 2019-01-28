@@ -158,12 +158,12 @@ dependencies {
 
   implementation "com.squareup.okhttp3:okhttp:$versions.okHttp"
   implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
-  implementation 'io.reactivex.rxjava2:rxjava:2.2.4'
+  implementation 'io.reactivex.rxjava2:rxjava:2.2.6'
   implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
 
   testImplementation 'junit:junit:4.12'
   testImplementation 'org.assertj:assertj-core:3.11.1'
   testImplementation 'org.mockito:mockito-core:2.23.4'
-  testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0'
+  testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0'
   testImplementation "com.squareup.okhttp3:mockwebserver:$versions.okHttp"
 }
