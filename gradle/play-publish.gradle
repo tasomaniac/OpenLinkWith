@@ -5,4 +5,5 @@ play {
     serviceAccountEmail = secrets['play_service_account'].or('').string
     serviceAccountCredentials = configFile(secrets['play_key_file'].or('no_file.p12').string)
     track = playPublishTrack
+    defaultToAppBundles = true
 }

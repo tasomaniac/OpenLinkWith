@@ -6,6 +6,7 @@ build
 
 my-release-key.keystore
 tasomaniac.p12
+*.pepk
 release.signing
 secrets.properties
 
