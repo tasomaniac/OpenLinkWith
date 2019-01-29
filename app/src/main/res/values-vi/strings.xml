@@ -11,8 +11,7 @@
   <string name="desc_preferred">Các ứng dụng được ưu tiên sẽ được sử dụng để mở ngay khi bạn chia sẻ liên kết từ trang web bạn đã chọn.\n\nChạm để xóa ứng dụng ưu tiên.</string>
   <string name="desc_preferred_empty">Các ứng dụng được ưu tiên sẽ được sử dụng để mở ngay khi bạn chia sẻ liên kết từ trang web bạn đã chọn.\n\nĐặt ứng dụng ưu tiên bằng cách chia sẻ liên kết với ứng dụng này và sau đó chọn \“Luôn luôn\”</string>
   <string name="title_remove_preferred">Gỡ khỏi danh sách ưu tiên?</string>
-  <string name="message_remove_preferred"><![CDATA[
-    Không dùng <strong>%1$s</strong> làm ứng dụng ưu tiên để mở đường dẫn <strong>%2$s</strong>?<br><br><strong>Lưu ý:</strong>Bạn có thể thiệt lập một ứng dụng ưu tiên mới để mở <strong>%3$s</strong> trong lần tiếp theo bạn chia sẻ nó.
+  <string name="message_remove_preferred"><![CDATA[    Không dùng <strong>%1$s</strong> làm ứng dụng ưu tiên để mở đường dẫn <strong>%2$s</strong>?<br><br><strong>Lưu ý:</strong>Bạn có thể thiệt lập một ứng dụng ưu tiên mới để mở <strong>%3$s</strong> trong lần tiếp theo bạn chia sẻ nó.
   ]]></string>
   <string name="error_invalid_url">Nội dung được chia sẻ không phải là một đường dẫn hợp lệ.</string>
   <string name="empty_resolver_activity">Không tìm thấy ứng dụng nào có thể mở đường dẫn bạn chọn.</string>
@@ -47,28 +46,24 @@
   <string name="pref_title_category_advanced">Advanced</string>
   <string name="pref_title_features">App Features</string>
   <string name="pref_summary_features">Enable/Disable some feature</string>
-  <string name="pref_details_feature_add_to_homescreen"><![CDATA[
-    Use <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.<br>
+  <string name="pref_details_feature_add_to_homescreen"><![CDATA[    Use <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.<br>
     <br>
     When enabled, this feature adds <strong>Add to Home screen</strong> to your system <strong>Share</strong> menu.<br>
     When selected you will have an option to add the shared link into your home screen.
   ]]></string>
   <string name="pref_title_feature_text_selection">Text Selection</string>
-  <string name="pref_details_feature_text_selection"><![CDATA[
-    When enabled, this feature adds <strong>Open With</strong> option into system level text selection pop-up.<br>
+  <string name="pref_details_feature_text_selection"><![CDATA[    When enabled, this feature adds <strong>Open With</strong> option into system level text selection pop-up.<br>
     <br>
     This feature can be useful in situations where sharing link is not feasible. When link is already visible in a text field, long click to select the text with the link and click <strong>Open With</strong>.
   ]]></string>
   <string name="pref_title_feature_direct_share">Direct Share</string>
-  <string name="pref_details_feature_direct_share"><![CDATA[
-    <strong>Direct Share</strong> is an Android feature where more relevant share targets are presented separately in the share menu.<br>
+  <string name="pref_details_feature_direct_share"><![CDATA[    <strong>Direct Share</strong> is an Android feature where more relevant share targets are presented separately in the share menu.<br>
     <br>
     When enabled, <strong>Open Link With</strong> will be presented at top in the system share menu.<br>
     Also note that priority is set to low. If Android finds more relevant targets from other apps, Open Link With may not be offered.
   ]]></string>
   <string name="pref_title_feature_browser">Set as browser</string>
-  <string name="pref_details_feature_browser"><![CDATA[
-    <strong>Warning:</strong> Experimental feature!<br>
+  <string name="pref_details_feature_browser"><![CDATA[    <strong>Warning:</strong> Experimental feature!<br>
     <br>
     Makes Android recognize <strong>Open Link With</strong> as a <strong>Browser</strong>.<br>
     <br>
@@ -78,8 +73,16 @@
     <strong>Be careful!</strong> Since Chrome (or your favorite browser) will not be default anymore, you may notice
      some behavior changes. As a benefit, your phone will be better with opening links in native apps.
   ]]></string>
-  <string name="feature_default_browser_message"><![CDATA[
-    In the next window, please select <strong>Open Link With</strong>, and then select <strong>Always</strong>.
+  <string name="pref_title_feature_caller_app">Detect foreground apps</string>
+  <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Warning:</strong> Experimental feature!<br>
+    <br>
+    When enabled, the foreground application (you shared the link from) will not be suggested.
+    <br><br>
+    Example: When sharing from browser, browser will not be suggested again. If no native app is found, you will see a warning message.
+    <br>
+    If not enabled, the foreground application will be suggested even though it is already open.
+  ]]></string>
+  <string name="feature_default_browser_message"><![CDATA[    In the next window, please select <strong>Open Link With</strong>, and then select <strong>Always</strong>.
   ]]></string>
   <string name="pref_state_feature_enabled">Enabled</string>
   <string name="pref_state_feature_disabled">Disabled</string>
@@ -100,14 +103,11 @@
   <string name="description_tutorial_0">Tôi được tạo ra để giúp bạn mỗi khi bạn bị mắc kẹt vì các liên kết luôn mở trong trình duyệt.</string>
   <string name="description_tutorial_1">Bạn nhấp vào liên kết rút gọn và bạn phải xem nó trong trình duyệt thay vì trong một ứng dụng hỗ trợ mà bạn có.</string>
   <string name="description_tutorial_2">Chỉ cần chia sẻ liên kết với tôi và tôi sẽ mở nó bằng ứng dụng bạn cần.</string>
-  <string name="description_tutorial_3"><![CDATA[
-    Chọn <strong>LUÔN LUÔN</strong> để cho tôi biết bạn sẽ luôn luôn mở liên kết đó với một ứng dụng cụ thể.
+  <string name="description_tutorial_3"><![CDATA[    Chọn <strong>LUÔN LUÔN</strong> để cho tôi biết bạn sẽ luôn luôn mở liên kết đó với một ứng dụng cụ thể.
   ]]></string>
-  <string name="description_tutorial_4"><![CDATA[
-    <strong>Thêm vào Màn hình chính</strong> để nhanh chóng truy cập các liên kết ưa thích của bạn với các ứng dụng mà bạn ưa thích.
+  <string name="description_tutorial_4"><![CDATA[    <strong>Thêm vào Màn hình chính</strong> để nhanh chóng truy cập các liên kết ưa thích của bạn với các ứng dụng mà bạn ưa thích.
   ]]></string>
-  <string name="description_tutorial_5"><![CDATA[
-    Cấp quyền <strong>Truy cập sử dụng</strong> và tôi sẽ làm việc tốt hơn. Tôi sẽ phát hiện được trình duyệt bạn đang chia sẻ để có hành động phù hợp.
+  <string name="description_tutorial_5"><![CDATA[    Cấp quyền <strong>Truy cập sử dụng</strong> và tôi sẽ làm việc tốt hơn. Tôi sẽ phát hiện được trình duyệt bạn đang chia sẻ để có hành động phù hợp.
   ]]></string>
   <string name="usage_access_give_access">Cấp quyền</string>
   <string name="error">Lỗi</string>

@@ -12,12 +12,14 @@ import dagger.android.DaggerActivity;
 
 import javax.annotation.Nullable;
 import javax.inject.Inject;
+import javax.inject.Provider;
 
 public class ShareToOpenWith extends DaggerActivity {
 
     public static final String EXTRA_FROM_DIRECT_SHARE = "EXTRA_FROM_DIRECT_SHARE";
 
     @Inject Analytics analytics;
+    @Inject Provider<CallerPackageExtractor> callerPackageExtractor;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,7 +39,7 @@ public class ShareToOpenWith extends DaggerActivity {
         if (foundUrl != null) {
             trackLinkOpen();
 
-            String callerPackage = CallerPackageExtractor.from(this).extract();
+            String callerPackage = callerPackageExtractor.get().extract();
             Intent intent = RedirectFixActivity.createIntent(this, foundUrl)
                     .putExtra(ShareCompat.EXTRA_CALLING_PACKAGE, callerPackage);
             startActivity(intent);

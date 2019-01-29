@@ -8,7 +8,7 @@ enum class Feature(
     @StringRes val titleRes: Int,
     @StringRes val detailsRes: Int,
     @DrawableRes val imageRes: Int? = null,
-    val className: String,
+    val className: String? = null,
     val prefKey: String,
     val defaultValue: Boolean = true
 ) {
@@ -39,6 +39,12 @@ enum class Feature(
         R.string.pref_details_feature_browser,
         className = "com.tasomaniac.openwith.BrowserActivity",
         prefKey = "pref_feature_browser",
+        defaultValue = false
+    ),
+    CALLER_APP(
+        R.string.pref_title_feature_caller_app,
+        R.string.pref_details_feature_caller_app,
+        prefKey = "pref_feature_caller_app",
         defaultValue = false
     )
 }

@@ -11,9 +11,7 @@
   <string name="desc_preferred">Applications préférées à utiliser lorsque les liens ci-dessous sont partagés avec cette application.\n\nAppuyer pour retirer une application préférée.</string>
   <string name="desc_preferred_empty">Applications préférées à utiliser lorsque les liens ci-dessous sont partagés avec cette application.\n\nVous pouvez définir des applications préférées en partageant des liens avec cette application et en choisissant \“Toujours\”</string>
   <string name="title_remove_preferred">Supprimer l\'application préférée?</string>
-  <string name="message_remove_preferred"><![CDATA[
-    Ne plus ouvrir les liens de <strong>%2$s</strong> avec <strong>%1$s</strong> ? <br><br><strong>Note:</strong>Vous pouvez définir une nouvelle application préférée à utiliser pour les prochains lien de <strong>%3$s</strong>.
-  ]]></string>
+  <string name="message_remove_preferred"><![CDATA[Ne plus ouvrir les liens de <strong>%2$s</strong> avec <strong>%1$s</strong> ? <br><br><strong>Note:</strong>Vous pouvez définir une nouvelle application préférée à utiliser pour les prochains lien de <strong>%3$s</strong>.    ]]></string>
   <string name="error_invalid_url">Le contenu partagé n\'avait aucune URL valide.</string>
   <string name="empty_resolver_activity">Aucune autre application n\'a été trouvé pour gérer l\'URL.</string>
   <string name="warning_open_link_with_name">Ouverture du lien avec %s.</string>
@@ -47,28 +45,24 @@
   <string name="pref_title_category_advanced">Advanced</string>
   <string name="pref_title_features">App Features</string>
   <string name="pref_summary_features">Enable/Disable some feature</string>
-  <string name="pref_details_feature_add_to_homescreen"><![CDATA[
-    Use <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.<br>
+  <string name="pref_details_feature_add_to_homescreen"><![CDATA[    Use <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.<br>
     <br>
     When enabled, this feature adds <strong>Add to Home screen</strong> to your system <strong>Share</strong> menu.<br>
     When selected you will have an option to add the shared link into your home screen.
   ]]></string>
   <string name="pref_title_feature_text_selection">Text Selection</string>
-  <string name="pref_details_feature_text_selection"><![CDATA[
-    When enabled, this feature adds <strong>Open With</strong> option into system level text selection pop-up.<br>
+  <string name="pref_details_feature_text_selection"><![CDATA[    When enabled, this feature adds <strong>Open With</strong> option into system level text selection pop-up.<br>
     <br>
     This feature can be useful in situations where sharing link is not feasible. When link is already visible in a text field, long click to select the text with the link and click <strong>Open With</strong>.
   ]]></string>
   <string name="pref_title_feature_direct_share">Direct Share</string>
-  <string name="pref_details_feature_direct_share"><![CDATA[
-    <strong>Direct Share</strong> is an Android feature where more relevant share targets are presented separately in the share menu.<br>
+  <string name="pref_details_feature_direct_share"><![CDATA[    <strong>Direct Share</strong> is an Android feature where more relevant share targets are presented separately in the share menu.<br>
     <br>
     When enabled, <strong>Open Link With</strong> will be presented at top in the system share menu.<br>
     Also note that priority is set to low. If Android finds more relevant targets from other apps, Open Link With may not be offered.
   ]]></string>
   <string name="pref_title_feature_browser">Set as browser</string>
-  <string name="pref_details_feature_browser"><![CDATA[
-    <strong>Warning:</strong> Experimental feature!<br>
+  <string name="pref_details_feature_browser"><![CDATA[    <strong>Warning:</strong> Experimental feature!<br>
     <br>
     Makes Android recognize <strong>Open Link With</strong> as a <strong>Browser</strong>.<br>
     <br>
@@ -78,8 +72,16 @@
     <strong>Be careful!</strong> Since Chrome (or your favorite browser) will not be default anymore, you may notice
      some behavior changes. As a benefit, your phone will be better with opening links in native apps.
   ]]></string>
-  <string name="feature_default_browser_message"><![CDATA[
-    In the next window, please select <strong>Open Link With</strong>, and then select <strong>Always</strong>.
+  <string name="pref_title_feature_caller_app">Detect foreground apps</string>
+  <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Warning:</strong> Experimental feature!<br>
+    <br>
+    When enabled, the foreground application (you shared the link from) will not be suggested.
+    <br><br>
+    Example: When sharing from browser, browser will not be suggested again. If no native app is found, you will see a warning message.
+    <br>
+    If not enabled, the foreground application will be suggested even though it is already open.
+  ]]></string>
+  <string name="feature_default_browser_message"><![CDATA[    In the next window, please select <strong>Open Link With</strong>, and then select <strong>Always</strong>.
   ]]></string>
   <string name="pref_state_feature_enabled">Enabled</string>
   <string name="pref_state_feature_disabled">Disabled</string>
@@ -100,14 +102,11 @@
   <string name="description_tutorial_0">Je viens à votre secours lorsque vous êtes bloqué dans un navigateur.</string>
   <string name="description_tutorial_1">Vous cliquez sur un lien et d\'une quelconque manière vous finissez bloqué sur une page web plutôt que de directement voir la vidéo.</string>
   <string name="description_tutorial_2">Partagez le simplement avec moi et je changerai d\'applications pour vous.</string>
-  <string name="description_tutorial_3"><![CDATA[
-    Sélectionner <strong>TOUJOURS</strong> pour me dire de toujours ouvrir ce lien avec une application spécifique.
+  <string name="description_tutorial_3"><![CDATA[    Sélectionner <strong>TOUJOURS</strong> pour me dire de toujours ouvrir ce lien avec une application spécifique.
   ]]></string>
-  <string name="description_tutorial_4"><![CDATA[
-    <strong>Ajouter à l\'écran d\'accueil</strong>pour rapidement avoir accès à vos liens préférés avec vos applications préférées.
+  <string name="description_tutorial_4"><![CDATA[    <strong>Ajouter à l\'écran d\'accueil</strong>pour rapidement avoir accès à vos liens préférés avec vos applications préférées.
   ]]></string>
-  <string name="description_tutorial_5"><![CDATA[
-    Donnez moi l\'accès au <strong>HABITUDES D\'UTILISATION</strong> et je fonctionnerai mieux. Je détecterai avec quel navigateur vous partagez pour agir en conséquence.
+  <string name="description_tutorial_5"><![CDATA[    Donnez moi l\'accès au <strong>HABITUDES D\'UTILISATION</strong> et je fonctionnerai mieux. Je détecterai avec quel navigateur vous partagez pour agir en conséquence.
   ]]></string>
   <string name="usage_access_give_access">Donnez l\'accès</string>
   <string name="error">Erreur</string>

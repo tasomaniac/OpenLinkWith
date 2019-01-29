@@ -1,6 +1,5 @@
 package com.tasomaniac.openwith.util
 
-import android.app.Activity
 import android.app.ActivityManager
 import android.app.usage.UsageStats
 import android.app.usage.UsageStatsManager
@@ -13,25 +12,36 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ShareCompat
 import androidx.core.content.getSystemService
 import com.tasomaniac.openwith.BuildConfig
+import com.tasomaniac.openwith.ShareToOpenWith
+import dagger.Provides
 
 sealed class CallerPackageExtractor {
 
     abstract fun extract(): String?
 
-    companion object {
+    @dagger.Module
+    class Module {
 
-        @JvmStatic
-        fun from(activity: Activity): CallerPackageExtractor {
-            val callerPackage = ShareCompat.getCallingPackage(activity)
+        @Provides
+        fun callerPackageExtractor(
+            shareToOpenWith: ShareToOpenWith,
+            callerPackagePreferences: CallerPackagePreferences
+        ): CallerPackageExtractor {
+            val callerPackage = ShareCompat.getCallingPackage(shareToOpenWith)
 
             return when {
+                callerPackagePreferences.isEnabled.not() -> EmptyExtractor
                 callerPackage != null -> SimpleExtractor(callerPackage)
-                SDK_INT < LOLLIPOP -> LegacyExtractor(activity)
-                SDK_INT >= LOLLIPOP_MR1 -> LollipopExtractor(activity)
-                else -> SimpleExtractor(null)
+                SDK_INT < LOLLIPOP -> LegacyExtractor(shareToOpenWith)
+                SDK_INT >= LOLLIPOP_MR1 -> LollipopExtractor(shareToOpenWith)
+                else -> EmptyExtractor
             }
         }
     }
+}
+
+private object EmptyExtractor : CallerPackageExtractor() {
+    override fun extract(): String? = null
 }
 
 private class SimpleExtractor(private val callerPackage: String?) : CallerPackageExtractor() {

@@ -46,28 +46,24 @@
   <string name="pref_title_category_advanced">詳細</string>
   <string name="pref_title_features">アプリ機能</string>
   <string name="pref_summary_features">いくつかの機能を有効/無効にします</string>
-  <string name="pref_details_feature_add_to_homescreen"><![CDATA[
-    <strong>ホーム画面に追加</strong> を使用すると、お気に入りのアプリでお気に入りのリンクにすばやくアクセスできます。<br>
+  <string name="pref_details_feature_add_to_homescreen"><![CDATA[    <strong>ホーム画面に追加</strong> を使用すると、お気に入りのアプリでお気に入りのリンクにすばやくアクセスできます。<br>
     <br>
     有効にすると、この機能によりお使いのシステムの <strong>共有</strong> メニューに <strong>ホーム画面に追加</strong> を追加します。<br>
     選択すると、ホーム画面に共有のリンクを追加するオプションが表示されます。
   ]]></string>
   <string name="pref_title_feature_text_selection">テキストの選択</string>
-  <string name="pref_details_feature_text_selection"><![CDATA[
-    有効にすると、この機能がシステム レベルのテキスト選択ポップアップに <strong>開く…</strong> オプションを追加します。<br>
+  <string name="pref_details_feature_text_selection"><![CDATA[    有効にすると、この機能がシステム レベルのテキスト選択ポップアップに <strong>開く…</strong> オプションを追加します。<br>
     <br>
     この機能はリンクの共有ができない状況で役に立ちます。テキストフィールドでリンクが表示されているとき、リンクを長押ししてテキストを選択し <strong>開く…</strong> をクリックします。
   ]]></string>
   <string name="pref_title_feature_direct_share">直接共有</string>
-  <string name="pref_details_feature_direct_share"><![CDATA[
-    <strong>直接共有</strong> は Android の機能で、より関連性の高い共有対象が共有メニューに分かれて表示されますす。<br>
+  <string name="pref_details_feature_direct_share"><![CDATA[    <strong>直接共有</strong> は Android の機能で、より関連性の高い共有対象が共有メニューに分かれて表示されますす。<br>
     <br>
     有効にすると、 <strong>リンクを開く…</strong> をシステム共有メニューの上部に表示します。<br>
     また、優先順位が低く設定されていることにも注意してください。Android が、他のアプリから関連性の高いターゲットが検出されると、リンクを開くが提供されない可能性があります。
   ]]></string>
   <string name="pref_title_feature_browser">ブラウザーとして設定</string>
-  <string name="pref_details_feature_browser"><![CDATA[
-    <strong>警告:</strong> 実験的な機能です!<br>
+  <string name="pref_details_feature_browser"><![CDATA[    <strong>警告:</strong> 実験的な機能です!<br>
     <br>
     Android が <strong>Open Link With</strong> を <strong>ブラウザー</strong> として認識します。<br>
     <br>
@@ -77,8 +73,16 @@
     <strong>ご注意ください!</strong> Chrome (またはお気に入りのブラウザー) が既定ではなくなります。
      動作が変更されます。利点として、お使いの携帯電話からネイティブアプリのリンクを開くのが便利になります。
   ]]></string>
-  <string name="feature_default_browser_message"><![CDATA[
-    次のウィンドウで <strong>Open Link With</strong> を選択して、<strong>常時</strong> を選択してください。
+  <string name="pref_title_feature_caller_app">Detect foreground apps</string>
+  <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Warning:</strong> Experimental feature!<br>
+    <br>
+    When enabled, the foreground application (you shared the link from) will not be suggested.
+    <br><br>
+    Example: When sharing from browser, browser will not be suggested again. If no native app is found, you will see a warning message.
+    <br>
+    If not enabled, the foreground application will be suggested even though it is already open.
+  ]]></string>
+  <string name="feature_default_browser_message"><![CDATA[    次のウィンドウで <strong>Open Link With</strong> を選択して、<strong>常時</strong> を選択してください。
   ]]></string>
   <string name="pref_state_feature_enabled">有効</string>
   <string name="pref_state_feature_disabled">無効</string>
@@ -99,14 +103,11 @@
   <string name="description_tutorial_0">ブラウザに飛ばされてしまっても、いつでも助けに行きます</string>
   <string name="description_tutorial_1">短縮リンクを踏んだとき、動画が直接再生されずにウェブページへ飛ばされてしまっていたと思います</string>
   <string name="description_tutorial_2">一度このアプリで共有していただければ、以後常にあなたが望むアプリに切り替えさせていただきます</string>
-  <string name="description_tutorial_3"><![CDATA[
-    <strong>常時</strong> を選択していただくことで、そのリンクを常に特定のアプリで開くようになります
+  <string name="description_tutorial_3"><![CDATA[      <strong>常時</strong> を選択していただくことで、そのリンクを常に特定のアプリで開くようになります
   ]]></string>
-  <string name="description_tutorial_4"><![CDATA[
-    <strong>ホーム画面に追加</strong> して、お気に入りのアプリでお気に入りのリンクにクイックにアクセスしましょう。
+  <string name="description_tutorial_4"><![CDATA[      <strong>ホーム画面に追加</strong> して、お気に入りのアプリでお気に入りのリンクにクイックにアクセスしましょう。
   ]]></string>
-  <string name="description_tutorial_5"><![CDATA[
-    <strong>使用状況へのアクセス</strong> を許可していただけると、更により良く機能していきます。あなたが共有するブラウザを検出して、それに応じた動きをするようになります。
+  <string name="description_tutorial_5"><![CDATA[      <strong>使用状況へのアクセス</strong> を許可していただけると、更により良く機能していきます。あなたが共有するブラウザを検出して、それに応じた動きをするようになります。
   ]]></string>
   <string name="usage_access_give_access">アクセス権を与える</string>
   <string name="error">エラー</string>
