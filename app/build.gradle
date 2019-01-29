@@ -81,12 +81,12 @@ staticAnalysis {
     config = files(configFile('detekt.yml'))
   }
 
-  ktlint {
-    version '0.29.0'
-    reporters = [ReporterType.CHECKSTYLE]
-
-    includeVariants { it.name == 'flossDebug' }
-  }
+//  ktlint {
+//    version '0.29.0'
+//    reporters = [ReporterType.CHECKSTYLE]
+//
+//    includeVariants { it.name == 'flossDebug' }
+//  }
 
   lintOptions {
     textReport true
