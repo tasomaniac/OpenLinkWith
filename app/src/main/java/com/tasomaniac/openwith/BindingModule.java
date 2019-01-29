@@ -15,6 +15,7 @@ import com.tasomaniac.openwith.settings.SettingsModule;
 import com.tasomaniac.openwith.settings.advanced.features.FeatureToggleModule;
 import com.tasomaniac.openwith.settings.advanced.features.FeaturesListFragment;
 import com.tasomaniac.openwith.settings.advanced.features.ToggleFeatureActivity;
+import com.tasomaniac.openwith.util.CallerPackageExtractor;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
@@ -52,6 +53,7 @@ interface BindingModule {
 
     @ContributesAndroidInjector RedirectFixActivity redirectFixActivity();
 
-    @ContributesAndroidInjector ShareToOpenWith shareToOpenWith();
+    @ContributesAndroidInjector(modules = CallerPackageExtractor.Module.class)
+    ShareToOpenWith shareToOpenWith();
 
 }

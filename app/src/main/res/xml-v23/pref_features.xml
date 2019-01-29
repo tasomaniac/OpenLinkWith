@@ -21,4 +21,9 @@
     android:title="@string/pref_title_feature_browser"
     android:fragment="com.tasomaniac.openwith.settings.advanced.features.ToggleFeatureActivity"/>
 
+  <Preference
+    android:key="@string/pref_key_feature_caller_app"
+    android:title="@string/pref_title_feature_caller_app"
+    android:fragment="com.tasomaniac.openwith.settings.advanced.features.ToggleFeatureActivity"/>
+
 </PreferenceScreen>

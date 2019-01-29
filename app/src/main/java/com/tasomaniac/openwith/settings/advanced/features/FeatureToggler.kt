@@ -14,6 +14,8 @@ class FeatureToggler @Inject constructor(
 ) {
 
     fun toggleFeature(feature: Feature, enabled: Boolean) {
+        if (feature.className == null) return
+
         packageManager.setComponentEnabledSetting(
             ComponentName(app, feature.className),
             enabled.toState(),
