@@ -11,8 +11,7 @@
   <string name="desc_preferred">Aplicativos preferidos a serem usados diretamente quando links forem compartilhados com este app.\n\nToque para remover um aplicativo preferencial abaixo.</string>
   <string name="desc_preferred_empty">Aplicativos para serem usados diretamente quando os links abaixo forem compartilhados com este app.\n\nVocê pode definir os apps preferidos compartilhando links com este app e escolhendo a opção \“Sempre\”</string>
   <string name="title_remove_preferred">Remover preferido?</string>
-  <string name="message_remove_preferred"><![CDATA[
-    Remover <strong>%1$s</strong> como aplicativo preferencial para abrir links de <strong>%2$s</strong>?<br><br><strong>Nota:</strong> Você pode definir um novo app preferido na próxima vez em que compartilhar um link de <strong>%3$s</strong>.
+  <string name="message_remove_preferred"><![CDATA[    Remover <strong>%1$s</strong> como aplicativo preferencial para abrir links de <strong>%2$s</strong>?<br><br><strong>Nota:</strong> Você pode definir um novo app preferido na próxima vez em que compartilhar um link de <strong>%3$s</strong>.
   ]]></string>
   <string name="error_invalid_url">O conteúdo compartilhado não tinha nenhuma URL válida.</string>
   <string name="empty_resolver_activity">Nenhum outro aplicativo encontrado para manusear a URL.</string>
@@ -47,28 +46,24 @@
   <string name="pref_title_category_advanced">Avançado</string>
   <string name="pref_title_features">Características do App</string>
   <string name="pref_summary_features">Ativar/desativar um recurso</string>
-  <string name="pref_details_feature_add_to_homescreen"><![CDATA[
-    Use <strong>Adicionar à tela inicial</strong> para acessar rapidamente seus links nos seus apps favoritos.<br>
+  <string name="pref_details_feature_add_to_homescreen"><![CDATA[    Use <strong>Adicionar à tela inicial</strong> para acessar rapidamente seus links nos seus apps favoritos.<br>
     <br>
     Quando ativada, esta função adiciona <strong>Adicionar à tela inicial</strong> ao menu <strong>Compartilhar</strong> do seu sistema.<br>
     Ao selecionar a opção, você poderá adicionar o link à sua tela inicial.
   ]]></string>
   <string name="pref_title_feature_text_selection">Seleção de Texto</string>
-  <string name="pref_details_feature_text_selection"><![CDATA[
-    Quando ativada, esta função adiciona a opção <strong>Abrir Com</strong> ao pop-up de seleção de texto do seu sistema.<br>
+  <string name="pref_details_feature_text_selection"><![CDATA[    Quando ativada, esta função adiciona a opção <strong>Abrir Com</strong> ao pop-up de seleção de texto do seu sistema.<br>
     <br>
     Esta função pode ser útil em situações onde não é possível compartilhar o link. Quando o link for visívelem um campo de texto, pressione sobre ele para selecionar o texto com o link e clique em <strong>Abrir Com</strong>.
   ]]></string>
   <string name="pref_title_feature_direct_share">Compartilhamento Direto</string>
-  <string name="pref_details_feature_direct_share"><![CDATA[
-    <strong>Direct Share</strong> é uma função do Android onde os compartilhamentos mais recentes ou relevantes aparecem em um menu separado na opção de compartilhar.<br>
+  <string name="pref_details_feature_direct_share"><![CDATA[    <strong>Direct Share</strong> é uma função do Android onde os compartilhamentos mais recentes ou relevantes aparecem em um menu separado na opção de compartilhar.<br>
     <br>
     Quando ativado, o <strong>Open Link With</strong> será mostrado nesse menu.<br>
     Note que a prioridade será baixa. Se o sistema Android encontrar outras opções mais relevantes, o Open Link With pode nem ser oferecido.
   ]]></string>
   <string name="pref_title_feature_browser">Definir como navegador</string>
-  <string name="pref_details_feature_browser"><![CDATA[
-    <strong>Aviso:</strong> Função experimental!<br>
+  <string name="pref_details_feature_browser"><![CDATA[    <strong>Aviso:</strong> Função experimental!<br>
     <br>
     Faz o Android reconhecer o <strong>Open Link With</strong> como um <strong>Navegador</strong>.<br>
     <br>
@@ -76,8 +71,16 @@
     <br>
     <strong>Tenha cuidado!</strong> Já que o Chrome (ou seu navegador favorito) não será mais o padrão, você pode notar comportamentos estranhos. Como benefício, seu aparelho será melhor ao abrir links em seus apps nativos.
   ]]></string>
-  <string name="feature_default_browser_message"><![CDATA[
-    Na próxima janela, por favor selecione <strong>Open Link With</strong>, e então selecione <strong>Sempre</strong>.
+  <string name="pref_title_feature_caller_app">Detect foreground apps</string>
+  <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Warning:</strong> Experimental feature!<br>
+    <br>
+    When enabled, the foreground application (you shared the link from) will not be suggested.
+    <br><br>
+    Example: When sharing from browser, browser will not be suggested again. If no native app is found, you will see a warning message.
+    <br>
+    If not enabled, the foreground application will be suggested even though it is already open.
+  ]]></string>
+  <string name="feature_default_browser_message"><![CDATA[    Na próxima janela, por favor selecione <strong>Open Link With</strong>, e então selecione <strong>Sempre</strong>.
   ]]></string>
   <string name="pref_state_feature_enabled">Ativado</string>
   <string name="pref_state_feature_disabled">Desativado</string>
@@ -98,14 +101,11 @@
   <string name="description_tutorial_0">Venho te resgatar sempre que você ficar preso nos navegadores.</string>
   <string name="description_tutorial_1">Você clica em um link curto e de alguma forma você acaba ficando preso na página da web ao invés de assistir o vídeo diretamente.</string>
   <string name="description_tutorial_2">Apenas compartilhe o link comigo e eu irei mudar de app para você.</string>
-  <string name="description_tutorial_3"><![CDATA[
-    Escolha <strong>SEMPRE</strong> para me dizer que o link deve ser sempre aberto com um aplicativo específico.
+  <string name="description_tutorial_3"><![CDATA[    Escolha <strong>SEMPRE</strong> para me dizer que o link deve ser sempre aberto com um aplicativo específico.
   ]]></string>
-  <string name="description_tutorial_4"><![CDATA[
-    <strong>Adicione à tela inicial</strong> para acessar rapidamente os seus links favoritos com seus apps favoritos.
+  <string name="description_tutorial_4"><![CDATA[    <strong>Adicione à tela inicial</strong> para acessar rapidamente os seus links favoritos com seus apps favoritos.
   ]]></string>
-  <string name="description_tutorial_5"><![CDATA[
-    Dê permissão ao <strong>ACESSO DE USO</strong> e eu vou funcionar melhor. Vou detectar de qual navegador você está compartilhando para executar a ação certa.
+  <string name="description_tutorial_5"><![CDATA[    Dê permissão ao <strong>ACESSO DE USO</strong> e eu vou funcionar melhor. Vou detectar de qual navegador você está compartilhando para executar a ação certa.
   ]]></string>
   <string name="usage_access_give_access">Permitir Acesso</string>
   <string name="error">Erro</string>

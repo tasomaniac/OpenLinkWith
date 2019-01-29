@@ -45,25 +45,21 @@
   <string name="pref_title_category_advanced">Gelişmiş</string>
   <string name="pref_title_features">Uygulama Özellikleri</string>
   <string name="pref_summary_features">Bazı özellikleri aç/kapa</string>
-  <string name="pref_details_feature_add_to_homescreen"><![CDATA[
-    <strong>Ana Ekrana ekle</strong> özelliğini kullanarak favori linklerinize kolayca ulaşın<br>
+  <string name="pref_details_feature_add_to_homescreen"><![CDATA[    <strong>Ana Ekrana ekle</strong> özelliğini kullanarak favori linklerinize kolayca ulaşın<br>
     <br>
     Aktifleştirildiğinde, bu özellik sistem <strong>Paylaşma</strong> menüsüne <strong>Ana Ekrana ekle</strong> tuşunu ekler.<br>
     Seçildiğinde, paylaşılan bağlantıyı telefonunuzun ana ekranına eklemek için seçeneğiniz olacaktır.
   ]]></string>
   <string name="pref_title_feature_text_selection">Metin Seçimi</string>
-  <string name="pref_details_feature_text_selection"><![CDATA[
-    Aktifleştirildiğinde bu özellik, sistem geneli metin seçimi açılır menüsüne <strong>Birlikte Aç</strong> seçeneğini ekler.<br><br>
+  <string name="pref_details_feature_text_selection"><![CDATA[    Aktifleştirildiğinde bu özellik, sistem geneli metin seçimi açılır menüsüne <strong>Birlikte Aç</strong> seçeneğini ekler.<br><br>
     Bu özellik, link paylaşımının kolay olmadığı durumlarda işinize yarar. Link zaten bir metinde görünür olduğunda, üzerine uzun basarak metin seçimini açın ve <strong>Birlikte Aç</strong> tıklayın.  ]]></string>
   <string name="pref_title_feature_direct_share">Doğrudan Paylaşım</string>
-  <string name="pref_details_feature_direct_share"><![CDATA[
-    <strong>Doğrudan Paylaşım</strong> bir Android özelliğidir. Size daha uygun paylaşım seçeneklerinizi paylaşım menüsünde ayrı bir yerde sunar.<br>
+  <string name="pref_details_feature_direct_share"><![CDATA[    <strong>Doğrudan Paylaşım</strong> bir Android özelliğidir. Size daha uygun paylaşım seçeneklerinizi paylaşım menüsünde ayrı bir yerde sunar.<br>
     <br>
     Aktifleştirildiğinde, sistem paylaşım menüsünde <strong>Birlikte Aç</strong> opsiyonu en üstte sunulacaktır.<br>
     Bu özelliğin öncelik ayarı düşük seviyededir. Android daha uygun paylaşım seçenekleri bulduğu durumlarda Birlikte Aç sunulmayabilir.  ]]></string>
   <string name="pref_title_feature_browser">Tarayıcı olarak ayarla</string>
-  <string name="pref_details_feature_browser"><![CDATA[
-    <strong>Uyarı:</strong> Deneysel özellik!<br>
+  <string name="pref_details_feature_browser"><![CDATA[    <strong>Uyarı:</strong> Deneysel özellik!<br>
     <br>
     <strong>Open Link With</strong> uygulamasının <strong>Tarayıcı</strong> olarak gözükmesini sağlar.<br>
     <br>
@@ -74,8 +70,16 @@
      olabilir. Diğer yandan bunun sayesinde, telefonunuz linkleri uygulamalarda açma konusunda daha iyi olacak.
  
   ]]></string>
-  <string name="feature_default_browser_message"><![CDATA[
-    Bir sonraki pencerede, lütfen önce <strong>Open Link With</strong> seçin, ve ardından <strong>Her zaman</strong> seçin.
+  <string name="pref_title_feature_caller_app">Detect foreground apps</string>
+  <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Warning:</strong> Experimental feature!<br>
+    <br>
+    When enabled, the foreground application (you shared the link from) will not be suggested.
+    <br><br>
+    Example: When sharing from browser, browser will not be suggested again. If no native app is found, you will see a warning message.
+    <br>
+    If not enabled, the foreground application will be suggested even though it is already open.
+  ]]></string>
+  <string name="feature_default_browser_message"><![CDATA[    Bir sonraki pencerede, lütfen önce <strong>Open Link With</strong> seçin, ve ardından <strong>Her zaman</strong> seçin.
   ]]></string>
   <string name="pref_state_feature_enabled">Aktif</string>
   <string name="pref_state_feature_disabled">Devre dışı</string>
@@ -96,14 +100,11 @@
   <string name="description_tutorial_0">Tarayıcıda sıkıştığın zaman seni kurtarmaya geldim.</string>
   <string name="description_tutorial_1">Kısa linklerden birine tıkladın ve vidyoyu direl izlemek yerine bir şekilde web sayfasında takıldın.</string>
   <string name="description_tutorial_2">Sadece benimle paylaş ve senin için uygulamada açayım.</string>
-  <string name="description_tutorial_3"><![CDATA[
-    Linki her zaman bir uygulama ile açmak için <strong>HER ZAMAN</strong> seçeneğini seçin.
+  <string name="description_tutorial_3"><![CDATA[  Linki her zaman bir uygulama ile açmak için <strong>HER ZAMAN</strong> seçeneğini seçin.
   ]]></string>
-  <string name="description_tutorial_4"><![CDATA[
-    Favori linklerinize kolay ulaşmak için <strong>Ana Ekrana ekle</strong> özelliğini kullanın.
+  <string name="description_tutorial_4"><![CDATA[Favori linklerinize kolay ulaşmak için <strong>Ana Ekrana ekle</strong> özelliğini kullanın.
   ]]></string>
-  <string name="description_tutorial_5"><![CDATA[
-    <strong>KULLANIM İZNİ</strong>\'ne erişim verirsen daha iyi çalışırım. Paylaştığın uygulamayı anlarım ve ona göre davranırım.
+  <string name="description_tutorial_5"><![CDATA[  <strong>KULLANIM İZNİ</strong>\'ne erişim verirsen daha iyi çalışırım. Paylaştığın uygulamayı anlarım ve ona göre davranırım.
   ]]></string>
   <string name="usage_access_give_access">Erişim Ver</string>
   <string name="error">Hata</string>

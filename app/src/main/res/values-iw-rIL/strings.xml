@@ -11,8 +11,7 @@
   <string name="desc_preferred">יישומים מעודפים לפתיחה מידית של קישורים למטה שהם משותפים עם היישום.\n\nלהסרת יישום מועדף, לחץ עליו.</string>
   <string name="desc_preferred_empty">יישומים מעודפים לפתיחה מידית של קישורים למטה שהם משותפים עם היישום.\n\nתוכל להגדיר יישומים מועדפים על ידי שיתוף קישור עם יישום זה ובחירה ב\“תמיד\”</string>
   <string name="title_remove_preferred">להסיר מועדף?</string>
-  <string name="message_remove_preferred"><![CDATA[
-    להסיר את <strong>%1$s</strong> כיישום מועדף לטעינת קישורים מ־<strong>%2$s</strong>?<br><br><strong>שים לב:</strong> אתה יכול להגדיר יישום מועדף חדש בפעם הבאה על ידי שיתוף קישור <strong>%3$s</strong>.
+  <string name="message_remove_preferred"><![CDATA[    להסיר את <strong>%1$s</strong> כיישום מועדף לטעינת קישורים מ־<strong>%2$s</strong>?<br><br><strong>שים לב:</strong> אתה יכול להגדיר יישום מועדף חדש בפעם הבאה על ידי שיתוף קישור <strong>%3$s</strong>.
   ]]></string>
   <string name="error_invalid_url">התוכן המשותף לא מכיל קישורים תקינים.</string>
   <string name="empty_resolver_activity">אין יישומים אחרים שיכולים לפתוח את הקישור הזה.</string>
@@ -47,28 +46,24 @@
   <string name="pref_title_category_advanced">Advanced</string>
   <string name="pref_title_features">App Features</string>
   <string name="pref_summary_features">Enable/Disable some feature</string>
-  <string name="pref_details_feature_add_to_homescreen"><![CDATA[
-    Use <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.<br>
+  <string name="pref_details_feature_add_to_homescreen"><![CDATA[    Use <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.<br>
     <br>
     When enabled, this feature adds <strong>Add to Home screen</strong> to your system <strong>Share</strong> menu.<br>
     When selected you will have an option to add the shared link into your home screen.
   ]]></string>
   <string name="pref_title_feature_text_selection">Text Selection</string>
-  <string name="pref_details_feature_text_selection"><![CDATA[
-    When enabled, this feature adds <strong>Open With</strong> option into system level text selection pop-up.<br>
+  <string name="pref_details_feature_text_selection"><![CDATA[    When enabled, this feature adds <strong>Open With</strong> option into system level text selection pop-up.<br>
     <br>
     This feature can be useful in situations where sharing link is not feasible. When link is already visible in a text field, long click to select the text with the link and click <strong>Open With</strong>.
   ]]></string>
   <string name="pref_title_feature_direct_share">Direct Share</string>
-  <string name="pref_details_feature_direct_share"><![CDATA[
-    <strong>Direct Share</strong> is an Android feature where more relevant share targets are presented separately in the share menu.<br>
+  <string name="pref_details_feature_direct_share"><![CDATA[    <strong>Direct Share</strong> is an Android feature where more relevant share targets are presented separately in the share menu.<br>
     <br>
     When enabled, <strong>Open Link With</strong> will be presented at top in the system share menu.<br>
     Also note that priority is set to low. If Android finds more relevant targets from other apps, Open Link With may not be offered.
   ]]></string>
   <string name="pref_title_feature_browser">Set as browser</string>
-  <string name="pref_details_feature_browser"><![CDATA[
-    <strong>Warning:</strong> Experimental feature!<br>
+  <string name="pref_details_feature_browser"><![CDATA[    <strong>Warning:</strong> Experimental feature!<br>
     <br>
     Makes Android recognize <strong>Open Link With</strong> as a <strong>Browser</strong>.<br>
     <br>
@@ -78,8 +73,16 @@
     <strong>Be careful!</strong> Since Chrome (or your favorite browser) will not be default anymore, you may notice
      some behavior changes. As a benefit, your phone will be better with opening links in native apps.
   ]]></string>
-  <string name="feature_default_browser_message"><![CDATA[
-    In the next window, please select <strong>Open Link With</strong>, and then select <strong>Always</strong>.
+  <string name="pref_title_feature_caller_app">Detect foreground apps</string>
+  <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Warning:</strong> Experimental feature!<br>
+    <br>
+    When enabled, the foreground application (you shared the link from) will not be suggested.
+    <br><br>
+    Example: When sharing from browser, browser will not be suggested again. If no native app is found, you will see a warning message.
+    <br>
+    If not enabled, the foreground application will be suggested even though it is already open.
+  ]]></string>
+  <string name="feature_default_browser_message"><![CDATA[    In the next window, please select <strong>Open Link With</strong>, and then select <strong>Always</strong>.
   ]]></string>
   <string name="pref_state_feature_enabled">Enabled</string>
   <string name="pref_state_feature_disabled">Disabled</string>
@@ -100,14 +103,11 @@
   <string name="description_tutorial_0">אני אחלץ אותך כשאתה נתקע בדפדפן.</string>
   <string name="description_tutorial_1">לחצת על קישור מקוצר ואיכשהו סיימת תקוע בדפדפן במקום לצפות בווידאו ישירות.</string>
   <string name="description_tutorial_2">רק שתף את הקישור איתי ואני אדאג להחליף יישום בשבילך.</string>
-  <string name="description_tutorial_3"><![CDATA[
-  בחר <strong>תמיד</strong> בשביל לומר לי לפתוח קישורים של אתר כלשהו תמיד באותו היישום.
+  <string name="description_tutorial_3"><![CDATA[  בחר <strong>תמיד</strong> בשביל לומר לי לפתוח קישורים של אתר כלשהו תמיד באותו היישום.
   ]]></string>
-  <string name="description_tutorial_4"><![CDATA[
-    <strong>הוסף למסך הבית</strong> לגישה מהירה לקישורים המועדפים עליך עם היישומים המועדפים עליך.
+  <string name="description_tutorial_4"><![CDATA[    <strong>הוסף למסך הבית</strong> לגישה מהירה לקישורים המועדפים עליך עם היישומים המועדפים עליך.
   ]]></string>
-  <string name="description_tutorial_5"><![CDATA[
-  תן גישה ל<strong>נתוני השימוש</strong> ואני אעבוד יותר טוב. אני אזהה את הדפדפן שאתה משתף ממנו ואפעל על פי זה.
+  <string name="description_tutorial_5"><![CDATA[  תן גישה ל<strong>נתוני השימוש</strong> ואני אעבוד יותר טוב. אני אזהה את הדפדפן שאתה משתף ממנו ואפעל על פי זה.
   ]]></string>
   <string name="usage_access_give_access">תן הרשאות</string>
   <string name="error">שגיאה</string>

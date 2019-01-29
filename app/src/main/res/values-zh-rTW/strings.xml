@@ -11,9 +11,8 @@
   <string name="desc_preferred">當下列的連結分享到此應用程式時，直接使用偏好的應用程式開啟。\n\n點擊以移除一個偏好的應用程式。</string>
   <string name="desc_preferred_empty">當下列的連結分享到此應用程式時，直接使用偏好的應用程式開啟。\n\n您可以透過分享連結到此應用程式並選擇「總是」以設成偏好的應用程式。</string>
   <string name="title_remove_preferred">是否移除偏好？</string>
-  <string name="message_remove_preferred"><![CDATA[
-    移除用於載入 <strong>%2$s</strong> 連結之偏好的應用程式 <strong>%1$s</strong> ？<br><br><strong>注意：</strong> 您可以在下次分享 <strong>%3$s</strong> 連結時重新設定偏好的應用程式。
-  ]]></string>
+  <string name="message_remove_preferred"><![CDATA[    移除用於載入 <strong>%2$s</strong> 連結之偏好的應用程式 <strong>%1$s</strong> ？<br><br><strong>注意：</strong> 您可以在下次分享 <strong>%3$s</strong> 連結時重新設定偏好的應用程式。
+    ]]></string>
   <string name="error_invalid_url">分享內容沒有任何有效的連結。</string>
   <string name="empty_resolver_activity">找不到其他可處理此連結的應用程式。</string>
   <string name="warning_open_link_with_name">以 %s 開啟連結。</string>
@@ -47,28 +46,24 @@
   <string name="pref_title_category_advanced">進階</string>
   <string name="pref_title_features">應用程式功能</string>
   <string name="pref_summary_features">啟用/停用一些功能</string>
-  <string name="pref_details_feature_add_to_homescreen"><![CDATA[
-    使用 <strong>加到 Home 畫面</strong> 以加快使用您喜愛的應用程式存取您喜愛的連結。<br>
+  <string name="pref_details_feature_add_to_homescreen"><![CDATA[    使用 <strong>加到 Home 畫面</strong> 以加快使用您喜愛的應用程式存取您喜愛的連結。<br>
     <br>
     當啟用時，此功能增加一個 <strong>加到 Home 畫面</strong> 到您的系統 <strong>分享</strong> 選單裡。<br>
     當選取時，您將會多一個選項可以把分享的連結加到 Home 畫面。
   ]]></string>
   <string name="pref_title_feature_text_selection">選取文字</string>
-  <string name="pref_details_feature_text_selection"><![CDATA[
-    當啟用時，此功能增加一個 <strong>Open With</strong> 選項到系統級文字選取的彈出選單裡。<br>
+  <string name="pref_details_feature_text_selection"><![CDATA[    當啟用時，此功能增加一個 <strong>Open With</strong> 選項到系統級文字選取的彈出選單裡。<br>
     <br>
     此功能在對付不能點開的純文字連結時會很好用。當文字區域裡已有可見的連結文字，長按以選取連結文字並點擊彈出的 <strong>Open With</strong> 選單。
   ]]></string>
   <string name="pref_title_feature_direct_share">直接分享</string>
-  <string name="pref_details_feature_direct_share"><![CDATA[
-    <strong>直接分享</strong> 為一個會在分享選單裡個別顯示更多相關的分享目標之 Android 功能。<br>
+  <string name="pref_details_feature_direct_share"><![CDATA[    <strong>直接分享</strong> 為一個會在分享選單裡個別顯示更多相關的分享目標之 Android 功能。<br>
     <br>
     當啟用時，<strong>Open Link With</strong> 將顯示於系統分享選單的上半部。<br>
     並且請注意其設定為低優先權。若 Android 從其他應用程式找到更多相關的分享目標，則 Open Link With 可能不會被顯示出來。
   ]]></string>
   <string name="pref_title_feature_browser">設為瀏覽器應用程式</string>
-  <string name="pref_details_feature_browser"><![CDATA[
-    <strong>警告：</strong> 實驗功能！<br>
+  <string name="pref_details_feature_browser"><![CDATA[    <strong>警告：</strong> 實驗功能！<br>
     <br>
     讓 Android 將 <strong>Open Link With</strong> 認定為一個 <strong>瀏覽器應用程式</strong>。<br>
     <br>
@@ -76,8 +71,16 @@
     <br>
     <strong>請謹慎服用！</strong> 因為 Chrome (或您喜愛的瀏覽器應用程式) 不再是預設的瀏覽器，您可能會察覺一些行為的改變。好處是您的手機用原生應用程式開啟連結會更好用。
   ]]></string>
-  <string name="feature_default_browser_message"><![CDATA[
-    在下一個視窗裡，請點選 <strong>Open Link With</strong>，然後點選 <strong>總是</strong>。
+  <string name="pref_title_feature_caller_app">Detect foreground apps</string>
+  <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Warning:</strong> Experimental feature!<br>
+    <br>
+    When enabled, the foreground application (you shared the link from) will not be suggested.
+    <br><br>
+    Example: When sharing from browser, browser will not be suggested again. If no native app is found, you will see a warning message.
+    <br>
+    If not enabled, the foreground application will be suggested even though it is already open.
+  ]]></string>
+  <string name="feature_default_browser_message"><![CDATA[    在下一個視窗裡，請點選 <strong>Open Link With</strong>，然後點選 <strong>總是</strong>。
   ]]></string>
   <string name="pref_state_feature_enabled">已啟用</string>
   <string name="pref_state_feature_disabled">已停用</string>
@@ -98,14 +101,11 @@
   <string name="description_tutorial_0">讓我來拯救每每卡在瀏覽器裡的您。</string>
   <string name="description_tutorial_1">當您點擊一個縮址，不知何故，您最終會被卡在網頁裡，而不是直接看片。</string>
   <string name="description_tutorial_2">只要分享給我，我會為您切換應用程式。</string>
-  <string name="description_tutorial_3"><![CDATA[
-    選擇 <strong>總是</strong> 以告訴我總是使用指定的應用程式開啟該連結。
+  <string name="description_tutorial_3"><![CDATA[    選擇 <strong>總是</strong> 以告訴我總是使用指定的應用程式開啟該連結。
   ]]></string>
-  <string name="description_tutorial_4"><![CDATA[
-    <strong>加到 Home 畫面</strong> 以加快使用您喜愛的應用程式存取您喜愛的連結。
+  <string name="description_tutorial_4"><![CDATA[    <strong>加到 Home 畫面</strong> 以加快使用您喜愛的應用程式存取您喜愛的連結。
   ]]></string>
-  <string name="description_tutorial_5"><![CDATA[
-    授予我 <strong>使用記錄</strong> 存取權限，我將表現得更好用。我會根據您常用來分享的應用程式之來龍去脈來偵測該使用哪一個瀏覽器應用程式。
+  <string name="description_tutorial_5"><![CDATA[    授予我 <strong>使用記錄</strong> 存取權限，我將表現得更好用。我會根據您常用來分享的應用程式之來龍去脈來偵測該使用哪一個瀏覽器應用程式。
   ]]></string>
   <string name="usage_access_give_access">授予存取權限</string>
   <string name="error">錯誤</string>

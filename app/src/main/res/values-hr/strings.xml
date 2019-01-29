@@ -11,8 +11,7 @@
   <string name="desc_preferred">Preferirane aplikacije koje će se upotrebljavati izravno kada se veze dijele s tom aplikacijom.\n\nDodirnite za uklanjanje preferirane aplikacije.</string>
   <string name="desc_preferred_empty">Preferirane aplikacije koje će se upotrebljavati izravno kada se veze dijele s ovom aplikacijom.\n\nMožete postaviti preferirane aplikacije dijeljenjem veza s ovom aplikacijom, a zatim odabirom opcije \“Uvijek\”</string>
   <string name="title_remove_preferred">Ukloniti preferirane?</string>
-  <string name="message_remove_preferred"><![CDATA[
-    Uklonite <strong>%1$s</strong> kao preferiranu aplikaciju za učitavanje <strong>%2$s</strong> veza?<br><br><strong>Napomena:</strong> Možete postaviti preferiranu aplikaciju koju ćete koristiti sljedeći put kada podijelite vezu <strong>%3$s</strong>.
+  <string name="message_remove_preferred"><![CDATA[    Uklonite <strong>%1$s</strong> kao preferiranu aplikaciju za učitavanje <strong>%2$s</strong> veza?<br><br><strong>Napomena:</strong> Možete postaviti preferiranu aplikaciju koju ćete koristiti sljedeći put kada podijelite vezu <strong>%3$s</strong>.
   ]]></string>
   <string name="error_invalid_url">Dijeljeni sadržaj nije imao valjane URL-ove.</string>
   <string name="empty_resolver_activity">Nisu pronađene druge aplikacije za obradu URL-a.</string>
@@ -47,21 +46,17 @@
   <string name="pref_title_category_advanced">Napredno</string>
   <string name="pref_title_features">Značajke aplikacije</string>
   <string name="pref_summary_features">Omogući/onemogući neku značajku</string>
-  <string name="pref_details_feature_add_to_homescreen"><![CDATA[
-    Upotrijebite <strong>Dodaj na početni zaslon</strong> kako biste brzo pristupili svojim omiljenim vezama sa svojim omiljenim aplikacijama.<br>    <br>
+  <string name="pref_details_feature_add_to_homescreen"><![CDATA[    Upotrijebite <strong>Dodaj na početni zaslon</strong> kako biste brzo pristupili svojim omiljenim vezama sa svojim omiljenim aplikacijama.<br>    <br>
     Kada je omogućeno, ova značajka dodaje <strong>Dodaj na početni zaslon</strong> na izbornik <strong>Dijeljenje</strong>.<br> Kada je odabrano, imat ćete opciju dodavanja dijeljene veze na svoj početni zaslon.
   ]]></string>
   <string name="pref_title_feature_text_selection">Odabir teksta</string>
-  <string name="pref_details_feature_text_selection"><![CDATA[
-    Kada je omogućena, ta značajka dodaje opciju <strong>Open with</strong> na skočni prozor za odabir teksta na razini sustava.<br>    <br>    Ova značajka može biti korisna u situacijama u kojima veza za dijeljenje nije izvediva. Kada je veza već vidljiva u tekstnom polju, dugo kliknite za odabir teksta s vezom i odaberite <strong>Open with</strong>.
+  <string name="pref_details_feature_text_selection"><![CDATA[    Kada je omogućena, ta značajka dodaje opciju <strong>Open with</strong> na skočni prozor za odabir teksta na razini sustava.<br>    <br>    Ova značajka može biti korisna u situacijama u kojima veza za dijeljenje nije izvediva. Kada je veza već vidljiva u tekstnom polju, dugo kliknite za odabir teksta s vezom i odaberite <strong>Open with</strong>.
   ]]></string>
   <string name="pref_title_feature_direct_share">Izravno Dijeljenje</string>
-  <string name="pref_details_feature_direct_share"><![CDATA[
-    <strong>Izravno Dijeljenje</strong> je Android značajka u kojoj se relevantni ciljevi za dijeljenje prikazuju zasebno u izborniku Dijeljenje.<br>    <br>    Kada je omogućeno, <strong>Open Link With</strong> će biti predstavljen na vrhu izbornika dijeljenja sustava.<br>     Također imajte na umu da je prioritet postavljen na nisku razinu. Ako Android pronađe relevantnije ciljeve iz drugih aplikacija, možda se ne ponudi otvaranje pomoću Open Link With.
+  <string name="pref_details_feature_direct_share"><![CDATA[    <strong>Izravno Dijeljenje</strong> je Android značajka u kojoj se relevantni ciljevi za dijeljenje prikazuju zasebno u izborniku Dijeljenje.<br>    <br>    Kada je omogućeno, <strong>Open Link With</strong> će biti predstavljen na vrhu izbornika dijeljenja sustava.<br>     Također imajte na umu da je prioritet postavljen na nisku razinu. Ako Android pronađe relevantnije ciljeve iz drugih aplikacija, možda se ne ponudi otvaranje pomoću Open Link With.
   ]]></string>
   <string name="pref_title_feature_browser">Postavi kao preglednik</string>
-  <string name="pref_details_feature_browser"><![CDATA[
-    <strong>Upozorenje:</strong> Eksperimentalna značajka!<br>
+  <string name="pref_details_feature_browser"><![CDATA[    <strong>Upozorenje:</strong> Eksperimentalna značajka!<br>
     <br>Omogućuje da Android prepozna <strong>Open Link With</strong> kao<strong>Preglednik</strong>.<br>
     <br>Kada je omogućeno, upotreba dijeljenja neće biti potrebna, samo klikom na vezu pokrenut će Open Link With i otvoriti će odabranu vezu
      u nativnoj aplikaciji. Također će prikazati punu vezu ukoliko je ista prethodno skraćena.<br>
@@ -69,8 +64,16 @@
     <strong>Budite oprezni!</strong> Budući da Chrome (ili Vaš omiljeni preglednik) više neće biti zadani, možete primijetiti
      neke promjene ponašanja. Kao prednost, Vaš će telefon biti bolji pri otvaranju veza u izvornim aplikacijama.
   ]]></string>
-  <string name="feature_default_browser_message"><![CDATA[
-    U sljedećem prozoru odaberite <strong>Open Link With</strong>, i zatim odaberite<strong>Uvijek</strong>.
+  <string name="pref_title_feature_caller_app">Detect foreground apps</string>
+  <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Warning:</strong> Experimental feature!<br>
+    <br>
+    When enabled, the foreground application (you shared the link from) will not be suggested.
+    <br><br>
+    Example: When sharing from browser, browser will not be suggested again. If no native app is found, you will see a warning message.
+    <br>
+    If not enabled, the foreground application will be suggested even though it is already open.
+  ]]></string>
+  <string name="feature_default_browser_message"><![CDATA[    U sljedećem prozoru odaberite <strong>Open Link With</strong>, i zatim odaberite<strong>Uvijek</strong>.
   ]]></string>
   <string name="pref_state_feature_enabled">Omogućeno</string>
   <string name="pref_state_feature_disabled">Onemogućeno</string>
@@ -91,14 +94,11 @@
   <string name="description_tutorial_0">Dolazim u pomoć kad god zaglavite u pregledniku.</string>
   <string name="description_tutorial_1">Kliknete na vezu i zaglavite na web stranici umjesto izravnim gledanjem videozapisa.</string>
   <string name="description_tutorial_2">Podijelite ga sa mnom i prebacit ću aplikacije za Vas.</string>
-  <string name="description_tutorial_3"><![CDATA[
-    Odaberite <strong>UVIJEK</strong> da biste mi rekli da uvijek otvorim tu vezu s određenom aplikacijom.
+  <string name="description_tutorial_3"><![CDATA[    Odaberite <strong>UVIJEK</strong> da biste mi rekli da uvijek otvorim tu vezu s određenom aplikacijom.
   ]]></string>
-  <string name="description_tutorial_4"><![CDATA[
-    <strong>Dodajte na početni zaslon</strong> da biste brzo pristupili svojim omiljenim vezama s Vašim omiljenim aplikacijama.
+  <string name="description_tutorial_4"><![CDATA[    <strong>Dodajte na početni zaslon</strong> da biste brzo pristupili svojim omiljenim vezama s Vašim omiljenim aplikacijama.
   ]]></string>
-  <string name="description_tutorial_5"><![CDATA[
-    Dopustite pristup <strong>PODACIMA O KORIŠTENJU</strong> i ja ću raditi bolje. Otkrit ću preglednik s kojim dijelite i postupati u skladu s tim.
+  <string name="description_tutorial_5"><![CDATA[    Dopustite pristup <strong>PODACIMA O KORIŠTENJU</strong> i ja ću raditi bolje. Otkrit ću preglednik s kojim dijelite i postupati u skladu s tim.
   ]]></string>
   <string name="usage_access_give_access">Daj pristup</string>
   <string name="error">Greška</string>

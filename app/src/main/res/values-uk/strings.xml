@@ -47,28 +47,24 @@
   <string name="pref_title_category_advanced">Додатково</string>
   <string name="pref_title_features">Можливості додатку</string>
   <string name="pref_summary_features">Увімкнути деякі можливості</string>
-  <string name="pref_details_feature_add_to_homescreen"><![CDATA[
-    Use <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.<br>
+  <string name="pref_details_feature_add_to_homescreen"><![CDATA[    Use <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.<br>
     <br>
     When enabled, this feature adds <strong>Add to Home screen</strong> to your system <strong>Share</strong> menu.<br>
     When selected you will have an option to add the shared link into your home screen.
   ]]></string>
   <string name="pref_title_feature_text_selection">Вибір тексту</string>
-  <string name="pref_details_feature_text_selection"><![CDATA[
-    When enabled, this feature adds <strong>Open With</strong> option into system level text selection pop-up.<br>
+  <string name="pref_details_feature_text_selection"><![CDATA[    When enabled, this feature adds <strong>Open With</strong> option into system level text selection pop-up.<br>
     <br>
     This feature can be useful in situations where sharing link is not feasible. When link is already visible in a text field, long click to select the text with the link and click <strong>Open With</strong>.
   ]]></string>
   <string name="pref_title_feature_direct_share">Direct Share</string>
-  <string name="pref_details_feature_direct_share"><![CDATA[
-    <strong>Direct Share</strong> is an Android feature where more relevant share targets are presented separately in the share menu.<br>
+  <string name="pref_details_feature_direct_share"><![CDATA[    <strong>Direct Share</strong> is an Android feature where more relevant share targets are presented separately in the share menu.<br>
     <br>
     When enabled, <strong>Open Link With</strong> will be presented at top in the system share menu.<br>
     Also note that priority is set to low. If Android finds more relevant targets from other apps, Open Link With may not be offered.
   ]]></string>
   <string name="pref_title_feature_browser">Set as browser</string>
-  <string name="pref_details_feature_browser"><![CDATA[
-    <strong>Warning:</strong> Experimental feature!<br>
+  <string name="pref_details_feature_browser"><![CDATA[    <strong>Warning:</strong> Experimental feature!<br>
     <br>
     Makes Android recognize <strong>Open Link With</strong> as a <strong>Browser</strong>.<br>
     <br>
@@ -78,8 +74,16 @@
     <strong>Be careful!</strong> Since Chrome (or your favorite browser) will not be default anymore, you may notice
      some behavior changes. As a benefit, your phone will be better with opening links in native apps.
   ]]></string>
-  <string name="feature_default_browser_message"><![CDATA[
-    In the next window, please select <strong>Open Link With</strong>, and then select <strong>Always</strong>.
+  <string name="pref_title_feature_caller_app">Detect foreground apps</string>
+  <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Warning:</strong> Experimental feature!<br>
+    <br>
+    When enabled, the foreground application (you shared the link from) will not be suggested.
+    <br><br>
+    Example: When sharing from browser, browser will not be suggested again. If no native app is found, you will see a warning message.
+    <br>
+    If not enabled, the foreground application will be suggested even though it is already open.
+  ]]></string>
+  <string name="feature_default_browser_message"><![CDATA[    In the next window, please select <strong>Open Link With</strong>, and then select <strong>Always</strong>.
   ]]></string>
   <string name="pref_state_feature_enabled">Увімкнено</string>
   <string name="pref_state_feature_disabled">Вимкнено</string>
@@ -100,14 +104,11 @@
   <string name="description_tutorial_0">Я допомагатиму Вам в тому випадку,  коли Ваші браузери зависатимуть.</string>
   <string name="description_tutorial_1">Використання коротких посилань спричиняє зависання замість перегляду відео.</string>
   <string name="description_tutorial_2">Використавши Поширити через мене,  дозволить Вам обирати яку програму використати для відкривання.</string>
-  <string name="description_tutorial_3"><![CDATA[
-    Виберіть ЗАВЖДИ показувати мені відкрити посилання через спеціальні програми.
+  <string name="description_tutorial_3"><![CDATA[    Виберіть ЗАВЖДИ показувати мені відкрити посилання через спеціальні програми.
   ]]></string>
-  <string name="description_tutorial_4"><![CDATA[
-    Додати на Головний екран швидкий доступ улюблених посилань через мої програми.
+  <string name="description_tutorial_4"><![CDATA[    Додати на Головний екран швидкий доступ улюблених посилань через мої програми.
   ]]></string>
-  <string name="description_tutorial_5"><![CDATA[
-    Надати доступ до <strong>Використання доступу</strong> і я буду працювати краще. Я обов\'язково виявлю браузер який Ви зазвичай використовуєте.
+  <string name="description_tutorial_5"><![CDATA[    Надати доступ до <strong>Використання доступу</strong> і я буду працювати краще. Я обов\'язково виявлю браузер який Ви зазвичай використовуєте.
   ]]></string>
   <string name="usage_access_give_access">Надати доступ</string>
   <string name="error">Помилка</string>

@@ -11,9 +11,7 @@
   <string name="desc_preferred">当下面的链接分享到此应用的时候，会直接打开默认应用。\n\n点击以删除默认应用。</string>
   <string name="desc_preferred_empty">当下面的链接分享到此应用的时候，会直接打开默认应用。\n\n分享链接到此应用，然后选择“始终”以设定默认应用。</string>
   <string name="title_remove_preferred">删除默认应用？</string>
-  <string name="message_remove_preferred"><![CDATA[
-    删除 <strong>%1$s</strong> 作为加载 <strong>%2$s</strong> 链接的默认应用吗？<br><br><strong>注︰</strong> 你可以在下次分享 <strong>%3$s</strong> 链接的时候设置新的默认应用。
-  ]]></string>
+  <string name="message_remove_preferred"><![CDATA[删除 <strong>%1$s</strong> 作为加载 <strong>%2$s</strong> 链接的默认应用吗？<br><br><strong>注︰</strong> 你可以在下次分享 <strong>%3$s</strong> 链接的时候设置新的默认应用。    ]]></string>
   <string name="error_invalid_url">分享到此应用的内容没有任何有效的链接。</string>
   <string name="empty_resolver_activity">没有找到相关应用来处理该链接。</string>
   <string name="warning_open_link_with_name">正在用 %s 打开链接。</string>
@@ -47,28 +45,24 @@
   <string name="pref_title_category_advanced">高级选项</string>
   <string name="pref_title_features">应用功能</string>
   <string name="pref_summary_features">启用/禁用一些功能</string>
-  <string name="pref_details_feature_add_to_homescreen"><![CDATA[
-    使用<strong>添加到主屏幕</strong>可以使用您喜爱的应用快速访问您的收藏链接。<br>
+  <string name="pref_details_feature_add_to_homescreen"><![CDATA[    使用<strong>添加到主屏幕</strong>可以使用您喜爱的应用快速访问您的收藏链接。<br>
     <br>
     启用后，此功能会将<strong>添加到主屏幕</strong>添加到您的系统的<strong>分享</strong>菜单。<br>
     选择后，您可以选择将共享链接添加到主屏幕。
   ]]></string>
   <string name="pref_title_feature_text_selection">选择文本</string>
-  <string name="pref_details_feature_text_selection"><![CDATA[
-    启用后，此功能会将<strong>打开方式</strong>选项添加到系统级文本选择弹出窗口中。<br>
+  <string name="pref_details_feature_text_selection"><![CDATA[    启用后，此功能会将<strong>打开方式</strong>选项添加到系统级文本选择弹出窗口中。<br>
     <br>
     在共享链接无法使用的情况下，此功能非常有用。如果链接已在文本字段中显示，请长按以选择包含该链接的文本，然后单击<strong>打开方式</strong>。
   ]]></string>
   <string name="pref_title_feature_direct_share">直接分享</string>
-  <string name="pref_details_feature_direct_share"><![CDATA[
-    <strong>直接分享</strong>是一项Android功能，其中更多相关的共享目标在共享菜单中单独显示。<br>
+  <string name="pref_details_feature_direct_share"><![CDATA[    <strong>直接分享</strong>是一项Android功能，其中更多相关的共享目标在共享菜单中单独显示。<br>
     <br>
     启用后，<strong>Open Link With</strong>将显示在系统共享菜单的顶部。<br>
     另请注意，优先级设置为低。如果Android从其他应用中找到更多相关目标，则Open Link With可能无法运作。
   ]]></string>
   <string name="pref_title_feature_browser">设置为浏览器</string>
-  <string name="pref_details_feature_browser"><![CDATA[
-    <strong>警告</strong>：实验性功能！<br>
+  <string name="pref_details_feature_browser"><![CDATA[    <strong>警告</strong>：实验性功能！<br>
     <br>
     使Android识别<strong>Open Link With</strong>作为<strong>浏览器</strong>。<br>
     <br>
@@ -78,8 +72,16 @@
     <strong>注意！</strong>由于Chrome（或您最喜欢的浏览器）不再是默认值，您可能会注意到一些行为改变。
     这作为一项优势，您可以通过在原生应用中打开相关链接来更方便地使用手机。
   ]]></string>
-  <string name="feature_default_browser_message"><![CDATA[
-    在下一个窗口中，请选择<strong>Open Link With</strong>，然后选择<strong>始终</strong>。
+  <string name="pref_title_feature_caller_app">Detect foreground apps</string>
+  <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Warning:</strong> Experimental feature!<br>
+    <br>
+    When enabled, the foreground application (you shared the link from) will not be suggested.
+    <br><br>
+    Example: When sharing from browser, browser will not be suggested again. If no native app is found, you will see a warning message.
+    <br>
+    If not enabled, the foreground application will be suggested even though it is already open.
+  ]]></string>
+  <string name="feature_default_browser_message"><![CDATA[    在下一个窗口中，请选择<strong>Open Link With</strong>，然后选择<strong>始终</strong>。
   ]]></string>
   <string name="pref_state_feature_enabled">已启用</string>
   <string name="pref_state_feature_disabled">已禁用</string>
@@ -100,14 +102,11 @@
   <string name="description_tutorial_0">每当你困在浏览器中，我会来解救你。</string>
   <string name="description_tutorial_1">你点击了一个短链接，但是没有直接看到视频，而是莫名其妙的最终被困在网页里。</string>
   <string name="description_tutorial_2">只要与我分享链接，我会为你切换应用。</string>
-  <string name="description_tutorial_3"><![CDATA[
-    选择 <strong>始终</strong> 来告诉我总是用特定应用来打开该链接。
+  <string name="description_tutorial_3"><![CDATA[    选择 <strong>始终</strong> 来告诉我总是用特定应用来打开该链接。
   ]]></string>
-  <string name="description_tutorial_4"><![CDATA[
-    <strong>添加到主屏幕</strong> 以通过你喜欢的应用快速访问你喜欢的链接。
+  <string name="description_tutorial_4"><![CDATA[    <strong>添加到主屏幕</strong> 以通过你喜欢的应用快速访问你喜欢的链接。
   ]]></string>
-  <string name="description_tutorial_5"><![CDATA[
-    授权 <strong>查看使用情况</strong>，我能工作得更好。我会检测你的分享的源头浏览器，并采取相应的行动。
+  <string name="description_tutorial_5"><![CDATA[    授权 <strong>查看使用情况</strong>，我能工作得更好。我会检测你的分享的源头浏览器，并采取相应的行动。  
   ]]></string>
   <string name="usage_access_give_access">授权</string>
   <string name="error">错误</string>
