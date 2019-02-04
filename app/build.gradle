@@ -82,7 +82,6 @@ staticAnalysis {
   }
 
   ktlint {
-    version '0.30.0'
     reporters = [ReporterType.CHECKSTYLE]
 
     includeVariants { it.name == 'flossDebug' }

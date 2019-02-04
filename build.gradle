@@ -76,6 +76,7 @@ allprojects {
                 useVersion versions.kotlin
             }
         }
+        resolutionStrategy.force 'com.github.shyiko:ktlint:0.30.0'
     }
 }
 
