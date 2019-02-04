@@ -81,12 +81,12 @@ staticAnalysis {
     config = files(configFile('detekt.yml'))
   }
 
-//  ktlint {
-//    version '0.29.0'
-//    reporters = [ReporterType.CHECKSTYLE]
-//
-//    includeVariants { it.name == 'flossDebug' }
-//  }
+  ktlint {
+    version '0.30.0'
+    reporters = [ReporterType.CHECKSTYLE]
+
+    includeVariants { it.name == 'flossDebug' }
+  }
 
   lintOptions {
     textReport true
@@ -163,7 +163,7 @@ dependencies {
 
   testImplementation 'junit:junit:4.12'
   testImplementation 'org.assertj:assertj-core:3.11.1'
-  testImplementation 'org.mockito:mockito-core:2.23.4'
+  testImplementation 'org.mockito:mockito-core:2.24.0'
   testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0'
   testImplementation "com.squareup.okhttp3:mockwebserver:$versions.okHttp"
 }
