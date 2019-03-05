@@ -7,5 +7,5 @@ android.buildTypes {
 }
 
 dependencies {
-    playImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.8'
+    playImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.9'
 }
