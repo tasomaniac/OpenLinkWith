@@ -8,8 +8,9 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 import com.tasomaniac.openwith.R;
 import dagger.android.support.DaggerAppCompatActivity;
 
@@ -63,7 +64,7 @@ public abstract class AppIntro extends DaggerAppCompatActivity {
 
         pager.setAdapter(this.mPagerAdapter);
 
-        pager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+        pager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
 
             @Override
             public void onPageSelected(int position) {
@@ -180,7 +181,7 @@ public abstract class AppIntro extends DaggerAppCompatActivity {
         doneText.setText(text);
     }
 
-    private static class PagerAdapter extends FragmentPagerAdapter {
+    private static class PagerAdapter extends FragmentStateAdapter {
         List<Fragment> fragments;
 
         PagerAdapter(FragmentManager fm, List<Fragment> fragments) {
@@ -188,15 +189,12 @@ public abstract class AppIntro extends DaggerAppCompatActivity {
             this.fragments = fragments;
         }
 
-        @Override
-        public Fragment getItem(int position) {
+        @Override public Fragment getItem(int position) {
             return this.fragments.get(position);
         }
 
-        @Override
-        public int getCount() {
-            return this.fragments.size();
+        @Override public int getItemCount() {
+            return fragments.size();
         }
-
     }
 }

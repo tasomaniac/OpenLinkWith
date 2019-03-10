@@ -3,7 +3,6 @@ package com.tasomaniac.openwith.settings
 import android.app.backup.BackupManager
 import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.transaction
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -67,7 +66,8 @@ class SettingsActivity
 
     override fun onPreferenceStartFragment(caller: PreferenceFragmentCompat, pref: Preference): Boolean {
         supportFragmentManager.transaction {
-            val fragment = Fragment.instantiate(this@SettingsActivity, pref.fragment)
+            val fragment =
+                supportFragmentManager.fragmentFactory.instantiate(classLoader, pref.fragment, null)
             replace(R.id.fragment_container, fragment)
             addToBackStack(null)
         }

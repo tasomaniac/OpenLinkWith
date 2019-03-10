@@ -62,7 +62,6 @@ allprojects {
         jcenter {
             content {
                 includeGroup 'org.jetbrains.trove4j'
-                includeGroup 'com.duolingo.open'
                 includeGroup 'io.gitlab.arturbosch.detekt'
                 includeGroup 'com.beust'
             }
