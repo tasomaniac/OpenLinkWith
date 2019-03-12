@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="skip">Saltar</string>
+  <string name="done">Hecho</string>
+  <string name="next">Siguiente</string>
+  <string name="cd_image_tutorial">Tutorial Imagen</string>
+</resources>

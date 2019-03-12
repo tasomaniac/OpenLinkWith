@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="skip">Пропустити</string>
+  <string name="done">Виконано</string>
+  <string name="next">Далі</string>
+  <string name="cd_image_tutorial">Взірець</string>
+</resources>

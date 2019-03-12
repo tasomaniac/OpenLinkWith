@@ -5,9 +5,6 @@
 
   <dimen name="content_padding">16dp</dimen>
 
-  <dimen name="keyline_1">16dp</dimen>
-
   <dimen name="appbar_height">196dp</dimen>
 
-  <dimen name="size_image_tutorial">160dp</dimen>
 </resources>

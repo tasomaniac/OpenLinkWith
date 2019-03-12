@@ -17,7 +17,6 @@
   <string name="error_invalid_url">Контент, которым вы поделились, не содержит действительных ссылок.</string>
   <string name="empty_resolver_activity">Не найдены другие приложения для работы с этой ссылкой.</string>
   <string name="warning_open_link_with_name">Открыть ссылку с помощью %s.</string>
-  <string name="done">Готово</string>
   <string name="pref_title_general">Основное</string>
   <string name="pref_title_about">О приложении</string>
   <string name="pref_summary_about">Посмотрите обучение ещё раз.</string>
@@ -97,8 +96,6 @@
   <string name="pref_title_market">Больше приложений от Said Tahsin Dane</string>
   <string name="pref_summary_market">Понравилось приложение? Почему бы не посмотреть мои другие?</string>
   <string name="pref_title_version">Версия</string>
-  <string name="skip">Пропустить</string>
-  <string name="cd_image_tutorial">Изображение в обучении</string>
   <string name="title_tutorial_0">Добро пожаловать в Open Link With</string>
   <string name="title_tutorial_1">У вас когда нибудь такое случалось?</string>
   <string name="title_tutorial_2">Поделитесь этим!</string>
@@ -114,7 +111,6 @@
   ]]></string>
   <string name="usage_access_give_access">Предоставить доступ</string>
   <string name="error">Ошибка</string>
-  <string name="next">Далее</string>
   <string name="error_usage_access_not_found">Настройка статистики использования не может быть найдена.\n\nYou may access it by going into Settings -&gt; Security</string>
   <string name="error_cannot_start_activity">Не удалось открыть ссылку через выбранное приложение. Попробуйте ещё раз позже.</string>
   <string name="add_to_homescreen">Добавить на рабочий стол</string>

@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import com.tasomaniac.openwith.R;
 
 public class AppIntroFragment extends Fragment {
 
@@ -41,11 +40,11 @@ public class AppIntroFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_intro, container, false);
-        TextView t = (TextView) v.findViewById(R.id.title);
-        TextView d = (TextView) v.findViewById(R.id.description);
-        ImageView i = (ImageView) v.findViewById(R.id.image);
-        LinearLayout m = (LinearLayout) v.findViewById(R.id.main);
+        View view = inflater.inflate(R.layout.fragment_intro, container, false);
+        TextView t = view.findViewById(R.id.title);
+        TextView d = view.findViewById(R.id.description);
+        ImageView i = view.findViewById(R.id.image);
+        LinearLayout m = view.findViewById(R.id.main);
 
         if (title != 0) {
             t.setText(Html.fromHtml(getString(title)));
@@ -65,7 +64,7 @@ public class AppIntroFragment extends Fragment {
         if (backgroundColor != 0) {
             m.setBackgroundColor(backgroundColor);
         }
-        return v;
+        return view;
     }
 
     public static class Builder {

@@ -16,7 +16,6 @@
   <string name="error_invalid_url">Nội dung được chia sẻ không phải là một đường dẫn hợp lệ.</string>
   <string name="empty_resolver_activity">Không tìm thấy ứng dụng nào có thể mở đường dẫn bạn chọn.</string>
   <string name="warning_open_link_with_name">Mở liên kết với %s.</string>
-  <string name="done">Xong</string>
   <string name="pref_title_general">Chung</string>
   <string name="pref_title_about">Giới thiệu</string>
   <string name="pref_summary_about">Xem lại hướng dẫn sử dụng.</string>
@@ -94,8 +93,6 @@
   <string name="pref_title_market">Ứng dụng khác của Said Tahsin Dane</string>
   <string name="pref_summary_market">Bạn thích nó? Tại sao không thử xem qua các ứng dụng khác của tôi?</string>
   <string name="pref_title_version">Phiên bản</string>
-  <string name="skip">Bỏ qua</string>
-  <string name="cd_image_tutorial">Hướng dẫn bằng hình ảnh</string>
   <string name="title_tutorial_0">Chào mừng bạn đến với Open Link With</string>
   <string name="title_tutorial_1">Nó có từng xảy ra với bạn?</string>
   <string name="title_tutorial_2">Chia sẻ nó!</string>
@@ -111,7 +108,6 @@
   ]]></string>
   <string name="usage_access_give_access">Cấp quyền</string>
   <string name="error">Lỗi</string>
-  <string name="next">Tiếp theo</string>
   <string name="error_usage_access_not_found">Không thể mở cài đặt Truy cập sử dụng.\n\n Bạn có thể truy cập nó bằng cách vào Cài đặt &gt; Bảo mật</string>
   <string name="error_cannot_start_activity">Không thể mở liên kết với ứng dụng đã chọn. Thử lại sau.</string>
   <string name="add_to_homescreen">Thêm vào Màn hình chính</string>

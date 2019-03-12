@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="skip">تخطي</string>
+  <string name="done">تم</string>
+  <string name="next">التالي</string>
+  <string name="cd_image_tutorial">صورة العرض التوضيحي</string>
+</resources>

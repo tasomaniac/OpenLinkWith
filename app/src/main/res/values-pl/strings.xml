@@ -15,7 +15,6 @@
   <string name="error_invalid_url">Współdzielona treść nie posiada poprawnych adresów URL.</string>
   <string name="empty_resolver_activity">Nie znaleziono innej aplikacji do obsługi adresu linku.</string>
   <string name="warning_open_link_with_name">Otwieranie łącza w %s.</string>
-  <string name="done">Gotowe</string>
   <string name="pref_title_general">Ogólne</string>
   <string name="pref_title_about">Informacje</string>
   <string name="pref_summary_about">Zobacz poradnik jeszcze raz.</string>
@@ -93,8 +92,6 @@
   <string name="pref_title_market">Więcej aplikacji Saida Tashina Dane</string>
   <string name="pref_summary_market">Podoba Ci się? Sprawdź inne moje aplikacje?</string>
   <string name="pref_title_version">Wersja</string>
-  <string name="skip">Pomiń</string>
-  <string name="cd_image_tutorial">Zdjęcie z poradnika</string>
   <string name="title_tutorial_0">Witaj w Open Link With</string>
   <string name="title_tutorial_1">Czy przytrafiło ci się to kiedykolwiek?</string>
   <string name="title_tutorial_2">Udostępnij!</string>
@@ -110,7 +107,6 @@
   ]]></string>
   <string name="usage_access_give_access">Zapewnić Dostęp</string>
   <string name="error">Błąd</string>
-  <string name="next">Dalej</string>
   <string name="error_usage_access_not_found">Aby nasza aplikacja mogła poprawnie działać musisz przypisać jej tzw. prawo do użycia.\n\nMożesz to zrobić wchodząc w Ustawienia -&gt; Bezpieczeństwo</string>
   <string name="error_cannot_start_activity">Nie udało się otworzyć łącza wybraną aplikacją. Spróbuj ponownie później.</string>
   <string name="add_to_homescreen">Dodaj do ekranu głównego</string>

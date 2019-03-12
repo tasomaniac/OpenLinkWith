@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="skip">Atla</string>
+  <string name="done">Bitti</string>
+  <string name="next">Sonraki</string>
+  <string name="cd_image_tutorial">Başlangıç Resmi</string>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="skip">Überspringen</string>
+  <string name="done">Fertig</string>
+  <string name="next">Weiter</string>
+  <string name="cd_image_tutorial">Tutorial Bild</string>
+</resources>

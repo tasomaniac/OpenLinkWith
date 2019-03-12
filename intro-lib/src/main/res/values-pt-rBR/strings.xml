@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="skip">Pular</string>
+  <string name="done">Concluído</string>
+  <string name="next">Seguinte</string>
+  <string name="cd_image_tutorial">Imagem de Tutorial</string>
+</resources>

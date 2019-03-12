@@ -110,7 +110,7 @@ configurations {
 }
 
 dependencies {
-  implementation project(':base')
+  implementation project(':intro-lib')
   
   implementation 'androidx.preference:preference-ktx:1.0.0'
   implementation 'androidx.viewpager2:viewpager2:1.0.0-alpha01'

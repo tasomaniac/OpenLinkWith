@@ -1,3 +1,4 @@
 include ':app'
 include ':base'
+include ':intro-lib'
 include ':test-support'

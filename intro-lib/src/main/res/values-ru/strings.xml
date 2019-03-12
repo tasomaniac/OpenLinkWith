@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="skip">Пропустить</string>
+  <string name="done">Готово</string>
+  <string name="next">Далее</string>
+  <string name="cd_image_tutorial">Изображение в обучении</string>
+</resources>

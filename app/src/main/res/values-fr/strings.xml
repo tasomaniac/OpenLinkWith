@@ -15,7 +15,6 @@
   <string name="error_invalid_url">Le contenu partagé n\'avait aucune URL valide.</string>
   <string name="empty_resolver_activity">Aucune autre application n\'a été trouvé pour gérer l\'URL.</string>
   <string name="warning_open_link_with_name">Ouverture du lien avec %s.</string>
-  <string name="done">Terminé</string>
   <string name="pref_title_general">Paramètres Généraux</string>
   <string name="pref_title_about">À propos</string>
   <string name="pref_summary_about">Revoir le tutoriel.</string>
@@ -93,8 +92,6 @@
   <string name="pref_title_market">Plus d\'applications par Said Tahsin Dane</string>
   <string name="pref_summary_market">Vous aimez ? Pourquoi ne pas jeter un œil à mes autres applications ?</string>
   <string name="pref_title_version">Version</string>
-  <string name="skip">Passer</string>
-  <string name="cd_image_tutorial">Tutoriel en image</string>
   <string name="title_tutorial_0">Bienvenue sur Open Link With</string>
   <string name="title_tutorial_1">Ça vous est déjà arrivé ?</string>
   <string name="title_tutorial_2">Partagez le !</string>
@@ -110,7 +107,6 @@
   ]]></string>
   <string name="usage_access_give_access">Donnez l\'accès</string>
   <string name="error">Erreur</string>
-  <string name="next">Continuer</string>
   <string name="error_usage_access_not_found">Les paramètres des habitudes d\'utilisation ne peuvent pas être ouverts.\n\nVous pouvez y accéder en allant dans Paramètres -&gt; Sécurité</string>
   <string name="error_cannot_start_activity">Échec de l\'ouverture du lien avec l\'application sélectionnée. Réessayez plus tard.</string>
   <string name="add_to_homescreen">Ajouter à l\'écran d\'accueil</string>

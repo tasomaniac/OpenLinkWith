@@ -16,7 +16,6 @@
   <string name="error_invalid_url">El contenido compartido no tenía ninguna URL válida.</string>
   <string name="empty_resolver_activity">Ninguna otra aplicación encontrada para manejar esta URL.</string>
   <string name="warning_open_link_with_name">Abrir enlace con %s.</string>
-  <string name="done">Hecho</string>
   <string name="pref_title_general">General</string>
   <string name="pref_title_about">Acerca de</string>
   <string name="pref_summary_about">Ver el tutorial de nuevo.</string>
@@ -93,8 +92,6 @@
   <string name="pref_title_market">Más aplicaciones de Tahsin Dane</string>
   <string name="pref_summary_market">Te gusta? Por qué no mirar mis otras apps?</string>
   <string name="pref_title_version">Versión</string>
-  <string name="skip">Saltar</string>
-  <string name="cd_image_tutorial">Tutorial Imagen</string>
   <string name="title_tutorial_0">Bienvenido a Abrir Enlace Con</string>
   <string name="title_tutorial_1">Alguna vez te ha pasado?</string>
   <string name="title_tutorial_2">¡Compártelo!</string>
@@ -110,7 +107,6 @@
   ]]></string>
   <string name="usage_access_give_access">Dar acceso</string>
   <string name="error">Error</string>
-  <string name="next">Siguiente</string>
   <string name="error_usage_access_not_found">El Ajuste de Acceso de Uso no se puede encontrar.\n\nYou may access it by going into Settings -&gt; Security</string>
   <string name="error_cannot_start_activity">Fallo al abrir el enlace con la aplicación seleccionada. Inténtalo más tarde.</string>
   <string name="add_to_homescreen">Añadir a la pantalla de inicio</string>

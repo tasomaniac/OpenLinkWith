@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="skip">Lewati</string>
+  <string name="done">Selesai</string>
+  <string name="next">Berikutnya</string>
+  <string name="cd_image_tutorial">Gambar tutorial</string>
+</resources>

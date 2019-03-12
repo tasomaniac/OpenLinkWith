@@ -16,7 +16,6 @@
   <string name="error_invalid_url">Konten kongsian tidak memiliki URL yang sah.</string>
   <string name="empty_resolver_activity">Tiada apl lain yang ditemui boleh menangani URL tersebut.</string>
   <string name="warning_open_link_with_name">Membuka tautan dengan %s.</string>
-  <string name="done">Selesai</string>
   <string name="pref_title_general">Umum</string>
   <string name="pref_title_about">Tentang</string>
   <string name="pref_summary_about">Lihat tutorial sekali lagi.</string>
@@ -94,8 +93,6 @@
   <string name="pref_title_market">Aplikasi lainnya oleh Said Tahsin Dane</string>
   <string name="pref_summary_market">Suka? Mengapa tidak lihat aplikasi saya lainnya?</string>
   <string name="pref_title_version">Versi</string>
-  <string name="skip">Lewati</string>
-  <string name="cd_image_tutorial">Gambar tutorial</string>
   <string name="title_tutorial_0">Selamat datang di Buka Tautan Dengan</string>
   <string name="title_tutorial_1">Apakah ini pernah terjadi pada Anda?</string>
   <string name="title_tutorial_2">Bagikan!</string>
@@ -111,7 +108,6 @@
   ]]></string>
   <string name="usage_access_give_access">Berikan Akses</string>
   <string name="error">Kesalahan</string>
-  <string name="next">Berikutnya</string>
   <string name="error_usage_access_not_found">Pengaturan Akses Penggunaan tidak dapat dibuka.\n\nAnda bisa mengaksesnya dengan membuka Pengaturan -&gt; Keamanan</string>
   <string name="error_cannot_start_activity">Gagal membuka tautan dengan apl yang dipilih. coba lagi nanti.</string>
   <string name="add_to_homescreen">Tambah ke Beranda</string>

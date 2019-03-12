@@ -16,7 +16,6 @@
   <string name="error_invalid_url">O conteúdo partilhado não tinha quaisquer URLs válidos.</string>
   <string name="empty_resolver_activity">Nenhuma outra aplicação encontrada para lidar com a URL.</string>
   <string name="warning_open_link_with_name">Abrir ligação com %s.</string>
-  <string name="done">Concluído</string>
   <string name="pref_title_general">Geral</string>
   <string name="pref_title_about">Acerca de</string>
   <string name="pref_summary_about">Ver o tutorial novamente.</string>
@@ -94,8 +93,6 @@
   <string name="pref_title_market">Mais aplicações de Said Tahsin Dane</string>
   <string name="pref_summary_market">Gostou? Por que não verifica as minhas outras aplicações?</string>
   <string name="pref_title_version">Versão</string>
-  <string name="skip">Ignorar</string>
-  <string name="cd_image_tutorial">Imagem do tutorial</string>
   <string name="title_tutorial_0">Bem-vindo ao Abrir a Ligação Com</string>
   <string name="title_tutorial_1">Já aconteceu consigo?</string>
   <string name="title_tutorial_2">Partilhar!</string>
@@ -111,7 +108,6 @@
   ]]></string>
   <string name="usage_access_give_access">Conceder acesso</string>
   <string name="error">Erro</string>
-  <string name="next">Seguinte</string>
   <string name="error_usage_access_not_found">Configurações de Acesso de utilização não encontradas.\n\nPode ter acesso indo a Configurações -&gt; Segurança</string>
   <string name="error_cannot_start_activity">Failed to open the link with selected app. Try again later.</string>
   <string name="add_to_homescreen">Adicionar ao ecrã principal</string>

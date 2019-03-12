@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="skip">Pomiń</string>
+  <string name="done">Gotowe</string>
+  <string name="next">Dalej</string>
+  <string name="cd_image_tutorial">Zdjęcie z poradnika</string>
+</resources>

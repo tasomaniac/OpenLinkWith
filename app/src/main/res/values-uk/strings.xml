@@ -17,7 +17,6 @@
   <string name="error_invalid_url">Посилання не містить дійсного посилання.</string>
   <string name="empty_resolver_activity">Не знайдено інших програм для даного посилання.</string>
   <string name="warning_open_link_with_name">Відкриття посилання з %s.</string>
-  <string name="done">Виконано</string>
   <string name="pref_title_general">Загальні</string>
   <string name="pref_title_about">Про</string>
   <string name="pref_summary_about">Переглянути посібник ще раз.</string>
@@ -95,8 +94,6 @@
   <string name="pref_title_market">Більше програм від Тасін Дейна</string>
   <string name="pref_summary_market">Як Вам новий вигляд?  Давайте спробуємо мої інші програми?</string>
   <string name="pref_title_version">Версія</string>
-  <string name="skip">Пропустити</string>
-  <string name="cd_image_tutorial">Взірець</string>
   <string name="title_tutorial_0">Ласкаво просимо у Open Link With</string>
   <string name="title_tutorial_1">Це не трапиться з вами?</string>
   <string name="title_tutorial_2">Поширити!</string>
@@ -112,7 +109,6 @@
   ]]></string>
   <string name="usage_access_give_access">Надати доступ</string>
   <string name="error">Помилка</string>
-  <string name="next">Далі</string>
   <string name="error_usage_access_not_found">Використання параметрів доступу не може бути open.\n\n Ви можете отримати до нього доступ, перейшовши в Налаштування -&gt; Безпека</string>
   <string name="error_cannot_start_activity">Не вдалося відкрити посилання з обраного додатку. Спробуйте ще раз.</string>
   <string name="add_to_homescreen">Додати на Домашній екран</string>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="skip">略過</string>
+  <string name="done">完成</string>
+  <string name="next">下一項</string>
+  <string name="cd_image_tutorial">導覽教程圖片</string>
+</resources>

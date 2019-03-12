@@ -15,7 +15,6 @@
   <string name="error_invalid_url">Der ausgewählte Inhalt beinhaltet keine gültigen URLs.</string>
   <string name="empty_resolver_activity">Keine passende Anwendung gefunden, um die URLs zu verarbeiten.</string>
   <string name="warning_open_link_with_name">Öffne links mit %s.</string>
-  <string name="done">Fertig</string>
   <string name="pref_title_general">Allgemein</string>
   <string name="pref_title_about">Info</string>
   <string name="pref_summary_about">Schauen Sie sich das Tutorial wieder an.</string>
@@ -94,8 +93,6 @@
   <string name="pref_title_market">Mehr apps von Said Tahsin Dane</string>
   <string name="pref_summary_market">Gefällt dir die App? Schau dir doch meine anderen Apps an?</string>
   <string name="pref_title_version">Version</string>
-  <string name="skip">Überspringen</string>
-  <string name="cd_image_tutorial">Tutorial Bild</string>
   <string name="title_tutorial_0">Willkommen bei Open Link With</string>
   <string name="title_tutorial_1">Ist es ihnen schon mal passiert?</string>
   <string name="title_tutorial_2">Teilen sie es!</string>
@@ -111,7 +108,6 @@
   ]]></string>
   <string name="usage_access_give_access">Zugriff erlauben</string>
   <string name="error">Fehler</string>
-  <string name="next">Weiter</string>
   <string name="error_usage_access_not_found">Zugriffseinstellungen können nicht geöffnet werden.\n\nDu kannst über Einstellungen -&gt; Sicherheit darauf zugreifen</string>
   <string name="error_cannot_start_activity">Fehler beim Öffnen des Links mit der ausgewählten App. Versuchen Sie es später erneut.</string>
   <string name="add_to_homescreen">Zum Startbildschirm hinzufügen</string>

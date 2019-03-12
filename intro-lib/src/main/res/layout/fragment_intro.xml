@@ -18,7 +18,7 @@
     android:paddingRight="@dimen/keyline_1"
     android:textAppearance="@style/TextAppearance.AppCompat.Title"
     android:textSize="28sp"
-    tools:text="@string/title_tutorial_5" />
+    tools:text="@tools:sample/lorem" />
 
   <FrameLayout
     android:layout_width="match_parent"
@@ -34,7 +34,7 @@
       android:layout_gravity="center"
       android:contentDescription="@string/cd_image_tutorial"
       android:scaleType="centerInside"
-      tools:src="@drawable/tutorial_1" />
+      tools:src="@tools:sample/avatars" />
   </FrameLayout>
 
   <TextView
@@ -47,5 +47,5 @@
     android:paddingRight="@dimen/keyline_1"
     android:paddingLeft="@dimen/keyline_1"
     android:textSize="16sp"
-    tools:text="@string/description_tutorial_5" />
+    tools:text="@tools:sample/lorem/random" />
 </LinearLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="skip">スキップ</string>
+  <string name="done">完了</string>
+  <string name="next">次</string>
+  <string name="cd_image_tutorial">チュートリアル画像</string>
+</resources>
