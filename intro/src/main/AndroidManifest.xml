@@ -3,7 +3,7 @@
 
     <application android:supportsRtl="true">
         <activity
-          android:name=".intro.IntroActivity"
+          android:name=".IntroActivity"
           android:theme="@style/Theme.OpenWith.Intro" />
     </application>
 
