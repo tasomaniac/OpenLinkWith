@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
+import com.tasomaniac.openwith.intro.lib.R;
 import dagger.android.support.DaggerAppCompatActivity;
 
 import java.util.ArrayList;
