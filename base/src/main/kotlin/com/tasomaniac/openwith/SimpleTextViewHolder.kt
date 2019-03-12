@@ -16,6 +16,7 @@ class SimpleTextViewHolder private constructor(view: View) : RecyclerView.ViewHo
 
     companion object {
         @JvmStatic
-        fun create(parent: ViewGroup, @LayoutRes layoutRes: Int) = SimpleTextViewHolder(parent.inflate(layoutRes))
+        fun create(parent: ViewGroup, @LayoutRes layoutRes: Int) =
+            SimpleTextViewHolder(parent.inflate(layoutRes))
     }
 }
