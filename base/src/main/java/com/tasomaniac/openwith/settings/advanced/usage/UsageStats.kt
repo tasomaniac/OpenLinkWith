@@ -27,7 +27,7 @@ object UsageStats {
 
     private fun observe(context: Context): Observable<Boolean> {
         return Observable.interval(1, TimeUnit.SECONDS)
-            .map { _ -> isEnabled(context) }
+            .map { isEnabled(context) }
     }
 
     @JvmStatic
