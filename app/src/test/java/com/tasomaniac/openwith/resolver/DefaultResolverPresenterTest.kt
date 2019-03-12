@@ -14,7 +14,7 @@ import com.nhaarman.mockitokotlin2.reset
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.data.PreferredAppDao
 import com.tasomaniac.openwith.resolver.preferred.PreferredResolver
-import com.tasomaniac.openwith.rx.ImmediateScheduling
+import com.tasomaniac.openwith.test.testScheduling
 import io.reactivex.Maybe
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -49,7 +49,7 @@ class DefaultResolverPresenterTest {
 
     init {
         val preferredResolver = PreferredResolver(mock(), mock(), dao)
-        useCase = ResolverUseCase(sourceIntent, preferredResolver, intentResolver, mock(), dao, ImmediateScheduling())
+        useCase = ResolverUseCase(sourceIntent, preferredResolver, intentResolver, mock(), dao, testScheduling())
         presenter = DefaultResolverPresenter(resources, sourceIntent, callerPackage, useCase, viewState)
     }
 

@@ -1,0 +1,7 @@
+apply from: configFile('android-library-config.gradle')
+
+dependencies {
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
+    api "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
+    api "androidx.lifecycle:lifecycle-common-java8:$versions.lifecycle"
+}

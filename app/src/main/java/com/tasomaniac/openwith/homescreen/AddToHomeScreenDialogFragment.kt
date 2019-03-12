@@ -26,6 +26,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import com.tasomaniac.android.widget.DelayedProgressBar
 import com.tasomaniac.openwith.R
+import com.tasomaniac.openwith.extensions.toast
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.util.Intents
 import dagger.android.support.DaggerAppCompatDialogFragment
@@ -122,7 +123,7 @@ class AddToHomeScreenDialogFragment : DaggerAppCompatDialogFragment() {
     private fun createShortcutAndHandleError() {
         val success = createShortcut()
         if (!success) {
-            Toast.makeText(context, R.string.add_to_home_screen_error, Toast.LENGTH_SHORT).show()
+            context!!.toast(R.string.add_to_home_screen_error, Toast.LENGTH_SHORT)
         }
     }
 

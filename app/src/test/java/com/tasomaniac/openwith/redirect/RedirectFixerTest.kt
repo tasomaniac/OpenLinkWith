@@ -1,6 +1,6 @@
 package com.tasomaniac.openwith.redirect
 
-import com.tasomaniac.openwith.rx.ImmediateScheduling
+import com.tasomaniac.openwith.test.testScheduling
 import io.reactivex.observers.TestObserver
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
@@ -19,7 +19,7 @@ class RedirectFixerTest {
     @Rule @JvmField val mockito: MockitoRule = MockitoJUnit.rule()
 
     private val redirectFixer: RedirectFixer =
-        RedirectFixer(OkHttpClient(), ImmediateScheduling(), 1)
+        RedirectFixer(OkHttpClient(), testScheduling(), 1)
 
     @Test
     fun givenNoRedirectShouldReturnOriginalUrl() {
