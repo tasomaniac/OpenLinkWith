@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="match_parent"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:orientation="vertical">
 
   <com.tasomaniac.openwith.intro.AppIntroViewPager
     android:id="@+id/view_pager"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_above="@id/bottom" />
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    tools:listitem="@layout/fragment_intro"/>
 
   <LinearLayout
     android:id="@+id/bottom"
     android:layout_width="match_parent"
     android:layout_height="64dp"
-    android:layout_alignParentBottom="true"
     android:gravity="bottom"
     android:orientation="vertical">
 
@@ -74,4 +76,4 @@
         android:visibility="gone" />
     </FrameLayout>
   </LinearLayout>
-</RelativeLayout>
+</LinearLayout>

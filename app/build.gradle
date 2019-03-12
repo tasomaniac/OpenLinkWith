@@ -113,11 +113,7 @@ dependencies {
   implementation project(':intro')
   
   implementation 'androidx.preference:preference-ktx:1.0.0'
-  implementation 'androidx.viewpager2:viewpager2:1.0.0-alpha01'
-
   implementation 'com.tasomaniac:delayed-progress:0.4'
-
-  kapt "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle"
 
   implementation "androidx.room:room-runtime:$versions.room"
   implementation "androidx.room:room-rxjava2:$versions.room"
@@ -126,7 +122,5 @@ dependencies {
   implementation "com.squareup.okhttp3:okhttp:$versions.okHttp"
 
   testImplementation project(':test-support')
-
-  testImplementation 'org.assertj:assertj-core:3.12.1'
   testImplementation "com.squareup.okhttp3:mockwebserver:$versions.okHttp"
 }
