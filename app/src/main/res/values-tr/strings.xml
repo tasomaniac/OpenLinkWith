@@ -7,7 +7,6 @@
   <string name="activity_resolver_use_always">Her zaman</string>
   <string name="which_view_application">Şununla aç:</string>
   <string name="which_view_application_named">%1$s ile aç</string>
-  <string name="title_preferred_apps">Tercih Edilenler</string>
   <string name="desc_preferred">Aşağıda bulunan bağlantılar bu uygulama ile paylaşıldığı zaman öncelikli olarak tercih edilecek uygulamalar aşağıdadır.\n\nTercihi silmek için uygulamayı seçin.</string>
   <string name="desc_preferred_empty">Aşağıda bulunan bağlantılar bu uygulama ile paylaşıldığı zaman öncelikli olarak tercih edilecek uygulamalar aşağıdadır.\n\nTercih edilen bir uygulama eklemek için bir linki bu uygulama ile paylaşın ve \“Her zaman\” tuşunu tıklayın.</string>
   <string name="title_remove_preferred">Tercihi kaldır?</string>
@@ -90,24 +89,9 @@
   <string name="pref_title_market">Said Tahsin Dane\'nin diğer uygulamaları</string>
   <string name="pref_summary_market">Beğendin mi? Diğer uygulamalarıma göz at?</string>
   <string name="pref_title_version">Versiyon</string>
-  <string name="title_tutorial_0">Open Link With\'e Hoşgeldin</string>
-  <string name="title_tutorial_1">Hiç başınıza geldi mi?</string>
-  <string name="title_tutorial_2">Paylaş!</string>
-  <string name="title_tutorial_5">Kullanım Erişimi</string>
-  <string name="description_tutorial_0">Tarayıcıda sıkıştığın zaman seni kurtarmaya geldim.</string>
-  <string name="description_tutorial_1">Kısa linklerden birine tıkladın ve vidyoyu direl izlemek yerine bir şekilde web sayfasında takıldın.</string>
-  <string name="description_tutorial_2">Sadece benimle paylaş ve senin için uygulamada açayım.</string>
-  <string name="description_tutorial_3"><![CDATA[  Linki her zaman bir uygulama ile açmak için <strong>HER ZAMAN</strong> seçeneğini seçin.
-  ]]></string>
-  <string name="description_tutorial_4"><![CDATA[Favori linklerinize kolay ulaşmak için <strong>Ana Ekrana ekle</strong> özelliğini kullanın.
-  ]]></string>
-  <string name="description_tutorial_5"><![CDATA[  <strong>KULLANIM İZNİ</strong>\'ne erişim verirsen daha iyi çalışırım. Paylaştığın uygulamayı anlarım ve ona göre davranırım.
-  ]]></string>
-  <string name="usage_access_give_access">Erişim Ver</string>
   <string name="error">Hata</string>
   <string name="error_usage_access_not_found">Kullanım Erişimi ayarları açılamıyor.\n\nAyarlar -&gt; Güvenlik kısmına giderek kendiniz ulaşabilirsiniz.</string>
   <string name="error_cannot_start_activity">Link, seçilen uygulama ile açılamadı. Daha sonra tekrar deneyin.</string>
-  <string name="add_to_homescreen">Ana Ekrana Ekle</string>
   <string name="add">Ekle</string>
   <string name="cancel">İptal</string>
   <string name="add_to_home_screen_dialog_hint">Kısayol adı</string>

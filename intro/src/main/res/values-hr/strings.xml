@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="title_tutorial_0">Dobrodošli u Open Link With</string>
+  <string name="description_tutorial_0">Dolazim u pomoć kad god zaglavite u pregledniku.</string>
+  <string name="title_tutorial_1">Je li Vam se ikada dogodilo?</string>
+  <string name="description_tutorial_1">Kliknete na vezu i zaglavite na web stranici umjesto izravnim gledanjem videozapisa.</string>
+  <string name="title_tutorial_2">Podijeli!</string>
+  <string name="description_tutorial_2">Podijelite ga sa mnom i prebacit ću aplikacije za Vas.</string>
+  <string name="description_tutorial_3"><![CDATA[    Odaberite <strong>UVIJEK</strong> da biste mi rekli da uvijek otvorim tu vezu s određenom aplikacijom.
+  ]]></string>
+  <string name="description_tutorial_4"><![CDATA[    <strong>Dodajte na početni zaslon</strong> da biste brzo pristupili svojim omiljenim vezama s Vašim omiljenim aplikacijama.
+  ]]></string>
+  <string name="title_tutorial_5">Pristup podacima o korištenju</string>
+  <string name="description_tutorial_5"><![CDATA[    Dopustite pristup <strong>PODACIMA O KORIŠTENJU</strong> i ja ću raditi bolje. Otkrit ću preglednik s kojim dijelite i postupati u skladu s tim.
+  ]]></string>
+  <string name="usage_access_give_access">Daj pristup</string>
+  <string name="title_preferred_apps">Preferirane aplikacije</string>
+</resources>

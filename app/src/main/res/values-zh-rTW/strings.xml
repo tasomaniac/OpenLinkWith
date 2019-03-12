@@ -7,7 +7,6 @@
   <string name="activity_resolver_use_always">總是</string>
   <string name="which_view_application">開啟方式</string>
   <string name="which_view_application_named">用 %1$s 開啟</string>
-  <string name="title_preferred_apps">偏好的應用程式</string>
   <string name="desc_preferred">當下列的連結分享到此應用程式時，直接使用偏好的應用程式開啟。\n\n點擊以移除一個偏好的應用程式。</string>
   <string name="desc_preferred_empty">當下列的連結分享到此應用程式時，直接使用偏好的應用程式開啟。\n\n您可以透過分享連結到此應用程式並選擇「總是」以設成偏好的應用程式。</string>
   <string name="title_remove_preferred">是否移除偏好？</string>
@@ -91,24 +90,9 @@
   <string name="pref_title_market">更多 Said Tahsin Dane 創作的應用程式</string>
   <string name="pref_summary_market">喜歡嗎？何不來看看我的其他應用程式？</string>
   <string name="pref_title_version">版本</string>
-  <string name="title_tutorial_0">歡迎使用 Open Link With</string>
-  <string name="title_tutorial_1">您有遇過這種情況嗎？</string>
-  <string name="title_tutorial_2">分享吧！</string>
-  <string name="title_tutorial_5">使用記錄存取權</string>
-  <string name="description_tutorial_0">讓我來拯救每每卡在瀏覽器裡的您。</string>
-  <string name="description_tutorial_1">當您點擊一個縮址，不知何故，您最終會被卡在網頁裡，而不是直接看片。</string>
-  <string name="description_tutorial_2">只要分享給我，我會為您切換應用程式。</string>
-  <string name="description_tutorial_3"><![CDATA[    選擇 <strong>總是</strong> 以告訴我總是使用指定的應用程式開啟該連結。
-  ]]></string>
-  <string name="description_tutorial_4"><![CDATA[    <strong>加到 Home 畫面</strong> 以加快使用您喜愛的應用程式存取您喜愛的連結。
-  ]]></string>
-  <string name="description_tutorial_5"><![CDATA[    授予我 <strong>使用記錄</strong> 存取權限，我將表現得更好用。我會根據您常用來分享的應用程式之來龍去脈來偵測該使用哪一個瀏覽器應用程式。
-  ]]></string>
-  <string name="usage_access_give_access">授予存取權限</string>
   <string name="error">錯誤</string>
   <string name="error_usage_access_not_found">無法開啟使用記錄存取權限的設定頁面。\n\n您可以自行到「設定」→「安全性」、或「設定」→「應用程式和通知」→「特殊應用程式存取權」→「使用者記鍵存取權」裡做設定。</string>
   <string name="error_cannot_start_activity">無法以所選應用程式開啟連結。請稍後再試。</string>
-  <string name="add_to_homescreen">加到 Home 畫面</string>
   <string name="add">新增</string>
   <string name="cancel">取消</string>
   <string name="add_to_home_screen_dialog_hint">捷徑標題</string>

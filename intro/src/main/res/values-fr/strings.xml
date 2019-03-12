@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="title_tutorial_0">Bienvenue sur Open Link With</string>
+  <string name="description_tutorial_0">Je viens à votre secours lorsque vous êtes bloqué dans un navigateur.</string>
+  <string name="title_tutorial_1">Ça vous est déjà arrivé ?</string>
+  <string name="description_tutorial_1">Vous cliquez sur un lien et d\'une quelconque manière vous finissez bloqué sur une page web plutôt que de directement voir la vidéo.</string>
+  <string name="title_tutorial_2">Partagez le !</string>
+  <string name="description_tutorial_2">Partagez le simplement avec moi et je changerai d\'applications pour vous.</string>
+  <string name="description_tutorial_3"><![CDATA[    Sélectionner <strong>TOUJOURS</strong> pour me dire de toujours ouvrir ce lien avec une application spécifique.
+  ]]></string>
+  <string name="description_tutorial_4"><![CDATA[    <strong>Ajouter à l\'écran d\'accueil</strong>pour rapidement avoir accès à vos liens préférés avec vos applications préférées.
+  ]]></string>
+  <string name="title_tutorial_5">Habitudes d\'Utilisations</string>
+  <string name="description_tutorial_5"><![CDATA[    Donnez moi l\'accès au <strong>HABITUDES D\'UTILISATION</strong> et je fonctionnerai mieux. Je détecterai avec quel navigateur vous partagez pour agir en conséquence.
+  ]]></string>
+  <string name="usage_access_give_access">Donnez l\'accès</string>
+  <string name="title_preferred_apps">Applications Préférées</string>
+</resources>

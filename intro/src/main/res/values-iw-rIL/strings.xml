@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="title_tutorial_0">ברוך הבא ל\“פתח קישור באמצעות..\”</string>
+  <string name="description_tutorial_0">אני אחלץ אותך כשאתה נתקע בדפדפן.</string>
+  <string name="title_tutorial_1">קרה לך פעם?</string>
+  <string name="description_tutorial_1">לחצת על קישור מקוצר ואיכשהו סיימת תקוע בדפדפן במקום לצפות בווידאו ישירות.</string>
+  <string name="title_tutorial_2">שתף את זה!</string>
+  <string name="description_tutorial_2">רק שתף את הקישור איתי ואני אדאג להחליף יישום בשבילך.</string>
+  <string name="description_tutorial_3"><![CDATA[  בחר <strong>תמיד</strong> בשביל לומר לי לפתוח קישורים של אתר כלשהו תמיד באותו היישום.
+  ]]></string>
+  <string name="description_tutorial_4"><![CDATA[    <strong>הוסף למסך הבית</strong> לגישה מהירה לקישורים המועדפים עליך עם היישומים המועדפים עליך.
+  ]]></string>
+  <string name="title_tutorial_5">גישה לנתוני שימוש</string>
+  <string name="description_tutorial_5"><![CDATA[  תן גישה ל<strong>נתוני השימוש</strong> ואני אעבוד יותר טוב. אני אזהה את הדפדפן שאתה משתף ממנו ואפעל על פי זה.
+  ]]></string>
+  <string name="usage_access_give_access">תן הרשאות</string>
+  <string name="title_preferred_apps">יישומים מעודפים</string>
+</resources>

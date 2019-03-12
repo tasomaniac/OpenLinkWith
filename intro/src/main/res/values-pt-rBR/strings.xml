@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="title_tutorial_0">Bem-vindo ao Abrir Link Com</string>
+  <string name="description_tutorial_0">Venho te resgatar sempre que você ficar preso nos navegadores.</string>
+  <string name="title_tutorial_1">Já aconteceu com você?</string>
+  <string name="description_tutorial_1">Você clica em um link curto e de alguma forma você acaba ficando preso na página da web ao invés de assistir o vídeo diretamente.</string>
+  <string name="title_tutorial_2">Compartilhar!</string>
+  <string name="description_tutorial_2">Apenas compartilhe o link comigo e eu irei mudar de app para você.</string>
+  <string name="description_tutorial_3"><![CDATA[    Escolha <strong>SEMPRE</strong> para me dizer que o link deve ser sempre aberto com um aplicativo específico.
+  ]]></string>
+  <string name="description_tutorial_4"><![CDATA[    <strong>Adicione à tela inicial</strong> para acessar rapidamente os seus links favoritos com seus apps favoritos.
+  ]]></string>
+  <string name="title_tutorial_5">Acesso de Uso</string>
+  <string name="description_tutorial_5"><![CDATA[    Dê permissão ao <strong>ACESSO DE USO</strong> e eu vou funcionar melhor. Vou detectar de qual navegador você está compartilhando para executar a ação certa.
+  ]]></string>
+  <string name="usage_access_give_access">Permitir Acesso</string>
+  <string name="title_preferred_apps">Aplicativos Preferidos</string>
+</resources>

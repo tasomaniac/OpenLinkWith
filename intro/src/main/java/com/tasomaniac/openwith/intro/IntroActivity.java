@@ -6,12 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.data.Analytics;
+import com.tasomaniac.openwith.extensions.ContextKt;
 import com.tasomaniac.openwith.rx.SchedulingStrategy;
 import com.tasomaniac.openwith.settings.advanced.usage.UsageStats;
 import com.tasomaniac.openwith.settings.advanced.usage.UsageStatsKt;
-import com.tasomaniac.openwith.util.Intents;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
@@ -113,7 +112,7 @@ public class IntroActivity extends AppIntro {
     private void observeUsageStats() {
         Disposable disposable = UsageStats.observeAccessGiven(this)
                 .compose(schedulingStrategy.forCompletable())
-                .subscribe(() -> Intents.restartSettings(this));
+                .subscribe(() -> ContextKt.restart(this));
         disposables.add(disposable);
     }
 

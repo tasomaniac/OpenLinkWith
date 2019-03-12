@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="title_tutorial_0">Bem-vindo ao Abrir a Ligação Com</string>
+  <string name="description_tutorial_0">Venho resgatá-lo sempre que fique preso nos navegadores.</string>
+  <string name="title_tutorial_1">Já aconteceu consigo?</string>
+  <string name="description_tutorial_1">Você clica numa ligação e de alguma forma acaba por ficar preso na página web ao invés de assistir ao vídeo diretamente.</string>
+  <string name="title_tutorial_2">Partilhar!</string>
+  <string name="description_tutorial_2">Basta partilhar comigo e irei mudar de aplicação.</string>
+  <string name="description_tutorial_3"><![CDATA[    Selecione <strong>sempre</strong> para abrir essa ligação com um aplicação específica.
+  ]]></string>
+  <string name="description_tutorial_4"><![CDATA[    <strong>Adicionar ao ecrã principal</strong> para aceder rapidamente aos seus links favoritos com as suas aplicações favoritas.
+  ]]></string>
+  <string name="title_tutorial_5">Acesso de utilização</string>
+  <string name="description_tutorial_5"><![CDATA[    Dê acesso a <strong>Acesso de utilização</strong> e irei trabalhar melhor. Vou detectar o navegador que está a usar para agir em conformidade.
+  ]]></string>
+  <string name="usage_access_give_access">Conceder acesso</string>
+  <string name="title_preferred_apps">Aplicações pré-definidas</string>
+</resources>

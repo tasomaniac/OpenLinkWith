@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <style name="Theme.OpenWith.Intro" parent="Theme.AppCompat.NoActionBar">
+    <item name="colorPrimary">@color/theme_primary</item>
+    <item name="colorPrimaryDark">@color/theme_primary_dark</item>
+    <item name="colorAccent">@color/theme_accent</item>
+
+    <item name="android:windowBackground">@color/theme_primary</item>
+  </style>
+</resources>

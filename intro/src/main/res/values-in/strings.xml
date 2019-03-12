@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="title_tutorial_0">Selamat datang di Buka Tautan Dengan</string>
+  <string name="description_tutorial_0">Saya datang menyelamatkan Anda kapanpun Anda terjebak dalam peramban.</string>
+  <string name="title_tutorial_1">Apakah ini pernah terjadi pada Anda?</string>
+  <string name="description_tutorial_1">Anda mengklik tautan singkat dan entah bagaimana Anda akhirnya terjebak di laman web bukannya menonton video secara langsung.</string>
+  <string name="title_tutorial_2">Bagikan!</string>
+  <string name="description_tutorial_2">Cukup bagikan tautan itu dengan saya dan saya akan alihkan aplikasi untuk Anda.</string>
+  <string name="description_tutorial_3"><![CDATA[    Pilih <strong>SELALU</strong> untuk memberitahu saya agar dapat selalu membuka tautan dengan apl tertentu.
+  ]]></string>
+  <string name="description_tutorial_4"><![CDATA[    <strong>Tambah ke Beranda</strong> Untuk akses cepat tautan favorit Anda dengan apl favorit Anda.
+  ]]></string>
+  <string name="title_tutorial_5">Akses Penggunaan</string>
+  <string name="description_tutorial_5"><![CDATA[    Berikan izin ke <strong>AKSES PENGGUNAAN</strong> dan saya akan bekerja lebih baik. Saya akan mendeteksi peramban yang anda bagikan dari tindakan yang sesuai.
+  ]]></string>
+  <string name="usage_access_give_access">Berikan Akses</string>
+  <string name="title_preferred_apps">Pilihan aplikasi</string>
+</resources>

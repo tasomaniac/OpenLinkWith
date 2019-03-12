@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="title_tutorial_0">歡迎使用 Open Link With</string>
+  <string name="description_tutorial_0">讓我來拯救每每卡在瀏覽器裡的您。</string>
+  <string name="title_tutorial_1">您有遇過這種情況嗎？</string>
+  <string name="description_tutorial_1">當您點擊一個縮址，不知何故，您最終會被卡在網頁裡，而不是直接看片。</string>
+  <string name="title_tutorial_2">分享吧！</string>
+  <string name="description_tutorial_2">只要分享給我，我會為您切換應用程式。</string>
+  <string name="description_tutorial_3"><![CDATA[    選擇 <strong>總是</strong> 以告訴我總是使用指定的應用程式開啟該連結。
+  ]]></string>
+  <string name="description_tutorial_4"><![CDATA[    <strong>加到 Home 畫面</strong> 以加快使用您喜愛的應用程式存取您喜愛的連結。
+  ]]></string>
+  <string name="title_tutorial_5">使用記錄存取權</string>
+  <string name="description_tutorial_5"><![CDATA[    授予我 <strong>使用記錄</strong> 存取權限，我將表現得更好用。我會根據您常用來分享的應用程式之來龍去脈來偵測該使用哪一個瀏覽器應用程式。
+  ]]></string>
+  <string name="usage_access_give_access">授予存取權限</string>
+  <string name="title_preferred_apps">偏好的應用程式</string>
+</resources>

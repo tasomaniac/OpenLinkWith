@@ -7,7 +7,6 @@
   <string name="activity_resolver_use_always">Siempre</string>
   <string name="which_view_application">Abrir con</string>
   <string name="which_view_application_named">Abrir con %1$s</string>
-  <string name="title_preferred_apps">Apps Preferidas</string>
   <string name="desc_preferred">Aplicaciones preferidas para ser usadas directamente cuando los enlaces siguientes son compartidos con esta app.\n\n Toca para quitar una app preferida.</string>
   <string name="desc_preferred_empty">Aplicaciones preferidas para ser usadas directamente cuando los siguientes enlaces son compartidos con esta aplicación.\n\nPuedes seleccionar las aplicaciones preferidas compartiendo enlaces con esta aplicación y luego eligiendo \“Siempre\”</string>
   <string name="title_remove_preferred">¿Borrar preferida?</string>
@@ -92,24 +91,9 @@
   <string name="pref_title_market">Más aplicaciones de Tahsin Dane</string>
   <string name="pref_summary_market">Te gusta? Por qué no mirar mis otras apps?</string>
   <string name="pref_title_version">Versión</string>
-  <string name="title_tutorial_0">Bienvenido a Abrir Enlace Con</string>
-  <string name="title_tutorial_1">Alguna vez te ha pasado?</string>
-  <string name="title_tutorial_2">¡Compártelo!</string>
-  <string name="title_tutorial_5">Acceso de uso</string>
-  <string name="description_tutorial_0">Vengo a rescatarte cuando te quedas atascado en los navegadores.</string>
-  <string name="description_tutorial_1">Tu clicas un enlace corto y de alguna manera terminas encallado en una web, en lugar de ver el vídeo directamente.</string>
-  <string name="description_tutorial_2">Solo compártelo conmigo y cambiaré las apps por ti.</string>
-  <string name="description_tutorial_3"><![CDATA[    Selecciona <strong>SIEMPRE</strong> para decirme que abra este enlace siempre con una aplicación específica.
-  ]]></string>
-  <string name="description_tutorial_4"><![CDATA[    <strong>Añadir a pantalla de inicio</strong> para acceder rápidamente a tus enlaces favoritos con tus aplicaciones favoritas.
-  ]]></string>
-  <string name="description_tutorial_5"><![CDATA[    Dar acceso a <strong>ACCESO DE USO</strong> y funcionaré mejor. Detectaré el navegador desde el cual estas compartiendo y actuaré en consecuencia.
-  ]]></string>
-  <string name="usage_access_give_access">Dar acceso</string>
   <string name="error">Error</string>
   <string name="error_usage_access_not_found">El Ajuste de Acceso de Uso no se puede encontrar.\n\nYou may access it by going into Settings -&gt; Security</string>
   <string name="error_cannot_start_activity">Fallo al abrir el enlace con la aplicación seleccionada. Inténtalo más tarde.</string>
-  <string name="add_to_homescreen">Añadir a la pantalla de inicio</string>
   <string name="add">Añadir</string>
   <string name="cancel">Cancelar</string>
   <string name="add_to_home_screen_dialog_hint">Título del acceso directo</string>

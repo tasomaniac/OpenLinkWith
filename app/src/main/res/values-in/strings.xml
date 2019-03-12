@@ -7,7 +7,6 @@
   <string name="activity_resolver_use_always">Selalu</string>
   <string name="which_view_application">Buka dengan</string>
   <string name="which_view_application_named">Buka dengan %1$s</string>
-  <string name="title_preferred_apps">Pilihan aplikasi</string>
   <string name="desc_preferred">Aplikasi pilihan akan digunakan semasa tautan bawah dikongsikan oleh aplikasi ini.\n\nSentuh untuk menghapuskan aplikasi pilihan.</string>
   <string name="desc_preferred_empty">Aplikasi pilihan akan terus digunakan semasa tautan dikongsikan menggunakan aplikasi ini.\n\nAnda boleh mengatur aplikasi preferensi dengan kongsian tautan menggunakan aplikasi ini dan kemudian memilih \“Selalu\”</string>
   <string name="title_remove_preferred">Hapuskan preferensi?</string>
@@ -93,24 +92,9 @@
   <string name="pref_title_market">Aplikasi lainnya oleh Said Tahsin Dane</string>
   <string name="pref_summary_market">Suka? Mengapa tidak lihat aplikasi saya lainnya?</string>
   <string name="pref_title_version">Versi</string>
-  <string name="title_tutorial_0">Selamat datang di Buka Tautan Dengan</string>
-  <string name="title_tutorial_1">Apakah ini pernah terjadi pada Anda?</string>
-  <string name="title_tutorial_2">Bagikan!</string>
-  <string name="title_tutorial_5">Akses Penggunaan</string>
-  <string name="description_tutorial_0">Saya datang menyelamatkan Anda kapanpun Anda terjebak dalam peramban.</string>
-  <string name="description_tutorial_1">Anda mengklik tautan singkat dan entah bagaimana Anda akhirnya terjebak di laman web bukannya menonton video secara langsung.</string>
-  <string name="description_tutorial_2">Cukup bagikan tautan itu dengan saya dan saya akan alihkan aplikasi untuk Anda.</string>
-  <string name="description_tutorial_3"><![CDATA[    Pilih <strong>SELALU</strong> untuk memberitahu saya agar dapat selalu membuka tautan dengan apl tertentu.
-  ]]></string>
-  <string name="description_tutorial_4"><![CDATA[    <strong>Tambah ke Beranda</strong> Untuk akses cepat tautan favorit Anda dengan apl favorit Anda.
-  ]]></string>
-  <string name="description_tutorial_5"><![CDATA[    Berikan izin ke <strong>AKSES PENGGUNAAN</strong> dan saya akan bekerja lebih baik. Saya akan mendeteksi peramban yang anda bagikan dari tindakan yang sesuai.
-  ]]></string>
-  <string name="usage_access_give_access">Berikan Akses</string>
   <string name="error">Kesalahan</string>
   <string name="error_usage_access_not_found">Pengaturan Akses Penggunaan tidak dapat dibuka.\n\nAnda bisa mengaksesnya dengan membuka Pengaturan -&gt; Keamanan</string>
   <string name="error_cannot_start_activity">Gagal membuka tautan dengan apl yang dipilih. coba lagi nanti.</string>
-  <string name="add_to_homescreen">Tambah ke Beranda</string>
   <string name="add">Tambah</string>
   <string name="cancel">Batal</string>
   <string name="add_to_home_screen_dialog_hint">Judul pintasan</string>

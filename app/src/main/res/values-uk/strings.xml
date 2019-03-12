@@ -7,7 +7,6 @@
   <string name="activity_resolver_use_always">Завжди</string>
   <string name="which_view_application">Відкрити у</string>
   <string name="which_view_application_named">Відкрити у %1$s</string>
-  <string name="title_preferred_apps">Найчастіше використовували</string>
   <string name="desc_preferred">Перевага додатків, які будуть використовуватися безпосередньо коли з вказане посилання сумісне з цією програмою.\n\nНатисніть, щоб видалити з бажаних програм.</string>
   <string name="desc_preferred_empty">Перевага додатків, які будуть використовуватися першочергово, коли зазначене посилання сумісне з цією програмою.\n\nВи можете обрати бажаний додаток, поширивши посилання у цей додаток, а потім оберіть \“Завжди\”</string>
   <string name="title_remove_preferred">Видалити обраними?</string>
@@ -94,24 +93,9 @@
   <string name="pref_title_market">Більше програм від Тасін Дейна</string>
   <string name="pref_summary_market">Як Вам новий вигляд?  Давайте спробуємо мої інші програми?</string>
   <string name="pref_title_version">Версія</string>
-  <string name="title_tutorial_0">Ласкаво просимо у Open Link With</string>
-  <string name="title_tutorial_1">Це не трапиться з вами?</string>
-  <string name="title_tutorial_2">Поширити!</string>
-  <string name="title_tutorial_5">Використання доступу</string>
-  <string name="description_tutorial_0">Я допомагатиму Вам в тому випадку,  коли Ваші браузери зависатимуть.</string>
-  <string name="description_tutorial_1">Використання коротких посилань спричиняє зависання замість перегляду відео.</string>
-  <string name="description_tutorial_2">Використавши Поширити через мене,  дозволить Вам обирати яку програму використати для відкривання.</string>
-  <string name="description_tutorial_3"><![CDATA[    Виберіть ЗАВЖДИ показувати мені відкрити посилання через спеціальні програми.
-  ]]></string>
-  <string name="description_tutorial_4"><![CDATA[    Додати на Головний екран швидкий доступ улюблених посилань через мої програми.
-  ]]></string>
-  <string name="description_tutorial_5"><![CDATA[    Надати доступ до <strong>Використання доступу</strong> і я буду працювати краще. Я обов\'язково виявлю браузер який Ви зазвичай використовуєте.
-  ]]></string>
-  <string name="usage_access_give_access">Надати доступ</string>
   <string name="error">Помилка</string>
   <string name="error_usage_access_not_found">Використання параметрів доступу не може бути open.\n\n Ви можете отримати до нього доступ, перейшовши в Налаштування -&gt; Безпека</string>
   <string name="error_cannot_start_activity">Не вдалося відкрити посилання з обраного додатку. Спробуйте ще раз.</string>
-  <string name="add_to_homescreen">Додати на Домашній екран</string>
   <string name="add">Додати</string>
   <string name="cancel">Завершити</string>
   <string name="add_to_home_screen_dialog_hint">Ім\'я ярлика</string>

@@ -52,10 +52,6 @@
     <activity android:name=".settings.advanced.features.ToggleFeatureActivity" />
 
     <activity
-      android:name=".intro.IntroActivity"
-      android:theme="@style/Theme.OpenWith.Intro" />
-
-    <activity
       android:name=".ShareToOpenWith"
       android:configChanges="keyboardHidden|orientation|screenLayout"
       android:documentLaunchMode="never"

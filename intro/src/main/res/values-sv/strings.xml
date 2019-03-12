@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="title_tutorial_0">Välkommen till Open Link With</string>
+  <string name="description_tutorial_0">Jag räddar dig när du fastnar i webbläsare.</string>
+  <string name="title_tutorial_1">Har det någonsin hänt dig?</string>
+  <string name="description_tutorial_1">Du klickar på en kortlänk och är på något vis fast på en websida istället för att se videon direkt.</string>
+  <string name="title_tutorial_2">Dela!</string>
+  <string name="description_tutorial_2">Bara dela den med mig så byter jag app åt dig.</string>
+  <string name="description_tutorial_3"><![CDATA[    Välj <strong>ALLTID</strong> för att säga till mig att alltid öppna länkar med en särskild app.
+  ]]></string>
+  <string name="description_tutorial_4"><![CDATA[    <strong>Lägg till på Hemskärmen</strong> för att snabbt nå dina favoritlänkar i dina favoritappar.
+  ]]></string>
+  <string name="title_tutorial_5">Användningsåtkomst</string>
+  <string name="description_tutorial_5"><![CDATA[    Ge tillgång till <strong>Användningsåtkomst</strong> så fungerar jag bättre. Jag kommer känna igen webbläsaren du delar från och agera därefter.
+  ]]></string>
+  <string name="usage_access_give_access">Ge åtkomst</string>
+  <string name="title_preferred_apps">Föredragna Appar</string>
+</resources>

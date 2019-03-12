@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="title_tutorial_0">Benvenuto in Open Link With</string>
+  <string name="description_tutorial_0">Ti vengo a salvare ogni volta che rimani bloccato nei browser.</string>
+  <string name="title_tutorial_1">Ti è mai successo?</string>
+  <string name="description_tutorial_1">Clicchi un link corto e in qualche modo ti ritrovi bloccato in una pagina web invece di guardare il video direttamente.</string>
+  <string name="title_tutorial_2">Condividilo!</string>
+  <string name="description_tutorial_2">Condividilo semplicemente con me e cambierò le app per te.</string>
+  <string name="description_tutorial_3"><![CDATA[Seleziona <strong>SEMPRE</strong> per dirmi di aprire sempre quel link con una applicazione specifica.
+  ]]></string>
+  <string name="description_tutorial_4"><![CDATA[    <strong>Aggiungi alla schermata Home</strong> per accedere velocemente ai tuoi link preferiti con le tue app preferite.
+  ]]></string>
+  <string name="title_tutorial_5">Accesso ai dati di utilizzo</string>
+  <string name="description_tutorial_5"><![CDATA[    Dammi l\'accesso a <strong>ACCESSO A DATI DI UTILIZZO</strong> e lavorerò meglio. Rileverò il browser dal quale stai condividendo per agire di conseguenza.
+  ]]></string>
+  <string name="usage_access_give_access">Garantisci l\'accesso</string>
+  <string name="title_preferred_apps">App preferite</string>
+</resources>

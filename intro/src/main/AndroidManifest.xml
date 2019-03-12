@@ -1,6 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tasomaniac.openwith.intro">
+  package="com.tasomaniac.openwith.intro">
 
-    <application android:supportsRtl="true" />
+    <application android:supportsRtl="true">
+        <activity
+          android:name=".intro.IntroActivity"
+          android:theme="@style/Theme.OpenWith.Intro" />
+    </application>
 
 </manifest>

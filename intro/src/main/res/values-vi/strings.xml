@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="title_tutorial_0">Chào mừng bạn đến với Open Link With</string>
+  <string name="description_tutorial_0">Tôi được tạo ra để giúp bạn mỗi khi bạn bị mắc kẹt vì các liên kết luôn mở trong trình duyệt.</string>
+  <string name="title_tutorial_1">Nó có từng xảy ra với bạn?</string>
+  <string name="description_tutorial_1">Bạn nhấp vào liên kết rút gọn và bạn phải xem nó trong trình duyệt thay vì trong một ứng dụng hỗ trợ mà bạn có.</string>
+  <string name="title_tutorial_2">Chia sẻ nó!</string>
+  <string name="description_tutorial_2">Chỉ cần chia sẻ liên kết với tôi và tôi sẽ mở nó bằng ứng dụng bạn cần.</string>
+  <string name="description_tutorial_3"><![CDATA[    Chọn <strong>LUÔN LUÔN</strong> để cho tôi biết bạn sẽ luôn luôn mở liên kết đó với một ứng dụng cụ thể.
+  ]]></string>
+  <string name="description_tutorial_4"><![CDATA[    <strong>Thêm vào Màn hình chính</strong> để nhanh chóng truy cập các liên kết ưa thích của bạn với các ứng dụng mà bạn ưa thích.
+  ]]></string>
+  <string name="title_tutorial_5">Quyền truy cập sử dụng</string>
+  <string name="description_tutorial_5"><![CDATA[    Cấp quyền <strong>Truy cập sử dụng</strong> và tôi sẽ làm việc tốt hơn. Tôi sẽ phát hiện được trình duyệt bạn đang chia sẻ để có hành động phù hợp.
+  ]]></string>
+  <string name="usage_access_give_access">Cấp quyền</string>
+  <string name="title_preferred_apps">Ứng dụng ưu tiên</string>
+</resources>

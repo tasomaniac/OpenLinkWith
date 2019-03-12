@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="title_tutorial_0">Добро пожаловать в Open Link With</string>
+  <string name="description_tutorial_0">Я прихожу спасти вас когда вы застряли в браузере.</string>
+  <string name="title_tutorial_1">У вас когда нибудь такое случалось?</string>
+  <string name="description_tutorial_1">Вы нажимаете на короткую ссылку и застреваете в браузере вместо того, чтобы использовать для этого приложение.</string>
+  <string name="title_tutorial_2">Поделитесь этим!</string>
+  <string name="description_tutorial_2">Просто поделитесь этим со мной и я переключу приложение для вас.</string>
+  <string name="description_tutorial_3"><![CDATA[    Выберите <strong>ВСЕГДА</strong>, чтобы сообщите мне какие ссылки всегда нужно открывать в этом приложении.
+  ]]></string>
+  <string name="description_tutorial_4"><![CDATA[    <strong>Добавить на рабочий стол</strong> для быстрого доступа к вашим любимым ссылкам с помощью любимых приложений.
+  ]]></string>
+  <string name="title_tutorial_5">Доступ к использованию</string>
+  <string name="description_tutorial_5"><![CDATA[    Дайте доступ к <strong>СТАТИСТИКЕ ИСПОЛЬЗОВАНИЯ</strong> и я смогу работать лучше. Я буду обнаруживать браузер из которого вы делитесь для соответствия.
+  ]]></string>
+  <string name="usage_access_give_access">Предоставить доступ</string>
+  <string name="title_preferred_apps">Предпочитаемые приложения</string>
+</resources>

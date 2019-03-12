@@ -7,7 +7,6 @@
   <string name="activity_resolver_use_always">总是</string>
   <string name="which_view_application">打开方式</string>
   <string name="which_view_application_named">用%1$s打开</string>
-  <string name="title_preferred_apps">默认应用</string>
   <string name="desc_preferred">当下面的链接分享到此应用的时候，会直接打开默认应用。\n\n点击以删除默认应用。</string>
   <string name="desc_preferred_empty">当下面的链接分享到此应用的时候，会直接打开默认应用。\n\n分享链接到此应用，然后选择“始终”以设定默认应用。</string>
   <string name="title_remove_preferred">删除默认应用？</string>
@@ -92,24 +91,9 @@
   <string name="pref_title_market">Said Tahsin Dane 的更多应用</string>
   <string name="pref_summary_market">喜欢它吗？何不看看我的其他应用？</string>
   <string name="pref_title_version">版本</string>
-  <string name="title_tutorial_0">欢迎使用 Open Link With</string>
-  <string name="title_tutorial_1">你遇到过这种情况吗？</string>
-  <string name="title_tutorial_2">分享它！</string>
-  <string name="title_tutorial_5">查看使用情况</string>
-  <string name="description_tutorial_0">每当你困在浏览器中，我会来解救你。</string>
-  <string name="description_tutorial_1">你点击了一个短链接，但是没有直接看到视频，而是莫名其妙的最终被困在网页里。</string>
-  <string name="description_tutorial_2">只要与我分享链接，我会为你切换应用。</string>
-  <string name="description_tutorial_3"><![CDATA[    选择 <strong>始终</strong> 来告诉我总是用特定应用来打开该链接。
-  ]]></string>
-  <string name="description_tutorial_4"><![CDATA[    <strong>添加到主屏幕</strong> 以通过你喜欢的应用快速访问你喜欢的链接。
-  ]]></string>
-  <string name="description_tutorial_5"><![CDATA[    授权 <strong>查看使用情况</strong>，我能工作得更好。我会检测你的分享的源头浏览器，并采取相应的行动。  
-  ]]></string>
-  <string name="usage_access_give_access">授权</string>
   <string name="error">错误</string>
   <string name="error_usage_access_not_found">不能打开查看使用情况设置。\n\n你可以通过进入 设置 -&gt; 安全 访问它</string>
   <string name="error_cannot_start_activity">无法使用所选择的应用打开该链接，请重试。</string>
-  <string name="add_to_homescreen">添加到主屏幕</string>
   <string name="add">新增</string>
   <string name="cancel">取消</string>
   <string name="add_to_home_screen_dialog_hint">快捷方式标题</string>

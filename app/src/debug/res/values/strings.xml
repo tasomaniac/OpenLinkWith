@@ -2,6 +2,5 @@
 <resources>
 
   <string name="app_name" translatable="false">#Open Link With</string>
-  <string name="add_to_homescreen">#Add To Home screen</string>
 
 </resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="title_tutorial_0">ようこそ Open Link With へ</string>
+  <string name="description_tutorial_0">ブラウザに飛ばされてしまっても、いつでも助けに行きます</string>
+  <string name="title_tutorial_1">今まであなたはどうしてましたか？</string>
+  <string name="description_tutorial_1">短縮リンクを踏んだとき、動画が直接再生されずにウェブページへ飛ばされてしまっていたと思います</string>
+  <string name="title_tutorial_2">共有してください！</string>
+  <string name="description_tutorial_2">一度このアプリで共有していただければ、以後常にあなたが望むアプリに切り替えさせていただきます</string>
+  <string name="description_tutorial_3"><![CDATA[      <strong>常時</strong> を選択していただくことで、そのリンクを常に特定のアプリで開くようになります
+  ]]></string>
+  <string name="description_tutorial_4"><![CDATA[      <strong>ホーム画面に追加</strong> して、お気に入りのアプリでお気に入りのリンクにクイックにアクセスしましょう。
+  ]]></string>
+  <string name="title_tutorial_5">使用状況へのアクセス</string>
+  <string name="description_tutorial_5"><![CDATA[      <strong>使用状況へのアクセス</strong> を許可していただけると、更により良く機能していきます。あなたが共有するブラウザを検出して、それに応じた動きをするようになります。
+  ]]></string>
+  <string name="usage_access_give_access">アクセス権を与える</string>
+  <string name="title_preferred_apps">優先アプリ</string>
+</resources>
