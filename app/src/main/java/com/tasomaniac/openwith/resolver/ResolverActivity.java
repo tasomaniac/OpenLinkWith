@@ -30,7 +30,7 @@ import com.tasomaniac.openwith.HeaderAdapter;
 import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.SimpleTextViewHolder;
 import com.tasomaniac.openwith.homescreen.AddToHomeScreenDialogFragment;
-import com.tasomaniac.openwith.util.Intents;
+import com.tasomaniac.openwith.util.IntentFixer;
 import dagger.android.support.DaggerAppCompatActivity;
 
 import javax.annotation.Nullable;
@@ -188,7 +188,7 @@ public class ResolverActivity extends DaggerAppCompatActivity implements
     @Override
     public void displayAddToHomeScreenDialog(DisplayActivityInfo activityInfo, Intent intent) {
         AddToHomeScreenDialogFragment
-                .newInstance(activityInfo, Intents.fixIntents(this, intent))
+                .newInstance(activityInfo, IntentFixer.fixIntents(this, intent))
                 .show(getSupportFragmentManager());
     }
 

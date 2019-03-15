@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.tasomaniac.openwith.extensions.AmazonASINKt.extractAmazonASIN;
 import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableSet;
 
@@ -111,21 +112,6 @@ public class UrlFix {
             return url;
         }
 
-        @Nullable
-        public static String extractAmazonASIN(String foundUrl) {
-            try {
-                // https://www.amazon.de/gp/product/B01LYYM9I3
-                // https://www.amazon.com/gp/aw/d/B001GNBJQO?vs=1
-                // http://www.amazon.com/Garmin-Speed-Cadence-Bike-Sensor/dp/B000BFNOT8
-                final Matcher matcher = Pattern.compile(".*//www.amazon.(?:com|co\\.uk|co.jp|com\\.au|com\\.br|ca|cn|fr|de|in|it|com\\.mx|nl|es)/(?:.+/)?(?:gp/aw/d|gp/product|dp)+/(\\w{10}).*", Pattern.CASE_INSENSITIVE)
-                        .matcher(foundUrl);
-                if (matcher.find()) {
-                    return matcher.group(1);
-                }
-            } catch (Exception ignored) {
-            }
-            return null;
-        }
     }
 
     private static class DailyMailFixer implements Fixer {
