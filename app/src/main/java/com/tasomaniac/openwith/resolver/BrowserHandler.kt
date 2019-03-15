@@ -1,11 +1,12 @@
-package com.tasomaniac.openwith.browser.resolver
+package com.tasomaniac.openwith.resolver
 
 import android.content.pm.ResolveInfo
 import android.os.Build
 import com.tasomaniac.openwith.browser.BrowserPreferences
 import com.tasomaniac.openwith.browser.BrowserPreferences.Mode
-import com.tasomaniac.openwith.util.componentName
-import com.tasomaniac.openwith.util.isEqualTo
+import com.tasomaniac.openwith.browser.resolver.BrowserResolver
+import com.tasomaniac.openwith.extensions.componentName
+import com.tasomaniac.openwith.extensions.isEqualTo
 import java.util.ArrayList
 import javax.inject.Inject
 

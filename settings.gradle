@@ -1,5 +1,7 @@
 include ':app'
 include ':base'
+include ':base-prefs'
+include ':browser-resolver'
 include ':intro'
 include ':intro-lib'
 include ':test-support'

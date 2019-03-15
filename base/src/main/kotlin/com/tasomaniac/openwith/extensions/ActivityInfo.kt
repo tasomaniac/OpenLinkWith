@@ -1,4 +1,4 @@
-package com.tasomaniac.openwith.util
+package com.tasomaniac.openwith.extensions
 
 import android.content.ComponentName
 import android.content.pm.ActivityInfo

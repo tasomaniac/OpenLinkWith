@@ -110,6 +110,8 @@ configurations {
 }
 
 dependencies {
+  implementation project(':base-prefs')
+  implementation project(':browser-resolver')
   implementation project(':intro')
   
   implementation 'androidx.preference:preference-ktx:1.0.0'

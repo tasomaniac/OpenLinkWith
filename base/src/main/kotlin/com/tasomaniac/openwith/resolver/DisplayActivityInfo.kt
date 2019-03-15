@@ -4,7 +4,7 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.drawable.Drawable
 import android.os.Parcelable
-import com.tasomaniac.openwith.util.componentName
+import com.tasomaniac.openwith.extensions.componentName
 import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 

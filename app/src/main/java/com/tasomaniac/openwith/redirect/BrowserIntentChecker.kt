@@ -8,7 +8,7 @@ import android.os.Build.VERSION_CODES.M
 import com.tasomaniac.openwith.BuildConfig
 import com.tasomaniac.openwith.browser.resolver.BrowserResolver
 import com.tasomaniac.openwith.util.Intents
-import com.tasomaniac.openwith.util.componentName
+import com.tasomaniac.openwith.extensions.componentName
 import javax.inject.Inject
 
 class BrowserIntentChecker @Inject constructor(

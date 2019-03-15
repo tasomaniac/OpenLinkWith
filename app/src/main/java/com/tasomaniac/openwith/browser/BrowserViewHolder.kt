@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.extensions.inflate
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
-import com.tasomaniac.openwith.util.componentName
+import com.tasomaniac.openwith.extensions.componentName
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.browser_list_item.browserIcon
 import kotlinx.android.synthetic.main.browser_list_item.browserInfo
