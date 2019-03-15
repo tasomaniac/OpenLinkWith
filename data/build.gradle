@@ -1,0 +1,7 @@
+apply from: configFile('android-library-config.gradle')
+
+dependencies {
+    implementation "androidx.room:room-runtime:$versions.room"
+    implementation "androidx.room:room-rxjava2:$versions.room"
+    kapt "androidx.room:room-compiler:$versions.room"
+}

@@ -113,16 +113,13 @@ dependencies {
   implementation project(':base-prefs')
   implementation project(':browser-preferred')
   implementation project(':browser-resolver')
+  implementation project(':data')
   implementation project(':intro')
   implementation project(':redirect')
 
   implementation 'androidx.appcompat:appcompat:1.0.2'
   implementation 'androidx.preference:preference-ktx:1.0.0'
   implementation 'com.tasomaniac:delayed-progress:0.4'
-
-  implementation "androidx.room:room-runtime:$versions.room"
-  implementation "androidx.room:room-rxjava2:$versions.room"
-  kapt "androidx.room:room-compiler:$versions.room"
 
   implementation "com.squareup.okhttp3:okhttp:$versions.okHttp"
 
