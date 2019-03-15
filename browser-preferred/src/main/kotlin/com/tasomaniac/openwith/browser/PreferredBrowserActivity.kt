@@ -3,17 +3,16 @@ package com.tasomaniac.openwith.browser
 import android.os.Bundle
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.tasomaniac.openwith.HeaderAdapter
-import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.SimpleTextViewHolder
 import com.tasomaniac.openwith.browser.resolver.BrowserResolver
 import com.tasomaniac.openwith.data.Analytics
-import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.extensions.componentName
+import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import javax.inject.Inject
-import kotlinx.android.synthetic.main.activity_preferred_apps.recycler_view as recyclerView
+import kotlinx.android.synthetic.main.browser_activity_preferred_apps.recycler_view as recyclerView
 
 class PreferredBrowserActivity : DaggerAppCompatActivity(), BrowsersAdapter.Listener {
 
@@ -26,7 +25,7 @@ class PreferredBrowserActivity : DaggerAppCompatActivity(), BrowsersAdapter.List
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_preferred_apps)
+        setContentView(R.layout.browser_activity_preferred_apps)
 
         analytics.sendScreenView("Browser Apps")
         setupToolbar()

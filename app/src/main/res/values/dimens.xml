@@ -3,8 +3,4 @@
 
   <dimen name="resolver_max_width">480dp</dimen>
 
-  <dimen name="content_padding">16dp</dimen>
-
-  <dimen name="appbar_height">196dp</dimen>
-
 </resources>
