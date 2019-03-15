@@ -12,6 +12,7 @@ import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.data.Analytics
 import com.tasomaniac.openwith.data.prefs.BooleanPreference
 import com.tasomaniac.openwith.data.prefs.UsageAccess
+import com.tasomaniac.openwith.extensions.restart
 import com.tasomaniac.openwith.rx.SchedulingStrategy
 import com.tasomaniac.openwith.settings.Settings
 import com.tasomaniac.openwith.settings.SettingsFragment
@@ -90,7 +91,7 @@ class UsageAccessSettings @Inject constructor(
     private fun observeUsageStats() {
         UsageStats.observeAccessGiven(context)
             .compose(schedulingStrategy.forCompletable())
-            .subscribe { Intents.restartSettings(context) }
+            .subscribe { context.restart() }
             .addTo(disposables)
     }
 

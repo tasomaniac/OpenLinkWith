@@ -1,6 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tasomaniac.openwith.resolver">
+  xmlns:tools="http://schemas.android.com/tools"
+  package="com.tasomaniac.openwith.resolver">
 
-    <application android:supportsRtl="true" />
+  <application android:supportsRtl="true">
+    <activity
+      android:name=".ResolverActivity"
+      android:documentLaunchMode="never"
+      android:excludeFromRecents="true"
+      android:finishOnCloseSystemDialogs="true"
+      android:relinquishTaskIdentity="true"
+      android:theme="@style/BottomSheet.Light"
+      tools:targetApi="lollipop" />
+  </application>
 
 </manifest>

@@ -34,7 +34,6 @@ import androidx.core.view.NestedScrollingParent;
 import androidx.core.view.NestedScrollingParentHelper;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
-import com.tasomaniac.openwith.R;
 import timber.log.Timber;
 
 public class ResolverDrawerLayout extends ViewGroup implements NestedScrollingParent {

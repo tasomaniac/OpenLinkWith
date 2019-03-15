@@ -36,7 +36,13 @@ class HomeScreenResolverPresenterTest {
         val listener = captureIntentResolverListener()
 
         val filteredItem = mock<DisplayActivityInfo>()
-        listener.onIntentResolved(IntentResolverResult(emptyList(), filteredItem, false))
+        listener.onIntentResolved(
+            IntentResolverResult(
+                emptyList(),
+                filteredItem,
+                false
+            )
+        )
 
         then(filteredItem).shouldHaveZeroInteractions()
     }

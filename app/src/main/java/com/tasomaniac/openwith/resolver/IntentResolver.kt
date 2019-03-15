@@ -71,7 +71,11 @@ internal class IntentResolver @Inject constructor(
         callerPackage.removeFrom(currentResolveList)
 
         val resolved = groupResolveList(currentResolveList)
-        return IntentResolverResult(resolved, resolveListGrouper.filteredItem, resolveListGrouper.showExtended)
+        return IntentResolverResult(
+            resolved,
+            resolveListGrouper.filteredItem,
+            resolveListGrouper.showExtended
+        )
     }
 
     private fun groupResolveList(currentResolveList: List<ResolveInfo>): List<DisplayActivityInfo> {

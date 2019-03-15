@@ -144,15 +144,6 @@
       android:theme="@style/BottomSheet.Light"
       tools:targetApi="lollipop" />
 
-    <activity
-      android:name=".resolver.ResolverActivity"
-      android:documentLaunchMode="never"
-      android:excludeFromRecents="true"
-      android:finishOnCloseSystemDialogs="true"
-      android:relinquishTaskIdentity="true"
-      android:theme="@style/BottomSheet.Light"
-      tools:targetApi="lollipop" />
-
     <service
       android:name=".resolver.ResolverChooserTargetService"
       android:label="@string/app_name"

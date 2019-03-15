@@ -3,8 +3,6 @@ package com.tasomaniac.openwith.resolver;
 import android.app.Activity;
 import android.content.Intent;
 import android.widget.Toast;
-import com.tasomaniac.openwith.BuildConfig;
-import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.util.Intents;
 import timber.log.Timber;
 

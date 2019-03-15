@@ -1,6 +1,0 @@
-<resources>
-  <dimen name="alert_dialog_button_bar_height">48dip</dimen>
-
-  <dimen name="resolver_max_width">480dp</dimen>
-
-</resources>

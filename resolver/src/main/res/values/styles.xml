@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <style name="BottomSheet.Light" parent="Base.BottomSheet.Light" />
+
+  <style name="Base.BottomSheet.Light" parent="Base.Theme.OpenWith">
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowBackground">@android:color/transparent</item>
+    <item name="android:backgroundDimEnabled">true</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowTranslucentStatus">false</item>
+    <item name="android:windowTranslucentNavigation">false</item>
+    <item name="listPreferredItemPaddingLeft">?attr/dialogPreferredPadding</item>
+    <item name="listPreferredItemPaddingRight">?attr/dialogPreferredPadding</item>
+    <item name="colorControlActivated">?attr/colorControlHighlight</item>
+  </style>
+</resources>

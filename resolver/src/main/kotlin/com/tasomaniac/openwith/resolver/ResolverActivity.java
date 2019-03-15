@@ -27,9 +27,7 @@ import android.widget.Toast;
 import androidx.annotation.StringRes;
 import androidx.recyclerview.widget.RecyclerView;
 import com.tasomaniac.openwith.HeaderAdapter;
-import com.tasomaniac.openwith.R;
 import com.tasomaniac.openwith.SimpleTextViewHolder;
-import com.tasomaniac.openwith.homescreen.AddToHomeScreenDialogFragment;
 import com.tasomaniac.openwith.util.IntentFixer;
 import dagger.android.support.DaggerAppCompatActivity;
 
@@ -48,6 +46,8 @@ public class ResolverActivity extends DaggerAppCompatActivity implements
 
     public static final String EXTRA_ADD_TO_HOME_SCREEN = "EXTRA_ADD_TO_HOME_SCREEN";
     private static final String KEY_CHECKED_POS = "KEY_CHECKED_POS";
+    public static final String RESULT_EXTRA_INFO = "RESULT_EXTRA_INFO";
+    public static final String RESULT_EXTRA_INTENT = "RESULT_EXTRA_INTENT";
 
     @Inject ResolverPresenter presenter;
     @Inject ResolveListAdapter adapter;
@@ -187,9 +187,11 @@ public class ResolverActivity extends DaggerAppCompatActivity implements
 
     @Override
     public void displayAddToHomeScreenDialog(DisplayActivityInfo activityInfo, Intent intent) {
-        AddToHomeScreenDialogFragment
-                .newInstance(activityInfo, IntentFixer.fixIntents(this, intent))
-                .show(getSupportFragmentManager());
+        Intent data = new Intent();
+        data.putExtra(RESULT_EXTRA_INFO, activityInfo);
+        data.putExtra(RESULT_EXTRA_INTENT, IntentFixer.fixIntents(this, intent));
+        setResult(RESULT_OK, data);
+        finish();
     }
 
     @Override

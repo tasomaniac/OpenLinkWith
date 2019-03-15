@@ -3,15 +3,8 @@ package com.tasomaniac.openwith.util;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import com.tasomaniac.openwith.settings.SettingsActivity;
 
 public class Intents {
-
-    public static void restartSettings(Context context) {
-        Intent intent = new Intent(context, SettingsActivity.class)
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        context.startActivity(intent);
-    }
 
     public static Intent homeScreenIntent() {
         Intent homeIntent = new Intent(Intent.ACTION_MAIN);
