@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import com.tasomaniac.openwith.redirect.UrlFix;
 import com.tasomaniac.openwith.settings.SettingsActivity;
 
 import java.util.List;
@@ -26,11 +27,6 @@ public class Intents {
         homeIntent.addCategory(Intent.CATEGORY_HOME);
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
         return homeIntent;
-    }
-
-    public static boolean isHttp(Intent intent) {
-        String scheme = intent.getScheme();
-        return "http".equals(scheme) || "https".equals(scheme);
     }
 
     public static void startActivityFixingIntent(Context context, Intent intent)
@@ -69,7 +65,7 @@ public class Intents {
         @Override
         public Intent fix(Context context, Intent intent) {
             if (intent.getDataString() != null && intent.getDataString().contains("amazon")) {
-                String asin = Urls.AmazonFixer.extractAmazonASIN(intent.getDataString());
+                String asin = UrlFix.AmazonFixer.extractAmazonASIN(intent.getDataString());
                 if (asin != null) {
                     if ("0000000000".equals(asin)) {
                         return context.getPackageManager()

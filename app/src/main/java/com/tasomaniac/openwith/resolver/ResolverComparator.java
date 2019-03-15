@@ -7,7 +7,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Build;
-import com.tasomaniac.openwith.util.Intents;
+import com.tasomaniac.openwith.extensions.IntentKt;
 
 import javax.annotation.Nullable;
 import java.text.Collator;
@@ -35,7 +35,7 @@ class ResolverComparator implements Comparator<ResolveInfo> {
         this.usageStatsMap = usageStatsMap;
         this.priorityPackages = priorityPackages;
         this.collator = Collator.getInstance(Locale.getDefault());
-        this.isHttp = Intents.isHttp(sourceIntent);
+        this.isHttp = IntentKt.isHttp(sourceIntent);
     }
 
     @Override

@@ -7,8 +7,8 @@ import android.content.pm.ResolveInfo
 import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.M
 import com.tasomaniac.openwith.BuildConfig
+import com.tasomaniac.openwith.extensions.isHttp
 import com.tasomaniac.openwith.rx.SchedulingStrategy
-import com.tasomaniac.openwith.util.Intents
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import io.reactivex.disposables.Disposables
@@ -64,7 +64,7 @@ internal class IntentResolver @Inject constructor(
         currentResolveList.removeAll {
             it.activityInfo.packageName == BuildConfig.APPLICATION_ID
         }
-        if (Intents.isHttp(sourceIntent)) {
+        if (sourceIntent.isHttp()) {
             browserHandlerFactory.create(currentResolveList).handleBrowsers()
         }
 
