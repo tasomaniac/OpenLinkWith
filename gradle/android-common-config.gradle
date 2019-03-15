@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         minSdkVersion versions.minSdk
-        targetSdkVersion versions.targetSdk
+        targetSdkVersion versions.compileSdk
     }
 
     compileOptions {
