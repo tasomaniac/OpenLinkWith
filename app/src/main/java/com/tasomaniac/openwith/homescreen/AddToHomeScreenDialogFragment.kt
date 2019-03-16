@@ -109,11 +109,16 @@ class AddToHomeScreenDialogFragment : DaggerAppCompatDialogFragment() {
 
         return AlertDialog.Builder(requireContext())
             .setPositiveButton(R.string.add) { _, _ -> createShortcutAndHandleError() }
-            .setNegativeButton(R.string.cancel) { _, _ -> requireActivity().finish() }
+            .setNegativeButton(R.string.cancel, null)
             .setView(view)
             .setTitle(R.string.add_to_homescreen)
             .create()
             .also { forceKeyboardVisible(it.window!!) }
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        requireActivity().finish()
     }
 
     fun onTitleChanged(title: CharSequence) {

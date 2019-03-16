@@ -7,7 +7,7 @@
     <item name="android:listPreferredItemPaddingEnd">?listPreferredItemPaddingRight</item>
   </style>
 
-  <style name="Theme.Transparent" parent="@android:style/Theme">
+  <style name="Theme.Transparent" parent="Base.Theme.OpenWith">
     <item name="android:windowBackground">@android:color/transparent</item>
     <item name="android:windowNoTitle">true</item>
     <item name="android:windowIsFloating">true</item>
@@ -17,7 +17,7 @@
     <item name="android:backgroundDimEnabled">false</item>
   </style>
 
-  <style name="Theme.Transparent.NoAnimation" parent="@style/Theme.Transparent">
+  <style name="Theme.Transparent.NoAnimation" parent="Theme.Transparent">
     <item name="android:windowAnimationStyle">@null</item>
   </style>
 

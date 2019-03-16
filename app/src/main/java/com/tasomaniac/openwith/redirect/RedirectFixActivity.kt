@@ -48,6 +48,7 @@ class RedirectFixActivity : DaggerAppCompatActivity() {
             .compose(schedulingStrategy.forMaybe())
             .subscribe { intent ->
                 intent.component = ComponentName(this, ResolverActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
                 startActivity(intent)
                 finish()
             }

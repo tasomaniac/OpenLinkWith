@@ -60,8 +60,7 @@
       android:label="@string/open_with"
       android:relinquishTaskIdentity="true"
       android:theme="@style/Theme.Transparent.NoAnimation"
-      android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
-      tools:targetApi="lollipop">
+      android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
 
       <intent-filter android:label="@string/open_with">
         <action android:name="android.intent.action.SEND" />
@@ -121,8 +120,7 @@
       android:label="@string/add_to_homescreen"
       android:relinquishTaskIdentity="true"
       android:theme="@style/Theme.Transparent.NoAnimation"
-      android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
-      tools:targetApi="lollipop">
+      android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
 
       <intent-filter android:label="@string/add_to_homescreen">
         <action android:name="android.intent.action.SEND" />

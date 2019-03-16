@@ -8,6 +8,7 @@ android {
     defaultConfig {
         minSdkVersion versions.minSdk
         targetSdkVersion versions.compileSdk
+        multiDexEnabled true
     }
 
     compileOptions {
@@ -36,6 +37,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
 
     implementation 'androidx.core:core-ktx:1.0.1'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.fragment:fragment-ktx:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
