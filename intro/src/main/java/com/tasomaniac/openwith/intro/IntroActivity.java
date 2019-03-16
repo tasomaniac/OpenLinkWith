@@ -1,13 +1,10 @@
 package com.tasomaniac.openwith.intro;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import com.tasomaniac.openwith.data.Analytics;
-import com.tasomaniac.openwith.extensions.ContextKt;
 import com.tasomaniac.openwith.rx.SchedulingStrategy;
 import com.tasomaniac.openwith.settings.advanced.usage.UsageStats;
 import com.tasomaniac.openwith.settings.advanced.usage.UsageStatsKt;
@@ -16,8 +13,7 @@ import io.reactivex.disposables.Disposable;
 
 import javax.inject.Inject;
 
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.LOLLIPOP;
+import static com.tasomaniac.openwith.extensions.ContextKt.restart;
 
 public class IntroActivity extends AppIntro {
 
@@ -68,12 +64,11 @@ public class IntroActivity extends AppIntro {
                     .drawable(R.drawable.tutorial_4).build());
         }
 
-        if (SDK_INT >= LOLLIPOP && !UsageStats.isEnabled(this)) {
+        if (!UsageStats.isEnabled(this)) {
             addUsageStatsSlide();
         }
     }
 
-    @RequiresApi(LOLLIPOP)
     private void addUsageStatsSlide() {
         usageStatsSlideAdded = true;
         addSlide(new AppIntroFragment.Builder()
@@ -93,7 +88,6 @@ public class IntroActivity extends AppIntro {
     public void onNextPressed() {
     }
 
-    @TargetApi(LOLLIPOP)
     @Override
     public void onDonePressed() {
         if (usageStatsSlideAdded && !UsageStats.isEnabled(this)) {
@@ -108,15 +102,13 @@ public class IntroActivity extends AppIntro {
         }
     }
 
-    @RequiresApi(LOLLIPOP)
     private void observeUsageStats() {
         Disposable disposable = UsageStats.observeAccessGiven(this)
                 .compose(schedulingStrategy.forCompletable())
-                .subscribe(() -> ContextKt.restart(this));
+                .subscribe(() -> restart(this));
         disposables.add(disposable);
     }
 
-    @TargetApi(LOLLIPOP)
     @Override
     protected void onResume() {
         super.onResume();
@@ -130,7 +122,7 @@ public class IntroActivity extends AppIntro {
     protected void onDestroy() {
         super.onDestroy();
 
-        if (SDK_INT >= LOLLIPOP && shouldTrackUsageAccess()) {
+        if (shouldTrackUsageAccess()) {
             analytics.sendEvent(
                     "Usage Access",
                     "Given in first intro",

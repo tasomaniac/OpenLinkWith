@@ -1,9 +1,7 @@
 package com.tasomaniac.openwith.settings.advanced.usage
 
-import android.os.Build.VERSION_CODES.LOLLIPOP
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
@@ -16,12 +14,10 @@ import com.tasomaniac.openwith.extensions.restart
 import com.tasomaniac.openwith.rx.SchedulingStrategy
 import com.tasomaniac.openwith.settings.Settings
 import com.tasomaniac.openwith.settings.SettingsFragment
-import com.tasomaniac.openwith.util.Intents
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import javax.inject.Inject
 
-@RequiresApi(LOLLIPOP)
 class UsageAccessSettings @Inject constructor(
     @param:UsageAccess private val usageAccessPref: BooleanPreference,
     private val analytics: Analytics,

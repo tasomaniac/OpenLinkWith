@@ -17,8 +17,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.LOLLIPOP_MR1;
 import static com.tasomaniac.openwith.resolver.ResolverActivity.EXTRA_ADD_TO_HOME_SCREEN;
 
 @Module
@@ -56,15 +54,14 @@ public abstract class ResolverModule {
     }
 
     @Nullable private static Map<String, UsageStats> usageStatsFrom(Context context) {
-        if (SDK_INT >= LOLLIPOP_MR1) {
-            UsageStatsManager usageStatsManager = ContextCompat.getSystemService(context, UsageStatsManager.class);
+        UsageStatsManager usageStatsManager = ContextCompat.getSystemService(context, UsageStatsManager.class);
 
-            final long sinceTime = System.currentTimeMillis() - USAGE_STATS_PERIOD;
-            if (usageStatsManager != null) {
-                return usageStatsManager.queryAndAggregateUsageStats(sinceTime, System.currentTimeMillis());
-            }
+        final long sinceTime = System.currentTimeMillis() - USAGE_STATS_PERIOD;
+        if (usageStatsManager != null) {
+            return usageStatsManager.queryAndAggregateUsageStats(sinceTime, System.currentTimeMillis());
+        } else {
+            return null;
         }
-        return null;
     }
 
     private static final String[] PRIORITY_PACKAGES = new String[]{

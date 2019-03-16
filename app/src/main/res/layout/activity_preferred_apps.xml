@@ -13,8 +13,7 @@
     android:layout_height="@dimen/appbar_height"
     android:elevation="4dp"
     android:fitsSystemWindows="true"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    tools:targetApi="lollipop">
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
     <com.google.android.material.appbar.CollapsingToolbarLayout
       android:id="@+id/collapsing_toolbar"

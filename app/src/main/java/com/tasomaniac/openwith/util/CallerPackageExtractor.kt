@@ -1,14 +1,9 @@
 package com.tasomaniac.openwith.util
 
-import android.app.ActivityManager
 import android.app.usage.UsageStats
 import android.app.usage.UsageStatsManager
 import android.content.Context
-import android.os.Build.VERSION.SDK_INT
-import android.os.Build.VERSION_CODES.LOLLIPOP
-import android.os.Build.VERSION_CODES.LOLLIPOP_MR1
 import android.text.format.DateUtils
-import androidx.annotation.RequiresApi
 import androidx.core.app.ShareCompat
 import androidx.core.content.getSystemService
 import com.tasomaniac.openwith.BuildConfig
@@ -32,9 +27,7 @@ sealed class CallerPackageExtractor {
             return when {
                 callerPackagePreferences.isEnabled.not() -> EmptyExtractor
                 callerPackage != null -> SimpleExtractor(callerPackage)
-                SDK_INT < LOLLIPOP -> LegacyExtractor(shareToOpenWith)
-                SDK_INT >= LOLLIPOP_MR1 -> LollipopExtractor(shareToOpenWith)
-                else -> EmptyExtractor
+                else -> LollipopExtractor(shareToOpenWith)
             }
         }
     }
@@ -51,18 +44,6 @@ private class SimpleExtractor(private val callerPackage: String?) : CallerPackag
     }
 }
 
-@Suppress("DEPRECATION")
-private class LegacyExtractor(context: Context) : CallerPackageExtractor() {
-
-    private val activityManager = context.getSystemService<ActivityManager>()!!
-
-    override fun extract(): String? {
-        val runningTasks = activityManager.getRunningTasks(1)
-        return runningTasks[0].baseActivity.packageName
-    }
-}
-
-@RequiresApi(LOLLIPOP_MR1)
 private class LollipopExtractor(context: Context) : CallerPackageExtractor() {
 
     private val usageStatsManager = context.getSystemService<UsageStatsManager>()

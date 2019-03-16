@@ -1,12 +1,10 @@
 package com.tasomaniac.openwith.resolver;
 
-import android.annotation.TargetApi;
 import android.app.usage.UsageStats;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.os.Build;
 import com.tasomaniac.openwith.extensions.IntentKt;
 
 import javax.annotation.Nullable;
@@ -90,7 +88,6 @@ class ResolverComparator implements Comparator<ResolveInfo> {
         return collator.compare(sa.toString(), sb.toString());
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private long getPackageTimeSpent(String packageName) {
         if (usageStatsMap != null) {
             final UsageStats stats = usageStatsMap.get(packageName);

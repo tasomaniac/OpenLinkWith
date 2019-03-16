@@ -4,16 +4,13 @@ import android.annotation.SuppressLint
 import android.app.AppOpsManager
 import android.content.Context
 import android.content.Intent
-import android.os.Build.VERSION_CODES.LOLLIPOP
 import android.provider.Settings
-import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
 import io.reactivex.Completable
 import io.reactivex.Observable
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
-@RequiresApi(LOLLIPOP)
 object UsageStats {
 
     @JvmStatic

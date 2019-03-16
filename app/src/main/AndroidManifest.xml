@@ -139,8 +139,7 @@
       android:excludeFromRecents="true"
       android:finishOnCloseSystemDialogs="true"
       android:relinquishTaskIdentity="true"
-      android:theme="@style/BottomSheet.Light"
-      tools:targetApi="lollipop" />
+      android:theme="@style/BottomSheet.Light" />
 
     <service
       android:name=".resolver.ResolverChooserTargetService"

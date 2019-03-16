@@ -3,7 +3,6 @@ package com.tasomaniac.openwith.settings
 import android.app.Application
 import android.content.ClipboardManager
 import android.os.Build.VERSION.SDK_INT
-import android.os.Build.VERSION_CODES.LOLLIPOP
 import android.os.Build.VERSION_CODES.M
 import androidx.core.content.getSystemService
 import com.tasomaniac.openwith.BuildConfig
@@ -31,13 +30,9 @@ class SettingsModule {
         general: GeneralSettings,
         display: DisplaySettings,
         advanced: AdvancedSettings,
+        usageAccess: UsageAccessSettings,
         other: OtherSettings
-    ): Set<Settings> = setOf(clipboard, askForRating, general, display, advanced, other)
-
-    @Provides
-    @ElementsIntoSet
-    fun usageAccessSettings(settings: UsageAccessSettings): Set<Settings> =
-        if (SDK_INT >= LOLLIPOP) setOf(settings) else emptySet()
+    ): Set<Settings> = setOf(clipboard, askForRating, general, display, advanced, usageAccess, other)
 
     @Provides
     @ElementsIntoSet

@@ -17,14 +17,12 @@
 -->
 <com.tasomaniac.openwith.resolver.ResolverDrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/contentPanel"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   app:maxCollapsedHeight="192dp"
   app:maxCollapsedHeightSmall="56dp"
-  app:resolverMaxWidth="@dimen/resolver_max_width"
-  tools:targetApi="lollipop">
+  app:resolverMaxWidth="@dimen/resolver_max_width">
 
   <LinearLayout
     android:layout_width="match_parent"
