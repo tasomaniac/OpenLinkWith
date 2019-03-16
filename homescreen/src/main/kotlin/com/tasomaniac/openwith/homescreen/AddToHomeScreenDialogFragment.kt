@@ -25,7 +25,6 @@ import androidx.core.graphics.drawable.IconCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import com.tasomaniac.android.widget.DelayedProgressBar
-import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.extensions.toast
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.util.Intents

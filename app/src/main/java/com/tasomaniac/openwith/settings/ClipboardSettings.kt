@@ -5,7 +5,7 @@ import androidx.preference.PreferenceCategory
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.data.Analytics
 import com.tasomaniac.openwith.redirect.RedirectFixActivity
-import com.tasomaniac.openwith.util.Urls
+import com.tasomaniac.openwith.extensions.findFirstUrl
 import javax.inject.Inject
 
 class ClipboardSettings @Inject constructor(
@@ -58,8 +58,7 @@ class ClipboardSettings @Inject constructor(
 
     private fun clipUrl(): String? {
         return try {
-            val primaryClip = clipboardManager.primaryClip?.getItemAt(0)?.coerceToText(context)?.toString()
-            Urls.findFirstUrl(primaryClip)
+            clipboardManager.primaryClip?.getItemAt(0)?.coerceToText(context)?.toString().findFirstUrl()
         } catch (e: Exception) {
             return null
         }

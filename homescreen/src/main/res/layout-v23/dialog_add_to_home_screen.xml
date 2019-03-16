@@ -3,7 +3,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:theme="@style/Theme.OpenWith"
+  android:theme="@style/Base.Theme.OpenWith"
   android:paddingTop="8dp">
 
   <EditText

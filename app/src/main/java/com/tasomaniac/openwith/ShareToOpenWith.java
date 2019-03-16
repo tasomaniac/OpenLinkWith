@@ -7,12 +7,13 @@ import androidx.core.app.ShareCompat;
 import com.tasomaniac.openwith.data.Analytics;
 import com.tasomaniac.openwith.redirect.RedirectFixActivity;
 import com.tasomaniac.openwith.util.CallerPackageExtractor;
-import com.tasomaniac.openwith.util.Urls;
 import dagger.android.DaggerActivity;
 
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.inject.Provider;
+
+import static com.tasomaniac.openwith.extensions.UrlsKt.extractUrlFrom;
 
 public class ShareToOpenWith extends DaggerActivity {
 
@@ -34,7 +35,7 @@ public class ShareToOpenWith extends DaggerActivity {
         trackDirectShare();
 
         final ShareCompat.IntentReader reader = ShareCompat.IntentReader.from(this);
-        String foundUrl = Urls.extractUrlFrom(getIntent(), reader);
+        String foundUrl = extractUrlFrom(getIntent(), reader);
 
         if (foundUrl != null) {
             trackLinkOpen();
