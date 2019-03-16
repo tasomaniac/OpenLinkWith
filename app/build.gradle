@@ -125,5 +125,4 @@ dependencies {
   implementation "com.squareup.okhttp3:okhttp:$versions.okHttp"
 
   testImplementation project(':test-support')
-  testImplementation "com.squareup.okhttp3:mockwebserver:$versions.okHttp"
 }

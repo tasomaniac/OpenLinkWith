@@ -40,8 +40,4 @@
     <item name="android:layout">@layout/preference_category_open_with</item>
   </style>
 
-  <style name="ThemeOverlay.Progress" parent="">
-    <item name="colorControlActivated">?colorAccent</item>
-  </style>
-
 </resources>

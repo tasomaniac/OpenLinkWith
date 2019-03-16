@@ -6,7 +6,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import com.tasomaniac.android.widget.DelayedProgressBar
-import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.resolver.ResolverActivity
 import com.tasomaniac.openwith.rx.SchedulingStrategy
 import com.tasomaniac.openwith.redirect.UrlFix.fixUrls
@@ -28,7 +27,7 @@ class RedirectFixActivity : DaggerAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.resolver_activity)
+        setContentView(R.layout.redirect_activity)
 
         val progress = findViewById<DelayedProgressBar>(R.id.resolver_progress)
         progress.show(true)
