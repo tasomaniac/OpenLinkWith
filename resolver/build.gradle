@@ -1,1 +1,5 @@
 apply from: configFile('android-library-config.gradle')
+
+dependencies {
+    testImplementation project(':test-support')
+}
