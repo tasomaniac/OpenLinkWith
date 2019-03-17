@@ -1,5 +1,6 @@
 package com.tasomaniac.openwith.settings.rating
 
+import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
@@ -10,7 +11,7 @@ import javax.inject.Inject
 class AskForRatingCondition(private val prefs: SharedPreferences) {
 
     @Inject
-    constructor(app: App) : this(app.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE))
+    constructor(app: Application) : this(app.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE))
 
     init {
         if (firstLaunchInMillis == -1L) {

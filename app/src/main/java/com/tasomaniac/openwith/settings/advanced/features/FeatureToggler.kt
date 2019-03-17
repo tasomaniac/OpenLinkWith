@@ -1,15 +1,15 @@
 package com.tasomaniac.openwith.settings.advanced.features
 
+import android.app.Application
 import android.content.ComponentName
 import android.content.pm.PackageManager
 import android.os.Build.VERSION_CODES.M
 import androidx.annotation.RequiresApi
-import com.tasomaniac.openwith.App
 import javax.inject.Inject
 
 @RequiresApi(M)
 class FeatureToggler @Inject constructor(
-    private val app: App,
+    private val app: Application,
     private val packageManager: PackageManager
 ) {
 
