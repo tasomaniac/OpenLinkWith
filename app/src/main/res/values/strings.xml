@@ -7,8 +7,11 @@
   <string name="pref_title_browser" translatable="false">@string/browser_title</string>
   <string name="pref_key_usage_stats" translatable="false">pref_usage_stats</string>
   <string name="pref_key_night_mode" translatable="false">pref_night_mode</string>
+  <string name="pref_value_night_mode_default" translatable="false">@string/pref_value_night_mode_off</string>
   <string name="pref_value_night_mode_off" translatable="false">off</string>
   <string name="pref_value_night_mode_on" translatable="false">on</string>
+  <string name="pref_value_night_mode_battery" translatable="false">battery</string>
+  <string name="pref_value_night_mode_system" translatable="false">system</string>
   <string name="pref_key_category_clipboard" translatable="false">pref_category_clipboard</string>
   <string name="pref_key_clipboard" translatable="false">pref_clipboard</string>
   <string name="pref_key_category_ask_for_rating" translatable="false">pref_category_ask_for_rating</string>
