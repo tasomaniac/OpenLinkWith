@@ -7,7 +7,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.core.os.bundleOf
 import androidx.core.text.parseAsHtml
-import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 
 class AppRemoveDialogFragment : AppCompatDialogFragment() {

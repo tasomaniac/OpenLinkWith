@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tasomaniac.openwith.HeaderAdapter
-import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.SimpleTextViewHolder
 import com.tasomaniac.openwith.data.Analytics
 import com.tasomaniac.openwith.data.PreferredApp
@@ -22,9 +21,7 @@ import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.Completable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
-import kotlinx.android.synthetic.main.activity_preferred_apps.toolbar
 import javax.inject.Inject
-import kotlinx.android.synthetic.main.activity_preferred_apps.recycler_view as recyclerView
 
 class PreferredAppsActivity : DaggerAppCompatActivity(), ItemClickListener, AppRemoveDialogFragment.Callbacks {
 
@@ -36,11 +33,13 @@ class PreferredAppsActivity : DaggerAppCompatActivity(), ItemClickListener, AppR
 
     private val disposables = CompositeDisposable()
 
+    private val recyclerView by lazy { findViewById<RecyclerView>(R.id.recycler_view) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_preferred_apps)
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         recyclerView.layoutManager = LinearLayoutManager(this)

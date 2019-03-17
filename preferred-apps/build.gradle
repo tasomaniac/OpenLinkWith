@@ -1,0 +1,6 @@
+apply from: configFile('android-library-config.gradle')
+
+dependencies {
+    implementation project(':resolver')
+    implementation project(':data')
+}

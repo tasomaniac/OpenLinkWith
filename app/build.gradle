@@ -116,6 +116,7 @@ dependencies {
   implementation project(':data')
   implementation project(':homescreen')
   implementation project(':intro')
+  implementation project(':preferred-apps')
   implementation project(':redirect')
   implementation project(':resolver')
 
