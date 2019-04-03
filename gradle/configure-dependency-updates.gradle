@@ -1,0 +1,9 @@
+dependencyUpdates.resolutionStrategy {
+    componentSelection { rules ->
+        rules.all { ComponentSelection selection ->
+            if (selection.candidate.version ==~ /(?i).*[.-]alpha[.\d-]*/) {
+                selection.reject('Alpha')
+            }
+        }
+    }
+}

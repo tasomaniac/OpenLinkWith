@@ -1,0 +1,14 @@
+subprojects {
+    repositories {
+        jcenter {
+            content {
+                // Ktlint dependencies
+                includeGroup 'org.jetbrains.trove4j'
+
+                // Detekt dependencies
+                includeGroup 'io.gitlab.arturbosch.detekt'
+                includeGroup 'com.beust'
+            }
+        }
+    }
+}
