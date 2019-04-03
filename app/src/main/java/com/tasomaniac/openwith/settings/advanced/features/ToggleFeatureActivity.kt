@@ -32,25 +32,9 @@ class ToggleFeatureActivity : DaggerAppCompatActivity() {
 
         val feature = intent.featureKey.toFeature()
         setupInitialState(feature)
-
-        featureToggle.setOnCheckedChangeListener { _, enabled ->
-            featurePreferences.setEnabled(feature, enabled)
-            featureToggle.setText(enabled.toSummary())
-            featureToggler.toggleFeature(feature, enabled)
-
-            sideEffects.forEach { it.featureToggled(feature, enabled) }
-        }
-
-        setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        setTitle(feature.titleRes)
-
-        featureDetails.text = getString(feature.detailsRes).parseAsHtml()
-        if (feature.imageRes != null) {
-            featureImage.setImageResource(feature.imageRes)
-        } else {
-            featureImage.visibility = View.GONE
-        }
+        setupToggle(feature)
+        setupTitle(feature)
+        setupDetails(feature)
 
         if (savedInstanceState == null) {
             analytics.sendEvent("FeatureToggle", "Feature", feature.prefKey)
@@ -61,6 +45,31 @@ class ToggleFeatureActivity : DaggerAppCompatActivity() {
         val enabled = featurePreferences.isEnabled(feature)
         featureToggle.isChecked = enabled
         featureToggle.setText(enabled.toSummary())
+    }
+
+    private fun setupToggle(feature: Feature) {
+        featureToggle.setOnCheckedChangeListener { _, enabled ->
+            featurePreferences.setEnabled(feature, enabled)
+            featureToggle.setText(enabled.toSummary())
+            featureToggler.toggleFeature(feature, enabled)
+
+            sideEffects.forEach { it.featureToggled(feature, enabled) }
+        }
+    }
+
+    private fun setupTitle(feature: Feature) {
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        setTitle(feature.titleRes)
+    }
+
+    private fun setupDetails(feature: Feature) {
+        featureDetails.text = getString(feature.detailsRes).parseAsHtml()
+        if (feature.imageRes != null) {
+            featureImage.setImageResource(feature.imageRes)
+        } else {
+            featureImage.visibility = View.GONE
+        }
     }
 
     @StringRes

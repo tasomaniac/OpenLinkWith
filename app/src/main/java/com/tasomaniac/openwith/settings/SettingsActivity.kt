@@ -16,8 +16,8 @@ import kotlinx.android.synthetic.main.activity_settings.collapsing_toolbar
 import kotlinx.android.synthetic.main.activity_settings.toolbar
 import javax.inject.Inject
 
-class SettingsActivity
-    : DaggerAppCompatActivity(),
+class SettingsActivity :
+    DaggerAppCompatActivity(),
     SharedPreferences.OnSharedPreferenceChangeListener,
     PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
@@ -66,8 +66,7 @@ class SettingsActivity
 
     override fun onPreferenceStartFragment(caller: PreferenceFragmentCompat, pref: Preference): Boolean {
         supportFragmentManager.transaction {
-            val fragment =
-                supportFragmentManager.fragmentFactory.instantiate(classLoader, pref.fragment, null)
+            val fragment = supportFragmentManager.fragmentFactory.instantiate(classLoader, pref.fragment)
             replace(R.id.fragment_container, fragment)
             addToBackStack(null)
         }

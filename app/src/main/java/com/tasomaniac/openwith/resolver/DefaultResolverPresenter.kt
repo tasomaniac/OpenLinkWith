@@ -59,29 +59,33 @@ internal class DefaultResolverPresenter @Inject constructor(
         override fun onIntentResolved(result: IntentResolverResult) {
             viewState.filteredItem = result.filteredItem
 
-            if (result.isEmpty) {
+            val handled = handleQuick(result)
+            if (handled) {
+                navigation.dismiss()
+            } else {
+                view.displayData(result)
+                view.setTitle(titleForAction(result.filteredItem))
+                view.setupActionButtons()
+            }
+        }
+
+        private fun handleQuick(result: IntentResolverResult) = when {
+            result.isEmpty -> {
                 Timber.e("No app is found to handle url: %s", sourceIntent.dataString)
                 view.toast(R.string.empty_resolver_activity)
-                navigation.dismiss()
-                return
+                true
             }
-            if (result.totalCount() == 1) {
+            result.totalCount() == 1 -> {
                 val activityInfo = result.filteredItem ?: result.resolved[0]
                 try {
-                    navigation.startPreferred(
-                        activityInfo.intentFrom(sourceIntent),
-                        activityInfo.displayLabel
-                    )
-                    navigation.dismiss()
-                    return
+                    navigation.startPreferred(activityInfo.intentFrom(sourceIntent), activityInfo.displayLabel)
+                    true
                 } catch (e: Exception) {
                     Timber.e(e)
+                    false
                 }
             }
-
-            view.displayData(result)
-            view.setTitle(titleForAction(result.filteredItem))
-            view.setupActionButtons()
+            else -> false
         }
 
         private fun titleForAction(filteredItem: DisplayActivityInfo?): String {

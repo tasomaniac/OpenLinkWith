@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
-import com.tasomaniac.openwith.App
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 

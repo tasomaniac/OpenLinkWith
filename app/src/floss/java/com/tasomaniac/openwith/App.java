@@ -28,7 +28,7 @@ public class App extends DaggerApplication {
 
     @Override
     protected AppComponent applicationInjector() {
-        component = (AppComponent) DaggerAppComponent.builder().create(this);
+        component = DaggerAppComponent.factory().create(this);
         return component;
     }
 
