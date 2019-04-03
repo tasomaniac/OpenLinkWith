@@ -1,10 +1,11 @@
 Help translate the app into your language:
 https://crowdin.com/project/open-link-with
 
+v2.7
+Internal improvements and various fixes
+
 v2.6
 Foreground app detection is now disabled by default.
 It can be enabled in Advanced settings.
-
-Example: When you share a Youtube link from browser, both browser and Youtube will be suggested. You will have the option to select "Always"
 
 <strong>Tip:</strong> Did you know that you can set OLW as a browser. Go to Advanced settings to enable.
