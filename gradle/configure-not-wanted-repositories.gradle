@@ -4,6 +4,7 @@ subprojects {
             content {
                 // Ktlint dependencies
                 includeGroup 'org.jetbrains.trove4j'
+                includeGroup 'com.andreapivetta.kolor'
 
                 // Detekt dependencies
                 includeGroup 'io.gitlab.arturbosch.detekt'
