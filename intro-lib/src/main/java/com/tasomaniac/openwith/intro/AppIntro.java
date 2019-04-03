@@ -7,7 +7,7 @@ import android.view.Window;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
@@ -20,14 +20,10 @@ import java.util.List;
 public abstract class AppIntro extends DaggerAppCompatActivity {
 
     private PagerAdapter mPagerAdapter;
-    private AppIntroViewPager pager;
+    private ViewPager2 pager;
     private List<Fragment> fragments = new ArrayList<>();
-    private int slidesNumber;
+    private int numberOfPages;
     private CircularIndicatorView mController;
-    private boolean skipButtonEnabled = true;
-    private boolean baseProgressButtonEnabled = true;
-    private boolean progressButtonEnabled = true;
-    private View skipButton;
     private View nextButton;
     private View doneButton;
     private int savedCurrentItem;
@@ -36,98 +32,63 @@ public abstract class AppIntro extends DaggerAppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.intro_layout);
 
-        skipButton = findViewById(R.id.skip);
+        findViewById(R.id.skip).setOnClickListener(v -> onSkipPressed());
         nextButton = findViewById(R.id.next);
-        doneButton = findViewById(R.id.done);
-        mPagerAdapter = new PagerAdapter(super.getSupportFragmentManager(), fragments);
-        pager = findViewById(R.id.view_pager);
-        pager.setAdapter(this.mPagerAdapter);
-
-        if (savedInstanceState != null) {
-            restoreLockingState(savedInstanceState);
-        }
-
-        skipButton.setOnClickListener(v -> onSkipPressed());
-
         nextButton.setOnClickListener(v -> {
             pager.setCurrentItem(pager.getCurrentItem() + 1);
             onNextPressed();
         });
-
+        doneButton = findViewById(R.id.done);
         doneButton.setOnClickListener(v -> onDonePressed());
 
-        mPagerAdapter = new PagerAdapter(getSupportFragmentManager(), fragments);
-        pager = findViewById(R.id.view_pager);
-
-        pager.setAdapter(this.mPagerAdapter);
-
-        pager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-
-            @Override
-            public void onPageSelected(int position) {
-                if (slidesNumber > 1) {
-                    mController.selectPosition(position);
-                }
-
-                // Allow the swipe to be re-enabled if a user swipes to a previous slide. Restore
-                // state of progress button depending on global progress button setting
-                if (!pager.isNextPagingEnabled()) {
-                    if (pager.getCurrentItem() != pager.getLockPage()) {
-                        setProgressButtonEnabled(baseProgressButtonEnabled);
-                        pager.setNextPagingEnabled(true);
-                    } else {
-                        setProgressButtonEnabled(progressButtonEnabled);
-                    }
-                } else {
-                    setProgressButtonEnabled(progressButtonEnabled);
-                }
-                skipButton.setVisibility(skipButtonEnabled ? View.VISIBLE : View.GONE);
-            }
-        });
-        pager.setCurrentItem(savedCurrentItem); //required for triggering onPageSelected for first page
+        setupPager(savedInstanceState);
 
         init(savedInstanceState);
-        slidesNumber = fragments.size();
+        numberOfPages = fragments.size();
 
-        if (slidesNumber == 1) {
-            setProgressButtonEnabled(progressButtonEnabled);
+        if (numberOfPages == 1) {
+            updateProgressButton();
         } else {
             initController();
         }
     }
 
+    private void setupPager(@Nullable Bundle savedInstanceState) {
+        mPagerAdapter = new PagerAdapter(this, fragments);
+        pager = findViewById(R.id.view_pager);
+        pager.setAdapter(mPagerAdapter);
+
+        if (savedInstanceState != null) {
+            savedCurrentItem = savedInstanceState.getInt("currentItem");
+        }
+        pager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+
+            @Override
+            public void onPageSelected(int position) {
+                if (numberOfPages > 1) {
+                    mController.selectPosition(position);
+                }
+
+                updateProgressButton();
+            }
+        });
+        pager.setCurrentItem(savedCurrentItem); //required for triggering onPageSelected for first page
+    }
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putBoolean("baseProgressButtonEnabled", baseProgressButtonEnabled);
-        outState.putBoolean("progressButtonEnabled", progressButtonEnabled);
-        outState.putBoolean("skipButtonEnabled", skipButtonEnabled);
-        outState.putBoolean("nextEnabled", pager.isPagingEnabled());
-        outState.putBoolean("nextPagingEnabled", pager.isNextPagingEnabled());
-        outState.putInt("lockPage", pager.getLockPage());
         outState.putInt("currentItem", pager.getCurrentItem());
-    }
-
-    private void restoreLockingState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        this.baseProgressButtonEnabled = savedInstanceState.getBoolean("baseProgressButtonEnabled");
-        this.progressButtonEnabled = savedInstanceState.getBoolean("progressButtonEnabled");
-        this.skipButtonEnabled = savedInstanceState.getBoolean("skipButtonEnabled");
-        this.savedCurrentItem = savedInstanceState.getInt("currentItem");
-        pager.setPagingEnabled(savedInstanceState.getBoolean("nextEnabled"));
-        pager.setNextPagingEnabled(savedInstanceState.getBoolean("nextPagingEnabled"));
-        pager.setLockPage(savedInstanceState.getInt("lockPage"));
     }
 
     private void initController() {
         mController = findViewById(R.id.indicator);
-        mController.initialize(slidesNumber);
+        mController.initialize(numberOfPages);
     }
 
-    public void addSlide(Fragment fragment) {
+    public void addPage(Fragment fragment) {
         fragments.add(fragment);
         mPagerAdapter.notifyDataSetChanged();
     }
@@ -154,24 +115,12 @@ public abstract class AppIntro extends DaggerAppCompatActivity {
         return super.onKeyDown(code, event);
     }
 
-    /**
-     * Setting to to display or hide the Next or Done button. This is a static setting and
-     * button state is maintained across slides until explicitly changed.
-     *
-     * @param progressButtonEnabled Set true to display. False to hide.
-     */
-    private void setProgressButtonEnabled(boolean progressButtonEnabled) {
-        this.progressButtonEnabled = progressButtonEnabled;
-        if (progressButtonEnabled) {
-            if (pager.getCurrentItem() == slidesNumber - 1) {
-                nextButton.setVisibility(View.GONE);
-                doneButton.setVisibility(View.VISIBLE);
-            } else {
-                nextButton.setVisibility(View.VISIBLE);
-                doneButton.setVisibility(View.GONE);
-            }
-        } else {
+    private void updateProgressButton() {
+        if (pager.getCurrentItem() == numberOfPages - 1) {
             nextButton.setVisibility(View.GONE);
+            doneButton.setVisibility(View.VISIBLE);
+        } else {
+            nextButton.setVisibility(View.VISIBLE);
             doneButton.setVisibility(View.GONE);
         }
     }
@@ -184,8 +133,8 @@ public abstract class AppIntro extends DaggerAppCompatActivity {
     private static class PagerAdapter extends FragmentStateAdapter {
         List<Fragment> fragments;
 
-        PagerAdapter(FragmentManager fm, List<Fragment> fragments) {
-            super(fm);
+        PagerAdapter(FragmentActivity activity, List<Fragment> fragments) {
+            super(activity);
             this.fragments = fragments;
         }
 
