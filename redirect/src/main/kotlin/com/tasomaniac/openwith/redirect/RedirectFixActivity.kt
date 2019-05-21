@@ -6,9 +6,9 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import com.tasomaniac.android.widget.DelayedProgressBar
+import com.tasomaniac.openwith.redirect.UrlFix.fixUrls
 import com.tasomaniac.openwith.resolver.ResolverActivity
 import com.tasomaniac.openwith.rx.SchedulingStrategy
-import com.tasomaniac.openwith.redirect.UrlFix.fixUrls
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.Maybe
 import io.reactivex.MaybeTransformer
