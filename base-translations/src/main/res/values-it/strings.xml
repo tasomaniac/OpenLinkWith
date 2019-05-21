@@ -68,7 +68,7 @@
     collegamento nell\'app nativa. Inoltre, non abbrevierà nessun collegamento abbreviato.<br>
     <br>
     <strong>Fai attenzione!</strong> Poiché Chrome (o il vostro browser preferito) non sarà più il predefinito, potresti notare
-     alcune modifiche del comportamento. Come un vantaggio, il telefono sarà migliore nell'apertura di collegamenti in applicazioni native.
+     alcune modifiche del comportamento. Come un vantaggio, il telefono sarà migliore nell\'apertura di collegamenti in applicazioni native.
   ]]></string>
   <string name="pref_title_feature_caller_app">Detect foreground apps</string>
   <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Warning:</strong> Experimental feature!<br>
