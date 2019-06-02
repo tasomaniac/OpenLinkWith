@@ -30,7 +30,7 @@ class DisplaySettings @Inject constructor(
             nightModePreferences.updateDefaultNightMode()
             activity.recreate()
 
-            val selectedValue = nightModePreferences.mode.stringVale(context.resources)
+            val selectedValue = nightModePreferences.mode.stringValue(context.resources)
             analytics.sendEvent("Preference", "Night Mode", selectedValue)
         }
     }

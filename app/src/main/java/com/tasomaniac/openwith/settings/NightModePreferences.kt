@@ -7,6 +7,7 @@ import android.os.Build.VERSION_CODES.P
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
 import com.tasomaniac.openwith.R
+import com.tasomaniac.openwith.settings.NightModePreferences.Mode.*
 import javax.inject.Inject
 
 class NightModePreferences @Inject constructor(
@@ -23,12 +24,12 @@ class NightModePreferences @Inject constructor(
     val mode: Mode
         get() {
             val value = sharedPreferences.getString(key, null)
-            return Mode.fromValue(resources, value) ?: defaultNightMode()
+            return PreferenceEntries.fromValue(resources, value) ?: defaultNightMode()
         }
 
     private fun defaultNightMode() = when {
-        SDK_INT >= P -> Mode.SYSTEM
-        else -> Mode.OFF
+        SDK_INT >= P -> SYSTEM
+        else -> OFF
     }
 
     fun updateDefaultNightMode() {
@@ -36,10 +37,10 @@ class NightModePreferences @Inject constructor(
     }
 
     enum class Mode(
-        @StringRes private val value: Int,
-        @StringRes val entry: Int,
+        @StringRes override val value: Int,
+        @StringRes override val entry: Int,
         val delegate: Int
-    ) {
+    ) : PreferenceEntries {
         OFF(R.string.pref_value_night_mode_off, R.string.pref_entry_night_mode_off, AppCompatDelegate.MODE_NIGHT_NO),
         ON(R.string.pref_value_night_mode_on, R.string.pref_entry_night_mode_on, AppCompatDelegate.MODE_NIGHT_YES),
         BATTERY(
@@ -52,13 +53,5 @@ class NightModePreferences @Inject constructor(
             R.string.pref_entry_night_mode_system,
             AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
         );
-
-        fun stringVale(resources: Resources): String = resources.getString(value)
-
-        companion object {
-
-            internal fun fromValue(resources: Resources, value: String?): Mode? =
-                Mode.values().find { it.stringVale(resources) == value }
-        }
     }
 }
