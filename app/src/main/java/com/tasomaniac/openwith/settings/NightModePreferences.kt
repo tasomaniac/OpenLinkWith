@@ -7,7 +7,8 @@ import android.os.Build.VERSION_CODES.P
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
 import com.tasomaniac.openwith.R
-import com.tasomaniac.openwith.settings.NightModePreferences.Mode.*
+import com.tasomaniac.openwith.settings.NightModePreferences.Mode.OFF
+import com.tasomaniac.openwith.settings.NightModePreferences.Mode.SYSTEM
 import javax.inject.Inject
 
 class NightModePreferences @Inject constructor(
@@ -41,8 +42,16 @@ class NightModePreferences @Inject constructor(
         @StringRes override val entry: Int,
         val delegate: Int
     ) : PreferenceEntries {
-        OFF(R.string.pref_value_night_mode_off, R.string.pref_entry_night_mode_off, AppCompatDelegate.MODE_NIGHT_NO),
-        ON(R.string.pref_value_night_mode_on, R.string.pref_entry_night_mode_on, AppCompatDelegate.MODE_NIGHT_YES),
+        OFF(
+            R.string.pref_value_night_mode_off,
+            R.string.pref_entry_night_mode_off,
+            AppCompatDelegate.MODE_NIGHT_NO
+        ),
+        ON(
+            R.string.pref_value_night_mode_on,
+            R.string.pref_entry_night_mode_on,
+            AppCompatDelegate.MODE_NIGHT_YES
+        ),
         BATTERY(
             R.string.pref_value_night_mode_battery,
             R.string.pref_entry_night_mode_battery,

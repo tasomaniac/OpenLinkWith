@@ -4,8 +4,8 @@ import android.content.ClipboardManager
 import androidx.preference.PreferenceCategory
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.data.Analytics
-import com.tasomaniac.openwith.redirect.RedirectFixActivity
 import com.tasomaniac.openwith.extensions.findFirstUrl
+import com.tasomaniac.openwith.redirect.RedirectFixActivity
 import javax.inject.Inject
 
 class ClipboardSettings @Inject constructor(

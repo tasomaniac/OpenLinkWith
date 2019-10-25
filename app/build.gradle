@@ -71,7 +71,9 @@ staticAnalysis {
   }
 
   ktlint {
-    reporters = [ReporterType.CHECKSTYLE]
+    reporters {
+      reporter "checkstyle"
+    }
 
     includeVariants { it.name == 'flossDebug' }
   }
@@ -88,14 +90,6 @@ staticAnalysis {
     lintConfig configFile('lint.xml')
 
     includeVariants { it.name == 'flossDebug' }
-  }
-}
-
-kapt {
-  arguments {
-    arg('dagger.gradle.incremental')
-    arg('dagger.formatGeneratedSource', 'disabled')
-//    arg('dagger.fastInit', 'enabled')
   }
 }
 
@@ -120,7 +114,7 @@ dependencies {
   implementation project(':redirect')
   implementation project(':resolver')
 
-  implementation 'androidx.preference:preference-ktx:1.0.0'
+  implementation 'androidx.preference:preference-ktx:1.1.0'
 
   implementation "com.squareup.okhttp3:okhttp:$versions.okHttp"
 

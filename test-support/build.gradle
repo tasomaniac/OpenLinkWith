@@ -4,5 +4,5 @@ dependencies {
     api 'junit:junit:4.13-beta-2'
     api 'org.assertj:assertj-core:3.12.2'
     api 'org.mockito:mockito-core:2.27.0'
-    api 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0'
+    api 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
 }

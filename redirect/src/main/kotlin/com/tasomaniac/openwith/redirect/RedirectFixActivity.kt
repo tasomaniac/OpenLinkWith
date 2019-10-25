@@ -15,6 +15,7 @@ import io.reactivex.MaybeTransformer
 import io.reactivex.Single
 import io.reactivex.disposables.Disposable
 import okhttp3.HttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import javax.inject.Inject
 
 class RedirectFixActivity : DaggerAppCompatActivity() {
@@ -78,6 +79,6 @@ class RedirectFixActivity : DaggerAppCompatActivity() {
 
         private fun Intent.withUrl(url: String): Intent = setData(Uri.parse(url))
 
-        private fun Intent.toHttpUrl() = HttpUrl.parse(dataString!!)
+        private fun Intent.toHttpUrl() = dataString!!.toHttpUrlOrNull()
     }
 }

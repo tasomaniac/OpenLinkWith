@@ -5,6 +5,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -138,7 +140,7 @@ public abstract class AppIntro extends DaggerAppCompatActivity {
             this.fragments = fragments;
         }
 
-        @Override public Fragment getItem(int position) {
+        @NonNull @Override public Fragment createFragment(int position) {
             return this.fragments.get(position);
         }
 

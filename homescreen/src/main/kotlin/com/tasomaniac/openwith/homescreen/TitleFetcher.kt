@@ -6,6 +6,7 @@ import com.tasomaniac.openwith.PerActivity
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.HttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
@@ -27,7 +28,7 @@ class TitleFetcher @Inject constructor(private val client: OkHttpClient) {
 
     fun fetch(url: String, onSuccess: (title: String?) -> Unit, onFailure: () -> Unit) {
         call?.cancel()
-        val httpUrl = HttpUrl.parse(url) ?: return
+        val httpUrl = url.toHttpUrlOrNull() ?: return
         call = client.newCall(request(httpUrl)).apply {
             enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) = onFailure()
@@ -37,7 +38,7 @@ class TitleFetcher @Inject constructor(private val client: OkHttpClient) {
                         Timber.tag("Network").e("Fail with response: %s", response)
                         onFailure()
                     } else {
-                        response.body()!!.use { body -> onSuccess(body.extractTitle()) }
+                        response.body!!.use { body -> onSuccess(body.extractTitle()) }
                     }
                 }
             })

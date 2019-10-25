@@ -3,6 +3,7 @@ package com.tasomaniac.openwith.settings.advanced.features
 import android.os.Build.VERSION_CODES.M
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
+import androidx.preference.Preference
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.settings.Settings
 import javax.inject.Inject
@@ -20,7 +21,7 @@ class FeaturesListSettings @Inject constructor(
     override fun resume() {
         Feature.values().forEach { feature ->
             val enabled = featurePreferences.isEnabled(feature)
-            fragment.findPreference(feature.prefKey)?.setSummary(enabled.toSummary())
+            fragment.findPreference<Preference>(feature.prefKey)?.setSummary(enabled.toSummary())
         }
     }
 

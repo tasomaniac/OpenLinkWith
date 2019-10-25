@@ -2,5 +2,5 @@ apply from: configFile('android-library-config.gradle')
 
 dependencies {
     api project(':intro-lib')
-    implementation 'androidx.viewpager2:viewpager2:1.0.0-alpha03'
+    implementation 'androidx.viewpager2:viewpager2:1.0.0-rc01'
 }

@@ -17,7 +17,7 @@ abstract class Settings(
     fun removePreference(preference: Preference) = fragment.preferenceScreen.removePreference(preference)
 
     fun findPreference(@StringRes keyResource: Int): Preference = fragment.run {
-        findPreference(getString(keyResource))
+        findPreference(getString(keyResource))!!
     }
 
     fun String.isKeyEquals(@StringRes keyRes: Int) = fragment.getString(keyRes) == this

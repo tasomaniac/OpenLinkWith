@@ -4,6 +4,7 @@ import com.tasomaniac.openwith.rx.SchedulingStrategy
 import io.reactivex.Single
 import okhttp3.Call
 import okhttp3.HttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.IOException
@@ -42,8 +43,7 @@ class RedirectFixer(
     }
 
     private fun doFollowRedirects(url: HttpUrl): HttpUrl =
-        fetchLocationHeader(url)
-            ?.let { HttpUrl.parse(it) }
+        fetchLocationHeader(url)?.toHttpUrlOrNull()
             ?.let {
                 lastUrl = it
                 doFollowRedirects(it)
