@@ -58,6 +58,10 @@ allprojects {
         google()
         mavenCentral()
     }
+
+    if (project.name != 'test-support') {
+        apply from: configFile('static-analysis.gradle')
+    }
 }
 
 apply plugin: 'com.github.ben-manes.versions'

@@ -2,9 +2,6 @@ apply plugin: 'com.android.application'
 apply from: configFile('android-common-config.gradle')
 apply plugin: 'com.novoda.android-command'
 apply plugin: 'com.novoda.build-properties'
-apply plugin: 'com.novoda.static-analysis'
-apply plugin: 'io.gitlab.arturbosch.detekt'
-apply plugin: 'org.jlleitschuh.gradle.ktlint'
 
 buildProperties {
   signing.using(configFile('release.signing')) | configFile('debug.signing')
@@ -57,39 +54,6 @@ android {
       versionNameSuffix '-floss'
     }
     play {}
-  }
-}
-
-staticAnalysis {
-  penalty {
-    maxWarnings = 10
-    maxErrors = 0
-  }
-
-  detekt {
-    config = files(configFile('detekt.yml'))
-  }
-
-  ktlint {
-    reporters {
-      reporter "checkstyle"
-    }
-
-    includeVariants { it.name == 'flossDebug' }
-  }
-
-  lintOptions {
-    textReport true
-    textOutput 'stdout'
-
-    checkAllWarnings true
-    checkReleaseBuilds false
-
-    if (System.env.TRAVIS_BRANCH != 'master') ignore 'MissingTranslation'
-
-    lintConfig configFile('lint.xml')
-
-    includeVariants { it.name == 'flossDebug' }
   }
 }
 

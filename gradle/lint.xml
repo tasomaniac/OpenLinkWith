@@ -19,8 +19,6 @@
   </issue>
   <issue id="TypographyEllipsis" severity="error" />
   <issue id="SimpleDateFormat" severity="error" />
-  <issue id="ThrowableNotAtBeginning" severity="error" />
-  <issue id="BinaryOperationInTimber" severity="error" />
   <issue id="WifiManagerPotentialLeak" severity="error" />
 
   <issue id="ObsoleteLintCustomCheck"

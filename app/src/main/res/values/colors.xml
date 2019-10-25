@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
   <color name="error_color">#FFDD2C00</color>
-
-  <color name="feature_switch_background">#EEE</color>
 </resources>
