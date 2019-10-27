@@ -29,8 +29,10 @@
   <string name="pref_summary_usage_stats">Popraw sortowanie aplikacji dając dostęp do statystyk.</string>
   <string name="pref_title_category_display">Wygląd</string>
   <string name="pref_title_night_mode">Tryb Nocny</string>
-  <string name="pref_entry_night_mode_off">Wył.</string>
-  <string name="pref_entry_night_mode_on">Wł.</string>
+  <string name="pref_entry_night_mode_off">Light</string>
+  <string name="pref_entry_night_mode_on">Dark</string>
+  <string name="pref_entry_night_mode_battery">Set by Battery Saver</string>
+  <string name="pref_entry_night_mode_system">Use system default</string>
   <string name="pref_title_category_clipboard">Link you copied</string>
   <string name="pref_title_clipboard">Click to open with&#8230;</string>
   <string name="pref_title_category_ask_for_rating">Like the app?</string>

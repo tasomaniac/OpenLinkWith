@@ -19,7 +19,7 @@
   <string name="pref_title_about">Giới thiệu</string>
   <string name="pref_summary_about">Xem lại hướng dẫn sử dụng.</string>
   <string name="pref_summary_preferred">Thay đổi cài đặt ứng dụng ưu tiên.</string>
-  <string name="browser_title">Browsers</string>
+  <string name="browser_title">Trình duyệt</string>
   <string name="browser_description">When a link shared with Open Link With, browsers are suggested in addition to the native apps.\n\nSelect below to modify this behavior.</string>
   <string name="browser_none">Hide browsers</string>
   <string name="browser_none_description">Never suggest browsers. Only native apps</string>
@@ -30,8 +30,10 @@
   <string name="pref_summary_usage_stats">Cải thiện việc phân loại ứng dụng bằng cách cho phép truy cập vào Thống kê sử dụng.</string>
   <string name="pref_title_category_display">Hiển thị</string>
   <string name="pref_title_night_mode">Chế độ ban đêm</string>
-  <string name="pref_entry_night_mode_off">Tắt</string>
-  <string name="pref_entry_night_mode_on">Bật</string>
+  <string name="pref_entry_night_mode_off">Light</string>
+  <string name="pref_entry_night_mode_on">Dark</string>
+  <string name="pref_entry_night_mode_battery">Set by Battery Saver</string>
+  <string name="pref_entry_night_mode_system">Use system default</string>
   <string name="pref_title_category_clipboard">Đã sao chép liên kết</string>
   <string name="pref_title_clipboard">Bấm để mở với&#8230;</string>
   <string name="pref_title_category_ask_for_rating">Like the app?</string>

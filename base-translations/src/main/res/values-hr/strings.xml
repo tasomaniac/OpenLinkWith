@@ -30,8 +30,10 @@
   <string name="pref_summary_usage_stats">Poboljšajte sortiranje aplikacije dajući pristup statistici upotrebe.</string>
   <string name="pref_title_category_display">Prikaz</string>
   <string name="pref_title_night_mode">Noćni način</string>
-  <string name="pref_entry_night_mode_off">Isključeno</string>
-  <string name="pref_entry_night_mode_on">Uključeno</string>
+  <string name="pref_entry_night_mode_off">Light</string>
+  <string name="pref_entry_night_mode_on">Dark</string>
+  <string name="pref_entry_night_mode_battery">Set by Battery Saver</string>
+  <string name="pref_entry_night_mode_system">Use system default</string>
   <string name="pref_title_category_clipboard">Veza koju ste kopirali</string>
   <string name="pref_title_clipboard">Kliknite da biste se otvorili s&#8230;</string>
   <string name="pref_title_category_ask_for_rating">Sviđa Vam se aplikacija?</string>
@@ -62,15 +64,14 @@
     <strong>Budite oprezni!</strong> Budući da Chrome (ili Vaš omiljeni preglednik) više neće biti zadani, možete primijetiti
      neke promjene ponašanja. Kao prednost, Vaš će telefon biti bolji pri otvaranju veza u izvornim aplikacijama.
   ]]></string>
-  <string name="pref_title_feature_caller_app">Detect foreground apps</string>
-  <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Warning:</strong> Experimental feature!<br>
-    <br>
-    When enabled, the foreground application (you shared the link from) will not be suggested.
-    <br><br>
-    Example: When sharing from browser, browser will not be suggested again. If no native app is found, you will see a warning message.
-    <br>
-    If not enabled, the foreground application will be suggested even though it is already open.
-  ]]></string>
+  <string name="pref_title_feature_caller_app">Otkrivanje aplikacija u prednjem planu</string>
+  <string name="pref_details_feature_caller_app"><![CDATA[<strong>Upozorenje:</strong> Eksperimentalne značajke!<br>
+<br>
+Kada je omogućeno, aplikacija u prednjem planu (od koje ste podijelili vezu) neće se predložiti.
+<br><br>
+Primjer: Kada dijelite iz preglednika, preglednik se više neće predložiti. Ako nije pronađena nijedna nativna aplikacija, vidjet ćete poruku upozorenja.
+<br>
+Ako nije omogućeno, predložit će se aplikacija u prednjem planu iako je već otvorena.  ]]></string>
   <string name="feature_default_browser_message"><![CDATA[    U sljedećem prozoru odaberite <strong>Open Link With</strong>, i zatim odaberite<strong>Uvijek</strong>.
   ]]></string>
   <string name="pref_state_feature_enabled">Omogućeno</string>

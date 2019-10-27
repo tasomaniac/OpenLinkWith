@@ -33,8 +33,10 @@
   <string name="pref_summary_usage_stats">Улучшите сортировку приложений, предоставив доступ к статистике использования.</string>
   <string name="pref_title_category_display">Экран</string>
   <string name="pref_title_night_mode">Ночной режим</string>
-  <string name="pref_entry_night_mode_off">Выключить</string>
-  <string name="pref_entry_night_mode_on">Включить</string>
+  <string name="pref_entry_night_mode_off">Light</string>
+  <string name="pref_entry_night_mode_on">Dark</string>
+  <string name="pref_entry_night_mode_battery">Set by Battery Saver</string>
+  <string name="pref_entry_night_mode_system">Use system default</string>
   <string name="pref_title_category_clipboard">Скопированная ссылка</string>
   <string name="pref_title_clipboard">Нажмите, чтобы открыть с помощью&#8230;</string>
   <string name="pref_title_category_ask_for_rating">Like the app?</string>

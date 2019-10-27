@@ -30,8 +30,10 @@
   <string name="pref_summary_usage_stats">Förbättra appen genom att ge tillgång till användarstatistik.</string>
   <string name="pref_title_category_display">Display</string>
   <string name="pref_title_night_mode">Night Mode</string>
-  <string name="pref_entry_night_mode_off">Off</string>
-  <string name="pref_entry_night_mode_on">On</string>
+  <string name="pref_entry_night_mode_off">Light</string>
+  <string name="pref_entry_night_mode_on">Dark</string>
+  <string name="pref_entry_night_mode_battery">Set by Battery Saver</string>
+  <string name="pref_entry_night_mode_system">Use system default</string>
   <string name="pref_title_category_clipboard">Link you copied</string>
   <string name="pref_title_clipboard">Click to open with&#8230;</string>
   <string name="pref_title_category_ask_for_rating">Like the app?</string>

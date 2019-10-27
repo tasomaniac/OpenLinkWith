@@ -29,8 +29,10 @@
   <string name="pref_summary_usage_stats">Verbessern Sie die Anwendung, in dem sie der App Nutzer zugriff zulassen.</string>
   <string name="pref_title_category_display">Anzeige</string>
   <string name="pref_title_night_mode">Nacht-Modus</string>
-  <string name="pref_entry_night_mode_off">Aus</string>
-  <string name="pref_entry_night_mode_on">An</string>
+  <string name="pref_entry_night_mode_off">Light</string>
+  <string name="pref_entry_night_mode_on">Dark</string>
+  <string name="pref_entry_night_mode_battery">Set by Battery Saver</string>
+  <string name="pref_entry_night_mode_system">Use system default</string>
   <string name="pref_title_category_clipboard">Link kopiert</string>
   <string name="pref_title_clipboard">Click to open with&#8230;</string>
   <string name="pref_title_category_ask_for_rating">Like the app?</string>
@@ -49,8 +51,8 @@
     When selected you will have an option to add the shared link into your home screen.
   ]]></string>
   <string name="pref_title_feature_text_selection">Textauswahl</string>
-  <string name="pref_details_feature_text_selection"><![CDATA[
-    When enabled, this feature adds <strong>Open With</strong> option into system level text selection pop-up.<br>
+  <string name="pref_details_feature_text_selection"><![CDATA[    When enabled, this feature adds <strong>Open With</strong> option into system level text selection pop-up.<br>
+  <string name="pref_title_feature_text_selection">Textauswahl</string>
     <br>
     This feature can be useful in situations where sharing link is not feasible. When link is already visible in a text field, long click to select the text with the link and click <strong>Open With</strong>.
   ]]></string>

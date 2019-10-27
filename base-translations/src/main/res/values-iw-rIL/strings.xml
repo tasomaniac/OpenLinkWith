@@ -30,8 +30,10 @@
   <string name="pref_summary_usage_stats">שפר את מיון היישומים על ידי נתינת גישה לנתוני סטטיסטיקות השימוש.</string>
   <string name="pref_title_category_display">תצוגה</string>
   <string name="pref_title_night_mode">מצב לילה</string>
-  <string name="pref_entry_night_mode_off">כבוי</string>
-  <string name="pref_entry_night_mode_on">פעיל</string>
+  <string name="pref_entry_night_mode_off">Light</string>
+  <string name="pref_entry_night_mode_on">Dark</string>
+  <string name="pref_entry_night_mode_battery">Set by Battery Saver</string>
+  <string name="pref_entry_night_mode_system">Use system default</string>
   <string name="pref_title_category_clipboard">Link you copied</string>
   <string name="pref_title_clipboard">Click to open with&#8230;</string>
   <string name="pref_title_category_ask_for_rating">Like the app?</string>

@@ -29,8 +29,10 @@
   <string name="pref_summary_usage_stats">通过授权此应用访问使用信息统计使用权以优化应用排序。</string>
   <string name="pref_title_category_display">显示</string>
   <string name="pref_title_night_mode">夜间模式</string>
-  <string name="pref_entry_night_mode_off">关闭</string>
-  <string name="pref_entry_night_mode_on">打开</string>
+  <string name="pref_entry_night_mode_off">Light</string>
+  <string name="pref_entry_night_mode_on">Dark</string>
+  <string name="pref_entry_night_mode_battery">Set by Battery Saver</string>
+  <string name="pref_entry_night_mode_system">Use system default</string>
   <string name="pref_title_category_clipboard">您复制的链接</string>
   <string name="pref_title_clipboard">选择打开该链接的应用</string>
   <string name="pref_title_category_ask_for_rating">喜欢这个应用吗？</string>
@@ -70,14 +72,14 @@
     <strong>注意！</strong>由于Chrome（或您最喜欢的浏览器）不再是默认值，您可能会注意到一些行为改变。
     这作为一项优势，您可以通过在原生应用中打开相关链接来更方便地使用手机。
   ]]></string>
-  <string name="pref_title_feature_caller_app">Detect foreground apps</string>
-  <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Warning:</strong> Experimental feature!<br>
+  <string name="pref_title_feature_caller_app">检测前台应用</string>
+  <string name="pref_details_feature_caller_app"><![CDATA[    <strong>注意：</strong> 实验功能！<br>
     <br>
-    When enabled, the foreground application (you shared the link from) will not be suggested.
+    启用后，该前台应用 (您共享的链接来源) 将不被建议。
     <br><br>
-    Example: When sharing from browser, browser will not be suggested again. If no native app is found, you will see a warning message.
+    示例：从浏览器共享时，浏览器将不再被建议。如果找不到本机应用，您将看到一条警告信息。
     <br>
-    If not enabled, the foreground application will be suggested even though it is already open.
+    如果未启用，该前台应用将始终被建议，即使它已经被打开。
   ]]></string>
   <string name="feature_default_browser_message"><![CDATA[    在下一个窗口中，请选择<strong>Open Link With</strong>，然后选择<strong>始终</strong>。
   ]]></string>

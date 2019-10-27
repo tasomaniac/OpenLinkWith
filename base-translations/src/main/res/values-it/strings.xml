@@ -13,7 +13,7 @@
   <string name="message_remove_preferred"><![CDATA[Rimuovi <strong>%1$s</strong> come app preferita per caricare i link di <strong>%2$s</strong>?<br><br><strong>Nota:</strong> Puoi selezionare una nuova app preferita da usare la prossima volta che condividi un link <strong>%3$s</strong>.    ]]></string>
   <string name="error_invalid_url">Il contenuto condiviso non ha nessun URL valido.</string>
   <string name="empty_resolver_activity">Nessun\'altra applicazione trovata per gestire l\'URL.</string>
-  <string name="warning_open_link_with_name">Aprendo il link con %s.</string>
+  <string name="warning_open_link_with_name">Apertura del link con %s.</string>
   <string name="pref_title_general">Generali</string>
   <string name="pref_title_about">Informazioni</string>
   <string name="pref_summary_about">Guarda nuovamente il tutorial.</string>
@@ -29,8 +29,10 @@
   <string name="pref_summary_usage_stats">Migliora la precisione dell\'applicazione dando accesso alle Statistiche di Utilizzo.</string>
   <string name="pref_title_category_display">Display</string>
   <string name="pref_title_night_mode">Modalità notturna</string>
-  <string name="pref_entry_night_mode_off">Non attiva</string>
-  <string name="pref_entry_night_mode_on">Attiva</string>
+  <string name="pref_entry_night_mode_off">Light</string>
+  <string name="pref_entry_night_mode_on">Dark</string>
+  <string name="pref_entry_night_mode_battery">Set by Battery Saver</string>
+  <string name="pref_entry_night_mode_system">Use system default</string>
   <string name="pref_title_category_clipboard">Link copiato</string>
   <string name="pref_title_clipboard">Fare clic per aprire con&#8230;</string>
   <string name="pref_title_category_ask_for_rating">Ti piace l\'applicazione?</string>
@@ -68,16 +70,16 @@
     collegamento nell\'app nativa. Inoltre, non abbrevierà nessun collegamento abbreviato.<br>
     <br>
     <strong>Fai attenzione!</strong> Poiché Chrome (o il vostro browser preferito) non sarà più il predefinito, potresti notare
-     alcune modifiche del comportamento. Come un vantaggio, il telefono sarà migliore nell\'apertura di collegamenti in applicazioni native.
+     alcune modifiche del comportamento. Come un vantaggio, il telefono sarà migliore nell'apertura di collegamenti in applicazioni native.
   ]]></string>
-  <string name="pref_title_feature_caller_app">Detect foreground apps</string>
-  <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Warning:</strong> Experimental feature!<br>
+  <string name="pref_title_feature_caller_app">Rileva le app in primo piano</string>
+  <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Attenzione:</strong> Funzione Sperimentale!<br>
     <br>
-    When enabled, the foreground application (you shared the link from) will not be suggested.
+    Se abilitato, l\'applicazione in primo piano (di cui hai condiviso il link) non verrà suggerita.
     <br><br>
-    Example: When sharing from browser, browser will not be suggested again. If no native app is found, you will see a warning message.
+    Esempio: quando si condivide dal browser, il browser non verrà più suggerito. Se non viene trovata alcuna app nativa, verrà visualizzato un messaggio di avviso.
     <br>
-    If not enabled, the foreground application will be suggested even though it is already open.
+    Se non abilitato, l'applicazione in primo piano verrà suggerita anche se è già aperta.
   ]]></string>
   <string name="feature_default_browser_message"><![CDATA[    Nella prossima finestra, seleziona <strong> Open Link With</strong>, e poi seleziona <strong> Sempre </strong>.
   ]]></string>

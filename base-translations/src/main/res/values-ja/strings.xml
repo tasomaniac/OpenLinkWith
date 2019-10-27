@@ -30,8 +30,10 @@
   <string name="pref_summary_usage_stats">アプリの表示順を向上させるために、使用統計情報へのアクセスを許可してください</string>
   <string name="pref_title_category_display">ディスプレイ</string>
   <string name="pref_title_night_mode">夜間モード</string>
-  <string name="pref_entry_night_mode_off">オフ</string>
-  <string name="pref_entry_night_mode_on">オン</string>
+  <string name="pref_entry_night_mode_off">Light</string>
+  <string name="pref_entry_night_mode_on">Dark</string>
+  <string name="pref_entry_night_mode_battery">Set by Battery Saver</string>
+  <string name="pref_entry_night_mode_system">Use system default</string>
   <string name="pref_title_category_clipboard">リンクがコピーされました</string>
   <string name="pref_title_clipboard">クリックして開く&#8230;</string>
   <string name="pref_title_category_ask_for_rating">気にいっていただけましたか?</string>
@@ -71,14 +73,14 @@
     <strong>ご注意ください!</strong> Chrome (またはお気に入りのブラウザー) が既定ではなくなります。
      動作が変更されます。利点として、お使いの携帯電話からネイティブアプリのリンクを開くのが便利になります。
   ]]></string>
-  <string name="pref_title_feature_caller_app">Detect foreground apps</string>
-  <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Warning:</strong> Experimental feature!<br>
+  <string name="pref_title_feature_caller_app">フォアグラウンドのアプリを検出</string>
+  <string name="pref_details_feature_caller_app"><![CDATA[    <strong>警告:</strong> 実験的な機能です!<br>
     <br>
-    When enabled, the foreground application (you shared the link from) will not be suggested.
+    有効にすると、(リンクを共有した) フォアグラウンド アプリケーションは提示されません。
     <br><br>
-    Example: When sharing from browser, browser will not be suggested again. If no native app is found, you will see a warning message.
+    例: ブラウザーから共有すると、ブラウザーは提示されなくなります。ネイティブアプリが見つからない場合は、警告メッセージが表示されます。
     <br>
-    If not enabled, the foreground application will be suggested even though it is already open.
+    無効な場合は、既に開いているフォアグラウンド アプリケーションも提示されます。
   ]]></string>
   <string name="feature_default_browser_message"><![CDATA[    次のウィンドウで <strong>Open Link With</strong> を選択して、<strong>常時</strong> を選択してください。
   ]]></string>

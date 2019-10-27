@@ -18,7 +18,7 @@
   <string name="pref_title_about">À propos</string>
   <string name="pref_summary_about">Revoir le tutoriel.</string>
   <string name="pref_summary_preferred">Changer les paramètres d\'applications préférées.</string>
-  <string name="browser_title">Browsers</string>
+  <string name="browser_title">Quoi</string>
   <string name="browser_description">When a link shared with Open Link With, browsers are suggested in addition to the native apps.\n\nSelect below to modify this behavior.</string>
   <string name="browser_none">Hide browsers</string>
   <string name="browser_none_description">Never suggest browsers. Only native apps</string>
@@ -29,8 +29,10 @@
   <string name="pref_summary_usage_stats">Améliorez le tri de l\'application en lui donnant accès aux statistiques d\'utilisation.</string>
   <string name="pref_title_category_display">Affichage</string>
   <string name="pref_title_night_mode">Mode Nuit</string>
-  <string name="pref_entry_night_mode_off">Désactivé</string>
-  <string name="pref_entry_night_mode_on">Activé</string>
+  <string name="pref_entry_night_mode_off">Light</string>
+  <string name="pref_entry_night_mode_on">Dark</string>
+  <string name="pref_entry_night_mode_battery">Set by Battery Saver</string>
+  <string name="pref_entry_night_mode_system">Use system default</string>
   <string name="pref_title_category_clipboard">Lien copié</string>
   <string name="pref_title_clipboard">Cliquez pour ouvrir avec&#8230;</string>
   <string name="pref_title_category_ask_for_rating">Like the app?</string>

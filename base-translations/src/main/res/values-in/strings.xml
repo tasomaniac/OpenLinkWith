@@ -30,8 +30,10 @@
   <string name="pref_summary_usage_stats">Tingkatkan urutan aplikasi dengan memberikan akses ke statistik penggunaan.</string>
   <string name="pref_title_category_display">Tampilan</string>
   <string name="pref_title_night_mode">Modus Malam</string>
-  <string name="pref_entry_night_mode_off">Nonaktif</string>
-  <string name="pref_entry_night_mode_on">Aktif</string>
+  <string name="pref_entry_night_mode_off">Light</string>
+  <string name="pref_entry_night_mode_on">Dark</string>
+  <string name="pref_entry_night_mode_battery">Set by Battery Saver</string>
+  <string name="pref_entry_night_mode_system">Use system default</string>
   <string name="pref_title_category_clipboard">Link telah disalin</string>
   <string name="pref_title_clipboard">Klik untuk buka dengan&#8230;</string>
   <string name="pref_title_category_ask_for_rating">Suka aplikasi ini?</string>
@@ -50,9 +52,9 @@
     Bila dipilih Anda akan memiliki pilihan untuk menambahkan tautan terpilih ke beranda Anda.
   ]]></string>
   <string name="pref_title_feature_text_selection">Pemilihan Teks</string>
-  <string name="pref_details_feature_text_selection"><![CDATA[    When enabled, this feature adds <strong>Open With</strong> option into system level text selection pop-up.<br>
+  <string name="pref_details_feature_text_selection"><![CDATA[    Saat diaktifkan, fitur ini menambahkan opsi <strong>Buka Dengan</strong> ke dalam sistem level munculan seleksi teks.<br>
     <br>
-    This feature can be useful in situations where sharing link is not feasible. When link is already visible in a text field, long click to select the text with the link and click <strong>Open With</strong>.
+    Fitur ini dapat sangat bermanfaat dalam situasi dimana berbagi tautan tidak dimungkinkan. Saat tautan sudah terlihat di bidang teks, klik lama untuk memilih teks dengan tautan dan klik <strong>Buka Dengan</strong>.
   ]]></string>
   <string name="pref_title_feature_direct_share">Perkongsian terus</string>
   <string name="pref_details_feature_direct_share"><![CDATA[    <strong>Direct Share</strong> is an Android feature where more relevant share targets are presented separately in the share menu.<br>
@@ -71,7 +73,7 @@
     <strong>Be careful!</strong> Since Chrome (or your favorite browser) will not be default anymore, you may notice
      some behavior changes. As a benefit, your phone will be better with opening links in native apps.
   ]]></string>
-  <string name="pref_title_feature_caller_app">Detect foreground apps</string>
+  <string name="pref_title_feature_caller_app">Deteksi apl foreground</string>
   <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Warning:</strong> Experimental feature!<br>
     <br>
     When enabled, the foreground application (you shared the link from) will not be suggested.

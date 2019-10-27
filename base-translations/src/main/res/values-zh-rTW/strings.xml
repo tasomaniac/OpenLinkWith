@@ -30,8 +30,10 @@
   <string name="pref_summary_usage_stats">透過授予使用記錄存取權限來改善應用程式排列順序。</string>
   <string name="pref_title_category_display">顯示</string>
   <string name="pref_title_night_mode">夜間模式</string>
-  <string name="pref_entry_night_mode_off">關</string>
-  <string name="pref_entry_night_mode_on">開</string>
+  <string name="pref_entry_night_mode_off">Light</string>
+  <string name="pref_entry_night_mode_on">Dark</string>
+  <string name="pref_entry_night_mode_battery">Set by Battery Saver</string>
+  <string name="pref_entry_night_mode_system">Use system default</string>
   <string name="pref_title_category_clipboard">您已複製的連結</string>
   <string name="pref_title_clipboard">點擊以&#8230;開啟</string>
   <string name="pref_title_category_ask_for_rating">喜歡這個應用程式嗎？</string>
@@ -69,14 +71,14 @@
     <br>
     <strong>請謹慎服用！</strong> 因為 Chrome (或您喜愛的瀏覽器應用程式) 不再是預設的瀏覽器，您可能會察覺一些行為的改變。好處是您的手機用原生應用程式開啟連結會更好用。
   ]]></string>
-  <string name="pref_title_feature_caller_app">Detect foreground apps</string>
-  <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Warning:</strong> Experimental feature!<br>
+  <string name="pref_title_feature_caller_app">偵測前景應用程式</string>
+  <string name="pref_details_feature_caller_app"><![CDATA[    <strong>警告：</strong>實驗性功能！<br>
     <br>
-    When enabled, the foreground application (you shared the link from) will not be suggested.
+    當啟用時，(您分享連結的來源) 前景應用程式不會被列入建議的應用程式清單。
     <br><br>
-    Example: When sharing from browser, browser will not be suggested again. If no native app is found, you will see a warning message.
+    例如：從瀏覽器分享過來時，瀏覽器將不再被列入建議。若找不到原生應用程式，則會顯示一個警告訊息。
     <br>
-    If not enabled, the foreground application will be suggested even though it is already open.
+    若停用，則前景應用程式仍會被列入建議，就算它已開啟。
   ]]></string>
   <string name="feature_default_browser_message"><![CDATA[    在下一個視窗裡，請點選 <strong>Open Link With</strong>，然後點選 <strong>總是</strong>。
   ]]></string>

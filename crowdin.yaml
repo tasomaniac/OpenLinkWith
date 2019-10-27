@@ -2,9 +2,8 @@
 project_identifier: open-link-with
 
 files:
-  -
-    source: '/app/src/main/res/values/strings.xml'
-    translation: '/app/src/main/res/values-%android_code%/strings.xml'
+  - source: '/base-translations/src/main/res/values/strings.xml'
+    translation: '/base-translations/src/main/res/values-%android_code%/strings.xml'
     languages_mapping:
       android_code:
         ar: ar

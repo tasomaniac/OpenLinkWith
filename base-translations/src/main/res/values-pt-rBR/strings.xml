@@ -30,17 +30,19 @@
   <string name="pref_summary_usage_stats">Melhorar a classificação dos apps dando acesso às Estatísticas de Uso.</string>
   <string name="pref_title_category_display">Exibição</string>
   <string name="pref_title_night_mode">Modo noturno</string>
-  <string name="pref_entry_night_mode_off">Desligar</string>
-  <string name="pref_entry_night_mode_on">Ligar</string>
+  <string name="pref_entry_night_mode_off">Light</string>
+  <string name="pref_entry_night_mode_on">Dark</string>
+  <string name="pref_entry_night_mode_battery">Set by Battery Saver</string>
+  <string name="pref_entry_night_mode_system">Use system default</string>
   <string name="pref_title_category_clipboard">Link que você copiou</string>
   <string name="pref_title_clipboard">Clique para abrir com&#8230;</string>
-  <string name="pref_title_category_ask_for_rating">Like the app?</string>
-  <string name="pref_title_ask_for_rating">If you enjoy Open Link With, would you mind taking a minute to rate it? Thanks for the support!</string>
+  <string name="pref_title_category_ask_for_rating">Gostou do app?</string>
+  <string name="pref_title_ask_for_rating">Se você gosta de Abrir Link Com, se importaria em levar um minuto para avaliá-lo? Obrigado pelo suporte!</string>
   <string name="ask_for_rating_feedback">Feedback?</string>
-  <string name="ask_for_rating_feedback_message">Would you like to give me more details?</string>
-  <string name="ask_for_rating_feedback_email_subject">Feedback for Open Link With</string>
-  <string name="ask_for_rating_rating_positive_button">Rate</string>
-  <string name="ask_for_rating_rating_message">Please find “Rate this app” section in Play Store to give a rating.\n\nThanks for the support! 🎉</string>
+  <string name="ask_for_rating_feedback_message">Gostaria de me dar mais detalhes?</string>
+  <string name="ask_for_rating_feedback_email_subject">Feedback para Abrir Link Com</string>
+  <string name="ask_for_rating_rating_positive_button">Avaliar</string>
+  <string name="ask_for_rating_rating_message">Por favor, encontre a seção \"Avaliar este app\" na Play Store para fazer uma avaliação.\n\nObrigado pelo apoio!  🎉</string>
   <string name="pref_title_category_advanced">Avançado</string>
   <string name="pref_title_features">Características do App</string>
   <string name="pref_summary_features">Ativar/desativar um recurso</string>
@@ -52,7 +54,7 @@
   <string name="pref_title_feature_text_selection">Seleção de Texto</string>
   <string name="pref_details_feature_text_selection"><![CDATA[    Quando ativada, esta função adiciona a opção <strong>Abrir Com</strong> ao pop-up de seleção de texto do seu sistema.<br>
     <br>
-    Esta função pode ser útil em situações onde não é possível compartilhar o link. Quando o link for visívelem um campo de texto, pressione sobre ele para selecionar o texto com o link e clique em <strong>Abrir Com</strong>.
+    Esta função pode ser útil em situações onde não é possível compartilhar o link. Quando o link for visível em um campo de texto, pressione sobre ele para selecionar o texto com o link e clique em <strong>Abrir Com</strong>.
   ]]></string>
   <string name="pref_title_feature_direct_share">Compartilhamento Direto</string>
   <string name="pref_details_feature_direct_share"><![CDATA[    <strong>Direct Share</strong> é uma função do Android onde os compartilhamentos mais recentes ou relevantes aparecem em um menu separado na opção de compartilhar.<br>
@@ -69,16 +71,16 @@
     <br>
     <strong>Tenha cuidado!</strong> Já que o Chrome (ou seu navegador favorito) não será mais o padrão, você pode notar comportamentos estranhos. Como benefício, seu aparelho será melhor ao abrir links em seus apps nativos.
   ]]></string>
-  <string name="pref_title_feature_caller_app">Detect foreground apps</string>
-  <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Warning:</strong> Experimental feature!<br>
+  <string name="pref_title_feature_caller_app">Detectar apps em primeiro plano</string>
+  <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Aviso:</strong> Função Experimental!<br>
     <br>
-    When enabled, the foreground application (you shared the link from) will not be suggested.
+    Quando ativada, o app em primeiro plano (de onde você compartilha) não será sugerido.
     <br><br>
-    Example: When sharing from browser, browser will not be suggested again. If no native app is found, you will see a warning message.
+    Exemplo: Ao compartilhar do navegador, ele não será sugerido novamente. Se nenhum app nativo for encontrado, você receberá uma mensagem de aviso.
     <br>
-    If not enabled, the foreground application will be suggested even though it is already open.
+    Se não for ativada o app ativo será sugerido de qualquer forma.
   ]]></string>
-  <string name="feature_default_browser_message"><![CDATA[    Na próxima janela, por favor selecione <strong>Open Link With</strong>, e então selecione <strong>Sempre</strong>.
+  <string name="feature_default_browser_message"><![CDATA[    Na próxima janela, por favor selecione <strong>Abrir Link Com</strong>, e então selecione <strong>Sempre</strong>.
   ]]></string>
   <string name="pref_state_feature_enabled">Ativado</string>
   <string name="pref_state_feature_disabled">Desativado</string>
