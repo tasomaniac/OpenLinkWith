@@ -4,6 +4,9 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+
+import javax.annotation.Nullable;
+
 import timber.log.Timber;
 
 public class IconLoader {
@@ -16,6 +19,7 @@ public class IconLoader {
         this.iconDpi = iconDpi;
     }
 
+    @Nullable
     public Drawable loadFor(ActivityInfo activity) {
         try {
             String packageName = activity.packageName;
@@ -32,8 +36,9 @@ public class IconLoader {
         return activity.loadIcon(packageManager);
     }
 
+    @Nullable
     private Drawable getIcon(String packageName, int resId) throws PackageManager.NameNotFoundException {
         Resources res = packageManager.getResourcesForApplication(packageName);
-        return res.getDrawableForDensity(resId, iconDpi);
+        return res.getDrawableForDensity(resId, iconDpi, null);
     }
 }
