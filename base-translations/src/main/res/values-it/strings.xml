@@ -70,7 +70,7 @@
     collegamento nell\'app nativa. Inoltre, non abbrevierà nessun collegamento abbreviato.<br>
     <br>
     <strong>Fai attenzione!</strong> Poiché Chrome (o il vostro browser preferito) non sarà più il predefinito, potresti notare
-     alcune modifiche del comportamento. Come un vantaggio, il telefono sarà migliore nell'apertura di collegamenti in applicazioni native.
+     alcune modifiche del comportamento. Come un vantaggio, il telefono sarà migliore nell\'apertura di collegamenti in applicazioni native.
   ]]></string>
   <string name="pref_title_feature_caller_app">Rileva le app in primo piano</string>
   <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Attenzione:</strong> Funzione Sperimentale!<br>
@@ -79,7 +79,7 @@
     <br><br>
     Esempio: quando si condivide dal browser, il browser non verrà più suggerito. Se non viene trovata alcuna app nativa, verrà visualizzato un messaggio di avviso.
     <br>
-    Se non abilitato, l'applicazione in primo piano verrà suggerita anche se è già aperta.
+    Se non abilitato, l\'applicazione in primo piano verrà suggerita anche se è già aperta.
   ]]></string>
   <string name="feature_default_browser_message"><![CDATA[    Nella prossima finestra, seleziona <strong> Open Link With</strong>, e poi seleziona <strong> Sempre </strong>.
   ]]></string>
