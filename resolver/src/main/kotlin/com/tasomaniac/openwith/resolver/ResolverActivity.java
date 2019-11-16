@@ -24,15 +24,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.StringRes;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.tasomaniac.openwith.HeaderAdapter;
 import com.tasomaniac.openwith.SimpleTextViewHolder;
 import com.tasomaniac.openwith.util.IntentFixer;
-import dagger.android.support.DaggerAppCompatActivity;
 
 import javax.annotation.Nullable;
 import javax.inject.Inject;
+
+import dagger.android.support.DaggerAppCompatActivity;
 
 /**
  * This activity is displayed when the system attempts to start an Intent for
@@ -203,7 +206,7 @@ public class ResolverActivity extends DaggerAppCompatActivity implements
     private void navigateToAppDetails(String packageName) {
         Intent in = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                 .setData(Uri.fromParts("package", packageName, null))
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
         startActivity(in);
     }
 
