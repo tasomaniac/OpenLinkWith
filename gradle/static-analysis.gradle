@@ -3,38 +3,41 @@ apply plugin: 'org.jlleitschuh.gradle.ktlint'
 apply plugin: 'com.novoda.static-analysis'
 
 
-staticAnalysis {
-    penalty {
-        maxWarnings = 10
-        maxErrors = 0
-    }
+afterEvaluate {
 
-    detekt {
-        config = files(configFile('detekt.yml'))
-    }
-
-    ktlint {
-        disabledRules = ['import-ordering']
-        reporters {
-            reporter 'checkstyle'
+    staticAnalysis {
+        penalty {
+            maxWarnings = 10
+            maxErrors = 0
         }
 
-        includeVariants { it.name in ['flossDebug', 'debug'] }
-    }
+        detekt {
+            config = files(configFile('detekt.yml'))
+        }
 
-    lintOptions {
-        textReport true
-        textOutput 'stdout'
+        ktlint {
+            disabledRules = ['import-ordering']
+            reporters {
+                reporter 'checkstyle'
+            }
 
-        checkAllWarnings true
-        checkTestSources false
-        checkReleaseBuilds false
-        checkDependencies false
+            includeVariants { it.name in ['flossDebug', 'debug'] }
+        }
 
-        if (System.env.TRAVIS_BRANCH != 'master') ignore 'MissingTranslation'
+        lintOptions {
+            textReport true
+            textOutput 'stdout'
 
-        lintConfig configFile('lint.xml')
+            checkAllWarnings true
+            checkTestSources false
+            checkReleaseBuilds false
+            checkDependencies false
 
-        includeVariants { it.name in ['flossDebug', 'debug'] }
+            if (System.env.TRAVIS_BRANCH != 'master') ignore 'MissingTranslation'
+
+            lintConfig configFile('lint.xml')
+
+            includeVariants { it.name in ['flossDebug', 'debug'] }
+        }
     }
 }
