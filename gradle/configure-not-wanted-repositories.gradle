@@ -9,6 +9,7 @@ subprojects {
                 // Detekt dependencies
                 includeGroup 'io.gitlab.arturbosch.detekt'
                 includeGroup 'com.beust'
+                includeGroup 'org.jetbrains.kotlinx'
             }
         }
     }
