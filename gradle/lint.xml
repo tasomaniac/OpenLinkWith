@@ -30,7 +30,6 @@
   <issue id="GoogleAppIndexingWarning" severity="ignore" />
   <issue id="NegativeMargin" severity="ignore" />
   <issue id="SelectableText" severity="ignore" />
-  <issue id="MissingRegistered" severity="ignore" />
 
 </lint>
                           

@@ -1,8 +1,8 @@
 apply from: configFile('android-library-config.gradle')
 
 dependencies {
-    api 'junit:junit:4.13-rc-1'
-    api 'org.assertj:assertj-core:3.14.0'
-    api 'org.mockito:mockito-core:3.1.0'
+    api 'junit:junit:4.13'
+    api 'org.assertj:assertj-core:3.15.0'
+    api 'org.mockito:mockito-core:3.2.4'
     api 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
 }
