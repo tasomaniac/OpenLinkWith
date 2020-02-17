@@ -13,6 +13,7 @@ afterEvaluate {
 
         detekt {
             config = files(configFile('detekt.yml'))
+            buildUponDefaultConfig = true
         }
 
         ktlint {
