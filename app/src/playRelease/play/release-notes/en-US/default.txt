@@ -1,8 +1,9 @@
 Help translate the app into your language:
 https://crowdin.com/project/open-link-with
 
-v2.7
+v2.8
 Internal improvements and various fixes
+Update translations
 
 v2.6
 Foreground app detection is now disabled by default.

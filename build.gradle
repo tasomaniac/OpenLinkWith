@@ -6,7 +6,7 @@ buildscript {
     }
 
     def versionMajor = 2
-    def versionMinor = 7
+    def versionMinor = 8
     def versionBuild = 0
     ext.playPublishTrack = 'internal'
 
