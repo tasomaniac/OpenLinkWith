@@ -39,7 +39,7 @@ fun CharSequence?.findFirstUrl(): String? {
 }
 
 @SuppressLint("InlinedApi")
-private fun getExtraSelectedText(intent: Intent): CharSequence {
+private fun getExtraSelectedText(intent: Intent): CharSequence? {
     return intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)
 }
 
