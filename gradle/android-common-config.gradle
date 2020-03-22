@@ -5,6 +5,10 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion versions.compileSdk
 
+    buildFeatures {
+        resValues = false
+    }
+
     defaultConfig {
         minSdkVersion versions.minSdk
         targetSdkVersion versions.compileSdk
@@ -23,10 +27,6 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
     }
-}
-
-kapt {
-    useBuildCache = true
 }
 
 androidExtensions {

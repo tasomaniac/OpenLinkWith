@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources translatable="false">
+
+    <string name="google_app_id">1:888720426014:android:6339ab81857f4741</string>
+    <string name="gcm_defaultSenderId">888720426014</string>
+    <string name="default_web_client_id">888720426014-m74ti5u8n9feq85ggpmgg09omapoj02u.apps.googleusercontent.com</string>
+    <string name="google_api_key">AIzaSyB9m5CcRO1kfkKC3SjmC_kV9gBY-rg0suw</string>
+    <string name="project_id">openlinkwith</string>
+</resources>

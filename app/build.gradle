@@ -58,7 +58,7 @@ android {
 }
 
 if (isPlay) {
-  apply from: configFile('fabric.gradle')
+  apply from: configFile('configure-crashlytics.gradle')
   apply from: configFile('play-publish.gradle')
 }
 
