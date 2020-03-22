@@ -34,62 +34,62 @@
   <string name="pref_summary_usage_stats">Улучшите сортировку приложений, предоставив доступ к статистике использования.</string>
   <string name="pref_title_category_display">Экран</string>
   <string name="pref_title_night_mode">Ночной режим</string>
-  <string name="pref_entry_night_mode_off">Light</string>
-  <string name="pref_entry_night_mode_on">Dark</string>
-  <string name="pref_entry_night_mode_battery">Set by Battery Saver</string>
-  <string name="pref_entry_night_mode_system">Use system default</string>
+  <string name="pref_entry_night_mode_off">Светлая</string>
+  <string name="pref_entry_night_mode_on">Тёмная</string>
+  <string name="pref_entry_night_mode_battery">Задаётся энергосбережением</string>
+  <string name="pref_entry_night_mode_system">Использовать значение \"По умолчанию\"</string>
   <string name="pref_title_category_clipboard">Скопированная ссылка</string>
   <string name="pref_title_clipboard">Нажмите, чтобы открыть с помощью&#8230;</string>
-  <string name="pref_title_category_ask_for_rating">Like the app?</string>
-  <string name="pref_title_ask_for_rating">If you enjoy Open Link With, would you mind taking a minute to rate it? Thanks for the support!</string>
-  <string name="ask_for_rating_feedback">Feedback?</string>
-  <string name="ask_for_rating_feedback_message">Would you like to give me more details?</string>
-  <string name="ask_for_rating_feedback_email_subject">Feedback for Open Link With</string>
-  <string name="ask_for_rating_rating_positive_button">Rate</string>
-  <string name="ask_for_rating_rating_message">Please find “Rate this app” section in Play Store to give a rating.\n\nThanks for the support! 🎉</string>
-  <string name="pref_title_category_advanced">Advanced</string>
-  <string name="pref_title_features">App Features</string>
-  <string name="pref_summary_features">Enable/Disable some feature</string>
-  <string name="pref_details_feature_add_to_homescreen"><![CDATA[    Use <strong>Add to Home screen</strong> to quickly access your fav links with your fav apps.<br>
+  <string name="pref_title_category_ask_for_rating">Вам нравится это приложение?</string>
+  <string name="pref_title_ask_for_rating">Если вам нравится Open Link With, не могли бы вы потратить минуту, чтобы оценить его? Спасибо за поддержку!</string>
+  <string name="ask_for_rating_feedback">Отзыв?</string>
+  <string name="ask_for_rating_feedback_message">Не хотите добавить немного деталей?</string>
+  <string name="ask_for_rating_feedback_email_subject">Отзыв об \"Open link with\"</string>
+  <string name="ask_for_rating_rating_positive_button">Оценить</string>
+  <string name="ask_for_rating_rating_message">Пожалуйста, найдите раздел «Оцените это приложение» в Play Маркете, чтобы поставить рейтинг.\n\nСпасибо за поддержку! 🎉</string>
+  <string name="pref_title_category_advanced">Расширенные</string>
+  <string name="pref_title_features">Функции приложения</string>
+  <string name="pref_summary_features">Включить/выключить некоторые функции</string>
+  <string name="pref_details_feature_add_to_homescreen"><![CDATA[    Используйте <strong>Добавить на домашний экран</strong> для быстрого доступа к вашим любимым ссылкам с помощью ваших любимых приложений.<br>
     <br>
-    When enabled, this feature adds <strong>Add to Home screen</strong> to your system <strong>Share</strong> menu.<br>
-    When selected you will have an option to add the shared link into your home screen.
+    Когда включено, добавляет <strong>Добавить на домашний экран</strong> в меню <strong>Поделиться</strong>.<br>
+    Когда выбрано, у вас будет возможность добавить общую ссылку на домашний экран.
   ]]></string>
-  <string name="pref_title_feature_text_selection">Text Selection</string>
-  <string name="pref_details_feature_text_selection"><![CDATA[    When enabled, this feature adds <strong>Open With</strong> option into system level text selection pop-up.<br>
+  <string name="pref_title_feature_text_selection">Выбор текста</string>
+  <string name="pref_details_feature_text_selection"><![CDATA[    При включении эта функция добавляет <strong>Открыть С</strong> в системнре всплывающее окно выбора текста.<br>
     <br>
-    This feature can be useful in situations where sharing link is not feasible. When link is already visible in a text field, long click to select the text with the link and click <strong>Open With</strong>.
+    Эта функция может быть полезна в ситуациях, когда поделиться ссылкой невозможно. Когда ссылка уже видна в текстовом поле, долгое нажатие, чтобы выбрать текст со ссылкой и нажмите <strong>Open With</strong>.
   ]]></string>
-  <string name="pref_title_feature_direct_share">Direct Share</string>
-  <string name="pref_details_feature_direct_share"><![CDATA[    <strong>Direct Share</strong> is an Android feature where more relevant share targets are presented separately in the share menu.<br>
+  <string name="pref_title_feature_direct_share">Прямой доступ</string>
+  <string name="pref_details_feature_direct_share"><![CDATA[    <strong>Direct Share</strong> это функция Android, где более релевантные цели представлены отдельно в меню.<br>
     <br>
-    When enabled, <strong>Open Link With</strong> will be presented at top in the system share menu.<br>
-    Also note that priority is set to low. If Android finds more relevant targets from other apps, Open Link With may not be offered.
+    Когда включено, <strong>Open Link С</strong> будет отображаться сверху в системном меню общего доступа.<br>
+    Также обратите внимание на низкий приоритет. Если Android найдет более подходящие цели из других приложений, то открытая ссылка с этой целью может не предлагаться.
   ]]></string>
-  <string name="pref_title_feature_browser">Set as browser</string>
-  <string name="pref_details_feature_browser"><![CDATA[    <strong>Warning:</strong> Experimental feature!<br>
+  <string name="pref_title_feature_browser">Установить как браузер</string>
+  <string name="pref_details_feature_browser"><![CDATA[    <strong>Предупреждение:</strong> Экспериментальная функция!<br>
     <br>
-    Makes Android recognize <strong>Open Link With</strong> as a <strong>Browser</strong>.<br>
+    Делает Android распознать <strong>Open Link С</strong> в качестве <strong>Browser</strong>.<br>
     <br>
-    When enabled, using share will not be necessary, just clicking links will trigger Open Link With and open the link
-     in the native app. It will also un-shorten any shortened link.<br>
+    Когда включено, использование доли не будет обязательным, просто щелкните по ссылкам запустит Open Link With и откройте ссылку
+     в собственном приложении. Это также позволит сократить любую сокращенную ссылку.<br>
     <br>
-    <strong>Be careful!</strong> Since Chrome (or your favorite browser) will not be default anymore, you may notice
-     some behavior changes. As a benefit, your phone will be better with opening links in native apps.
+    <strong>Будьте осторожны!</strong> Поскольку Chrome (или ваш любимый браузер) больше не будет по умолчанию, вы можете заметить
+     некоторые изменения поведения. В качестве выгодного ваш телефон будет лучше открывать ссылки в родных приложениях.
   ]]></string>
-  <string name="pref_title_feature_caller_app">Detect foreground apps</string>
-  <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Warning:</strong> Experimental feature!<br>
+  <string name="pref_title_feature_caller_app">Обнаружение активных приложений</string>
+  <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Предупреждение:</strong> Экспериментальная функция!<br>
     <br>
-    When enabled, the foreground application (you shared the link from) will not be suggested.
+    Когда включено, активное приложение (в котором вы поделились ссылкой) не будет предложено.
     <br><br>
-    Example: When sharing from browser, browser will not be suggested again. If no native app is found, you will see a warning message.
+    Пример: При попытке поделиться из браузера, браузер не будет предлагаться. Если родное приложение не найдено, вы увидите предупреждение.
     <br>
-    If not enabled, the foreground application will be suggested even though it is already open.
+    Если не включено, активное приложение будет предлагаться, даже если оно уже открыто.
   ]]></string>
-  <string name="feature_default_browser_message"><![CDATA[    In the next window, please select <strong>Open Link With</strong>, and then select <strong>Always</strong>.
+  <string name="feature_default_browser_message"><![CDATA[    В следующем окне выберите <strong>Open Link With</strong>, а затем <strong>Всегда</strong>.
   ]]></string>
-  <string name="pref_state_feature_enabled">Enabled</string>
-  <string name="pref_state_feature_disabled">Disabled</string>
+  <string name="pref_state_feature_enabled">Включён</string>
+  <string name="pref_state_feature_disabled">Отключён</string>
   <string name="pref_title_category_others">Прочее</string>
   <string name="pref_title_open_source">Лицензии Open Source</string>
   <string name="pref_summary_open_source">Смотрите лицензии библиотек с открытым исходным кодом.</string>

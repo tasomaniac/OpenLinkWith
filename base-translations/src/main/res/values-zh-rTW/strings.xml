@@ -31,10 +31,10 @@
   <string name="pref_summary_usage_stats">透過授予使用記錄存取權限來改善應用程式排列順序。</string>
   <string name="pref_title_category_display">顯示</string>
   <string name="pref_title_night_mode">夜間模式</string>
-  <string name="pref_entry_night_mode_off">Light</string>
-  <string name="pref_entry_night_mode_on">Dark</string>
-  <string name="pref_entry_night_mode_battery">Set by Battery Saver</string>
-  <string name="pref_entry_night_mode_system">Use system default</string>
+  <string name="pref_entry_night_mode_off">淺色主題</string>
+  <string name="pref_entry_night_mode_on">深色主題</string>
+  <string name="pref_entry_night_mode_battery">跟隨節約耗電量模式設定</string>
+  <string name="pref_entry_night_mode_system">使用系統預設值</string>
   <string name="pref_title_category_clipboard">您已複製的連結</string>
   <string name="pref_title_clipboard">點擊以&#8230;開啟</string>
   <string name="pref_title_category_ask_for_rating">喜歡這個應用程式嗎？</string>

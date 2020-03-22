@@ -31,10 +31,10 @@
   <string name="pref_summary_usage_stats">Mejorar la precisión de la aplicación dando acceso a las Estadísticas de Uso.</string>
   <string name="pref_title_category_display">Pantalla</string>
   <string name="pref_title_night_mode">Modo nocturno</string>
-  <string name="pref_entry_night_mode_off">Light</string>
-  <string name="pref_entry_night_mode_on">Dark</string>
-  <string name="pref_entry_night_mode_battery">Set by Battery Saver</string>
-  <string name="pref_entry_night_mode_system">Use system default</string>
+  <string name="pref_entry_night_mode_off">Claro</string>
+  <string name="pref_entry_night_mode_on">Oscuro</string>
+  <string name="pref_entry_night_mode_battery">Definido por el ahorro de energía</string>
+  <string name="pref_entry_night_mode_system">Uso del sistema predeterminado</string>
   <string name="pref_title_category_clipboard">Enlace copiado</string>
   <string name="pref_title_clipboard">Clic para abrir con&#8230;</string>
   <string name="pref_title_category_ask_for_rating">¿Te gusta la aplicación?</string>

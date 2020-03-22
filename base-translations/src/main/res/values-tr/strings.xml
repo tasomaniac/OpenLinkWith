@@ -72,14 +72,13 @@
  
   ]]></string>
   <string name="pref_title_feature_caller_app">Detect foreground apps</string>
-  <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Warning:</strong> Experimental feature!<br>
-    <br>
-    When enabled, the foreground application (you shared the link from) will not be suggested.
-    <br><br>
-    Example: When sharing from browser, browser will not be suggested again. If no native app is found, you will see a warning message.
-    <br>
-    If not enabled, the foreground application will be suggested even though it is already open.
-  ]]></string>
+  <string name="pref_details_feature_caller_app"><![CDATA[<strong>Uyarı:</strong> Deneysel özellik!<br>
+<br>
+Etkinleştirildiğinde bağlantıyı paylaştığınız ön plandaki uygulama bir daha önerilmeyecektir.
+<br><br>
+Örnek: Tarayıcı üzerinden paylaştığınızda, tarayıcı bir daha önerilmez. Eğer yerleşik bir uygulama bulunamazsa, uyarı iletisi alacaksınız.
+<br>
+Etkinleştirilmezse ön plandaki uygulama açık olsa da önerilmeye devam eder.]]></string>
   <string name="feature_default_browser_message"><![CDATA[    Bir sonraki pencerede, lütfen önce <strong>Open Link With</strong> seçin, ve ardından <strong>Her zaman</strong> seçin.
   ]]></string>
   <string name="pref_state_feature_enabled">Aktif</string>

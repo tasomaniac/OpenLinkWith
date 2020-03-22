@@ -31,10 +31,10 @@
   <string name="pref_summary_usage_stats">アプリの表示順を向上させるために、使用統計情報へのアクセスを許可してください</string>
   <string name="pref_title_category_display">ディスプレイ</string>
   <string name="pref_title_night_mode">夜間モード</string>
-  <string name="pref_entry_night_mode_off">Light</string>
-  <string name="pref_entry_night_mode_on">Dark</string>
-  <string name="pref_entry_night_mode_battery">Set by Battery Saver</string>
-  <string name="pref_entry_night_mode_system">Use system default</string>
+  <string name="pref_entry_night_mode_off">ライト</string>
+  <string name="pref_entry_night_mode_on">ダーク</string>
+  <string name="pref_entry_night_mode_battery">バッテリーセーバーで設定</string>
+  <string name="pref_entry_night_mode_system">システムデフォルトの設定</string>
   <string name="pref_title_category_clipboard">リンクがコピーされました</string>
   <string name="pref_title_clipboard">クリックして開く&#8230;</string>
   <string name="pref_title_category_ask_for_rating">気にいっていただけましたか?</string>
