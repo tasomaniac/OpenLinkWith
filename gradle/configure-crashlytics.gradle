@@ -2,6 +2,6 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 
 dependencies {
-    playImplementation 'com.google.firebase:firebase-analytics:17.2.3'
-    playImplementation 'com.google.firebase:firebase-crashlytics:17.0.0-beta02'
+    playImplementation 'com.google.firebase:firebase-analytics:17.4.1'
+    playImplementation 'com.google.firebase:firebase-crashlytics:17.0.0'
 }

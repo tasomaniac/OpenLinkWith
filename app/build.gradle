@@ -78,7 +78,7 @@ dependencies {
   implementation project(':redirect')
   implementation project(':resolver')
 
-  implementation 'androidx.preference:preference-ktx:1.1.0'
+  implementation 'androidx.preference:preference-ktx:1.1.1'
 
   implementation "com.squareup.okhttp3:okhttp:$versions.okHttp"
 
