@@ -3,6 +3,7 @@ package com.tasomaniac.openwith.browser
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.tasomaniac.openwith.browser.preferred.R
 import com.tasomaniac.openwith.extensions.inflate
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.browser_list_item.browserIcon

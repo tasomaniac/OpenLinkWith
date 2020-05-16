@@ -12,6 +12,7 @@ import com.tasomaniac.openwith.SimpleTextViewHolder
 import com.tasomaniac.openwith.data.Analytics
 import com.tasomaniac.openwith.data.PreferredApp
 import com.tasomaniac.openwith.data.PreferredAppDao
+import com.tasomaniac.openwith.preferred.apps.R
 import com.tasomaniac.openwith.resolver.ApplicationViewHolder
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import com.tasomaniac.openwith.resolver.IconLoader

@@ -1,6 +1,0 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tasomaniac.openwith.redirect">
-
-    <application android:supportsRtl="true" />
-
-</manifest>

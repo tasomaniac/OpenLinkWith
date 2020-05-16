@@ -5,9 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.recyclerview.widget.RecyclerView
+import com.tasomaniac.openwith.browser.preferred.R
+import com.tasomaniac.openwith.extensions.componentName
 import com.tasomaniac.openwith.extensions.inflate
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
-import com.tasomaniac.openwith.extensions.componentName
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.browser_list_item.browserIcon
 import kotlinx.android.synthetic.main.browser_list_item.browserInfo

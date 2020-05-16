@@ -25,6 +25,7 @@ buildscript {
     ]
 
     repositories {
+        maven { url 'https://dl.bintray.com/gradleup/maven' }
         gradlePluginPortal()
         google()
         mavenCentral()
@@ -39,12 +40,19 @@ buildscript {
         classpath 'io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.8.0'
         classpath 'org.jlleitschuh.gradle:ktlint-gradle:9.2.1'
         classpath 'com.novoda:gradle-static-analysis-plugin:1.2'
+        classpath 'com.gradleup:auto-manifest-plugin:1.0'
         if (isPlay) {
             classpath 'com.google.gms:google-services:4.3.3'
             classpath 'com.google.firebase:firebase-crashlytics-gradle:2.1.0'
             classpath 'com.github.triplet.gradle:play-publisher:2.7.5'
         }
     }
+}
+apply plugin: 'com.gradleup.auto.manifest'
+
+autoManifest {
+    packageName = 'com.tasomaniac.openwith'
+    replaceDashesWithDot = true
 }
 
 allprojects {

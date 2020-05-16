@@ -1,6 +1,0 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tasomaniac.openwith.homescreen">
-
-    <application android:supportsRtl="true" />
-
-</manifest>
