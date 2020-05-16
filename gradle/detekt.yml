@@ -16,15 +16,9 @@ console-reports:
   #  - 'FindingsReport'
   #  - 'BuildFailureReport'
 
-output-reports:
-  active: true
-  exclude:
-  #  - 'PlainOutputReport'
-  #  - 'XmlOutputReport'
-
 complexity:
   active: true
   TooManyFunctions:
     active: true
     thresholdInFiles: 12
-    thresholdInClasses: 12
+    thresholdInClasses: 13

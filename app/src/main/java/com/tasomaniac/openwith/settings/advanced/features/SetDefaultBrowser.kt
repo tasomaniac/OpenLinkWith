@@ -28,6 +28,7 @@ class SetDefaultBrowser @Inject constructor(
         displayWarningToSetDefaultBrowser(intent)
     }
 
+    @Suppress("TooGenericExceptionCaught")
     private fun displayWarningToSetDefaultBrowser(intent: Intent) {
         AlertDialog.Builder(activity)
             .setTitle(R.string.pref_title_feature_browser)

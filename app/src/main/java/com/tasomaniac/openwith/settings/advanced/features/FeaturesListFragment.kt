@@ -34,7 +34,7 @@ class FeaturesListFragment : PreferenceFragmentCompat(),
 
     override fun onResume() {
         super.onResume()
-        activity!!.setTitle(R.string.pref_title_features)
+        requireActivity().setTitle(R.string.pref_title_features)
         settings.resume()
     }
 
@@ -51,7 +51,7 @@ class FeaturesListFragment : PreferenceFragmentCompat(),
     override fun getCallbackFragment() = this
 
     override fun onPreferenceStartFragment(caller: PreferenceFragmentCompat, pref: Preference): Boolean {
-        ToggleFeatureActivity.startWith(activity!!, pref)
+        ToggleFeatureActivity.startWith(requireActivity(), pref)
         return true
     }
 }

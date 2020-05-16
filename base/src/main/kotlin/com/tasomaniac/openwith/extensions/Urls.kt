@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.core.app.ShareCompat
 import java.util.regex.Pattern
 
+@Suppress("MaxLineLength")
 private val URL_PATTERN = Pattern.compile(
     "\\b((?:[a-z][\\w-]+:(?:/{1,3}|[a-z0-9%])|www\\d{0,3}[.]|[a-z0-9.\\-]+[.][a-z]{2,4}/)(?:[^\\s()<>]+|\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\))+(?:\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\)|[^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]))",
     Pattern.CASE_INSENSITIVE
@@ -18,14 +19,11 @@ fun Intent.extractUrlFrom(reader: ShareCompat.IntentReader): String? {
     if (text == null) {
         text = getExtraSelectedText(this)
     }
-    val firstUrl = text.findFirstUrl()
+    val firstUrl = text?.findFirstUrl()
     return fixHttpPrefix(firstUrl)
 }
 
-fun CharSequence?.findFirstUrl(): String? {
-    if (this == null) {
-        return null
-    }
+fun CharSequence.findFirstUrl(): String? {
     val matcher = URL_PATTERN.matcher(this)
     if (!matcher.find()) {
         return null

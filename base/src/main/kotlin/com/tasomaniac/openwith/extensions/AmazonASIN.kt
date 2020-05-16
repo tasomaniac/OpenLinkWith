@@ -7,6 +7,7 @@ fun extractAmazonASIN(foundUrl: String): String? {
         // https://www.amazon.de/gp/product/B01LYYM9I3
         // https://www.amazon.com/gp/aw/d/B001GNBJQO?vs=1
         // http://www.amazon.com/Garmin-Speed-Cadence-Bike-Sensor/dp/B000BFNOT8
+        @Suppress("MaxLineLength")
         val matcher = Pattern.compile(
             ".*//www.amazon.(?:com|co\\.uk|co.jp|com\\.au|com\\.br|ca|cn|fr|de|in|it|com\\.mx|nl|es)/(?:.+/)?(?:gp/aw/d|gp/product|dp)+/(\\w{10}).*",
             Pattern.CASE_INSENSITIVE

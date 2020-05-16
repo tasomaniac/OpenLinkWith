@@ -15,7 +15,7 @@ class AppRemoveDialogFragment : AppCompatDialogFragment() {
     private var callbacks: Callbacks? = null
 
     private val info: DisplayActivityInfo
-        get() = arguments!!.getParcelable(EXTRA_INFO)!!
+        get() = requireArguments().getParcelable(EXTRA_INFO)!!
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -33,7 +33,7 @@ class AppRemoveDialogFragment : AppCompatDialogFragment() {
             info.displayLabel, info.extendedInfo, info.extendedInfo
         ).parseAsHtml()
 
-        return AlertDialog.Builder(activity!!)
+        return AlertDialog.Builder(requireActivity())
             .setTitle(R.string.title_remove_preferred)
             .setMessage(message)
             .setPositiveButton(android.R.string.ok) { _, _ -> callbacks!!.onAppRemoved(info) }

@@ -9,8 +9,8 @@ abstract class Settings(
     val fragment: PreferenceFragmentCompat
 ) : SettingsView {
 
-    val context get() = fragment.context!!
-    val activity get() = fragment.activity!!
+    val context get() = fragment.requireContext()
+    val activity get() = fragment.requireActivity()
 
     fun addPreferencesFromResource(@XmlRes resId: Int) = fragment.addPreferencesFromResource(resId)
 

@@ -56,9 +56,10 @@ class ClipboardSettings @Inject constructor(
         }
     }
 
+    @Suppress("TooGenericExceptionCaught")
     private fun clipUrl(): String? {
         return try {
-            clipboardManager.primaryClip?.getItemAt(0)?.coerceToText(context)?.toString().findFirstUrl()
+            clipboardManager.primaryClip?.getItemAt(0)?.coerceToText(context)?.toString()?.findFirstUrl()
         } catch (e: Exception) {
             return null
         }

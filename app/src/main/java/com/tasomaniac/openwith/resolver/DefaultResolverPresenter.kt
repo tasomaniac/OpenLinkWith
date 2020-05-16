@@ -35,6 +35,7 @@ internal class DefaultResolverPresenter @Inject constructor(
         private val navigation: ResolverView.Navigation
     ) : ResolverUseCase.Listener {
 
+        @Suppress("TooGenericExceptionCaught")
         override fun onPreferredResolved(
             uri: Uri,
             preferredApp: PreferredApp,
@@ -69,6 +70,7 @@ internal class DefaultResolverPresenter @Inject constructor(
             }
         }
 
+        @Suppress("TooGenericExceptionCaught")
         private fun handleQuick(result: IntentResolverResult) = when {
             result.isEmpty -> {
                 Timber.e("No app is found to handle url: %s", sourceIntent.dataString)

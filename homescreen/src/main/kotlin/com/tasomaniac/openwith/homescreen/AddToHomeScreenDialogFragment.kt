@@ -42,9 +42,9 @@ class AddToHomeScreenDialogFragment : DaggerAppCompatDialogFragment() {
     private lateinit var progressBar: DelayedProgressBar
 
     private val activityToAdd: DisplayActivityInfo
-        get() = arguments!!.getParcelable(KEY_ACTIVITY_TO_ADD)!!
+        get() = requireArguments().getParcelable(KEY_ACTIVITY_TO_ADD)!!
     private val intent: Intent
-        get() = arguments!!.getParcelable(KEY_INTENT)!!
+        get() = requireArguments().getParcelable(KEY_INTENT)!!
 
     private val positiveButton: Button
         get() = (dialog as AlertDialog).getButton(DialogInterface.BUTTON_POSITIVE)
@@ -127,10 +127,11 @@ class AddToHomeScreenDialogFragment : DaggerAppCompatDialogFragment() {
     private fun createShortcutAndHandleError() {
         val success = createShortcut()
         if (!success) {
-            context!!.toast(R.string.add_to_home_screen_error, Toast.LENGTH_SHORT)
+            requireContext().toast(R.string.add_to_home_screen_error, Toast.LENGTH_SHORT)
         }
     }
 
+    @Suppress("TooGenericExceptionCaught")
     private fun createShortcut(): Boolean {
         val id = intent.dataString!! + activityToAdd.packageName()
         val label = titleView.text.toString()
