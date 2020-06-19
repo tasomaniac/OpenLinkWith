@@ -8,6 +8,7 @@ import com.tasomaniac.openwith.resolver.preferred.PreferredResolver
 import com.tasomaniac.openwith.rx.SchedulingStrategy
 import io.reactivex.Completable
 import io.reactivex.disposables.Disposable
+import io.reactivex.rxkotlin.subscribeBy
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -29,14 +30,14 @@ internal class ResolverUseCase @Inject constructor(
         val uri = sourceIntent.data!!
         disposable = preferredResolver.resolve(uri)
             .compose(scheduling.forMaybe())
-            .subscribe(
-                { (app, info) ->
+            .subscribeBy(
+                onSuccess = { (app, info) ->
                     intentResolver.lastChosenComponent = app.componentName
                     listener.onPreferredResolved(uri, app, info)
                     intentResolver.bind(listener)
                 },
-                Timber::e,
-                { intentResolver.bind(listener) }
+                onError = Timber::e,
+                onComplete = { intentResolver.bind(listener) }
             )
     }
 
