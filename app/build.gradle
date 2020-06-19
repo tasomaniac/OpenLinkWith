@@ -17,7 +17,7 @@ android {
     versionName versions.versionName
     buildConfigString 'GIT_SHA', gitSha
 
-    resConfigs 'ar', 'de', 'en', 'es', 'fr', 'hr', 'in', 'it', 'iw-rIL', 'ja', 'pl', 'pt-rBR', 'pt-rPT', 'ru', 'sv', 'tr', 'uk', 'vi', 'zh-rCN', 'zh-rTW'
+    resConfigs 'ar', 'de', 'en', 'es', 'fi', 'fr', 'hi', 'hr', 'in', 'it', 'iw-rIL', 'ja', 'ko', 'nl', 'pl', 'pt-rBR', 'pt-rPT', 'ru', 'sv', 'tr', 'uk', 'vi', 'zh-rCN', 'zh-rTW'
   }
 
   signingConfigs {
