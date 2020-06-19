@@ -41,6 +41,12 @@ enum class Feature(
         prefKey = "pref_feature_browser",
         defaultValue = false
     ),
+    CLEAN_URLS(
+        R.string.pref_title_feature_clean_urls,
+        R.string.pref_details_feature_clean_urls,
+        prefKey = "pref_feature_clean_urls",
+        defaultValue = false
+    ),
     CALLER_APP(
         R.string.pref_title_feature_caller_app,
         R.string.pref_details_feature_caller_app,
