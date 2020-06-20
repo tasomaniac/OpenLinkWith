@@ -48,12 +48,12 @@
   <string name="pref_details_feature_add_to_homescreen"><![CDATA[    Utilisez <strong>Ajouter à l\'écran d\'accueil</strong> pour accéder rapidement à vos liens favoris avec vos applications favorites.<br>
     <br>
     Lorsqu\'il est activé, cette fonctionnalité ajoute <strong>Ajouter à l\'écran d\'accueil</strong> à votre système <strong>Partagez le menu</strong> .<br>
-    Lorsque sélectionné, vous aurez la possibilité d'ajouter le lien partagé à votre écran d'accueil.
+    Lorsque sélectionné, vous aurez la possibilité d\'ajouter le lien partagé à votre écran d\'accueil.
   ]]></string>
   <string name="pref_title_feature_text_selection">Sélection de texte</string>
   <string name="pref_details_feature_text_selection"><![CDATA[    Lorsqu\'elle est activée, cette fonctionnalité ajoute l\'option <strong>Ouvrir avec</strong> dans la fenêtre pop-up de sélection du système.<br>
     <br>
-    Cette fonctionnalité peut être utile dans des situations où le partage de lien n'est pas réalisable. Lorsque le lien est déjà visible dans un champ de texte, appuyez longuement pour le sélectionner et cliquez sur <strong>Ouvrir avec</strong>.
+    Cette fonctionnalité peut être utile dans des situations où le partage de lien n\'est pas réalisable. Lorsque le lien est déjà visible dans un champ de texte, appuyez longuement pour le sélectionner et cliquez sur <strong>Ouvrir avec</strong>.
   ]]></string>
   <string name="pref_title_feature_direct_share">Partage direct</string>
   <string name="pref_details_feature_direct_share"><![CDATA[    <strong>Partage Direct</strong> est une fonctionnalité Android où des cibles de partage plus pertinentes sont présentées séparément dans le menu de partage.<br>
@@ -70,16 +70,16 @@
      dans l\'application native. Il déraccourcira également tout lien raccourci.<br>
     <br>
     <strong>Soyez prudent !</strong> Puisque Chrome (ou votre navigateur favori) ne sera plus navigateur par défaut, vous pouvez remarquer
-     changements de comportement. L'avantage c'est que votre téléphone gérera mieux les ouvertures de liens vers des applications natives.
+     changements de comportement. L\'avantage c\'est que votre téléphone gérera mieux les ouvertures de liens vers des applications natives.
   ]]></string>
   <string name="pref_title_feature_caller_app">Détecter les applications au premier plan</string>
   <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Attention :</strong> Fonctionnalité expérimentale !<br>
     <br>
     Lorsqu\'il est activé, l\'application de premier plan (Celle depuis laquelle vous avez partagé le lien) ne sera pas suggérée.
     <br><br>
-    Exemple: quand vous partagez à partir du navigateur, celui-ci ne sera pas suggéré à nouveau. Si aucune application native n'est trouvée, vous verrez un message d'avertissement.
+    Exemple: quand vous partagez à partir du navigateur, celui-ci ne sera pas suggéré à nouveau. Si aucune application native n\'est trouvée, vous verrez un message d\'avertissement.
     <br>
-    Si non activé, l'application de premier plan sera suggérée même si elle est déjà ouverte.
+    Si non activé, l\'application de premier plan sera suggérée même si elle est déjà ouverte.
   ]]></string>
   <string name="feature_default_browser_message"><![CDATA[    Dans la fenêtre suivante, sélectionnez <strong>Open Link With</strong>, puis sélectionnez <strong>Toujours</strong>.
   ]]></string>
