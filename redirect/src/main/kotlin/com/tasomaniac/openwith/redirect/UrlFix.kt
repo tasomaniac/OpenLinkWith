@@ -1,28 +1,35 @@
 package com.tasomaniac.openwith.redirect
 
 import com.tasomaniac.openwith.extensions.extractAmazonASIN
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import java.util.regex.Pattern
+import javax.inject.Inject
 
-object UrlFix {
-    private val URL_FIXERS = setOf(
-        FacebookFixer(),
-        TwitterFixer(),
-        EbayFixer(),
-        AmazonFixer(),
-        DailyMailFixer(),
-        VkFixer(),
-        WashingtonPostFixer()
-    )
+class UrlFix @Inject constructor(
+    private val cleanUrlsPreferences: CleanUrlsPreferences
+) {
 
-    fun String.fixUrls(): String {
-        var url = this
+    fun fixUrls(originalUrl: String): String {
+        var url = originalUrl
         for (urlFixer in URL_FIXERS) {
             url = urlFixer.fix(url)
         }
-        return url
+        return url.cleanUpTrackingParams()
     }
 
-    internal interface Fixer {
+    private fun String.cleanUpTrackingParams(): String {
+        if (cleanUrlsPreferences.isEnabled) {
+            val httpUrl = toHttpUrlOrNull() ?: return this
+            val urlBuilder = httpUrl.newBuilder()
+            httpUrl.queryParameterNames
+                .filter { cleanUrlsPreferences.cleanUpRegex.matches(it) }
+                .forEach { urlBuilder.removeAllQueryParameters(it) }
+            return urlBuilder.build().toString()
+        }
+        return this
+    }
+
+    private interface Fixer {
         fun fix(url: String): String
     }
 
@@ -150,5 +157,17 @@ object UrlFix {
                 .replace("http://www.washingtonpost.com", "wp-android://www.washingtonpost.com")
                 .replace("https://www.washingtonpost.com", "wp-android://www.washingtonpost.com")
         }
+    }
+
+    companion object {
+        private val URL_FIXERS = setOf(
+            FacebookFixer(),
+            TwitterFixer(),
+            EbayFixer(),
+            AmazonFixer(),
+            DailyMailFixer(),
+            VkFixer(),
+            WashingtonPostFixer()
+        )
     }
 }
