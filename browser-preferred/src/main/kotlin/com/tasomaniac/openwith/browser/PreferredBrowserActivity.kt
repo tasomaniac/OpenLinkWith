@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.tasomaniac.openwith.HeaderAdapter
 import com.tasomaniac.openwith.SimpleTextViewHolder
 import com.tasomaniac.openwith.browser.preferred.R
+import com.tasomaniac.openwith.browser.preferred.databinding.BrowserActivityPreferredAppsBinding
 import com.tasomaniac.openwith.browser.resolver.BrowserResolver
 import com.tasomaniac.openwith.data.Analytics
 import com.tasomaniac.openwith.extensions.componentName
@@ -12,8 +13,8 @@ import com.tasomaniac.openwith.resolver.DisplayActivityInfo
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
+import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
-import kotlinx.android.synthetic.main.browser_activity_preferred_apps.recycler_view as recyclerView
 
 class PreferredBrowserActivity : DaggerAppCompatActivity(), BrowsersAdapter.Listener {
 
@@ -22,17 +23,20 @@ class PreferredBrowserActivity : DaggerAppCompatActivity(), BrowsersAdapter.List
     @Inject lateinit var browserResolver: BrowserResolver
     @Inject lateinit var browserPreferences: BrowserPreferences
 
+    private val context get() = this
+
     private val disposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.browser_activity_preferred_apps)
+        val binding = BrowserActivityPreferredAppsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         analytics.sendScreenView("Browser Apps")
         setupToolbar()
 
         browserResolver.resolve()
-            .subscribe(::setupList)
+            .subscribeBy(onSuccess = { binding.setupList(it) })
             .addTo(disposable)
     }
 
@@ -41,10 +45,15 @@ class PreferredBrowserActivity : DaggerAppCompatActivity(), BrowsersAdapter.List
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
-    private fun setupList(browsers: List<DisplayActivityInfo>) {
-        recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+    private fun BrowserActivityPreferredAppsBinding.setupList(browsers: List<DisplayActivityInfo>) {
+        recyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
-        val browsersAdapter = BrowsersAdapter(browsers, browserPreferences.mode, viewHolderFactory, listener = this)
+        val browsersAdapter = BrowsersAdapter(
+            browsers,
+            browserPreferences.mode,
+            viewHolderFactory,
+            listener = this@PreferredBrowserActivity
+        )
         recyclerView.adapter = HeaderAdapter(
             browsersAdapter,
             { viewGroup -> SimpleTextViewHolder.create(viewGroup, R.layout.preferred_header) },
