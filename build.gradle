@@ -39,7 +39,7 @@ buildscript {
         classpath 'io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.14.1'
         classpath 'org.jlleitschuh.gradle:ktlint-gradle:9.2.1'
         classpath 'com.novoda:gradle-static-analysis-plugin:1.2'
-        classpath 'com.gradleup:auto-manifest-plugin:1.0.1'
+        classpath 'com.gradleup:auto-manifest-plugin:1.0.4'
         if (isPlay) {
             classpath 'com.google.gms:google-services:4.3.3'
             classpath 'com.google.firebase:firebase-crashlytics-gradle:2.1.0'
