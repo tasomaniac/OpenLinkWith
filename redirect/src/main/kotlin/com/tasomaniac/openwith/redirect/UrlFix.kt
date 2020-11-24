@@ -14,19 +14,16 @@ class UrlFix @Inject constructor(
         for (urlFixer in URL_FIXERS) {
             url = urlFixer.fix(url)
         }
-        return url.cleanUpTrackingParams()
+        return if (cleanUrlsPreferences.isEnabled) url.cleanUpTrackingParams() else url
     }
 
     private fun String.cleanUpTrackingParams(): String {
-        if (cleanUrlsPreferences.isEnabled) {
-            val httpUrl = toHttpUrlOrNull() ?: return this
-            val urlBuilder = httpUrl.newBuilder()
-            httpUrl.queryParameterNames
-                .filter { cleanUrlsPreferences.cleanUpRegex.matches(it) }
-                .forEach { urlBuilder.removeAllQueryParameters(it) }
-            return urlBuilder.build().toString()
-        }
-        return this
+        val httpUrl = toHttpUrlOrNull() ?: return this
+        val urlBuilder = httpUrl.newBuilder()
+        httpUrl.queryParameterNames
+            .filter { cleanUrlsPreferences.cleanUpRegex.matches(it) }
+            .forEach { urlBuilder.removeAllQueryParameters(it) }
+        return urlBuilder.build().toString()
     }
 
     private interface Fixer {

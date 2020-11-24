@@ -21,6 +21,8 @@
   <issue id="SimpleDateFormat" severity="error" />
   <issue id="WifiManagerPotentialLeak" severity="error" />
 
+  <issue id="SelectableText" severity="ignore" />
+  <issue id="NewerVersionAvailable" severity="ignore" />
   <issue id="ObsoleteLintCustomCheck"
     severity="ignore" /> <!-- Project doesn't have custom lint checks and cannot fix 3rd party libraries-->
   <issue id="UnknownNullness" severity="ignore" />  <!-- https://issuetracker.google.com/issues/78011047 -->
@@ -29,7 +31,6 @@
   <issue id="GoogleAppIndexingApiWarning" severity="ignore" />
   <issue id="GoogleAppIndexingWarning" severity="ignore" />
   <issue id="NegativeMargin" severity="ignore" />
-  <issue id="SelectableText" severity="ignore" />
 
 </lint>
                           
