@@ -21,7 +21,7 @@ class BrowsersAdapter(
         return viewHolder.withMinHeight()
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is NoneViewHolder -> holder.bind(preference === BrowserPreferences.Mode.None, listener::onNoneClick)
             is AlwaysViewHolder -> holder.bind(
@@ -35,6 +35,7 @@ class BrowsersAdapter(
             }
             else -> throw IllegalStateException("Unknown holder at position: $position")
         }
+    }
 
     override fun getItemCount() = browsers.size + EXTRA_ITEM_COUNT
 

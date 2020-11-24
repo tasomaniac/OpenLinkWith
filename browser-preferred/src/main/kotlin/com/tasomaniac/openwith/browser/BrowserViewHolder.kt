@@ -1,43 +1,34 @@
 package com.tasomaniac.openwith.browser
 
 import android.content.ComponentName
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.recyclerview.widget.RecyclerView
-import com.tasomaniac.openwith.browser.preferred.R
+import com.tasomaniac.openwith.browser.preferred.databinding.BrowserListItemBinding
 import com.tasomaniac.openwith.extensions.componentName
-import com.tasomaniac.openwith.extensions.inflate
+import com.tasomaniac.openwith.extensions.inflater
 import com.tasomaniac.openwith.resolver.DisplayActivityInfo
-import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.browser_list_item.browserIcon
-import kotlinx.android.synthetic.main.browser_list_item.browserInfo
-import kotlinx.android.synthetic.main.browser_list_item.browserSelected
-import kotlinx.android.synthetic.main.browser_list_item.browserTitle
 import javax.inject.Inject
 
 class BrowserViewHolder private constructor(
-    override val containerView: View
-) : RecyclerView.ViewHolder(containerView),
-    LayoutContainer {
+    private val binding: BrowserListItemBinding
+) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(
         info: DisplayActivityInfo,
         selectedBrowser: ComponentName?,
         onItemClicked: (DisplayActivityInfo) -> Unit
-    ) {
+    ) = binding.apply {
         browserTitle.text = info.displayLabel
         browserIcon.setImageDrawable(info.displayIcon)
         browserSelected.isChecked = info.activityInfo.componentName() == selectedBrowser
         browserInfo.isGone = true
-
-        itemView.setOnClickListener {
-            onItemClicked(info)
-        }
+        itemView.setOnClickListener { onItemClicked(info) }
     }
 
     class Factory @Inject constructor() {
 
-        fun createWith(parent: ViewGroup) = BrowserViewHolder(parent.inflate(R.layout.browser_list_item))
+        fun createWith(parent: ViewGroup) =
+            BrowserViewHolder(BrowserListItemBinding.inflate(parent.inflater(), parent, false))
     }
 }

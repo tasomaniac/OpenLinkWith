@@ -20,8 +20,8 @@
   <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="?actionBarSize"
-    android:foreground="?selectableItemBackground"
-    android:addStatesFromChildren="true">
+    android:addStatesFromChildren="true"
+    android:foreground="?selectableItemBackground">
 
     <View
       android:layout_width="match_parent"
@@ -30,10 +30,10 @@
 
     <Switch
       android:id="@+id/featureToggle"
-      android:paddingLeft="@dimen/keyline_1"
-      android:paddingRight="@dimen/keyline_1"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:paddingLeft="@dimen/keyline_1"
+      android:paddingRight="@dimen/keyline_1"
       tools:text="Enabled" />
   </FrameLayout>
 
@@ -45,17 +45,17 @@
     <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:orientation="vertical"
       android:paddingTop="@dimen/content_padding"
-      android:paddingBottom="@dimen/content_padding"
-      android:orientation="vertical">
+      android:paddingBottom="@dimen/content_padding">
 
       <TextView
         android:id="@+id/featureDetails"
-        android:lineSpacingMultiplier="1.2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingRight="@dimen/keyline_1"
+        android:lineSpacingMultiplier="1.2"
         android:paddingLeft="@dimen/keyline_1"
+        android:paddingRight="@dimen/keyline_1"
         android:paddingBottom="@dimen/content_padding"
         android:textSize="16sp"
         tools:text="@string/pref_details_feature_add_to_homescreen" />
@@ -63,10 +63,10 @@
       <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/content_padding"
-        android:paddingRight="24dp"
+        android:gravity="center"
         android:paddingLeft="24dp"
-        android:gravity="center">
+        android:paddingTop="@dimen/content_padding"
+        android:paddingRight="24dp">
 
         <ImageView
           android:id="@+id/featureImage"
