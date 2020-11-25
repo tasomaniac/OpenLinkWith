@@ -38,17 +38,17 @@ class UrlFix @Inject constructor(
             }
 
             // Skip the links that Facebook supports
-            return if (url.contains("facebook.com/permalink.php")
-                || url.contains("facebook.com/story.php")
-                || url.contains("facebook.com/home.php")
-                || url.contains("facebook.com/photo.php")
-                || url.contains("facebook.com/video.php")
-                || url.contains("facebook.com/donate")
-                || url.contains("facebook.com/events")
-                || url.contains("facebook.com/groups")
-                || url.contains("/posts/")
-                || url.contains("/dialog/")
-                || url.contains("/sharer")
+            return if (url.contains("facebook.com/permalink.php") ||
+                url.contains("facebook.com/story.php") ||
+                url.contains("facebook.com/home.php") ||
+                url.contains("facebook.com/photo.php") ||
+                url.contains("facebook.com/video.php") ||
+                url.contains("facebook.com/donate") ||
+                url.contains("facebook.com/events") ||
+                url.contains("facebook.com/groups") ||
+                url.contains("/posts/") ||
+                url.contains("/dialog/") ||
+                url.contains("/sharer")
             ) {
                 url
             } else {
@@ -97,7 +97,7 @@ class UrlFix @Inject constructor(
         override fun fix(url: String): String {
             var asin = extractAmazonASIN(url)
 
-            //Use fake ASIN to make Amazon App popup for the Intent.
+            // Use fake ASIN to make Amazon App popup for the Intent.
             val matcher = Pattern.compile(AMAZON_PATTERN).matcher(url)
             if (matcher.matches()) {
                 asin = "0000000000"

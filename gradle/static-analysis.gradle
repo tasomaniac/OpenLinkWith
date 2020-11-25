@@ -34,7 +34,8 @@ afterEvaluate {
             checkReleaseBuilds false
             checkDependencies false
 
-            if (System.env.TRAVIS_BRANCH != 'master') ignore 'MissingTranslation'
+            println System.env.GITHUB_REF
+            if (System.env.GITHUB_REF != 'master') ignore 'MissingTranslation'
 
             lintConfig configFile('lint.xml')
 
