@@ -31,7 +31,8 @@ class DebugSettings @Inject constructor(
             R.string.pref_key_debug_instagram to "https://www.instagram.com/tasomaniac/",
             R.string.pref_key_debug_hangouts to
                     "https://hangouts.google.com/hangouts/_/novoda.com/wormhole?authuser=tahsin@novoda.com",
-            R.string.pref_key_debug_play to "https://play.google.com/store/apps/details?id=com.tasomaniac.openwith&utm_source=facebook",
+            R.string.pref_key_debug_play to
+                    "https://play.google.com/store/apps/details?id=com.tasomaniac.openwith&utm_source=facebook",
             R.string.pref_key_debug_redirect to "http://forward.immobilienscout24.de/9004STF/expose/78069302",
             R.string.pref_key_debug_non_http to "is24://retargetShowSearchForm",
             R.string.pref_key_debug_missing_http to "www.google.com"
