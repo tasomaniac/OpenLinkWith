@@ -71,6 +71,12 @@
     <br>
     <strong>請謹慎服用！</strong> 因為 Chrome (或您喜愛的瀏覽器應用程式) 不再是預設的瀏覽器，您可能會察覺一些行為的改變。好處是您的手機用原生應用程式開啟連結會更好用。
   ]]></string>
+  <string name="pref_title_feature_clean_urls">清理連結</string>
+  <string name="pref_details_feature_clean_urls"><![CDATA[    當啟用時，<strong>Open Link With</strong> 將自分享連結裡清理與廣告相關的追蹤參數。
+    <br>
+    將根據提供的正規表示式 (Regex) 規則清理連結。
+  ]]></string>
+  <string name="clean_urls_regex_hint">Regex style rule</string>
   <string name="pref_title_feature_caller_app">偵測前景應用程式</string>
   <string name="pref_details_feature_caller_app"><![CDATA[    <strong>警告：</strong>實驗性功能！<br>
     <br>

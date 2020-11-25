@@ -72,6 +72,12 @@
     <br>
     <strong>¡Cuidado!</strong> Como Chrome (o tu navegador favorito) no será por ya el predeterminado, puede notar algunos cambios de comportamiento. Como un beneficio, el teléfono será mejor con la apertura de enlaces en aplicaciones nativas.
   ]]></string>
+  <string name="pref_title_feature_clean_urls">Clean-up links</string>
+  <string name="pref_details_feature_clean_urls"><![CDATA[    Cuando está habilitado, <strong>Abrir enlace con</strong> limpiará los parámetros de seguimiento relacionados con la publicidad de enlaces compartidos.
+    <br>
+    Los enlaces serán limpiados de acuerdo a la regla Regex proporcionada.
+  ]]></string>
+  <string name="clean_urls_regex_hint">Regex style rule</string>
   <string name="pref_title_feature_caller_app">Detectar apps en primer plano</string>
   <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Advertencia: característica experimental</strong>!<br>
     <br>

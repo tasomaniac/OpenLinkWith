@@ -72,6 +72,12 @@
     <strong>注意！</strong>由于Chrome（或您最喜欢的浏览器）不再是默认值，您可能会注意到一些行为改变。
     这作为一项优势，您可以通过在原生应用中打开相关链接来更方便地使用手机。
   ]]></string>
+  <string name="pref_title_feature_clean_urls">清除链接</string>
+  <string name="pref_details_feature_clean_urls"><![CDATA[    启用后，<strong>Open Link With</strong>将会清除收到共享的链接中与广告相关的跟踪参数。
+     <br>
+     链接将根据Regex提供的规则进行清理。
+  ]]></string>
+  <string name="clean_urls_regex_hint">Regex style rule</string>
   <string name="pref_title_feature_caller_app">检测前台应用</string>
   <string name="pref_details_feature_caller_app"><![CDATA[    <strong>注意：</strong> 实验功能！<br>
     <br>

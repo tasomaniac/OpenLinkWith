@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="hi">
   <string name="open_with">इससे खोलें&#8230;</string>
-  <string name="add_to_homescreen">Add To Home screen</string>
+  <string name="add_to_homescreen">होम स्‍क्रीन में डालें </string>
   <string name="use_a_different_app">अलग ऐप इस्तेमाल करें</string>
   <string name="activity_resolver_use_once">सिर्फ एक बार </string>
   <string name="activity_resolver_use_always">हमेशा</string>
@@ -52,6 +52,12 @@
   <string name="pref_details_feature_direct_share"><![CDATA[    <strong>डायरेक्ट शेयर</strong>एक एंड्राइड विशेषता है जहां ज्यादा मिलता जुलते लक्ष्यों को अलग से प्रस्तुत किया ज्याता है शेयर मेनू में|<br>    <br>जब चालू किया जायेगा तब,<strong>Open Link With</strong>को शेयर मेनू में ऊपर दिखया ज्यएगा।<br>और ये ध्यान दें की प्रथमताको कम रखा जायेगा। अगर एंड्राइड को और भी मिलते जुलते लक्ष्य मिलतें हैं दूसरे एपों से तो, Open Link With शायद नहीं दिखाया जायेगा।]]></string>
   <string name="pref_title_feature_browser">ब्राउज़र के रूप में सेट करें</string>
   <string name="pref_details_feature_browser"><![CDATA[    <strong>चेतावनी:</strong>प्रायोगिक विशेषता!<br>    <br>एंड्राइड को पहचानने में<strong>Open Link With</strong>को <strong>ब्राउज़र की तरह।<br>    <br>    जब चालू करतें हैं तब, शेयर को इस्तेमाल करने की जरूरत नही पड़ेगी, सिर्फ लिंकों को क्लिक करने से Open Link With सामने आ जायेगा     और नेटिव ऐप में लिंक को खोलें। और कोई छोटी लिंक को भी बड़ा कर दिता जायेगा|<br>    <br>    <strong>सावधान रहें!</strong>क्योंकि Chrome (या दूसरा पसंदीदा ब्ब्रोऊज़र) डिफ़ॉल्ट नहीं रहेगा, आपको कुछ बर्तावों में      बदलाव देखने मिल सकतें हैं। पर आपको फायदे के रूप में, आपका फ़ोन नेटिव ऐप्स में लिंक्स को खोलने में बेहतर हो जायेगा।]]></string>
+  <string name="pref_title_feature_clean_urls">लिंक्स को क्लीन करें</string>
+  <string name="pref_details_feature_clean_urls"><![CDATA[ जब चालु किया जायेगा, <strong>Open Link With</strong> अड्वर्टाइस्मेंट से जोड़े ट्रैकिंग सम्भंदित पैरामीटर्स को निकाल देगा शेयर की गयी लिंक्स में से। 
+    <br>
+    लिंक्स को दिए गए Regex नियम के अनुसार क्लीन किया जायेगा। 
+  ]]></string>
+  <string name="clean_urls_regex_hint">Regex style rule</string>
   <string name="pref_title_feature_caller_app">फ़ोरेग्रॉउंड ऐपों का पता लगाएं</string>
   <string name="pref_details_feature_caller_app"><![CDATA[    <strong>चेतावनी:</strong>प्रायोगिक विशेषता!<br>    <br>    जब चालू करतें हैं तब, फोरग्रौंड एप्लीकेशन (आपने जिससे लिंक शेयर कि थी उसका) का सुझाव नहीं किया जायेगा|    <br><br>    उदाहरण: जब ब्राउज़र से शेयर किया जायेगा तब,  ब्राउज़र का सुझाव फिर से नही किया जायेगा। अगर कोई नेटिव ऐप नहीं मिला तो, आपको एक चेतावनी: दिखेगी।   <br>    अगर चालू नहीं किया तो, फोरग्रौंड एप्लीकेशन के खुले रहने के बावजूद भी उसे ही सुझाया जायेगा।]]></string>
   <string name="feature_default_browser_message"><![CDATA[    अगले विंडो में, कृपया चुनाव करे<strong>Open Link With</strong>, और चुनें<strong>हमेशा</strong>।   ]]></string>

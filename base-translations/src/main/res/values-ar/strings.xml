@@ -72,6 +72,12 @@
     <strong>كن حذرا!</strong> بما أن كروم (أو المتصفح المفضل لديك) لن يكون الافتراضي بعد الآن، فقد تلاحظ
      بعض التغييرات. كفائدة ، سيكون هاتفك أفضل مع فتح الروابط بالتطبيقات الأصلية.
   ]]></string>
+  <string name="pref_title_feature_clean_urls">Clean-up links</string>
+  <string name="pref_details_feature_clean_urls"><![CDATA[    When enabled, <strong>Open Link With</strong> will clean-up advertisement related tracking parameters from shared links.
+    <br>
+    Links will be cleaned up according to the Regex rule provided.
+  ]]></string>
+  <string name="clean_urls_regex_hint">Regex style rule</string>
   <string name="pref_title_feature_caller_app">كشف التطبيقات المستخدمة</string>
   <string name="pref_details_feature_caller_app"><![CDATA[    <strong>تحذير:</strong> ميزة تجريبية!<br>
     <br>

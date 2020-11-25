@@ -73,6 +73,12 @@
     <strong>ご注意ください!</strong> Chrome (またはお気に入りのブラウザー) が既定ではなくなります。
      動作が変更されます。利点として、お使いの携帯電話からネイティブアプリのリンクを開くのが便利になります。
   ]]></string>
+  <string name="pref_title_feature_clean_urls">リンクのクリーンアップ</string>
+  <string name="pref_details_feature_clean_urls"><![CDATA[    有効にすると <strong>Open Link With</strong> は、広告関連のトラッキングパラメータを共有リンクからクリーンアップします。
+    <br>
+    提供された正規表現ルールに従ってリンクがクリーンアップされます。
+  ]]></string>
+  <string name="clean_urls_regex_hint">Regex style rule</string>
   <string name="pref_title_feature_caller_app">フォアグラウンドのアプリを検出</string>
   <string name="pref_details_feature_caller_app"><![CDATA[    <strong>警告:</strong> 実験的な機能です!<br>
     <br>

@@ -76,6 +76,12 @@
     <strong>Будьте осторожны!</strong> Поскольку Chrome (или ваш любимый браузер) больше не будет по умолчанию, вы можете заметить
      некоторые изменения поведения. В качестве выгодного ваш телефон будет лучше открывать ссылки в родных приложениях.
   ]]></string>
+  <string name="pref_title_feature_clean_urls">Clean-up links</string>
+  <string name="pref_details_feature_clean_urls"><![CDATA[    When enabled, <strong>Open Link With</strong> will clean-up advertisement related tracking parameters from shared links.
+    <br>
+    Links will be cleaned up according to the Regex rule provided.
+  ]]></string>
+  <string name="clean_urls_regex_hint">Regex style rule</string>
   <string name="pref_title_feature_caller_app">Обнаружение активных приложений</string>
   <string name="pref_details_feature_caller_app"><![CDATA[    <strong>Предупреждение:</strong> Экспериментальная функция!<br>
     <br>

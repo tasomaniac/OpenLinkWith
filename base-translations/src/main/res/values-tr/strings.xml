@@ -29,10 +29,10 @@
   <string name="pref_summary_usage_stats">Uygulama dizilimini iyileştirmek için izin ver.</string>
   <string name="pref_title_category_display">Görünüm</string>
   <string name="pref_title_night_mode">Gece Modu</string>
-  <string name="pref_entry_night_mode_off">Light</string>
-  <string name="pref_entry_night_mode_on">Dark</string>
-  <string name="pref_entry_night_mode_battery">Set by Battery Saver</string>
-  <string name="pref_entry_night_mode_system">Use system default</string>
+  <string name="pref_entry_night_mode_off">Açık Tema</string>
+  <string name="pref_entry_night_mode_on">Koyu Tema</string>
+  <string name="pref_entry_night_mode_battery">Pil koruyucu ayarlar</string>
+  <string name="pref_entry_night_mode_system">Varsayılanı kullan</string>
   <string name="pref_title_category_clipboard">Kopyalanan link</string>
   <string name="pref_title_clipboard">Birlikte açmak için tıklayın&#8230;</string>
   <string name="pref_title_category_ask_for_rating">Uygulamayı beğendiniz mi?</string>
@@ -70,7 +70,13 @@
      olabilir. Diğer yandan bunun sayesinde, telefonunuz linkleri uygulamalarda açma konusunda daha iyi olacak.
  
   ]]></string>
-  <string name="pref_title_feature_caller_app">Detect foreground apps</string>
+  <string name="pref_title_feature_clean_urls">Bağlantıları temizle</string>
+  <string name="pref_details_feature_clean_urls"><![CDATA[    Aktif edildiğinde, paylaşılan bağlantılardan, <strong>Open Link With</strong> reklam takibi sebebiyle eklenen parametreleri temizler.
+    <br>
+    Bağlantılar sağlanan Regex kurallarına göre temizlenir.
+  ]]></string>
+  <string name="clean_urls_regex_hint">Regex stilinde kural</string>
+  <string name="pref_title_feature_caller_app">Ön plandaki uygulamaları tespit et</string>
   <string name="pref_details_feature_caller_app"><![CDATA[<strong>Uyarı:</strong> Deneysel özellik!<br>
 <br>
 Etkinleştirildiğinde bağlantıyı paylaştığınız ön plandaki uygulama bir daha önerilmeyecektir.
