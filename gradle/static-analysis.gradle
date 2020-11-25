@@ -34,8 +34,7 @@ afterEvaluate {
             checkReleaseBuilds false
             checkDependencies false
 
-            println System.env.GITHUB_REF
-            if (System.env.GITHUB_REF != 'master') ignore 'MissingTranslation'
+            if (System.env.GITHUB_REF?.includes('refs/pull')) ignore 'MissingTranslation'
 
             lintConfig configFile('lint.xml')
 

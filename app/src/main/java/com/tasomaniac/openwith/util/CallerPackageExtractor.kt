@@ -66,7 +66,7 @@ private class LollipopExtractor(context: Context) : CallerPackageExtractor() {
     private fun List<UsageStats>.mostRecentPackage() =
         filter {
             it.packageName !in listOf(BuildConfig.APPLICATION_ID, "android")
-        }.maxBy {
+        }.maxByOrNull {
             it.lastTimeUsed
         }?.packageName
 
