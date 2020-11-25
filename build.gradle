@@ -16,11 +16,11 @@ buildscript {
             versionCode: versionMajor * 10000 + versionMinor * 100 + versionBuild,
             versionName: "${versionMajor}.${versionMinor}",
 
-            dagger     : '2.27',
+            dagger     : '2.30.1',
             lifecycle  : '2.2.0',
             kotlin     : '1.4.20',
-            ktlint     : '0.36.0',
-            okHttp     : '4.6.0',
+            ktlint     : '0.39.0',
+            okHttp     : '4.8.0',
             room       : '2.2.5',
     ]
 
@@ -33,11 +33,11 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:4.1.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.28.0'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.36.0'
         classpath 'com.novoda:gradle-android-command-plugin:2.1.0'
         classpath 'com.novoda:gradle-build-properties-plugin:0.4.1'
         classpath 'io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.14.1'
-        classpath 'org.jlleitschuh.gradle:ktlint-gradle:9.2.1'
+        classpath 'org.jlleitschuh.gradle:ktlint-gradle:9.4.1'
         classpath 'com.novoda:gradle-static-analysis-plugin:1.2'
         classpath 'com.gradleup:auto-manifest-plugin:1.0.4'
         if (isPlay) {
@@ -66,5 +66,4 @@ allprojects {
 }
 
 apply from: configFile('configure-not-wanted-repositories.gradle')
-apply from: configFile('configure-dependency-resolution.gradle')
 apply from: configFile('configure-dependency-updates.gradle')
