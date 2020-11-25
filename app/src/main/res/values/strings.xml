@@ -23,6 +23,7 @@
   <string name="pref_key_feature_text_selection" translatable="false">pref_feature_text_selection</string>
   <string name="pref_key_feature_direct_share" translatable="false">pref_feature_direct_share</string>
   <string name="pref_key_feature_browser" translatable="false">pref_feature_browser</string>
+  <string name="pref_key_feature_clean_urls" translatable="false">pref_feature_clean_urls</string>
   <string name="pref_key_feature_caller_app" translatable="false">pref_feature_caller_app</string>
   <string name="pref_key_open_source" translatable="false">pref_open_source</string>
   <string name="pref_key_contact" translatable="false">pref_contact</string>

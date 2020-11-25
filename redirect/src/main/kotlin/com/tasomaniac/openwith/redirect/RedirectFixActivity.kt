@@ -6,7 +6,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import com.tasomaniac.android.widget.DelayedProgressBar
-import com.tasomaniac.openwith.redirect.UrlFix.fixUrls
 import com.tasomaniac.openwith.resolver.ResolverActivity
 import com.tasomaniac.openwith.rx.SchedulingStrategy
 import dagger.android.support.DaggerAppCompatActivity
@@ -22,6 +21,7 @@ class RedirectFixActivity : DaggerAppCompatActivity() {
 
     @Inject lateinit var browserIntentChecker: BrowserIntentChecker
     @Inject lateinit var redirectFixer: RedirectFixer
+    @Inject lateinit var urlFix: UrlFix
     @Inject lateinit var schedulingStrategy: SchedulingStrategy
 
     private var disposable: Disposable? = null
@@ -38,14 +38,16 @@ class RedirectFixActivity : DaggerAppCompatActivity() {
         }
         disposable = Single.just(source)
             .filter { browserIntentChecker.hasOnlyBrowsers(it) }
+            .map { urlFix.fixUrls(it.dataString!!) }
             .flatMap {
-                Maybe.fromCallable<HttpUrl> { it.toHttpUrl() }
+                Maybe.fromCallable<HttpUrl> { it.toHttpUrlOrNull() }
             }
             .compose(redirectTransformer)
-            .map { fixUrls(it.toString()) }
+            .map(HttpUrl::toString)
+            .toSingle(source.dataString!!) // fall-back to original data if anything goes wrong
+            .map(urlFix::fixUrls) // fix again after potential redirect
             .map { source.withUrl(it) }
-            .defaultIfEmpty(source)
-            .compose(schedulingStrategy.forMaybe())
+            .compose(schedulingStrategy.forSingle())
             .subscribe { intent ->
                 intent.component = ComponentName(this, ResolverActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
@@ -74,11 +76,9 @@ class RedirectFixActivity : DaggerAppCompatActivity() {
             return Intent(activity, RedirectFixActivity::class.java)
                 .putExtras(activity.intent)
                 .setAction(Intent.ACTION_VIEW)
-                .setData(Uri.parse(fixUrls(foundUrl)))
+                .setData(Uri.parse(foundUrl))
         }
 
         private fun Intent.withUrl(url: String): Intent = setData(Uri.parse(url))
-
-        private fun Intent.toHttpUrl() = dataString!!.toHttpUrlOrNull()
     }
 }

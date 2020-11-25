@@ -61,12 +61,11 @@
         tools:text="@string/pref_details_feature_add_to_homescreen" />
 
       <FrameLayout
+        android:id="@+id/featureCustomContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingLeft="24dp"
-        android:paddingTop="@dimen/content_padding"
-        android:paddingRight="24dp">
+        android:paddingHorizontal="16dp"
+        android:paddingTop="@dimen/content_padding">
 
         <ImageView
           android:id="@+id/featureImage"
@@ -75,6 +74,7 @@
           android:layout_gravity="center"
           android:contentDescription="@string/cd_image_tutorial"
           android:scaleType="centerInside"
+          android:layout_marginHorizontal="8dp"
           android:src="@drawable/tutorial_4" />
       </FrameLayout>
 
