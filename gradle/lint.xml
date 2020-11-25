@@ -23,6 +23,7 @@
 
   <issue id="SelectableText" severity="ignore" />
   <issue id="NewerVersionAvailable" severity="ignore" />
+  <issue id="GradleDependency" severity="ignore" />
   <issue id="ObsoleteLintCustomCheck"
     severity="ignore" /> <!-- Project doesn't have custom lint checks and cannot fix 3rd party libraries-->
   <issue id="UnknownNullness" severity="ignore" />  <!-- https://issuetracker.google.com/issues/78011047 -->
