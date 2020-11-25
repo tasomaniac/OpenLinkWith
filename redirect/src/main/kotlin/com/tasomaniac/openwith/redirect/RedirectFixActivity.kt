@@ -43,9 +43,10 @@ class RedirectFixActivity : DaggerAppCompatActivity() {
                 Maybe.fromCallable<HttpUrl> { it.toHttpUrlOrNull() }
             }
             .compose(redirectTransformer)
-            .map { urlFix.fixUrls(it.toString()) } // fix again after potential redirect
+            .map(HttpUrl::toString)
+            .toSingle(source.dataString!!) // fall-back to original data if anything goes wrong
+            .map(urlFix::fixUrls) // fix again after potential redirect
             .map { source.withUrl(it) }
-            .toSingle(source)
             .compose(schedulingStrategy.forSingle())
             .subscribe { intent ->
                 intent.component = ComponentName(this, ResolverActivity::class.java)

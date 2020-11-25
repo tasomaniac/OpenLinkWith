@@ -21,7 +21,7 @@ class UrlFix @Inject constructor(
         val httpUrl = toHttpUrlOrNull() ?: return this
         val urlBuilder = httpUrl.newBuilder()
         httpUrl.queryParameterNames
-            .filter { cleanUrlsPreferences.cleanUpRegex.matches(it) }
+            .filter { cleanUrlsPreferences.cleanUpRegex.containsMatchIn(it) }
             .forEach { urlBuilder.removeAllQueryParameters(it) }
         return urlBuilder.build().toString()
     }

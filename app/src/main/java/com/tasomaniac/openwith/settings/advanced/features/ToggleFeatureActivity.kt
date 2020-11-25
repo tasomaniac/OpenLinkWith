@@ -11,7 +11,9 @@ import androidx.core.text.parseAsHtml
 import androidx.preference.Preference
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.data.Analytics
+import com.tasomaniac.openwith.settings.advanced.features.custom.view.FeatureToggleCustomView
 import dagger.android.support.DaggerAppCompatActivity
+import kotlinx.android.synthetic.main.toggle_feature_activity.featureCustomContent
 import kotlinx.android.synthetic.main.toggle_feature_activity.featureDetails
 import kotlinx.android.synthetic.main.toggle_feature_activity.featureImage
 import kotlinx.android.synthetic.main.toggle_feature_activity.featureToggle
@@ -25,6 +27,7 @@ class ToggleFeatureActivity : DaggerAppCompatActivity() {
     @Inject lateinit var featureToggler: FeatureToggler
     @Inject lateinit var analytics: Analytics
     @Inject lateinit var sideEffects: Set<@JvmSuppressWildcards FeatureToggleSideEffect>
+    @Inject lateinit var customViews: Map<Feature, @JvmSuppressWildcards FeatureToggleCustomView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,6 +73,7 @@ class ToggleFeatureActivity : DaggerAppCompatActivity() {
         } else {
             featureImage.visibility = View.GONE
         }
+        customViews[feature]?.bindCustomContent(featureCustomContent)
     }
 
     @StringRes

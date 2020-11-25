@@ -95,6 +95,7 @@
     <br>
     Links will be cleaned up according to the Regex rule provided.
   ]]></string>
+  <string name="clean_urls_regex_hint">Regex style rule</string>
   <string name="pref_title_feature_caller_app">Detect foreground apps</string>
   <string name="pref_details_feature_caller_app"><![CDATA[
     <strong>Warning:</strong> Experimental feature!<br>
