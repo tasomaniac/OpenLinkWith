@@ -1,13 +1,13 @@
 apply plugin: 'com.github.triplet.play'
 
 android.playConfigs {
-    playRelease.enabled = true
+    playRelease {
+        enabled.set(true)
+    }
 }
 
-def secrets = buildProperties.secrets
 play {
-    serviceAccountEmail = secrets['play_service_account'].or('').string
-    serviceAccountCredentials = configFile(secrets['play_key_file'].or('no_file.p12').string)
+    serviceAccountCredentials = configFile("play-service-account.json")
     track = playPublishTrack
     defaultToAppBundles = true
     enabled = false

@@ -5,10 +5,9 @@ build
 /captures
 
 my-release-key.keystore
-tasomaniac.p12
+play-service-account.json
 *.pepk
 release.signing
-secrets.properties
 
 # IDEA/Android Studio ignores
 *.iml

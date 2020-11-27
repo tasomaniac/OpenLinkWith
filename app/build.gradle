@@ -5,7 +5,6 @@ apply plugin: 'com.novoda.build-properties'
 
 buildProperties {
   signing.using(configFile('release.signing')) | configFile('debug.signing')
-  secrets.using(configFile('secrets.properties'))
 }
 
 def gitSha = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
