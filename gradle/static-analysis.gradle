@@ -17,6 +17,7 @@ afterEvaluate {
 
         ktlint {
             version = versions.ktlint
+            outputToConsole = true
             disabledRules = ['import-ordering']
             reporters {
                 reporter 'checkstyle'
