@@ -1,6 +1,7 @@
 package com.tasomaniac.openwith.settings
 
 import android.content.ClipboardManager
+import androidx.core.view.doOnLayout
 import androidx.preference.PreferenceCategory
 import com.tasomaniac.openwith.R
 import com.tasomaniac.openwith.data.Analytics
@@ -14,18 +15,12 @@ class ClipboardSettings @Inject constructor(
     private val analytics: Analytics
 ) : Settings(fragment) {
 
-    private lateinit var clipChangedListener: ClipboardManager.OnPrimaryClipChangedListener
     private var preferenceCategory: PreferenceCategory? = null
 
-    override fun setup() {
-        updateClipboard()
-
-        clipChangedListener = ClipboardManager.OnPrimaryClipChangedListener { updateClipboard() }
-        clipboardManager.addPrimaryClipChangedListener(clipChangedListener)
-    }
-
-    override fun release() {
-        clipboardManager.removePrimaryClipChangedListener(clipChangedListener)
+    override fun resume() {
+        fragment.requireView().doOnLayout {
+            updateClipboard()
+        }
     }
 
     private fun updateClipboard() {
@@ -56,11 +51,10 @@ class ClipboardSettings @Inject constructor(
         }
     }
 
-    @Suppress("TooGenericExceptionCaught")
     private fun clipUrl(): String? {
         return try {
             clipboardManager.primaryClip?.getItemAt(0)?.coerceToText(context)?.toString()?.findFirstUrl()
-        } catch (e: Exception) {
+        } catch (ignored: Exception) {
             return null
         }
     }

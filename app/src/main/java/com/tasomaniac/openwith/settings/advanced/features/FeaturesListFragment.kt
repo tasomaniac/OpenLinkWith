@@ -14,7 +14,8 @@ import javax.inject.Inject
 
 @Keep
 @RequiresApi(M)
-class FeaturesListFragment : PreferenceFragmentCompat(),
+class FeaturesListFragment :
+    PreferenceFragmentCompat(),
     PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
     @Inject lateinit var settings: FeaturesListSettings
