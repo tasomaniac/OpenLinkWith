@@ -12,13 +12,11 @@ object DataModule {
 
     @Singleton
     @Provides
-    @JvmStatic
     fun room(app: Application): Database =
         Room.databaseBuilder(app, Database::class.java, "openWithDatabase.db")
             .addMigrations(Migration1to2)
             .build()
 
     @Provides
-    @JvmStatic
     fun preferredAppDao(database: Database) = database.preferredAppDao()
 }

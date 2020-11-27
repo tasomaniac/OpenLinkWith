@@ -22,8 +22,8 @@ class AskForRatingCondition(private val prefs: SharedPreferences) {
 
     fun shouldDisplay(): Boolean {
         return alreadyShown.not() &&
-                firstLaunchInMillis <= LAUNCH_DAY_THRESHOLD.daysAgo() &&
-                launchCount >= LAUNCH_TIMES_THRESHOLD
+            firstLaunchInMillis <= LAUNCH_DAY_THRESHOLD.daysAgo() &&
+            launchCount >= LAUNCH_TIMES_THRESHOLD
     }
 
     var alreadyShown: Boolean
