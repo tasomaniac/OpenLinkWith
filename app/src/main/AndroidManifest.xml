@@ -9,21 +9,29 @@
 
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-  <!--suppress DeprecatedClassUsageInspection -->
-  <uses-permission
-    android:name="android.permission.GET_TASKS"
-    android:maxSdkVersion="20" />
   <uses-permission
     android:name="android.permission.PACKAGE_USAGE_STATS"
     tools:ignore="ProtectedPermissions" />
+
+  <!-- Force remove some permissions -->
+  <uses-permission
+    android:name="android.permission.READ_PHONE_STATE"
+    tools:node="remove" />
+  <uses-permission
+    android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    tools:ignore="ScopedStorage"
+    tools:node="remove" />
+  <uses-permission
+    android:name="android.permission.READ_EXTERNAL_STORAGE"
+    tools:node="remove" />
 
   <application
     android:name=".App"
     android:allowBackup="true"
     android:fullBackupContent="true"
     android:icon="@mipmap/ic_launcher_main"
-    android:roundIcon="@mipmap/ic_launcher_main"
     android:label="@string/app_name"
+    android:roundIcon="@mipmap/ic_launcher_main"
     android:supportsRtl="true"
     android:theme="@style/Theme.OpenWith"
     tools:ignore="GoogleAppIndexingWarning">
@@ -78,8 +86,8 @@
     <activity-alias
       android:name=".TextSelectionActivity"
       android:enabled="true"
-      android:targetActivity=".ShareToOpenWith"
-      android:label="@string/open_with">
+      android:label="@string/open_with"
+      android:targetActivity=".ShareToOpenWith">
 
       <intent-filter>
         <action android:name="android.intent.action.PROCESS_TEXT" />
@@ -94,8 +102,8 @@
     <activity-alias
       android:name=".BrowserActivity"
       android:enabled="false"
-      android:targetActivity=".ShareToOpenWith"
-      android:label="@string/open_with">
+      android:label="@string/open_with"
+      android:targetActivity=".ShareToOpenWith">
 
       <intent-filter>
         <action android:name="android.intent.action.VIEW" />

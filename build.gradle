@@ -6,12 +6,12 @@ buildscript {
     }
 
     def versionMajor = 2
-    def versionMinor = 8
+    def versionMinor = 9
     def versionBuild = 0
     ext.playPublishTrack = 'internal'
 
     ext.versions = [
-            compileSdk : 28,
+            compileSdk : 29,
             minSdk     : 22,
             versionCode: versionMajor * 10000 + versionMinor * 100 + versionBuild,
             versionName: "${versionMajor}.${versionMinor}",

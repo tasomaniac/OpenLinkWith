@@ -1,12 +1,8 @@
 Help translate the app into your language:
 https://crowdin.com/project/open-link-with
 
-v2.8
-Internal improvements and various fixes
-Update translations
-
-v2.6
-Foreground app detection is now disabled by default.
-It can be enabled in Advanced settings.
+v2.9
+🔍 New Privacy Feature 🔍
+Go into Advanced Settings and enable cleaning up marketing/tracking parameters!
 
 <strong>Tip:</strong> Did you know that you can set OLW as a browser. Go to Advanced settings to enable.
