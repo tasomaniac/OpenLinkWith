@@ -1,6 +1,6 @@
 Share the current web page when you are in a browser to open with another app!
 
-Did it ever happen to you? You click a link (let's say Youtube link) and the system does not ask you anything and opens the link in the browser. And you are stuck in Youtube web page instead of watching the video in the native app.
+Did it ever happen to you? You click a link (let's say a video link) and the system does not ask you anything and opens the link in the browser. And you are stuck in a web page instead of watching the video in the native app.
 
 There are 2 options for you. You either watch the video in the web or you remember the name of the video and search it in the app. Well, not anymore.
 
@@ -14,7 +14,7 @@ If you find yourself sharing the same url over and over, you can use "Add to Hom
 
 I hope you find this useful. Please help me by trying it and sending feedback to me.
 
-<strong>Note:</strong This app also fixes links for some of the most popular Android applications like Amazon, eBay, Facebook and DailyMail. Not all but most of the links from these websites will be open with respective native android apps when you share them with Open Link With.
+<strong>Note:</strong This app also fixes links for some of the most popular Android applications. Not all but most of the links from these websites will be open with respective native android apps when you share them with Open Link With.
 
 The app uses internet to: 
 - Send crash reports
