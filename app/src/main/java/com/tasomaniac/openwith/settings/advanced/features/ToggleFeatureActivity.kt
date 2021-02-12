@@ -90,7 +90,7 @@ class ToggleFeatureActivity : DaggerAppCompatActivity() {
         private const val FEATURE = "FEATURE"
 
         private var Intent.featureKey: String
-            get() = getStringExtra(FEATURE)
+            get() = requireNotNull(getStringExtra(FEATURE))
             set(value) {
                 putExtra(FEATURE, value)
             }

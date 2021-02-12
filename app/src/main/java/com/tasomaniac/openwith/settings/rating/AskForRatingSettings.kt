@@ -82,7 +82,7 @@ class AskForRatingSettings @Inject constructor(
     }
 
     private fun startContactEmailChooser() {
-        ShareCompat.IntentBuilder.from(activity)
+        ShareCompat.IntentBuilder(activity)
             .addEmailTo("Said Tahsin Dane <tasomaniac+openlinkwith@gmail.com>")
             .setSubject(context.getString(R.string.ask_for_rating_feedback_email_subject))
             .setType("message/rfc822")

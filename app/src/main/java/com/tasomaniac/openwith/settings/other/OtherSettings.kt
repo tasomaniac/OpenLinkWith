@@ -50,7 +50,7 @@ class OtherSettings @Inject constructor(
     }
 
     private fun startContactEmailChooser() {
-        ShareCompat.IntentBuilder.from(activity)
+        ShareCompat.IntentBuilder(activity)
             .addEmailTo("Said Tahsin Dane <tasomaniac+openlinkwith@gmail.com>")
             .setSubject(context.getString(R.string.app_name))
             .setType("message/rfc822")

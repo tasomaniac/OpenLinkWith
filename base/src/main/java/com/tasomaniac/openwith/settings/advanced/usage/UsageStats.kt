@@ -28,6 +28,7 @@ object UsageStats {
     }
 
     @JvmStatic
+    @Suppress("DEPRECATION") // Deprecated just for renaming
     fun isEnabled(context: Context): Boolean {
         val appOps = context.getSystemService<AppOpsManager>() ?: return false
         val mode = appOps.checkOpNoThrow(

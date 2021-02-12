@@ -31,7 +31,7 @@ class ResolveListAdapter @Inject constructor(
         val itemClickListener = ItemClickListener {
             itemClickListener?.onItemClick(it)
             if (selectionEnabled) {
-                checkedItemPosition = holder.adapterPosition
+                checkedItemPosition = holder.bindingAdapterPosition
             }
         }
         holder.bind(getItem(position), itemClickListener, itemLongClickListener)

@@ -17,7 +17,7 @@ class DebugSettings @Inject constructor(
     }
 
     private fun Preference.setupDebugPreference(debugPrefUrl: String) {
-        intent = ShareCompat.IntentBuilder.from(activity)
+        intent = ShareCompat.IntentBuilder(activity)
             .setText(debugPrefUrl)
             .setType("text/plain")
             .createChooserIntent()
