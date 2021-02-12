@@ -2,7 +2,7 @@ apply from: configFile('android-library-config.gradle')
 
 dependencies {
     api 'junit:junit:4.13.1'
-    api 'org.assertj:assertj-core:3.18.1'
-    api 'org.mockito:mockito-core:3.6.28'
+    api 'org.assertj:assertj-core:3.19.0'
+    api 'org.mockito:mockito-core:3.7.7'
     api 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
 }
