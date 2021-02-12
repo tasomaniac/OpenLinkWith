@@ -31,7 +31,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.1'
+        classpath 'com.android.tools.build:gradle:7.0.0-alpha06'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.36.0'
         classpath 'com.novoda:gradle-build-properties-plugin:0.4.1'
