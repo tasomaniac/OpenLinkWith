@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply from: configFile('android-common-config.gradle')
-apply plugin: 'com.novoda.android-command'
 apply plugin: 'com.novoda.build-properties'
 
 buildProperties {
