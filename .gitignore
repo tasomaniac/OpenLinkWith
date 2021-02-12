@@ -16,6 +16,7 @@ release.signing
 .idea/*
 
 # IDEA/Android Studio Ignore exceptions
+!.idea/icon.png
 !.idea/vcs.xml
 !.idea/fileTemplates/
 !.idea/inspectionProfiles/
