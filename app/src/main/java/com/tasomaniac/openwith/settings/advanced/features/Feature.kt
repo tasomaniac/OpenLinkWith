@@ -31,7 +31,7 @@ enum class Feature(
         R.string.pref_title_feature_direct_share,
         R.string.pref_details_feature_direct_share,
         R.drawable.feature_direct_share,
-        "com.tasomaniac.openwith.resolver.ResolverChooserTargetService",
+        "androidx.sharetarget.ChooserTargetServiceCompat",
         "pref_feature_direct_share"
     ),
     BROWSER(

@@ -80,7 +80,7 @@
 
       <meta-data
         android:name="android.service.chooser.chooser_target_service"
-        android:value=".resolver.ResolverChooserTargetService" />
+        android:value="androidx.sharetarget.ChooserTargetServiceCompat" />
     </activity>
 
     <activity-alias
@@ -148,15 +148,6 @@
       android:finishOnCloseSystemDialogs="true"
       android:relinquishTaskIdentity="true"
       android:theme="@style/BottomSheet.Light" />
-
-    <service
-      android:name=".resolver.ResolverChooserTargetService"
-      android:label="@string/app_name"
-      android:permission="android.permission.BIND_CHOOSER_TARGET_SERVICE">
-      <intent-filter>
-        <action android:name="android.service.chooser.ChooserTargetService" />
-      </intent-filter>
-    </service>
 
   </application>
 

@@ -77,6 +77,7 @@ dependencies {
   implementation project(':resolver')
 
   implementation 'androidx.preference:preference-ktx:1.1.1'
+  implementation 'androidx.sharetarget:sharetarget:1.1.0'
 
   implementation "com.squareup.okhttp3:okhttp:$versions.okHttp"
 

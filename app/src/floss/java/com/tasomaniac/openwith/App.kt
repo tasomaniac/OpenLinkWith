@@ -1,38 +1,41 @@
-package com.tasomaniac.openwith;
+package com.tasomaniac.openwith
 
-import com.tasomaniac.openwith.settings.NightModePreferences;
-import com.tasomaniac.openwith.settings.rating.AskForRatingCondition;
-import dagger.android.support.DaggerApplication;
-import timber.log.Timber;
+import androidx.core.content.pm.ShortcutInfoCompat
+import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.graphics.drawable.IconCompat
+import com.tasomaniac.openwith.settings.NightModePreferences
+import com.tasomaniac.openwith.settings.rating.AskForRatingCondition
+import dagger.android.support.DaggerApplication
+import timber.log.Timber
+import timber.log.Timber.DebugTree
+import javax.inject.Inject
 
-import javax.inject.Inject;
+class App : DaggerApplication() {
 
-public class App extends DaggerApplication {
+    @Inject
+    lateinit var nightModePreferences: NightModePreferences
 
-    private AppComponent component;
+    @Inject
+    lateinit var askForRatingCondition: AskForRatingCondition
 
-    @Inject NightModePreferences nightModePreferences;
-    @Inject AskForRatingCondition askForRatingCondition;
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        nightModePreferences.updateDefaultNightMode();
-
+    override fun onCreate() {
+        super.onCreate()
+        nightModePreferences.updateDefaultNightMode()
         if (BuildConfig.DEBUG) {
-            Timber.plant(new Timber.DebugTree());
+            Timber.plant(DebugTree())
         }
-
-        askForRatingCondition.notifyAppLaunch();
+        askForRatingCondition.notifyAppLaunch()
     }
 
-    @Override
-    protected AppComponent applicationInjector() {
-        component = DaggerAppComponent.factory().create(this);
-        return component;
-    }
+    override fun applicationInjector() = DaggerAppComponent.factory().create(this)
 
-    public AppComponent component() {
-        return component;
+    fun createShortcutWith(): Boolean {
+        val shortcut = ShortcutInfoCompat.Builder(this, "com.tasomaniac.openwith.LINK_SHARE_TARGET")
+            .setCategories(setOf("com.tasomaniac.openwith.LINK_SHARE_TARGET"))
+            .setLongLived(true)
+            .setShortLabel(getString(R.string.open_with))
+            .setIcon(IconCompat.createWithResource(this, R.mipmap.ic_launcher_main))
+            .build()
+        return ShortcutManagerCompat.setDynamicShortcuts(this, listOf(shortcut))
     }
 }
