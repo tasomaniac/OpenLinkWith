@@ -81,6 +81,10 @@
       <meta-data
         android:name="android.service.chooser.chooser_target_service"
         android:value="androidx.sharetarget.ChooserTargetServiceCompat" />
+
+      <meta-data
+        android:name="android.app.shortcuts"
+        android:resource="@xml/shortcuts" />
     </activity>
 
     <activity-alias
