@@ -1,4 +1,4 @@
-Open Link With [![Build Status](https://travis-ci.org/tasomaniac/OpenLinkWith.png?branch=master)][2]
+Open Link With ![Build Status](https://github.com/tasomaniac/OpenLinkWith/actions/workflows/ci.yml/badge.svg)
 ==============
 
 <a href="https://f-droid.org/repository/browse/?fdid=com.tasomaniac.openwith.floss" target="_blank">
@@ -48,6 +48,3 @@ License
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
-
-
-[2]: https://travis-ci.org/tasomaniac/OpenLinkWith
