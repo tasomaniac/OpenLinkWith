@@ -66,12 +66,12 @@ class RedirectFixerTest {
     @Test
     fun givenNetworkTimeoutReturnOriginal() {
         given {
-            setDispatcher(object : Dispatcher() {
+            dispatcher = object : Dispatcher() {
                 override fun dispatch(request: RecordedRequest): MockResponse {
                     Thread.sleep(1500)
                     return redirectTo("redirect")
                 }
-            })
+            }
         }.then {
             assertUrlWithPath("original")
                 .assertNoErrors()
@@ -81,12 +81,12 @@ class RedirectFixerTest {
     @Test
     fun givenWithinNetworkTimeoutLimitReturnRedirect() {
         given {
-            setDispatcher(object : Dispatcher() {
+            dispatcher = object : Dispatcher() {
                 override fun dispatch(request: RecordedRequest): MockResponse {
                     Thread.sleep(500)
                     return redirectTo("redirect")
                 }
-            })
+            }
         }.then {
             assertUrlWithPath("redirect")
                 .assertNoErrors()
@@ -96,11 +96,11 @@ class RedirectFixerTest {
     @Test
     fun givenNetworkIsInterruptedReturnOriginal() {
         given {
-            setDispatcher(object : Dispatcher() {
+            dispatcher = object : Dispatcher() {
                 override fun dispatch(request: RecordedRequest): MockResponse {
                     throw InterruptedException()
                 }
-            })
+            }
         }.then {
             assertUrlWithPath("original")
                 .assertNoErrors()
