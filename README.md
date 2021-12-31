@@ -1,4 +1,4 @@
-Open Link With ![Build Status](https://github.com/tasomaniac/OpenLinkWith/actions/workflows/ci.yml/badge.svg)
+Open Link With ![Build Status](https://github.com/tasomaniac/OpenLinkWith/actions/workflows/ci.yml/badge.svg?branch=master)
 ==============
 
 <a href="https://f-droid.org/repository/browse/?fdid=com.tasomaniac.openwith.floss" target="_blank">
