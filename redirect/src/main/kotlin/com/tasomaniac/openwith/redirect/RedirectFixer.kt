@@ -54,7 +54,7 @@ class RedirectFixer(
         this.call = call
         return try {
             call.execute().use { it.header("Location") }
-        } catch (e: IOException) {
+        } catch (ignored: IOException) {
             null
         }
     }

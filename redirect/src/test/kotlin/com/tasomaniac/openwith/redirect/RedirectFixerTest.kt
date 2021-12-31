@@ -120,6 +120,7 @@ class RedirectFixerTest {
 
     inner class Then {
 
+        @Suppress("MemberNameEqualsClassName")
         infix fun then(assert: TestObserver<HttpUrl>.() -> Unit) {
             test().assert()
         }

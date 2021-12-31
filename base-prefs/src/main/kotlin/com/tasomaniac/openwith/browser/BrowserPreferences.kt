@@ -21,12 +21,11 @@ class BrowserPreferences @Inject constructor(private val sharedPreferences: Shar
             }
         }
         get() {
-            val value = sharedPreferences.getString(KEY, null)
-            return when (value) {
+            return when (val value = sharedPreferences.getString(KEY, null)) {
                 null, "always_ask" -> Mode.AlwaysAsk
                 "none" -> Mode.None
                 "browser" -> Mode.Browser(browserName!!, componentName)
-                else -> throw IllegalStateException()
+                else -> error("Unknown when checking browser mode: $value")
             }
         }
 
