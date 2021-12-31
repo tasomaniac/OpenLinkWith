@@ -44,7 +44,7 @@ class HomeScreenResolverPresenterTest {
             )
         )
 
-        then(filteredItem).shouldHaveZeroInteractions()
+        then(filteredItem).shouldHaveNoInteractions()
     }
 
     @Test

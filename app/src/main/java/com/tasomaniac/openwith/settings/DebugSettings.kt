@@ -25,5 +25,4 @@ class DebugSettings @Inject constructor(
             .setType("text/plain")
             .createChooserIntent()
     }
-
 }

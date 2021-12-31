@@ -21,7 +21,7 @@ class SettingsActivity :
     SharedPreferences.OnSharedPreferenceChangeListener,
     PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
-    @Inject @field:TutorialShown lateinit var tutorialShown: BooleanPreference
+    @Inject @TutorialShown lateinit var tutorialShown: BooleanPreference
     @Inject lateinit var analytics: Analytics
     @Inject lateinit var sharedPreferences: SharedPreferences
 

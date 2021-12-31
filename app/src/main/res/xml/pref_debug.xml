@@ -3,46 +3,38 @@
   <PreferenceCategory
     android:order="1000"
     android:key="@string/pref_key_category_debug"
-    android:title="@string/pref_title_category_debug">
+    android:title="Debug">
 
     <Preference
-      android:key="@string/pref_key_debug_amazon"
-      android:title="@string/pref_title_debug_amazon"
+      android:title="Amazon Intent"
       android:summary="http://www.amazon.com/Garmin-Speed-Cadence-Bike-Sensor/dp/B000BFNOT8"/>
 
     <Preference
-      android:key="@string/pref_key_debug_maps"
-      android:title="@string/pref_title_debug_maps"
+      android:title="Maps Intent"
       android:summary="http://maps.google.com/maps"/>
 
     <Preference
-      android:key="@string/pref_key_debug_instagram"
-      android:title="@string/pref_title_debug_instagram"
+      android:title="Instagram Intent"
       android:summary="https://www.instagram.com/tasomaniac/"/>
 
     <Preference
-      android:key="@string/pref_key_debug_play"
-      android:title="@string/pref_title_debug_play"
+      android:title="Play Store Intent"
       android:summary="https://play.google.com/store/apps/details?id=com.tasomaniac.openwith"/>
 
     <Preference
-      android:key="@string/pref_key_debug_redirect"
-      android:title="@string/pref_title_debug_redirect"
+      android:title="Url with redirect"
       android:summary="http://forward.immobilienscout24.de/9004STF/expose/78069302"/>
 
     <Preference
-      android:key="pref_key_debug_washington_post"
       android:title="Washington Post"
       android:summary="https://www.washingtonpost.com/nation/2021/12/30/colorado-grass-fire/"/>
 
     <Preference
-      android:key="@string/pref_key_debug_non_http"
-      android:title="@string/pref_title_debug_non_http"
+      android:title="Non-Http url"
       android:summary="is24://retargetShowSearchForm"/>
 
     <Preference
-      android:key="@string/pref_key_debug_missing_http"
-      android:title="@string/pref_title_debug_missing_http"
+      android:title="Missing-Http Intent"
       android:summary="www.google.com"/>
 
   </PreferenceCategory>

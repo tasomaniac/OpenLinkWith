@@ -1,29 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="pref_key_category_debug" translatable="false">pref_debug</string>
-  <string name="pref_title_category_debug" translatable="false">Debug</string>
-
-  <string name="pref_key_debug_amazon" translatable="false">pref_debug_amazon</string>
-  <string name="pref_title_debug_amazon" translatable="false">Amazon Intent</string>
-
-  <string name="pref_key_debug_maps" translatable="false">pref_debug_maps</string>
-  <string name="pref_title_debug_maps" translatable="false">Maps Intent</string>
-
-  <string name="pref_key_debug_instagram" translatable="false">pref_debug_instagram</string>
-  <string name="pref_title_debug_instagram" translatable="false">Instagram Intent</string>
-
-  <string name="pref_key_debug_hangouts" translatable="false">pref_debug_hangouts</string>
-  <string name="pref_title_debug_hangouts" translatable="false">Hangouts Intent</string>
-
-  <string name="pref_key_debug_play" translatable="false">pref_debug_play</string>
-  <string name="pref_title_debug_play" translatable="false">Play Store Intent</string>
-
-  <string name="pref_key_debug_redirect" translatable="false">pref_debug_redirect</string>
-  <string name="pref_title_debug_redirect" translatable="false">Url with redirect</string>
-
-  <string name="pref_key_debug_non_http" translatable="false">pref_debug_non_http</string>
-  <string name="pref_title_debug_non_http" translatable="false">Non-Http url</string>
-
-  <string name="pref_key_debug_missing_http" translatable="false">pref_debug_missing_http</string>
-  <string name="pref_title_debug_missing_http" translatable="false">Missing-Http Intent</string>
 </resources>

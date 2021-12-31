@@ -90,7 +90,7 @@ class DefaultResolverPresenterTest {
 
         then(navigation).should().startPreferred(intent, label)
         then(navigation).should().dismiss()
-        then(view).shouldHaveZeroInteractions()
+        then(view).shouldHaveNoInteractions()
     }
 
     @Test
@@ -105,7 +105,7 @@ class DefaultResolverPresenterTest {
 
         then(navigation).should().startPreferred(intent, label)
         then(navigation).should().dismiss()
-        then(view).shouldHaveZeroInteractions()
+        then(view).shouldHaveNoInteractions()
     }
 
     @Test
