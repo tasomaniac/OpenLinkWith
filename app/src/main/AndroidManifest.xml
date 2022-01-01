@@ -10,6 +10,9 @@
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
   <uses-permission
+    android:name="android.permission.QUERY_ALL_PACKAGES"
+    tools:ignore="QueryAllPackagesPermission" />
+  <uses-permission
     android:name="android.permission.PACKAGE_USAGE_STATS"
     tools:ignore="ProtectedPermissions" />
 
@@ -64,12 +67,12 @@
       android:configChanges="keyboardHidden|orientation|screenLayout"
       android:documentLaunchMode="never"
       android:excludeFromRecents="true"
+      android:exported="true"
       android:finishOnCloseSystemDialogs="true"
       android:label="@string/open_with"
       android:relinquishTaskIdentity="true"
       android:theme="@style/Theme.Transparent.NoAnimation"
-      android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
-      android:exported="true">
+      android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
 
       <intent-filter android:label="@string/open_with">
         <action android:name="android.intent.action.SEND" />
@@ -91,9 +94,9 @@
     <activity-alias
       android:name=".TextSelectionActivity"
       android:enabled="true"
+      android:exported="true"
       android:label="@string/open_with"
-      android:targetActivity=".ShareToOpenWith"
-      android:exported="true">
+      android:targetActivity=".ShareToOpenWith">
 
       <intent-filter>
         <action android:name="android.intent.action.PROCESS_TEXT" />
@@ -108,9 +111,9 @@
     <activity-alias
       android:name=".BrowserActivity"
       android:enabled="false"
+      android:exported="true"
       android:label="@string/open_with"
-      android:targetActivity=".ShareToOpenWith"
-      android:exported="true">
+      android:targetActivity=".ShareToOpenWith">
 
       <intent-filter>
         <action android:name="android.intent.action.VIEW" />
@@ -130,13 +133,13 @@
       android:documentLaunchMode="never"
       android:enabled="@bool/add_to_home_screen_enabled"
       android:excludeFromRecents="true"
+      android:exported="true"
       android:finishOnCloseSystemDialogs="true"
       android:icon="@mipmap/ic_launcher_bookmark"
       android:label="@string/add_to_homescreen"
       android:relinquishTaskIdentity="true"
       android:theme="@style/Theme.Transparent.NoAnimation"
-      android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
-      android:exported="true">
+      android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
 
       <intent-filter android:label="@string/add_to_homescreen">
         <action android:name="android.intent.action.SEND" />

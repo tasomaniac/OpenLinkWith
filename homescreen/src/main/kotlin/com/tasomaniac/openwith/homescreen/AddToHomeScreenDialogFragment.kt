@@ -160,7 +160,12 @@ class AddToHomeScreenDialogFragment : DaggerAppCompatDialogFragment() {
         IconCompat.createWithResource(requireContext(), R.mipmap.ic_launcher_bookmark)
 
     private fun startHomeScreen(): IntentSender =
-        PendingIntent.getActivity(requireContext(), 0, Intents.homeScreenIntent(), 0).intentSender
+        PendingIntent.getActivity(
+            requireContext(),
+            0,
+            Intents.homeScreenIntent(),
+            PendingIntent.FLAG_IMMUTABLE
+        ).intentSender
 
     fun show(fragmentManager: FragmentManager) = show(fragmentManager, "AddToHomeScreen")
 
