@@ -14,7 +14,7 @@ Did it ever happen to you? You click a link (let's say Youtube link) and the sys
 
 There are 2 options for you. You either watch the video in the web or you remember the name of the video and search it in the app. Well, not anymore. 
 
-With OpenLinkWith, you can share any webpage with it and it will ask you which applicatios to open the link with.
+With OpenLinkWith, you can share any webpage with it and it will ask you which applications to open the link with.
 
 Althought the original intent of the application is to direct webpages to apps, it can even be used to switch between apps. Imagine you have 2 Twitter clients in your phone. You can open a tweet in the official Twitter application and then switch to an another app with the same tweet opened. Cool, hah?
 
