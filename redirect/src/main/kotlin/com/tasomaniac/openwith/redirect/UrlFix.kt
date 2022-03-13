@@ -148,14 +148,6 @@ class UrlFix @Inject constructor(
         }
     }
 
-    private class WashingtonPostFixer : Fixer {
-        override fun fix(url: String): String {
-            return url
-                .replace("http://www.washingtonpost.com", "wp-android://www.washingtonpost.com")
-                .replace("https://www.washingtonpost.com", "wp-android://www.washingtonpost.com")
-        }
-    }
-
     companion object {
         private val URL_FIXERS = setOf(
             FacebookFixer(),
@@ -163,8 +155,7 @@ class UrlFix @Inject constructor(
             EbayFixer(),
             AmazonFixer(),
             DailyMailFixer(),
-            VkFixer(),
-            WashingtonPostFixer()
+            VkFixer()
         )
     }
 }
