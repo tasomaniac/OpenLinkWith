@@ -26,10 +26,6 @@
       android:summary="http://forward.immobilienscout24.de/9004STF/expose/78069302"/>
 
     <Preference
-      android:title="Washington Post"
-      android:summary="https://www.washingtonpost.com/nation/2021/12/30/colorado-grass-fire/"/>
-
-    <Preference
       android:title="Non-Http url"
       android:summary="is24://retargetShowSearchForm"/>
 
