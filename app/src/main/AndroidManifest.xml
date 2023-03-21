@@ -42,7 +42,8 @@
     <activity
       android:name=".settings.SettingsActivity"
       android:clearTaskOnLaunch="true"
-      android:exported="true">
+      android:exported="true"
+      android:launchMode="singleInstance">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
@@ -53,14 +54,18 @@
     <activity
       android:name=".preferred.PreferredAppsActivity"
       android:label="@string/title_preferred_apps"
+      android:launchMode="singleInstance"
       android:parentActivityName=".settings.SettingsActivity" />
 
     <activity
       android:name=".browser.PreferredBrowserActivity"
       android:label="@string/browser_title"
+      android:launchMode="singleInstance"
       android:parentActivityName=".settings.SettingsActivity" />
 
-    <activity android:name=".settings.advanced.features.ToggleFeatureActivity" />
+    <activity
+      android:name=".settings.advanced.features.ToggleFeatureActivity"
+      android:launchMode="singleInstance" />
 
     <activity
       android:name=".ShareToOpenWith"
