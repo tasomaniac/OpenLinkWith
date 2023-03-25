@@ -15,10 +15,13 @@
  */
 package com.tasomaniac.openwith.resolver;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -77,7 +80,7 @@ public class ResolverActivity extends DaggerAppCompatActivity implements
         super.onStart();
     }
 
-    @Override
+    @SuppressLint("ClickableViewAccessibility") @Override
     public void displayData(IntentResolverResult result) {
         setContentView(result.getFilteredItem() != null ? R.layout.resolver_list_with_default : R.layout.resolver_list);
         setupList(result, result.getShowExtended());
@@ -86,6 +89,24 @@ public class ResolverActivity extends DaggerAppCompatActivity implements
         rdl.setOnDismissedListener(this::finish);
         findViewById(R.id.button_always).setOnClickListener(v -> listener.onActionButtonClick(true));
         findViewById(R.id.button_once).setOnClickListener(v -> listener.onActionButtonClick(false));
+
+        if(result.getFilteredItem() != null){
+            GestureDetector gDetector = new GestureDetector(getBaseContext(), new GestureDetector.SimpleOnGestureListener() {
+
+                @Override
+                public boolean onDown(MotionEvent e) {
+                    return true;
+                }
+
+                @Override
+                public boolean onDoubleTap(MotionEvent e) {
+                    listener.onActionButtonClick(false);
+                    return true;
+                }
+            });
+
+            findViewById(R.id.preferred_item).setOnTouchListener((v, event) -> gDetector.onTouchEvent(event));
+        }
     }
 
     private void setupList(IntentResolverResult data, boolean shouldDisplayExtendedInfo) {
