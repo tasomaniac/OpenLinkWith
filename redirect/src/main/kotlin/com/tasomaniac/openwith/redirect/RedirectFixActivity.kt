@@ -23,6 +23,7 @@ class RedirectFixActivity : DaggerAppCompatActivity() {
     @Inject lateinit var redirectFixer: RedirectFixer
     @Inject lateinit var urlFix: UrlFix
     @Inject lateinit var schedulingStrategy: SchedulingStrategy
+    @Inject lateinit var cleanUrlsPreferences: CleanUrlsPreferences
 
     private var disposable: Disposable? = null
 
@@ -57,10 +58,15 @@ class RedirectFixActivity : DaggerAppCompatActivity() {
     }
 
     private val redirectTransformer = MaybeTransformer<HttpUrl, HttpUrl> { source ->
-        source.flatMap { httpUrl ->
-            redirectFixer
-                .followRedirects(httpUrl)
-                .toMaybe()
+        if (cleanUrlsPreferences.isEnabled) {
+            source.flatMap { httpUrl ->
+                redirectFixer
+                    .followRedirects(httpUrl)
+                    .toMaybe()
+            }
+        } else {
+            // Identity; do nothing
+            source
         }
     }
 
