@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="title_tutorial_0">Willkommen bei Open Link With</string>
-  <string name="description_tutorial_0">Ich komme zur Rettung, wenn du mal in deinem Browser fest steckst.</string>
+  <string name="description_tutorial_0">Ich bin deine Rettung, wenn du mal in deinem Browser feststeckst.</string>
   <string name="title_tutorial_1">Ist es ihnen schon mal passiert?</string>
   <string name="description_tutorial_1">Du klickst ein Kurlink an und landest irgendwie auf einer Seite statt das Video direkt anzuschauen.</string>
   <string name="title_tutorial_2">Teilen Sie es!</string>
