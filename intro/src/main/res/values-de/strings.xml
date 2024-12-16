@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="title_tutorial_0">Willkommen bei Open Link With</string>
-  <string name="description_tutorial_0">Ich komme zur rettung, wenn du mal in deinem Browser fest steckst.</string>
+  <string name="description_tutorial_0">Ich komme zur Rettung, wenn du mal in deinem Browser fest steckst.</string>
   <string name="title_tutorial_1">Ist es ihnen schon mal passiert?</string>
-  <string name="description_tutorial_1">Du clickst ein short-link an und landest irrgendwie auf einer Seite statt du das Video direkt dir anschaust.</string>
-  <string name="title_tutorial_2">Teilen sie es!</string>
+  <string name="description_tutorial_1">Du klickst ein Kurlink an und landest irgendwie auf einer Seite statt das Video direkt anzuschauen.</string>
+  <string name="title_tutorial_2">Teilen Sie es!</string>
   <string name="description_tutorial_2">Teil es einfach mit mir, und ich werde für dich die Apps wechseln.</string>
   <string name="description_tutorial_3"><![CDATA[    Wählen Sie <strong>immer öffnen</strong> um einen Link immer mit der spezifischen App zu öffnen.
   ]]></string>
