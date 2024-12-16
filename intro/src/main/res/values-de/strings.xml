@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="title_tutorial_0">Willkommen bei Open Link With</string>
-  <string name="description_tutorial_0">Ich komme zur rettung, wenn du mal in deinem Browser fest steckst.</string>
+  <string name="description_tutorial_0">Ich bin deine Rettung, wenn du mal in deinem Browser feststeckst.</string>
   <string name="title_tutorial_1">Ist es ihnen schon mal passiert?</string>
-  <string name="description_tutorial_1">Du clickst ein short-link an und landest irrgendwie auf einer Seite statt du das Video direkt dir anschaust.</string>
-  <string name="title_tutorial_2">Teilen sie es!</string>
+  <string name="description_tutorial_1">Du klickst einen Kurzlink an und – anstatt, dass du das Video direkt anschauen kannst – landest du irgendwie auf einer Webseite?</string>
+  <string name="title_tutorial_2">Teil es!</string>
   <string name="description_tutorial_2">Teil es einfach mit mir, und ich werde für dich die Apps wechseln.</string>
   <string name="description_tutorial_3"><![CDATA[    Wählen Sie <strong>immer öffnen</strong> um einen Link immer mit der spezifischen App zu öffnen.
   ]]></string>
   <string name="description_tutorial_4"><![CDATA[    <strong>Zum Startbildschirm hinzufügen</strong>, um deine Lieblingslinks direkt mit der passenden App vom Startbildschirm aus zu starten.
   ]]></string>
   <string name="title_tutorial_5">Nutzer zugriff</string>
-  <string name="description_tutorial_5"><![CDATA[    Zugriff auf <strong>Nutzer Zugriff</strong> gewähren und ich werde besser arbeiten. Ich erkenne den Browser, den sie benutzen um entsprend zu funktionieren.
+  <string name="description_tutorial_5"><![CDATA[    Zugriff auf <strong>Nutzerzugriff</strong> gewähren und ich werde besser arbeiten. Ich erkenne den Browser, den du benutzt, um entsprechend zu funktionieren.
   ]]></string>
   <string name="usage_access_give_access">Zugriff erlauben</string>
   <string name="title_preferred_apps">Bevorzugte Apps</string>
