@@ -1,8 +1,8 @@
-Open Link With ![Build Status](https://github.com/tasomaniac/OpenLinkWith/actions/workflows/ci.yml/badge.svg?branch=master)
+Open Link With
 ==============
 
-Announcement
-------------
+👇👇 Announcement 👇👇
+----------------------
 
 It's humbling to see that this project inspired couple more projects along the way. Unfortunately I don't have the capacity to deal with Google's strict requirements. If you're looking for a direct replacement, @SamLeatherdale forked and republished the app
 
