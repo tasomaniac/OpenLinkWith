@@ -1,10 +1,12 @@
 Open Link With ![Build Status](https://github.com/tasomaniac/OpenLinkWith/actions/workflows/ci.yml/badge.svg?branch=master)
 ==============
 
-~~<a href="https://f-droid.org/repository/browse/?fdid=com.tasomaniac.openwith.floss" target="_blank">
-<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="90"/></a>
-<a href="https://play.google.com/store/apps/details?id=com.tasomaniac.openwith" target="_blank">
-<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="90"/></a>~~
+Announcement
+------------
+
+It's humbling to see that this project inspired couple more projects along the way. Unfortunately I don't have the capacity to deal with Google's strict requirements. If you're looking for a direct replacement, @SamLeatherdale forked and republished the app
+
+[Open Link With: Redux](https://play.google.com/store/apps/details?id=com.samleatherdale.openwith) is now live on Google Play, and the source is available at [SamLeatherdale/OpenLinkWith](https://github.com/SamLeatherdale/OpenLinkWith) 🚀 
 
 What
 ----
